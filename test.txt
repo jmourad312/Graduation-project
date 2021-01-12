@@ -1,1 +1,18 @@
+<<<<<<< HEAD
 whatsup mate
+=======
+yguyguygyug
+
+
+12301
+12213
+
+
+
+
+
+
+
+
+sdfsdfsdf
+>>>>>>> 93268eb59ee0358d125e111a833bf4949a5a46d5
