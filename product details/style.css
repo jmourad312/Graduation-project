@@ -1,0 +1,28 @@
+
+.accordion ul{
+    list-style: none;
+    cursor: pointer;
+}
+
+.accordion ul li{
+    cursor: pointer;
+}
+
+.accordion ul li.active{
+    color:red;
+}
+
+.accordion .content .tab2content,.accordion .content .tab3content{
+     display: none;
+}
+
+.show{
+    display: block !important;
+}
+.hide{
+    display: none;
+}
+
+.clearfix{
+    clear: both;
+}

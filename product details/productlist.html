@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Product List</title>
+</head>
+
+<body>
+
+    <!-- start header -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">Logo</a>
+    </nav>
+    <!-- end header -->
+
+    <!-- start product details -->
+    <div class="container mx-auto mt-3">
+        <div class="row shadow-sm  mb-4 bg-light rounded-lg">
+            <!-- image of produce -->
+            <div class="col-md-4">
+                <img src='https://autovx.com/wp-content/uploads/2018/02/%D9%85%D9%82%D9%88%D8%AF-%D8%A7%D9%84%D8%B3%D9%8A%D9%84%D8%B1%D8%A9-2.png'
+                    width="100%" height="100%">
+            </div>
+
+            <div class="col-md-8 p-2">
+                <h3>Name Of Product from <a href='#'>Workshop</a></h3>
+                <!-- avalible or not -->
+                <span class="badge badge-pill badge-success">Avalible</span>
+                <span class="badge badge-pill badge-danger">Not Avalible</span>
+                <!-- number of stars -->
+                <div class="mt-3" class="star">
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"> No review</span>
+                </div>
+                <!-- description -->
+                <div class="mt-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, reiciendis
+                    expedita incidunt,
+                    inventore totam recusandae sint, optio eveniet delectus rem amet ani</div>
+                <!-- Add to favorate and compare product -->
+                <!-- price -->
+                <div class="mt-3">
+                    <span class="" style="font-size: 25px;">
+                        <li class="fas fa-coins pr-2 text-warning"></li>150 LE
+                    </span>
+                    <div class="d-flex justify-content-end">
+                        <span class="fa-lg pr-3" data-toggle="tooltip" title="Add to favorate" data-placement="bottom">
+                            <i class="far fa-heart  text-danger"></i>
+                        </span>
+                        <span class="fa-lg" data-toggle="tooltip" title="compare product" data-placement="bottom">
+                            <i class="fas fa-sliders-h  text-primary"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end product details -->
+
+
+    <!-- start Location ,reviews,PRODUCT INFORMATION -->
+    <div class="accordion container mx-auto mt-3">
+        <div class="row">
+
+            <div class="col-md-2 shadow-sm p-2 mb-4 rounded-lg">
+                <ul class="tabs">
+                    <li id="tab1" class="active"><i class="fas fa-info  mr-2"></i> Product information</li>
+                    <hr>
+                    <li id="tab2" class=" "><i class="fas fa-map-marker-alt mr-2"></i> locations</li>
+                    <hr>
+                    <li id="tab3" class=" "><i class="fas fa-pen  mr-2"></i> write your review</li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-10 content">
+                <div class="tab1content">
+                    <h3><span class="pl-3" style="border-left :3px solid red ;height: 100%; "></span>Product Information
+                    </h3>
+                    <br>
+                    <p><b>Case: </b> china</p>
+                    <p><b>Compatible car models: </b>hbjhbhjbhjb</p>
+                </div>
+
+                <div class="tab2content">
+                    <h3><span class="pl-3" style="border-left :3px solid red ;height: 100%; "></span>Location</h3>
+                    <br>
+                    <div class="d-flex flex-wrap">
+                        <div>
+                            <img src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
+                                width="70px" height="70px">
+                            <p>location one </p>
+                        </div>
+                        <div class="pl-3">
+                            <img src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
+                                width="70px" height="70px">
+                            <p>location two </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab3content">
+                    <h3><span class="pl-3" style="border-left :3px solid red ;height: 100%; "></span>Write your Feedback
+                    </h3>
+                    <br>
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control" placeholder="Enter email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="review">review:</label>
+                            <input type="review" class="form-control" placeholder="Enter your review" id="review">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end Location ,reviews,PRODUCT INFORMATION -->
+
+
+
+<!-- start item -->
+    <div class="container  mx-auto mt-3">
+
+        <hr class="my-4">
+    
+        <!--Carousel Wrapper-->
+        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+    
+          <!--Controls-->
+          <div class="controls-top">
+            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+          </div>
+          <!--/.Controls-->
+    
+          <!--Indicators-->
+          <ol class="carousel-indicators">
+            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+            <li data-target="#multi-item-example" data-slide-to="1"></li>
+            <li data-target="#multi-item-example" data-slide-to="2"></li>
+          </ol>
+          <!--/.Indicators-->
+    
+          <!--Slides-->
+          <div class="carousel-inner" role="listbox">
+    
+            <!--First slide-->
+            <div class="carousel-item active">
+    
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+            <!--/.First slide-->
+    
+            <!--Second slide-->
+            <div class="carousel-item">
+    
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(60).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(47).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/City/4-col/img%20(48).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+            <!--/.Second slide-->
+    
+            <!--Third slide-->
+            <div class="carousel-item">
+    
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(53).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(45).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-4 clearfix d-none d-md-block">
+                  <div class="card mb-2">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Food/4-col/img%20(51).jpg"
+                      alt="Card image cap">
+                    <div class="card-body">
+                      <h4 class="card-title">Card title</h4>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                      <a class="btn btn-primary">Button</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+            <!--/.Third slide-->
+    
+          </div>
+          <!--/.Slides-->
+    
+        </div>
+        <!--/.Carousel Wrapper-->
+    
+    
+      </div>
+
+<!-- end item -->
+
+
+
+
+
+
+
+
+
+
+    <!--start footer -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">Logo</a>
+    </nav>
+    <!-- end footer -->
+
+    <script src="./script.js" type="text/javascript"></script>
+</body>
+
+</html>
