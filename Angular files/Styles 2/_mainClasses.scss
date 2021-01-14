@@ -1,0 +1,39 @@
+html {
+  background-image: url("../"+ $body-pattern);
+}
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+a:hover {
+  text-decoration: inherit;
+  color: inherit;
+}
+a:active {
+  text-decoration: inherit;
+  color: inherit;
+}
+* {
+  box-sizing: border-box;
+  outline: none !important;
+  margin: 0;
+  padding: 0;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $menu-icon-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  $hover-color;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $menu-icon-color;
+}
