@@ -1,0 +1,46 @@
+<nav>
+    <div class="nav-wrapper">
+      <div (click)="ToggleMenu()" [class.menu-open]="ToggleMenu()" class="mobile-list-icon">
+        <div class="a"></div>
+        <div class="b"></div>
+        <div class="c"></div>
+      </div>
+      <button *ngIf="!IsMenuOpen" class="btn btn-dark">
+        <a routerLink="user/auth/login">Login</a>
+      </button>
+    </div>
+
+    <section class="menu-mobile-list" [class.active]="!ToggleMenu()" >
+      <a class=" about item-style" href="#">
+        <img src="../../../../assets/Images/logo_01_1x.png" alt="">
+      </a>
+      <a class=" services item-style" routerLink="/user/profile">Profile</a>
+      <a class=" place-order item-style" routerLink="#">Products</a>
+      <a class=" place-order item-style" routerLink="#">BLOG</a>
+      <a class=" faqs item-style" routerLink="#">FAQS</a>
+      <a class=" blog item-style" routerLink="/user/auth/login">Login</a>
+      <a class=" contact item-style" routerLink="#">CONTACT US</a>
+    </section>
+    
+  </nav>
+
+  <router-outlet></router-outlet>
+
+  <footer [class.nav-open]="!IsMenuOpen" >
+    <div class="footer-wrapper">
+      <div class="container">
+        <form class="input-group row">
+          <div class="d-flex col-3">
+            <ng-select class="carBrands" [items]="CarBrand" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select Car Brand"></ng-select>
+          </div>
+          <div class="d-flex col-3">
+            <ng-select class="carBrands" [items]="CarModel" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select Car Model"></ng-select>
+          </div>
+          <div class="d-flex col-3">
+            <ng-select class="carBrands" [items]="CarPartName" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select Part Name"></ng-select>
+          </div>
+          <button type="submit" class="ml-2 col-2 btn btn-success">Search</button>
+        </form>
+      </div>
+    </div>
+  </footer>

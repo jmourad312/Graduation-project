@@ -1,0 +1,317 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "styles/mainVariables";
+@import "styles/mixins";
+@import "styles/mainClasses";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+nav {
+  .nav-wrapper {
+    position: fixed;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1100;
+
+    .mobile-list-icon {
+      cursor: pointer;
+      width: 23px;
+      height: 20px;
+      outline: none;
+      display: block;
+      transition: all 100ms;
+
+      div {
+        background-color: $menu-icon-color;
+        width: 23px;
+        height: 4px;
+        transition: transform 100ms, background-color 2s;
+
+        &:not(:last-child) {
+          margin-bottom: 4px;
+        }
+      }
+
+      &.menu-open {
+        .b {
+          display: none;
+        }
+
+        .a {
+          transform: rotate(45deg) translate(9px, 6px);
+          background-color: $light-color;
+        }
+
+        .c {
+          transform: rotate(-45deg) translateY(4px);
+          background-color: $light-color;
+        }
+      }
+    }
+  }
+
+  .menu-mobile-list {
+    left: 0;
+    top: 0;
+    padding-top: 120px;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    transform: translateX(-100%);
+    background-image: url($dark-pattern);
+    z-index: 1000;
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+
+    &.active {
+      transform: translateX(0);
+    }
+
+    .item-style {
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      justify-content: center;
+      color: $light-color;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 200;
+  width: 100%;
+  transform: translateY(0);
+  transition: transform 100ms;
+
+  &.nav-open {
+    transform: translateY(100%);
+  }
+
+  .footer-wrapper {
+    padding-top: 31px;
+    padding-bottom: 20px;
+    background-image: url($dark-pattern);
+
+    &:before {
+      display: block;
+      content: "";
+      //background-image: url($white-pattern-style-top);
+      width: 100%;
+      top: -1px;
+      position: absolute;
+      height: 15px;
+    }
+
+    .carBrands {
+      width: 100%;
+    }
+  }
+}
+
+.home-header {
+  background-image: url($body-pattern);
+  color: $font-dark;
+
+  .home {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .info {
+    }
+
+    .homeImage {
+      flex-basis: 70%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .carousel {
+    .slide-control-style {
+      color: $menu-icon-color;
+    }
+
+    .carousel-indicators {
+      margin-bottom: 105px;
+
+      li {
+        background-color: $menu-icon-color;
+      }
+    }
+  }
+}
+
+//login form style
+.login-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  //background-image: url($body-pattern);
+  width: 100%;
+  height: 100vh;
+  //height: 100%;
+  overflow-y: auto;
+
+
+  .login-wrapper {
+    position: relative;
+    background-image: url($dark-pattern);
+
+
+    // &:before {
+    //   display: block;
+    //   content: "";
+    //   background-image: url($white-pattern-style-top);
+    //   width: 100%;
+    //   top: 0;
+    //   left: 0;
+    //   position: absolute;
+    //   height: 15px;
+    // }
+
+    // &:after {
+    //   display: block;
+    //   content: "";
+    //   background-image: url($white-pattern-style-top);
+    //   width: 100%;
+    //   left: 0;
+    //   transform: rotate(180deg);
+    //   bottom: -1px;
+    //   position: absolute;
+    //   height: 15px;
+    // }
+
+    // .right-style {
+    //   position: absolute;
+    //   background-image: url($white-pattern-style-side);
+    //   width: 15px;
+    //   top: 0;
+    //   left: 0;
+    //   height: 100%;
+    // }
+
+    // .left-style {
+    //   position: absolute;
+    //   background-image: url($white-pattern-style-side);
+    //   width: 15px;
+    //   top: 0;
+    //   transform: rotate(180deg);
+    //   right: -1px;
+    //   height: 100%;
+    // }
+  }
+}
+.profile-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-image: url($body-pattern);
+  width: 100%;
+  height: 100vh;
+
+  .profile-wrapper {
+    position: relative;
+    background-image: url($dark-pattern);
+
+    &:before {
+      display: block;
+      content: "";
+      background-image: url($white-pattern-style-top);
+      width: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 15px;
+    }
+
+    &:after {
+      display: block;
+      content: "";
+      background-image: url($white-pattern-style-top);
+      width: 100%;
+      left: 0;
+      transform: rotate(180deg);
+      bottom: -1px;
+      position: absolute;
+      height: 15px;
+    }
+
+    .right-style {
+      position: absolute;
+      background-image: url($white-pattern-style-side);
+      width: 15px;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+
+    .left-style {
+      position: absolute;
+      background-image: url($white-pattern-style-side);
+      width: 15px;
+      top: 0;
+      transform: rotate(180deg);
+      right: -1px;
+      height: 100%;
+    }
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+    .customDiv{
+      border-style: ridge;
+    }
+  }
+}

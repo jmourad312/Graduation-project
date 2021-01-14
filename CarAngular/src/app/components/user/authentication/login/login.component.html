@@ -1,0 +1,46 @@
+<section class="login-component">
+    <div class="container jumbotron login-wrapper">
+      <div class="right-style"></div>
+      <div class="left-style"></div>
+      <div class="row pr-4 pl-4">
+        <div class="col-md-6">
+          <img src="https://html.merku.love/rotors/assets/images/about/img_03.jpg" style="width: 100%;" alt="">
+        </div>
+        <div class="col-md-6">
+          <h2>Login</h2>or <span>
+            <a routerLink='/signup'>Create Account</a></span>
+          <!-- Login Form -->
+          <form [formGroup]="form">
+            <label>
+              <input type="email" formControlName='Email' class="form-control" name="login" placeholder="Email">
+            </label>
+  
+            <div *ngIf="form.controls['Email'].dirty && form.controls['Email'].touched">
+                <small class="text-danger" *ngIf="form.controls['Email'].hasError('required')">You Should Enter Email address</small>
+                <small class="text-danger" *ngIf="form.controls['Email'].hasError('pattern')">Email address is invalid format</small>
+              </div>
+  
+            <br>
+            <label>
+              <input type="password" class="form-control" name="login" placeholder="password">
+            </label>
+            <br>
+            <input type="submit" class="btn btn-danger" style="width: 100%;" value="Log In">
+          </form>
+          <br>
+          <a href="#">Forget Password</a>
+          <br><br>
+          <div class="row">
+            <div class="col-md-4">
+              Login with
+            </div>
+            <div class="col-md-8">
+              <button class="btn btn-danger mr-1"  style="width: 40%;">Google</button>
+              <button class="btn btn-primary" style="width: 40%;">Facebook</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

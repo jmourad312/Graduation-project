@@ -1,0 +1,152 @@
+<script>
+
+document.querySelector("body > div.menu.js-menu.is-active")
+
+document.querySelector("body > main")
+</script>
+
+<style>
+    .header{
+    letter-spacing: 1.5px;
+-webkit-font-smoothing: antialiased;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+width: 80px;
+border-right: 1px solid #e6e6e6;
+text-align: center;
+z-index: 2;
+transition: border-color 1s ease;}
+
+.menu{
+    letter-spacing: 1.5px;
+-webkit-font-smoothing: antialiased;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+position: fixed;
+top: 0;
+bottom: 0;
+right: 0;
+z-index: 5;
+left: 80px;
+visibility: visible;
+transition: visibility .8s cubic-bezier(.08,.03,.22,.87);
+}
+
+</style>
+
+
+<body>
+
+<header data-module="header">
+    <button type="button" class="toggle-menu js-toggle-menu is-active"><span class="sr-only">Menu</span></button>
+    <div class="side-menu">
+        <ul class="social-inline" itemscope="" itemtype="http://schema.org/Organization">
+            <span itemprop="name" class="d-none">Everess</span>
+            <link itemprop="url" href="https://www.everess.fr">
+            <li class="social-inline__item"><a href="https://www.linkedin.com/company/everess-agency/" class=""
+                    target="_blank" itemprop="sameAs"><span>in</span></a>
+            </li>
+            <li class="social-inline__item"><a href="https://www.facebook.com/everess.agency/" class="" target="_blank"
+                    itemprop="sameAs"><span>fb</span></a>
+            </li>
+            <li class="social-inline__item"><a href="https://www.instagram.com/everess.fr/" class="" target="_blank"
+                    itemprop="sameAs"><span>ig</span></a>
+            </li>
+
+        </ul>
+
+        <button type="button" class="dark-mode-button js-dark-mode-button"><span class="sr-only">Dark
+                mode</span></button>
+
+    </div>
+</header>
+
+<div class="menu js-menu is-active">
+    <div class="menu__wrapper">
+        <a href="https://www.everess.fr" class="menu__col js-menu-col">
+            <span class="menu__col-outer">
+                <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                    <span class="menu__title"><span>Accueil</span></span>
+                    <span class="menu__text">Développons ensemble votre stratégie digitale</span>
+                </span>
+            </span>
+        </a>
+        <div class="menu__col js-menu-col">
+            <span class="menu__col-outer">
+                <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                    <span class="menu__title"><span>Services</span></span>
+                    <span class="menu__text">
+                        <a href="https://www.everess.fr/services/dashboard"
+                            class="menu__submenu-link js-menu-col">Dashboard</a><br>
+                        <a href="https://www.everess.fr/services/website" class="menu__submenu-link js-menu-col">Site
+                            web</a><br>
+                        <a href="https://www.everess.fr/services/mobile" class="menu__submenu-link js-menu-col">App
+                            mobile</a>
+                    </span>
+                    <a href="https://www.everess.fr/services/dashboard"
+                        class="menu__master-link is-inner js-menu-col"></a>
+                </span>
+                <a href="https://www.everess.fr/services/dashboard" class="menu__master-link js-menu-col"></a>
+            </span>
+        </div>
+        <span class="menu__col-outer">
+            <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                <span class="menu__title"><span>Projets</span></span>
+                <span class="menu__text">
+                    <a href="https://www.everess.fr/projects/piscines-magiline"
+                        class="menu__submenu-link js-menu-col">Piscines Magiline</a><br>
+                    <a href="https://www.everess.fr/projects/newtechwood"
+                        class="menu__submenu-link js-menu-col">NewTechWood</a><br>
+                    <a href="https://www.everess.fr/projects/energie-et-beaute"
+                        class="menu__submenu-link js-menu-col">Énergie et Beauté</a><br>
+                    <a href="https://www.everess.fr/projects/hamma" class="menu__submenu-link js-menu-col">Hamma</a><br>
+                </span>
+                <a href="https://www.everess.fr/projects" class="menu__master-link is-inner js-menu-col"></a>
+            </span>
+            <a href="https://www.everess.fr/projects" class="menu__master-link js-menu-col"></a>
+        </span>
+        <div class="menu__col js-menu-col">
+
+        </div>
+        <a href="https://www.everess.fr/about" class="menu__col js-menu-col">
+            <span class="menu__col-outer">
+                <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                    <span class="menu__title"><span>À propos</span></span>
+                    <span class="menu__text">Découvrez notre vision !</span>
+                </span>
+            </span>
+        </a>
+        <a href="https://www.everess.fr/blog" class="menu__col js-menu-col d-lg-none">
+            <span class="menu__col-outer">
+                <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                    <span class="menu__title"><span>Blog</span></span>
+                </span>
+            </span>
+        </a>
+        <a href="https://www.everess.fr/contact" class="menu__col js-menu-col">
+            <span class="menu__col-outer">
+                <span class="menu__col-inner js-menu-col-inner" style="left: 94.719px;">
+                    <span class="menu__title"><span>Contact</span></span>
+                    <span class="menu__text">Et si on collaborait ?</span>
+                </span>
+            </span>
+        </a>
+    </div>
+
+    <button type="button" class="dark-mode-button d-lg-none js-dark-mode-button"><span class="sr-only">Dark
+            mode</span></button>
+</div>
+
+</body>
