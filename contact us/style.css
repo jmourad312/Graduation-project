@@ -1,0 +1,64 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 4px 0 35px 0;
+  letter-spacing: 1px;
+}
+
+p {
+  margin: 0 0 25px;
+  font-size: 18px;
+  line-height: 1.6em;
+}
+
+.inputheight {
+  height: 15rem;
+}
+
+.form-control:focus {
+  border-color: #181818;
+  transition: all .2s ease-in-out;
+  transform: scale(1.18);
+
+  
+}
+
+#contact .card:hover i,#contact .card:hover h4{
+	color: #920b0b;
+}
+
+ul{
+  padding-top: 40px;
+}
+
+li{
+  margin-right:3rem;
+}
+
+li a {
+  background-color: #f7f7f7;
+  color: #181616;
+}
+
+li a:hover,
+li a:focus,
+button {
+  text-decoration: none;
+  background-color: #d80606;
+}
+
+#contact {
+  background: #1f1e1e;
+  color: #f4f4f4;
+  padding: 50px;
+}
+
+textarea.form-control {
+  height: 100px;
+  resize: none;
+}
