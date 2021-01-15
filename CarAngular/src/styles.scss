@@ -193,66 +193,10 @@ footer {
 }
 
 //login form style
-.login-component {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  //background-image: url($body-pattern);
-  width: 100%;
-  height: 100vh;
-  //height: 100%;
-  overflow-y: auto;
+@import "styles/loginComp";
 
 
-  .login-wrapper {
-    position: relative;
-    background-image: url($dark-pattern);
-
-
-    // &:before {
-    //   display: block;
-    //   content: "";
-    //   background-image: url($white-pattern-style-top);
-    //   width: 100%;
-    //   top: 0;
-    //   left: 0;
-    //   position: absolute;
-    //   height: 15px;
-    // }
-
-    // &:after {
-    //   display: block;
-    //   content: "";
-    //   background-image: url($white-pattern-style-top);
-    //   width: 100%;
-    //   left: 0;
-    //   transform: rotate(180deg);
-    //   bottom: -1px;
-    //   position: absolute;
-    //   height: 15px;
-    // }
-
-    // .right-style {
-    //   position: absolute;
-    //   background-image: url($white-pattern-style-side);
-    //   width: 15px;
-    //   top: 0;
-    //   left: 0;
-    //   height: 100%;
-    // }
-
-    // .left-style {
-    //   position: absolute;
-    //   background-image: url($white-pattern-style-side);
-    //   width: 15px;
-    //   top: 0;
-    //   transform: rotate(180deg);
-    //   right: -1px;
-    //   height: 100%;
-    // }
-  }
-}
+//profile component
 .profile-component {
   display: flex;
   justify-content: center;
@@ -395,16 +339,16 @@ footer {
   text-decoration:none;
   }
 
-.blog {
-.blog-contents {
-  .blog-post {
-    .text-multiline-truncate {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+  .blog {
+  .blog-contents {
+    .blog-post {
+      .text-multiline-truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
-}
 }
 
 
