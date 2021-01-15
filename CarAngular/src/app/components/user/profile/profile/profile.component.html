@@ -1,0 +1,46 @@
+<section class="profile-component">
+    <div class="container jumbotron profile-wrapper">
+      <div class="left-style"></div>
+      <div class="right-style"></div>
+      <div class="row pr-4 pl-4">
+        <div class="col-md-3">
+          <img src="http://www.newdesignfile.com/postpic/2013/01/generic-user-icon-windows_321380.png"
+               style="width: 100%;" alt="">
+          <br>
+          <h6>Joined in Jan 2021</h6>
+          <h5>User name:</h5>
+          <button class="btn btn-primary">Edit profile</button>
+          <br><br>
+        </div>
+        <div class="col-md-9">
+          <div class="tab">
+            <button class="tablinks" (click)="showAboutMe()" mat-raised-button>About me</button>
+            <button class="tablinks" (click)="showCarDetails()" mat-raised-button>Car details</button>
+            <button class="tablinks" (click)="showComments()" mat-raised-button>Comments</button>
+            <button class="tablinks" (click)="showStarsItem()" mat-raised-button>Stars item</button>
+          </div>
+  
+          <div [hidden]="aboutMe">
+            <h4>First name:</h4>
+            <h4>Surname:</h4>
+            <h4>Email: </h4>
+            <h4>Phone number: </h4>
+            <h4>Location map</h4>
+          </div>
+  
+          <div [hidden]="carDetails">
+            <h4>Car model:</h4>
+          </div>
+  
+          <div [hidden]="comments">
+            <div class="customDiv">
+              <span class="float-right text-secondary">Sep 29, 2014, 9:12 PM</span>
+              <h4 class="text-secondary">Title</h4>
+              <h6 class="text-secondary">Comment details</h6></div>
+          </div>
+          <div [hidden]="starsItem"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

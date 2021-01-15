@@ -1,0 +1,89 @@
+<section class="login-component">
+    <div class="container jumbotron login-wrapper">
+        <div class="">
+            <form [formGroup]='formGroup'>
+                <h2 style="text-align: center;">Signup</h2>
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" formControlName="Name" #inputaddname class="form-control"
+                        placeholder="Write Name">
+                    <div
+                        *ngIf="formGroup.controls['Name'].invalid && (formGroup.controls['Name'].touched || formGroup.controls['Name'].dirty)">
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Name'].hasError('required')">Required
+                            Name</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Name'].hasError('minlength')">min length
+                            is
+                            5</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Name'].hasError('maxlength')">max length
+                            is
+                            10</small>
+                    </div>
+                    <br>
+                    <label>Email:</label>
+                    <input type="text" formControlName="Email" #inputaddEmail class="form-control"
+                        placeholder="Write Email">
+                    <div
+                        *ngIf="formGroup.controls['Email'].invalid && (formGroup.controls['Email'].touched || formGroup.controls['Email'].dirty)">
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Email'].hasError('required')">Required
+                            Email</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Email'].hasError('email')">Should be
+                            xxx@example.com</small>
+                    </div>
+                    <br>
+                    <label>Password:</label>
+                    <input type="text" formControlName="Password" #inputaddPassword class="form-control"
+                        placeholder="Write its password">
+                    <div
+                        *ngIf="formGroup.controls['Password'].invalid && (formGroup.controls['Password'].touched || formGroup.controls['Password'].dirty)">
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Password'].hasError('required')">Required
+                            Password</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Password'].hasError('minlength')">min
+                            length is 10</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Password'].hasError('maxlength')">max
+                            length is 30</small>
+                    </div>
+                    <br>
+                    <label>Gender:</label>
+                    <input type="text" formControlName="Gender" #inputaddGender class="form-control"
+                        placeholder="Write its Gender">
+                    <div
+                        *ngIf="formGroup.controls['Gender'].invalid && (formGroup.controls['Gender'].touched || formGroup.controls['Gender'].dirty)">
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['Gender'].hasError('required')">Required
+                            Gender</small>
+                    </div>
+                    <br>
+                    <label>DateOfBirth:</label>
+                    <input type="text" formControlName="DateOfBirth" #inputaddDateOfBirth class="form-control"
+                        placeholder="Write its Price">
+                    <div
+                        *ngIf="formGroup.controls['DateOfBirth'].invalid && (formGroup.controls['DateOfBirth'].touched || formGroup.controls['DateOfBirth'].dirty)">
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['DateOfBirth'].hasError('required')">Required
+                            Name</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['DateOfBirth'].hasError('minlength')">min
+                            length is 10</small>
+                        <small class="form-text text-danger"
+                            *ngIf="formGroup.controls['DateOfBirth'].hasError('maxlength')">max
+                            length is 11</small>
+                    </div>
+                    <br>
+                </div>
+                <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success float-right btn-lg"
+                    data-dismiss="modal" >SignUp</button>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+
+
+    </div>
+</section>
