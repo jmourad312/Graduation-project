@@ -29,6 +29,12 @@ const routes: Routes = [
   },
 
   {
+    path:'info', 
+    component:HeaderComponent,
+    loadChildren:() => import ('./components/info/info.module').then(m=>m.InfoModule)
+  },
+
+  {
     path:'', 
     component:HeaderComponent,
     loadChildren:() => import ('./components/user/profile/profile.module').then(m=>m.ProfileModule)
