@@ -31,12 +31,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/base.css",
+              "src/assets/css/pater.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/js/custom.js"
+              "src/assets/js/custom.js",
+              "src/assets/js/demo.js",
+              "src/assets/js/imagesloaded.pkgd.min.js",
+              "src/assets/js/anime.min.js",
+              "src/assets/js/demo6.js"
             ]
           },
           "configurations": {

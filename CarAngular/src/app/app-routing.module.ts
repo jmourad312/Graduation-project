@@ -1,3 +1,4 @@
+import { HomepageComponent } from './components/layout/homepage/homepage.component';
 import { listLazyRoutes, parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -38,7 +39,13 @@ const routes: Routes = [
     path:'', 
     component:HeaderComponent,
     loadChildren:() => import ('./components/user/profile/profile.module').then(m=>m.ProfileModule)
-  },
+  }
+  // {
+  //   path:'', 
+  //   component:HeaderComponent,
+  //   // loadChildren:() => import ('./components/user/profile/profile.module').then(m=>m.ProfileModule)
+  // },
+  
 
 ];
 

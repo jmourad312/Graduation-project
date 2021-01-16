@@ -1,3 +1,4 @@
+import { HomepageComponent } from './../../layout/homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
@@ -9,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes:Routes=[
   {path:'',component:ProfileComponent},
+  {path:'home',component:HomepageComponent},
   {path:'favoriteitem',component:FavoriteitemComponent},
   {path:'favoriteblog',component:FavoriteblogComponent},
   {path:'searchhistory',component:SearchhistoryComponent},

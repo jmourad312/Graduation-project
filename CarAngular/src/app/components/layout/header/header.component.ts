@@ -16,12 +16,13 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   ToggleMenu(): boolean {
     this.IsMenuOpen = !this.IsMenuOpen;
     return this.IsMenuOpen;
-}
+  }
 }
 
 
