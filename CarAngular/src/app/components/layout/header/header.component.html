@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
     <div class="nav-wrapper">
       <div (click)="ToggleMenu()" [class.menu-open]="ToggleMenu()" class="mobile-list-icon">
         <div class="a"></div>
@@ -14,19 +14,94 @@
       <a class=" about item-style" href="#">
         <img src="../../../../assets/Images/logo_01_1x.png" alt="">
       </a>
-
       <a class=" services item-style" routerLink="/user/profile">Profile</a>
       <a class=" place-order item-style" routerLink="/user/blog/list">list blog</a>
       <a class=" place-order item-style" routerLink="/user/blog/add">BLOG</a>
       <a class=" faqs item-style" routerLink="/user/auth/restpassword">resetpassword</a>
       <a class=" blog item-style" routerLink="/user/auth/login">Login</a>
       <a class=" contact item-style" routerLink="/info/contactus">CONTACT US</a>
-    
     </section>
-    
-  </nav>
+  </nav> -->
+  
+  
+  <section class="newNav">
 
+    <article>
+      <div class="menu">
+        <input id="menu--toggle"
+               type="checkbox" />
+        <!-- /#menu--toggle -->
+        <label class="menu--toggle__trigger"
+               for="menu--toggle"></label>
+        <!-- /.menu--toggle__trigger -->
+        <label class="menu--toggle__burger"
+               for="menu--toggle"></label>
+        <!-- /.menu--toggle__burger -->
+  
+
+          <ul class="menu__body">
+            <li class="menu__body-element ">
+              <a class="menu__body-link "
+                routerLink="/user/profile"
+                  >
+                  Profile
+              </a>
+              <!-- /.menu__body-link -->
+            </li>
+            <!-- /.menu__body-element -->
+            <li class="menu__body-element">
+              <a class="menu__body-link "
+              routerLink="/user/blog/list"
+                  >
+                  list blog
+              </a>
+            </li>
+  
+            <li class="menu__body-element">
+              <a class="menu__body-link "
+              routerLink="/user/blog/add"
+                  >
+                  BLOG
+              </a>
+            </li>
+  
+            <li class="menu__body-element">
+              <a class="menu__body-link "
+              routerLink="/user/auth/restpassword"
+                  >
+                  resetpassword
+              </a>
+            </li>
+  
+            <li class="menu__body-element">
+              <a class="menu__body-link"
+              routerLink="/user/auth/login"
+                  >
+                  Login
+              </a>
+            </li>
+  
+            <li class="menu__body-element">
+              <a class="menu__body-link"
+              routerLink="/info/contactus"
+                  >
+                  CONTACT US
+              </a>
+            </li>
+          </ul>
+        <!-- /.menu__body -->
+      </div>
+      <!-- /.menu -->
+    </article>
+    <!-- <article>
+      <div class="promotion">
+      </div> -->
+      <!-- /.promotion -->
+    <!-- </article> -->
+  </section>
+  
   <router-outlet></router-outlet>
+
 
   <footer [class.nav-open]="!IsMenuOpen">
     
