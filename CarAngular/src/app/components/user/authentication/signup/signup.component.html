@@ -4,26 +4,49 @@
             <form [formGroup]='formGroup'>
                 <h2 style="text-align: center;">Signup</h2>
                 <div class="form-group">
-                    <label>Name:</label>
-                    <input type="text" formControlName="Name" #inputaddname class="form-control"
-                        placeholder="Write Name">
-                    <div
-                        *ngIf="formGroup.controls['Name'].invalid && (formGroup.controls['Name'].touched || formGroup.controls['Name'].dirty)">
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Name'].hasError('required')">Required
-                            Name</small>
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Name'].hasError('minlength')">min length
-                            is
-                            5</small>
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Name'].hasError('maxlength')">max length
-                            is
-                            10</small>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>First Name:</label>
+                            <input type="text" formControlName="Name" #inputaddname class="form-control"
+                                placeholder="Write Name">
+                            <div
+                                *ngIf="formGroup.controls['Name'].invalid && (formGroup.controls['Name'].touched || formGroup.controls['Name'].dirty)">
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('required')">Required
+                                    Name</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('minlength')">min length
+                                    is
+                                    5</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('maxlength')">max length
+                                    is
+                                    10</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>Last Name:</label>
+                            <input type="text" formControlName="Name" #inputaddLastname class="form-control"
+                                placeholder="Write Name">
+                            <!-- <div
+                                *ngIf="formGroup.controls['Name'].invalid && (formGroup.controls['Name'].touched || formGroup.controls['Name'].dirty)">
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('required')">Required
+                                    Name</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('minlength')">min length
+                                    is
+                                    5</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Name'].hasError('maxlength')">max length
+                                    is
+                                    10</small>
+                            </div> -->
+                        </div>
                     </div>
                     <br>
                     <label>Email:</label>
-                    <input type="text" formControlName="Email" #inputaddEmail class="form-control"
+                    <input type="email" formControlName="Email" #inputaddEmail class="form-control"
                         placeholder="Write Email">
                     <div
                         *ngIf="formGroup.controls['Email'].invalid && (formGroup.controls['Email'].touched || formGroup.controls['Email'].dirty)">
@@ -35,20 +58,42 @@
                             xxx@example.com</small>
                     </div>
                     <br>
-                    <label>Password:</label>
-                    <input type="text" formControlName="Password" #inputaddPassword class="form-control"
-                        placeholder="Write its password">
-                    <div
-                        *ngIf="formGroup.controls['Password'].invalid && (formGroup.controls['Password'].touched || formGroup.controls['Password'].dirty)">
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Password'].hasError('required')">Required
-                            Password</small>
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Password'].hasError('minlength')">min
-                            length is 10</small>
-                        <small class="form-text text-danger"
-                            *ngIf="formGroup.controls['Password'].hasError('maxlength')">max
-                            length is 30</small>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Password:</label>
+                            <input type="password" formControlName="Password" #inputaddPassword class="form-control"
+                                placeholder="Write its password">
+                            <div
+                                *ngIf="formGroup.controls['Password'].invalid && (formGroup.controls['Password'].touched || formGroup.controls['Password'].dirty)">
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('required')">Required
+                                    Password</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('minlength')">min
+                                    length is 10</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('maxlength')">max
+                                    length is 30</small>
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <label>Confirm Password:</label>
+                            <input type="password" formControlName="ConfirmPassword" #inputaddConfirmPassword class="form-control"
+                                placeholder="Confirm password">
+                            <!-- <div
+                                *ngIf="formGroup.controls['Password'].invalid && (formGroup.controls['Password'].touched || formGroup.controls['Password'].dirty)">
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('required')">Required
+                                    Password</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('minlength')">min
+                                    length is 10</small>
+                                <small class="form-text text-danger"
+                                    *ngIf="formGroup.controls['Password'].hasError('maxlength')">max
+                                    length is 30</small>
+                            </div> -->
+                        </div>
                     </div>
                     <br>
                     <label>Gender:</label>
@@ -61,8 +106,24 @@
                             Gender</small>
                     </div>
                     <br>
-                    <label>DateOfBirth:</label>
-                    <input type="text" formControlName="DateOfBirth" #inputaddDateOfBirth class="form-control"
+                    <div class="btn-group">
+                        <input
+                          type="radio"
+                          class="btn-check"
+                          name="options"
+                          id="option1"
+                          autocomplete="off"
+                          checked
+                        />
+                        <label class="btn btn-secondary" for="option1">Male</label>
+                      
+                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" />
+                        <label class="btn btn-secondary" for="option2">Female</label>
+                      
+                      </div>
+                    <br>
+                    <label>Date of birth:</label>
+                    <input type="date" formControlName="DateOfBirth" #inputaddDateOfBirth class="form-control"
                         placeholder="Write its Price">
                     <div
                         *ngIf="formGroup.controls['DateOfBirth'].invalid && (formGroup.controls['DateOfBirth'].touched || formGroup.controls['DateOfBirth'].dirty)">
@@ -79,7 +140,7 @@
                     <br>
                 </div>
                 <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success float-right btn-lg"
-                    data-dismiss="modal" >SignUp</button>
+                    data-dismiss="modal">SignUp</button>
                 <div class="clearfix"></div>
             </form>
         </div>
