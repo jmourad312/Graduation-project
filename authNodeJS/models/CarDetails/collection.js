@@ -1,0 +1,14 @@
+const mongoose = require("mongoose");
+
+var schema = mongoose.Schema;
+var collection= new schema({
+    name: String,
+    car: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Car",
+      }],
+      
+});
+
+
+module.exports = mongoose.model("Collection",collection);;
