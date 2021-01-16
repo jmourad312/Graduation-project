@@ -31,7 +31,7 @@ a:active {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:  $hover-color;
+  background: $hover-color;
 }
 
 /* Handle on hover */
@@ -39,46 +39,60 @@ a:active {
   background: $menu-icon-color;
 }
 //to make edges seem jagged
-.jagged-edges{
-      &:before {
-        display: block;
-        content: "";
-        background-image: url("../"+$white-pattern-style-top);
-        width: 100%;
-        top: 0;
-        left: 0;
-        position: absolute;
-        height: 15px;
-      }
+.jagged-edges {
+  &:before {
+    display: block;
+    content: "";
+    background-image: url("../" + $white-pattern-style-top);
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 15px;
+  }
 
-      &:after {
-        display: block;
-        content: "";
-        background-image: url("../"+$white-pattern-style-top);
-        width: 100%;
-        left: 0;
-        transform: rotate(180deg);
-        bottom: -1px;
-        position: absolute;
-        height: 15px;
-      }
+  &:after {
+    display: block;
+    content: "";
+    background-image: url("../" + $white-pattern-style-top);
+    width: 100%;
+    left: 0;
+    transform: rotate(180deg);
+    bottom: -1px;
+    position: absolute;
+    height: 15px;
+  }
 
-      .right-style {
-        position: absolute;
-        background-image: url("../"+$white-pattern-style-side);
-        width: 15px;
-        top: 0;
-        left: 0;
-        height: 100%;
-      }
+  .right-style {
+    position: absolute;
+    background-image: url("../" + $white-pattern-style-side);
+    width: 15px;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
 
-      .left-style {
-        position: absolute;
-        background-image: url("../"+$white-pattern-style-side);
-        width: 15px;
-        top: 0;
-        transform: rotate(180deg);
-        right: -1px;
-        height: 100%;
-      }
-    }
+  .left-style {
+    position: absolute;
+    background-image: url("../" + $white-pattern-style-side);
+    width: 15px;
+    top: 0;
+    transform: rotate(180deg);
+    right: -1px;
+    height: 100%;
+  }
+}
+
+//jagged only for top side
+.jagged-edges-top {
+  &:before {
+    display: block;
+    content: "";
+    background-image: url("../" + $white-pattern-style-top);
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 15px;
+  }
+}
