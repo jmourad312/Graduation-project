@@ -3,10 +3,16 @@ const passport = require("passport");
 
 const fs = require("fs");
 const bodyparser = require("body-parser");
-const routeuser = require("./routes/user");
-const routeauth = require("./routes/auth");
+
+const routeuser = require("./routes/user/user");
+const routeauth = require('./routes/authentication/sign-up');
+const roeauth = require('./routes/authentication/o-thridParty');
+
+
+// to run at angular
 const cors = require("cors");
 
+//generate key private and public for secret token
 const genKeyPair = require("./generatekeypair");
 
 //server
@@ -23,30 +29,31 @@ mongoose.connect("mongodb://127.0.0.1:27017/carDB", {
 
 
 //models routes
-var files_arr = fs.readdirSync(__dirname + "/models/Blog");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/Blog/" + file);
-});
-var files_arr = fs.readdirSync(__dirname + "/models/CarDetails");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/CarDetails/" + file);
-});
-var files_arr = fs.readdirSync(__dirname + "/models/Independace");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/Independace/" + file);
-});
-var files_arr = fs.readdirSync(__dirname + "/models/Person");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/Person" + file);
-});
-var files_arr = fs.readdirSync(__dirname + "/models/Person/User");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/Person/User/" + file);
-});
-var files_arr = fs.readdirSync(__dirname + "/models/Person/Vendor");
-files_arr.forEach(function (file) {
-  require(__dirname + "/models/Person/Vendor/" + file);
-});
+require('./models/user');
+// var files_arr = fs.readdirSync(__dirname + "/models/Blog");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/Blog/" + file);
+// });
+// var files_arr = fs.readdirSync(__dirname + "/models/CarDetails");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/CarDetails/" + file);
+// });
+// var files_arr = fs.readdirSync(__dirname + "/models/Independace");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/Independace/" + file);
+// });
+// var files_arr = fs.readdirSync(__dirname + "/models/Person");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/Person" + file);
+// });
+// var files_arr = fs.readdirSync(__dirname + "/models/Person/User");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/Person/User/" + file);
+// });
+// var files_arr = fs.readdirSync(__dirname + "/models/Person/Vendor");
+// files_arr.forEach(function (file) {
+//   require(__dirname + "/models/Person/Vendor/" + file);
+// });
 
 
 
@@ -58,7 +65,10 @@ app.use(passport.initialize());
 
 app.use(bodyparser.json({ extended: false }));
 
-// app.use("/auth", routeauth);
+roeauth
+app.use("/f", roeauth);
+
+app.use("/signup", routeauth);
 app.use("/user", routeuser);
 
 app.use((req, resp, next) => {
