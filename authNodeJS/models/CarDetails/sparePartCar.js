@@ -5,13 +5,9 @@ var car = new schema({
   name: String,
   price: String,
   description: String,
-  available: boolean,
+  available: Boolean,
   case: String,
   image: [],
-  collection: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Collection",
-  },
   itemFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemFeedBack",
@@ -20,6 +16,10 @@ var car = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "CarType",
   }],
+  carCollection: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CarCollection",
+  },
 });
 
 module.exports = mongoose.model("Car", car);

@@ -3,7 +3,6 @@ const FacebookStrategy = require('passport-facebook');
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const User = require('../models/user');
-
 const configOption = require('./configoption')
 
 // app.js will pass the global passport object here, and this function will configure it
@@ -29,7 +28,6 @@ module.exports = (passport) => {
         });
 
     }));
-
 
     passport.use(new FacebookStrategy(configOption.facebookOptions, function (accessToken, refreshToken, profile, done) {
         User.findOne({ facebookId: profile.id }, async function (err, user) {

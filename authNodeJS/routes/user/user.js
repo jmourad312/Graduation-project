@@ -46,7 +46,6 @@ router.get('/:code',passport.authenticate('jwt', { session: false }),canView,(re
     })
 });
 
-
 router.get('/' ,(req, resp) => {
 
     User.find({}, { _id: 0, __v: 0 }, (err, data) => {
@@ -75,8 +74,6 @@ router.get('/' ,(req, resp) => {
         }
     })
 });
-
-
 
 router.delete('/:code',(req, resp) => {
     User.deleteOne({ ID: req.params.code }, (err, data) => {

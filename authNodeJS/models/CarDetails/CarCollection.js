@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
-var collection= new schema({
+var carCollection= new schema({
     name: String,
     car: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -11,4 +11,4 @@ var collection= new schema({
 });
 
 
-module.exports = mongoose.model("Collection",collection);;
+module.exports = mongoose.model("CarCollection",carCollection);;

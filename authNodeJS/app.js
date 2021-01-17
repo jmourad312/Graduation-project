@@ -4,9 +4,7 @@ const passport = require("passport");
 const fs = require("fs");
 const bodyparser = require("body-parser");
 
-const routeuser = require("./routes/user/user");
-const routeauth = require('./routes/authentication/sign-up');
-const roeauth = require('./routes/authentication/o-thridParty');
+const routeAuth = require('./routes/authentication/auth');
 
 
 // to run at angular
@@ -28,48 +26,33 @@ mongoose.connect("mongodb://127.0.0.1:27017/carDB", {
 });
 
 
-//models routes
-require('./models/user');
-// var files_arr = fs.readdirSync(__dirname + "/models/Blog");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/Blog/" + file);
-// });
-// var files_arr = fs.readdirSync(__dirname + "/models/CarDetails");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/CarDetails/" + file);
-// });
-// var files_arr = fs.readdirSync(__dirname + "/models/Independace");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/Independace/" + file);
-// });
-// var files_arr = fs.readdirSync(__dirname + "/models/Person");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/Person" + file);
-// });
-// var files_arr = fs.readdirSync(__dirname + "/models/Person/User");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/Person/User/" + file);
-// });
-// var files_arr = fs.readdirSync(__dirname + "/models/Person/Vendor");
-// files_arr.forEach(function (file) {
-//   require(__dirname + "/models/Person/Vendor/" + file);
-// });
+//models 
+require('./models/Person/admin');
+require('./models/Person/person')
 
+//schema in files 
+files = ["/models/Blog", "/models/CarDetails", "/models/Independace", "/models/Person/Vendor", "/models/Person/User"]
+
+for (let i = 0; i < files.length; i++) {
+  var files_arr = fs.readdirSync(__dirname + files[i]);
+  files_arr.forEach(function (file) {
+    require(__dirname + files[i] + "/" + file);
+  });
+}
 
 
 // Pass the global passport object into the configuration function
 require("./config/passport")(passport);
-
 // This will initialize the passport object on every request
 app.use(passport.initialize());
 
+//bodyparser
 app.use(bodyparser.json({ extended: false }));
 
-roeauth
-app.use("/f", roeauth);
 
-app.use("/signup", routeauth);
-app.use("/user", routeuser);
+//routes
+app.use("/auth", routeAuth);
+//app.use("/user", routeuser);
 
 app.use((req, resp, next) => {
   resp.send("Hello page not found");
