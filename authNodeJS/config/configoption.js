@@ -22,7 +22,6 @@ const facebookOptions = {
     profileFields: ['id', 'displayName', 'photos', 'emails']
 }
 
-
 const GOOGLE_APP_ID = '52351952508-hl0kqgkmkdobu6hqjhdlqt4v7eg8s275.apps.googleusercontent.com';
 const GOOGLE_APP_SECRET = 'IZlNtFtNW2BZpJ0kJ_PkkbTk';
 

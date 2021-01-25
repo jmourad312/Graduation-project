@@ -42,7 +42,7 @@ module.exports = (passport) => {
                     email: profile.emails[0].value,
                 }, (err, user) => {
                     User.create({
-                        person: Person._id,
+                        person: user._id,
                         facebookId: profile.id
                     }, (err2, user2) => {
                         return done(null, user);
@@ -69,7 +69,7 @@ module.exports = (passport) => {
                     email: profile.emails[0].value,
                 }, (err, user) => {
                     User.create({
-                        person: Person._id,
+                        person: user._id,
                         googleId: profile.id
                     }, (err2, user2) => {
                         return done(null, user);

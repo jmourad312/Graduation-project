@@ -26,19 +26,19 @@ mongoose.connect("mongodb://127.0.0.1:27017/carDB", {
 });
 
 
-//models 
-require('./models/Person/admin');
-require('./models/Person/person')
+// //models 
+// require('./models/Person/admin');
+// require('./models/Person/person')
 
-//schema in files 
-files = ["/models/Blog", "/models/CarDetails", "/models/Independace", "/models/Person/Vendor", "/models/Person/User"]
+// //schema in files 
+// files = ["/models/Blog", "/models/CarDetails", "/models/Independace", "/models/Person/Vendor", "/models/Person/User"]
 
-for (let i = 0; i < files.length; i++) {
-  var files_arr = fs.readdirSync(__dirname + files[i]);
-  files_arr.forEach(function (file) {
-    require(__dirname + files[i] + "/" + file);
-  });
-}
+// for (let i = 0; i < files.length; i++) {
+//   var files_arr = fs.readdirSync(__dirname + files[i]);
+//   files_arr.forEach(function (file) {
+//     require(__dirname + files[i] + "/" + file);
+//   });
+// }
 
 
 // Pass the global passport object into the configuration function
