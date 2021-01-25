@@ -4,7 +4,7 @@ const passport = require("passport");
 const fs = require("fs");
 const bodyparser = require("body-parser");
 
-const routeAuth = require('./routes/authentication/auth');
+const AuthUserRoute = require('./routes/user/auth');
 
 
 // to run at angular
@@ -51,8 +51,7 @@ app.use(bodyparser.json({ extended: false }));
 
 
 //routes
-app.use("/auth", routeAuth);
-//app.use("/user", routeuser);
+app.use("/auth",AuthUserRoute);
 
 app.use((req, resp, next) => {
   resp.send("Hello page not found");

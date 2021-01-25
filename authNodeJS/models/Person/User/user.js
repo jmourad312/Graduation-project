@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
-var juser = new schema({
+var user = new schema({
   // onSale: Boolean,
   // price: {
   //     type: Number,
@@ -27,4 +27,4 @@ var juser = new schema({
   },
 });
 
-module.exports = mongoose.model("jUser", juser);
+module.exports = mongoose.model("User", user);

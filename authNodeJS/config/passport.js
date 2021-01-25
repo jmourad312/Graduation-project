@@ -1,8 +1,8 @@
 const JwtStrategy = require('passport-jwt').Strategy
 const FacebookStrategy = require('passport-facebook');
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-
-const User = require('../models/user');
+const Person = require('../models/Person/person')
+const User = require('../models/Person/User/user');
 const configOption = require('./configoption')
 
 // app.js will pass the global passport object here, and this function will configure it
@@ -11,7 +11,7 @@ module.exports = (passport) => {
     passport.use(new JwtStrategy(configOption.options, function (jwt_payload, done) {
         console.log(profile);
         // We will assign the `sub` property on the JWT to the database ID of user
-        User.findOne({ _id: jwt_payload._id }, function (err, user) {
+        Person.findOne({ _id: jwt_payload._id }, function (err, user) {
             // This flow look familiar?  It is the same as when we implemented
             // the `passport-local` strategy
             if (err) {
@@ -34,15 +34,19 @@ module.exports = (passport) => {
             if (err) {
                 return done(err, false);
             }
-            
+
             if (!user) {
 
-                User.create({
-                    UserName: profile.displayName,
-                    Email: profile.emails[0].value,
-                    facebookId: profile.id
-                },(err, user) =>{
-                    return done(null, user);
+                Person.create({
+                    firstName: profile.displayName,
+                    email: profile.emails[0].value,
+                }, (err, user) => {
+                    User.create({
+                        person: Person._id,
+                        facebookId: profile.id
+                    }, (err2, user2) => {
+                        return done(null, user);
+                    })
                 })
             }
             else {
@@ -53,19 +57,23 @@ module.exports = (passport) => {
     }));
 
     passport.use(new GoogleStrategy(configOption.googleOptions, function (accessToken, refreshToken, profile, done) {
-        User.findOne({ googleId: profile.id }, async function (err, user) {
+        console.log("google:::",profile)
+        Person.findOne({ googleId: profile.id }, async function (err, user) {
             if (err) {
                 return done(err, false);
             }
             if (!user) {
 
-                User.create({
-                    UserName: profile.displayName,
-                    Email: profile.emails[0].value,
-                    googleId: profile.id
-                },(err, user) =>{
-                    console.log(err)
-                    return done(null, user);
+                Person.create({
+                    firstName: profile.displayName,
+                    email: profile.emails[0].value,
+                }, (err, user) => {
+                    User.create({
+                        person: Person._id,
+                        googleId: profile.id
+                    }, (err2, user2) => {
+                        return done(null, user);
+                    })
                 })
             }
             else {

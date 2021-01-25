@@ -30,6 +30,7 @@ const googleOptions = {
     clientID: GOOGLE_APP_ID,
     clientSecret: GOOGLE_APP_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback",
+    profileFields: ['id', 'displayName', 'photos', 'emails']
 }
 
 module.exports = {googleOptions,facebookOptions,options}
