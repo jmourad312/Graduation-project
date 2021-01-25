@@ -7,8 +7,8 @@ const bcrypt = require('bcryptjs');
 
 
 //FaceBook
-router.get('/facebook', passport.authenticate('facebook'))
-router.get('/facebook/callback', passport.authenticate('facebook', { session: false }), (req, resp) => {
+router.get('/facebook', passport.authenticate('facebook',{scope : ['email']}))
+router.get('/facebook/callback', passport.authenticate('facebook', {session: false}), (req, resp) => {
 
     //create and assign a token
     const token = gettoken(req.user); 
@@ -21,9 +21,7 @@ router.get('/facebook/callback', passport.authenticate('facebook', { session: fa
 });
 
 //Google
-router.get('/google', passport.authenticate('google',{
-    scope:['profile']
-}))
+router.get('/google', passport.authenticate('google',{scope:['email']}))
 router.get('/google/callback', passport.authenticate('google', { session: false }), (req, resp) => {
     //create and assign a token
     const token = gettoken(req.user); 
