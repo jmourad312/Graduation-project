@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "./layout/navbar/Navbar.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/Routes";
@@ -11,8 +10,8 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
-        <Homepage2/>
-        {/* <Routes/> */}
+        {/* <Homepage2/> */}
+        <Routes/>
       </Router>
     </div>
   );

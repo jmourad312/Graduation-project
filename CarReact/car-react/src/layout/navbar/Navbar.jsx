@@ -18,7 +18,7 @@ export default function Navbar() {
               {/* <a className="menu__body-link " href="/home">
                 Homepage
               </a> */}
-              <Link className="menu__body-link " to="/auth/login">Auth</Link>
+              <Link className="menu__body-link " to="/login">Auth</Link>
               {/* <!-- /.menu__body-link --> */}
             </li>
             {/* <!-- /.menu__body-element --> */}

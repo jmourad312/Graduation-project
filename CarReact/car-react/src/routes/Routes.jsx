@@ -2,6 +2,10 @@ import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
 const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
+const Homepage2 = React.lazy(() =>
+  import("../layout/Homepage/Homepage2")
+);
+
 const Login = React.lazy(() =>
   import("../pages/user/authentication/login/Login")
 );
@@ -18,8 +22,9 @@ export default function Routes() {
   return (
     <Suspense fallback={"Loading"}>
       <Switch>
-        <Route path="/auth" exact component={AuthRoutes} />
+        <Route path="/" exact component={Homepage2} />
         <Route path="/login" exact component={Login} />
+        
 
         {/* <Route path="/about" exact component={About} />
         <Route path="/contact" exact component={Contact} />
