@@ -96,7 +96,7 @@ router.post('/signup', async (req, resp) => {
 
 //signin
 router.post('/signin', (req, resp) => {
-    Person.findOne({ Email: req.body.Email }, (err, data) => {
+    Person.findOne({ email: req.body.email }, (err, data) => {
 
         if (err) {
             resp.json({
