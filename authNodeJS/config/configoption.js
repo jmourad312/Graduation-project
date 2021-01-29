@@ -18,7 +18,7 @@ const FACEBOOK_APP_SECRET = '2ac6fcf1b5a5674807fbf4b1fab8ffaf';
 const facebookOptions = {
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/user/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos', 'emails']
 }
 
@@ -28,7 +28,7 @@ const GOOGLE_APP_SECRET = 'IZlNtFtNW2BZpJ0kJ_PkkbTk';
 const googleOptions = {
     clientID: GOOGLE_APP_ID,
     clientSecret: GOOGLE_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: "http://localhost:3000/user/auth/google/callback",
     profileFields: ['id', 'displayName', 'photos', 'emails']
 }
 

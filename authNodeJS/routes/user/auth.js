@@ -37,7 +37,7 @@ router.get('/google/callback', passport.authenticate('google', { session: false 
 //signup
 router.post('/signup', async (req, resp) => {
 
-    const saltRounds = 10;
+    const saltRounds = await bcrypt.genSalt(10);
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
         if (err) {
             resp.json({
