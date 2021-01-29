@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const bodyparser = require("body-parser");
-const db = require('./db/config')
+const db = require('./config/configDB')
 const AuthUserRoute = require('./routes/user/auth');
 // to run at angular
 const cors = require("cors");
@@ -25,9 +25,6 @@ app.use(passport.initialize());
 
 //routes
 app.use("/auth",AuthUserRoute);
-
-
-
 
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
