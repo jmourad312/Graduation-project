@@ -27,7 +27,6 @@
     
     class Slideshow {
         constructor(el) {
-            console.log(el);
             this.DOM = {};
             this.DOM.el = el;
             this.settings = {

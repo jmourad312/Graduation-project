@@ -1,0 +1,227 @@
+/* You can add global styles to this file, and also import other style files */
+@import "styles/buttonStyles";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "styles/_mainVariables";
+@import "styles/mixins";
+@import "styles/mainClasses";
+// @import "~@ng-select/ng-select/themes/default.theme.css";
+
+//login form style
+@import "styles/loginComp";
+
+//profile component
+@import "styles/userProfile";
+
+//blogggggggggggggggggggggggggggggg
+@import "styles/blogList";
+
+//////products detailllllllllllls/////////////////////
+@import "styles/productsDetails";
+
+///////////////terms and conditions 
+@import "styles/termsConditions";
+
+///////////////////////////aboutus 
+@import "styles/aboutUs";
+
+////////////////////contact us
+@import "styles/contactUs";
+
+////////////////////////////////////////////////////////////////////////////////vendor profile
+@import "styles/vendorProf-usrComp";
+
+////////////////////////////////////////reset password 
+@import "styles/resetPassComp";
+
+@import 'styles/newNav';
+
+
+nav {
+  .nav-wrapper {
+    position: fixed;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1100;
+
+    .mobile-list-icon {
+      cursor: pointer;
+      width: 23px;
+      height: 20px;
+      outline: none;
+      display: block;
+      transition: all 100ms;
+
+      div {
+        background-color: $menu-icon-color;
+        width: 23px;
+        height: 4px;
+        transition: transform 100ms, background-color 2s;
+
+        &:not(:last-child) {
+          margin-bottom: 4px;
+        }
+      }
+
+      &.menu-open {
+        .b {
+          display: none;
+        }
+
+        .a {
+          transform: rotate(45deg) translate(9px, 6px);
+          background-color: $light-color;
+        }
+
+        .c {
+          transform: rotate(-45deg) translateY(4px);
+          background-color: $light-color;
+        }
+      }
+    }
+  }
+
+  .menu-mobile-list {
+    left: 0;
+    top: 0;
+    padding-top: 120px;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    transform: translateX(-100%);
+    background-image: url($dark-pattern);
+    z-index: 1000;
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+
+    &.active {
+      transform: translateX(0);
+    }
+
+    .item-style {
+      color: #FFF;
+      text-decoration: none;
+      margin: 10px 10px;
+      font-size: 20px;
+      padding: 10px 10px;
+      position: relative;
+      z-index: 0;
+      cursor: pointer;
+
+      &:before{
+        position: absolute;
+        opacity: 0.5;
+        height: 95%;
+        width: 2px;
+        content: '';
+        background: $hover-color;
+        transition: all 150ms;
+      }
+      &:after{
+        position: absolute;
+        opacity: 0.5;
+        height: 95%;
+        width: 2px;
+        content: '';
+        background: $hover-color;
+        transition: all 200ms;
+      }
+      &:before{
+        left: 0px;
+        top: 0px;
+      }
+      &:after{
+        right: 0px;
+        bottom: 0px;
+      }
+      &:hover:after {
+        opacity: 1;
+        height: 2px;
+        width: 100%;
+      }
+      &:hover:before {
+        opacity: 1;
+        height: 2px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 200;
+  width: 100%;
+  transform: translateY(0);
+  transition: transform 100ms;
+
+  &.nav-open {
+    transform: translateY(100%);
+  }
+
+  .footer-wrapper {
+    padding-top: 31px;
+    padding-bottom: 20px;
+    background-image: url($dark-pattern);
+
+    &:before {
+      display: block;
+      content: "";
+      //background-image: url($white-pattern-style-top);
+      width: 100%;
+      top: -1px;
+      position: absolute;
+      height: 15px;
+    }
+
+    .carBrands {
+      width: 100%;
+    }
+  }
+}
+
+.home-header {
+  background-image: url($body-pattern);
+  color: $font-dark;
+
+  .home {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .info {
+    }
+
+    .homeImage {
+      flex-basis: 70%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .carousel {
+    .slide-control-style {
+      color: $menu-icon-color;
+    }
+
+    .carousel-indicators {
+      margin-bottom: 105px;
+
+      li {
+        background-color: $menu-icon-color;
+      }
+    }
+  }
+}
+
+
+
