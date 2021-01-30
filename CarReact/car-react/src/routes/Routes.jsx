@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
-const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
+// const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
 const Homepage2 = React.lazy(() =>
   import("../layout/Homepage/Homepage2")
 );
