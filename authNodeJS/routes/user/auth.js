@@ -7,7 +7,6 @@ const User = require('../../models/Person/User/user');
 const Subscription = require('../../models/Person/User/subscription')
 const bcrypt = require('bcryptjs');
 
-
 //FaceBook
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
 router.get('/facebook/callback', passport.authenticate('facebook', { session: false }), (req, resp) => {
@@ -38,11 +37,11 @@ router.get('/google/callback', passport.authenticate('google', { session: false 
 router.post('/signup', async (req, resp) => {
 
     const saltRounds = await bcrypt.genSalt(10);
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        if (err) {
+    bcrypt.hash(req.body.password, saltRounds, function (errorHash, hash) {
+        if (errorHash) {
             resp.json({
                 "Data": {},
-                "Message": "Can't add user to database,  " + err,
+                "Message": "Can't add user to database,  " + errorHash,
                 "Success": false
             })
         }
@@ -59,32 +58,54 @@ router.post('/signup', async (req, resp) => {
                 role: "user",
                 password: hash,
 
-            }, (err, data) => {
-                if (err) {
-                    console.log(err)
+            }, (errorPerson, dataOfPerson) => {
+                if (errorPerson) {
                     resp.json({
                         "Data": {},
-                        "Message": "Can't add user to database,  " + err,
+                        "Message": "Can't add user to database,  " + errorPerson,
                         "Success": false
                     })
                 }
                 else {
+                    Subscription.create({
+                        type: req.body.type,
+                        createdAt: req.body.createdAt,
+                        endAt: req.body.endAt
 
-                    User.create({ person: data._id }, (err2, data2) => {
-                        if (err2) {
-                            console.log(err)
+                    }, (errorSubscription, dataOfSubscription) => {
+
+                        if (errorSubscription) {
                             resp.json({
                                 "Data": {},
-                                "Message": "Can't add user to database,  " + err,
+                                "Message": "Can't add user to database,  " + errorSubscription,
                                 "Success": false
                             })
                         }
+
                         else {
-                            const token = gettoken(data);
-                            resp.json({
-                                "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
-                                "Message": "Done Sign in ",
-                                "Success": true
+
+                            User.create({
+
+                                 person: dataOfPerson._id,
+                                 userSubscription:dataOfSubscription._id
+
+                                }, (errorUser, dataOfUser) => {
+
+                                if (errorUser) {
+                                    resp.json({
+                                        "Data": {},
+                                        "Message": "Can't add user to database,  " + errorUser,
+                                        "Success": false
+                                    })
+                                }
+                                else {
+                                    const token = gettoken(dataOfPerson);
+                                    resp.json({
+                                        "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
+                                        "Message": "Done Sign in ",
+                                        "Success": true
+                                    })
+                                }
                             })
                         }
                     })
@@ -148,5 +169,6 @@ router.post('/signin', (req, resp) => {
     });
 });
 
-
 module.exports = router
+
+
