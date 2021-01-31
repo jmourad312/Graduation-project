@@ -38,8 +38,6 @@ body{
 ////////////////////////////////////////////////////////////////////////////////vendor profile
 @import "styles/vendorProf-usrComp";
 
-////////////////////////////////////////reset password 
-@import "styles/resetPassComp";
 
 // new nav bar
 @import 'styles/newNav';
@@ -64,6 +62,9 @@ body{
 
 //sign choice component
 @import 'styles/vendorSignForm';
+
+//sign choice component
+@import 'styles/magdyNav';
 
 nav {
   .nav-wrapper {

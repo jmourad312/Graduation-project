@@ -34,11 +34,6 @@ export default function Navbar() {
             </li>
             {/* <!-- /.menu__body-element --> */}
             <li className="menu__body-element">
-              <Link className="menu__body-link " to="/ResetPassword">
-                ResetPassword
-              </Link>
-            </li>
-            <li className="menu__body-element">
               <Link className="menu__body-link " to="/SignForm">
                 SignForm
               </Link>

@@ -12,9 +12,6 @@ const Login = React.lazy(() =>
 const SignUp = React.lazy(() =>
   import("../pages/user/authentication/signUp/SignUp")
 );
-const ResetPassword = React.lazy(() =>
-  import("../pages/user/authentication/resetPassword/ResetPassword")
-);
 const AddBlog = React.lazy(() =>
   import("../pages/user/blog/addBlog/AddBlog.jsx")
 );
@@ -76,7 +73,6 @@ export default function Routes() {
         <Route path="/" exact component={Homepage2} />
         <Route path="/login" exact component={Login} />
         <Route path="/SignUp" exact component={SignUp} />
-        <Route path="/ResetPassword" exact component={ResetPassword} />
         <Route path="/AddBlog" exact component={AddBlog} />
         <Route path="/BlogDetails" exact component={BlogDetails} />
         <Route path="/BlogList" exact component={BlogList} />
