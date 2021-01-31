@@ -16,7 +16,7 @@ var user = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserSubscription",
   },
-  banned: Boolean,
+  banned: {type:Boolean,default:false},
 
   //authentication
   facebookId: {

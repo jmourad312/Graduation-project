@@ -10,7 +10,7 @@ var vendor = new schema({
   workshopSchedule: {
     openingTime: String,
     closingTime: String,
-    closingDays: Array,
+    closingDays: [String],
   },
 
   vendorSubscription: {
@@ -22,7 +22,7 @@ var vendor = new schema({
     ref: "VendorFeedBack",
   },
 
-  banned: Boolean,
+  banned: {type:Boolean,default:false},
 });
 
 module.exports = mongoose.model("Vendor", vendor);
