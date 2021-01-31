@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var car = new schema({
-  name: String,
+  name: { type: String, required: true },
   price: String,
   description: String,
   available: Boolean,
   case: String,
-  image: [],
+  image: [String],
   itemFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemFeedBack",

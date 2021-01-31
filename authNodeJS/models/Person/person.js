@@ -7,7 +7,11 @@ var person = new schema({
   lastName: String,
   email: String,
   password: String,
-  image: {type:String,default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS88rI7RXVX2mJ4tuynlW20f-wsl9lzNKhCHg&usqp=CAU"},
+  image: {
+    type: String,
+    default:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS88rI7RXVX2mJ4tuynlW20f-wsl9lzNKhCHg&usqp=CAU",
+  },
   createdAt: Date,
   updatedAt: Date,
   phoneNumber: [Number],

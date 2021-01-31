@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 var schema = mongoose.Schema;
 var reply = new schema({
     content: String,
-    image: [],
+    image: [String],
     createdAT: Date,
     updatedAT: Date,
     commentVoting: Number,
