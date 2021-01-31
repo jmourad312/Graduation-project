@@ -52,6 +52,13 @@ const MyProfile = React.lazy(() =>
 const Signform = React.lazy(() =>
   import("../pages/user/authentication/signform/signform")
 );
+const SignChoice = React.lazy(() =>
+  import("../pages/user/authentication/signFormChoice/SignChoice")
+);
+const VendorSignForm = React.lazy(() =>
+  import("../pages/user/authentication/vendorSignForm/VendorSignForm")
+);
+
 
 
 
@@ -82,12 +89,14 @@ export default function Routes() {
         <Route path="/ProductsList" exact component={ProductsList} />
         <Route path="/MyProfile/(page)?" component={MyProfile} />
         <Route path="/SignForm" exact component={Signform} />
+        <Route path="/VendorSignForm" exact component={VendorSignForm} />
+        <Route path="/SignChoice" exact component={SignChoice} />
+
         <Route
           path="/DisplayUserProfile"
           exact
           component={DisplayUserProfile}
         />
-
       </Switch>
     </Suspense>
   );

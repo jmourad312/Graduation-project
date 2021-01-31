@@ -8,14 +8,20 @@ export default function Navbar() {
         <div className="menu">
           <input id="menu--toggle" type="checkbox" />
           {/* <!-- /#menu--toggle --> */}
-          <label className="menu--toggle__trigger" htmlFor="menu--toggle"></label>
+          <label
+            className="menu--toggle__trigger"
+            htmlFor="menu--toggle"
+          ></label>
           {/* <!-- /.menu--toggle__trigger --> */}
-          <label className="menu--toggle__burger" htmlFor="menu--toggle"></label>
+          <label
+            className="menu--toggle__burger"
+            htmlFor="menu--toggle"
+          ></label>
           {/* <!-- /.menu--toggle__burger --> */}
 
           <ul className="menu__body">
             <li className="menu__body-element ">
-              <Link className="menu__body-link " to="/login">
+              <Link className="menu__body-link " to="/SignChoice">
                 Auth
               </Link>
             </li>

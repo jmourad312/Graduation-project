@@ -1,5 +1,5 @@
 body{
-  background-image: url("./assets/Images/body-pattern.jpg");
+    background-image: url("./assets/Images/body-pattern.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -58,6 +58,12 @@ body{
 //review component
 @import 'styles/review';
 
+//sign choice component
+@import 'styles/signChoice';
+
+
+//sign choice component
+@import 'styles/vendorSignForm';
 
 nav {
   .nav-wrapper {
