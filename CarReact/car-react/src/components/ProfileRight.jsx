@@ -12,6 +12,7 @@ export default function ProfileRight(props) {
     <div className={props.class}>
       <Suspense fallback={"Loading"}>
         <Switch>
+        <div className="profileRightContent">
           <Route path={`/MyProfile/BasicDetails`}>
             <BasicDetails />
           </Route>
@@ -30,6 +31,7 @@ export default function ProfileRight(props) {
           <Route path={`/MyProfile/Settings`}>
             <Settings />
           </Route>
+        </div>
         </Switch>
       </Suspense>
     </div>

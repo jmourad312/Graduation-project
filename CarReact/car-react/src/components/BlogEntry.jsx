@@ -19,7 +19,7 @@ export default function BlogEntry(props) {
           <p className="small text-muted text-uppercase mb-3">
             by
             <a href="#!" className="text-reset">
-              <strong>{props.userName}</strong>
+              <strong> {props.userName}</strong>
             </a>
             <a href="#!" className="text-reset float-right">
               {props.date}

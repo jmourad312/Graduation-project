@@ -8,8 +8,8 @@ export default function MyProfile() {
   return (
     <section className="myProfile container">
       <div className="row">
-        <ProfileLeft class="col-lg-3 profileLeft" />
-        <ProfileRight class="col-lg-9 profileright" />
+        <ProfileLeft class="col-3 profileLeft" />
+        <ProfileRight class="col-9 profileright" />
       </div>
     </section>
   );

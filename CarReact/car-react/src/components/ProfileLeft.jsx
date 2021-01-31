@@ -7,16 +7,18 @@ export default function ProfileLeft(props) {
 
   return (
     <div className={props.class}>
+    <div style={{height:"300px"}}>
       <Image
         src={profilePic}
         alt="profile picture"
-        height="300px"
-        width="250px"
+        height="100%"
+        width="100%"
       />
-      <div className="mt-3">
-        <p className="mt-3 button raise">
+    </div>
+      <div className="mt-3" >
+        <div className="mt-3 button raise">
           <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
-        </p>
+        </div>
         <p className="mt-3 button raise">
           <Link to={`/MyProfile/RecentViews`}>Recently viewed</Link>
         </p>
