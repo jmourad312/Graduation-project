@@ -87,6 +87,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="menu__body-element">
+              <Link className="menu__body-link " to="/MyProfile">
+                MyProfile
+              </Link>
+            </li>
+            <li className="menu__body-element">
               <Link className="menu__body-link " to="/DisplayUserProfile">
                 DisplayUserProfile
               </Link>

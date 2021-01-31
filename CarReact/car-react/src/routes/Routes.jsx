@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 // const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
 const Homepage2 = React.lazy(() => import("../layout/Homepage/Homepage2"));
 
+
 const Login = React.lazy(() =>
   import("../pages/user/authentication/login/Login")
 );
@@ -45,6 +46,9 @@ const ProductsList = React.lazy(() =>
 const DisplayUserProfile = React.lazy(() =>
   import("../pages/user/profile/displayProfile/DisplayUserProfile")
 );
+const MyProfile = React.lazy(() =>
+  import("../pages/user/profile/myProfile/MyProfile")
+);
 
 
 
@@ -57,7 +61,7 @@ const DisplayUserProfile = React.lazy(() =>
 
 export default function Routes() {
   return (
-    <Suspense fallback={"Loading"}>
+    <Suspense fallback={"loading"}>
       <Switch>
         <Route path="/" exact component={Homepage2} />
         <Route path="/login" exact component={Login} />
@@ -73,19 +77,13 @@ export default function Routes() {
         <Route path="/VendorProfileUser" exact component={VendorProfileUser} />
         <Route path="/ProductDetails" exact component={ProductDetails} />
         <Route path="/ProductsList" exact component={ProductsList} />
+        <Route path="/MyProfile/(page)?" component={MyProfile} />
         <Route
           path="/DisplayUserProfile"
           exact
           component={DisplayUserProfile}
         />
 
-        {/* <Route path="/about" exact component={About} />
-        <Route path="/contact" exact component={Contact} />
-        <Route path="/counter" exact component={Counter} />
-        <Route path="/users" exact component={Users} />
-        <Route path="/products" exact component={Products} />
-        <Route path="/changecont" exact component={ChangeCont} />
-        <Route path="/books" exact component={GoogleBooks} /> */}
       </Switch>
     </Suspense>
   );
