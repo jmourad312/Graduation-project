@@ -1,3 +1,11 @@
+body{
+  background-image: url("./assets/Images/body-pattern.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 /* You can add global styles to this file, and also import other style files */
 @import "styles/buttonStyles";
 @import '~bootstrap/dist/css/bootstrap.min.css';
@@ -40,6 +48,16 @@
 @import 'styles/homePage';
 @import 'styles/homePage2';
 @import 'styles/signform';
+
+//ads component
+@import 'styles/adsComp';
+
+//profile component
+@import 'styles/myProfile';
+
+//review component
+@import 'styles/review';
+
 
 nav {
   .nav-wrapper {

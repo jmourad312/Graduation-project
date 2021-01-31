@@ -1,12 +1,16 @@
 .blog {
-    .blog-contents {
-      .blog-post {
-        .text-multiline-truncate {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
+  .blog-filter {
+    margin-top: 10%;
+  }
+  .blog-contents {
+    margin-top: 10%;
+
+    .blog-post {
+      .text-multiline-truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
-  
+}

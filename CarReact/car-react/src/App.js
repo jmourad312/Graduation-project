@@ -11,7 +11,9 @@ function App() {
       <Router>
         <Navbar />
         {/* <Homepage2/> */}
-        <Routes/>
+          <Routes/>
+        <div className="container">
+        </div>
       </Router>
     </div>
   );
