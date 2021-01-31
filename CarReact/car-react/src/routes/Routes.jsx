@@ -49,6 +49,9 @@ const DisplayUserProfile = React.lazy(() =>
 const MyProfile = React.lazy(() =>
   import("../pages/user/profile/myProfile/MyProfile")
 );
+const Signform = React.lazy(() =>
+  import("../pages/user/authentication/signform/signform")
+);
 
 
 
@@ -78,6 +81,7 @@ export default function Routes() {
         <Route path="/ProductDetails" exact component={ProductDetails} />
         <Route path="/ProductsList" exact component={ProductsList} />
         <Route path="/MyProfile/(page)?" component={MyProfile} />
+        <Route path="/SignForm" exact component={Signform} />
         <Route
           path="/DisplayUserProfile"
           exact

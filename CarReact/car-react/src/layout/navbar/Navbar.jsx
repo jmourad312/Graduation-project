@@ -32,7 +32,11 @@ export default function Navbar() {
                 ResetPassword
               </Link>
             </li>
-
+            <li className="menu__body-element">
+              <Link className="menu__body-link " to="/SignForm">
+                SignForm
+              </Link>
+            </li>
             <li className="menu__body-element">
               <Link className="menu__body-link " to="/AddBlog">
                 AddBlog
