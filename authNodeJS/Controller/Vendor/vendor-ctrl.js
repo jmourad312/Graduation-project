@@ -71,6 +71,7 @@ getItems = async (req, res) => {
     });
 };
 
+//get One Item
 getOneItem = async (req, res) => {
   await carItem
     .findOne({ _id: req.params.id }, (err, items) => {
@@ -82,7 +83,7 @@ getOneItem = async (req, res) => {
         });
       }
       if (!items) {
-          console.log(items)
+        console.log(items)
         return res.status(400).json({
           Data: null,
           Message: "Item not found ",
@@ -104,4 +105,51 @@ getOneItem = async (req, res) => {
     });
 };
 
-module.exports = { addItem, getItems, getOneItem };
+updateItem = async (req, res) => {
+  let { ...data } = req.body;
+  carItem.updateOne({ _id: req.params.id },
+    data, { upsert: true },(err, result)=> {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't update an item ",
+          Success: false,
+        });
+      } return res.status(200).json({ 
+        Data: result.n, 
+        Message: "You can update an item ", 
+        Success: true, });
+    });
+};
+
+deleteItem = async (req, res) => {
+  carItem.deleteOne({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      res.json({
+        "Data": {},
+        "Message": "Can't delete item from database",
+        "Success": false
+      })
+    }
+    else {
+      if (data.n == 0) {
+        res.json({
+          "Data": {},
+          "Message": "Data with that id: " + req.params.id + " don't exist",
+          "Success": false
+        })
+      }
+
+      else {
+        res.json({
+          "Data": {},
+          "Message": "Done delete",
+          "Success": true
+        })
+      }
+    }
+  })
+
+}
+
+module.exports = { addItem, getItems, getOneItem, updateItem, deleteItem };

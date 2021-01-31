@@ -17,14 +17,6 @@ var user = new schema({
     ref: "UserSubscription",
   },
   banned: {type:Boolean,default:false},
-
-  //authentication
-  facebookId: {
-    type: Number,
-  },
-  googleId: {
-    type: Number,
-  },
 });
 
 module.exports = mongoose.model("User", user);

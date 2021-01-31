@@ -2,6 +2,13 @@ const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var person = new schema({
+  //authentication
+  facebookId: {
+    type: Number,
+  },
+  googleId: {
+    type: Number,
+  },
   firstName: String,
   middleName: String,
   lastName: String,
