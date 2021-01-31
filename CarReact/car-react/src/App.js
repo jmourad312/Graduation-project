@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
-        {/* <MagdyNavbar/> */}
+        {/* <Navbar /> */}
+        <MagdyNavbar/>
         {/* <Homepage2/> */}
           <Routes/>
         <div className="container">
