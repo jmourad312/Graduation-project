@@ -8,9 +8,9 @@ export default function Navbar() {
         <div className="menu">
           <input id="menu--toggle" type="checkbox" />
           {/* <!-- /#menu--toggle --> */}
-          <label className="menu--toggle__trigger" for="menu--toggle"></label>
+          <label className="menu--toggle__trigger" htmlFor="menu--toggle"></label>
           {/* <!-- /.menu--toggle__trigger --> */}
-          <label className="menu--toggle__burger" for="menu--toggle"></label>
+          <label className="menu--toggle__burger" htmlFor="menu--toggle"></label>
           {/* <!-- /.menu--toggle__burger --> */}
 
           <ul className="menu__body">
@@ -23,9 +23,7 @@ export default function Navbar() {
             </li>
             {/* <!-- /.menu__body-element --> */}
             <li className="menu__body-element ">
-              <a className="menu__body-link " href="/user/profile">
-                Profile
-              </a>
+            <Link className="menu__body-link " to="/signform">Sign Form</Link>
               {/* <!-- /.menu__body-link --> */}
             </li>
             {/* <!-- /.menu__body-element --> */}

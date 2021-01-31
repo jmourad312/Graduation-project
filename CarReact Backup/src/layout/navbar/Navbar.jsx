@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -14,9 +15,10 @@ export default function Navbar() {
 
           <ul className="menu__body">
             <li className="menu__body-element ">
-              <a className="menu__body-link " href="/home">
+              {/* <a className="menu__body-link " href="/home">
                 Homepage
-              </a>
+              </a> */}
+              <Link className="menu__body-link " to="/login">Auth</Link>
               {/* <!-- /.menu__body-link --> */}
             </li>
             {/* <!-- /.menu__body-element --> */}

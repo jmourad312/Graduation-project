@@ -10,6 +10,11 @@ const Login = React.lazy(() =>
   import("../pages/user/authentication/login/Login")
 );
 
+
+const signform = React.lazy(() =>
+  import("../pages/user/authentication/signform/signform")
+);
+
 // const About = React.lazy(() => import("../Pages/About"));
 // const Contact = React.lazy(() => import("../Pages/Contact"));
 // const Counter = React.lazy(() => import("../Pages/Counter"));
@@ -24,6 +29,7 @@ export default function Routes() {
       <Switch>
         <Route path="/" exact component={Homepage2} />
         <Route path="/login" exact component={Login} />
+        <Route path="/signform" exact component={signform} />
         
 
         {/* <Route path="/about" exact component={About} />
