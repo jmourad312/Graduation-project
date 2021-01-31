@@ -70,7 +70,7 @@ router.post('/signup', async (req, resp) => {
                             const token = gettoken(dataOfPerson);
                             resp.json({
                                 "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
-                                "Message": "Done Sign in ",
+                                "Message": "Done Sign up ",
                                 "Success": true
                             })
                         }

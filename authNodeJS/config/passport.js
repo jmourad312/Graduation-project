@@ -30,31 +30,28 @@ module.exports = (passport) => {
     }));
 
     passport.use(new FacebookStrategy(configOption.facebookOptions, function (accessToken, refreshToken, profile, done) {
-
-        Person.findOne({ facebookId: profile.id }, async function (errorFind, dataOfFind) {
-            if (errorFind) {
-                return done(errorFind, false);
+        User.findOne({ facebookId: profile.id }, async function (err, user) {
+            if (err) {
+                return done(err, false);
             }
 
-            if (!dataOfFind) {
+            if (!user) {
 
                 Person.create({
                     firstName: profile.displayName,
                     email: profile.emails[0].value,
-                    facebookId: profile.id
-
-                }, (errorPerson, dataOfPerson) => {
-
+                    role: "user",
+                }, (err, user) => {
                     User.create({
-                        person: dataOfPerson._id,
-                    }, (errorUser, dataOfUser) => {
-                        return done(null, dataOfPerson);
+                        person: user._id,
+                        facebookId: profile.id
+                    }, (err2, user2) => {
+                        return done(null, user);
                     })
-                    
                 })
             }
             else {
-                return done(null, dataOfPerson);
+                return done(null, user);
             }
         });
 
@@ -71,10 +68,11 @@ module.exports = (passport) => {
                 Person.create({
                     firstName: profile.displayName,
                     email: profile.emails[0].value,
-                    googleId: profile.id,
+                    role: "user",
                 }, (err, user) => {
                     User.create({
                         person: user._id,
+                        googleId: profile.id
                     }, (err2, user2) => {
                         return done(null, user);
                     })

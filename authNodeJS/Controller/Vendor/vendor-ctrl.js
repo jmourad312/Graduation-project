@@ -105,10 +105,10 @@ getOneItem = async (req, res) => {
     });
 };
 
-updateItem = async (req, res) => {
+updateItem = (req, res) => {
   let { ...data } = req.body;
   carItem.updateOne({ _id: req.params.id },
-    data, { upsert: true },(err, result)=> {
+    data, { upsert: true,new:true },(err, result)=> {
       if (err) {
         return res.status(400).json({
           Data: null,
@@ -116,13 +116,13 @@ updateItem = async (req, res) => {
           Success: false,
         });
       } return res.status(200).json({ 
-        Data: result.n, 
+        Data: result, 
         Message: "You can update an item ", 
         Success: true, });
     });
 };
 
-deleteItem = async (req, res) => {
+deleteItem = (req, res) => {
   carItem.deleteOne({ _id: req.params.id }, (err, data) => {
     if (err) {
       res.json({
