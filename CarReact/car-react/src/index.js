@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './styles.scss';
+
 // import $ from 'jquery';
-import $ from "jquery";
 // import 'bootstrap/dist/css/bootstrap.css';
 // import 'bootstrap/scss/bootstrap.scss';
 
