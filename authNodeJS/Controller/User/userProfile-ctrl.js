@@ -1,37 +1,50 @@
- const person = require('../../models/Person/person');
- const user= require ('../../models/Person/User/user');
- const userSubscription= require ('../../models/Person/User/subscription');
- const bcrypt = require('bcryptjs');
+const person = require('../../models/Person/person');
+const user = require('../../models/Person/User/user');
+const userSubscription = require('../../models/Person/User/subscription');
+const bcrypt = require('bcryptjs');
 
- //User info (show info - update info)
+//User info (show info - update info)
 // 1- show info
 showUserProfile = (req, res) => {
-
-    User.findOne({ ID: req.params.code }, { _id: 0, __v: 0 }, (err, data) => {
+    const IdPerson = req.params.id
+    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id" }, { path: "userSubscription",select:"-__v -_id" }];
+    user.findOne({ person: IdPerson },{facebookId:0,googleId:0,__v:0, _id:0}).populate(populateQuery).exec((err, data) => {
         if (err) {
-            res.status(400).json({
-                "Data": null,
-                "Message": "Can't get userdata from database,  " + err,
-                "Success": false
-            })
+            return res.status(400).json({
+                Data: err,
+                Message: "*****************",
+                Success: false,
+            });
         }
         else {
-            if (data == null) {
-                res.status(400).json({
-                    "Data": null,
-                    "Message": "Data with that id: " + req.params.code + " don't exist",
-                    "Success": false
-                })
-            }
-            else {
-                res.status(200).json({
-                    "Data": data,
-                    "Message": "Done get all data",
-                    "Success": true
-                })
-            }
+            return res.status(200).json({
+                Data: data,
+                Message: ":D :D",
+                Success: true,
+            });
         }
-    })
+    });
 };
 
-module.exports = {showUserProfile}
+//update info
+updateUserProfile = (req,res) =>{
+    const {...data} = req.body
+    person.updateOne({_id:req.params.id},data, { upsert: true, new: true },(error,data)=>{
+        if(error){
+            return res.status(400).json({
+                Data: null,
+                Message: "You can't update ",
+                Success: false,
+              });
+        }
+        else{
+            return res.status(200).json({
+                Data: data.n,
+                Message: "updated ",
+                Success: true,
+              });
+        }
+    })
+}
+
+module.exports = { showUserProfile, updateUserProfile}

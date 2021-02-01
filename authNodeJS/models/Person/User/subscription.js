@@ -9,6 +9,3 @@ var userSubscription = new schema({
 });
 
 module.exports = mongoose.model("UserSubscription", userSubscription);
-
-
-console.log("")

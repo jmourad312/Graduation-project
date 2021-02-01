@@ -17,15 +17,12 @@ module.exports = (passport) => {
                 return done(err, false);
             }
             if (user) {
-
                 return done(null, jwt_payload);
             } else {
 
                 return done(null, false);
             }
-
         });
-
     }));
 
     passport.use(new FacebookStrategy(configOption.facebookOptions, function (accessToken, refreshToken, profile, done) {

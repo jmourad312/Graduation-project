@@ -6,7 +6,7 @@ const vendorprofiileCtrl = require("../../Controller/Vendor/vendor'sProfile-ctrl
 
 
 function canView(req, resp, next) {
-  const { role} = req.jwt_payload;
+  const { role } = req.user;
   if (!(role == "vendor" || role == "admin")) {
     resp.json({
       Data: null,
@@ -17,7 +17,8 @@ function canView(req, resp, next) {
 }
 
 function validateVendor(req, resp, next) {
-  const { role, _id} = req.jwt_payload;
+  console.log(req.user)
+  const { role, _id} = req.user;
   if (! ( (role == "vendor" || role == "admin") && _id == req.params.id) ) {
     resp.json({
       Data: null,

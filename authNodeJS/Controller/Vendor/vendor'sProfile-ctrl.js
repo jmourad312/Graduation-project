@@ -5,13 +5,19 @@ const feedBack = require('../../models/Person/Vendor/feedBack')
 const bcrypt = require('bcryptjs');
 
 
-//forget password
+ //forget password
 forgetPassword = (req,res) => {
-
+    
+// find email
+// generate token 
+//and update reset in schema by any code ->  Math.floor(Math.random() * 10)
+// sent mail by same code
 }
 //reset password
 resetPassword = (req,res) => {
     
+// compare code and check token then reset password 
+//done   
 }
 
 //update password
