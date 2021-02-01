@@ -15,11 +15,13 @@
     "gl-react-color-matrix": "^1.1.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
+    "popmotion": "^9.1.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-gaussian-blur": "^1.0.6",
     "react-helmet": "^6.1.0",
+    "react-pose": "^4.0.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"

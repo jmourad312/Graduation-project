@@ -17,7 +17,7 @@ function App() {
           <Routes/>
         <div className="container">
         </div>
-        <Footer/>
+        {/* <Footer/> */}
       </Router>
     </div>
   );
