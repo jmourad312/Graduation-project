@@ -12,7 +12,7 @@ router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
 router.get('/facebook/callback', passport.authenticate('facebook', { session: false }), (req, resp) => {
 
     //create and assign a token
-    const token = gettoken(req.user);
+    const token = gettoken.token(req.user);
     resp.json({
         "Data": { "token": "Bearer " + token, "expiresIn": 33 * 1000 },
         "Message": "Done Sign in ",
@@ -25,7 +25,7 @@ router.get('/facebook/callback', passport.authenticate('facebook', { session: fa
 router.get('/google', passport.authenticate('google', { scope: ['email'] }))
 router.get('/google/callback', passport.authenticate('google', { session: false }), (req, resp) => {
     //create and assign a token
-    const token = gettoken(req.user);
+    const token = gettoken.token(req.user);
     resp.json({
         "Data": { "token": "Bearer " + token, "expiresIn": 33 * 1000 },
         "Message": "Done Sign in ",
@@ -99,7 +99,7 @@ router.post('/signup', async (req, resp) => {
                                     })
                                 }
                                 else {
-                                    const token = gettoken(dataOfPerson);
+                                    const token = gettoken.token(dataOfPerson);
                                     resp.json({
                                         "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
                                         "Message": "Done Sign in ",
@@ -154,7 +154,7 @@ router.post('/signin', (req, resp) => {
                         }
                         else {
                             //create and assign a token
-                            const token = gettoken(data);
+                            const token = gettoken.token(data);
                             resp.json({
                                 "Data": { token: "Bearer " + token, expiresIn: '1d' },
                                 "Message": "Done Sign in ",

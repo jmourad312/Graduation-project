@@ -42,16 +42,6 @@ addItem = (req, res) => {
     });
 };
 
-// router.post('/createRoom', function (req, res, next) {
-//   var id = mongoose.Types.ObjectId();
-//   var u = new db.Room({ _id: id, name: req.body.name });
-//   u.save(function (err) {
-//     res.send({
-//       id: id, name: req.body.name
-//     });
-//   });
-// });
-
 //get all items
 getItems = async (req, res) => {
   const IdVendor = req.user._id;

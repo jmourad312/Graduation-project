@@ -67,7 +67,7 @@ router.post('/signup', async (req, resp) => {
                             })
                         }
                         else {
-                            const token = gettoken(dataOfPerson);
+                            const token = gettoken.token(dataOfPerson);
                             resp.json({
                                 "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
                                 "Message": "Done Sign up ",
@@ -120,7 +120,7 @@ router.post('/signin', (req, resp) => {
                         }
                         else {
                             //create and assign a token
-                            const token = gettoken(data);
+                            const token = gettoken.token(data);
                             resp.json({
                                 "Data": { token: "Bearer " + token, expiresIn: '1d' },
                                 "Message": "Done Sign in ",
