@@ -6,7 +6,7 @@ const userProfileCtrl= require ('../../Controller/User/userProfile-ctrl')
 
 
 function canView(req, resp, next) {
-    const { role} = req.jwt_payload;
+    const { role} = req.user;
     if (!(role == "user" || role == "admin")) {
       resp.json({
         Data: null,
@@ -16,7 +16,7 @@ function canView(req, resp, next) {
     } else next();
   }
   
-  function validateVendor(req, resp, next) {
+  function validateUser(req, resp, next) {
     const { role, _id} = req.user;
     if (! ( (role == "user" || role == "admin") && _id == req.params.id) ) {
       resp.json({
@@ -27,94 +27,9 @@ function canView(req, resp, next) {
     } else next();
   }
 
-router.get('/:id',passport.authenticate('jwt', { session: false }),canView,userProfileCtrl.showUserProfile);
+router.get('/showUserProfile/:id',passport.authenticate('jwt', { session: false }),validateUser,userProfileCtrl.showUserProfile);
 
-router.get('/' ,(req, resp) => {
-
-    User.find({}, { _id: 0, __v: 0 }, (err, data) => {
-        if (err) {
-            resp.json({
-                "Data": {},
-                "Message": "Can't get userdata from database,  " + err,
-                "Success": false
-            })
-        }
-        else {
-            if (data == null) {
-                resp.json({
-                    "Data": {},
-                    "Message": "Data with that id: " + req.params.code + " don't exist",
-                    "Success": false
-                })
-            }
-            else {
-                resp.json({
-                    "Data": data,
-                    "Message": "Done get all data",
-                    "Success": true
-                })
-            }
-        }
-    })
-});
-
-router.delete('/:code',(req, resp) => {
-    User.deleteOne({ ID: req.params.code }, (err, data) => {
-        if (err) {
-            resp.json({
-                "Data": {},
-                "Message": "Can't delete userdata from database,  " + err,
-                "Success": false
-            })
-        }
-        else {
-            if (data == null) {
-                resp.json({
-                    "Data": {},
-                    "Message": "Data with that id: " + req.params.code + " don't exist",
-                    "Success": false
-                })
-            }
-
-            else {
-                resp.json({
-                    "Data": data,
-                    "Message": "Done delete  ",
-                    "Success": true
-                })
-            }
-        }
-    })
-});
-
-router.put('/:code' ,(req, resp) => {
-    User.updateOne({ ID: req.params.code }, req.body, (err, data) => {
-        if (err) {
-            resp.json({
-                "Data": {},
-                "Message": "Can't update userdata from database,  " + err,
-                "Success": false
-            })
-        }
-        else {
-            if (data == null) {
-                resp.json({
-                    "Data": {},
-                    "Message": "Data with that id: " + req.params.code + " don't exist",
-                    "Success": false
-                })
-            }
-
-            else {
-                resp.json({
-                    "Data": {},
-                    "Message": "Number of data update: " + data.nModified,
-                    "Success": true
-                })
-            }
-        }
-    })
-});
+router.put('/updateUserProfile/:id' , passport.authenticate('jwt', { session: false }),validateUser,userProfileCtrl.updateUserProfile);
 
 
 

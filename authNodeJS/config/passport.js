@@ -22,9 +22,7 @@ module.exports = (passport) => {
 
                 return done(null, false);
             }
-
         });
-
     }));
 
     passport.use(new FacebookStrategy(configOption.facebookOptions, function (accessToken, refreshToken, profile, done) {
