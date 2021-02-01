@@ -1,6 +1,6 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
 
-//create new car Item
+//create new Item
 addItem = (req, res) => {
   const body = req.body;
   if (!body) {
@@ -71,6 +71,7 @@ getItems = async (req, res) => {
     });
 };
 
+//get one item
 getOneItem = async (req, res) => {
   await carItem
     .findOne({ _id: req.params.id }, (err, items) => {
@@ -82,7 +83,7 @@ getOneItem = async (req, res) => {
         });
       }
       if (!items) {
-          console.log(items)
+        console.log(items);
         return res.status(400).json({
           Data: null,
           Message: "Item not found ",
@@ -104,4 +105,32 @@ getOneItem = async (req, res) => {
     });
 };
 
-module.exports = { addItem, getItems, getOneItem };
+//update one item
+updateItem = async (req, res) => {
+  let { ...data } = req.body;
+
+  const result = await carItem.updateOne(
+    { _id: req.params.id },
+    data,
+    // { new: true },    
+    { upsert: true },
+    function (err, result) {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't update an item ",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: result.n,
+        Message: "You can update an item ",
+        Success: true,
+      });
+    }
+  );
+};
+
+
+
+module.exports = { addItem, getItems, getOneItem, updateItem };

@@ -20,5 +20,6 @@ function canView(req, resp, next) {
 router.post("/add", vendorCtrl.addItem);
 router.get("/getItems", vendorCtrl.getItems);
 router.get("/getItem/:id", vendorCtrl.getOneItem);
+router.put("/updateItem/:id", vendorCtrl.updateItem);
 
 module.exports = router;
