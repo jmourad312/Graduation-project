@@ -4,6 +4,7 @@ import Routes from "./routes/Routes";
 import Homepage from "./layout/Homepage/Homepage";
 import Homepage2 from "./layout/Homepage/Homepage2";
 import MagdyNavbar from "./layout/navbar/MagdyNavbar.jsx";
+import Footer from "./layout/footer/Footer.jsx";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Routes/>
         <div className="container">
         </div>
+        <Footer/>
       </Router>
     </div>
   );
