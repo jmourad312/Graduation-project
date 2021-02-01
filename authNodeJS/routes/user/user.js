@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/Person/User/user");
 const passport = require('passport');
+const userProfileCtrl= require ('../../Controller/User/userProfile-ctrl')
 
 
 function canView (req,resp,next){
@@ -17,34 +18,7 @@ function canView (req,resp,next){
         next();
 }
 
-router.get('/:code',passport.authenticate('jwt', { session: false }),canView,(req, resp) => {
-
-    User.findOne({ ID: req.params.code }, { _id: 0, __v: 0 }, (err, data) => {
-        if (err) {
-            resp.json({
-                "Data": null,
-                "Message": "Can't get userdata from database,  " + err,
-                "Success": false
-            })
-        }
-        else {
-            if (data == null) {
-                resp.json({
-                    "Data": null,
-                    "Message": "Data with that id: " + req.params.code + " don't exist",
-                    "Success": false
-                })
-            }
-            else {
-                resp.json({
-                    "Data": data,
-                    "Message": "Done get all data",
-                    "Success": true
-                })
-            }
-        }
-    })
-});
+router.get('/:code',passport.authenticate('jwt', { session: false }),canView,userProfileCtrl.showUserProfile);
 
 router.get('/' ,(req, resp) => {
 
