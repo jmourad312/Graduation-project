@@ -163,7 +163,7 @@ export default function Signform() {
           <div className={changePayment}>
             <section class="section-plans" id="section-plans">
               <div class="row">
-                <div class="col-1-of-2">
+                <div class="col-6">
                   <div class="card">
                     <div class="card__side card__side--front-1">
                       <div class="card__title card__title--1">
@@ -173,12 +173,8 @@ export default function Signform() {
 
                       <div class="card__details">
                         <ul>
-                          <li>1 Website</li>
-                          <li>50 GB SSD Storage</li>
-                          <li>Unmetered Bandwidth</li>
-                          <li>Free SSL Certificate</li>
-                          <li>1 Included Domain</li>
-                          <li>1 Included Domain</li>
+                          <li>Limited Search results</li>
+                          <li>Limited Search results</li>
                         </ul>
                       </div>
                     </div>
@@ -196,7 +192,7 @@ export default function Signform() {
                   </div>
                 </div>
 
-                <div class="col-1-of-2">
+                <div class="col-6">
                   <div class="card">
                     <div class="card__side card__side--front-2">
                       <div class="card__title card__title--2">
@@ -206,10 +202,8 @@ export default function Signform() {
 
                       <div class="card__details">
                         <ul>
-                          <li>Includes Basic Package Features</li>
-                          <li>Unlimited Websites</li>
-                          <li>Unlimited SSD Storage</li>
-                          <li>Unlimited Domains</li>
+                          <li>Extended Search results</li>
+                          <li>Enjoy Ads free experince</li>
                           <li>Unlimited Parked Domains</li>
                           <li>Unlimited Sub Domains</li>
                         </ul>
