@@ -5,20 +5,29 @@ const passport = require('passport');
 const userProfileCtrl= require ('../../Controller/User/userProfile-ctrl')
 
 
-function canView (req,resp,next){
-    const { Role,ID } = req.user;
-    if(! ((Role == 'user' || Role == 'admin') &&  ID == req.params.code)) {
-        resp.json({
-            "Data": null,
-            "Message": "can't access",
-            "Success": false
-        })
-    }
-    else 
-        next();
-}
+function canView(req, resp, next) {
+    const { role} = req.jwt_payload;
+    if (!(role == "user" || role == "admin")) {
+      resp.json({
+        Data: null,
+        Message: "can't access",
+        Success: false,
+      });
+    } else next();
+  }
+  
+  function validateVendor(req, resp, next) {
+    const { role, _id} = req.user;
+    if (! ( (role == "user" || role == "admin") && _id == req.params.id) ) {
+      resp.json({
+        Data: null,
+        Message: "can't access",
+        Success: false,
+      });
+    } else next();
+  }
 
-router.get('/:code',passport.authenticate('jwt', { session: false }),canView,userProfileCtrl.showUserProfile);
+router.get('/:id',passport.authenticate('jwt', { session: false }),canView,userProfileCtrl.showUserProfile);
 
 router.get('/' ,(req, resp) => {
 

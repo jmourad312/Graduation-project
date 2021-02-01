@@ -7,7 +7,7 @@
 // 1- show info
 showUserProfile = (req, res) => {
 
-    User.findOne({ ID: req.params.code }, { _id: 0, __v: 0 }, (err, data) => {
+    Person.findOne({ _id: req.params.id }, { _id: 0, __v: 0 }, (err, data) => {
         if (err) {
             res.status(400).json({
                 "Data": null,
