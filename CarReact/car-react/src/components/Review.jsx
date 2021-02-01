@@ -17,7 +17,7 @@ export default function Review() {
             <input class="star star-1" id="star-1-2" type="radio" name="star" />
             <label class="star star-1" for="star-1-2"></label>
             <div class="rev-box">
-              <textarea class="review" col="30" name="review"></textarea>
+              <textarea class="review" col="30" name="review" ></textarea>
               <label class="review" for="review">
                 Breif Review
               </label>
