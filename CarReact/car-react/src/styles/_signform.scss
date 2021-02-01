@@ -219,6 +219,7 @@
     .card__title--1 {
       .fas {
         font-size: 3rem;
+        margin-top: 10px;
       }
     }
     .card__title--2 {
@@ -243,7 +244,7 @@
       padding: 0 0.2rem 2rem;
       ul {
         list-style: none;
-        width: 80%;
+        width: 90%;
         margin: 0 auto;
         li {
           text-align: center;
@@ -257,7 +258,7 @@
     }
     .card__cta {
       position: absolute;
-      top: 20%;
+      top: 50%;
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
