@@ -1,5 +1,6 @@
 import React from "react";
 import blogItems from '../../../../assets/js/blogItems'
+import AddBlog from "../../../../components/AddBlog";
 import BlogEntry from "../../../../components/BlogEntry";
 import BlogFilter from "../../../../components/BlogFilter";
 
@@ -20,8 +21,6 @@ export default function BlogList() {
       cardBrand={blog.cardBrand}
       cardModel={blog.cardModel}
       replies={blog.replies}
-
-
     />
   }
 
@@ -29,6 +28,7 @@ export default function BlogList() {
   return (
     <section className="blog">
       <section className="container">
+      <AddBlog/>
         <div className="row">
           <BlogFilter class="col-3 blog-filter"/>
           <div className="col-9 blog-contents">

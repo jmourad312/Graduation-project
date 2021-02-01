@@ -14,7 +14,7 @@ const SignUp = React.lazy(() =>
   import("../pages/user/authentication/signUp/SignUp")
 );
 const AddBlog = React.lazy(() =>
-  import("../pages/user/blog/addBlog/AddBlog.jsx")
+  import("../components/AddBlog.jsx")
 );
 const BlogDetails = React.lazy(() =>
   import("../pages/user/blog/blogDetails/BlogDetails.jsx")
