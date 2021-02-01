@@ -38,7 +38,7 @@ updateProfilePassword = async (req, res) => {
     })
 }
 
-//updates 
+//update profile
 updateProfile = async (req, res) => {
 
     const {...data} = req.body
