@@ -12,6 +12,9 @@ export default function Signform() {
     const switchPayment = () => {
         setChangePayment("payment showPayment");
     }
+    const switchPaymentBack = () => {
+      setChangePayment("payment");
+    };
     const switchClass = () =>{
         setChangeClass("forgotpass open");
     }
@@ -151,7 +154,7 @@ export default function Signform() {
                   <input type="email" placeholder="Email" />
                 </div>
                 <div className="col-3">
-                  <Button class="btn btn-primary" value="Send email" />
+                  <Button className="btn btn-primary" value="Send email" />
                 </div>
               </div>
               <input type="text" placeholder="Input your code here" />
@@ -161,30 +164,34 @@ export default function Signform() {
             </form>
           </div>
           <div className={changePayment}>
-            <section class="section-plans" id="section-plans">
-              <div class="row">
-                <div class="col-6">
-                  <div class="card">
-                    <div class="card__side card__side--front-1">
-                      <div class="card__title card__title--1">
-                        <i class="fas fa-paper-plane"></i>
-                        <h4 class="card__heading">Basic</h4>
+            <i
+              class="fas fa-times-circle fa-3x closeIcon"
+              onClick={switchPaymentBack}
+            ></i>
+            <section className="section-plans" id="section-plans">
+              <div className="row">
+                <div className="col-6">
+                  <div className="card">
+                    <div className="card__side card__side--front-1">
+                      <div className="card__title card__title--1">
+                        <i className="fas fa-paper-plane"></i>
+                        <h4 className="card__heading">Basic</h4>
                       </div>
 
-                      <div class="card__details">
+                      <div className="card__details">
                         <ul>
                           <li>Limited Search results</li>
                           <li>Limited Search results</li>
                         </ul>
                       </div>
                     </div>
-                    <div class="card__side card__side--back card__side--back-1">
-                      <div class="card__cta">
-                        <div class="card__price-box">
-                          <p class="card__price-only">Only</p>
-                          <p class="card__price-value">$2.95/mo*</p>
+                    <div className="card__side card__side--back card__side--back-1">
+                      <div className="card__cta">
+                        <div className="card__price-box">
+                          <p className="card__price-only">Only</p>
+                          <p className="card__price-value">$2.95/mo*</p>
                         </div>
-                        <a href="#popup" class="btn btn--white">
+                        <a href="#popup" className="btn btn--white">
                           Select
                         </a>
                       </div>
@@ -192,15 +199,15 @@ export default function Signform() {
                   </div>
                 </div>
 
-                <div class="col-6">
-                  <div class="card">
-                    <div class="card__side card__side--front-2">
-                      <div class="card__title card__title--2">
-                        <i class="fas fa-plane"></i>
-                        <h4 class="card__heading">Plus</h4>
+                <div className="col-6">
+                  <div className="card">
+                    <div className="card__side card__side--front-2">
+                      <div className="card__title card__title--2">
+                        <i className="fas fa-plane"></i>
+                        <h4 className="card__heading">Plus</h4>
                       </div>
 
-                      <div class="card__details">
+                      <div className="card__details">
                         <ul>
                           <li>Extended Search results</li>
                           <li>Enjoy Ads free experince</li>
@@ -209,13 +216,13 @@ export default function Signform() {
                         </ul>
                       </div>
                     </div>
-                    <div class="card__side card__side--back card__side--back-2">
-                      <div class="card__cta">
-                        <div class="card__price-box">
-                          <p class="card__price-only">Only</p>
-                          <p class="card__price-value">$5.45/mo*</p>
+                    <div className="card__side card__side--back card__side--back-2">
+                      <div className="card__cta">
+                        <div className="card__price-box">
+                          <p className="card__price-only">Only</p>
+                          <p className="card__price-value">$5.45/mo*</p>
                         </div>
-                        <a href="#popup" class="btn btn--white">
+                        <a href="#popup" className="btn btn--white">
                           Select
                         </a>
                       </div>
