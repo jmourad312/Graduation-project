@@ -148,9 +148,9 @@
     --y: 35;
   }
   .menu__item:nth-of-type(2) {
-    --delay: 0.2;
-    --x: 65;
-    --y: 35;
+    --delay: 0.25;
+    --x: 48;
+    --y: 40;
   }
   .menu__item:nth-of-type(3) {
     --delay: 0.3;
@@ -161,6 +161,61 @@
     --delay: 0.4;
     --x: 65;
     --y: 65;
+  }
+  .menu__item:nth-of-type(5) {
+    --delay: 0.5;
+    --x: 53;
+    --y: 75;
+  }
+  .menu__item:nth-of-type(6) {
+    --delay: 0.6;
+    --x: 68;
+    --y: 17;
+  }
+  .menu__item:nth-of-type(7) {
+    --delay: 0.7;
+    --x: 10;
+    --y: 25;
+  }
+  .menu__item:nth-of-type(8) {
+    --delay: 0.8;
+    --x: 32;
+    --y: 45;
+  }
+  .menu__item:nth-of-type(9) {
+    --delay: 0.9;
+    --x: 12;
+    --y: 50;
+  }
+  .menu__item:nth-of-type(10) {
+    --delay: 1;
+    --x: 50;
+    --y: 15;
+  }
+  .menu__item:nth-of-type(11) {
+    --delay: 0.35;
+    --x: 8;
+    --y: 75;
+  }
+  .menu__item:nth-of-type(12) {
+    --delay: 1.1;
+    --x: 30;
+    --y: 40;
+  }
+  .menu__item:nth-of-type(13) {
+    --delay: 0.55;
+    --x: 40;
+    --y: 85;
+  }
+  .menu__item:nth-of-type(14) {
+    --delay: 0.65;
+    --x: 82;
+    --y: 30;
+  }
+  .menu__item:nth-of-type(15) {
+    --delay: 0.75;
+    --x: 85;
+    --y: 60;
   }
   .menu__link {
     align-items: center;
@@ -178,7 +233,7 @@
   .menu__link:hover {
     text-decoration: underline;
   }
-  #anthing {
+  #anything {
     --hue: 70.19766086162119;
   }
 
