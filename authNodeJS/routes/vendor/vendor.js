@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const vendorCtrl = require("../../Controller/Vendor/vendor-ctrl");
+const vendorCtrl = require("../../Controller/Vendor/vendor'sItem-ctrl");
 
 function canView(req, resp, next) {
   const { Role} = req.user;
