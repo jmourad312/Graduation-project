@@ -9,7 +9,6 @@ const configOption = require('./configoption')
 module.exports = (passport) => {
     // The JWT payload is passed into the verify callback
     passport.use(new JwtStrategy(configOption.options, function (jwt_payload, done) {
-        console.log(profile);
         // We will assign the `sub` property on the JWT to the database ID of user
         Person.findOne({ _id: jwt_payload._id }, function (err, user) {
             // This flow look familiar?  It is the same as when we implemented
@@ -40,6 +39,8 @@ module.exports = (passport) => {
                 Person.create({
                     firstName: profile.displayName,
                     email: profile.emails[0].value,
+                    image: profile.photos[0].value,
+                    role: "user",
                 }, (err, user) => {
                     User.create({
                         person: user._id,
@@ -67,6 +68,8 @@ module.exports = (passport) => {
                 Person.create({
                     firstName: profile.displayName,
                     email: profile.emails[0].value,
+                    image: profile.photos[0].value,
+                    role: "user",
                 }, (err, user) => {
                     User.create({
                         person: user._id,

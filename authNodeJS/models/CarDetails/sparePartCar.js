@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var car = new schema({
+
   name: { type: String, required: true },
   price: String,
   description: String,
@@ -16,10 +17,15 @@ var car = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "CarType",
   }],
-  carCollection: {
+  itemCollection: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "CarCollection",
+    ref: "ItemCollection",
   },
+  vendor:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Vendor",
+  }
+
 });
 
 module.exports = mongoose.model("Car", car);

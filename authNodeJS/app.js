@@ -35,10 +35,8 @@ app.use(passport.initialize());
 app.use("/user/auth",AuthUserRoute);
 app.use("/user",UserRoute);
 
-//app.use("/vendor/auth",AuthVendorRoute);
 app.use("/vendor",VendorRoute);
 app.use("/vendor/auth",AuthVendorRoute);
-//app.use("/vendor",VendorRoute);
 
 // app.use("/admin/auth",AuthAdminRoute);
 // app.use("/admin",AdminRoute);

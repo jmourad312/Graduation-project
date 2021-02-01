@@ -6,13 +6,11 @@ var vendor = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Person",
   },
-
   workshopSchedule: {
     openingTime: String,
     closingTime: String,
     closingDays: [String],
   },
-
   vendorSubscription: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorSubscription",
