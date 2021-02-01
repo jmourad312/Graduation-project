@@ -34,5 +34,4 @@ showUserProfile = (req, res) => {
     })
 };
 
-
 module.exports = {showUserProfile}
