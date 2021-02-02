@@ -4,7 +4,6 @@ import image1 from "../../assets/Images/13.jpg";
 import image2 from "../../assets/Images/14.jpg";
 import image3 from "../../assets/Images/15.jpg";
 import image4 from "../../assets/Images/16.jpg";
-import { Helmet } from "react-helmet";
 
 export default function Homepage() {
     useEffect(() => {

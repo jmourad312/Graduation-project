@@ -6,7 +6,7 @@ export default function BlogEntry(props) {
       <div className="card blog-post">
         <div className="rounded">
           <img
-            className={props.imgClass}
+            className="img-fluid card-img-top"
             src={props.imgSrc}
             alt={props.imgAlt}
           />
