@@ -43,7 +43,7 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
       .then((res) => {
         console.log(res);
-        localStorage.setItem("Authorization",res.data.Data.token);
+        localStorage.setItem("Authorization", res.headers.authorization);
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
@@ -75,12 +75,10 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signin", userSignInInfo)
       .then((res) => {
         console.log(res);
-        // console.log(res.data.Data.token);
-        localStorage.setItem("Authorization",res.data.Data.token);
-        console.log(localStorage.getItem("Authorization"));
         // savetoken(res.data.Data.token);
         // console.log(token);
-        console.log(res.data.Success);
+        localStorage.setItem("Authorization", res.headers.authorization);
+        console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
           props.history.push("/MyProfile");
