@@ -22,8 +22,9 @@ const app = express();
 const apiPort = 3000;
 
 app.use(bodyparser.json({ extended: false }));
-app.use(cors());
-
+app.use(cors({
+    exposedHeaders: ['Authorization'],
+  }));
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // Pass the global passport object into the configuration function
