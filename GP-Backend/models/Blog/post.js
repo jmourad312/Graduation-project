@@ -7,6 +7,16 @@ var post = new schema({
     image: [],
     createdAT: Date,
     updatedAT: Date,
+    person: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Person",
+    },
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
     updatedPosts: [
         {
           type: mongoose.Schema.Types.ObjectId,

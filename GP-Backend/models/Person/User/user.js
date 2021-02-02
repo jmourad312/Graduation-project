@@ -2,11 +2,7 @@ var mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var user = new schema({
-  // onSale: Boolean,
-  // price: {
-  //     type: Number,
-  //     required: function () { return this.onSale }
-  // },
+
   //schema
   person: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +13,7 @@ var user = new schema({
     ref: "UserSubscription",
   },
   banned: {type:Boolean,default:false},
+  
   //authentication
   facebookId: {
     type: Number,

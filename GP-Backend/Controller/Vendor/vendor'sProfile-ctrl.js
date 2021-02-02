@@ -61,7 +61,6 @@ forgetPassword = (req, res) => {
 }
 //reset password
 resetPassword = (req, res) => {
-
     // compare code and check token then reset password 
     //done   
 }
