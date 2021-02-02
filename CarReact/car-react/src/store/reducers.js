@@ -14,7 +14,7 @@ export default (state ={
       case TYPES.GET_BLOGS:
         return {
           ...state,
-          products: action.payload,
+          blogs: action.payload,
         };
       default:
         return state;

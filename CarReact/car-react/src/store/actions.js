@@ -8,7 +8,7 @@ import axios from 'axios';
 //   };
 // };
 
-export const getProducts = () => async (dispatch) =>{
+export const getProductsAction = () => async (dispatch) =>{
     try {
         const res = await axios.get('https://fakestoreapi.com/products');
         console.log(res);
@@ -21,7 +21,7 @@ export const getProducts = () => async (dispatch) =>{
     }
 }
 
-export const getBlogs = () => async (dispatch) => {
+export const getBlogsAction = () => async (dispatch) => {
   try {
     const res = await axios.get("https://fakestoreapi.com/products");
     console.log(res);
