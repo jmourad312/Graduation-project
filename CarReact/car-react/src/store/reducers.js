@@ -4,6 +4,7 @@ import * as TYPES from './types';
 export default (state ={
     products:[],
     blogs:[],
+    users:[],
 }, action)=>{
     switch (action.type) {
       case TYPES.GET_PRODUCTS:
@@ -15,6 +16,11 @@ export default (state ={
         return {
           ...state,
           blogs: action.payload,
+        };
+      case TYPES.GET_USER:
+        return {
+          ...state,
+          users: action.payload,
         };
       default:
         return state;

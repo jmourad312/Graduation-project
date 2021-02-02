@@ -47,7 +47,7 @@ export default function BlogList() {
         badgeClass={blog.badgeClass}
         badgeValue={blog.badgeValue}
         cardTitle={blog.title}
-        userName={blog.userName}
+        userName={blog.category}
         date={blog.date}
         cardContent={blog.description}
         cardBrand={blog.cardBrand}
