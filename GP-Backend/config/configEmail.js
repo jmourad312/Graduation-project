@@ -9,3 +9,10 @@ const transporter = nodemailer.createTransport({
 });
 
 module.exports = transporter;
+
+
+
+  // auth: {
+  //     user: 'jaime.wehner49@ethereal.email',
+  //     pass: 'XeRnvJgG42XucmvUXd'
+  // }

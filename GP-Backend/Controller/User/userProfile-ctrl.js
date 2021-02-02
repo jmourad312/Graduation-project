@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 // 1- show info
 showUserProfile = (req, res) => {
     const IdPerson = req.params.id
-    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id" }, { path: "userSubscription",select:"-__v -_id" }];
+    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "userSubscription",select:"-__v -_id" }];
     user.findOne({ person: IdPerson },{facebookId:0,googleId:0,__v:0, _id:0}).populate(populateQuery).exec((err, data) => {
         if (err) {
             return res.status(400).json({
@@ -47,4 +47,28 @@ updateUserProfile = (req,res) =>{
     })
 }
 
-module.exports = { showUserProfile, updateUserProfile}
+//update password
+updateUserPassword = async (req, res) => {
+
+    const saltRounds = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, saltRounds);
+
+    person.updateOne({ _id: req.params.id }, { password: password }, { upsert: true, new: true }, (error, data) => {
+        if (error) {
+            return res.status(400).json({
+                Data: null,
+                Message: "You can't update your password",
+                Success: false,
+            });
+        }
+        else {
+            return res.status(200).json({
+                Data: data.n,
+                Message: "your password updated ",
+                Success: true,
+            });
+        }
+    })
+}
+
+module.exports = { showUserProfile, updateUserProfile, updateUserPassword}

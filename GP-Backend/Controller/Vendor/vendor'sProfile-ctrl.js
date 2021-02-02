@@ -112,4 +112,25 @@ updateProfile = async (req, res) => {
     })
 }
 
-module.exports = { updateProfilePassword, updateProfile, forgetPassword }
+showVendorProfile = (req, res) => {
+    const IdPerson = req.params.id
+    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription",select:"-__v -_id" }];
+    vendor.findOne({ person: IdPerson },{vendorFeedBack:0,__v:0, _id:0}).populate(populateQuery).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                Data: err,
+                Message: "*****************",
+                Success: false,
+            });
+        }
+        else {
+            return res.status(200).json({
+                Data: data,
+                Message: ":D :D",
+                Success: true,
+            });
+        }
+    });
+};
+
+module.exports = { updateProfilePassword, updateProfile, forgetPassword,resetPassword ,showVendorProfile }
