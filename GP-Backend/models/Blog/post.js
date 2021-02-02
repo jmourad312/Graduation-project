@@ -11,12 +11,6 @@ var post = new schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
     },
-
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-
     updatedPosts: [
         {
           type: mongoose.Schema.Types.ObjectId,

@@ -26,7 +26,7 @@ function validateUser(req, resp, next) {
   } else next();
 }
 
-// user routes on his profile 
+// user routes on his profile
 router.get(
   "/showUserProfile/:id",
   passport.authenticate("jwt", { session: false }),
@@ -34,8 +34,12 @@ router.get(
   userProfileCtrl.showUserProfile
 );
 
-router.put("/updateUserPassword/:id",passport.authenticate('jwt', { session: false }),validateUser,userProfileCtrl.updateUserPassword);
-
+router.put(
+  "/updateUserPassword/:id",
+  passport.authenticate("jwt", { session: false }),
+  validateUser,
+  userProfileCtrl.updateUserPassword
+);
 
 // user routes on Blog
 router.post(
@@ -57,4 +61,11 @@ router.put(
   userBlogCtrl.updatePost
 );
 
+// add comment 
+router.put(
+  "/addComment/:id",
+  passport.authenticate("jwt", { session: false }),
+  validateUser,
+  userBlogCtrl.addComment
+);
 module.exports = router;

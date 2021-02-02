@@ -2,7 +2,7 @@ const person = require("../../models/Person/person");
 const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
-const comment = require("../../models/Blog/reply");
+const Comment = require("../../models/Blog/reply");
 
 const bcrypt = require("bcryptjs");
 
@@ -17,8 +17,8 @@ const bcrypt = require("bcryptjs");
 
 //add post
 addNewPost = (req, res) => {
-  const IdUser = req.user._id;
   const body = req.body;
+  const IdPerson = body.id;
   if (!body) {
     return res.json({
       Data: null,
@@ -28,7 +28,7 @@ addNewPost = (req, res) => {
   }
 
   const post = new Post(body);
-  post.user = IdUser;
+  post.person = IdPerson;
 
   if (!post) {
     return res.status(400).json({
@@ -109,7 +109,45 @@ updatePost = (req, res) => {
   );
 };
 
-//add comment 
+//add comment
+addComment = (req, res) => {
+  const body = req.body;
+  const IdPerson = body.id;
+ 
+  if (!body) {
+    return res.json({
+      Data: null,
+      Message: "You must Type any comment",
+      Success: false,
+    });
+  }
 
+  const comment = new Comment(body);
+  comment.person = IdPerson;
 
-module.exports = { addNewPost, deletePost , updatePost };
+  Post.findByIdAndUpdate(
+    body.postId,
+    {
+      $push: { Reply: comment },
+    },
+    { new: true }
+  )
+    .populate("comment.person", "name")
+    .exec((err, data) => {
+      if (err) {
+        return res.status(400).json({
+          Data: err,
+          Message: "*****************",
+          Success: false,
+        });
+      } else {
+        return res.status(200).json({
+          Data: data,
+          Message: "Your comment is uploaded",
+          Success: true,
+        });
+      }
+    });
+};
+
+module.exports = { addNewPost, deletePost, updatePost, addComment };
