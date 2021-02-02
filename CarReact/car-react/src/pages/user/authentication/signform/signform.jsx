@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import $ from "jquery";
 // import { useEffect } from 'react';
 import Button from '../../../../components/Button';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSignInAction, userSignUpAction } from '../../../../store/actions';
 
 export default function Signform() {
 
@@ -21,6 +24,18 @@ export default function Signform() {
     const switchBack = () =>{
         setChangeClass("forgotpass");
     }
+    const userSignUp = useSelector(state => state.userSignUp);
+    const userSignIn = useSelector((state) => state.userSignIn);
+
+  const dispatch = useDispatch();
+
+  const signUP = () =>{
+    dispatch(userSignUpAction());
+  }
+   const signIN = () => {
+     dispatch(userSignInAction());
+   };
+
     
     // const signUpButton = document.querySelector('#signUp');
     // const signInButton = document.getElementById('signIn');
@@ -46,17 +61,23 @@ export default function Signform() {
     //     container.classList.remove("bottom-panel-active");
     // });
 
+
     return (
       <div className="signform ">
         <div className="container " id="container">
           <div className="form-container sign-up-container ">
-            <div className="form1">
+            <form
+              method="post"
+              action="localhost:3000/user/auth/signup"
+              className="form1"
+              onSubmit={signIN}
+            >
               <h1>Create Account</h1>
               <div className="social-container">
-                <Link to="#" className="social">
+                <Link to="localhost:3000/user/auth/facebook" className="social">
                   <i className="fab fa-facebook-f"></i>
                 </Link>
-                <Link to="#" className="social">
+                <Link to="localhost:3000/user/auth/google" className="social">
                   <i className="fab fa-google-plus-g"></i>
                 </Link>
                 {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
@@ -65,19 +86,25 @@ export default function Signform() {
               <input type="text" placeholder="Name" />
               <input type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
-              <button className="button" onClick={switchPayment}>
+              <button className="button">Sign Up</button>
+              {/* <button className="button" onClick={switchPayment}>
                 Sign Up
-              </button>
-            </div>
+              </button> */}
+            </form>
           </div>
           <div className="form-container sign-in-container ">
-            <form action="#" className="form1">
+            <form
+              action="localhost:3000/user/auth/signin"
+              method="post"
+              className="form1"
+              onSubmit={signUP}
+            >
               <h1>Sign in</h1>
               <div className="social-container">
-                <Link to="#" className="social">
+                <Link to="localhost:3000/user/auth/facebook" className="social">
                   <i className="fab fa-facebook-f"></i>
                 </Link>
-                <Link to="#" className="social">
+                <Link to="localhost:3000/user/auth/google" className="social">
                   <i className="fab fa-google-plus-g"></i>
                 </Link>
                 {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}

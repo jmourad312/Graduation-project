@@ -73,3 +73,57 @@ export const addUserAction = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+
+//-------------------user sign in
+export const userSignInAction = () => async (dispatch) => {
+  try {
+    const req = await axios.post("localhost:3000/user/auth/signin");
+    console.log(req);
+    dispatch({
+      type: TYPES.USER_SIGN_IN,
+      payload: req.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//*--------------------user sign up
+export const userSignUpAction = () => async (dispatch) => {
+  try {
+    const req = await axios.post("localhost:3000/user/auth/signup");
+    console.log(req);
+    dispatch({
+      type: TYPES.USER_SIGN_UP,
+      payload: req.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//-------------------vendor sign in
+export const vendorSignInAction = () => async (dispatch) => {
+  try {
+    const req = await axios.post("localhost:3000/vendor/auth/signin");
+    console.log(req);
+    dispatch({
+      type: TYPES.VENDOR_SIGN_IN,
+      payload: req.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+//-------------------vendor sign Up
+export const vendorSignUpAction = () => async (dispatch) => {
+  try {
+    const req = await axios.post("localhost:3000/vendor/auth/signup");
+    console.log(req);
+    dispatch({
+      type: TYPES.VENDOR_SIGN_UP,
+      payload: req.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

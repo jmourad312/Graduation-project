@@ -213,7 +213,11 @@ export default function VendorSignForm() {
               <div className="col-sm-6 form">
                 {/* <!-- Login Form --> */}
                 <div className="login form-peice switched">
-                  <form className="login-form" action="#" method="post">
+                  <form
+                    className="login-form"
+                    action="localhost:3000/vendor/auth/signin"
+                    method="post"
+                  >
                     <div className="form-group">
                       <label for="loginemail">Email Adderss</label>
                       <input
@@ -246,7 +250,11 @@ export default function VendorSignForm() {
 
                 {/* <!-- Signup Form --> */}
                 <div className="signup form-peice">
-                  <form className="signup-form" action="#" method="post">
+                  <form
+                    className="signup-form"
+                    action="localhost:3000/vendor/auth/signup"
+                    method="post"
+                  >
                     <div className="row">
                       <div className="col-4">
                         <div className="form-group">
