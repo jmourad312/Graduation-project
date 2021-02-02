@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import blogItems from '../../../../assets/js/blogItems'
+// import blogItems from '../../../../assets/js/blogItems'
 import AddBlog from "../../../../components/AddBlog";
 import BlogEntry from "../../../../components/BlogEntry";
 import BlogFilter from "../../../../components/BlogFilter";
 import {useDispatch, useSelector} from 'react-redux';
-import Button from "../../../../components/Button";
+// import Button from "../../../../components/Button";
 import { getProductsAction } from "../../../../store/actions";
 
 export default function BlogList() {
