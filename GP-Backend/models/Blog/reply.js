@@ -4,8 +4,6 @@ var schema = mongoose.Schema;
 var reply = new schema({
     content: String,
     image: [String],
-    createdAT: Date,
-    updatedAT: Date,
     commentVoting: Number,
     commentReply: [
         {
@@ -14,7 +12,9 @@ var reply = new schema({
         }
       ],
    
-});
+}
+, { timestamps: true },
+);
 
 
 module.exports = mongoose.model("Reply",reply);

@@ -4,8 +4,6 @@ const user = require("../../models/Person/User/user");
 const Post = require("../../models/Blog/post");
 const comment = require("../../models/Blog/reply");
 
-const bcrypt = require("bcryptjs");
-
 // add post
 // delete post
 // update post
