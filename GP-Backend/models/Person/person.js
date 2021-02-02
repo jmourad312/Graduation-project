@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { numberOfItem } = require("../../controller/Vendor/vendor'sItem-ctrl");
 
 var schema = mongoose.Schema;
 var person = new schema({
@@ -21,6 +22,7 @@ var person = new schema({
       },
     ],
   },
+  codeToResetPassword:Number,
 }
   , { timestamps: true },
 );

@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/Person/User/user");
 const passport = require('passport');
-
+const userProfileCtrl = require('../../controller/User/userProfile-ctrl')
 
 function canView(req, resp, next) {
     const { role} = req.user;

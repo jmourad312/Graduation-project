@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const vendorItemCtrl = require("../../Controller/Vendor/vendor'sItem-ctrl");
-const vendorprofiileCtrl = require("../../Controller/Vendor/vendor'sProfile-ctrl");
+const vendorItemCtrl = require("../../controller/Vendor/vendor'sItem-ctrl");
+const vendorprofiileCtrl = require("../../controller/Vendor/vendor'sProfile-ctrl");
 
 
 function canView(req, resp, next) {
@@ -39,5 +39,10 @@ router.get("/partOfItem/:skip",passport.authenticate('jwt', { session: false }),
 
 router.put("/updateProfilePassword/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfilePassword);
 router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
+router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
+
+router.post("/forgetPassword",vendorprofiileCtrl.forgetPassword);
+
+
 
 module.exports = router;
