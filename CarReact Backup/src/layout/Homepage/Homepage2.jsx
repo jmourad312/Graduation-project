@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Ads from "../../components/Ads";
 
 export default function Homepage2() {
   useEffect(() => {
@@ -441,6 +442,12 @@ export default function Homepage2() {
           </div>
         </div>
       </div>
+      <Ads
+        class="pater"
+        link="http://go.thoughtleaders.io/SenchaCodrops141117"
+        imgSrc="../../assets/Images/logo.svg"
+        hoverImgSrc="../../assets/Images/sencha.png"
+      />
     </section>
   );
 }

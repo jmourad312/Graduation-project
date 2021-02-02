@@ -1,6 +1,3 @@
-.button{
-    
-}
 // Animate the size, inside
 .fill:hover,
 .fill:focus {
@@ -8,22 +5,22 @@
 }
 
 // Animate the size, outside
-.pulse:hover, 
+.pulse:hover,
 .pulse:focus {
   animation: pulse 1s;
-  box-shadow: 0 0 0 2em rgba(#fff,0);
+  box-shadow: 0 0 0 2em rgba(#fff, 0);
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 var(--hover); }
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
 }
 
 // Stack multiple shadows, one from the left, the other from the right
 .close:hover,
 .close:focus {
-  box-shadow: 
-    inset -3.5em 0 0 0 var(--hover),
-    inset 3.5em 0 0 0 var(--hover);  
+  box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
 }
 
 // Size can also be negative; see how it's smaller than the element
@@ -46,46 +43,42 @@
 }
 
 // Multiple shadows, one on the outside, another on the inside
-.offset {  
-  box-shadow: 
-    0.3em 0.3em 0 0 var(--color),
-    inset 0.3em 0.3em 0 0 var(--color);
-  
+.offset {
+  box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+
   &:hover,
   &:focus {
-    box-shadow: 
-      0 0 0 0 var(--hover),
-      inset 6em 3.5em 0 0 var(--hover);
+    box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
   }
 }
 $colors: (
-  fill: #a972cb,
-  pulse: #ef6eae, 
-  close: #ff7f82, 
-  raise: #ffa260, 
-  up: #e4cb58, 
-  slidess: #8fc866, 
-  offset: #205545
+  fill: #cb72bc,
+  pulse: #efa26e,
+  raise: #60d2ff,
+  up: #b3a670,
+  close1: #ff7f82,
+  slide1: #8fc866,
+  offset: #205545,
 );
 
 // Sass variables compile to a static string; CSS variables are dynamic and inherited
-  // Loop through the map and set CSS custom properties using Sass variables
+// Loop through the map and set CSS custom properties using Sass variables
 @each $button, $color in $colors {
   .#{$button} {
     --color: #{$color};
-    --hover: #{adjust-hue($color, 45deg)};
+    --hover: #{adjust-hue($color, 10deg)};
   }
 }
 
 // Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
-.button {  
+.button {
   color: var(--color);
-  transition: 0.25s;
-  
+  transition: 0.45s;
+
   &:hover,
-  &:focus { 
+  &:focus {
     border-color: var(--hover);
-    color: #fff;
+    color: rgb(255, 255, 255);
   }
 }
 
@@ -95,13 +88,14 @@ $colors: (
 .button {
   background: none;
   border: 2px solid;
+  border-radius: 10px;
   font: inherit;
   line-height: 1;
   margin: 0.5em;
   padding: 1em 2em;
 }
 
-code { 
-  color: #e4cb58;
+code {
+  color: #1f1e1d;
   font: inherit;
 }
