@@ -75,36 +75,46 @@ export const addUserAction = () => async (dispatch) => {
 };
 
 
+
+//USER  ------------------------------------------------------------
 //-------------------user sign in
 export const userSignInAction = () => async (dispatch) => {
   try {
-    const req = await axios.post("localhost:3000/user/auth/signin");
+    const req = await axios.post("http://localhost:3000/user/auth/signin");
     console.log(req);
     dispatch({
       type: TYPES.USER_SIGN_IN,
       payload: req.data,
     });
+    console.log(req);
+
   } catch (error) {
     console.log(error);
+
   }
 };
 //*--------------------user sign up
 export const userSignUpAction = () => async (dispatch) => {
   try {
-    const req = await axios.post("localhost:3000/user/auth/signup");
+    const req = await axios.post("http://localhost:3000/user/auth/signup");
     console.log(req);
     dispatch({
       type: TYPES.USER_SIGN_UP,
       payload: req.data,
     });
+    console.log(req);
+
   } catch (error) {
     console.log(error);
   }
 };
+
+
+//VENDOR----------------------------------------------------------
 //-------------------vendor sign in
 export const vendorSignInAction = () => async (dispatch) => {
   try {
-    const req = await axios.post("localhost:3000/vendor/auth/signin");
+    const req = await axios.post("http://localhost:3000/vendor/auth/signin");
     console.log(req);
     dispatch({
       type: TYPES.VENDOR_SIGN_IN,
@@ -117,7 +127,7 @@ export const vendorSignInAction = () => async (dispatch) => {
 //-------------------vendor sign Up
 export const vendorSignUpAction = () => async (dispatch) => {
   try {
-    const req = await axios.post("localhost:3000/vendor/auth/signup");
+    const req = await axios.post("http://localhost:3000/vendor/auth/signup");
     console.log(req);
     dispatch({
       type: TYPES.VENDOR_SIGN_UP,
@@ -126,4 +136,12 @@ export const vendorSignUpAction = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+///-----savee token
+export const setToken = (payload) => {
+  return {
+    type: TYPES.GET_TOKEN,
+    payload,
+  };
 };

@@ -13,3 +13,6 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 
 export const GET_BLOGS = "GET_BLOGS";
 export const ADD_BLOG = "ADD_BLOG";
+
+export const GET_TOKEN = "GET_TOKEN";
+

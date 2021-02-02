@@ -10,6 +10,7 @@ export default (
     userSignUp: {},
     vendorSignIn: {},
     vendorSignUp: {},
+    token:"",
   },
   action
 ) => {
@@ -18,6 +19,11 @@ export default (
       return {
         ...state,
         products: action.payload,
+      };
+    case TYPES.GET_TOKEN:
+      return {
+        ...state,
+        token: action.payload,
       };
     case TYPES.GET_BLOGS:
       return {
