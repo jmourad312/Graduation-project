@@ -29,6 +29,8 @@ router.get('/showUserProfile/:id',passport.authenticate('jwt', { session: false 
 
 router.put('/updateUserProfile/:id' , passport.authenticate('jwt', { session: false }),validateUser,userProfileCtrl.updateUserProfile);
 
+router.put("/updateUserPassword/:id",passport.authenticate('jwt', { session: false }),validateUser,userProfileCtrl.updateUserPassword);
+
 
 
 

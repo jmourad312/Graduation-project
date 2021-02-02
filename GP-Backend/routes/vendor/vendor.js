@@ -40,9 +40,11 @@ router.get("/partOfItem/:skip",passport.authenticate('jwt', { session: false }),
 router.put("/updateProfilePassword/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfilePassword);
 router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
 router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
+router.get('/showVendorProfile/:id',passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.showVendorProfile);
+
 
 router.post("/forgetPassword",vendorprofiileCtrl.forgetPassword);
-
+//router.post("/resetPassword",passport.authenticate('jwt', { session: false }),vendorprofiileCtrl.resetPassword)
 
 
 module.exports = router;
