@@ -68,8 +68,8 @@ router.post('/signup', async (req, resp) => {
                         }
                         else {
                             const token = gettoken.token(dataOfPerson);
-                            resp.json({
-                                "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
+                            resp.header("Authorization", "Bearer " + token).json({
+                                "Data": dataOfPerson._id,
                                 "Message": "Done Sign up ",
                                 "Success": true
                             })
@@ -121,8 +121,8 @@ router.post('/signin', (req, resp) => {
                         else {
                             //create and assign a token
                             const token = gettoken.token(data);
-                            resp.json({
-                                "Data": { token: "Bearer " + token, expiresIn: '1d' },
+                            resp.header("Authorization", "Bearer " + token).json({
+                                "Data": dataOfPerson._id,
                                 "Message": "Done Sign in ",
                                 "Success": true
                             })

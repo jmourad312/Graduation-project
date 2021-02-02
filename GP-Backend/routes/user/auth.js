@@ -13,8 +13,8 @@ router.get('/facebook/callback', passport.authenticate('facebook', { session: fa
 
     //create and assign a token
     const token = gettoken.token(req.user);
-    resp.json({
-        "Data": { "token": "Bearer " + token, "expiresIn": 33 * 1000 },
+    resp.header("Authorization", "Bearer " + token).json({
+        "Data": req.user._id,
         "Message": "Done Sign in ",
         "Success": true
     })
@@ -26,8 +26,8 @@ router.get('/google', passport.authenticate('google', { scope: ['email'] }))
 router.get('/google/callback', passport.authenticate('google', { session: false }), (req, resp) => {
     //create and assign a token
     const token = gettoken.token(req.user);
-    resp.json({
-        "Data": { "token": "Bearer " + token, "expiresIn": 33 * 1000 },
+    resp.header("Authorization", "Bearer " + token).json({
+        "Data": req.user._id,
         "Message": "Done Sign in ",
         "Success": true
     })
@@ -100,8 +100,8 @@ router.post('/signup', async (req, resp) => {
                                 }
                                 else {
                                     const token = gettoken.token(dataOfPerson);
-                                    resp.json({
-                                        "Data": { "token": "Bearer " + token, "expiresIn": '1d' },
+                                    resp.header("Authorization", "Bearer " + token).json({
+                                        "Data": dataOfPerson._id,
                                         "Message": "Done Sign in ",
                                         "Success": true
                                     })
@@ -155,8 +155,8 @@ router.post('/signin', (req, resp) => {
                         else {
                             //create and assign a token
                             const token = gettoken.token(data);
-                            resp.json({
-                                "Data": { token: "Bearer " + token, expiresIn: '1d' },
+                            resp.header("Authorization", "Bearer " + token).json({
+                                "Data": dataOfPerson._id,
                                 "Message": "Done Sign in ",
                                 "Success": true
                             })
