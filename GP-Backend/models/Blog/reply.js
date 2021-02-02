@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var reply = new schema({
-<<<<<<< HEAD
-  content:{
+  content:
+  {
         type:"String",
         default:""
   } 
@@ -25,21 +25,6 @@ var reply = new schema({
       ref: "Reply",
     },
   ],
-=======
-    content: String,
-    image: [String],
-    commentVoting: Number,
-    commentReply: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Reply"
-        }
-      ],
-   
-}
-, { timestamps: true },
-);
->>>>>>> 8b854073a3efd5023ea63c54a29db7a4d718180b
 
 });
 
