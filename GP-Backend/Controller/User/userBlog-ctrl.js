@@ -148,4 +148,9 @@ addComment = (req, res) => {
     });
 };
 
+// show all posts of all users
+showAllPosts = (req,res)=>{
+  
+}
+
 module.exports = { addNewPost, deletePost, updatePost, addComment };

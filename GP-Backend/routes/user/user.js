@@ -43,7 +43,7 @@ router.put(
 
 // user routes on Blog
 router.post(
-  "/addPost/:id",
+  "/addPost",
   passport.authenticate("jwt", { session: false }),
   validateUser,
   userBlogCtrl.addNewPost
@@ -62,10 +62,12 @@ router.put(
 );
 
 // add comment 
-router.put(
-  "/addComment/:id",
+router.post(
+  "/addComment",
   passport.authenticate("jwt", { session: false }),
   validateUser,
   userBlogCtrl.addComment
 );
+
+
 module.exports = router;
