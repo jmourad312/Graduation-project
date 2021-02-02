@@ -11,7 +11,7 @@ import {
   setToken,
 } from "../../../../store/actions";
 
-export default function Signform() {
+export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
   // const [changeClassBack, setChangeClassBack] = useState("forgotpass")
   const [changePayment, setChangePayment] = useState("payment");
@@ -43,6 +43,12 @@ export default function Signform() {
       .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
       .then((res) => {
         console.log(res);
+        localStorage.setItem("Authorization",res.data.Data.token);
+        console.log(localStorage.getItem("Authorization"));
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+          props.history.push("/MyProfile");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -74,6 +80,11 @@ export default function Signform() {
         console.log(localStorage.getItem("Authorization"));
         // savetoken(res.data.Data.token);
         // console.log(token);
+        console.log(res.data.Success);
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+          props.history.push("/MyProfile");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -135,6 +146,7 @@ export default function Signform() {
   return (
     <div className="signform ">
       <div className="container " id="container">
+
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
@@ -178,6 +190,7 @@ export default function Signform() {
             <button className="button" type="submit">
               Sign Up
             </button>
+            <p>By signing up you agree to our <span>TERMS</span> and <span>Privacy Policy</span></p>
             {/* <button className="button" onClick={switchPayment}>
                 Sign Up
               </button> */}
