@@ -44,7 +44,7 @@ router.get('/showVendorProfile/:id',passport.authenticate('jwt', { session: fals
 
 
 router.post("/forgetPassword",vendorprofiileCtrl.forgetPassword);
-//router.post("/resetPassword",passport.authenticate('jwt', { session: false }),vendorprofiileCtrl.resetPassword)
+router.post("/resetPassword",passport.authenticate('jwt', { session: false }),vendorprofiileCtrl.resetPassword)
 
 
 module.exports = router;

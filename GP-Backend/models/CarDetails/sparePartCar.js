@@ -21,9 +21,9 @@ var car = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemCollection",
   },
-  vendor:{
+  person:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Vendor",
+    ref: "Person",
   }
 
 });

@@ -43,7 +43,7 @@ forgetPassword = (req, res) => {
                     if (error) {
                         return res.status(400).json({
                             Data: null,
-                            Message: "This email doesn't exist",
+                            Message: "try again",
                             Success: false,
                         });
                     }
@@ -60,9 +60,35 @@ forgetPassword = (req, res) => {
     })
 }
 //reset password
-resetPassword = (req, res) => {
-    // compare code and check token then reset password 
-    //done   
+resetPassword = async (req, res) => {
+    const data = await person.findOne({ email: req.body.email })
+    if (data.codeToResetPassword == req.body.code) {
+        const saltRounds = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(req.body.password, saltRounds);
+        person.updateOne({ email: req.body.email }, { password }, (error, data) => {
+            if (error) {
+                return res.status(400).json({
+                    Data: null,
+                    Message: "You can't update your password",
+                    Success: false,
+                });
+            }
+            else {
+                return res.status(200).json({
+                    Data: data.n,
+                    Message: "your password updated ",
+                    Success: true,
+                });
+            }
+        })
+    }
+    else {
+        return res.status(400).json({
+            Data: null,
+            Message: "You can't update your password",
+            Success: false,
+        });
+    }
 }
 
 //update password
@@ -94,8 +120,8 @@ updateProfile = async (req, res) => {
 
     const { ...data } = req.body
 
-    person.updateOne({ _id: req.params.id }, data, { upsert: true, new: true }, (error, data) => {
-        if (error) {
+    person.updateOne({ _id: req.params.id }, data, { upsert: true, new: true }, (errorPerson, dataOfPerson) => {
+        if (errorPerson) {
             return res.status(400).json({
                 Data: null,
                 Message: "You can't update ",
@@ -103,19 +129,31 @@ updateProfile = async (req, res) => {
             });
         }
         else {
-            return res.status(200).json({
-                Data: data.n,
-                Message: "updated ",
-                Success: true,
-            });
+
+            vendor.updateOne({ person: req.params.id }, data, { upsert: true, new: true }, (error, dataOfVendor) => {
+                if (error) {
+                    return res.status(400).json({
+                        Data: null,
+                        Message: "You can't update ",
+                        Success: false,
+                    });
+                }
+                else {
+                    return res.status(200).json({
+                        Data: dataOfVendor.n + dataOfPerson+n,
+                        Message: "updated ",
+                        Success: true,
+                    });
+                }
+            })
         }
     })
 }
 
 showVendorProfile = (req, res) => {
     const IdPerson = req.params.id
-    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription",select:"-__v -_id" }];
-    vendor.findOne({ person: IdPerson },{vendorFeedBack:0,__v:0, _id:0}).populate(populateQuery).exec((err, data) => {
+    const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription", select: "-__v -_id" }];
+    vendor.findOne({ person: IdPerson }, { vendorFeedBack: 0, __v: 0, _id: 0 }).populate(populateQuery).exec((err, data) => {
         if (err) {
             return res.status(400).json({
                 Data: err,
@@ -133,4 +171,4 @@ showVendorProfile = (req, res) => {
     });
 };
 
-module.exports = { updateProfilePassword, updateProfile, forgetPassword,resetPassword ,showVendorProfile }
+module.exports = { updateProfilePassword, updateProfile, forgetPassword, resetPassword, showVendorProfile }
