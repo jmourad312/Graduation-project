@@ -25,8 +25,8 @@ export const getProductsAction = () => async (dispatch) =>{
 // blog requests -------------------------
 export const getBlogsAction = () => async (dispatch) => {
   try {
-    const res = await axios.get("https://fakestoreapi.com/products");
-    console.log(res);
+    const res = await axios.get("http://localhost:3000/user/showAllPosts");
+    // console.log(res);
     dispatch({
       type: TYPES.GET_BLOGS,
       payload: res.data,
@@ -35,18 +35,18 @@ export const getBlogsAction = () => async (dispatch) => {
     console.log(error);
   }
 };
-export const AddBlogsAction = () => async (dispatch) => {
-  try {
-    const req = await axios.post("https://fakestoreapi.com/products");
-    console.log(req);
-    dispatch({
-      type: TYPES.ADD_BLOG,
-      payload: req.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const AddBlogsAction = () => async (dispatch) => {
+//   try {
+//     const req = await axios.post("https://fakestoreapi.com/products");
+//     console.log(req);
+//     dispatch({
+//       type: TYPES.ADD_BLOG,
+//       payload: req.data,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // get user -----------------------
 export const getUsersAction = () => async (dispatch) => {
