@@ -203,20 +203,42 @@ addCommentReply = (req, res) => {
 
 // show all posts of all users
 showAllPosts = (req, res) => {
-  Post.find({}, (error, data) => {
-    if (error || !data.length) {
-      return res.status(400).json({
-        Data: error,
-        Message: "no blogs found",
-        Success: false,
+  const populateQuery = [{ path: "person", select: "firstName" }];
+  Post.find({},{title:1,model:1,state:1}, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).skip(0).limit(6).populate(populateQuery).exec(
+    (error, data) => {
+      if (error || data.length==0) {
+        return res.status(400).json({
+          Data: error,
+          Message: "no blogs found",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: data,
+        Message: "The last 6 posts",
+        Success: true,
       });
-    }
-    return res.status(200).json({
-      Data: data,
-      Message: "احلى بلوج لاحلى زبون",
-      Success: true,
-    });
-  })
+    })
+}
+
+// show all posts of all users
+showDetailsPost = (req, res) => {
+  const populateQuery = [{ path: "person", select: "firstName" }, { path: "Comment" }];
+  Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 }).populate(populateQuery).exec(
+    (error, data) => {
+      if (error || data.length==0) {
+        return res.status(400).json({
+          Data: error,
+          Message: "no blogs found",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: data,
+        Message: "Details Post",
+        Success: true,
+      });
+    })
 }
 
 showPostsOfUser = (req, res) => {
@@ -385,6 +407,7 @@ module.exports = {
   addCommentReply,
   showAllPosts,
   showPostsOfUser,
+  showDetailsPost,
   voteToComment,
   removeVoteFromComment,
   numberOfVoting,

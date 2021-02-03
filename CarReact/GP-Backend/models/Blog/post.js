@@ -4,6 +4,8 @@ var schema = mongoose.Schema;
 var post = new schema({
   title: String,
   body: String,
+  model:String,
+  state:{type:Boolean, default:false},
   image: [],
   person: {
     type: mongoose.Schema.Types.ObjectId,
