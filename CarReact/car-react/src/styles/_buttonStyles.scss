@@ -18,9 +18,9 @@
 }
 
 // Stack multiple shadows, one from the left, the other from the right
-.close:hover,
-.close:focus {
-  box-shadow: inset -3.5em 0 0 0 var(--hover), inset 3.5em 0 0 0 var(--hover);
+.close1:hover,
+.close1:focus {
+  box-shadow: inset -4.5em 0 0 0 var(--hover), inset 4.5em 0 0 0 var(--hover);
 }
 
 // Size can also be negative; see how it's smaller than the element
@@ -37,9 +37,9 @@
 }
 
 // And from the left
-.slide:hover,
-.slide:focus {
-  box-shadow: inset 6.5em 0 0 0 var(--hover);
+.slide1:hover,
+.slide1:focus {
+  box-shadow: inset 8.5em 0 0 0 var(--hover);
 }
 
 // Multiple shadows, one on the outside, another on the inside
@@ -56,8 +56,8 @@ $colors: (
   pulse: #efa26e,
   raise: #60d2ff,
   up: #b3a670,
-  close1: #ff7f82,
-  slide1: #8fc866,
+  close1: #cac0c0,
+  slide1: #6699c8,
   offset: #205545,
 );
 
