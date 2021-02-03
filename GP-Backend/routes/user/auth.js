@@ -115,7 +115,6 @@ router.post('/signup', async (req, resp) => {
     });
 });
 
-
 //signin
 router.post('/signin', (req, resp) => {
     Person.findOne({ email: req.body.email }, (err, data) => {

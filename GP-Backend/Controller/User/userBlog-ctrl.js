@@ -6,7 +6,7 @@ const Comment = require("../../models/Blog/reply");
 
 // add post
 // delete post
-// update post
+// update post->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // add comment
 // vote on comment
 // show his posts
@@ -16,7 +16,7 @@ const Comment = require("../../models/Blog/reply");
 //add post
 addNewPost = (req, res) => {
   const body = req.body;
-  const IdPerson = body.id;
+  const IdPerson = req.user._id;
   if (!body) {
     return res.json({
       Data: null,
@@ -56,8 +56,8 @@ addNewPost = (req, res) => {
 
 //delete post
 deletePost = (req, res) => {
-  const IdUser = req.user._id;
-  Post.deleteOne({ _id: req.params.id, user: IdUser }, (err, data) => {
+  const IdPerson = req.user._id;
+  Post.deleteOne({ _id: req.params.id, person: IdPerson }, (err, data) => {
     if (err) {
       res.json({
         Data: {},
@@ -84,10 +84,10 @@ deletePost = (req, res) => {
 
 //update post
 updatePost = (req, res) => {
-  const IdUser = req.user._id;
+  const IdPerson = req.user._id;
   let { ...data } = req.body;
   Post.updateOne(
-    { _id: req.params.id, user: IdUser },
+    { _id: req.params.id, person: IdPerson },
     data,
     { upsert: true, new: true },
     (err, result) => {
@@ -110,8 +110,9 @@ updatePost = (req, res) => {
 //add comment
 addComment = (req, res) => {
   const body = req.body;
-  const IdPerson = body.id;
- 
+  const IdPerson = req.user._id;
+  const IdPost = req.params.idpost;
+
   if (!body) {
     return res.json({
       Data: null,
@@ -122,15 +123,66 @@ addComment = (req, res) => {
 
   const comment = new Comment(body);
   comment.person = IdPerson;
+  comment.post = IdPost;
+  comment.save()
+
+  const populateQuery = [{ path: "comment", select: "-__v -_id -person" }];
 
   Post.findByIdAndUpdate(
-    body.postId,
+    { _id: IdPost },
     {
-      $push: { Reply: comment },
+      $push: { comment: comment },
     },
     { new: true }
   )
-    .populate("comment.person", "name")
+    .populate(populateQuery)
+    .exec((err, data) => {
+      if (err) {
+        return res.status(400).json({
+          Data: err,
+          Message: "*****************",
+          Success: false,
+        });
+      } else {
+        return res.status(200).json({
+          Data: data,
+          Message: "Your comment is uploaded",
+          Success: true,
+        });
+      }
+    });
+};
+
+
+//add comment
+addCommentReply = (req, res) => {
+  const body = req.body;
+  const IdPerson = req.user._id;
+  const IdPost = req.params.idpost;
+  const IdComment = req.params.idcomment;
+
+  if (!body) {
+    return res.json({
+      Data: null,
+      Message: "You must Type any comment",
+      Success: false,
+    });
+  }
+
+  const comment = new Comment(body);
+  comment.person = IdPerson;
+  comment.post = IdPost;
+  comment.save()
+  const populateQuery = [{ path: "comment", select: "-__v -_id -person" }];
+
+  Comment.findByIdAndUpdate(
+    { _id: IdComment },
+    {
+      $push: { commentReply: comment },
+    },
+    { new: true }
+  )
+    .populate(populateQuery)
     .exec((err, data) => {
       if (err) {
         return res.status(400).json({
@@ -149,8 +201,93 @@ addComment = (req, res) => {
 };
 
 // show all posts of all users
-showAllPosts = (req,res)=>{
-  
+showAllPosts = (req, res) => {
+  Post.find({}, (error, data) => {
+    if (error || !data.length) {
+      return res.status(400).json({
+        Data: error,
+        Message: "no blogs found",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data,
+      Message: "احلى بلوج لاحلى زبون",
+      Success: true,
+    });
+  })
 }
 
-module.exports = { addNewPost, deletePost, updatePost, addComment };
+showPostsOfUser = (req, res) => {
+  const IdPerson = req.user._id;
+  Post.find({ person: IdPerson }, (error, data) => {
+    if (error || !data.length) {
+      return res.status(400).json({
+        Data: error,
+        Message: "no blogs found",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data,
+      Message: "احلى بلوج لاحلى زبون",
+      Success: true,
+    });
+  })
+}
+
+voteToComment = (req, res) => {
+
+  Comment.updateOne({ _id: req.params.id }, { $push: { Voting: req.user._id } }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "can't vote",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.n,
+      Message: "احلى فوت",
+      Success: true,
+    });
+  })
+
+}
+
+removeVoteFromComment = (req, res) => {
+  Comment.updateOne({ _id: req.params.id }, { $pullAll: { Voting: req.user._id } }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "can't delete vote",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.n,
+      Message: " لييييه يا اخي بس ",
+      Success: true,
+    });
+  })
+}
+
+numberOfVoting = (req, res) => {
+  Comment.findOne({ _id: req.params.id }, { Voting: 1 }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "can't delete vote",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.Voting.length,
+      Message: "number of voting",
+      Success: true,
+    });
+  })
+}
+
+
+module.exports = { addNewPost, deletePost, updatePost, addComment, addCommentReply, showAllPosts, showPostsOfUser, voteToComment, removeVoteFromComment, numberOfVoting };

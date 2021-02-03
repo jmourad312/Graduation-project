@@ -4,12 +4,10 @@ var schema = mongoose.Schema;
 var reply = new schema({
   content:
   {
-        type:"String",
-        default:""
+    type: "String",
+    default: ""
   },
   image: [String],
-  createdAT: Date,
-  updatedAT: Date,
   commentVoting: Number,
   person: {
     type: mongoose.Schema.Types.ObjectId,
@@ -25,8 +23,9 @@ var reply = new schema({
       ref: "Reply",
     },
   ],
+  voting:[Number],
 }
-, { timestamps: true },
+  , { timestamps: true },
 );
 
 module.exports = mongoose.model("Reply", reply);
