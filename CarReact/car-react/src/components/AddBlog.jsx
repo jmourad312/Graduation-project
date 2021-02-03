@@ -3,20 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddBlogsAction } from "../store/actions";
 import Button from "./Button";
 import Input from "./Input";
-import axios from 'axios';
+import axios from "axios";
+import $ from "jquery";
 export default function AddBlog() {
-
   // const blogs = useSelector((state) => state.blogs);
   // const dispatch = useDispatch();
   // const addBlog = (params) => {
   //   dispatch(AddBlogsAction(params));
   // };
+  $("form").on("change", ".file-upload-field", function () {
+    $(this)
+      .parent(".file-upload-wrapper")
+      .attr(
+        "data-text",
+        $(this)
+          .val()
+          .replace(/.*(\/|\\)/, "")
+      );
+  });
 
   const [inputValue, setInputValue] = useState({
     title: "",
-    content:"",
+    content: "",
+    image: "",
   });
-  const handleChange = (event) =>{
+
+  const handleChange = (event) => {
     const { value, name } = event.target;
     setInputValue((previous) => {
       return {
@@ -24,7 +36,7 @@ export default function AddBlog() {
         [name]: value,
       };
     });
-  }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
@@ -45,9 +57,8 @@ export default function AddBlog() {
         console.log(error);
       });
   };
-  
-  useEffect(() => {
-  }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="addBlog">
@@ -77,6 +88,17 @@ export default function AddBlog() {
               />
             </div>
             <div class="form-group">
+              <label for="image">Add image URL</label>
+              <Input
+                type="file"
+                class="form-control"
+                name="image"
+                id="image"
+                value={inputValue.image}
+                onChange={handleChange}
+              />
+            </div>
+            <div class="form-group">
               <label for="content">Blog Content</label>
               <textarea
                 class="form-control"
@@ -88,10 +110,7 @@ export default function AddBlog() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="btn btn-success"
-            >
+            <button type="submit" className="btn btn-success">
               ADD
             </button>
           </form>
