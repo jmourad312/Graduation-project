@@ -5,6 +5,7 @@ var post = new schema({
   title: String,
   body: String,
   model:String,
+  brand:String,
   state:{type:Boolean, default:false},
   image: [],
   person: {
