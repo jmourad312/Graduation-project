@@ -289,5 +289,32 @@ numberOfVoting = (req, res) => {
   })
 }
 
+addPostToBookmarks = (req, res) => {
 
-module.exports = { addNewPost, deletePost, updatePost, addComment, addCommentReply, showAllPosts, showPostsOfUser, voteToComment, removeVoteFromComment, numberOfVoting };
+  const IdPost = req.body.postid
+  user.updateOne({ person: req.user._id }, {
+    $push: { bookmarkPost: IdPost }
+  }, (error, data) => {
+
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "failed add blog to bookmark",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.n,
+      Message: "done add blog to bookmark",
+      Success: true,
+    });
+
+
+  })
+}
+
+module.exports = {
+  addNewPost, deletePost, updatePost, addComment,
+  addCommentReply, showAllPosts, showPostsOfUser,
+  voteToComment, removeVoteFromComment, numberOfVoting, addPostToBookmarks
+};

@@ -13,7 +13,10 @@ var user = new schema({
     ref: "UserSubscription",
   },
   banned: {type:Boolean,default:false},
-  
+  bookmarkPost:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+  }],
   //authentication
   facebookId: {
     type: Number,
