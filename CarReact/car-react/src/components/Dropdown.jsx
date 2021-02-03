@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as Actions from "../store/actions";
 
 export default function Dropdown(props) {
+
+
+
+  const blogFilterBrandActive = useSelector(state => state.blogFilterBrandActive);
+  const dispatch = useDispatch();
   const [state, setstate] = useState("");
+  const changeInputState = () =>{
+    dispatch(Actions.getBlogsFilterBrandActive(true))
+  }
+
   const handleChange = (event) => {
     setstate(event.target.value);
     setSubmit(event.target.value);
+    console.log("change");
+
+    changeInputState();
   };
   const [submit, setSubmit] = useState({
     name: "",
@@ -12,6 +26,8 @@ export default function Dropdown(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("change");
+
     console.log(submit);
     //   axios
     //     .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
@@ -31,28 +47,22 @@ export default function Dropdown(props) {
 
   useEffect(() => {
     const inputField = document.querySelector(".chosen-value");
-
     const dropdown = document.querySelector(".value-list");
-
     const dropdownArray = [...document.querySelectorAll("li")];
-
     console.log(typeof dropdownArray);
-
     // dropdown.classList.add("open");
     // inputField.focus(); // Demo purposes only
     let valueArray = [];
     dropdownArray.forEach((item) => {
       valueArray.push(item.textContent);
     });
-
     // const closeDropdown = () => {
     //   dropdown.classList.remove("open");
     // };
-
     inputField.addEventListener("input", () => {
       dropdown.classList.add("open");
       let inputValue = inputField.value.toLowerCase();
-      // let valueSubstring;
+      let valueSubstring;
       if (inputValue.length > 0) {
         for (let j = 0; j < valueArray.length; j++) {
           if (
@@ -72,7 +82,7 @@ export default function Dropdown(props) {
         }
       }
     });
-
+    // setstate(evt.target.value);
     dropdownArray.forEach((item) => {
       item.addEventListener("click", (evt) => {
         inputField.value = item.textContent;
@@ -81,7 +91,6 @@ export default function Dropdown(props) {
         });
       });
     });
-
     inputField.addEventListener("focus", () => {
       inputField.placeholder = "Type to filter";
       dropdown.classList.add("open");
@@ -89,15 +98,14 @@ export default function Dropdown(props) {
         dropdown.classList.remove("closed");
       });
     });
-
     inputField.addEventListener("blur", () => {
       inputField.placeholder = "Brand";
       dropdown.classList.remove("open");
     });
-
     document.addEventListener("click", (evt) => {
       const isDropdown = dropdown.contains(evt.target);
       const isInput = inputField.contains(evt.target);
+      
       if (!isDropdown && !isInput) {
         dropdown.classList.remove("open");
       }
@@ -117,8 +125,8 @@ export default function Dropdown(props) {
           onChange={handleChange}
         />
         <ul class="value-list">
-          {props.mapItems.map((item, index) => {
-            return <li key={index}>{item.make}</li>;
+          {props.mapItems.map((item) => {
+            return <li>{item.make}</li>;
           })}
         </ul>
       </form>

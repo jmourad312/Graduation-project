@@ -113,6 +113,9 @@ export default function AddBlog() {
             <button type="submit" className="btn btn-success">
               ADD
             </button>
+            <label for="modal" className="btn btn-danger mt-2">
+              Cancel
+            </label>
           </form>
         </article>
 
