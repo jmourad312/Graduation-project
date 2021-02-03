@@ -57,7 +57,10 @@ router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { sessi
 
 router.get("/numberOfVoting/:id", userBlogCtrl.numberOfVoting);
 
+//bookmarks 
+router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addBookmarks);
 
+router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.getBookmarksList);
 
 // products 
 router.get("/partOfItem/:skip", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
