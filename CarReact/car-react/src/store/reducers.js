@@ -20,21 +20,35 @@ export default (
         ...state,
         products: action.payload,
       };
+    case TYPES.ADD_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
+
     case TYPES.GET_TOKEN:
       return {
         ...state,
         token: action.payload,
       };
+
     case TYPES.GET_BLOGS:
       return {
         ...state,
         blogs: action.payload,
       };
+    // case TYPES.ADD_BLOG:
+    //   return {
+    //     ...state,
+    //     blogs: action.payload,
+    //   };
+
     case TYPES.GET_USER:
       return {
         ...state,
         users: action.payload,
       };
+
     case TYPES.USER_SIGN_IN:
       return {
         ...state,
@@ -45,6 +59,7 @@ export default (
         ...state,
         userSignUp: action.payload,
       };
+
     case TYPES.VENDOR_SIGN_IN:
       return {
         ...state,
@@ -55,6 +70,7 @@ export default (
         ...state,
         vendorSignUp: action.payload,
       };
+
     default:
       return state;
   }

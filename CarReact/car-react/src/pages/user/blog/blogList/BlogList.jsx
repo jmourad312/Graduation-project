@@ -5,23 +5,29 @@ import BlogEntry from "../../../../components/BlogEntry";
 import BlogFilter from "../../../../components/BlogFilter";
 import {useDispatch, useSelector} from 'react-redux';
 // import Button from "../../../../components/Button";
-import { getProductsAction } from "../../../../store/actions";
+import { getBlogsAction } from "../../../../store/actions";
+import Loading from '../../../../components/Loading';
 
 export default function BlogList() {
   
-  const products = useSelector(state => state.products);
-  console.log(products);
+  
+  const blogs = useSelector(state => state.blogs);
   const dispatch = useDispatch();
-  console.log(products);
-  const getProducts = () =>{
-    dispatch(getProductsAction("asa"));
+  const getBlogs = () =>{
+    dispatch(getBlogsAction());
   }
-  console.log(products);
 
-  useEffect(() => {  
-    getProducts();
-  }, [])
+  useEffect(() => {
+    getBlogs();
+  }, []);
+    useEffect(() => {
+      getBlogs();
+    }, [blogs]);
 
+  // const items = [];
+  // blogs.Data.forEach(element => {
+  //   items.push(element)
+  // });
   function createItem (blog) {
     // return <BlogEntry
     //   key={blog.id}
@@ -40,15 +46,15 @@ export default function BlogList() {
     // />
     return (
       <BlogEntry
-        key={blog.id}
+        key={blog._id}
         imgClass={blog.imgClass}
         imgSrc={blog.image}
         imgAlt={blog.imgAlt}
-        badgeClass={blog.badgeClass}
+        badgeClass={blog.state ? "badge-primary" : null}
         badgeValue={blog.badgeValue}
         cardTitle={blog.title}
         userName={blog.category}
-        date={blog.date}
+        date={blog.createdAt}
         cardContent={blog.description}
         cardBrand={blog.cardBrand}
         cardModel={blog.cardModel}
@@ -67,7 +73,9 @@ export default function BlogList() {
           <BlogFilter class="col-3 blog-filter" />
           <div className="col-9 blog-contents">
             <section>
-              <div className="row">{products.map(createItem)}</div>
+              <div className="row">
+                {blogs.Data?blogs.Data.map(createItem):<Loading />}
+              </div>
             </section>
           </div>
         </div>
@@ -75,3 +83,4 @@ export default function BlogList() {
     </section>
   );
 }
+
