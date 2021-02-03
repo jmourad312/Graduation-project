@@ -201,6 +201,42 @@ addCommentReply = (req, res) => {
     });
 };
 
+// show all posts of all users
+showAllPosts = (req, res) => {
+  Post.find({}, (error, data) => {
+    if (error || !data.length) {
+      return res.status(400).json({
+        Data: error,
+        Message: "no blogs found",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data,
+      Message: "احلى بلوج لاحلى زبون",
+      Success: true,
+    });
+  })
+}
+
+showPostsOfUser = (req, res) => {
+  const IdPerson = req.user._id;
+  Post.find({ person: IdPerson }, (error, data) => {
+    if (error || !data.length) {
+      return res.status(400).json({
+        Data: error,
+        Message: "no blogs found",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data,
+      Message: "احلى بلوج لاحلى زبون",
+      Success: true,
+    });
+  })
+}
+
 // remove voting on comment
 removeVoteFromComment = (req, res) => {
   Comment.updateOne(
@@ -222,6 +258,25 @@ removeVoteFromComment = (req, res) => {
     }
   );
 };
+
+voteToComment = (req, res) => {
+
+  Comment.updateOne({ _id: req.params.id }, { $push: { Voting: req.user._id } }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "can't vote",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.n,
+      Message: "احلى فوت",
+      Success: true,
+    });
+  })
+
+}
 
 // calculate number of voting
 numberOfVoting = (req, res) => {
@@ -258,6 +313,7 @@ addBookmarks = (req, res) => {
   const newBookmark = new BookmarkPostsList(body);
   newBookmark.person = IdPerson;
   newBookmark.post = IdPost;
+  newBookmark.save();
 
   if (!newBookmark) {
     return res.status(400).json({
@@ -327,10 +383,11 @@ module.exports = {
   updatePost,
   addComment,
   addCommentReply,
+  showAllPosts,
   showPostsOfUser,
   voteToComment,
   removeVoteFromComment,
   numberOfVoting,
-  newBookmark,
+  addBookmarks,
   getBookmarksList,
 };

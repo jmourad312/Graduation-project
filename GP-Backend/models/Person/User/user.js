@@ -13,7 +13,6 @@ var user = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserSubscription",
   },
-<<<<<<< HEAD
 
   favouriteItems: [
     {
@@ -31,13 +30,6 @@ var user = new schema({
 
   banned: { type: Boolean, default: false },
 
-=======
-  banned: {type:Boolean,default:false},
-  bookmarkPost:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
-  }],
->>>>>>> bac14256cb416e7f8b639efeb222d2170b11061f
   //authentication
   facebookId: {
     type: Number,
