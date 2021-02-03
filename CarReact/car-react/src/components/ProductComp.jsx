@@ -25,7 +25,7 @@ export default function ProductComp(props) {
         <div className="card-body px-2 pb-2 pt-1">
           <div className="d-flex justify-content-between">
             <div>
-              <p className="h4 text-primary">{props.price}</p>
+              <p className="h4 text-primary">{props.price + "$"}</p>
             </div>
           </div>
           <p className="text-warning d-flex align-items-center mb-2">
@@ -44,43 +44,36 @@ export default function ProductComp(props) {
           </p>
           <p className="mb-1">
             <small>
-              <a href="#" className="text-secondary text-multiline-truncate">
+              <a href="#" className="text-secondary">
                 {props.brand}
               </a>
             </small>
           </p>
           <p className="mb-1">
             <small>
-              <a href="#" className="text-secondary text-multiline-truncate">
+              <a href="#" className="text-secondary">
                 {props.model}
               </a>
             </small>
           </p>
-          <p className="mb-1">
+          <p className="">
             <small>
-              <a href="#" className="text-secondary text-multiline-truncate">
+              <a href="#" className="text-secondary">
                 {props.category}
               </a>
             </small>
           </p>
-
-          <div className="d-flex justify-content-between">
-            <div className="col px-0">
-              <button className="btn btn-outline-primary btn-block">
-                Add To Cart
+          <div className="row ml-1">
+            <div className="col-9 px-0">
+              <button className="button slide1 p-2">
+                Go to details{" "}
                 <i className="fa fa-shopping-basket" aria-hidden="true"></i>
               </button>
             </div>
-            <div className="ml-2">
-              <Link
-                to="#"
-                className="button fill p-1"
-                data-toggle="tooltip"
-                data-placement="left"
-                title="Add to Wishlist"
-              >
+            <div className="col-3 px-0" style={{ marginTop: "6px" }}>
+              <button className="button fill p-2 m-0" title="Add to Wishlist">
                 <i className="fa fa-heart" aria-hidden="true"></i>
-              </Link>
+              </button>
             </div>
           </div>
         </div>

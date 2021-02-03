@@ -36,10 +36,10 @@ export default function ProductsList() {
     <div className="productList">
       <div className="container">
         <div className="row">
-          <div className="col-4" style={{ marginTop: "15%" }}>
+          <div className="col-4" style={{ marginTop:"10%" }}>
             <ProductFilter />
           </div>
-          <div className="col-8" style={{ marginTop: "15%" }}>
+          <div className="col-8" style={{ marginTop: "10%" }}>
           <div className="row">
             {products.map(createProducts)}
           </div>
