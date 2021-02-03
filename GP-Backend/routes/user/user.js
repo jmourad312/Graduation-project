@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const userProfileCtrl = require("../../controller/User/userProfile-ctrl");
 const userBlogCtrl = require("../../Controller/User/userBlog-ctrl");
+const userItemCtrl = require ('../../Controller/User/userItem-ctrl')
 
 function canView(req, resp, next) {
   const { role } = req.user;
@@ -57,5 +58,9 @@ router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { sessi
 router.get("/numberOfVoting/:id", userBlogCtrl.numberOfVoting);
 
 router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addPostToBookmarks);
+
+// products 
+router.get("/partOfItem/:skip", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+
 
 module.exports = router;
