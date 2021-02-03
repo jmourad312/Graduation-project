@@ -10,8 +10,7 @@ const Comment = require("../../models/Blog/reply");
 // add comment
 // vote on comment
 // show his posts
-// show all posts of all users
-//add post to bookmarks
+// add post to bookmarks
 
 //add post
 addNewPost = (req, res) => {
@@ -148,9 +147,6 @@ addComment = (req, res) => {
     });
 };
 
-// show all posts of all users
-showAllPosts = (req,res)=>{
-  
-}
+
 
 module.exports = { addNewPost, deletePost, updatePost, addComment };
