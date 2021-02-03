@@ -46,6 +46,9 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addCommentReply);
 
 // show posts
+
+router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
+
 router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
 router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
