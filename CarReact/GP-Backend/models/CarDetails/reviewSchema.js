@@ -5,7 +5,7 @@ var itemFeedBack  = new schema({
   comment: String,
   rating: {
     type: Number,
-    min: 1,
+    min: 0,
     max: 5,
     validate: { validator: Number.isInteger },
   },
