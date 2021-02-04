@@ -35,8 +35,7 @@ export default function BlogDetails(props) {
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
-          console.log("hhkhkhkhk");
-          // props.history.push("/MyProfile");
+          console.log("success");
         } else {
           console.log("fail");
         }
@@ -44,13 +43,14 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
+      setInputValue("")
   };
 
   useEffect(() => {
     getBlog(blogID);
-    console.log(blogDetails);
-    console.log(blogID);
-  }, []);
+    // console.log(blogDetails);
+    // console.log(blogID);
+  }, [blogID]);
     return (
       <div className="container p-5">
         <div>
