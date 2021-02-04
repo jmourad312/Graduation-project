@@ -15,6 +15,7 @@ export default function BlogDetails(props) {
   const [inputValue, setInputValue] = useState({
     content: "",
   });
+  // const [replyInput, setReplyInput] = useState({initialState})
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -43,14 +44,19 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-      setInputValue("")
+      setInputValue({content:""})
   };
-
+  
   useEffect(() => {
     getBlog(blogID);
     // console.log(blogDetails);
     // console.log(blogID);
-  }, [blogID]);
+  }, []);
+  useEffect(() => {
+    getBlog(blogID);
+    // console.log(blogDetails);
+    // console.log(blogID);
+  }, [blogDetails]);
     return (
       <div className="container p-5">
         <div>
@@ -121,9 +127,9 @@ export default function BlogDetails(props) {
 
         {/* <!-- Single Comment --> */}
         {blogDetails ?
-          blogDetails.comment.map((item) => {
+          blogDetails.comment.map((item,index) => {
             return (
-              <div className="media mb-4">
+              <div className="media mb-4" key={index}>
                 <img
                   className="d-flex mr-3 rounded-circle"
                   src={item.image}
@@ -133,22 +139,36 @@ export default function BlogDetails(props) {
                   <h5 className="mt-0">{item.person.firstName}</h5>
                   {item.content}
                 </div>
-                {item.commentReply ?
-                  item.commentReply.map((rep) => {
-                    return (
-                      <div className="media mt-4">
-                        <img
-                          className="d-flex mr-3 rounded-circle"
-                          src={rep.image}
-                          alt=""
-                        />
-                        <div className="media-body">
-                          <h5 className="mt-0">{rep.person.firstName}</h5>
-                          {rep.person.firstName}
+                <form method="post">
+                  <textarea
+                    className="form-control"
+                    rows="3"
+                    name="content"
+                    // value=
+                    // onChange=
+                  ></textarea>
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
+                {item
+                  ? item.commentReply.map((rep) => {
+                      return (
+                        <div className="media mt-4">
+                          <img
+                            className="d-flex mr-3 rounded-circle"
+                            src={rep.image}
+                            alt=""
+                            style={{maxHeight:"300px",maxWidth:"300px"}}
+                          />
+                          <div className="media-body">
+                            <h5 className="mt-0">{rep.person.firstName}</h5>
+                            {rep.person.firstName}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }): "LOADING"}
+                      );
+                    })
+                  : "LOADING"}
               </div>
             );
           }): "LOADING"}
