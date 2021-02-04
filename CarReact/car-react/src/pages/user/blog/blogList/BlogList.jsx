@@ -53,7 +53,7 @@ export default function BlogList() {
         badgeClass={blog.state ? "badge-primary" : null}
         // badgeValue={blog.badgeValue}
         cardTitle={blog.title}
-        userName={blog.person.firstName}
+        userName={blog.person.firstName? blog.person.firstName : "User"}
         date={blog.createdAt}
         cardContent={blog.body}
         cardBrand={blog.brand}
