@@ -40,7 +40,7 @@ app.use("/vendor",VendorRoute);
 app.use("/vendor/auth",AuthVendorRoute);
 
 // app.use("/admin/auth",AuthAdminRoute);
-// app.use("/admin",AdminRoute);
+app.use("/admin",AdminRoute);
 
 
 
