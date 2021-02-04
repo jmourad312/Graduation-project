@@ -155,7 +155,7 @@ addComment = (req, res) => {
     });
 };
 
-//add comment
+//add Reply on comment
 addCommentReply = (req, res) => {
   const body = req.body;
   const IdPerson = req.user._id;
@@ -221,7 +221,7 @@ showAllPosts = (req, res) => {
     })
 }
 
-// show all posts of all users
+// show post details
 showDetailsPost = (req, res) => {
   const populateQuery = [{ path: "person", select: "firstName" }, { path: "Comment" }];
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 }).populate(populateQuery).exec(
@@ -241,28 +241,7 @@ showDetailsPost = (req, res) => {
     })
 }
 
-showFilterPosts = (req, res) => {
-  const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const query =  {$or:[{title: criteriaSearch},{body:criteriaSearch}] } 
-  const populateQuery = [{ path: "person", select: "firstName" }];
-
-  Post.find(query, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).populate(populateQuery).exec(
-    (error, data) => {
-      if (error || data.length==0) {
-        return res.status(400).json({
-          Data: error,
-          Message: "no blogs found",
-          Success: false,
-        });
-      }
-      return res.status(200).json({
-        Data: data,
-        Message: "posts: filter",
-        Success: true,
-      });
-    })
-}
-
+//show users posts
 showPostsOfUser = (req, res) => {
   const IdPerson = req.user._id;
   Post.find({ person: IdPerson }, (error, data) => {
@@ -279,6 +258,26 @@ showPostsOfUser = (req, res) => {
       Success: true,
     });
   })
+}
+
+//voting in comment 
+voteToComment = (req, res) => {
+
+  Comment.updateOne({ _id: req.params.id }, { $push: { Voting: req.user._id } }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        Data: error,
+        Message: "can't vote",
+        Success: false,
+      });
+    }
+    return res.status(200).json({
+      Data: data.n,
+      Message: "احلى فوت",
+      Success: true,
+    });
+  })
+
 }
 
 // remove voting on comment
@@ -302,25 +301,6 @@ removeVoteFromComment = (req, res) => {
     }
   );
 };
-
-voteToComment = (req, res) => {
-
-  Comment.updateOne({ _id: req.params.id }, { $push: { Voting: req.user._id } }, (error, data) => {
-    if (error) {
-      return res.status(400).json({
-        Data: error,
-        Message: "can't vote",
-        Success: false,
-      });
-    }
-    return res.status(200).json({
-      Data: data.n,
-      Message: "احلى فوت",
-      Success: true,
-    });
-  })
-
-}
 
 // calculate number of voting
 numberOfVoting = (req, res) => {
