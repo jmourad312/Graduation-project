@@ -128,8 +128,13 @@ export default function AddBlog() {
             <input
               list="brandList"
               id="brand"
+<<<<<<< HEAD
+              value={inputValue.brand}
+              onChange={()=> handleChange}
+=======
               name="brand"
               onChange={handleChange}
+>>>>>>> b593bc64e38044dd3636dfcb4d73d1ad0d254551
             />
             <datalist id="brandList">
               {cars2.map((item, index) => {

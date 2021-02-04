@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import $ from 'jquery';
+// import { useSelector } from "react-redux";
+
 
 export default function Dropdown2(props) {
 
