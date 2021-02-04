@@ -1,5 +1,6 @@
 import * as TYPES from './types';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 // export const setLanguage = (payload) => {
 //   return {
@@ -23,6 +24,26 @@ export const getProductsAction = () => async (dispatch) =>{
 }
 
 // blog requests -------------------------
+export const getBlogDetails = (params) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/user/showDetailsPost/${params}`,
+    );
+    // console.log(res);
+    dispatch({
+      type: TYPES.GET_BLOG_DETAILS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const setBlogId = (payload) => {
+  return {
+    type: TYPES.GET_BLOG_ID,
+    payload,
+  };
+};
 export const getBlogsAction = () => async (dispatch) => {
   try {
     const res = await axios.get("http://localhost:3000/user/showAllPosts");
@@ -35,9 +56,51 @@ export const getBlogsAction = () => async (dispatch) => {
     console.log(error);
   }
 };
+export const getBlogsFilterBrand = () => async (dispatch) => {
+  try {
+    const res = await axios.get("https://fakestoreapi.com/products");
+    // console.log(res);
+    dispatch({
+      type: TYPES.GET_BLOG_FILTER_BRAND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getBlogsFilterBrandActive = (payload) => {
+  return {
+    type: TYPES.GET_BLOG_FILTER_BRAND_ACTIVE,
+    payload,
+  };
+};
+export const getBlogsFilterModel = () => async (dispatch) => {
+  try {
+    const res = await axios.get("https://fakestoreapi.com/products");
+    // console.log(res);
+    dispatch({
+      type: TYPES.GET_BLOG_FILTER_MODEL,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getBlogsFilterSearch = () => async (dispatch) => {
+  try {
+    const res = await axios.post("https://fakestoreapi.com/products");
+    // console.log(res);
+    dispatch({
+      type: TYPES.GET_BLOG_FILTER_SEARCH,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 // export const AddBlogsAction = () => async (dispatch) => {
 //   try {
-//     const req = await axios.post("https://fakestoreapi.com/products");
+//     const req = await axios.post("http://localhost:3000/user/addPost");
 //     console.log(req);
 //     dispatch({
 //       type: TYPES.ADD_BLOG,

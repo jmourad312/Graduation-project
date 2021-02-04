@@ -19,10 +19,10 @@ export default function BlogList() {
 
   useEffect(() => {
     getBlogs();
-  }, []);
-    useEffect(() => {
-      getBlogs();
-    }, [blogs]);
+  }, [blogs]);
+    // useEffect(() => {
+    //   getBlogs();
+    // }, []);
 
   // const items = [];
   // blogs.Data.forEach(element => {
@@ -47,18 +47,19 @@ export default function BlogList() {
     return (
       <BlogEntry
         key={blog._id}
-        imgClass={blog.imgClass}
+        id={blog._id}
+        // imgClass={blog.imgClass}
         imgSrc={blog.image}
-        imgAlt={blog.imgAlt}
+        // imgAlt={blog.imgAlt}
         badgeClass={blog.state ? "badge-primary" : null}
-        badgeValue={blog.badgeValue}
+        // badgeValue={blog.badgeValue}
         cardTitle={blog.title}
-        userName={blog.category}
+        userName={blog.person.firstName ? blog.person.firstName : "User"}
         date={blog.createdAt}
-        cardContent={blog.description}
-        cardBrand={blog.cardBrand}
-        cardModel={blog.cardModel}
-        replies={blog.price}
+        cardContent={blog.body}
+        cardBrand={blog.brand}
+        cardModel={blog.model}
+        // replies={blog.price}
       />
     );
   }

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
-var carType = new schema({
+var carbrand = new schema({
     name: String,
     carModel: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -9,4 +9,4 @@ var carType = new schema({
       }],
 });
 
-module.exports = mongoose.model("CarType", carType);
+module.exports = mongoose.model("CarBrand", carbrand);
