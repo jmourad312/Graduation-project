@@ -6,23 +6,12 @@
   .container {
     max-width: 960px;
     margin: 30px auto;
-    padding: 20px;
- }
-  h1 {
-    font-size: 20px;
-    text-align: center;
-    margin: 20px 0 20px;
- }
-  h1 small {
-    display: block;
-    font-size: 15px;
-    padding-top: 8px;
-    color: gray;
+    padding: 10px;
  }
   .avatar-upload {
     position: relative;
     max-width: 205px;
-    margin: 50px auto;
+    margin: 30px auto;
  }
   .avatar-upload .avatar-edit {
     position: absolute;
@@ -39,7 +28,7 @@
     height: 34px;
     margin-bottom: 0;
     border-radius: 100%;
-    background: #FFFFFF;
+    background: #000000;
     border: 1px solid transparent;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12);
     cursor: pointer;
@@ -53,20 +42,20 @@
   .avatar-upload .avatar-edit input + label:after {
     content: "\f040";
     font-family: 'FontAwesome';
-    color: #757575;
+    color: #beb8b8;
     position: absolute;
-    top: 10px;
+    top: 6px;
     left: 0;
     right: 0;
     text-align: center;
     margin: auto;
  }
   .avatar-upload .avatar-preview {
-    width: 192px;
-    height: 192px;
+    width: 200px;
+    height: 200px;
     position: relative;
     border-radius: 100%;
-    border: 6px solid #F8F8F8;
+    border: 3px solid #000000;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
  }
   .avatar-upload .avatar-preview > div {
