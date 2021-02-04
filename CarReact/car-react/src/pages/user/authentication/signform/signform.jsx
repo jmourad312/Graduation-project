@@ -23,7 +23,7 @@ export default function Signform(props) {
   // };
 
   const [userSignUpInfo, setUserSignUpInfo] = useState({
-    name: "",
+    firstName: "",
     email: "",
     password: "",
   });
@@ -144,7 +144,6 @@ export default function Signform(props) {
   return (
     <div className="signform ">
       <div className="container " id="container">
-
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
@@ -167,8 +166,8 @@ export default function Signform(props) {
             <input
               type="text"
               placeholder="Name"
-              name="name"
-              value={userSignUpInfo.name}
+              name="firstName"
+              value={userSignUpInfo.firstName}
               onChange={changeUserSignUpInfo}
             />
             <input
@@ -188,7 +187,10 @@ export default function Signform(props) {
             <button className="button" type="submit">
               Sign Up
             </button>
-            <p>By signing up you agree to our <span>TERMS</span> and <span>Privacy Policy</span></p>
+            <p>
+              By signing up you agree to our <span>TERMS</span> and{" "}
+              <span>Privacy Policy</span>
+            </p>
             {/* <button className="button" onClick={switchPayment}>
                 Sign Up
               </button> */}
