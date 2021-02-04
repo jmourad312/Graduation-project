@@ -15,7 +15,9 @@ export default function BlogDetails(props) {
   const [inputValue, setInputValue] = useState({
     content: "",
   });
-  // const [replyInput, setReplyInput] = useState({initialState})
+  const [replyInput, setReplyInput] = useState({
+    content: "",
+  })
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -45,6 +47,30 @@ export default function BlogDetails(props) {
         console.log(error);
       });
       setInputValue({content:""})
+  };
+  const handleReplySubmit = (event,params) => {
+    event.preventDefault();
+    console.log(inputValue);
+    axios
+      .post(
+        `http://localhost:3000/user/addCommentReply/${params}`,
+        replyInput,
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setReplyInput({ content: "" });
   };
   
   useEffect(() => {
@@ -127,16 +153,16 @@ export default function BlogDetails(props) {
 
         {/* <!-- Single Comment --> */}
         {blogDetails ?
-          blogDetails.comment.map((item,index) => {
+          blogDetails.comment.map((item) => {
             return (
-              <div className="media mb-4" key={index}>
+              <div className="media mb-4" >
                 <img
                   className="d-flex mr-3 rounded-circle"
                   src={item.image}
                   alt=""
                 />
                 <div className="media-body">
-                  <h5 className="mt-0">{item.person.firstName}</h5>
+                  <h5 className="mt-0">{item.person.firstName?item.person.firstName:null}</h5>
                   {item.content}
                 </div>
                 <form method="post">
@@ -144,8 +170,8 @@ export default function BlogDetails(props) {
                     className="form-control"
                     rows="3"
                     name="content"
-                    // value=
-                    // onChange=
+                    value={replyInput.content}
+                    onChange={()=>handleReplySubmit(item._id)}
                   ></textarea>
                   <button type="submit" className="btn btn-primary">
                     Submit
@@ -162,8 +188,8 @@ export default function BlogDetails(props) {
                             style={{maxHeight:"300px",maxWidth:"300px"}}
                           />
                           <div className="media-body">
-                            <h5 className="mt-0">{rep.person.firstName}</h5>
-                            {rep.person.firstName}
+                            <h5 className="mt-0">{rep.person?rep.person.firstName:"NO NAME"}</h5>
+                            {rep.person? rep.person.firstName:"NO NAME"}
                           </div>
                         </div>
                       );
