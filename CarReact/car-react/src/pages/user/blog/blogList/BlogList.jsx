@@ -20,9 +20,9 @@ export default function BlogList() {
   useEffect(() => {
     getBlogs();
   }, []);
-    useEffect(() => {
-      getBlogs();
-    }, [blogs]);
+    // useEffect(() => {
+    //   getBlogs();
+    // }, []);
 
   // const items = [];
   // blogs.Data.forEach(element => {

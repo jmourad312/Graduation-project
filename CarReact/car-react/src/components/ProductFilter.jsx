@@ -13,9 +13,7 @@ export default function ProductFilter() {
         <div className="row">
           <Dropdown mapItems={cars2} name="brand" />
         </div>
-        <div className="row" style={{marginTop:"50%"}}>
-          <Dropdown mapItems={cars2} name="model" />
-        </div>
+
         {/* <div className="row mt-2">
           <Dropdown mapItems={carBrand2} name="model" />
         </div>

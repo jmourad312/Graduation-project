@@ -5,12 +5,16 @@ export default (
   state = {
     products: [],
     blogs: [],
+    blogFilterBrand: [],
+    blogFilterBrandActive: false,
+    blogFilterModel: [],
+    blogFilterSearch: [],
     users: [],
     userSignIn: {},
     userSignUp: {},
     vendorSignIn: {},
     vendorSignUp: {},
-    token:"",
+    token: "",
   },
   action
 ) => {
@@ -32,10 +36,31 @@ export default (
         token: action.payload,
       };
 
+    //------------BLOG---------------
     case TYPES.GET_BLOGS:
       return {
         ...state,
         blogs: action.payload,
+      };
+    case TYPES.GET_BLOG_FILTER_BRAND:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case TYPES.GET_BLOG_FILTER_BRAND_ACTIVE:
+      return {
+        ...state,
+        blogFilterBrandActive: action.payload,
+      };
+    case TYPES.GET_BLOG_FILTER_MODEL:
+      return {
+        ...state,
+        blogFilterModel: action.payload,
+      };
+    case TYPES.GET_BLOG_FILTER_SEARCH:
+      return {
+        ...state,
+        blogFilterSearch: action.payload,
       };
     // case TYPES.ADD_BLOG:
     //   return {
