@@ -1,0 +1,94 @@
+.dropdownn {
+  form {
+    position: relative;
+    width: 15rem;
+  }
+
+  .chosen-value,
+  .value-list {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .chosen-value {
+    font-family: "Ek Mukta";
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    height: 4rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    background-color: #fafcfd;
+    border: 3px solid transparent;
+    transition: 0.3s ease-in-out;
+
+    &::-webkit-input-placeholder {
+      color: #333;
+    }
+
+    &:hover {
+      background-color: #59b4ff98;
+      cursor: pointer;
+
+      &::-webkit-input-placeholder {
+        color: #333;
+      }
+    }
+
+    &:focus,
+    &.open {
+      box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+      outline: 0;
+      background-color: #59b4ff;
+      color: #000;
+
+      &::-webkit-input-placeholder {
+        color: #000;
+      }
+    }
+  }
+
+  .value-list {
+    list-style: none;
+    position: absolute;
+    z-index: 10;
+    margin-top: -2rem;
+    margin-left: 15rem;
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    max-height: 0;
+    transition: 0.3s ease-in-out;
+
+    &.open {
+      max-height: 150px;
+      overflow: auto;
+    }
+
+    li {
+      position: relative;
+      height: 4rem;
+      background-color: #fafcfd;
+      padding: 1rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      opacity: 1;
+
+      &:hover {
+        background-color: #2e5d83;
+        color: #fff;
+      }
+
+      &.closed {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        opacity: 0;
+      }
+    }
+  }
+}
