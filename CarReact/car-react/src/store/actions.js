@@ -79,7 +79,7 @@ export const getBlogsFilterSearch = () => async (dispatch) => {
 };
 // export const AddBlogsAction = () => async (dispatch) => {
 //   try {
-//     const req = await axios.post("https://fakestoreapi.com/products");
+//     const req = await axios.post("http://localhost:3000/user/addPost");
 //     console.log(req);
 //     dispatch({
 //       type: TYPES.ADD_BLOG,

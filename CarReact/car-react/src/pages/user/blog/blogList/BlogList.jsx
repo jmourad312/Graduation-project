@@ -19,7 +19,7 @@ export default function BlogList() {
 
   useEffect(() => {
     getBlogs();
-  }, []);
+  }, [blogs]);
     // useEffect(() => {
     //   getBlogs();
     // }, []);
@@ -47,18 +47,18 @@ export default function BlogList() {
     return (
       <BlogEntry
         key={blog._id}
-        imgClass={blog.imgClass}
+        // imgClass={blog.imgClass}
         imgSrc={blog.image}
-        imgAlt={blog.imgAlt}
+        // imgAlt={blog.imgAlt}
         badgeClass={blog.state ? "badge-primary" : null}
-        badgeValue={blog.badgeValue}
+        // badgeValue={blog.badgeValue}
         cardTitle={blog.title}
-        userName={blog.category}
+        userName={blog.person.firstName}
         date={blog.createdAt}
-        cardContent={blog.description}
-        cardBrand={blog.cardBrand}
-        cardModel={blog.cardModel}
-        replies={blog.price}
+        cardContent={blog.body}
+        cardBrand={blog.brand}
+        cardModel={blog.model}
+        // replies={blog.price}
       />
     );
   }

@@ -4,22 +4,22 @@ import $ from 'jquery';
 
 export default function Dropdown2(props) {
 
-  const blogFilterBrandActive = useSelector(
-    (state) => state.blogFilterBrandActive
-  );
-  useEffect(() => {
-      $(document).ready(function () {
-          if (!blogFilterBrandActive) {
-              $(`#${props.name}`).prop("disabled", true);
-          } else{
-              $(`#${props.name}`).prop("disabled", false);
-          }
-      });
-  }, [blogFilterBrandActive]);
+  // const blogFilterBrandActive = useSelector(
+  //   (state) => state.blogFilterBrandActive
+  // );
+  // useEffect(() => {
+  //     $(document).ready(function () {
+  //         if (!blogFilterBrandActive) {
+  //             $(`#${props.name}`).prop("disabled", true);
+  //         } else{
+  //             $(`#${props.name}`).prop("disabled", false);
+  //         }
+  //     });
+  // }, [blogFilterBrandActive]);
 
   return (
     <div>
-      <input
+      {/* <input
         list={props.list}
         id={props.name}
         name={props.name}
@@ -29,6 +29,21 @@ export default function Dropdown2(props) {
       <datalist id={props.list}>
         {props.Items.map((item) => {
           return <option value={item.make} />;
+        })}
+      </datalist> */}
+      <label for="ice-cream-choice">Choose a flavor:</label>
+      <input
+        list="ice-cream-flavors"
+        id="ice-cream-choice"
+        name={props.name}
+      />
+
+      <datalist id="ice-cream-flavors" onChange={props.onChange}>
+        {/* <option value="Chocolate"/> */}
+        {props.Items.map((item, index) => {
+          return (
+          <option key={index} value={item.make} />
+          );
         })}
       </datalist>
     </div>

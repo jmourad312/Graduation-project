@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from "react";
+import Dropdown2 from './Dropdown2';
+import cars2 from '../assets/js/cars2';
 
 export default function BlogFilter(props) {
 
@@ -11,20 +13,24 @@ export default function BlogFilter(props) {
   })
 
   const handleChange = (event) => {
-    switch (event.target.name) {
-      case "model":
-        setState({
-          ...state,
-          model: event.target.value,
-        });
-        break;
-      case "brand":
-        setState({
-          ...state,
-          brand: event.target.value
-        });
-        break;
-    }
+    const { name, value } = event.target;
+    setState({
+      [name]: value,
+    });
+    // switch (event.target.name) {
+    //   case "model":
+    //     setState({
+    //       ...state,
+    //       model: event.target.value,
+    //     });
+    //     break;
+    //   case "brand":
+    //     setState({
+    //       ...state,
+    //       brand: event.target.value
+    //     });
+    //     break;
+    // }
   }
 
   return (
@@ -36,13 +42,13 @@ export default function BlogFilter(props) {
           <input type="checkbox" className="custom-control-input" id="New" />
           <label className="custom-control-label text-primary mb-2" for="New">
             New
-            </label>
+          </label>
         </div>
         <div className="custom-control custom-checkbox">
           <input type="checkbox" className="custom-control-input" id="Hot" />
           <label className="custom-control-label text-danger mb-2" for="Hot">
             Hot
-            </label>
+          </label>
         </div>
         <div className="custom-control custom-checkbox">
           <input
@@ -55,17 +61,21 @@ export default function BlogFilter(props) {
             for="Answered"
           >
             Answered
-            </label>
+          </label>
         </div>
       </div>
       <div className="mb-5">
-        <select value={state.model} name="model" onChange={handleChange} className="custom-select custom-select-lg mb-3">
+        <select
+          value={state.model}
+          name="model"
+          onChange={handleChange}
+          className="custom-select custom-select-lg mb-3"
+        >
           <option value="BMW">BMW</option>
           <option value="RENAULT">RENAULT</option>
           <option value="MERCEDES">MERCEDES</option>
           <option value="JEEP">JEEP</option>
         </select>
-
         <p>
           <span className="badge badge-secondary">
             Mercedes <span className="badge badge-danger">X</span>
@@ -81,8 +91,20 @@ export default function BlogFilter(props) {
           </span>
         </p>
       </div>
+      <Dropdown2
+        // list="MODEL"
+        // name="MODEL"
+        // placeholder="MODEL"
+        Items={cars2}
+      />
       <div>
-        <select value={state.brand} disabled={!state.model} name="brand" onChange={handleChange} className="custom-select custom-select-sm mb-3">
+        <select
+          value={state.brand}
+          disabled={!state.model}
+          name="brand"
+          onChange={handleChange}
+          className="custom-select custom-select-sm mb-3"
+        >
           <option value="BMWx3">BMW X3</option>
           <option value="BMWx2">BMW X2</option>
           <option value="MERCEDES">MERCEDES A-className</option>
@@ -96,7 +118,7 @@ export default function BlogFilter(props) {
           </span>
           <span className="badge badge-secondary">
             MERCEDES A-className
-              <span className="badge badge-danger">X</span>
+            <span className="badge badge-danger">X</span>
           </span>
         </p>
       </div>

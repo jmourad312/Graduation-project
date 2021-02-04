@@ -7,7 +7,7 @@ export default function ProfileLeft(props) {
 
   return (
     <div className={props.class}>
-      <div style={{ height: "400px" }}>
+      <div style={{ height: "300px" }}>
         <Image
           src={profilePic}
           alt="profile picture"

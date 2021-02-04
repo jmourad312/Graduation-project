@@ -5,6 +5,8 @@ import Button from "./Button";
 import Input from "./Input";
 import axios from "axios";
 import $ from "jquery";
+import Dropdown2 from "./Dropdown2";
+import cars2 from '../assets/js/cars2';
 export default function AddBlog() {
   // const blogs = useSelector((state) => state.blogs);
   // const dispatch = useDispatch();
@@ -24,8 +26,9 @@ export default function AddBlog() {
 
   const [inputValue, setInputValue] = useState({
     title: "",
-    content: "",
+    body: "",
     image: "",
+    brand: "",
   });
 
   const handleChange = (event) => {
@@ -102,7 +105,7 @@ export default function AddBlog() {
               <label for="content">Blog Content</label>
               <textarea
                 class="form-control"
-                name="content"
+                name="body"
                 id="content"
                 rows="3"
                 placeHolder="Type the blog information"
@@ -110,6 +113,8 @@ export default function AddBlog() {
                 onChange={handleChange}
               ></textarea>
             </div>
+            <Dropdown2 Items={cars2} name="brand" value={inputValue.brand} onChange={()=>handleChange}/>
+            
             <button type="submit" className="btn btn-success">
               ADD
             </button>
