@@ -55,7 +55,7 @@ export default function AddBlog() {
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
-          console.log("hhkhkhkhk");
+          console.log("Success");
           // props.history.push("/MyProfile");
         } else {
           console.log("fail");
@@ -64,6 +64,7 @@ export default function AddBlog() {
       .catch((error) => {
         console.log(error);
       });
+      setInputValue("");
   };
   return (
     <div className="addBlog">
@@ -125,13 +126,8 @@ export default function AddBlog() {
             <input
               list="brandList"
               id="brand"
-<<<<<<< HEAD
               value={inputValue.brand}
               onChange={()=> handleChange}
-=======
-              name="brand"
-              onChange={handleChange}
->>>>>>> b593bc64e38044dd3636dfcb4d73d1ad0d254551
             />
             <datalist id="brandList">
               {cars2.map((item, index) => {
@@ -160,6 +156,7 @@ export default function AddBlog() {
                 </select>
               </div>
 
+            {/* --------------------------------MODEL---------------------------- */}
               <div className="col-6">
                 <select
                   className="custom-select"
@@ -200,7 +197,6 @@ export default function AddBlog() {
               <option value="3">Three</option>
             </select> */}
 
-            {/* --------------------------------MODEL---------------------------- */}
 
             {/* <label for="model">Choose a model:</label>
             <input

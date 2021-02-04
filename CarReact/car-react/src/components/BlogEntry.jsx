@@ -4,8 +4,8 @@ import { setBlogId } from "../store/actions";
 import { useHistory } from "react-router-dom";
 
 export default function BlogEntry(props) {
-  let history = useHistory();
-  // const blogID = useSelector(state => state.blogID)
+  var history = useHistory();
+  const blogID = useSelector(state => state.blogID)
   const dispatch = useDispatch();
 
   const handleClick = (params) =>{

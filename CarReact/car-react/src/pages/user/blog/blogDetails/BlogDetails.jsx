@@ -15,6 +15,9 @@ export default function BlogDetails(props) {
   const [inputValue, setInputValue] = useState({
     content: "",
   });
+  const [replyInput, setReplyInput] = useState({
+    content: "",
+  })
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -35,8 +38,7 @@ export default function BlogDetails(props) {
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
-          console.log("hhkhkhkhk");
-          // props.history.push("/MyProfile");
+          console.log("success");
         } else {
           console.log("fail");
         }
@@ -44,13 +46,43 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
+      setInputValue({content:""})
   };
-
+  const handleReplySubmit = (event,params) => {
+    event.preventDefault();
+    console.log(inputValue);
+    axios
+      .post(
+        `http://localhost:3000/user/addCommentReply/${params}`,
+        replyInput,
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setReplyInput({ content: "" });
+  };
+  
   useEffect(() => {
     getBlog(blogID);
-    console.log(blogDetails);
-    console.log(blogID);
+    // console.log(blogDetails);
+    // console.log(blogID);
   }, []);
+  useEffect(() => {
+    getBlog(blogID);
+    // console.log(blogDetails);
+    // console.log(blogID);
+  }, [blogDetails]);
     return (
       <div className="container p-5">
         <div>
@@ -123,32 +155,46 @@ export default function BlogDetails(props) {
         {blogDetails ?
           blogDetails.comment.map((item) => {
             return (
-              <div className="media mb-4">
+              <div className="media mb-4" >
                 <img
                   className="d-flex mr-3 rounded-circle"
                   src={item.image}
                   alt=""
                 />
                 <div className="media-body">
-                  <h5 className="mt-0">{item.person.firstName}</h5>
+                  <h5 className="mt-0">{item.person.firstName?item.person.firstName:null}</h5>
                   {item.content}
                 </div>
-                {item.commentReply ?
-                  item.commentReply.map((rep) => {
-                    return (
-                      <div className="media mt-4">
-                        <img
-                          className="d-flex mr-3 rounded-circle"
-                          src={rep.image}
-                          alt=""
-                        />
-                        <div className="media-body">
-                          <h5 className="mt-0">{rep.person.firstName}</h5>
-                          {rep.person.firstName}
+                <form method="post">
+                  <textarea
+                    className="form-control"
+                    rows="3"
+                    name="content"
+                    value={replyInput.content}
+                    onChange={()=>handleReplySubmit(item._id)}
+                  ></textarea>
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
+                {item
+                  ? item.commentReply.map((rep) => {
+                      return (
+                        <div className="media mt-4">
+                          <img
+                            className="d-flex mr-3 rounded-circle"
+                            src={rep.image}
+                            alt=""
+                            style={{maxHeight:"300px",maxWidth:"300px"}}
+                          />
+                          <div className="media-body">
+                            <h5 className="mt-0">{rep.person?rep.person.firstName:"NO NAME"}</h5>
+                            {rep.person? rep.person.firstName:"NO NAME"}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }): "LOADING"}
+                      );
+                    })
+                  : "LOADING"}
               </div>
             );
           }): "LOADING"}
