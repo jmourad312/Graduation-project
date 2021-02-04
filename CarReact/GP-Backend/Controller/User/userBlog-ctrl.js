@@ -126,9 +126,21 @@ addComment = (req, res) => {
   const comment = new Comment(body);
   comment.person = IdPerson;
   comment.post = IdPost;
-  comment.save();
+  comment.save().catch(error => {
+    return res.status(400).json({
+      Data: error,
+      Message: "*****************",
+      Success: false,
+    });
+  });
 
-  const populateQuery = [{ path: "comment", select: "-__v -_id -person" }];
+  const populateQuery = [{
+    path: "comment", populate: {
+      path: "person",
+      select: "firstName"
+    },
+    select: '-post -commentReply'
+  }];
 
   Post.findByIdAndUpdate(
     { _id: IdPost },
@@ -147,7 +159,7 @@ addComment = (req, res) => {
         });
       } else {
         return res.status(200).json({
-          Data: data,
+          Data: data.comment[data.comment.length - 1],
           Message: "Your comment is uploaded",
           Success: true,
         });
@@ -206,7 +218,7 @@ showAllPosts = (req, res) => {
   const populateQuery = [{ path: "person", select: "firstName" }];
   Post.find({}, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).skip(0).limit(6).populate(populateQuery).exec(
     (error, data) => {
-      if (error || data.length==0) {
+      if (error || data.length == 0) {
         return res.status(400).json({
           Data: error,
           Message: "no blogs found",
@@ -223,10 +235,16 @@ showAllPosts = (req, res) => {
 
 // show all posts of all users
 showDetailsPost = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName" }, { path: "Comment" }];
+  const populateQuery = [{ path: "person", select: "firstName" }, {
+    path: "comment", populate: {
+      path: "person",
+      select: "firstName"
+    },
+    select: '-post '
+  }];
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 }).populate(populateQuery).exec(
     (error, data) => {
-      if (error || data.length==0) {
+      if (error || data.length == 0) {
         return res.status(400).json({
           Data: error,
           Message: "no blogs found",
@@ -243,12 +261,12 @@ showDetailsPost = (req, res) => {
 
 showFilterPosts = (req, res) => {
   const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const query =  {$or:[{title: criteriaSearch},{body:criteriaSearch}  ] } 
+  const query = { $or: [{ title: criteriaSearch }, { body: criteriaSearch }] }
   const populateQuery = [{ path: "person", select: "firstName" }];
 
   Post.find(query, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).populate(populateQuery).exec(
     (error, data) => {
-      if (error || data.length==0) {
+      if (error || data.length == 0) {
         return res.status(400).json({
           Data: error,
           Message: "no blogs found",
