@@ -15,7 +15,6 @@ export default function VendorAdministraion() {
       }, []);
     return (
         <div className="vendorAdmin">
-
             <section className="myProfile container">
                 <div className="row">
                     <div className=" profileLeft">
