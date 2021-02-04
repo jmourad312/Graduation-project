@@ -38,6 +38,12 @@ export const getBlogDetails = (params) => async (dispatch) => {
     console.log(error);
   }
 };
+export const setBlogId = (payload) => {
+  return {
+    type: TYPES.GET_BLOG_ID,
+    payload,
+  };
+};
 export const getBlogsAction = () => async (dispatch) => {
   try {
     const res = await axios.get("http://localhost:3000/user/showAllPosts");

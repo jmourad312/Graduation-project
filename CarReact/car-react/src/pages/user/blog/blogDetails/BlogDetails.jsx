@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBlogDetails } from '../../../../store/actions';
 
 export default function BlogDetails(props) {
-  const blogs = useSelector((state) => state.blogs);
+  // const blogs = useSelector((state) => state.blogs);
+  const blogID = useSelector(state => state.blogID)
   const blogDetails = useSelector((state) => state.blogDetails.Data);
   const dispatch = useDispatch();
 
@@ -12,7 +13,7 @@ export default function BlogDetails(props) {
   };
 
   useEffect(() => {
-    getBlog(props.id);
+    getBlog(blogID);
     console.log(blogDetails);
   }, []);
     return (

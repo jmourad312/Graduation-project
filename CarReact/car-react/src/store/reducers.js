@@ -6,6 +6,7 @@ export default (
     products: [],
     blogDetails:[],
     blogs: [],
+    blogID:"",
     blogFilterBrand: [],
     blogFilterBrandActive: false,
     blogFilterModel: [],
@@ -44,6 +45,11 @@ export default (
         blogs: action.payload,
       };
     case TYPES.GET_BLOG_DETAILS:
+      return {
+        ...state,
+        blogID: action.payload,
+      };
+    case TYPES.GET_BLOG_ID:
       return {
         ...state,
         blogDetails: action.payload,
