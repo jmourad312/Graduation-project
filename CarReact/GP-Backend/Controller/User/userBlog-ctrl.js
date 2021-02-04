@@ -243,7 +243,7 @@ showDetailsPost = (req, res) => {
 
 showFilterPosts = (req, res) => {
   const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const query =  {$or:[{title: criteriaSearch},{body:criteriaSearch}] } 
+  const query =  {$or:[{title: criteriaSearch},{body:criteriaSearch}  ] } 
   const populateQuery = [{ path: "person", select: "firstName" }];
 
   Post.find(query, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).populate(populateQuery).exec(
