@@ -120,7 +120,7 @@ export default function AddBlog() {
               name="brand"
               id="brand"
               value={inputValue.brand}
-              onChange={handleChange}
+              onChange={()=> handleChange}
             />
 
             <button type="submit" className="btn btn-success">

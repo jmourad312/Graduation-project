@@ -35,7 +35,7 @@ export default function Dropdown2(props) {
       <input
         list="ice-cream-flavors"
         id="brand"
-        name={props.brand}
+        name={"brand"}
       />
 
       <datalist id="ice-cream-flavors" onChange={props.onChange}>
