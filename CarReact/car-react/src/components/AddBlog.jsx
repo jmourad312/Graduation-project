@@ -106,7 +106,6 @@ export default function AddBlog() {
                 name="image"
                 id="formFileMultiple"
                 multiple
-                required
               />
             </div>
             <div class="form-group">
