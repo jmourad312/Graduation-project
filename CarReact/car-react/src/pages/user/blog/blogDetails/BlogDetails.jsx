@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getBlogDetails } from '../../../../store/actions';
 
-export default function BlogDetails() {
+export default function BlogDetails(props) {
+  // const blogs = useSelector((state) => state.blogs);
+  const blogID = useSelector(state => state.blogID)
+  const blogDetails = useSelector((state) => state.blogDetails.Data);
+  const dispatch = useDispatch();
+
+  const getBlog = (params) => {
+    dispatch(getBlogDetails(params));
+  };
+
+  useEffect(() => {
+    getBlog(blogID);
+    console.log(blogDetails);
+    console.log(blogID);
+
+  }, []);
     return (
       <div className="container p-5">
         <div>
@@ -8,34 +25,43 @@ export default function BlogDetails() {
             className="font-weight-bold"
             style={{ fontSize: "26px", marginBottom: "0" }}
           >
-            Car Owner Question with some details that will help other to answer
+            {" "}
+            {blogDetails ? blogDetails.title : "LOADING"}{" "}
           </p>
           <p>
-            by <a href=""> CarQuestionOWner</a>
+            by{" "}
+            <span>
+              {" "}
+              {blogDetails ? blogDetails.person.firstName : "LOADING"}
+            </span>
           </p>
           <hr />
           <p>
-            <span style={{ color: "gray" }}>Asked</span> 1/10/2021{" "}
-            <span style={{ color: "gray" }}> Viewed </span> 3
-            <span className="badge badge-success">Answerd</span>
+            <span style={{ color: "gray" }}>
+              Date :{blogDetails && blogDetails.createdAt}
+            </span>
+            {/* <span style={{ color: "gray" }}> Viewed </span> 3 */}
+            <span className="badge badge-success">
+              {blogDetails
+                ? blogDetails.state === true && "Answered"
+                : "LOADING"}
+            </span>
           </p>
           <hr />
           <h5 className="mt-0">Post Details</h5>
-          <p>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-            vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </p>
+          <p>{blogDetails && blogDetails.body}</p>
           <hr />
-          <img src="http://placehold.it/500x600" alt=""/>
+          <img src={blogDetails && blogDetails.image} alt="" />
           <hr />
           <p>
             {" "}
             <span className="text-secondary">Tags</span>{" "}
-            <span className="badge badge-info">BMW</span>
-            <span className="badge badge-info">BMW2</span>
-            <span className="badge badge-info">BMW3</span>
+            <span className="badge badge-info">
+              {blogDetails && blogDetails.brand}
+            </span>
+            <span className="badge badge-info">
+              {blogDetails && blogDetails.model}
+            </span>
           </p>
         </div>
 
@@ -123,7 +149,7 @@ export default function BlogDetails() {
           <h2>Related Questions</h2>
           <div className="row mt-3">
             <div className="col-md-4">
-              <div className="card" style={{width: "18rem"}}>
+              <div className="card" style={{ width: "18rem" }}>
                 <img
                   className="card-img-top"
                   src="http://placehold.it/300x150"
@@ -138,7 +164,7 @@ export default function BlogDetails() {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card" style={{width: "18rem"}}>
+              <div className="card" style={{ width: "18rem" }}>
                 <img
                   className="card-img-top"
                   src="http://placehold.it/300x150"
@@ -153,7 +179,7 @@ export default function BlogDetails() {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="card" style={{width: "18rem"}}>
+              <div className="card" style={{ width: "18rem" }}>
                 <img
                   className="card-img-top"
                   src="http://placehold.it/300x150"

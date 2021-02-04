@@ -4,7 +4,9 @@ import * as TYPES from "./types";
 export default (
   state = {
     products: [],
+    blogDetails:[],
     blogs: [],
+    blogID:"",
     blogFilterBrand: [],
     blogFilterBrandActive: false,
     blogFilterModel: [],
@@ -41,6 +43,16 @@ export default (
       return {
         ...state,
         blogs: action.payload,
+      };
+    case TYPES.GET_BLOG_DETAILS:
+      return {
+        ...state,
+        blogDetails: action.payload,
+      };
+    case TYPES.GET_BLOG_ID:
+      return {
+        ...state,
+        blogID: action.payload,
       };
     case TYPES.GET_BLOG_FILTER_BRAND:
       return {

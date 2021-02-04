@@ -1,7 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const bodyparser = require("body-parser");
-const db = require('./config/configDB')
+const db = require('./config/configDB');
+var multer = require('multer');
 // to run at angular
 const cors = require("cors");
 //generate key private and public for secret token

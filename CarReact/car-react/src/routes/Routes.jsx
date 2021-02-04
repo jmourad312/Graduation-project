@@ -78,7 +78,9 @@ export default function Routes() {
         <Route path="/login" exact component={Login} />
         <Route path="/SignUp" exact component={SignUp} />
         <Route path="/AddBlog" exact component={AddBlog} />
-        <Route path="/BlogDetails" exact component={BlogDetails} />
+
+        <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
+
         <Route path="/BlogList" exact component={BlogList} />
         <Route path="/AboutUs" exact component={AboutUs} />
         <Route path="/ContactUs" exact component={ContactUs} />
@@ -87,7 +89,9 @@ export default function Routes() {
         <Route path="/VendorProfileUser" exact component={VendorProfileUser} />
         <Route path="/ProductDetails" exact component={ProductDetails} />
         <Route path="/ProductsList" exact component={ProductsList} />
+
         <Route path="/MyProfile/(page)?" component={MyProfile} />
+
         <Route path="/SignForm" exact component={Signform} />
         <Route path="/VendorSignForm" exact component={VendorSignForm} />
         <Route path="/SignChoice" exact component={SignChoice} />

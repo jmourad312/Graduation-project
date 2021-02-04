@@ -50,6 +50,7 @@ router.get("/showFilterPosts", userBlogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 
+
 router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
 router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
