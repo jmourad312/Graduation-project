@@ -56,6 +56,9 @@ const SignChoice = React.lazy(() =>
 const VendorSignForm = React.lazy(() =>
   import("../pages/user/authentication/vendorSignForm/VendorSignForm")
 );
+const VendorAdministraion = React.lazy(() =>
+  import("../pages/user/profile/vendorAdministraionProfile/vendorAdministraion")
+);
 
 
 
@@ -88,6 +91,7 @@ export default function Routes() {
         <Route path="/SignForm" exact component={Signform} />
         <Route path="/VendorSignForm" exact component={VendorSignForm} />
         <Route path="/SignChoice" exact component={SignChoice} />
+        <Route path="/vendorAdministraion" exact component={VendorAdministraion} />
 
         <Route
           path="/DisplayUserProfile"

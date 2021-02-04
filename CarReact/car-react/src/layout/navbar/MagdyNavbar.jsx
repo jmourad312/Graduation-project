@@ -36,6 +36,7 @@ export default function MagdyNavbar() {
                     <li className="menu__item" id="item13"><Link className="menu__link" to="/ProductDetails">ProductDetails</Link></li>
                     <li className="menu__item" id="item14"><Link className="menu__link" to="/MyProfile">MyProfile</Link></li>
                     <li className="menu__item" id="item15"><Link className="menu__link" to="/DisplayUserProfile">DisplayUserProfile</Link></li>
+                    <li className="menu__item" id="item17"><Link className="menu__link" to="/vendorAdministraion">VendorAdmin</Link></li>
                 </ul>
             </nav>
             {/* <svg id="item16" >
