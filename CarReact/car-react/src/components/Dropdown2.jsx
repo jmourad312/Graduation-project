@@ -31,11 +31,11 @@ export default function Dropdown2(props) {
           return <option value={item.make} />;
         })}
       </datalist> */}
-      <label for="ice-cream-choice">Choose a flavor:</label>
+      <label for="ice-cream-choice">Choose a brand:</label>
       <input
         list="ice-cream-flavors"
-        id="ice-cream-choice"
-        name={props.name}
+        id="brand"
+        name={props.brand}
       />
 
       <datalist id="ice-cream-flavors" onChange={props.onChange}>

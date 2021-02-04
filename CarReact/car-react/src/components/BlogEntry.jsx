@@ -21,6 +21,7 @@ export default function BlogEntry(props) {
             <a href="#!" className="text-reset">
               <strong> {props.userName}</strong>
             </a>
+            <br/>
             <a href="#!" className="text-reset float-right">
               {props.date}
             </a>

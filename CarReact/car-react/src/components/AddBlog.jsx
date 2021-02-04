@@ -61,7 +61,7 @@ export default function AddBlog() {
       });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <div className="addBlog">
@@ -113,8 +113,16 @@ export default function AddBlog() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <Dropdown2 Items={cars2} name="brand" value={inputValue.brand} onChange={()=>handleChange}/>
-            
+            <Dropdown2
+              type="text"
+              class="form-control"
+              Items={cars2}
+              name="brand"
+              id="brand"
+              value={inputValue.brand}
+              onChange={handleChange}
+            />
+
             <button type="submit" className="btn btn-success">
               ADD
             </button>
