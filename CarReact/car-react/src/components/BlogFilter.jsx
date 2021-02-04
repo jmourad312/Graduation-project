@@ -1,22 +1,42 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
-import Dropdown2 from './Dropdown2';
-import cars2 from '../assets/js/cars2';
+import Dropdown2 from "./Dropdown2";
+import cars2 from "../assets/js/cars2";
+import axios from "axios";
 
 export default function BlogFilter(props) {
-
-
   const [state, setState] = useState({
     model: "",
     brand: "",
-    classDisabled:"false"
-  })
+    classDisabled: "false",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setState({
       [name]: value,
     });
+  };
+
+  const handleSubmit = (event) => {
+    event.perventDefault();
+    // console.log(state.model);
+    // axios
+    //   .post(`http://localhost:3000/user/addComment/`, state.model,
+    //   // {headers: { Authorization: localStorage.getItem("Authorization") },
+    //   )
+    //   .then((req) => {
+    //     console.log(req);
+    //     if (req.data.Success === true) {
+    //       console.log("success");
+    //     } else {
+    //       console.log("fail");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     // switch (event.target.name) {
     //   case "model":
     //     setState({
@@ -31,7 +51,7 @@ export default function BlogFilter(props) {
     //     });
     //     break;
     // }
-  }
+  };
 
   return (
     <div className={props.class}>
@@ -65,18 +85,20 @@ export default function BlogFilter(props) {
         </div>
       </div>
       <div className="mb-5">
-        <select
-          value={state.model}
-          name="model"
-          onChange={handleChange}
-          className="custom-select custom-select-lg mb-3"
-        >
-          <option value="BMW">BMW</option>
-          <option value="RENAULT">RENAULT</option>
-          <option value="MERCEDES">MERCEDES</option>
-          <option value="JEEP">JEEP</option>
-        </select>
-        <p>
+        <form method="post" onChange={handleSubmit}>
+          <select
+            value={state.model}
+            name="model"
+            onChange={handleChange}
+            className="custom-select custom-select-lg mb-3"
+          >
+            <option value="BMW">BMW</option>
+            <option value="RENAULT">RENAULT</option>
+            <option value="MERCEDES">MERCEDES</option>
+            <option value="JEEP">JEEP</option>
+          </select>
+        </form>
+        {/* <p>
           <span className="badge badge-secondary">
             Mercedes <span className="badge badge-danger">X</span>
           </span>
@@ -89,7 +111,7 @@ export default function BlogFilter(props) {
           <span className="badge badge-secondary">
             JEEP <span className="badge badge-danger">X</span>
           </span>
-        </p>
+        </p> */}
       </div>
       <Dropdown2
         // list="MODEL"

@@ -2,18 +2,20 @@ import React from "react";
 import Image from "./Image";
 import profilePic from "../assets/Images/pexels-photo-220453.jpeg";
 import { Link } from "react-router-dom";
+import ProfilePicture from "./ProfilePicture";
 
 export default function ProfileLeft(props) {
 
   return (
     <div className={props.class}>
       <div style={{ height: "300px" }}>
-        <Image
+        {/* <Image
           src={profilePic}
           alt="profile picture"
           height="100%"
           width="100%"
-        />
+        /> */}
+        <ProfilePicture />
       </div>
       <div className="mt-3" >
         <div className="mt-3 button raise">
