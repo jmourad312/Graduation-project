@@ -15,6 +15,8 @@ export default function BlogDetails(props) {
   useEffect(() => {
     getBlog(blogID);
     console.log(blogDetails);
+    console.log(blogID);
+
   }, []);
     return (
       <div className="container p-5">

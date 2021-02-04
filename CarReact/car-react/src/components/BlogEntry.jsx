@@ -1,9 +1,22 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setBlogId } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
 export default function BlogEntry(props) {
+  let history = useHistory();
+  // const blogID = useSelector(state => state.blogID)
+  const dispatch = useDispatch();
+
+  const handleClick = (params) =>{
+    dispatch(setBlogId(params));
+    history.push(`/BlogDetails/${props.id}`);
+  }
+
+
   return (
     <div className="col-md-6 col-lg-6 col-xl-4 mb-4">
-      <div className="card blog-post">
+      <div className="card blog-post" onClick={()=>handleClick(props.id)}>
         <div className="rounded">
           <img
             className="img-fluid card-img-top"

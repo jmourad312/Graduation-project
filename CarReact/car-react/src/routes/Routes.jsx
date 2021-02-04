@@ -79,7 +79,7 @@ export default function Routes() {
         <Route path="/SignUp" exact component={SignUp} />
         <Route path="/AddBlog" exact component={AddBlog} />
 
-        <Route path="/BlogDetails" exact component={BlogDetails} />
+        <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
 
         <Route path="/BlogList" exact component={BlogList} />
         <Route path="/AboutUs" exact component={AboutUs} />

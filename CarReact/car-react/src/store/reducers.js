@@ -47,12 +47,12 @@ export default (
     case TYPES.GET_BLOG_DETAILS:
       return {
         ...state,
-        blogID: action.payload,
+        blogDetails: action.payload,
       };
     case TYPES.GET_BLOG_ID:
       return {
         ...state,
-        blogDetails: action.payload,
+        blogID: action.payload,
       };
     case TYPES.GET_BLOG_FILTER_BRAND:
       return {
