@@ -46,6 +46,7 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addCommentReply);
 
 // show posts
+router.get("/showFilterPosts", userBlogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 
@@ -67,6 +68,5 @@ router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false
 
 // products 
 router.get("/partOfItem/:skip", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
-
 
 module.exports = router;
