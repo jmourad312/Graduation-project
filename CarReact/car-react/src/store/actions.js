@@ -1,6 +1,5 @@
 import * as TYPES from './types';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 // export const setLanguage = (payload) => {
 //   return {

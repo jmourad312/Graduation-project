@@ -32,18 +32,12 @@ export default function Dropdown2(props) {
         })}
       </datalist> */}
       <label for="ice-cream-choice">Choose a brand:</label>
-      <input
-        list="ice-cream-flavors"
-        id="brand"
-        name={props.brand}
-      />
+      <input list="ice-cream-flavors" id="brand" name={props.brand} />
 
       <datalist id="ice-cream-flavors" onChange={props.onChange}>
         {/* <option value="Chocolate"/> */}
         {props.Items.map((item, index) => {
-          return (
-          <option key={index} value={item.make} />
-          );
+          return <option key={index} value={item.make} />;
         })}
       </datalist>
     </div>

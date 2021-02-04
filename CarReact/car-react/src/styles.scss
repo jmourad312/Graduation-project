@@ -122,11 +122,14 @@
 }
 /* Main styles */
 body {
+  // background-color: #00163b;
+  // background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC") repeat 0 0;
-  -webkit-animation: bg-scrolling-reverse 0.92s infinite;
-  -moz-animation: bg-scrolling-reverse 0.92s infinite;
-  -o-animation: bg-scrolling-reverse 0.92s infinite;
-  animation: bg-scrolling-reverse 0.92s infinite;
+  -webkit-animation: bg-scrolling-reverse 3.92s infinite;
+  -moz-animation: bg-scrolling-reverse 3.92s infinite;
+  -o-animation: bg-scrolling-reverse 3.92s infinite;
+  animation: bg-scrolling-reverse 3.92s infinite;
   -webkit-animation-timing-function: linear;
   -moz-animation-timing-function: linear;
   -o-animation-timing-function: linear;

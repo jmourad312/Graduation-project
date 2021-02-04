@@ -91,6 +91,7 @@ export default function Signform(props) {
   };
 
   const switchPayment = () => {
+    // e.preventDefault();
     setChangePayment("payment showPayment");
   };
   const switchPaymentBack = () => {

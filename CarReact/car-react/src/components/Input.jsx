@@ -9,6 +9,7 @@ function Input(props) {
         value={props.value}
         id={props.id}
         placeholder={props.placeHolder}
+        required={props.req}
       ></input>
     </>
   );
