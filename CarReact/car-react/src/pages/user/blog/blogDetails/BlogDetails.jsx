@@ -162,20 +162,25 @@ export default function BlogDetails(props) {
       {blogDetails
         ? blogDetails.comment.map((item,index) => {
             return (
-              <div className="media mb-4" key={index}>
+              <div className="media mb-1" key={index}>
                 <img
                   className="d-flex mr-3 rounded-circle"
                   src={item.image}
                   alt=""
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
                 />
+                <hr />
+                <br />
                 <div className="media-body">
                   <h5 className="mt-0">
                     {item.person.firstName ? item.person.firstName : null}
                   </h5>
-                  {item.content}
+                  <hr />
+                  <br />
+                  <p>{item.content}</p>
                 </div>
-                
-                <form
+
+                {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -190,8 +195,8 @@ export default function BlogDetails(props) {
                   <button type="button" className="btn btn-primary">
                     Submit
                   </button>
-                </form>
-                {item
+                </form> */}
+                {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -210,11 +215,16 @@ export default function BlogDetails(props) {
                         </div>
                       );
                     })
-                  : "LOADING"}
+                  : "LOADING"} */}
               </div>
             );
           })
         : "LOADING"}
+
+
+
+
+
 
       {/* <!-- Comment with nested comments --> */}
       {/* <div className="media mb-4">
