@@ -1,0 +1,17 @@
+.login-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  //background-image: url($body-pattern);
+  width: 100%;
+  height: 100vh;
+  //height: 100%;
+  overflow-y: auto;
+
+
+  .login-wrapper {
+    position: relative;
+    background-image: url("../"+$dark-pattern);
+  }
+}
