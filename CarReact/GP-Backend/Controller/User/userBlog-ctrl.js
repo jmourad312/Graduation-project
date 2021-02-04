@@ -137,6 +137,8 @@ addComment = (req, res) => {
     },
     { new: true }
   )
+
+  Comment.findOne({_id:comment.id},{})
     .populate(populateQuery)
     .exec((err, data) => {
       if (err) {

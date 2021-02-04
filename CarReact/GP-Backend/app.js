@@ -16,6 +16,7 @@ const UserRoute = require('./routes/user/user');
 const VendorRoute = require('./routes/vendor/vendor');
 const AdminRoute = require('./routes/admin/admin');
 
+const blogRoute = require('./routes/blog/blog')
 
 
 //server
@@ -42,6 +43,8 @@ app.use("/vendor/auth",AuthVendorRoute);
 
 // app.use("/admin/auth",AuthAdminRoute);
 app.use("/admin",AdminRoute);
+
+app.use("/blog",blogRoute);
 
 
 
