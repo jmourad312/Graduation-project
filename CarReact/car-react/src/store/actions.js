@@ -26,7 +26,7 @@ export const getProductsAction = () => async (dispatch) =>{
 export const getBlogDetails = (params) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:3000/user/showDetailsPost/${params}`,
+      `http://localhost:3000/user/showDetailsPost/${params}`
     );
     // console.log(res);
     dispatch({
