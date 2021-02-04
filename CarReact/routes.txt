@@ -5,7 +5,13 @@ From Front--->>>>>>>>>> 1- params id -> POST
 From Back - >{
 state,
 image,
-comment array,
+comment array [
+content ""
+image []
+person.firstname
+commentreply []
+
+] ,
 title,
 body,
 brand,
@@ -13,9 +19,7 @@ model,
 person.firstName,
 createdAt,
 updatedAt,
-comment.content
-comment.image array
-comment.person.firstName
-comment.commentReply
-
 }
+
+
+add -->

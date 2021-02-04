@@ -24,22 +24,19 @@ export default function AddBlog() {
           .replace(/.*(\/|\\)/, "")
       );
   });
-
+  const [stateDisabled, setStateDisabled] = useState(false)
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
     image: "",
     brand: "",
     model: "",
-    disabled: false,
   });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
-      setInputValue({
-        disabled:true
-      })
+      setStateDisabled(true)
     }
     setInputValue((previous) => {
       return {
@@ -166,9 +163,9 @@ export default function AddBlog() {
               <div className="col-6">
                 <select
                   className="custom-select"
-                  name="brand"
+                  name="model"
                   onChange={handleChange}
-                  disabled={!inputValue.disabled}
+                  disabled={!stateDisabled}
                   required
                 >
                   {/* <option selected>Open this select menu</option> */}
