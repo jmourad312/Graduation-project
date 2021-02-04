@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import $ from 'jquery';
+
 
 export default function Dropdown2(props) {
 
@@ -32,15 +32,7 @@ export default function Dropdown2(props) {
         })}
       </datalist> */}
       <label for="ice-cream-choice">Choose a brand:</label>
-<<<<<<< HEAD
-      <input
-        list="ice-cream-flavors"
-        id="brand"
-        name={"brand"}
-      />
-=======
       <input list="ice-cream-flavors" id="brand" name={props.brand} />
->>>>>>> b593bc64e38044dd3636dfcb4d73d1ad0d254551
 
       <datalist id="ice-cream-flavors" onChange={props.onChange}>
         {/* <option value="Chocolate"/> */}
