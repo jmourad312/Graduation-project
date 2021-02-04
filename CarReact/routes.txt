@@ -1,0 +1,18 @@
+*****************localhost:3000/user/showDetailsPost/:id******************************************
+From Front--->>>>>>>>>> 1- params id -> POST 
+2- method -> get
+
+From Back - >{
+state,
+image,
+comment array,
+title,
+body,
+brand,
+model,
+person.firstName,
+createdAt,
+updatedAt,
+
+
+}
