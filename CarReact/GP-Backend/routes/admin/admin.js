@@ -6,5 +6,7 @@ const Car = require('../../Controller/Admin/admin-ctrl')
 router.post('/addBrand',Car.addBrand)
 router.post('/addModel/:id',Car.addModel)
 
+router.get('/getBrand',Car.getBrand)
+router.get('/getModel/:id',Car.getModel)
 
 module.exports = router;

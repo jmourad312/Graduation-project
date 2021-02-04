@@ -1,5 +1,6 @@
 import * as TYPES from './types';
 import axios from 'axios';
+import { instance } from "../network/axiosConfig";
 
 // export const setLanguage = (payload) => {
 //   return {
@@ -104,6 +105,20 @@ export const getBlogsFilterSearch = () => async (dispatch) => {
 //     dispatch({
 //       type: TYPES.ADD_BLOG,
 //       payload: req.data,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// filter blog
+// export const filterCarModel = () => async (dispatch) => {
+//   try {
+//     const res = await instance.get('user');
+//     console.log(res);
+//     dispatch({
+//       type: TYPES.GET_CAR_MODEL,
+//       payload: res.data,
 //     });
 //   } catch (error) {
 //     console.log(error);
