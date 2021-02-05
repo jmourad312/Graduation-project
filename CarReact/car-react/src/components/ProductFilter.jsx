@@ -78,9 +78,6 @@ export default function ProductFilter(props) {
         <h4 className="font-weight-bold mb-3">Filter Options</h4>
       </div>
 
-      <button type="button" onClick={actionToFilterOption} className="btn btn-success">filter Nooooooow</button>
-
-
       <div className="mb-5">
         <input type="range" name="priceLess" onChange={handleChange} value={state.priceLessThan} className="form-range" min="0" max="100" step="10" />
         <label htmlFor="customRange" className="form-label ml-2">Form: {state.priceLessThan}</label>
@@ -107,7 +104,7 @@ export default function ProductFilter(props) {
         </select>
       </div>
 
-      <div>
+      <div className="mb-5">
         <select
           value={state.model}
           disabled={!state.brand}
@@ -124,6 +121,8 @@ export default function ProductFilter(props) {
           ))}
         </select>
       </div>
+
+      <button type="button" onClick={actionToFilterOption} className="btn btn-success">Filter No0o0o0o0o0o0ow</button>
 
     </div>
   );
