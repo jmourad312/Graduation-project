@@ -1,4 +1,4 @@
-import Dropdown from "../../../../../components/Dropdown";
+// import Dropdown from "../../../../../components/Dropdown";
 
 export default function BookmarkedPosts() {
   const carBrand = ["BMW", "AUDI", "MAZARATI", "HYUNDAI"];
@@ -7,18 +7,16 @@ export default function BookmarkedPosts() {
 
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-4">
-          <Dropdown mapItems={carBrand} name="brand" />
-        </div>
-        <div className="col-4">
-          <Dropdown mapItems={carBrand2} name="model" />
-        </div>
-        <div className="col-4">
-          <Dropdown mapItems={carBrand3} name="not model" />
-        </div>
-      </div>
+    <div className="BookmarkedPosts">
+      <div className="container mt-3">
+                <div className="media border p-3">
+                    <img src="" alt="John Doe" className="mr-3 rounded-circle" />
+                    <div className="media-body">
+                        <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
     </div>
   );
 }

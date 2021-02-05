@@ -83,6 +83,18 @@
 //profile picture
 @import'styles/profpic';
 
+//my blog posts
+@import'styles/myblogposts';
+
+//bookmarked posts
+@import'styles/bookmarkedposts';
+
+//favourite items
+@import'styles/favouriteitems';
+
+//recent views
+@import'styles/recentviews';
+
 //background
 @-webkit-keyframes bg-scrolling-reverse {
   100% {
