@@ -1,21 +1,14 @@
 import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { AddBlogsAction } from "../store/actions";
-// import Button from "./Button";
 import Input from "./Input";
 import axios from "axios";
 import $ from "jquery";
-// import Dropdown2 from "./Dropdown2";
 import cars2 from "../assets/js/cars2";
+import cars3 from "../assets/js/cars3";
+
 import { useDispatch, useSelector } from "react-redux";
-import { filterCarModel, resultFromFilter } from "../store/actions";
-// import 'bootstrap';
+
+
 export default function AddBlog() {
-  // const blogs = useSelector((state) => state.blogs);
-  // const dispatch = useDispatch();
-  // const addBlog = (params) => {
-  //   dispatch(AddBlogsAction(params));
-  // };
   $("form").on("change", ".file-upload-field", function () {
     $(this)
       .parent(".file-upload-wrapper")
@@ -169,10 +162,10 @@ export default function AddBlog() {
                   required
                 >
                   {/* <option selected>Open this select menu</option> */}
-                  {stateRedux.brand.map((item, index) => {
+                  {cars2.map((item, index) => {
                     return (
-                      <option key={index} value={item.name}>
-                        {item.name}
+                      <option key={index} value={item.make}>
+                        {item.make}
                       </option>
                     );
                   })}
@@ -192,7 +185,7 @@ export default function AddBlog() {
                   disabled={!stateDisabled}
                 >
                   {/* <option selected>Open this select menu</option> */}
-                  {stateRedux.model.map((item, index) => {
+                  {cars3.map((item, index) => {
                     return (
                       <option key={index} value={item.model}>
                         {item.model}
