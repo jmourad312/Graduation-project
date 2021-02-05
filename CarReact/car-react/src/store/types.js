@@ -8,9 +8,6 @@ export const USER_SIGN_UP = "USER_SIGN_UP";
 export const VENDOR_SIGN_IN = "VENDOR_SIGN_IN";
 export const VENDOR_SIGN_UP = "VENDOR_SIGN_UP";
 
-export const GET_PRODUCTS = "GET_PRODUCTS";
-export const ADD_PRODUCT = "ADD_PRODUCT";
-
 //--------BLOG---------------------
 export const GET_BLOGS = "GET_BLOGS";
 export const GET_BLOG_FILTER_BRAND_ACTIVE = "GET_BLOG_FILTER_BRAND_ACTIVE";
@@ -22,17 +19,16 @@ export const GET_BLOG_ID = "GET_BLOG_ID";
 export const GET_BRAND = "GET_BRAND"
 export const GET_MODEL = "GET_MODEL"
 // export const GET_MODEL_ADD_FILTER = "GET_MODEL_ADD_FILTER";
-
 export const GET_RESULTS_FILTER = "GET_RESULTS_FILTER"
-
-
-
-
-
-
-
-
 export const ADD_BLOG = "ADD_BLOG";
+
+
+//-------Product--------------------
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
+export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
+export const ADD_PRODUCT = "ADD_PRODUCT";
+
 
 export const GET_TOKEN = "GET_TOKEN";
 

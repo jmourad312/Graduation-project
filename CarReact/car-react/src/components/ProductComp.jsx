@@ -1,10 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { setProductId } from "../store/actions";
 
 export default function ProductComp(props) {
+
+  var history = useHistory();
+  const productID = useSelector(state => state.productID)
+  const dispatch = useDispatch();
+
+  const handleClick = (params) =>{
+    dispatch(setProductId(params));
+    history.push(`/ProductDetails/${props.id}`);
+  }
+
+
+
   return (
     <div className="col-md-4 col-lg-4 col-xl-4 mb-3">
-      <div className="card product">
+      <div className="card product" onClick={()=>handleClick(props.id)}>
         <div className="d-flex justify-content-between position-absolute w-100">
           <div className="label-new">
             <span className="text-white bg-success small d-flex align-items-center px-2 py-1">
@@ -38,7 +52,7 @@ export default function ProductComp(props) {
           <p className="mb-0">
             <strong>
               <a href="#" className="text-secondary">
-                {props.title}
+                {props.name}
               </a>
             </strong>
           </p>

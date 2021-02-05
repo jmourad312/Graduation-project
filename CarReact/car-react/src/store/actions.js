@@ -9,10 +9,11 @@ import { instance } from "../network/axiosConfig";
 //   };
 // };
 
-// products requests -----------------------
+// products requests --------------------------
+
 export const getProductsAction = () => async (dispatch) =>{
     try {
-        const res = await axios.get('https://fakestoreapi.com/products');
+        const res = await axios.get("http://localhost:3000/user/partOfItem");
         console.log(res);
         dispatch({
             type: TYPES.GET_PRODUCTS,
@@ -22,8 +23,29 @@ export const getProductsAction = () => async (dispatch) =>{
         console.log(error);
     }
 }
+export const getProductDetails = (params) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/user/showDetailsItem/${params}`
+    );
+    dispatch({
+      type: TYPES.GET_PRODUCT_DETAILS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// blog requests -------------------------
+export const setProductId = (payload) => {
+  return {
+    type: TYPES.GET_PRODUCT_ID,
+    payload,
+  };
+};
+
+//----------------------------------------------
+// blog requests -------------------------------
 export const getBlogDetails = (params) => async (dispatch) => {
   try {
     const res = await axios.get(

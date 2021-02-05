@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getProductDetails } from "../../../../store/actions";
 
 export default function ProductDetails(props) {
+  const productID = useSelector((state) => state.productID);
+  const productDetails = useSelector((state) => state.productDetails);
+  const dispatch = useDispatch();
+  const getProducts = (params) => {
+    dispatch(getProductDetails(params));
+  };
+  useEffect(() => {
+    getProducts(productID);
+  }, []);
+  useEffect(() => {
+    getProducts(productID);
+  }, [productDetails]);
   return (
     <section className="products-details">
       {/* <!-- start product details --> */}
@@ -9,20 +24,31 @@ export default function ProductDetails(props) {
           {/* <!-- image of produce --> */}
           <div className="col-md-4">
             <img
-              src="https://autovx.com/wp-content/uploads/2018/02/%D9%85%D9%82%D9%88%D8%AF-%D8%A7%D9%84%D8%B3%D9%8A%D9%84%D8%B1%D8%A9-2.png"
+              src={productDetails && productDetails.image}
               width="100%"
               height="100%"
+              style={{ maxHeight: "400px", maxWidth: "400px" }}
               alt=""
             />
           </div>
 
           <div className="col-md-8 p-2">
             <h3>
-              Name Of Product from <a href="#">Workshop</a>
+              {productDetails && productDetails.name} By{" "}
+              <Link to="#">
+                {productDetails && productDetails.person.firstName}
+              </Link>
             </h3>
             {/* <!-- avalible or not --> */}
-            <span className="badge badge-pill badge-success">Avalible</span>
-            <span className="badge badge-pill badge-danger">Not Avalible</span>
+            {productDetails &&
+              (productDetails.available ? (
+                <span className="badge badge-pill badge-success">Avalible</span>
+              ) : (
+                <span className="badge badge-pill badge-danger">
+                  Not Avalible
+                </span>
+              ))}
+
             {/* <!-- number of stars --> */}
             <div className="mt-3 star">
               <span className="fa fa-star"></span>
@@ -33,15 +59,15 @@ export default function ProductDetails(props) {
             </div>
             {/* <!-- description --> */}
             <div className="mt-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Architecto, reiciendis expedita incidunt, inventore totam
-              recusandae sint, optio eveniet delectus rem amet ani
+              {productDetails && productDetails.description}
             </div>
             {/* <!-- Add to favorate and compare product --> */}
             {/* <!-- price --> */}
             <div className="mt-3">
               <span className="" style={{ fontSize: "25px" }}>
-                <li className="fas fa-coins pr-2 text-warning">150 LE</li>
+                <li className="fas fa-coins pr-2 text-warning">
+                  {productDetails && productDetails.price}
+                </li>
               </span>
               <div className="d-flex justify-content-end">
                 <span
@@ -86,15 +112,21 @@ export default function ProductDetails(props) {
               <span
                 className="pl-3"
                 style={{ borderLeft: "3px solid red", height: "100%" }}
-              ></span>
-              Product Information
+              >
+                Product Information
+              </span>
             </h3>
             <br />
             <p>
-              <b>Case: </b> china
+              <b>Manufacturer: </b> {productDetails && productDetails.case}
             </p>
             <p>
-              <b>Compatible car models: </b>hbjhbhjbhjb
+              <b>Brand: </b>
+              {productDetails && productDetails.carBrand.name}
+            </p>
+            <p>
+              <b>Compatible car models: </b>
+              {productDetails && productDetails.carBrand.carModel.model}
             </p>
             {/* </div> */}
 

@@ -3,7 +3,12 @@ import * as TYPES from "./types";
 
 export default (
   state = {
+    //Products-------------
     products: [],
+    productDetails: [],
+    productID: "",
+
+    //blog-----------
     blogDetails: [],
     blogs: [],
     blogID: "",
@@ -11,16 +16,17 @@ export default (
     blogFilterBrandActive: false,
     blogFilterModel: [],
     blogFilterSearch: [],
+    brand: [],
+    model: [],
+    modelAddFilter: [],
+    filterblog: [],
+    //--------------
     users: [],
     userSignIn: {},
     userSignUp: {},
     vendorSignIn: {},
     vendorSignUp: {},
     token: "",
-    brand: [],
-    model: [],
-    modelAddFilter:[],
-    filterblog:[]
   },
   action
 ) => {
@@ -29,6 +35,16 @@ export default (
       return {
         ...state,
         products: action.payload,
+      };
+    case TYPES.GET_PRODUCT_DETAILS:
+      return {
+        ...state,
+        productDetails: action.payload,
+      };
+    case TYPES.GET_PRODUCT_ID:
+      return {
+        ...state,
+        productID: action.payload,
       };
     case TYPES.ADD_PRODUCT:
       return {
