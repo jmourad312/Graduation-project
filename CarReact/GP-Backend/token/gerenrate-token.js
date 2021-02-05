@@ -8,7 +8,7 @@ const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 
 token = function (data){
     const payload = { _id: data._id, role: data.role, iat: Date.now() };
-    const token = jwt.sign(payload, PRIV_KEY, { expiresIn: 33*1000, algorithm: 'RS256' });
+    const token = jwt.sign(payload, PRIV_KEY, { algorithm: 'RS256' });
     return token
 }
 
