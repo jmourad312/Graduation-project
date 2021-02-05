@@ -29,8 +29,8 @@ export default function ProductsList() {
         image={prod.image}
         price={prod.price}
         name={prod.name}
-        brand={prod.carBrand.name}
-        model={prod.carBrand.carModel.model}
+        brand={prod.carBrand}
+        model={prod.carModel}
         // category={prod.category}
       />
     );
@@ -39,16 +39,16 @@ export default function ProductsList() {
     <div className="productList">
       <div className="container">
         <div className="row">
-          <div className="col-4" style={{ marginTop:"10%" }}>
+          <div className="col-3" style={{ marginTop: "10%" }}>
             {/* <ProductFilter /> */}
           </div>
-          <div className="col-8" style={{ marginTop: "10%" }}>
-          <div className="row">
-            {products.Data?products.Data.map(createProducts):<Loading/>}
-          </div>
+          <div className="col-9" style={{ marginTop: "10%" }}>
+            <div className="row">
+              {products.Data ? products.Data.map(createProducts) : <Loading />}
+            </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
   );
 }
