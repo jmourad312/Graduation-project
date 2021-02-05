@@ -55,6 +55,7 @@ router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
 router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
 
+
 //vote 
 router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.voteToComment);
 
@@ -68,6 +69,8 @@ router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false
 router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.getBookmarksList);
 
 // products 
-router.get("/partOfItem/:skip", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+
+router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.showDetailsItem);
 
 module.exports = router;
