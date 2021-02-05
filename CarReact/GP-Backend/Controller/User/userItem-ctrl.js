@@ -32,21 +32,17 @@ partOfItem = (req, res) => {
 
 // show all posts of all users
 showDetailsItem = (req, res) => {
-    const populateQuery = [{ path: "person", select: "firstName" }, {
-        path: "carBrand", populate:
-            { path: "carModel", select: "model" },
-        select: 'name'
-    }];
-    carItem.findOne({ _id: req.params.id }, {name: 1, price: 1, description: 1, image: 1 }).populate(populateQuery).exec(
+    const populateQuery = { path: "person", select: "firstName" }
+    carItem.findOne({ _id: req.params.id }, {name: 1, price: 1, description: 1, image: 1,carModel:1,carBrand:1  }).populate(populateQuery).exec(
       (error, data) => {
         if (error || data.length == 0) {
-          return res.status(400).json({
+          return res.json({
             Data: error,
             Message: "no product found",
             Success: false,
           });
         }
-        return res.status(200).json({
+        return res.json({
           Data: data,
           Message: "Details product",
           Success: true,
