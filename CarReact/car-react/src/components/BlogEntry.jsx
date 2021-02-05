@@ -16,7 +16,7 @@ export default function BlogEntry(props) {
 
   return (
     <div className="col-md-6 col-lg-6 col-xl-4 mb-4">
-      <div className="card blog-post" onClick={()=>handleClick(props.id)}>
+      <div className="card blog-post" onClick={() => handleClick(props.id)}>
         <div className="rounded">
           <img
             className="img-fluid card-img-top"
@@ -34,7 +34,7 @@ export default function BlogEntry(props) {
             <a href="#!" className="text-reset">
               <strong> {props.userName}</strong>
             </a>
-            <br/>
+            <br />
             <a href="#!" className="text-reset float-right">
               {props.date}
             </a>

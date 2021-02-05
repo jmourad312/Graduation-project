@@ -90,7 +90,7 @@ export default function Routes() {
         <Route path="/ProductDetails/:id?" exact component={ProductDetails} />
         <Route path="/ProductsList" exact component={ProductsList} />
 
-        <Route path="/MyProfile/(page)?" component={MyProfile} />
+        <Route path="/MyProfile/(page)?:id?" component={MyProfile} />
 
         <Route path="/SignForm" exact component={Signform} />
         <Route path="/VendorSignForm" exact component={VendorSignForm} />

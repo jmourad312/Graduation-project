@@ -40,9 +40,9 @@ export default function ProductsList() {
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "10%" }}>
-            {/* <ProductFilter /> */}
+            <ProductFilter />
           </div>
-          <div className="col-9" style={{ marginTop: "10%" }}>
+          <div className="col-9" style={{ marginTop: "5%" }}>
             <div className="row">
               {products.Data ? products.Data.map(createProducts) : <Loading />}
             </div>

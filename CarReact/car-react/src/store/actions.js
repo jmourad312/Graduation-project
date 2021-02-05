@@ -1,6 +1,6 @@
 import * as TYPES from './types';
 import axios from 'axios';
-import { instance } from "../network/axiosConfig";
+
 
 // export const setLanguage = (payload) => {
 //   return {
@@ -193,9 +193,19 @@ export const resultFromFilter = (data) => async (dispatch) => {
 
 
 // get user -----------------------
-export const getUsersAction = () => async (dispatch) => {
+export const setUserIdAction = (payload) => {
+  return {
+    type: TYPES.GET_USER_ID,
+    payload,
+  };
+};
+
+export const getUsersAction = (params) => async (dispatch) => {
   try {
-    const res = await axios.get("https://fakestoreapi.com/users");
+    const res = await axios.get(
+      `http://localhost:3000/user/showUserProfile/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
     console.log(res);
     dispatch({
       type: TYPES.GET_USER,
@@ -205,6 +215,7 @@ export const getUsersAction = () => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const addUserAction = () => async (dispatch) => {
   try {
     const req = await axios.post("https://fakestoreapi.com/users");

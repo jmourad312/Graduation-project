@@ -1,6 +1,11 @@
 // export const SITE_LANG = "SITE_LANG";
 
+//-------USER----------------------------
 export const GET_USER = "GET_USER";
+export const GET_USER_ID = "GET_USER_ID";
+
+
+
 export const ADD_USER = "ADD_USER";
 
 export const USER_SIGN_IN = "USER_SIGN_IN";
@@ -21,7 +26,6 @@ export const GET_MODEL = "GET_MODEL"
 // export const GET_MODEL_ADD_FILTER = "GET_MODEL_ADD_FILTER";
 export const GET_RESULTS_FILTER = "GET_RESULTS_FILTER"
 export const ADD_BLOG = "ADD_BLOG";
-
 
 //-------Product--------------------
 export const GET_PRODUCTS = "GET_PRODUCTS";

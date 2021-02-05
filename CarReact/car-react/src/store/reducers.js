@@ -21,7 +21,8 @@ export default (
     modelAddFilter: [],
     filterblog: [],
     //--------------
-    users: [],
+    user: [],
+    userID: "",
     userSignIn: {},
     userSignUp: {},
     vendorSignIn: {},
@@ -51,7 +52,6 @@ export default (
         ...state,
         products: action.payload,
       };
-
     case TYPES.GET_TOKEN:
       return {
         ...state,
@@ -94,7 +94,6 @@ export default (
         ...state,
         blogFilterSearch: action.payload,
       };
-
     case TYPES.GET_BRAND:
       return {
         ...state,
@@ -121,10 +120,16 @@ export default (
     //     blogs: action.payload,
     //   };
 
+    //-------------USER----------------
     case TYPES.GET_USER:
       return {
         ...state,
-        users: action.payload,
+        user: action.payload,
+      };
+    case TYPES.GET_USER_ID:
+      return {
+        ...state,
+        userID: action.payload,
       };
 
     case TYPES.USER_SIGN_IN:
