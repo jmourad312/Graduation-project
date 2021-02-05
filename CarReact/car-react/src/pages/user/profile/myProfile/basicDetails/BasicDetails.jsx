@@ -1,16 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
-export default function BasicDetails() {
+export default function BasicDetails(props) {
+
+  // const user = useSelector(state => state.user)
+  
   return (
     <div class="container emp-profile">
       <form method="post">
         <div class="row">
-          <div class="col-md-2">
-
-          </div>
+          <div class="col-md-2"></div>
           <div class="col-md-10">
             <div class="tab-content profile-tab" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
                 <div class="row">
                   <div class="col-md-6">
                     <label>User Id</label>
@@ -24,7 +31,7 @@ export default function BasicDetails() {
                     <label>Name</label>
                   </div>
                   <div class="col-md-6">
-                    <p>Mohamed Magdy</p>
+                    <p>{props.person.firstName}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -32,7 +39,7 @@ export default function BasicDetails() {
                     <label>Email</label>
                   </div>
                   <div class="col-md-6">
-                    <p>magdyyy@gmail.com</p>
+                    <p>{props.person.email}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -40,7 +47,7 @@ export default function BasicDetails() {
                     <label>Phone</label>
                   </div>
                   <div class="col-md-6">
-                    <p>123 456 7890</p>
+                    <p>{props.person.phoneNumber}</p>
                   </div>
                 </div>
                 <div class="row">

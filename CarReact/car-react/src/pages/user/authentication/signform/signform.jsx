@@ -5,22 +5,18 @@ import $ from "jquery";
 import Button from "../../../../components/Button";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  userSignInAction,
-  userSignUpAction,
-  setToken,
-} from "../../../../store/actions";
+import { setUserIdAction } from "../../../../store/actions";
 
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
   // const [changeClassBack, setChangeClassBack] = useState("forgotpass")
   const [changePayment, setChangePayment] = useState("payment");
+  const userID = useSelector(state => state.userID)
   const dispatch = useDispatch();
-  // const token = useSelector((state) => state.token);
 
-  // const savetoken = (item) => {
-  //   dispatch(setToken(item));
-  // };
+  const setUserID = (params) => {
+    dispatch(setUserIdAction(params));
+  };
 
   const [userSignUpInfo, setUserSignUpInfo] = useState({
     firstName: "",
@@ -43,11 +39,12 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
       .then((res) => {
         console.log(res);
+        setUserID(res.data.Data);
         localStorage.setItem("Authorization", res.headers.authorization);
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          props.history.push("/MyProfile");
+          props.history.push(`/MyProfile/${userID}`);
         }
       })
       .catch((error) => {
@@ -75,19 +72,19 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signin", userSignInInfo)
       .then((res) => {
         console.log(res);
+        setUserID(res.data.Data);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          props.history.push("/MyProfile");
+          props.history.push(`/MyProfile/${userID}`);
         }
       })
       .catch((error) => {
         console.log(error);
       });
-
   };
 
   const switchPayment = () => {
