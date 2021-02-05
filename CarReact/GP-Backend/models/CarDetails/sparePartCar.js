@@ -8,7 +8,7 @@ var car = new schema({
   description: String,
   available: Boolean,
   case: String,
-  image: [String],
+  image: [],
   itemFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemFeedBack",
