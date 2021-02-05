@@ -43,7 +43,7 @@ addModel = (req, res) => {
 }
 
 getBrand = (req, res) => {
-    Brand.find({}, (error, data) => {
+    Brand.find({}, { name: 1, _id: 1 }, (error, data) => {
         if (error || data.length == 0) {
             return res.status(400).json({
                 Data: null,
@@ -61,7 +61,9 @@ getBrand = (req, res) => {
 }
 
 getModel = (req, res) => {
-    Model.find({}, (error, data) => {
+    Brand.find({ name: req.params.name }, { carModel:1 }).populate( { path: "carModel", select: "model" }
+
+    ).exec((error, data) => {
         if (error || data.length == 0) {
             return res.status(400).json({
                 Data: null,

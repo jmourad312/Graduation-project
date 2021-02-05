@@ -112,18 +112,45 @@ export const getBlogsFilterSearch = () => async (dispatch) => {
 // };
 
 // filter blog
-// export const filterCarModel = () => async (dispatch) => {
-//   try {
-//     const res = await instance.get('user');
-//     console.log(res);
-//     dispatch({
-//       type: TYPES.GET_CAR_MODEL,
-//       payload: res.data,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const filterCarBrand = () => async (dispatch) => {
+  try {
+    const res = await axios.get('http://localhost:3000/admin/getBrand');
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_BRAND,
+      payload: res.data.Data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const filterCarModel = (namebrand) => async (dispatch) => {
+  try {
+    const res = await axios.get(`http://localhost:3000/admin/getModel/${namebrand}`);
+    console.log(res.data.Data[0].carModel);
+    dispatch({
+      type: TYPES.GET_MODEL,
+      payload: res.data.Data[0].carModel,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resultFromFilter = (data) => async (dispatch) => {
+  try {
+    console.log(data)
+    const res = await axios.post('http://localhost:3000/user/showFilterPosts',data);
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_BLOGS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // get user -----------------------
 export const getUsersAction = () => async (dispatch) => {
