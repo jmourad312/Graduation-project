@@ -4,9 +4,9 @@ import * as TYPES from "./types";
 export default (
   state = {
     products: [],
-    blogDetails:[],
+    blogDetails: [],
     blogs: [],
-    blogID:"",
+    blogID: "",
     blogFilterBrand: [],
     blogFilterBrandActive: false,
     blogFilterModel: [],
@@ -17,6 +17,10 @@ export default (
     vendorSignIn: {},
     vendorSignUp: {},
     token: "",
+    brand: [],
+    model: [],
+    modelAddFilter:[],
+    filterblog:[]
   },
   action
 ) => {
@@ -73,6 +77,27 @@ export default (
       return {
         ...state,
         blogFilterSearch: action.payload,
+      };
+
+    case TYPES.GET_BRAND:
+      return {
+        ...state,
+        brand: action.payload,
+      };
+    case TYPES.GET_MODEL:
+      return {
+        ...state,
+        model: action.payload,
+      };
+    // case TYPES.GET_MODEL_ADD_FILTER:
+    //   return {
+    //     ...state,
+    //     modelAddFilter: action.payload,
+    //   };
+    case TYPES.GET_RESULTS_FILTER:
+      return {
+        ...state,
+        filterblog: action.payload,
       };
     // case TYPES.ADD_BLOG:
     //   return {

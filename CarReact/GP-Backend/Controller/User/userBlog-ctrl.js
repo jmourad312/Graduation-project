@@ -18,9 +18,9 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 addNewPost = (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
   const images = [];
-  req.files.map((file) => {
-    images.push("http://localhost:3000/images/" + file.filename);
-  });
+  // req.files.map((file) => {
+  //   images.push("http://localhost:3000/images/" + file.filename);
+  // });
 
   const IdPerson = req.user._id;
   if (!body) {
@@ -286,16 +286,30 @@ showDetailsPost = (req, res) => {
 };
 
 showFilterPosts = (req, res) => {
-  const criteriaSearch = { $regex: req.body.search, $options: "i" };
-  const query = { $or: [{ title: criteriaSearch }, { body: criteriaSearch }] };
+  const criteriaSearch = { $regex: req.body.search, $options: 'i' };
+  const queryCond = {}
+  
+  if (req.body.search) {
+    queryCond.title = { $regex: req.body.search, $options: 'i' }
+    //queryCond.body = { $regex: req.body.search, $options: 'i' };
+  }
+  if (req.body.model) {
+    queryCond.model = req.body.model;
+  }
+  if (req.body.brand) {
+    queryCond.brand = req.body.brand;
+  }
+  console.log(queryCond)
   const populateQuery = [{ path: "person", select: "firstName" }];
 
-  Post.find(query, { updatedPosts: 0, comment: 0, __V: 0 })
+  Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
+    .skip(0)
+    .limit(9)
     .exec((error, data) => {
       if (error || data.length == 0) {
-        return res.status(400).json({
+        return res.status(200).json({
           Data: error,
           Message: "no blogs found",
           Success: false,

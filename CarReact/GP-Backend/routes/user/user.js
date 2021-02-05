@@ -35,7 +35,7 @@ router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.array("image", 10) ,userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
@@ -47,7 +47,7 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addCommentReply);
 
 // show posts
-router.get("/showFilterPosts", userBlogCtrl.showFilterPosts)
+router.post("/showFilterPosts", userBlogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 

@@ -1,56 +1,44 @@
 import React from "react";
-import { useState } from "react";
-import Dropdown2 from "./Dropdown2";
-import cars2 from "../assets/js/cars2";
+import { useEffect,useState } from "react";
 import axios from "axios";
+import { useSelector,useDispatch } from "react-redux";
+import {filterCarModel, filterCarBrand, resultFromFilter} from '../store/actions'
+
 
 export default function BlogFilter(props) {
   const [state, setState] = useState({
     model: "",
     brand: "",
-    classDisabled: "false",
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setState({
-      [name]: value,
-    });
-  };
+  const stateRedux = useSelector((state) => state)
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.perventDefault();
-    // console.log(state.model);
-    // axios
-    //   .post(`http://localhost:3000/user/addComment/`, state.model,
-    //   // {headers: { Authorization: localStorage.getItem("Authorization") },
-    //   )
-    //   .then((req) => {
-    //     console.log(req);
-    //     if (req.data.Success === true) {
-    //       console.log("success");
-    //     } else {
-    //       console.log("fail");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  useEffect(() => {
+    dispatch(filterCarBrand())
+  }, [])
 
-    // switch (event.target.name) {
-    //   case "model":
-    //     setState({
-    //       ...state,
-    //       model: event.target.value,
-    //     });
-    //     break;
-    //   case "brand":
-    //     setState({
-    //       ...state,
-    //       brand: event.target.value
-    //     });
-    //     break;
-    // }
+  const handleChange =  (event) => {
+
+    switch (event.target.name) {
+      case "brand":
+        setState({
+          ...state,
+          brand: event.target.value,
+        });
+        dispatch(resultFromFilter({brand:event.target.value}))
+        dispatch(filterCarModel(event.target.value))
+
+        break;
+      case "model":
+        setState({
+          ...state,
+          model: event.target.value
+        });
+        dispatch(resultFromFilter({brand:state.brand,model:event.target.value}))
+
+        break;
+    }
   };
 
   return (
@@ -84,66 +72,27 @@ export default function BlogFilter(props) {
           </label>
         </div>
       </div>
+
       <div className="mb-5">
-        <form method="post" onChange={handleSubmit}>
-          <select
-            value={state.model}
-            name="model"
-            onChange={handleChange}
-            className="custom-select custom-select-lg mb-3"
-          >
-            <option value="BMW">BMW</option>
-            <option value="RENAULT">RENAULT</option>
-            <option value="MERCEDES">MERCEDES</option>
-            <option value="JEEP">JEEP</option>
-          </select>
-        </form>
-        {/* <p>
-          <span className="badge badge-secondary">
-            Mercedes <span className="badge badge-danger">X</span>
-          </span>
-          <span className="badge badge-secondary">
-            BMW <span className="badge badge-danger">X</span>
-          </span>
-          <span className="badge badge-secondary">
-            RENAULT <span className="badge badge-danger">X</span>
-          </span>
-          <span className="badge badge-secondary">
-            JEEP <span className="badge badge-danger">X</span>
-          </span>
-        </p> */}
-      </div>
-      <Dropdown2
-        // list="MODEL"
-        // name="MODEL"
-        // placeholder="MODEL"
-        Items={cars2}
-      />
-      <div>
-        <select
-          value={state.brand}
-          disabled={!state.model}
-          name="brand"
-          onChange={handleChange}
-          className="custom-select custom-select-sm mb-3"
-        >
-          <option value="BMWx3">BMW X3</option>
-          <option value="BMWx2">BMW X2</option>
-          <option value="MERCEDES">MERCEDES A-className</option>
+        <select value={state.brand} name="brand" onChange={handleChange} className="custom-select custom-select-lg mb-3">
+          {
+            stateRedux.brand.map((item, index) => 
+              <option value={item.name} key={index}>{item.name}</option>
+            )
+          }
         </select>
-        <p>
-          <span className="badge badge-secondary">
-            BMW X3 <span className="badge badge-danger">X</span>
-          </span>
-          <span className="badge badge-secondary">
-            BMW X2<span className="badge badge-danger">X</span>
-          </span>
-          <span className="badge badge-secondary">
-            MERCEDES A-className
-            <span className="badge badge-danger">X</span>
-          </span>
-        </p>
       </div>
+
+      <div>
+        <select value={state.model} disabled={!state.brand} name="model" onChange={handleChange} className="custom-select custom-select-sm mb-3">
+          {
+            stateRedux.model.map((item, index) => 
+              <option value={item.model} key={index}>{item.model}</option>
+            )
+          }
+        </select>
+      </div>
+
     </div>
   );
 }
