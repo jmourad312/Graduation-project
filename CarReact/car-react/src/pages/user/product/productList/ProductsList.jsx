@@ -44,7 +44,7 @@ export default function ProductsList() {
           </div>
           <div className="col-8" style={{ marginTop: "10%" }}>
           <div className="row">
-            {products.Data?products.map(createProducts):<Loading/>}
+            {products.Data?products.Data.map(createProducts):<Loading/>}
           </div>
           </div>
         </div>
