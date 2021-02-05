@@ -58,9 +58,10 @@ showFilterItems = (req, res) => {
     const queryCond = {}
 
     if (req.body.priceLessThan && req.body.priceMoreThan) {
+        console.log(req.body.priceMoreThan)
         queryCond.$and = [
-            { price: { $gte: req.body.priceMoreThan } },
-            { price: { $lte: req.body.priceLessThan } }
+            { price: { $gte: +req.body.priceLessThan } },
+            { price: { $lte: +req.body.priceMoreThan } }
         ]
     }
 
@@ -68,11 +69,11 @@ showFilterItems = (req, res) => {
         queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }]
     }
 
-    if (req.body.carBrand) {
-        queryCond.carBrand = req.body.carBrand;
+    if (req.body.brand) {
+        queryCond.carBrand = req.body.brand;
     }
-    if (req.body.carModel) {
-        queryCond.carModel = req.body.carModel;
+    if (req.body.model) {
+        queryCond.carModel = req.body.model;
     }
 
     console.log(queryCond)

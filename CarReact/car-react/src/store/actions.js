@@ -46,6 +46,24 @@ export const setProductId = (payload) => {
   };
 };
 
+
+
+export const resultFromFilterProduct = (data) => async (dispatch) => {
+  try {
+    console.log(data)
+    const res = await axios.post('http://localhost:3000/user/showFilterItems',data);
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_PRODUCTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 //----------------------------------------------
 // blog requests -------------------------------
 export const getBlogDetails = (params) => async (dispatch) => {
@@ -190,7 +208,6 @@ export const resultFromFilter = (data) => async (dispatch) => {
   }
 };
 //filter add blog
-
 
 // get user -----------------------
 export const setUserIdAction = (payload) => {

@@ -33,6 +33,5 @@ export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 
-
 export const GET_TOKEN = "GET_TOKEN";
 
