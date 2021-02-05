@@ -137,6 +137,20 @@ export const filterCarModel = (namebrand) => async (dispatch) => {
     console.log(error);
   }
 };
+// export const filterCarModelAddFilter = (namebrand) => async (dispatch) => {
+//   try {
+//     const res = await axios.get(
+//       `http://localhost:3000/admin/getModel/${namebrand}`
+//     );
+//     console.log(res.data.Data[0].carModel);
+//     dispatch({
+//       type: TYPES.GET_MODEL_ADD_FILTER,
+//       payload: res.data.Data[0].carModel,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const resultFromFilter = (data) => async (dispatch) => {
   try {
@@ -151,6 +165,8 @@ export const resultFromFilter = (data) => async (dispatch) => {
     console.log(error);
   }
 };
+//filter add blog
+
 
 // get user -----------------------
 export const getUsersAction = () => async (dispatch) => {

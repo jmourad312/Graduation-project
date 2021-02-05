@@ -19,6 +19,7 @@ export default (
     token: "",
     brand: [],
     model: [],
+    modelAddFilter:[],
     filterblog:[]
   },
   action
@@ -88,11 +89,16 @@ export default (
         ...state,
         model: action.payload,
       };
-      case TYPES.GET_RESULTS_FILTER:
-        return {
-          ...state,
-          filterblog: action.payload,
-        };
+    // case TYPES.GET_MODEL_ADD_FILTER:
+    //   return {
+    //     ...state,
+    //     modelAddFilter: action.payload,
+    //   };
+    case TYPES.GET_RESULTS_FILTER:
+      return {
+        ...state,
+        filterblog: action.payload,
+      };
     // case TYPES.ADD_BLOG:
     //   return {
     //     ...state,
