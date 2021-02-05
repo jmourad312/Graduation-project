@@ -44,33 +44,7 @@ export default function BlogFilter(props) {
   return (
     <div className={props.class}>
       <div className="mb-4 ml-2" filter="price">
-        <h6 className="font-weight-bold mb-3">Sort Options</h6>
-
-        <div className="custom-control custom-checkbox">
-          <input type="checkbox" className="custom-control-input" id="New" />
-          <label className="custom-control-label text-primary mb-2" for="New">
-            New
-          </label>
-        </div>
-        <div className="custom-control custom-checkbox">
-          <input type="checkbox" className="custom-control-input" id="Hot" />
-          <label className="custom-control-label text-danger mb-2" for="Hot">
-            Hot
-          </label>
-        </div>
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="Answered"
-          />
-          <label
-            className="custom-control-label text-success mb-2"
-            for="Answered"
-          >
-            Answered
-          </label>
-        </div>
+        <h4 className="font-weight-bold mb-3">Filter Options</h4>
       </div>
 
       <div className="mb-5">

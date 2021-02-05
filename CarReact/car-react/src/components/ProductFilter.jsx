@@ -1,25 +1,85 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
 import cars2 from '../assets/js/cars2';
 import cars from "../assets/js/cars";
+import { useDispatch, useSelector } from 'react-redux';
+import { filterCarBrand, filterCarModel, resultFromFilter } from '../store/actions';
 
 
-export default function ProductFilter() {
-    const carBrand = ["BMW", "AUDI", "MAZARATI", "HYUNDAI"];
-    const carBrand2 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
-    const carBrand3 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
+export default function ProductFilter(props) {
+    const [state, setState] = useState({
+      model: "",
+      brand: "",
+    });
+
+    const stateRedux = useSelector((state) => state);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(filterCarBrand());
+    }, []);
+
+    const handleChange = (event) => {
+      switch (event.target.name) {
+        case "brand":
+          setState({
+            ...state,
+            brand: event.target.value,
+          });
+          dispatch(resultFromFilter({ brand: event.target.value }));
+          dispatch(filterCarModel(event.target.value));
+
+          break;
+        case "model":
+          setState({
+            ...state,
+            model: event.target.value,
+          });
+          dispatch(
+            resultFromFilter({ brand: state.brand, model: event.target.value })
+          );
+
+          break;
+      }
+    };
+
     return (
-      <div className="productFilter">
-        <div className="row">
-          <Dropdown mapItems={cars2} name="brand" />
+      <div className={props.class}>
+        <div className="mb-4 ml-2" filter="price">
+          <h4 className="font-weight-bold mb-3">Filter Options</h4>
         </div>
 
-        {/* <div className="row mt-2">
-          <Dropdown mapItems={carBrand2} name="model" />
+        <div className="mb-5">
+          <select
+            value={state.brand}
+            name="brand"
+            onChange={handleChange}
+            className="custom-select custom-select-lg mb-3"
+          >
+            {stateRedux.brand.map((item, index) => (
+              <option value={item.name} key={index}>
+                {item.name}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className="row mt-2">
-          <Dropdown mapItems={carBrand3} name="sda" />
-        </div> */}
+
+        <div>
+          <select
+            value={state.model}
+            disabled={!state.brand}
+            name="model"
+            onChange={handleChange}
+            className="custom-select custom-select-sm mb-3"
+          >
+            {stateRedux.model.map((item, index) => (
+              <option value={item.model} key={index}>
+                {item.model}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     );
+
 }

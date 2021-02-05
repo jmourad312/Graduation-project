@@ -133,7 +133,7 @@ export default function AddBlog() {
                 id="content"
                 rows="3"
                 placeHolder="Type the blog information"
-                value={inputValue.content}
+                value={inputValue.body}
                 onChange={handleChange}
                 required
               ></textarea>
