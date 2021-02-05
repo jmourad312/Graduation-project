@@ -53,12 +53,21 @@ app.use("/blog", blogRoute);
 app.use(express.static("uploads"));
 app.use("/images", express.static(__dirname + "/uploads"));
 
-// app.post("/test", upload.array("images", 10), (req, res) => {
-//   // console.log("http://localhost:3000/images/" + req.file.filename);
-//   const images =[];
-//   req.files.map(file=>{images.push(file.filename)})
-//   console.log(images)
-//   res.send({data: req.body});
-// });
+app.post("/test", upload.array("images", 10), (req, res) => {
+  // const images = req.files;
+  // const URL= "http://localhost:3000/images/" + images.filename;
+
+  // const images = req.files;
+  //   console.log(images);
+  //   console.log(images.length);
+    // res.send({ data: req.body });
+  // });
+  const images = [];
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+  });
+  console.log(images);
+  console.log(images.length);
+});
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
