@@ -17,7 +17,7 @@ export default function ProductComp(props) {
 
 
   return (
-    <div className="col-md-4 col-lg-4 col-xl-4 mb-3">
+    <div className="col-md-3 col-lg-3 col-xl-3 mb-3">
       <div className="card product" onClick={()=>handleClick(props.id)}>
         <div className="d-flex justify-content-between position-absolute w-100">
           <div className="label-new">
@@ -34,7 +34,7 @@ export default function ProductComp(props) {
           </div>
         </div>
         <a href="#">
-          <img src={props.image} className="card-img-top" alt="Product" />
+          <img src={props.image} className="card-img-top" alt="Product" style={{maxHeight:"400px",maxWidth:"400px"}} />
         </a>
         <div className="card-body px-2 pb-2 pt-1">
           <div className="d-flex justify-content-between">

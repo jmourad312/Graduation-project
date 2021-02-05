@@ -5,7 +5,7 @@ import { getProductDetails } from "../../../../store/actions";
 
 export default function ProductDetails(props) {
   const productID = useSelector((state) => state.productID);
-  const productDetails = useSelector((state) => state.productDetails);
+  const productDetails = useSelector((state) => state.productDetails.Data);
   const dispatch = useDispatch();
   const getProducts = (params) => {
     dispatch(getProductDetails(params));
@@ -25,20 +25,24 @@ export default function ProductDetails(props) {
           <div className="col-md-4">
             <img
               src={productDetails && productDetails.image}
-              width="100%"
-              height="100%"
+              // width="100%"
+              // height="100%"
               style={{ maxHeight: "400px", maxWidth: "400px" }}
               alt=""
             />
           </div>
 
           <div className="col-md-8 p-2">
-            <h3>
+            <h2>
               {productDetails && productDetails.name} By{" "}
               <Link to="#">
-                {productDetails && productDetails.person.firstName}
+                {productDetails
+                  ? productDetails.person
+                    ? productDetails.person.firstName
+                    : "(LOADING)"
+                  : "LOADING"}
               </Link>
-            </h3>
+            </h2>
             {/* <!-- avalible or not --> */}
             {productDetails &&
               (productDetails.available ? (
@@ -118,15 +122,28 @@ export default function ProductDetails(props) {
             </h3>
             <br />
             <p>
-              <b>Manufacturer: </b> {productDetails && productDetails.case}
+              <b>Manufacturer: </b>{" "}
+              {productDetails
+                ? productDetails.case
+                  ? productDetails.case
+                  : "Loading"
+                : "Loading"}
             </p>
             <p>
-              <b>Brand: </b>
-              {productDetails && productDetails.carBrand.name}
+              <b>Brand: </b>{" "}
+              {productDetails
+                ? productDetails.carBrand
+                  ? productDetails.carBrand
+                  : "Loading"
+                : "Loading"}
             </p>
             <p>
               <b>Compatible car models: </b>
-              {productDetails && productDetails.carBrand.carModel.model}
+              {productDetails
+                ? productDetails.carModel
+                  ? productDetails.carModel
+                  : "Loading"
+                : "Loading"}
             </p>
             {/* </div> */}
 
@@ -161,7 +178,6 @@ export default function ProductDetails(props) {
             </div>
             {/* </div> */}
 
-            {/* <div [hidden]="tab == 1 || tab == 2"> */}
             <h3>
               <span
                 className="pl-3"

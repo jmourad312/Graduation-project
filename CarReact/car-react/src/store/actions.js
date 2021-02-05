@@ -13,7 +13,8 @@ import { instance } from "../network/axiosConfig";
 
 export const getProductsAction = () => async (dispatch) =>{
     try {
-        const res = await axios.get("http://localhost:3000/user/partOfItem");
+        const res = await axios.get("http://localhost:3000/user/partOfItem",
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
         console.log(res);
         dispatch({
             type: TYPES.GET_PRODUCTS,
@@ -26,7 +27,8 @@ export const getProductsAction = () => async (dispatch) =>{
 export const getProductDetails = (params) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:3000/user/showDetailsItem/${params}`
+      `http://localhost:3000/user/showDetailsItem/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     dispatch({
       type: TYPES.GET_PRODUCT_DETAILS,
