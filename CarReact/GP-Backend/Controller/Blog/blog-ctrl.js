@@ -20,9 +20,13 @@ showAllPosts = (req, res) => {
     })
 }
 
-// show post details
+// show all posts of all users
 showDetailsPost = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName" }, { path: "Comment" }];
+  const populateQuery = [{ path: "person", select: "firstName" }, {
+    path: "comment", populate: 
+    [{path: "person",select: "firstName"},{path: "commentReply" ,populate: {path: "person",select: "firstName"}   ,select: "firstName"}] ,
+    select: '-post '
+  }];
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 }).populate(populateQuery).exec(
     (error, data) => {
       if (error || data.length == 0) {

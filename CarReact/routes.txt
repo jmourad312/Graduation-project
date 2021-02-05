@@ -5,13 +5,7 @@ From Front--->>>>>>>>>> 1- params id -> POST
 From Back - >{
 state,
 image,
-comment array [
-content ""
-image []
-person.firstname
-commentreply []
-
-] ,
+comment array,
 title,
 body,
 brand,
@@ -19,7 +13,22 @@ model,
 person.firstName,
 createdAt,
 updatedAt,
+comment.content
+comment.image array
+comment.person.firstName
+comment.commentReply
+
 }
 
+-----------------------------------------------------------------------------------------------------------------------------
+localhost:3000/user/addComment/:idpost   -> post request -> token 
+Front {
+content
+image
+}
 
-add -->
+localhost:3000/user/showFilterPosts
+Front {
+content
+image
+}

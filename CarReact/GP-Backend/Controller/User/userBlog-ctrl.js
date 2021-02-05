@@ -3,7 +3,6 @@ const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
-
 const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 // add post
@@ -17,7 +16,12 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 //add post
 addNewPost = (req, res) => {
-  const body = req.body;
+  const body = JSON.parse(JSON.stringify(req.body));
+  const images = [];
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+  });
+
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
@@ -27,7 +31,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post(body);
+  const post = new Post(body, images);
   post.person = IdPerson;
 
   if (!post) {
@@ -126,7 +130,7 @@ addComment = (req, res) => {
   const comment = new Comment(body);
   comment.person = IdPerson;
   comment.post = IdPost;
-  comment.save().catch(error => {
+  comment.save().catch((error) => {
     return res.status(400).json({
       Data: error,
       Message: "*****************",
@@ -134,13 +138,16 @@ addComment = (req, res) => {
     });
   });
 
-  const populateQuery = [{
-    path: "comment", populate: {
-      path: "person",
-      select: "firstName"
+  const populateQuery = [
+    {
+      path: "comment",
+      populate: {
+        path: "person",
+        select: "firstName",
+      },
+      select: "-post -commentReply",
     },
-    select: '-post -commentReply'
-  }];
+  ];
 
   Post.findByIdAndUpdate(
     { _id: IdPost },
@@ -222,8 +229,13 @@ addCommentReply = (req, res) => {
 // show all posts of all users
 showAllPosts = (req, res) => {
   const populateQuery = [{ path: "person", select: "firstName" }];
-  Post.find({}, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).skip(0).limit(6).populate(populateQuery).exec(
-    (error, data) => {
+  Post.find({}, { updatedPosts: 0, comment: 0, __V: 0 })
+    // .select('')
+    .sort({ _id: -1 })
+    .skip(0)
+    .limit(6)
+    .populate(populateQuery)
+    .exec((error, data) => {
       if (error || data.length == 0) {
         return res.status(400).json({
           Data: error,
@@ -236,18 +248,25 @@ showAllPosts = (req, res) => {
         Message: "The last 6 posts",
         Success: true,
       });
-    })
-}
+    });
+};
 
 // show all posts of all users
 showDetailsPost = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName" }, {
-    path: "comment", populate: 
-    [{path: "person",select: "firstName"},{path: "commentReply" ,populate: {path: "person",select: "firstName"}   ,select: "-post"}] ,
-    select: '-post '
-  }];
-  Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 }).populate(populateQuery).exec(
-    (error, data) => {
+  const populateQuery = [
+    { path: "person", select: "firstName" },
+    {
+      path: "comment",
+      populate: {
+        path: "person",
+        select: "firstName",
+      },
+      select: "-post ",
+    },
+  ];
+  Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 })
+    .populate(populateQuery)
+    .exec((error, data) => {
       if (error || data.length == 0) {
         return res.status(400).json({
           Data: error,
@@ -260,18 +279,34 @@ showDetailsPost = (req, res) => {
         Message: "Details Post",
         Success: true,
       });
-    })
-}
+    });
+};
 
 showFilterPosts = (req, res) => {
   const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const query = { $or: [{ title: criteriaSearch }, { body: criteriaSearch }] }
+  const queryCond = {}
+  
+  if (req.body.search) {
+    queryCond.title = { $regex: req.body.search, $options: 'i' }
+    //queryCond.body = { $regex: req.body.search, $options: 'i' };
+  }
+  if (req.body.model) {
+    queryCond.model = req.body.model;
+  }
+  if (req.body.brand) {
+    queryCond.brand = req.body.brand;
+  }
+  console.log(queryCond)
   const populateQuery = [{ path: "person", select: "firstName" }];
 
-  Post.find(query, { updatedPosts: 0, comment: 0, __V: 0 }).sort({ _id: -1 }).populate(populateQuery).exec(
-    (error, data) => {
+  Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
+    .sort({ _id: -1 })
+    .populate(populateQuery)
+    .skip(0)
+    .limit(9)
+    .exec((error, data) => {
       if (error || data.length == 0) {
-        return res.status(400).json({
+        return res.status(200).json({
           Data: error,
           Message: "no blogs found",
           Success: false,
@@ -282,8 +317,8 @@ showFilterPosts = (req, res) => {
         Message: "posts: filter",
         Success: true,
       });
-    })
-}
+    });
+};
 
 showPostsOfUser = (req, res) => {
   const IdPerson = req.user._id;
@@ -300,8 +335,8 @@ showPostsOfUser = (req, res) => {
       Message: "احلى بلوج لاحلى زبون",
       Success: true,
     });
-  })
-}
+  });
+};
 
 // remove voting on comment
 removeVoteFromComment = (req, res) => {
@@ -326,23 +361,25 @@ removeVoteFromComment = (req, res) => {
 };
 
 voteToComment = (req, res) => {
-
-  Comment.updateOne({ _id: req.params.id }, { $push: { Voting: req.user._id } }, (error, data) => {
-    if (error) {
-      return res.status(400).json({
-        Data: error,
-        Message: "can't vote",
-        Success: false,
+  Comment.updateOne(
+    { _id: req.params.id },
+    { $push: { Voting: req.user._id } },
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          Data: error,
+          Message: "can't vote",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: data.n,
+        Message: "احلى فوت",
+        Success: true,
       });
     }
-    return res.status(200).json({
-      Data: data.n,
-      Message: "احلى فوت",
-      Success: true,
-    });
-  })
-
-}
+  );
+};
 
 // calculate number of voting
 numberOfVoting = (req, res) => {
