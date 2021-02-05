@@ -10,11 +10,7 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 
 // get part of product 
 partOfItem = (req, res) => {
-    const populateQuery = [{ path: "person", select: "firstName" }, {
-        path: "carBrand", populate:
-            { path: "carModel", select: "model" },
-        select: 'name'
-    }];
+    const populateQuery = { path: "person", select: "firstName" };
 
     carItem.find({}, {name: 1, price: 1, description: 1, image: 1,carModel:1,carBrand:1 }).populate(populateQuery).sort({ _id: -1 }).skip(0).limit(12).exec((err, data) => {
         if (err || data.length == 0) {
