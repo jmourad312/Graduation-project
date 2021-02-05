@@ -16,7 +16,7 @@ partOfItem = (req, res) => {
         select: 'name'
     }];
 
-    carItem.find({}, {name: 1, price: 1, description: 1, image: 1 }).populate(populateQuery).sort({ _id: -1 }).skip(0).limit(6).exec((err, data) => {
+    carItem.find({}, {name: 1, price: 1, description: 1, image: 1,carModel:1,carBrand:1 }).populate(populateQuery).sort({ _id: -1 }).skip(0).limit(9).exec((err, data) => {
         if (err || data.length == 0) {
             return res.json({
                 "Data": err,

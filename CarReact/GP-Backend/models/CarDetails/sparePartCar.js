@@ -8,15 +8,13 @@ var car = new schema({
   description: String,
   available: Boolean,
   case: String,
-  image: [],
+  image: String,
   itemFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemFeedBack",
   }],
-  carBrand: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CarBrand",
-  }],
+  carBrand: String,
+  carModel: String,
   itemCollection: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ItemCollection",

@@ -14,10 +14,10 @@ addItem = (req, res) => {
   }
 
   const car = new carItem(body);
-  car.vendor = IdVendor;
+  car.person = IdVendor;
 
   if (!car) {
-    return res.status(400).json({
+    return res.json({
       Data: err, //null insteat
       Message: "You must provide an item ",
       Success: false,
