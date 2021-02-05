@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { AddBlogsAction } from "../store/actions";
-// import Button from "./Button";
 import Input from "./Input";
 import axios from "axios";
 import $ from "jquery";
-// import Dropdown2 from "./Dropdown2";
 import cars2 from "../assets/js/cars2";
-// import 'bootstrap';
+import cars3 from "../assets/js/cars3";
+
+import { useDispatch, useSelector } from "react-redux";
+
+
 export default function AddBlog() {
-  // const blogs = useSelector((state) => state.blogs);
-  // const dispatch = useDispatch();
-  // const addBlog = (params) => {
-  //   dispatch(AddBlogsAction(params));
-  // };
   $("form").on("change", ".file-upload-field", function () {
     $(this)
       .parent(".file-upload-wrapper")
@@ -24,7 +19,10 @@ export default function AddBlog() {
           .replace(/.*(\/|\\)/, "")
       );
   });
-  const [stateDisabled, setStateDisabled] = useState(false)
+  const stateRedux = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const [stateDisabled, setStateDisabled] = useState(false);
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
@@ -32,11 +30,15 @@ export default function AddBlog() {
     brand: "",
     model: "",
   });
+  const [inputFilter, setInputFilter] = useState({
+    brand: "",
+    model: "",
+  });
 
   const handleChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
-      setStateDisabled(true)
+      setStateDisabled(true);
     }
     setInputValue((previous) => {
       return {
@@ -45,6 +47,22 @@ export default function AddBlog() {
       };
     });
   };
+  // const handleFilterChange = (event) => {
+  //   const { value, name } = event.target;
+  //   if (name === "brand") {
+  //     setStateDisabled(true);
+  //     // dispatch(resultFromFilter({ brand: value }));
+  //     dispatch(filterCarModel(value));
+  //   } else if (name === "model") {
+  //     // dispatch(resultFromFilter({ brand: inputFilter.brand, model: value }));
+  //   }
+  //   setInputFilter((previous) => {
+  //     return {
+  //       ...previous,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
@@ -64,8 +82,9 @@ export default function AddBlog() {
       .catch((error) => {
         console.log(error);
       });
-      setInputValue("");
+    setInputValue("");
   };
+
   return (
     <div className="addBlog">
       <input type="checkbox" id="modal" />
@@ -114,7 +133,7 @@ export default function AddBlog() {
                 id="content"
                 rows="3"
                 placeHolder="Type the blog information"
-                value={inputValue.content}
+                value={inputValue.body}
                 onChange={handleChange}
                 required
               ></textarea>
@@ -150,26 +169,26 @@ export default function AddBlog() {
                       </option>
                     );
                   })}
+
                   {/* <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option> */}
                 </select>
               </div>
 
-            {/* --------------------------------MODEL---------------------------- */}
+              {/* --------------------------------MODEL---------------------------- */}
               <div className="col-6">
                 <select
                   className="custom-select"
                   name="model"
                   onChange={handleChange}
                   disabled={!stateDisabled}
-                  required
                 >
                   {/* <option selected>Open this select menu</option> */}
-                  {cars2.map((item, index) => {
+                  {cars3.map((item, index) => {
                     return (
-                      <option key={index} value={item.make}>
-                        {item.make}
+                      <option key={index} value={item.model}>
+                        {item.model}
                       </option>
                     );
                   })}
@@ -196,7 +215,6 @@ export default function AddBlog() {
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select> */}
-
 
             {/* <label for="model">Choose a model:</label>
             <input
