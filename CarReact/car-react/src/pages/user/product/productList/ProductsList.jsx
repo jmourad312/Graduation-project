@@ -19,6 +19,7 @@ export default function ProductsList() {
   useEffect(() => {
     getProducts();
   }, []);
+  
   const createProducts = (prod) =>{
     return (
       <ProductComp
