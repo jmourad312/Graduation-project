@@ -194,13 +194,16 @@ addCommentReply = (req, res) => {
   comment.post = IdPost;
   comment.save();
 
-  const populateQuery = [{
-    path: "commentReply", populate: {
-      path: "person",
-      select: "firstName"
+  const populateQuery = [
+    {
+      path: "commentReply",
+      populate: {
+        path: "person",
+        select: "firstName",
+      },
+      select: "-post -commentReply",
     },
-    select: '-post -commentReply'
-  }];
+  ];
   Comment.findByIdAndUpdate(
     { _id: IdComment },
     {
@@ -218,7 +221,7 @@ addCommentReply = (req, res) => {
         });
       } else {
         return res.status(200).json({
-          Data: data.commentReply[data.commentReply.length-1],
+          Data: data.commentReply[data.commentReply.length - 1],
           Message: "Your comment is uploaded",
           Success: true,
         });
