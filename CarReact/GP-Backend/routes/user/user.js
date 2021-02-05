@@ -73,4 +73,9 @@ router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canV
 
 router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.showDetailsItem);
 
+
+router.get("/showFilterItems", userItemCtrl.showFilterItems);
+
+
+
 module.exports = router;

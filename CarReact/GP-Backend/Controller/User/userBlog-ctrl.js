@@ -290,8 +290,7 @@ showFilterPosts = (req, res) => {
   const queryCond = {}
   
   if (req.body.search) {
-    queryCond.title = { $regex: req.body.search, $options: 'i' }
-    //queryCond.body = { $regex: req.body.search, $options: 'i' };
+      queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }]
   }
   if (req.body.model) {
     queryCond.model = req.body.model;

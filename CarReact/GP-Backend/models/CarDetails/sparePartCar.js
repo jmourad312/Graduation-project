@@ -4,7 +4,7 @@ var schema = mongoose.Schema;
 var car = new schema({
 
   name: { type: String, required: true },
-  price: String,
+  price: Number,
   description: String,
   available: Boolean,
   case: String,
