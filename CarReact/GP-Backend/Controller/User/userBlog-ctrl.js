@@ -306,7 +306,7 @@ showFilterPosts = (req, res) => {
     .limit(9)
     .exec((error, data) => {
       if (error || data.length == 0) {
-        return res.status(400).json({
+        return res.status(200).json({
           Data: error,
           Message: "no blogs found",
           Success: false,

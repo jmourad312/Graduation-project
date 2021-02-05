@@ -3,7 +3,7 @@ const router = express.Router();
 const blogCtrl = require('../../Controller/Blog/blog-ctrl');
 const { route } = require("../user/auth");
 
-router.get("/showFilterPosts", blogCtrl.showFilterPosts)
+router.post("/showFilterPosts", blogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", blogCtrl.showDetailsPost)
 
