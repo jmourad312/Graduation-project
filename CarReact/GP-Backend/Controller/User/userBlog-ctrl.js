@@ -17,8 +17,9 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 //add post
 addNewPost = (req, res) => {
-
+  console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));
+  
   // const images = [];
   // req.files.map((file) => {
   //   images.push("http://localhost:3000/images/" + file.filename);
@@ -58,6 +59,7 @@ addNewPost = (req, res) => {
       });
     })
     .catch((error) => {
+      console.log(req.body);
       return res.status(200).json({
         Data: error.message,
         Message: "Youoooo must Type any words",

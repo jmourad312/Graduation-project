@@ -25,14 +25,26 @@ export default function AddBlog() {
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
-    image: null,
+    image: "",
     brand: "",
     model: "",
   });
+
   const [inputFilter, setInputFilter] = useState({
     brand: "",
     model: "",
   });
+
+  const handleImageChange = (event) => {
+    console.log(event.target.files[0]);
+    setInputValue((previous) => {
+      return {
+        ...previous,
+        image: event.target.files[0],
+        // loaded: 0,
+      };
+    });
+  };
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -46,16 +58,6 @@ export default function AddBlog() {
       };
     });
   };
-  const handleImageChange = (event) => {
-    console.log(event.target.files[0]);
-    setInputValue((previous) => {
-      return {
-        ...previous,
-        image: event.target.files[0],
-        loaded: 0,
-      };
-    });
-  }
   // const handleFilterChange = (event) => {
   //   const { value, name } = event.target;
   //   if (name === "brand") {
@@ -75,8 +77,19 @@ export default function AddBlog() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
+    const formData = new FormData();
+    formData.append(
+      "image",
+      inputValue.image,
+      // inputValue.image.name,
+      // inputValue.title,
+      // inputValue.body,
+      // inputValue.brand,
+      // inputValue.model,
+    );
+    const sent = {inputValue, formData};
     axios
-      .post("http://localhost:3000/user/addPost", inputValue, {
+      .post("http://localhost:3000/user/addPost", formData, {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
@@ -91,7 +104,8 @@ export default function AddBlog() {
       .catch((error) => {
         console.log(error);
       });
-    setInputValue("");
+      console.log(inputValue);
+    // setInputValue("");
   };
 
   return (
@@ -119,7 +133,7 @@ export default function AddBlog() {
                 placeHolder="Type the subject of your blog here"
                 value={inputValue.title}
                 onChange={handleChange}
-                req={true}
+                req={false}
               />
             </div>
             <div className="mb-3">
@@ -128,7 +142,8 @@ export default function AddBlog() {
               </label>
               <input
                 type="file"
-                name="file"
+                name="image"
+                // value={inputValue.image}
                 onChange={handleImageChange}
               ></input>
               {/* <Input
@@ -150,7 +165,7 @@ export default function AddBlog() {
                 placeHolder="Type the blog information"
                 value={inputValue.body}
                 onChange={handleChange}
-                required
+                // required
               ></textarea>
             </div>
 
@@ -174,7 +189,7 @@ export default function AddBlog() {
                   className="custom-select"
                   name="brand"
                   onChange={handleChange}
-                  required
+                  // required
                 >
                   {/* <option selected>Open this select menu</option> */}
                   {cars2.map((item, index) => {
