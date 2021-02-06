@@ -26,7 +26,7 @@ addNewPost = (req, res) => {
   // });
   const Postinput ={}
   //kjiuhuihuihuihiuhukukukuk
-  if(req.file.filename){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
+  if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
   const IdPerson = req.user._id;
   if (!body) {
