@@ -5,11 +5,9 @@ import Loading from "../components/Loading";
 // const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
 const Homepage2 = React.lazy(() => import("../layout/Homepage/Homepage2"));
 
-
 const Login = React.lazy(() =>
   import("../pages/user/authentication/login/Login")
 );
-
 const SignUp = React.lazy(() =>
   import("../pages/user/authentication/signUp/SignUp")
 );
@@ -56,8 +54,8 @@ const SignChoice = React.lazy(() =>
 const VendorSignForm = React.lazy(() =>
   import("../pages/user/authentication/vendorSignForm/VendorSignForm")
 );
-const VendorAdministraion = React.lazy(() =>
-  import("../pages/user/profile/vendorAdministraionProfile/vendorAdministraion")
+const VendorAdministration = React.lazy(() =>
+  import("../pages/user/profile/vendorAdministrationProfile/VendorAdministration")
 );
 
 
@@ -95,7 +93,7 @@ export default function Routes() {
         <Route path="/SignForm" exact component={Signform} />
         <Route path="/VendorSignForm" exact component={VendorSignForm} />
         <Route path="/SignChoice" exact component={SignChoice} />
-        <Route path="/vendorAdministraion" exact component={VendorAdministraion} />
+        <Route path="/VendorAdministration/(page)?" component={VendorAdministration} />
 
         <Route
           path="/DisplayUserProfile"
