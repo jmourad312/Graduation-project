@@ -3,6 +3,7 @@ const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
+const Vote = require('../../models/Blog/votingPost')
 const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 // add post
@@ -129,10 +130,19 @@ addComment = (req, res) => {
     });
   }
 
+  const vote = new Vote();
+  vote.save();
+
   const comment = new Comment(body);
   comment.person = IdPerson;
   comment.post = IdPost;
-  comment.save().catch((error) => {
+  comment.vote = vote._id;
+
+  comment.save().then((dataComment) => {
+    vote.comment = dataComment._id;
+    vote.save();
+  }
+  ).catch((error) => {
     return res.status(400).json({
       Data: error,
       Message: "*****************",
@@ -261,10 +271,9 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: {
-        path: "person",
-        select: "firstName",
-      },
+      populate: [{ path: "person", select: "firstName"}
+      , { path: "vote", select: "numberOfVoting" }
+      ],
       select: "-post ",
     },
   ];
@@ -289,9 +298,9 @@ showDetailsPost = (req, res) => {
 showFilterPosts = (req, res) => {
   const criteriaSearch = { $regex: req.body.search, $options: 'i' };
   const queryCond = {}
-  
+
   if (req.body.search) {
-      queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }]
+    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }]
   }
   if (req.body.model) {
     queryCond.model = req.body.model;
@@ -342,35 +351,55 @@ showPostsOfUser = (req, res) => {
 };
 
 // remove voting on comment
-removeVoteFromComment = (req, res) => {
-  Comment.updateOne(
-    { _id: req.params.id },
-    { $pullAll: { Voting: req.user._id } },
+removeVoteFromComment = async (req, res) => {
+
+  const personVote = await Vote.find({ person: { $in: req.user._id } })
+
+  if (personVote.length == 0) {
+    return res.json({
+      Data: null,
+      Message: "You already don't vote before",
+      Success: false,
+    });
+  }
+
+  Vote.updateOne(
+    { comment: req.params.id },
+    { $pull: { person: req.user._id }, $inc: { numberOfVoting: -1 } },
     (error, data) => {
       if (error) {
-        return res.status(400).json({
+        return res.json({
           Data: error,
-          Message: "can't delete vote",
+          Message: "can't vote",
           Success: false,
         });
       }
-      return res.status(200).json({
+      return res.json({
         Data: data.n,
-        Message: " لييييه يا اخي بس ",
+        Message: "Done remove voting",
         Success: true,
       });
     }
   );
+
+
 };
 
-voteToComment = (req, res) => {
+voteToComment = async (req, res) => {
 
+  const personVote = await Vote.find({ person: { $in: req.user._id } })
 
+  if (personVote.length > 0) {
+    return res.status(400).json({
+      Data: null,
+      Message: "You already vote before",
+      Success: false,
+    });
+  }
 
-  
-  Comment.updateOne(
-    { _id: req.params.id },
-    { $push: { Voting: req.user._id } },
+  Vote.updateOne(
+    { comment: req.params.id },
+    { $push: { person: req.user._id }, $inc: { numberOfVoting: 1 } },
     (error, data) => {
       if (error) {
         return res.status(400).json({
@@ -381,29 +410,11 @@ voteToComment = (req, res) => {
       }
       return res.status(200).json({
         Data: data.n,
-        Message: "احلى فوت",
+        Message: "Done add Voting",
         Success: true,
       });
     }
   );
-};
-
-// calculate number of voting
-numberOfVoting = (req, res) => {
-  Comment.findOne({ _id: req.params.id }, { Voting: 1 }, (error, data) => {
-    if (error) {
-      return res.status(400).json({
-        Data: error,
-        Message: "can't delete vote",
-        Success: false,
-      });
-    }
-    return res.status(200).json({
-      Data: data.Voting.length,
-      Message: "number of voting",
-      Success: true,
-    });
-  });
 };
 
 // add posts to bookmark
@@ -499,7 +510,6 @@ module.exports = {
   showFilterPosts,
   voteToComment,
   removeVoteFromComment,
-  numberOfVoting,
   addBookmarks,
   getBookmarksList,
 };

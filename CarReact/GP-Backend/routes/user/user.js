@@ -55,9 +55,9 @@ router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }
 router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.updatePost);
 
 // add comment or reply in comment 
-router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addComment);
+router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addComment);
 
-router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addCommentReply);
+router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addCommentReply);
 
 // show posts
 router.post("/showFilterPosts", userBlogCtrl.showFilterPosts)
@@ -73,8 +73,6 @@ router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }),
 router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.voteToComment);
 
 router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.removeVoteFromComment);
-
-router.get("/numberOfVoting/:id", userBlogCtrl.numberOfVoting);
 
 //bookmarks 
 router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addBookmarks);

@@ -40,7 +40,7 @@ router.get("/numberOfItem",passport.authenticate('jwt', { session: false }),canV
 router.get("/partOfItem/:skip",passport.authenticate('jwt', { session: false }),canView,vendorItemCtrl.partOfItem);
 
 router.put("/updateProfilePassword/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfilePassword);
-router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
+// router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
 router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,upload.single("image"),vendorprofiileCtrl.updateProfile);
 router.get('/showVendorProfile/:id',passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.showVendorProfile);
 

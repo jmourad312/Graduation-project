@@ -8,7 +8,6 @@ var reply = new schema(
       default: "",
     },
     image: [String],
-    commentVoting: Number,
     person: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
@@ -23,13 +22,11 @@ var reply = new schema(
         ref: "Reply",
       },
     ],
-    voting: [Number],
-    vote: [
+    vote: 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Voting",
       },
-    ],
   },
   { timestamps: true }
 );

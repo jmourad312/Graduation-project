@@ -148,7 +148,7 @@ updateProfile = async (req, res) => {
                 }
                 else {
                     return res.status(200).json({
-                        Data: dataOfVendor.n + dataOfPerson+n,
+                        Data: dataOfVendor.n + dataOfPerson.n,
                         Message: "updated ",
                         Success: true,
                     });
