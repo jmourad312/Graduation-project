@@ -49,7 +49,7 @@ export default function BlogList() {
         key={blog._id}
         id={blog._id}
         // imgClass={blog.imgClass}
-        imgSrc={blog.images}
+        imgSrc={blog.image}
         // imgAlt={blog.imgAlt}
         badgeClass={blog.state ? "badge-primary" : null}
         // badgeValue={blog.badgeValue}
