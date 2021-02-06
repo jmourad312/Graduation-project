@@ -9,7 +9,7 @@ var person = new schema({
   email: String,
   password: String,
   image: { type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS88rI7RXVX2mJ4tuynlW20f-wsl9lzNKhCHg&usqp=CAU" },
-  phoneNumber: [Number],
+  phoneNumber: Number,
   subscribe: Boolean,
   role: { type: String, enum: ["user", "admin", "vendor"], default: "user" },
   region: {

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
-var bookmarkSchema = new schema({
+var voting = new schema({
   type: [Number],
   
   person: {
@@ -16,4 +16,4 @@ var bookmarkSchema = new schema({
 
 });
 
-module.exports = mongoose.model("BookmarksList", bookmarkSchema);
+module.exports = mongoose.model("Voting", voting);

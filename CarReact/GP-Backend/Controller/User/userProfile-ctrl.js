@@ -27,20 +27,23 @@ showUserProfile = (req, res) => {
 };
 
 //update info
-updateUserProfile = (req,res) =>{
-    const {...data} = req.body
-    person.updateOne({_id:req.params.id},data, { upsert: true, new: true },(error,data)=>{
+updateUserProfile = async (req,res) =>{
+    const data = req.body
+    const saltRounds = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, saltRounds);
+
+    person.updateOne({_id:req.params.id},{...data,password:password}, { upsert: true, new: true },(error,data)=>{
         if(error){
             return res.status(400).json({
                 Data: null,
-                Message: "You can't update ",
+                Message: "You can't update",
                 Success: false,
               });
         }
         else{
             return res.status(200).json({
                 Data: data.n,
-                Message: "updated ",
+                Message: "updated",
                 Success: true,
               });
         }
