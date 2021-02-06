@@ -38,16 +38,12 @@ export const getProductDetails = (params) => async (dispatch) => {
     console.log(error);
   }
 };
-
 export const setProductId = (payload) => {
   return {
     type: TYPES.GET_PRODUCT_ID,
     payload,
   };
 };
-
-
-
 export const resultFromFilterProduct = (data) => async (dispatch) => {
   try {
     console.log(data)
@@ -62,9 +58,6 @@ export const resultFromFilterProduct = (data) => async (dispatch) => {
     console.log(error);
   }
 };
-
-
-
 //----------------------------------------------
 // blog requests -------------------------------
 export const getBlogDetails = (params) => async (dispatch) => {
@@ -167,7 +160,6 @@ export const filterCarBrand = () => async (dispatch) => {
     console.log(error);
   }
 };
-
 export const filterCarModel = (namebrand) => async (dispatch) => {
   try {
     const res = await axios.get(`http://localhost:3000/admin/getModel/${namebrand}`);
@@ -194,7 +186,6 @@ export const filterCarModel = (namebrand) => async (dispatch) => {
 //     console.log(error);
 //   }
 // };
-
 export const resultFromFilter = (data) => async (dispatch) => {
   try {
     console.log(data)
@@ -210,6 +201,8 @@ export const resultFromFilter = (data) => async (dispatch) => {
 };
 //filter add blog
 
+
+
 // get user -----------------------
 export const setUserIdAction = (payload) => {
   return {
@@ -217,7 +210,6 @@ export const setUserIdAction = (payload) => {
     payload,
   };
 };
-
 export const getUsersAction = (params) => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -284,6 +276,42 @@ export const userSignUpAction = () => async (dispatch) => {
 
 
 //VENDOR----------------------------------------------------------
+export const setVendorIdAction = (payload) => {
+  return {
+    type: TYPES.GET_VENDOR_ID,
+    payload,
+  };
+};
+export const getVendorsAction = (params) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/vendor/showVendorProfile/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_VENDOR,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getVendorsItemsAction = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/vendor/getItems`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_VENDOR_ITEMS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 //-------------------vendor sign in
 export const vendorSignInAction = () => async (dispatch) => {
   try {
@@ -310,6 +338,16 @@ export const vendorSignUpAction = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+
+
+
+
+
+
+
+
+
 
 ///-----savee token
 export const setToken = (payload) => {

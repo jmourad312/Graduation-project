@@ -12,10 +12,10 @@ export default function ProfileRight(props) {
         <Switch>
           <div className="vendorRightContent">
             <Route path={`/VendorAdministration/VendorDetails/`}>
-              <VendorDetails />
+              <VendorDetails vendor={props.vendor} />
             </Route>
             <Route path={`/VendorAdministration/MyItems/`}>
-              <MyItems  />
+              <MyItems />
             </Route>
             <Route path={`/VendorAdministration/VendorSettings/`}>
               <VendorSettings />
