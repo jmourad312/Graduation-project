@@ -8,15 +8,15 @@ import { getUsersAction, setUserIdAction } from "../../../../store/actions";
 
 export default function MyProfile() {
   const dispatch = useDispatch();
-  const userID = useSelector((state) => state.userID);
+  // const userID = useSelector((state) => state.userID);
   const user = useSelector((state) => state.user.Data);
-  dispatch(setUserIdAction(userID));
+  dispatch(setUserIdAction(localStorage.getItem("UserID")));
 
   useEffect(() => {
-    dispatch(getUsersAction(userID));
+    dispatch(getUsersAction(localStorage.getItem("UserID")));
     console.log(user ? user.person : "loading");
-    console.log(userID);
-  }, [userID]);
+    console.log(localStorage.getItem("UserID"));
+  }, [localStorage.getItem("UserID")]);
 
   return (
     <div>

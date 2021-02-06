@@ -41,10 +41,12 @@ export default function Signform(props) {
         console.log(res);
         setUserID(res.data.Data);
         localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("UserID", res.data.Data);
+
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          props.history.push(`/MyProfile/${userID}`);
+          props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
       .catch((error) => {
@@ -76,10 +78,11 @@ export default function Signform(props) {
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("UserID", res.data.Data);
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          props.history.push(`/MyProfile/${userID}`);
+          props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
       .catch((error) => {
