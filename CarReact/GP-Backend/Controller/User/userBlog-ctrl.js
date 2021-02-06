@@ -275,9 +275,7 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: [{ path: "person", select: "firstName"}
-      , { path: "vote", select: "numberOfVoting" }
-      ],
+      populate: [{ path: "person", select: "firstName"}, { path: "vote", select: "numberOfVoting" }],
       select: "-post ",
     },
   ];
@@ -357,8 +355,8 @@ showPostsOfUser = (req, res) => {
 // remove voting on comment
 removeVoteFromComment = async (req, res) => {
 
-  const personVote = await Vote.find({ person: { $in: req.user._id } })
-
+  const personVote = await Vote.find({ person: { $in: req.user._id },  comment: req.params.id  })
+  console.log(personVote)
   if (personVote.length == 0) {
     return res.json({
       Data: null,
@@ -367,7 +365,7 @@ removeVoteFromComment = async (req, res) => {
     });
   }
 
-  Vote.updateOne(
+  Vote.findOneAndUpdate(
     { comment: req.params.id },
     { $pull: { person: req.user._id }, $inc: { numberOfVoting: -1 } },
     (error, data) => {
@@ -379,7 +377,7 @@ removeVoteFromComment = async (req, res) => {
         });
       }
       return res.json({
-        Data: data.n,
+        Data: data.numberOfVoting,
         Message: "Done remove voting",
         Success: true,
       });
@@ -391,29 +389,30 @@ removeVoteFromComment = async (req, res) => {
 
 voteToComment = async (req, res) => {
 
-  const personVote = await Vote.find({ person: { $in: req.user._id } })
+  const personVote = await Vote.find({ person: { $in: req.user._id },  comment: req.params.id  })
+  console.log(personVote)
 
   if (personVote.length > 0) {
-    return res.status(400).json({
+    return res.json({
       Data: null,
       Message: "You already vote before",
       Success: false,
     });
   }
 
-  Vote.updateOne(
+  Vote.findOneAndUpdate(
     { comment: req.params.id },
     { $push: { person: req.user._id }, $inc: { numberOfVoting: 1 } },
     (error, data) => {
       if (error) {
-        return res.status(400).json({
+        return res.json({
           Data: error,
           Message: "can't vote",
           Success: false,
         });
       }
       return res.status(200).json({
-        Data: data.n,
+        Data: data.numberOfVoting,
         Message: "Done add Voting",
         Success: true,
       });

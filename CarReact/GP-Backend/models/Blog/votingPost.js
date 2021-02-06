@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
 var voting = new schema({
-    numberOfVoting:Number,
+    numberOfVoting:{type:Number,default:0},
     person: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Person",

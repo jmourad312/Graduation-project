@@ -27,6 +27,9 @@ export const GET_BLOG_DETAILS = "GET_BLOG_DETAILS";
 export const GET_BLOG_ID = "GET_BLOG_ID";
 export const GET_BRAND = "GET_BRAND"
 export const GET_MODEL = "GET_MODEL"
+export const ADD_VOTE = "ADD_VOTE"
+export const REMOVE_VOTE = "REMOVE_VOTE"
+
 // export const GET_MODEL_ADD_FILTER = "GET_MODEL_ADD_FILTER";
 export const GET_RESULTS_FILTER = "GET_RESULTS_FILTER"
 export const ADD_BLOG = "ADD_BLOG";

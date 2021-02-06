@@ -74,6 +74,39 @@ export const getBlogDetails = (params) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addVoteComment = (params) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:3000/user/voteToComment/${params}`,"s",
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    // console.log(res);
+    dispatch({
+      type: TYPES.ADD_VOTE,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeVoteComment = (params) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `http://localhost:3000/user/removeVoteFromComment/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    // console.log(res);
+    dispatch({
+      type: TYPES.REMOVE_VOTE,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const setBlogId = (payload) => {
   return {
     type: TYPES.GET_BLOG_ID,

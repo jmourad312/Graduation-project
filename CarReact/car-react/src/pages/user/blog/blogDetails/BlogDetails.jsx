@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getBlogDetails } from '../../../../store/actions';
+import { getBlogDetails, addVoteComment, removeVoteComment } from '../../../../store/actions';
 
 export default function BlogDetails(props) {
   // const blogs = useSelector((state) => state.blogs);
@@ -59,31 +59,40 @@ export default function BlogDetails(props) {
     setInputValue({ content: "" });
   };
 
-  const handleReplySubmit = (event,params) => {
+  const handleReplySubmit = (event, params) => {
     event.preventDefault();
     console.log(params);
     console.log(replyInput);
     // axios
-      // .post(
-      //   `http://localhost:3000/user/addCommentReply/${params}`,
-      //   replyInput,
-      //   {
-      //     headers: { Authorization: localStorage.getItem("Authorization") },
-      //   }
-      // )
-      // .then((req) => {
-      //   console.log(req);
-      //   if (req.data.Success === true) {
-      //     console.log("success");
-      //   } else {
-      //     console.log("fail");
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // });
+    // .post(
+    //   `http://localhost:3000/user/addCommentReply/${params}`,
+    //   replyInput,
+    //   {
+    //     headers: { Authorization: localStorage.getItem("Authorization") },
+    //   }
+    // )
+    // .then((req) => {
+    //   console.log(req);
+    //   if (req.data.Success === true) {
+    //     console.log("success");
+    //   } else {
+    //     console.log("fail");
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
     setReplyInput({ replyContent: "" });
   };
+
+  const addVote = (id) => {
+    dispatch(addVoteComment(id));
+
+  }
+  const removeVote = (id) => {
+    dispatch(removeVoteComment(id));
+
+  }
 
   useEffect(() => {
     getBlog(blogID);
@@ -160,27 +169,31 @@ export default function BlogDetails(props) {
 
       {/* <!-- Single Comment --> */}
       {blogDetails
-        ? blogDetails.comment.map((item,index) => {
-            return (
-              <div className="media mb-1" key={index}>
-                <img
-                  className="d-flex mr-3 rounded-circle"
-                  src={item.image}
-                  alt=""
-                  style={{ maxHeight: "300px", maxWidth: "300px" }}
-                />
+        ? blogDetails.comment.map((item, index) => {
+          return (
+            <div className="media mb-1" key={index}>
+              <button className="btn btn-info" onClick={() => addVote(item._id)}><i className="fas fa-arrow-circle-up" /></button>
+              <span className="btn badge-pill btn-success">{item.vote.numberOfVoting}</span>
+              <button className="btn btn-info" onClick={() => removeVote(item._id)}><i class="fas fa-arrow-circle-down" /></button>
+
+              <img
+                className="d-flex mr-3 rounded-circle"
+                src={item.image}
+                alt=""
+                style={{ maxHeight: "300px", maxWidth: "300px" }}
+              />
+              <hr />
+              <br />
+              <div className="media-body">
+                <h5 className="mt-0">
+                  {item.person.firstName ? item.person.firstName : null}
+                </h5>
                 <hr />
                 <br />
-                <div className="media-body">
-                  <h5 className="mt-0">
-                    {item.person.firstName ? item.person.firstName : null}
-                  </h5>
-                  <hr />
-                  <br />
-                  <p>{item.content}</p>
-                </div>
+                <p>{item.content}</p>
+              </div>
 
-                {/* <form
+              {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -196,7 +209,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                {/* {item
+              {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -216,9 +229,9 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-              </div>
-            );
-          })
+            </div>
+          );
+        })
         : "LOADING"}
 
 
@@ -321,9 +334,9 @@ export default function BlogDetails(props) {
                 <h5 className="card-title">Card title</h5>
                 <p className="card-text">Some quick content.</p>
               </div> */}
-            {/* </div> */}
-          {/* </div> */}
-        {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
       {/* </div> */}
     </div>
   );

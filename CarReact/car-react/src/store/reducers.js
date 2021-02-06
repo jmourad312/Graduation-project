@@ -20,6 +20,8 @@ export default (
     model: [],
     modelAddFilter: [],
     filterblog: [],
+    addVote: 0,
+    removeVote: 0,
     //--------------
     user: [],
     userID: "",
@@ -108,6 +110,17 @@ export default (
       return {
         ...state,
         model: action.payload,
+      };
+
+    case TYPES.ADD_VOTE:
+      return {
+        ...state,
+        addVote: action.payload,
+      };
+    case TYPES.REMOVE_VOTE:
+      return {
+        ...state,
+        removeVote: action.payload,
       };
     // case TYPES.GET_MODEL_ADD_FILTER:
     //   return {
