@@ -1,19 +1,19 @@
 .vendorAdmin{
 
-        background-color: $body-pattern;
         
         .vendorleft{
-            background-image: url("../"+$dark-pattern);
             // margin-top: 10%;
             padding: 15px;
             // border: 2px solid saddlebrown;
             text-align: center;
+            .newCont{
+                background-color: #010003;
+                background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
+            }
         }
         .vendorright{
-            background-image: url("../"+$dark-pattern);
-            // background-color: #010003;
-            // background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
-            margin-top: 10%;
+            background-color: #010003;
+            background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
             padding: 15px;
             // border: 2px solid saddlebrown;
             .vendorRightContent{

@@ -17,11 +17,12 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 //add post
 addNewPost = (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
-  const images = [];
-  req.files.map((file) => {
-    images.push("http://localhost:3000/images/" + file.filename);
-    console.log(images)
-  });
+  // const images = [];
+  // req.files.map((file) => {
+  //   images.push("http://localhost:3000/images/" + file.filename);
+  //   console.log(images)
+  // });
+  const image = req.file.filename;
 
   const IdPerson = req.user._id;
   if (!body) {
@@ -32,7 +33,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post(body, images);
+  const post = new Post(body, "http://localhost:3000/images/" +  image);
   post.person = IdPerson;
 
   if (!post) {
@@ -363,6 +364,10 @@ removeVoteFromComment = (req, res) => {
 };
 
 voteToComment = (req, res) => {
+
+
+
+  
   Comment.updateOne(
     { _id: req.params.id },
     { $push: { Voting: req.user._id } },

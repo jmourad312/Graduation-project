@@ -1,8 +1,100 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import { useDispatch } from "react-redux";
+import { setVendorIdAction } from "../../../../store/actions";
+import axios from "axios";
 
-export default function VendorSignForm() {
+export default function VendorSignForm(props) {
+
+  const dispatch = useDispatch();
+  const setVendorID=(params)=>{
+    dispatch(setVendorIdAction(params))
+  }
+
+  const [vendorSignUpInfo, setVendorSignUpInfo] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: 0,
+    password: "",
+    confirmPassword: "",
+  });
+  const changeVendorSignUpInfo = (event) => {
+    const { value, name } = event.target;
+    setVendorSignUpInfo((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
+  const handleVendorSignUp = (event) => {
+    event.preventDefault();
+    console.log(vendorSignUpInfo);
+    axios
+      .post("http://localhost:3000/vendor/auth/signup", vendorSignUpInfo)
+      .then((res) => {
+        console.log(res);
+        setVendorID(res.data.Data);
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("VendorID", res.data.Data);
+        console.log(localStorage.getItem("Authorization"));
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+          props.history.push(
+            `/VendorAdministration/${localStorage.getItem("VendorID")}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+
+
+
+  const [vendorSignInInfo, setVendorSignInInfo] = useState({
+    email: "",
+    password: "",
+  });
+  const changeVendorSignInInfo = (event) => {
+    const { value, name } = event.target;
+    setVendorSignInInfo((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
+  const handleVendorSignIn = (event) => {
+    event.preventDefault();
+    console.log(vendorSignInInfo);
+    axios
+      .post("http://localhost:3000/vendor/auth/signin", vendorSignInInfo)
+      .then((res) => {
+        console.log(res);
+        setVendorID(res.data.Data);
+        // savetoken(res.data.Data.token);
+        // console.log(token);
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("VendorID", res.data.Data);
+        console.log(localStorage.getItem("Authorization"));
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+          props.history.push(
+            `/VendorAdministration/${localStorage.getItem("VendorID")}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     /*global $, document, window, setTimeout, navigator, console, location*/
     $(document).ready(function () {
@@ -213,27 +305,27 @@ export default function VendorSignForm() {
               <div className="col-sm-6 form">
                 {/* <!-- Login Form --> */}
                 <div className="login form-peice switched">
-                  <form
-                    className="login-form"
-                    action="localhost:3000/vendor/auth/signin"
-                    method="post"
-                  >
+                  <form className="login-form" onSubmit={handleVendorSignIn}>
                     <div className="form-group">
-                      <label for="loginemail">Email Adderss</label>
+                      <label for="email">Email Adderss</label>
                       <input
                         type="email"
-                        name="loginemail"
-                        id="loginemail"
+                        name="email"
+                        id="email"
+                        value={vendorSignInInfo.email}
+                        onChange={changeVendorSignInInfo}
                         required
                       />
                     </div>
 
                     <div className="form-group">
-                      <label for="loginPassword">Password</label>
+                      <label for="password">Password</label>
                       <input
                         type="password"
-                        name="loginPassword"
-                        id="loginPassword"
+                        name="password"
+                        id="password"
+                        value={vendorSignInInfo.password}
+                        onChange={changeVendorSignInInfo}
                         required
                       />
                     </div>
@@ -250,20 +342,18 @@ export default function VendorSignForm() {
 
                 {/* <!-- Signup Form --> */}
                 <div className="signup form-peice">
-                  <form
-                    className="signup-form"
-                    action="localhost:3000/vendor/auth/signup"
-                    method="post"
-                  >
+                  <form className="signup-form" onSubmit={handleVendorSignUp}>
                     <div className="row">
                       <div className="col-4">
                         <div className="form-group">
                           <label for="firstName">First Name</label>
                           <input
                             type="text"
-                            name="username"
+                            name="firstName"
                             id="firstName"
                             className="name"
+                            value={vendorSignUpInfo.firstName}
+                            onChange={changeVendorSignUpInfo}
                           />
                           <span className="error"></span>
                         </div>
@@ -273,9 +363,11 @@ export default function VendorSignForm() {
                           <label for="middleName">Middle Name</label>
                           <input
                             type="text"
-                            name="username"
+                            name="middleName"
                             id="middleName"
                             className="name"
+                            value={vendorSignUpInfo.middleName}
+                            onChange={changeVendorSignUpInfo}
                           />
                           <span className="error"></span>
                         </div>
@@ -285,9 +377,11 @@ export default function VendorSignForm() {
                           <label for="lastName">Last Name</label>
                           <input
                             type="text"
-                            name="username"
+                            name="lastName"
                             id="lastName"
                             className="name"
+                            value={vendorSignUpInfo.lastName}
+                            onChange={changeVendorSignUpInfo}
                           />
                           <span className="error"></span>
                         </div>
@@ -297,9 +391,11 @@ export default function VendorSignForm() {
                       <label for="email">Email Adderss</label>
                       <input
                         type="email"
-                        name="emailAdress"
+                        name="email"
                         id="email"
                         className="email"
+                        value={vendorSignUpInfo.email}
+                        onChange={changeVendorSignUpInfo}
                       />
                       <span className="error"></span>
                     </div>
@@ -318,17 +414,21 @@ export default function VendorSignForm() {
                         name="password"
                         id="password"
                         className="pass"
+                        value={vendorSignUpInfo.password}
+                        onChange={changeVendorSignUpInfo}
                       />
                       <span className="error"></span>
                     </div>
 
                     <div className="form-group">
-                      <label for="passwordCon">Confirm Password</label>
+                      <label for="confirmPassword">Confirm Password</label>
                       <input
                         type="password"
-                        name="passwordCon"
-                        id="passwordCon"
+                        name="confirmPassword"
+                        id="confirmPassword"
                         className="passConfirm"
+                        value={vendorSignUpInfo.confirmPassword}
+                        onChange={changeVendorSignUpInfo}
                       />
                       <span className="error"></span>
                     </div>

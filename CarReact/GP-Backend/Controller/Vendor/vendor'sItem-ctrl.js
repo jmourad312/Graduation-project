@@ -46,35 +46,22 @@ addItem = (req, res) => {
 getItems = async (req, res) => {
   const IdVendor = req.user._id;
 
-  await carItem
-    .find({ vendor: IdVendor }, (err, items) => {
-      if (err) {
-        return res.status(400).json({
-          Data: err,
-          Message: "You must provide an item ",
-          Success: false,
-        });
-      }
-      if (!items.length) {
-        return res.status(400).json({
-          Data: null,
+   carItem
+    .find({ person: IdVendor }, (error, items) => {
+      if (error || items.length == 0) {
+        return res.json({
+          Data: error,
           Message: "Item not found",
           Success: false,
         });
       }
-      return res.status(200).json({
+      return res.json({
         Data: items,
-        Message: "احلى ايتم لاحلى زبون",
+        Message: "number of items:"+items.length,
         Success: true,
       });
     })
-    .catch((error) => {
-      return res.status(200).json({
-        Data: error.message,
-        Message: "Item not found ",
-        Success: false,
-      });
-    });
+
 };
 
 //get One Item

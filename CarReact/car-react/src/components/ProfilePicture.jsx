@@ -1,30 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
 
 export default function ProfilePicture(props) {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .put(
-        `http://localhost:3000/user/updateUserProfile/${localStorage.getItem("UserID")}`,props.image,
-        {
-          headers: { Authorization: localStorage.getItem("Authorization") },
-        }
-      )
-      .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
+  // const [state, setState] = useState({
+  //   image:""
+  // })
+
+  // const handleChange = (event) => {
+  //   const { value, name } = event.target;
+  //   setState((previous) => {
+  //     return {
+  //       ...previous,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   axios
+  //     .put(
+  //       `http://localhost:3000/user/updateUserProfile/${localStorage.getItem("UserID")}`,props.image,
+  //       {
+  //         headers: { Authorization: localStorage.getItem("Authorization") },
+  //       }
+  //     )
+  //     .then((req) => {
+  //       console.log(req);
+  //       if (req.data.Success === true) {
+  //         console.log("Success");
+  //         // props.history.push("/MyProfile");
+  //       } else {
+  //         console.log("fail");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   useEffect(() => {
     function readURL(input) {
@@ -54,11 +69,23 @@ export default function ProfilePicture(props) {
               <input
                 type="file"
                 id="imageUpload"
+                name="image"
                 accept=".png, .jpg, .jpeg"
-                onChange={handleSubmit}
+                // onChange={handleChange}
               />
-              <label for="imageUpload"></label>
+              <label for="imageUpload" 
+              // onSubmit={handleSubmit}
+              ></label>
             </form>
+            {/* <Uploady
+              destination={{
+                url: `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
+                  "UserID"
+                )}`,
+              }}
+            >
+              <UploadButton />
+            </Uploady> */}
           </div>
           <div className="avatar-preview">
             <div

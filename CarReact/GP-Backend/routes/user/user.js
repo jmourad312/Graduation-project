@@ -3,12 +3,23 @@ const router = express.Router();
 const passport = require("passport");
 const userProfileCtrl = require("../../controller/User/userProfile-ctrl");
 const userBlogCtrl = require("../../Controller/User/userBlog-ctrl");
-const userItemCtrl = require ('../../Controller/User/userItem-ctrl');
-const upload =require ('../../middleware/upload').upload;
+const userItemCtrl = require('../../Controller/User/userItem-ctrl');
+const upload = require('../../middleware/upload').upload;
 
 function canView(req, resp, next) {
   const { role } = req.user;
   if (!(role == "user" || role == "admin")) {
+    resp.json({
+      Data: null,
+      Message: "can't access",
+      Success: false,
+    });
+  } else next();
+}
+
+function canViewall(req, resp, next) {
+  const { role } = req.user;
+  if (!(role == "user" || role == "admin" || role == "vendor")) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -30,14 +41,14 @@ function validateUser(req, resp, next) {
 }
 
 // user routes on his profile
-router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser,userProfileCtrl.showUserProfile);
+router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("images"), userProfileCtrl.showUserProfile);
 
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("image"), userProfileCtrl.updateUserProfile);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,upload.array("images",10),userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
@@ -71,12 +82,12 @@ router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false
 router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.getBookmarksList);
 
 // products 
-router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.partOfItem);
 
-router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.showDetailsItem);
+router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showDetailsItem);
 
 
-router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canView,userItemCtrl.showFilterItems);
+router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
 
 
 
