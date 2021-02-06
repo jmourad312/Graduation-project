@@ -2,9 +2,10 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 
 //create new Item
 addItem = (req, res) => {
+  const body = JSON.parse(JSON.stringify(req.body));
+
   const IdVendor = req.user._id;
   console.log("adddittem")
-  const body = req.body;
   if (!body) {
     return res.json({
       Data: null,
