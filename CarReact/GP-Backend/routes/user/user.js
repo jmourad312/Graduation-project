@@ -17,6 +17,17 @@ function canView(req, resp, next) {
   } else next();
 }
 
+function canViewall(req, resp, next) {
+  const { role } = req.user;
+  if (!(role == "user" || role == "admin" || role=="vendor")) {
+    resp.json({
+      Data: null,
+      Message: "can't access",
+      Success: false,
+    });
+  } else next();
+}
+
 function validateUser(req, resp, next) {
   console.log(req.user)
   const { role, _id } = req.user;
@@ -71,12 +82,12 @@ router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false
 router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.getBookmarksList);
 
 // products 
-router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.partOfItem);
 
-router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.showDetailsItem);
+router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showDetailsItem);
 
 
-router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canView,userItemCtrl.showFilterItems);
+router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall,userItemCtrl.showFilterItems);
 
 
 
