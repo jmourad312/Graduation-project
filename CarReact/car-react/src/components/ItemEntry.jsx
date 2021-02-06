@@ -5,10 +5,10 @@ import { setProductId } from '../store/actions';
 
 export default function ItemEntry(props) {
   const dispatch = useDispatch();
-
+let history = useHistory();
     const handleClick = (params) =>{
     dispatch(setProductId(params));
-    props.history.push(`/ProductDetails/${props.id}`);
+    history.push(`/ProductDetails/${props.id}`);
   }
     return (
       <div className="col-md-6 col-lg-6 col-xl-4 mb-4">
@@ -25,7 +25,7 @@ export default function ItemEntry(props) {
             <p className="card-text">{props.carBrand}</p>
             <p className="card-text">{props.carModel}</p>
 
-            <button className="btn btn-success" onClick={()=>handleClick(props._id)}>
+            <button className="btn btn-success" onClick={()=>handleClick(props.id)}>
               Details
             </button>
           </div>
