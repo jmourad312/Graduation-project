@@ -25,7 +25,7 @@ addNewPost = (req, res) => {
   //   images.push("http://localhost:3000/images/" + file.filename);
   //   console.log(images)
   // });
-  const Postinput ={}
+  const Postinput ={};
   
   if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
