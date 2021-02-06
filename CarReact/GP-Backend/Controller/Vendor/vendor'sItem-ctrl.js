@@ -47,10 +47,10 @@ getItems = async (req, res) => {
   const IdVendor = req.user._id;
 
    carItem
-    .find({ vendor: IdVendor }, (error, items) => {
+    .find({ person: IdVendor }, (error, items) => {
       if (error || items.length == 0) {
         return res.json({
-          Data: err,
+          Data: error,
           Message: "Item not found",
           Success: false,
         });
