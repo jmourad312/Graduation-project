@@ -363,6 +363,10 @@ removeVoteFromComment = (req, res) => {
 };
 
 voteToComment = (req, res) => {
+
+
+
+  
   Comment.updateOne(
     { _id: req.params.id },
     { $push: { Voting: req.user._id } },
