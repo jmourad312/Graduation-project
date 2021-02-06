@@ -61,7 +61,7 @@ export default function Settings() {
 
   return (
     <div>
-      <form method="put" onSubmit={handleSubmit}>
+      <form>
         <div className="row">
           <div className="form-group col-4">
             <Label
@@ -72,13 +72,7 @@ export default function Settings() {
             <Input
               id="firstName"
               class="form-control"
-              value={
-                user
-                  ? user.person
-                    ? user.person.firstName
-                    : "Loading"
-                  : "null"
-              }
+              value={userInfo.firstName}
               name="firstName"
               onChange={handleChange}
               placeHolder="First Name"
@@ -94,13 +88,7 @@ export default function Settings() {
             <Input
               id="middleName"
               class="form-control"
-              value={
-                user
-                  ? user.person
-                    ? user.person.middleName
-                    : "Loading"
-                  : "null"
-              }
+              value={userInfo.middleName}
               name="middleName"
               onChange={handleChange}
               placeHolder="Middle Name"
@@ -116,9 +104,7 @@ export default function Settings() {
             <Input
               id="lastName"
               class="form-control"
-              value={
-                user ? (user.person ? user.person.lastName : "Loading") : "null"
-              }
+              value={userInfo.lastName}
               name="lastName"
               onChange={handleChange}
               placeHolder="Last Name"
@@ -136,13 +122,7 @@ export default function Settings() {
           <Input
             id="phoneNumber"
             class="form-control"
-            value={
-              user
-                ? user.person
-                  ? user.person.phoneNumber
-                  : "Loading"
-                : "null"
-            }
+            value={userInfo.phoneNumber}
             name="phoneNumber"
             onChange={handleChange}
             placeHolder="Phone number"
@@ -160,13 +140,7 @@ export default function Settings() {
               <Input
                 id="password"
                 class="form-control"
-                value={
-                  user
-                    ? user.person
-                      ? user.person.password
-                      : "Loading"
-                    : "null"
-                }
+                value={userInfo.password}
                 name="password"
                 onChange={handleChange}
                 placeHolder="Password"
@@ -193,7 +167,12 @@ export default function Settings() {
             </div>
           </div>
         </div>
-        <Button onClick="" class="btn btn-success" value="Submit" />
+        <Button
+          onClick={handleSubmit}
+        //   type="submit"
+          class="btn btn-success"
+          value="Submit"
+        />
       </form>
     </div>
   );
