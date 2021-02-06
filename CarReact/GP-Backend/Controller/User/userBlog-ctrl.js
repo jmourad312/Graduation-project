@@ -18,9 +18,10 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 addNewPost = (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
   const images = [];
-  // req.files.map((file) => {
-  //   images.push("http://localhost:3000/images/" + file.filename);
-  // });
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+    console.log(images)
+  });
 
   const IdPerson = req.user._id;
   if (!body) {
