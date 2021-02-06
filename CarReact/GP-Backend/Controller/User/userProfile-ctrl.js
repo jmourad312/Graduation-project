@@ -28,11 +28,12 @@ showUserProfile = (req, res) => {
 
 //update info
 updateUserProfile = async (req,res) =>{
-    const data = req.body
+    const data = req.body;
+    const image = req.file;
     const saltRounds = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, saltRounds);
 
-    person.updateOne({_id:req.params.id},{...data,password:password}, { upsert: true, new: true },(error,data)=>{
+    person.updateOne({_id:req.params.id},{...data,password:password, image: image}, { upsert: true, new: true },(error,data)=>{
         if(error){
             return res.status(400).json({
                 Data: null,

@@ -30,14 +30,14 @@ function validateUser(req, resp, next) {
 }
 
 // user routes on his profile
-router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.showUserProfile);
+router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("images"),userProfileCtrl.showUserProfile);
 
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserProfile);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,upload.array("images",10),userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
