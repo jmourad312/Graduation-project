@@ -33,7 +33,7 @@ updateUserProfile = async (req,res) =>{
     const saltRounds = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, saltRounds);
 
-    person.updateOne({_id:req.params.id},{...data,password:password, image: image}, { upsert: true, new: true },(error,data)=>{
+    person.updateOne({_id:req.params.id},{...data,password:password, image: "http://localhost:3000/images/"+ image}, { upsert: true, new: true },(error,data)=>{
         if(error){
             return res.status(400).json({
                 Data: null,
