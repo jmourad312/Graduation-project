@@ -25,7 +25,7 @@ addNewPost = (req, res) => {
   //   console.log(images)
   // });
   const Postinput ={}
-
+  //
   if(req.file.filename){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
   const IdPerson = req.user._id;
