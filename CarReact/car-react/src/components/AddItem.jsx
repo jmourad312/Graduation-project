@@ -47,6 +47,16 @@ export default function AddBlog() {
       };
     });
   };
+  const handleImageChange = (event) => {
+    console.log(event.target.files[0]);
+    setInputValue((previous) => {
+      return {
+        ...previous,
+        image: event.target.files[0],
+        // loaded: 0,
+      };
+    });
+  };
   // const handleFilterChange = (event) => {
   //   const { value, name } = event.target;
   //   if (name === "brand") {
@@ -66,10 +76,23 @@ export default function AddBlog() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
+    const formData = new FormData();
+    formData.append("image", inputValue.image);
+    formData.append("name", inputValue.name);
+    formData.append("description", inputValue.description);
+    formData.append("carBrand", inputValue.carBrand);
+    formData.append("carModel", inputValue.carModel);
+    formData.append("price", inputValue.price);
+
+    const config = {
+      headers: {
+        "content-type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
     axios
-      .post("http://localhost:3000/vendor/add", inputValue, {
-        headers: { Authorization: localStorage.getItem("Authorization") },
-      })
+      .post("http://localhost:3000/vendor/add", formData, config)
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -124,7 +147,7 @@ export default function AddBlog() {
                 type="file"
                 name="image"
                 id="formFileMultiple"
-                multiple
+                onChange={handleImageChange}
               />
             </div>
             <div class="form-group">

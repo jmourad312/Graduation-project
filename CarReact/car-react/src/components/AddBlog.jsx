@@ -78,20 +78,24 @@ export default function AddBlog() {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    formData.append(
-      "image",
-      inputValue.image,
+    formData.append("image", inputValue.image);
+    formData.append("title", inputValue.title);
+    formData.append("body", inputValue.body);
+    formData.append("brand", inputValue.brand);
+    formData.append("model", inputValue.model);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
       // inputValue.image.name,
       // inputValue.title,
       // inputValue.body,
       // inputValue.brand,
       // inputValue.model,
-    );
-    const sent = {inputValue, formData};
     axios
-      .post("http://localhost:3000/user/addPost", formData, {
-        headers: { Authorization: localStorage.getItem("Authorization") },
-      })
+      .post("http://localhost:3000/user/addPost", formData, config)
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
