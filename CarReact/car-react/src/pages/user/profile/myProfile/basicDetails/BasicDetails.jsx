@@ -36,6 +36,22 @@ export default function BasicDetails(props) {
                 </div>
                 <div class="row">
                   <div class="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{props.person.middleName}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{props.person.lastName}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
                     <label>Email</label>
                   </div>
                   <div class="col-md-6">
