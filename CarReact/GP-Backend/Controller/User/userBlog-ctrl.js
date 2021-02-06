@@ -3,7 +3,7 @@ const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
-const Vote = require('../../models/Blog/votingPost')
+const Vote = require("../../models/Blog/votingPost");
 const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 // add post
@@ -23,7 +23,11 @@ addNewPost = (req, res) => {
   //   images.push("http://localhost:3000/images/" + file.filename);
   //   console.log(images)
   // });
-  const image = req.file.filename;
+  const Postinput = {};
+
+  if (req.file.filename) {
+    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  }
 
   const IdPerson = req.user._id;
   if (!body) {
@@ -34,7 +38,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post(body, "http://localhost:3000/images/" + image);
+  const post = new Post({ ...body, ...Postinput });
   post.person = IdPerson;
 
   if (!post) {
@@ -138,17 +142,19 @@ addComment = (req, res) => {
   comment.post = IdPost;
   comment.vote = vote._id;
 
-  comment.save().then((dataComment) => {
-    vote.comment = dataComment._id;
-    vote.save();
-  }
-  ).catch((error) => {
-    return res.status(400).json({
-      Data: error,
-      Message: "*****************",
-      Success: false,
+  comment
+    .save()
+    .then((dataComment) => {
+      vote.comment = dataComment._id;
+      vote.save();
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        Data: error,
+        Message: "*****************",
+        Success: false,
+      });
     });
-  });
 
   const populateQuery = [
     {
@@ -271,8 +277,9 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: [{ path: "person", select: "firstName"}
-      , { path: "vote", select: "numberOfVoting" }
+      populate: [
+        { path: "person", select: "firstName" },
+        { path: "vote", select: "numberOfVoting" },
       ],
       select: "-post ",
     },
@@ -296,11 +303,11 @@ showDetailsPost = (req, res) => {
 };
 
 showFilterPosts = (req, res) => {
-  const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const queryCond = {}
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  const queryCond = {};
 
   if (req.body.search) {
-    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }]
+    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }];
   }
   if (req.body.model) {
     queryCond.model = req.body.model;
@@ -308,7 +315,7 @@ showFilterPosts = (req, res) => {
   if (req.body.brand) {
     queryCond.brand = req.body.brand;
   }
-  console.log(queryCond)
+  console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
 
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
@@ -352,8 +359,7 @@ showPostsOfUser = (req, res) => {
 
 // remove voting on comment
 removeVoteFromComment = async (req, res) => {
-
-  const personVote = await Vote.find({ person: { $in: req.user._id } })
+  const personVote = await Vote.find({ person: { $in: req.user._id } });
 
   if (personVote.length == 0) {
     return res.json({
@@ -381,13 +387,10 @@ removeVoteFromComment = async (req, res) => {
       });
     }
   );
-
-
 };
 
 voteToComment = async (req, res) => {
-
-  const personVote = await Vote.find({ person: { $in: req.user._id } })
+  const personVote = await Vote.find({ person: { $in: req.user._id } });
 
   if (personVote.length > 0) {
     return res.status(400).json({
