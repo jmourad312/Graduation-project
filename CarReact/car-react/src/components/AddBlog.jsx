@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import axios from "axios";
-import $ from "jquery";
+import $, { event } from "jquery";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
 
 import { useDispatch, useSelector } from "react-redux";
-
 
 export default function AddBlog() {
   $("form").on("change", ".file-upload-field", function () {
@@ -26,7 +25,7 @@ export default function AddBlog() {
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
-    image: "",
+    image: null,
     brand: "",
     model: "",
   });
@@ -47,6 +46,16 @@ export default function AddBlog() {
       };
     });
   };
+  const handleImageChange = (event) => {
+    console.log(event.target.files[0]);
+    setInputValue((previous) => {
+      return {
+        ...previous,
+        image: event.target.files[0],
+        loaded: 0,
+      };
+    });
+  }
   // const handleFilterChange = (event) => {
   //   const { value, name } = event.target;
   //   if (name === "brand") {
@@ -118,12 +127,18 @@ export default function AddBlog() {
                 Multiple files input example
               </label>
               <input
-                className="form-control"
                 type="file"
-                name="image"
+                name="file"
+                onChange={handleImageChange}
+              ></input>
+              {/* <Input
+                class="form-control"
+                type="file"
+                name="images"
                 id="formFileMultiple"
-                multiple
-              />
+                // value={inputValue.image}
+                onChange={handleImageChange}
+              /> */}
             </div>
             <div class="form-group">
               <label for="content">Blog Content</label>
