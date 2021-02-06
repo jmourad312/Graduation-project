@@ -32,4 +32,4 @@ function genKeyPair() {
         });
 
 }
-module.exports = genKeyPair();
+module.exports = genKeyPair;

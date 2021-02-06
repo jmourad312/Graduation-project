@@ -3,6 +3,7 @@ import Image from "./Image";
 import profilePic from "../assets/Images/pexels-photo-220453.jpeg";
 import { Link } from "react-router-dom";
 import ProfilePicture from "./ProfilePicture";
+import { useSelector } from "react-redux";
 
 export default function ProfileLeft(props) {
 
@@ -15,9 +16,9 @@ export default function ProfileLeft(props) {
           height="100%"
           width="100%"
         /> */}
-        <ProfilePicture />
+        <ProfilePicture image={props.image} />
       </div>
-      <div className="mt-3" >
+      <div className="mt-3">
         <div className="mt-3 button raise">
           <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
         </div>
@@ -25,16 +26,20 @@ export default function ProfileLeft(props) {
           <Link to={`/MyProfile/RecentViews`}>Recently viewed</Link>
         </p>
         <p className="mt-3 button raise">
-          <Link to="/MyProfile/BlogPosts">My blog posts</Link>
+          <Link to={`/MyProfile/BlogPosts`}>My blog posts</Link>
         </p>
         <p className="mt-3 button fill">
-          <Link to="/MyProfile/FavouriteItems">Favourite items</Link>
+          <Link to={`/MyProfile/FavouriteItems`}>
+            Favourite items
+          </Link>
         </p>
         <p className="mt-3 button pulse">
-          <Link to="/MyProfile/BookmarkedPosts">Bookmarked posts</Link>
+          <Link to={`/MyProfile/BookmarkedPosts`}>
+            Bookmarked posts
+          </Link>
         </p>
         <p className="mt-3 button up">
-          <Link to="/MyProfile/Settings">Settings</Link>
+          <Link to={`/MyProfile/Settings`}>Settings</Link>
         </p>
       </div>
     </div>

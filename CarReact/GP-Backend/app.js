@@ -69,4 +69,5 @@ app.use("/images", express.static(__dirname + "/uploads"));
 //   console.log(images.length);
 // });
 
+
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

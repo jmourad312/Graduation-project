@@ -83,6 +83,18 @@
 //profile picture
 @import'styles/profpic';
 
+//my blog posts
+@import'styles/myblogposts';
+
+//bookmarked posts
+@import'styles/bookmarkedposts';
+
+//favourite items
+@import'styles/favouriteitems';
+
+//recent views
+@import'styles/recentviews';
+
 //background
 @-webkit-keyframes bg-scrolling-reverse {
   100% {
@@ -126,6 +138,7 @@
 }
 /* Main styles */
 body {
+  overflow-x: hidden;
   // background-color: #00163b;
   // background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */

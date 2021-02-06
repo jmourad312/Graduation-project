@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../../../components/Loading';
 import ProductComp from '../../../../components/ProductComp';
 import ProductFilter from '../../../../components/ProductFilter';
 import { getProductsAction } from '../../../../store/actions';
@@ -8,27 +9,29 @@ import { getProductsAction } from '../../../../store/actions';
 export default function ProductsList() {
   
   const products = useSelector((state) => state.products);
-  console.log(products);
+  // console.log(products);
   const dispatch = useDispatch();
-  console.log(products);
+  // console.log(products);
   const getProducts = () => {
     dispatch(getProductsAction());
   };
-  console.log(products);
+  // console.log(products);
 
   useEffect(() => {
     getProducts();
   }, []);
+
   const createProducts = (prod) =>{
     return (
       <ProductComp
-        key={prod.id}
+        key={prod._id}
+        id={prod._id}
         image={prod.image}
         price={prod.price}
-        title={prod.title}
-        brand={prod.description}
-        model={prod.description}
-        category={prod.category}
+        name={prod.name}
+        brand={prod.carBrand}
+        model={prod.carModel}
+        // category={prod.category}
       />
     );
   }
@@ -36,16 +39,16 @@ export default function ProductsList() {
     <div className="productList">
       <div className="container">
         <div className="row">
-          <div className="col-4" style={{ marginTop:"10%" }}>
+          <div className="col-3" style={{ marginTop: "10%" }}>
             <ProductFilter />
           </div>
-          <div className="col-8" style={{ marginTop: "10%" }}>
-          <div className="row">
-            {products.map(createProducts)}
-          </div>
+          <div className="col-9" style={{ marginTop: "5%" }}>
+            <div className="row">
+              {products.Data ? products.Data.map(createProducts) : <Loading />}
+            </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
   );
 }

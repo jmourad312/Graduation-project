@@ -14,22 +14,22 @@ export default function ProfileRight(props) {
       <Suspense fallback={<Loading />}>
         <Switch>
           <div className="profileRightContent">
-            <Route path={`/MyProfile/BasicDetails`}>
-              <BasicDetails />
+            <Route path={`/MyProfile/BasicDetails/`}>
+              <BasicDetails person={props.person} />
             </Route>
-            <Route path={`/MyProfile/RecentViews`}>
+            <Route path={`/MyProfile/RecentViews/`}>
               <RecentViews />
             </Route>
-            <Route path={`/MyProfile/BlogPosts`}>
+            <Route path={`/MyProfile/BlogPosts/`}>
               <BlogPosts />
             </Route>
-            <Route path={`/MyProfile/FavouriteItems`}>
-              <FavouriteItems />
+            <Route path={`/MyProfile/FavouriteItems/`}>
+              <FavouriteItems favouriteItems={props.favouriteItems} />
             </Route>
-            <Route path={`/MyProfile/BookmarkedPosts`}>
-              <BookmarkedPosts />
+            <Route path={`/MyProfile/BookmarkedPosts/`}>
+              <BookmarkedPosts bookmarkPosts={props.bookmarkPosts} />
             </Route>
-            <Route path={`/MyProfile/Settings`}>
+            <Route path={`/MyProfile/Settings/`}>
               <Settings />
             </Route>
           </div>

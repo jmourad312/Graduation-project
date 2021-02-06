@@ -35,7 +35,7 @@ router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,upload.array("images",10),userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
@@ -55,6 +55,7 @@ router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
 router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
 
+
 //vote 
 router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.voteToComment);
 
@@ -68,6 +69,13 @@ router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false
 router.get("/showPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.getBookmarksList);
 
 // products 
-router.get("/partOfItem/:skip", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.partOfItem);
+
+router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canView, userItemCtrl.showDetailsItem);
+
+
+router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canView,userItemCtrl.showFilterItems);
+
+
 
 module.exports = router;

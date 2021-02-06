@@ -1,10 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { setProductId } from "../store/actions";
 
 export default function ProductComp(props) {
+
+  var history = useHistory();
+  const productID = useSelector(state => state.productID)
+  const dispatch = useDispatch();
+
+  const handleClick = (params) =>{
+    dispatch(setProductId(params));
+    history.push(`/ProductDetails/${props.id}`);
+  }
+
+
+
   return (
-    <div className="col-md-4 col-lg-4 col-xl-4 mb-3">
-      <div className="card product">
+    <div className="col-md-3 col-lg-3 col-xl-3 mb-3">
+      <div className="card product" onClick={()=>handleClick(props.id)}>
         <div className="d-flex justify-content-between position-absolute w-100">
           <div className="label-new">
             <span className="text-white bg-success small d-flex align-items-center px-2 py-1">
@@ -20,7 +34,7 @@ export default function ProductComp(props) {
           </div>
         </div>
         <a href="#">
-          <img src={props.image} className="card-img-top" alt="Product" />
+          <img src={props.image} className="card-img-top" alt="Product" style={{maxHeight:"400px",maxWidth:"400px"}} />
         </a>
         <div className="card-body px-2 pb-2 pt-1">
           <div className="d-flex justify-content-between">
@@ -38,7 +52,7 @@ export default function ProductComp(props) {
           <p className="mb-0">
             <strong>
               <a href="#" className="text-secondary">
-                {props.title}
+                {props.name}
               </a>
             </strong>
           </p>

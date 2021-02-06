@@ -14,7 +14,7 @@ export default function BlogList() {
   const blogs = useSelector(state => state.blogs);
   const dispatch = useDispatch();
   const getBlogs = () =>{
-   // dispatch(getBlogsAction());
+  //  dispatch(getBlogsAction());
   }
 
   useEffect(() => {

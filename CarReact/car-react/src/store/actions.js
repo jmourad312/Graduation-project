@@ -1,6 +1,6 @@
 import * as TYPES from './types';
 import axios from 'axios';
-import { instance } from "../network/axiosConfig";
+
 
 // export const setLanguage = (payload) => {
 //   return {
@@ -9,10 +9,12 @@ import { instance } from "../network/axiosConfig";
 //   };
 // };
 
-// products requests -----------------------
+// products requests --------------------------
+
 export const getProductsAction = () => async (dispatch) =>{
     try {
-        const res = await axios.get('https://fakestoreapi.com/products');
+        const res = await axios.get("http://localhost:3000/user/partOfItem",
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
         console.log(res);
         dispatch({
             type: TYPES.GET_PRODUCTS,
@@ -22,8 +24,49 @@ export const getProductsAction = () => async (dispatch) =>{
         console.log(error);
     }
 }
+export const getProductDetails = (params) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/user/showDetailsItem/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    dispatch({
+      type: TYPES.GET_PRODUCT_DETAILS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// blog requests -------------------------
+export const setProductId = (payload) => {
+  return {
+    type: TYPES.GET_PRODUCT_ID,
+    payload,
+  };
+};
+
+
+
+export const resultFromFilterProduct = (data) => async (dispatch) => {
+  try {
+    console.log(data)
+    const res = await axios.post('http://localhost:3000/user/showFilterItems',data,
+    { headers: { Authorization: localStorage.getItem("Authorization") } });
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_PRODUCTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+//----------------------------------------------
+// blog requests -------------------------------
 export const getBlogDetails = (params) => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -167,11 +210,20 @@ export const resultFromFilter = (data) => async (dispatch) => {
 };
 //filter add blog
 
-
 // get user -----------------------
-export const getUsersAction = () => async (dispatch) => {
+export const setUserIdAction = (payload) => {
+  return {
+    type: TYPES.GET_USER_ID,
+    payload,
+  };
+};
+
+export const getUsersAction = (params) => async (dispatch) => {
   try {
-    const res = await axios.get("https://fakestoreapi.com/users");
+    const res = await axios.get(
+      `http://localhost:3000/user/showUserProfile/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
     console.log(res);
     dispatch({
       type: TYPES.GET_USER,
@@ -181,6 +233,7 @@ export const getUsersAction = () => async (dispatch) => {
     console.log(error);
   }
 };
+
 export const addUserAction = () => async (dispatch) => {
   try {
     const req = await axios.post("https://fakestoreapi.com/users");
