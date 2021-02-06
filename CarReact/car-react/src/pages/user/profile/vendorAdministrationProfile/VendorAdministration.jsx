@@ -3,49 +3,72 @@ import { Link } from 'react-router-dom'
 import Image from '../../../../components/Image'
 import profilePic from "../../../../assets/Images/pexels-photo-220453.jpeg";
 import VendorProfileRight from './VendorProfileRight';
+import { useDispatch, useSelector } from 'react-redux';
+import { getVendorsAction, setVendorIdAction } from '../../../../store/actions';
 // import ProfileRight from '../../../../components/ProfileRight';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default function VendorAdministration() {
+  const dispatch = useDispatch();
+  const vendor = useSelector((state) => state.vendor.Data);
+dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
+
     useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "../../../../assets/js/additem.js";
-        script.async = true;
-        document.body.appendChild(script);
-    }, []);
+      dispatch(getVendorsAction(localStorage.getItem("VendorID")));
+      console.log(vendor ? vendor.person : "loading");
+      console.log(localStorage.getItem("VendorID"));
+    }, [localStorage.getItem("VendorID")]);
+
     return (
-        <div className="vendorAdmin">
-            <section className="container">
-                <div className="vendorleft" style={{ height: "900px" }}>
-                    <div className="row m-auto ">
-                        <p className="mt-3 button raise">
-                            <Link to={`/VendorAdministration/VendorDetails`}>Basic details</Link>
-                        </p>
-                        <p className="mt-3 button raise">
-                            <Link to="/VendorAdministration/MyItems">My Items</Link>
-                        </p>
-                        <p className="mt-3 button up">
-                            <Link to="/VendorAdministration/VendorSettings">Settings</Link>
-                        </p>
-                    </div>
-                    <div className="row">
-                        <div className="col-3" >
-                            <Image
-                                src={profilePic}
-                                alt="profile picture"
-                                height="100%"
-                                width="100%"
-                            />
-                        </div>
-                        <div className="col-9 mt-5  ">
-                            <VendorProfileRight />
-                        </div>
-                    </div>
+      <div className="vendorAdmin">
+        <section className="container">
+          <div className="vendorleft">
+            <div style={{ marginTop: "10%" }}>
+              <div className="row m-auto newCont">
+                <div className="col-3">
+                  <Image
+                    src={
+                      vendor
+                        ? vendor.person
+                          ? vendor.person.image
+                          : null
+                        : null
+                    }
+                    alt="profile picture"
+                    height="100%"
+                    width="100%"
+                  />
                 </div>
-            </section>
-        </div>
-    )
+                <div className="col-9">
+                  <p className="mt-3 button raise">
+                    <Link to={`/VendorAdministration/VendorDetails`}>
+                      Basic details
+                    </Link>
+                  </p>
+                  <p className="mt-3 button raise">
+                    <Link to="/VendorAdministration/MyItems">My Items</Link>
+                  </p>
+                  <p className="mt-3 button up">
+                    <Link to="/VendorAdministration/VendorSettings">
+                      Settings
+                    </Link>
+                  </p>
+                </div>
+              </div>
+              <div className="row vendorright">
+                <div className="col-3"></div>
+                <div className="col-9 mt-5  ">
+                  <VendorProfileRight
+                    vendor={vendor ? vendor.person : "null"}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
 }
 
 

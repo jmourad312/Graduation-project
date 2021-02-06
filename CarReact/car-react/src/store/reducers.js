@@ -25,9 +25,14 @@ export default (
     userID: "",
     userSignIn: {},
     userSignUp: {},
+    token: "",
+    //vendor------------------
+    vendor: [],
+    vendorID: "",
+    vendorItems: [],
+
     vendorSignIn: {},
     vendorSignUp: {},
-    token: "",
   },
   action
 ) => {
@@ -141,6 +146,23 @@ export default (
       return {
         ...state,
         userSignUp: action.payload,
+      };
+
+    //---------------Vendor------------
+    case TYPES.GET_VENDOR:
+      return {
+        ...state,
+        vendor: action.payload,
+      };
+    case TYPES.GET_VENDOR_ID:
+      return {
+        ...state,
+        vendorID: action.payload,
+      };
+    case TYPES.GET_VENDOR_ITEMS:
+      return {
+        ...state,
+        vendorItems: action.payload,
       };
 
     case TYPES.VENDOR_SIGN_IN:
