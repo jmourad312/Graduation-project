@@ -9,10 +9,6 @@ var voting = new schema({
     ref: "Person",
   },
 
-  post: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
-  },
 
 });
 

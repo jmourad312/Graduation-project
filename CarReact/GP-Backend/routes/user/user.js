@@ -34,6 +34,8 @@ router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false
 
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 
+router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserProfile);
+
 // user routes on Blog
 router.post("/addPost", passport.authenticate("jwt", { session: false }), canView ,userBlogCtrl.addNewPost);
 
