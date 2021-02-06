@@ -31,7 +31,7 @@ function validateVendor(req, resp, next) {
 }
 
 //router.get('/path',passport.authenticate('jwt', { session: false }),canView,nameOfFunction);
-router.post("/add", passport.authenticate('jwt', { session: false }),canView,vendorItemCtrl.addItem);
+router.post("/add", passport.authenticate('jwt', { session: false }),upload.single("image"),canView,vendorItemCtrl.addItem);
 router.get("/getItems",passport.authenticate('jwt', { session: false }),canView,vendorItemCtrl.getItems);
 router.get("/getItem/:id",passport.authenticate('jwt', { session: false }),canView,vendorItemCtrl.getOneItem);
 router.put("/updateItem/:id",passport.authenticate('jwt', { session: false }),canView,vendorItemCtrl.updateItem);

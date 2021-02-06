@@ -3,6 +3,8 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 //create new Item
 addItem = (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
+  const Postinput ={}
+  if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
   const IdVendor = req.user._id;
   console.log("adddittem")
@@ -14,7 +16,7 @@ addItem = (req, res) => {
     });
   }
 
-  const car = new carItem(body);
+  const car = new carItem({...body,...Postinput});
   car.person = IdVendor;
 
   if (!car) {
