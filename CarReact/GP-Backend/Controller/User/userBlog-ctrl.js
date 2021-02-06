@@ -26,14 +26,13 @@ addNewPost = (req, res) => {
   //   console.log(images)
   // });
   const Postinput ={}
-  //kjiuhuihuihuihiuhukukukuk
   if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
       Data: null,
-      Message: "Youhhhhh must Type any words",
+      Message: "You must Type any words",
       Success: false,
     });
   }
@@ -62,7 +61,7 @@ addNewPost = (req, res) => {
       console.log(req.body);
       return res.status(200).json({
         Data: error.message,
-        Message: "Youoooo must Type any words",
+        Message: "You must Type any words",
         Success: false,
       });
     });
