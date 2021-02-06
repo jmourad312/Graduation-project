@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require("passport");
 const vendorItemCtrl = require("../../controller/Vendor/vendor'sItem-ctrl");
 const vendorprofiileCtrl = require("../../controller/Vendor/vendor'sProfile-ctrl");
+const upload =require ('../../middleware/upload').upload;
+
 
 
 function canView(req, resp, next) {
@@ -39,7 +41,7 @@ router.get("/partOfItem/:skip",passport.authenticate('jwt', { session: false }),
 
 router.put("/updateProfilePassword/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfilePassword);
 router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
-router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
+router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,upload.single("image"),vendorprofiileCtrl.updateProfile);
 router.get('/showVendorProfile/:id',passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.showVendorProfile);
 
 
