@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import ItemEntry from '../../../../../components/ItemEntry';
 import Loading from '../../../../../components/Loading';
 import { getVendorsItemsAction } from '../../../../../store/actions';
-
+import AddItem from '../../../../../components/AddItem';
 export default function MyItems() {
 
     const vendorItems = useSelector(state => state.vendorItems.Data);
     const dispatch = useDispatch();
     const getItems = () =>{
+        console.log(vendorItems);
         dispatch(getVendorsItemsAction());
     }
     useEffect(() => {
@@ -37,12 +38,15 @@ export default function MyItems() {
     }
 
     return (
-        <div className="FavouriteItems">
-            <div className="container">
-            <div className="row">
-                {vendorItems?vendorItems.map(createItem):<Loading/>}
-            </div>
-            </div>
+      <div className="FavouriteItems">
+        <div className="container">
+          <div className="row">
+            {vendorItems ? vendorItems.map(createItem) : <Loading />}
+          </div>
+          <div className="row">
+            <AddItem />
+          </div>
         </div>
-    )
+      </div>
+    );
 }
