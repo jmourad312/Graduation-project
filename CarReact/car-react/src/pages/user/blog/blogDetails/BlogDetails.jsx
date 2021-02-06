@@ -123,7 +123,7 @@ export default function BlogDetails(props) {
         <h5 className="mt-0">Post Details</h5>
         <p>{blogDetails && blogDetails.body}</p>
         <hr />
-        <img src={blogDetails && blogDetails.images[0]} alt="" />
+        <img src={blogDetails && blogDetails.image} alt="" />
         <hr />
         <p>
           {" "}

@@ -2,6 +2,9 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 
 //create new Item
 addItem = (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+
   const body = JSON.parse(JSON.stringify(req.body));
   const Postinput ={}
   if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
