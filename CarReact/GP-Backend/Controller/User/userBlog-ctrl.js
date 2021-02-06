@@ -34,7 +34,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post(body, "http://localhost:3000/images/" +  image);
+  const post = new Post(body, "http://localhost:3000/images/" + image);
   post.person = IdPerson;
 
   if (!post) {
