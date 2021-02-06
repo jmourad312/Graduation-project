@@ -17,24 +17,27 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 //add post
 addNewPost = (req, res) => {
+
   const body = JSON.parse(JSON.stringify(req.body));
   // const images = [];
   // req.files.map((file) => {
   //   images.push("http://localhost:3000/images/" + file.filename);
   //   console.log(images)
   // });
-  const image = req.file.filename;
+  const Postinput ={}
+
+  if(req.file.filename){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
 
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
       Data: null,
-      Message: "You must Type any words",
+      Message: "Youhhhhh must Type any words",
       Success: false,
     });
   }
 
-  const post = new Post(body, "http://localhost:3000/images/" +  image);
+  const post = new Post({...body,...Postinput});
   post.person = IdPerson;
 
   if (!post) {
@@ -57,7 +60,7 @@ addNewPost = (req, res) => {
     .catch((error) => {
       return res.status(200).json({
         Data: error.message,
-        Message: "You must Type any words",
+        Message: "Youoooo must Type any words",
         Success: false,
       });
     });
