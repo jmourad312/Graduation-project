@@ -28,7 +28,8 @@ showUserProfile = (req, res) => {
 
 //update info
 updateUserProfile = (req,res) =>{
-    const {...data} = req.body
+    const {...data} = req.body;
+    const image = req.file;
     person.updateOne({_id:req.params.id},data, { upsert: true, new: true },(error,data)=>{
         if(error){
             return res.status(400).json({

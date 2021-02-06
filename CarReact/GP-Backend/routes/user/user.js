@@ -30,7 +30,7 @@ function validateUser(req, resp, next) {
 }
 
 // user routes on his profile
-router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.showUserProfile);
+router.get("/showUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("images"),userProfileCtrl.showUserProfile);
 
 router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: false }), validateUser, userProfileCtrl.updateUserPassword);
 

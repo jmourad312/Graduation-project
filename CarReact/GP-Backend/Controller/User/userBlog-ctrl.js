@@ -234,7 +234,6 @@ addCommentReply = (req, res) => {
 showAllPosts = (req, res) => {
   const populateQuery = [{ path: "person", select: "firstName" }];
   Post.find({}, { updatedPosts: 0, comment: 0, __V: 0 })
-    // .select('')
     .sort({ _id: -1 })
     .skip(0)
     .limit(6)
