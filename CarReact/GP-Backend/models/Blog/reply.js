@@ -24,6 +24,12 @@ var reply = new schema(
       },
     ],
     voting: [Number],
+    vote: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Voting",
+      },
+    ],
   },
   { timestamps: true }
 );
