@@ -36,7 +36,8 @@ export default function MyProfile() {
             person={user ? user.person : "null"}
             bookmarkPosts={user ? user.bookmarkPosts : "null"}
             favouriteItems={user ? user.favouriteItems : "null"}
-            postsUser = {user ? user.postsUser : "null"}
+            postsUser={user ? user.postsUser : "null"}
+            recentlyViewed={user?user.recentlyViewed:"null"}
           />
         </div>
       </section>

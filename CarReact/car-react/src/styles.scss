@@ -95,6 +95,9 @@
 //recent views
 @import'styles/recentviews';
 
+//simple delete
+@import'styles/box';
+
 
 //background
 @-webkit-keyframes bg-scrolling-reverse {
@@ -153,7 +156,6 @@ body {
   -o-animation-timing-function: linear;
   animation-timing-function: linear;
 }
-
 
 nav {
   .nav-wrapper {

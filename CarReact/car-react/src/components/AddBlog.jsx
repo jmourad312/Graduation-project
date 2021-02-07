@@ -85,15 +85,12 @@ export default function AddBlog() {
     formData.append("model", inputValue.model);
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
+        "content-type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
         Authorization: localStorage.getItem("Authorization"),
       },
     };
-      // inputValue.image.name,
-      // inputValue.title,
-      // inputValue.body,
-      // inputValue.brand,
-      // inputValue.model,
+
     axios
       .post("http://localhost:3000/user/addPost", formData, config)
       .then((req) => {

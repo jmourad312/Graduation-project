@@ -18,10 +18,10 @@ export default function ProfileRight(props) {
               <BasicDetails person={props.person} />
             </Route>
             <Route path={`/MyProfile/RecentViews/`}>
-              <RecentViews />
+              <RecentViews recentlyViewed={props.recentlyViewed} />
             </Route>
             <Route path={`/MyProfile/BlogPosts/`}>
-              <BlogPosts  postsUser={props.postsUser}/>
+              <BlogPosts postsUser={props.postsUser} />
             </Route>
             <Route path={`/MyProfile/FavouriteItems/`}>
               <FavouriteItems favouriteItems={props.favouriteItems} />
