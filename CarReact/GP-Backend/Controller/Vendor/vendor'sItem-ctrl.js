@@ -107,10 +107,17 @@ getOneItem = async (req, res) => {
 };
 
 updateItem = (req, res) => {
+
   const IdVendor = req.user._id;
-  let { ...data } = req.body;
+
+  const body = JSON.parse(JSON.stringify(req.body));
+
+  const Postinput ={}
+
+  if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
+
   carItem.updateOne({ _id: req.params.id, person: IdVendor },
-    data, { upsert: true, new: true }, (err, result) => {
+    {...body,...Postinput}, { upsert: true, new: true }, (err, result) => {
       if (err) {
         return res.status(400).json({
           Data: null,
