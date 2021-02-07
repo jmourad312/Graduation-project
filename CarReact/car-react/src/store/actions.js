@@ -336,7 +336,7 @@ export const getVendorsItemsAction = () => async (dispatch) => {
       `http://localhost:3000/vendor/getItems`,
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
-    console.log(res);
+    // console.log(res);
     dispatch({
       type: TYPES.GET_VENDOR_ITEMS,
       payload: res.data,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import Button from '../../../../../components/Button';
+import Button2 from '../../../../../components/Button2';
 import Input from '../../../../../components/Input';
 import Label from '../../../../../components/Label';
 
@@ -166,7 +166,7 @@ export default function VendorSettings() {
               </div>
             </div>
           </div>
-          <Button
+          <Button2
             onClick={handleSubmit}
             //   type="submit"
             class="btn btn-success"
