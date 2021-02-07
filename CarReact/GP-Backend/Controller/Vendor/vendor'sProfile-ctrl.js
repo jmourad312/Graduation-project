@@ -1,7 +1,6 @@
 const person = require('../../models/Person/person')
 const vendor = require('../../models/Person/Vendor/vendor')
 const subscription = require('../../models/Person/Vendor/subscription')
-const feedBack = require('../../models/Person/Vendor/feedBack');
 const bcrypt = require('bcryptjs');
 const gettoken = require('../../token/gerenrate-token')
 const transporter = require('../../config/configEmail')

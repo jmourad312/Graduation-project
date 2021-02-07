@@ -4,6 +4,8 @@ const passport = require("passport");
 const userProfileCtrl = require("../../controller/User/userProfile-ctrl");
 const userBlogCtrl = require("../../Controller/User/userBlog-ctrl");
 const userItemCtrl = require('../../Controller/User/userItem-ctrl');
+const userRateCtrl = require('../../Controller/User/userRate-ctrl');
+
 const upload = require('../../middleware/upload').upload;
 
 function canView(req, resp, next) {
@@ -68,8 +70,6 @@ router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 
 router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
-router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
-
 
 //vote 
 router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.voteToComment);
@@ -89,6 +89,36 @@ router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false
 router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
 
 router.get("/showVendorProfile/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showVendorProfile);
+
+//recentlyViewed, Bookmark, Favourite
+
+router.put("/recentlyViewed", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.recentlyViewed)
+
+router.put("/addBookmarkPosts", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.addBookmarkPosts)
+
+router.put("/removeBookmarkPosts", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.removeBookmarkPosts)
+
+router.put("/addFavouriteItems", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.addFavouriteItems)
+
+router.put("/removeFavouriteItems", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.removeFavouriteItems)
+
+
+
+
+// feedback Item and vendor
+
+router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.writeFeedback);
+// {
+//     comment:String,
+//     rating:Number,
+//     car:IDitem,
+//     vendor:IDperson   
+// }
+
+
+
+router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
+    // params => idfeedback
 
 
 module.exports = router;

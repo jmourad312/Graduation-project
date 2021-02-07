@@ -11,7 +11,7 @@ var car = new schema({
   image: String,
   itemFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ItemFeedBack",
+    ref: "FeedBack",
   }],
   carBrand: String,
   carModel: String,

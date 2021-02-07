@@ -15,10 +15,10 @@ var vendor = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorSubscription",
   },
-  vendorFeedBack: {
+  vendorFeedBack: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "VendorFeedBack",
-  },
+    ref: "FeedBack",
+  }],
 
   banned: {type:Boolean,default:false},
 });

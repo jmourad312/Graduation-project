@@ -17,14 +17,20 @@ var user = new schema({
   favouriteItems: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "FavouriteItems",
+      ref: "Car",
+    },
+  ],
+  recentlyViewed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
     },
   ],
 
   bookmarkPosts: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "BookmarkPosts",
+      ref: "Post",
     },
   ],
   postsUser: [
