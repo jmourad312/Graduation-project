@@ -336,17 +336,23 @@ showFilterPosts = (req, res) => {
 
 showPostsOfUser = (req, res) => {
   const IdPerson = req.user._id;
-  Post.find({ person: IdPerson }, (error, data) => {
+
+  const populateQuery = [{ path: "person", select: "firstName" }];
+
+  Post.find({ person: IdPerson })
+  .sort({ _id: -1 })
+  .populate(populateQuery)
+  .exec ((error, data) => {
     if (error || !data.length) {
-      return res.status(400).json({
+      return res.json({
         Data: error,
         Message: "no blogs found",
         Success: false,
       });
     }
-    return res.status(200).json({
+    return res.json({
       Data: data,
-      Message: "احلى بلوج لاحلى زبون",
+      Message: "posts for:"+data.person.firstName,
       Success: true,
     });
   });

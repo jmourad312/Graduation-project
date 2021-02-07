@@ -39,8 +39,6 @@ showUserProfile = (req, res) => {
     });
 };
 
-
-
 //update info
 updateUserProfile = async (req, res) => {
 

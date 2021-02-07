@@ -97,6 +97,8 @@ updateProfilePassword = async (req, res) => {
     const saltRounds = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, saltRounds);
 
+
+
     person.updateOne({ _id: req.params.id }, { password: password }, { upsert: true, new: true }, (error, data) => {
         if (error) {
             return res.status(400).json({
@@ -118,17 +120,20 @@ updateProfilePassword = async (req, res) => {
 //update profile
 updateProfile = async (req, res) => {
 
-    const data = req.body;
+    const body = JSON.parse(JSON.stringify(req.body));
+
     const saltRounds = await bcrypt.genSalt(10);
     const update = {}
+    
     if(req.body.password){
         update.password = await bcrypt.hash(req.body.password, saltRounds);
     }
+
     if(req.file){
         update.image = "http://localhost:3000/images/"+req.file.filename;
     }
 
-    person.updateOne({ _id: req.params.id }, {...data,...update}, { upsert: true, new: true }, (errorPerson, dataOfPerson) => {
+    person.updateOne({ _id: req.params.id }, {...body,...update}, { upsert: true, new: true }, (errorPerson, dataOfPerson) => {
         if (errorPerson) {
             return res.status(400).json({
                 Data: null,
