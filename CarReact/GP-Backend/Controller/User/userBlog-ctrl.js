@@ -281,14 +281,7 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-<<<<<<< HEAD
-      populate: [
-        { path: "person", select: "firstName" },
-        { path: "vote", select: "numberOfVoting" },
-      ],
-=======
       populate: [{ path: "person", select: "firstName"}, { path: "vote", select: "numberOfVoting" }],
->>>>>>> b21cedf888d52372fc4fe463953280e8e04d66da
       select: "-post ",
     },
   ];
@@ -367,14 +360,9 @@ showPostsOfUser = (req, res) => {
 
 // remove voting on comment
 removeVoteFromComment = async (req, res) => {
-<<<<<<< HEAD
-  const personVote = await Vote.find({ person: { $in: req.user._id } });
-
-=======
 
   const personVote = await Vote.find({ person: { $in: req.user._id },  comment: req.params.id  })
   console.log(personVote)
->>>>>>> b21cedf888d52372fc4fe463953280e8e04d66da
   if (personVote.length == 0) {
     return res.json({
       Data: null,

@@ -115,9 +115,6 @@ showFilterItems = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
-module.exports = { partOfItem, showFilterItems, showDetailsItem };
-=======
 showVendorProfile = (req, res) => {
     const populateQuery = [
         { path: "person", select: "-password -email -role -codeToResetPassword -subscribe" },
@@ -143,4 +140,3 @@ showVendorProfile = (req, res) => {
 }
 
 module.exports = { partOfItem, showFilterItems, showDetailsItem, showVendorProfile }
->>>>>>> b7402c4b9f65cc65846955e7676ec50e0da9ac42
