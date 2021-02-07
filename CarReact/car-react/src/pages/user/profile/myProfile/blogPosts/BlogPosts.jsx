@@ -1,7 +1,10 @@
+import axios from "axios";
 import React from "react";
+import SimpleDelete from "../../../../../components/SimpleDelete";
 // import Footer from '../../../../../layout/footer/Footer'
 
 export default function BlogPosts(props) {
+  
   return (
     <div className="MyBlogPosts">
       <div className="container mt-3">
@@ -22,9 +25,11 @@ export default function BlogPosts(props) {
                 </h4>
                 <p>{post.body}</p>
                 <small>
-                  <i className="badge badge-light">{post.brand}</i>{" "}<i className="badge badge-light">{post.model}</i>
+                  <i className="badge badge-light">{post.brand}</i>{" "}
+                  <i className="badge badge-light">{post.model}</i>
                 </small>
               </div>
+                <SimpleDelete id={post._id} />
             </div>
           );
         })}

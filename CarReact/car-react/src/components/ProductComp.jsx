@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -12,6 +13,26 @@ export default function ProductComp(props) {
   const handleClick = (params) =>{
     dispatch(setProductId(params));
     history.push(`/ProductDetails/${props.id}`);
+    axios
+      .put(
+        `http://localhost:3000/user/recentlyViewed`,
+        { id: props.id },
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 

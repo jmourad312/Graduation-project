@@ -43,7 +43,7 @@ partOfItem = (req, res) => {
 showDetailsItem = (req, res) => {
   const populateQuery = [
     { path: "person", select: "firstName" },
-    {path: itemFeedBack}
+    // {path: "itemFeedBack"}
   ];
   carItem
     .findOne(
