@@ -52,10 +52,12 @@ addNewPost = (req, res) => {
     });
   }
 
+
+
   post
     .save()
     .then((data) => {
-      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } })
+      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } }).then(console.log("Done")).catch(console.log("error"))
       return res.json({
         Data: post._id,
         Message: "New post is created successfully",
