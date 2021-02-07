@@ -5,8 +5,6 @@ const bcrypt = require("bcryptjs");
 
 //User info (show info - update info)
 
-
-
 // 1- show info
 showUserProfile = (req, res) => {
   const IdPerson = req.params.id;
@@ -24,6 +22,7 @@ showUserProfile = (req, res) => {
 
     { path: "bookmarkPosts", populate: { path: "person", select: "firstName" }  , select: "-__v -comment -updatedPosts" },
 
+    { path: "recentlyViewed", populate: { path: "person", select: "firstName" }  , select: "-__v" },
 
   ];
   user
@@ -71,13 +70,13 @@ updateUserProfile = async (req, res) => {
     { upsert: true, new: true },
     (error, data) => {
       if (error) {
-        return res.status(400).json({
+        return res.json({
           Data: null,
           Message: "You can't update" + error,
           Success: false,
         });
       } else {
-        return res.status(200).json({
+        return res.json({
           Data: data.n,
           Message: "updated",
           Success: true,

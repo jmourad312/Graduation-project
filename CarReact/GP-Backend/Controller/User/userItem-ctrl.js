@@ -41,7 +41,10 @@ partOfItem = (req, res) => {
 
 // show all posts of all users
 showDetailsItem = (req, res) => {
-  const populateQuery = { path: "person", select: "firstName" };
+  const populateQuery = [
+    { path: "person", select: "firstName" },
+    {path: itemFeedBack}
+  ];
   carItem
     .findOne(
       { _id: req.params.id },
