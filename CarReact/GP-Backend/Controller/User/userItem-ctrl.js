@@ -139,4 +139,5 @@ showVendorProfile = (req, res) => {
 
 }
 
+
 module.exports = { partOfItem, showFilterItems, showDetailsItem, showVendorProfile }

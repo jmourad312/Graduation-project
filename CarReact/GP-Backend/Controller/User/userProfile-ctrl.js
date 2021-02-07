@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 
 //User info (show info - update info)
 
+
+
 // 1- show info
 showUserProfile = (req, res) => {
   const IdPerson = req.params.id;
@@ -15,7 +17,13 @@ showUserProfile = (req, res) => {
         "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword",
     },
     { path: "userSubscription", select: "-__v -_id" },
+
     { path: "postsUser", select: "-__v -comment -updatedPosts" },
+
+    { path: "favouriteItems", populate: { path: "person", select: "firstName" }  ,select: "-__v -comment -updatedPosts" },
+
+    { path: "bookmarkPosts", populate: { path: "person", select: "firstName" }  , select: "-__v -comment -updatedPosts" },
+
 
   ];
   user
