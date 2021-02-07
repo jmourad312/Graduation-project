@@ -1,4 +1,4 @@
-function Button(props) {
+function Button2(props) {
   return (
     <button
       className={props.class}
@@ -8,4 +8,4 @@ function Button(props) {
     </button>
   );
 }
-export default Button;
+export default Button2;
