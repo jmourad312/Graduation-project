@@ -1,0 +1,75 @@
+import $ from "jquery";
+import axios from "axios";
+
+export default function ProfilePicture(props) {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        );
+        $("#imagePreview").hide();
+        $("#imagePreview").fadeIn(650);
+      };
+      const formData = new FormData();
+      formData.append("image", input.files[0]);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+      const URL = `http://localhost:3000/vendor/updateProfile/${localStorage.getItem(
+        "VendorID"
+      )}`;
+      axios
+        .put(URL, formData, config)
+        .then((req) => {
+          console.log(req);
+          if (req.data.Success === true) {
+            console.log("Success");
+            // props.history.push("/MyProfile");
+          } else {
+            console.log("fail");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  $("#imageUpload").change(function () {
+    readURL(this);
+    console.log("hellloooooooooooooooooooooo");
+  });
+
+  return (
+    <div className="profpic">
+      <div className="container">
+        <div className="avatar-upload">
+          <div className="avatar-edit">
+            <form>
+              <input
+                type="file"
+                id="imageUpload"
+                name="image"
+                accept=".png, .jpg, .jpeg"
+                // onChange={handleChange}
+              />
+              <label for="imageUpload"></label>
+            </form>
+          </div>
+          <div className="avatar-preview">
+            <div
+              id="imagePreview"
+              style={{ backgroundImage: `url(${props.image})` }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

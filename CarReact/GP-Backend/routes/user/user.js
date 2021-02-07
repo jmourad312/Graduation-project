@@ -54,6 +54,8 @@ router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }
 
 router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.updatePost);
 
+router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
+
 // add comment or reply in comment 
 router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addComment);
 

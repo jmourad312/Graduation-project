@@ -1,65 +1,53 @@
-import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
 
 export default function ProfilePicture(props) {
 
-  // const [state, setState] = useState({
-  //   image:""
-  // })
 
-  // const handleChange = (event) => {
-  //   const { value, name } = event.target;
-  //   setState((previous) => {
-  //     return {
-  //       ...previous,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   axios
-  //     .put(
-  //       `http://localhost:3000/user/updateUserProfile/${localStorage.getItem("UserID")}`,props.image,
-  //       {
-  //         headers: { Authorization: localStorage.getItem("Authorization") },
-  //       }
-  //     )
-  //     .then((req) => {
-  //       console.log(req);
-  //       if (req.data.Success === true) {
-  //         console.log("Success");
-  //         // props.history.push("/MyProfile");
-  //       } else {
-  //         console.log("fail");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  useEffect(() => {
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $("#imagePreview").css(
-            "background-image",
-            "url(" + e.target.result + ")"
-          );
-          $("#imagePreview").hide();
-          $("#imagePreview").fadeIn(650);
-        };
-        reader.readAsDataURL(input.files[0]);
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        );
+        $("#imagePreview").hide();
+        $("#imagePreview").fadeIn(650);
+      };
+      const formData = new FormData();
+      formData.append("image", input.files[0])
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+      const URL = `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
+        "UserID"
+        )}`;
+        axios
+        .put(URL,formData,config)
+        .then((req) => {
+          console.log(req);
+          if (req.data.Success === true) {
+            console.log("Success");
+            // props.history.push("/MyProfile");
+          } else {
+            console.log("fail");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       }
-    }
-    $("#imageUpload").change(function () {
-      readURL(this);
-    });
-  }, []);
+      reader.readAsDataURL(input.files[0]);
+  }
+  $("#imageUpload").change(function () {
+    readURL(this);
+    console.log("hellloooooooooooooooooooooo")
+  });
+  
   return (
     <div className="profpic">
       <div className="container">
@@ -73,19 +61,10 @@ export default function ProfilePicture(props) {
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleChange}
               />
-              <label for="imageUpload" 
-              // onSubmit={handleSubmit}
+              <label
+                for="imageUpload"
               ></label>
             </form>
-            {/* <Uploady
-              destination={{
-                url: `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
-                  "UserID"
-                )}`,
-              }}
-            >
-              <UploadButton />
-            </Uploady> */}
           </div>
           <div className="avatar-preview">
             <div
