@@ -70,9 +70,9 @@ router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }),
 
 
 //vote 
-router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.voteToComment);
+router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.voteToComment);
 
-router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.removeVoteFromComment);
+router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.removeVoteFromComment);
 
 //bookmarks 
 router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addBookmarks);
@@ -84,9 +84,9 @@ router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canV
 
 router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showDetailsItem);
 
-
 router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
 
+router.get("/showVendorProfile/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showVendorProfile);
 
 
 module.exports = router;

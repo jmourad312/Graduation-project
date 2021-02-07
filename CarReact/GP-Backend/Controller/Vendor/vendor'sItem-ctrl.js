@@ -127,7 +127,7 @@ updateItem = (req, res) => {
 
 deleteItem = (req, res) => {
   const IdVendor = req.user._id;
-  carItem.deleteOne({ _id: req.params.id, vendor: IdVendor }, (err, data) => {
+  carItem.deleteOne({ _id: req.params.id, person: IdVendor }, (err, data) => {
     if (err) {
       res.json({
         "Data": {},

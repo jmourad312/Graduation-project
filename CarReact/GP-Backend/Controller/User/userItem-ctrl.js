@@ -103,4 +103,28 @@ showFilterItems = (req, res) => {
             })
 };
 
-module.exports = { partOfItem, showFilterItems, showDetailsItem }
+showVendorProfile = (req, res) => {
+    const populateQuery = [
+        { path: "person", select: "-password -email -role -codeToResetPassword -subscribe" },
+        { path: "vendorFeedBack" }
+    ]
+
+    Vendor.findOne({ person: req.params.id }, { __v: 0, banned: 0, workshopSchedule: 0 }).populate(populateQuery).exec((error, data) => {
+        if (error || data.length == 0) {
+            return res.json({
+                "Data": err,
+                "Message": "No Data found in DB",
+                "Success": false
+            })
+        }
+        return res.json({
+            "Data": data,
+            "Message": "Done Get Vendor Profile",
+            "Success": true
+        })
+    })
+
+
+}
+
+module.exports = { partOfItem, showFilterItems, showDetailsItem, showVendorProfile }
