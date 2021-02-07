@@ -236,6 +236,7 @@ export const resultFromFilter = (data) => async (dispatch) => {
 
 
 
+//USER  ------------------------------------------------------------
 // get user -----------------------
 export const setUserIdAction = (payload) => {
   return {
@@ -259,7 +260,7 @@ export const getUsersAction = (params) => async (dispatch) => {
   }
 };
 
-export const addUserAction = () => async (dispatch) => {
+export const getUserBlogs = () => async (dispatch) => {
   try {
     const req = await axios.post("https://fakestoreapi.com/users");
     console.log(req);
@@ -272,9 +273,6 @@ export const addUserAction = () => async (dispatch) => {
   }
 };
 
-
-
-//USER  ------------------------------------------------------------
 //-------------------user sign in
 export const userSignInAction = () => async (dispatch) => {
   try {
@@ -288,7 +286,6 @@ export const userSignInAction = () => async (dispatch) => {
 
   } catch (error) {
     console.log(error);
-
   }
 };
 //*--------------------user sign up
