@@ -2,8 +2,6 @@ import $ from "jquery";
 import axios from "axios";
 
 export default function ProfilePicture(props) {
-
-
   function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -16,7 +14,7 @@ export default function ProfilePicture(props) {
         $("#imagePreview").fadeIn(650);
       };
       const formData = new FormData();
-      formData.append("image", input.files[0])
+      formData.append("image", input.files[0]);
       const config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -24,10 +22,10 @@ export default function ProfilePicture(props) {
         },
       };
       const URL = `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
-        "UserID"
-        )}`;
-        axios
-        .put(URL,formData,config)
+        "VendorID"
+      )}`;
+      axios
+        .put(URL, formData, config)
         .then((req) => {
           console.log(req);
           if (req.data.Success === true) {
@@ -40,14 +38,14 @@ export default function ProfilePicture(props) {
         .catch((error) => {
           console.log(error);
         });
-      }
-      reader.readAsDataURL(input.files[0]);
+    }
+    reader.readAsDataURL(input.files[0]);
   }
   $("#imageUpload").change(function () {
     readURL(this);
-    console.log("hellloooooooooooooooooooooo")
+    console.log("hellloooooooooooooooooooooo");
   });
-  
+
   return (
     <div className="profpic">
       <div className="container">
@@ -61,9 +59,7 @@ export default function ProfilePicture(props) {
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleChange}
               />
-              <label
-                for="imageUpload"
-              ></label>
+              <label for="imageUpload"></label>
             </form>
           </div>
           <div className="avatar-preview">
