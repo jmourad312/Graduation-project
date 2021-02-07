@@ -9,12 +9,12 @@ export default function MyItems() {
     const vendorItems = useSelector(state => state.vendorItems.Data);
     const dispatch = useDispatch();
     const getItems = () =>{
-        console.log(vendorItems);
+        // console.log(vendorItems);
         dispatch(getVendorsItemsAction());
     }
     useEffect(() => {
-        getItems();
-    }, [])
+      getItems();
+    }, [vendorItems]);
     const createItem = (item)=>{
         return (
           <ItemEntry

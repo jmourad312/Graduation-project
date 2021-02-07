@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import $ from "jquery";
+// import $ from "jquery";
 // import { useEffect } from 'react';
-import Button from "../../../../components/Button";
+import Button2 from "../../../../components/Button2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserIdAction } from "../../../../store/actions";
@@ -299,13 +299,13 @@ export default function Signform(props) {
                 <input type="email" placeholder="Email" />
               </div>
               <div className="col-3">
-                <Button className="btn btn-primary" value="Send email" />
+                <Button2 className="btn btn-primary" value="Send email" />
               </div>
             </div>
             <input type="text" placeholder="Input your code here" />
             <input type="password" placeholder="New password" />
             <input type="password" placeholder="Confirm new password" />
-            <Button value="submit" />
+            <Button2 value="submit" />
           </form>
         </div>
         <div className={changePayment}>
