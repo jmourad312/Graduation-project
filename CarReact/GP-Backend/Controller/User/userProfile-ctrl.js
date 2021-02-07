@@ -39,11 +39,17 @@ showUserProfile = (req, res) => {
     });
 };
 
+
+
 //update info
 updateUserProfile = async (req, res) => {
-  const data = req.body;
+
+  const body = JSON.parse(JSON.stringify(req.body));
+
   const saltRounds = await bcrypt.genSalt(10);
+
   const update = {};
+
   if (req.body.password) {
     update.password = await bcrypt.hash(req.body.password, saltRounds);
   }
@@ -53,7 +59,7 @@ updateUserProfile = async (req, res) => {
 
   person.updateOne(
     { _id: req.params.id },
-    { ...data, ...update },
+    { ...body, ...update },
     { upsert: true, new: true },
     (error, data) => {
       if (error) {
