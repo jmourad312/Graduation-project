@@ -1,6 +1,14 @@
 const Brand = require('../../models/CarDetails/carBrand')
 const Model = require('../../models/CarDetails/carModel')
 
+//addbanuser
+//removebaanuser
+//addbanvendor
+//removebanvendor
+//cal number of user
+// cal number of vendor and his products
+//add collection 
+
 addBrand = (req, res) => {
     const brand = new Brand(req.body);
     brand.save()
