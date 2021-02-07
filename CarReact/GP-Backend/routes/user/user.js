@@ -47,7 +47,11 @@ router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: fa
 
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("image"), userProfileCtrl.updateUserProfile);
 
-router.post("/recentlyViewed", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.recentlyViewed)
+router.put("/recentlyViewed", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.recentlyViewed)
+router.put("/addBookmarkPosts", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.addBookmarkPosts)
+router.put("/removeBookmarkPosts", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.removeBookmarkPosts)
+router.put("/addFavouriteItems", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.addFavouriteItems)
+router.put("/removeFavouriteItems", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.removeFavouriteItems)
 
 // user routes on Blog
 router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
