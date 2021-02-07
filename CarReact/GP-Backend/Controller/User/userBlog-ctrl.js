@@ -3,17 +3,18 @@ const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
-const Vote = require('../../models/Blog/votingPost')
+const Vote = require("../../models/Blog/votingPost");
 const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 // add post
 // delete post
-// update post->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// update post
 // add comment
 // vote on comment
 // show his posts
 // add post to bookmarks
 // show posts in bookmarks
+
 
 //add post
 addNewPost = (req, res) => {
@@ -25,8 +26,11 @@ addNewPost = (req, res) => {
   //   images.push("http://localhost:3000/images/" + file.filename);
   //   console.log(images)
   // });
-  const Postinput = {}
-  if (req.file) { Postinput.image = "http://localhost:3000/images/" + req.file.filename }
+
+  const Postinput = {};
+  if (req.file) {
+    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  }
 
   const IdPerson = req.user._id;
   if (!body) {
@@ -149,17 +153,19 @@ addComment = (req, res) => {
   comment.post = IdPost;
   comment.vote = vote._id;
 
-  comment.save().then((dataComment) => {
-    vote.comment = dataComment._id;
-    vote.save();
-  }
-  ).catch((error) => {
-    return res.status(400).json({
-      Data: error,
-      Message: "*****************",
-      Success: false,
+  comment
+    .save()
+    .then((dataComment) => {
+      vote.comment = dataComment._id;
+      vote.save();
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        Data: error,
+        Message: "*****************",
+        Success: false,
+      });
     });
-  });
 
   const populateQuery = [
     {
@@ -305,11 +311,11 @@ showDetailsPost = (req, res) => {
 };
 
 showFilterPosts = (req, res) => {
-  const criteriaSearch = { $regex: req.body.search, $options: 'i' };
-  const queryCond = {}
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  const queryCond = {};
 
   if (req.body.search) {
-    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }]
+    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }];
   }
   if (req.body.model) {
     queryCond.model = req.body.model;
@@ -317,7 +323,7 @@ showFilterPosts = (req, res) => {
   if (req.body.brand) {
     queryCond.brand = req.body.brand;
   }
-  console.log(queryCond)
+  console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
 
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
@@ -396,8 +402,6 @@ removeVoteFromComment = async (req, res) => {
       });
     }
   );
-
-
 };
 
 voteToComment = async (req, res) => {
