@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Button, Col, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import cars2 from '../../../../assets/js/cars2';
+import cars3 from '../../../../assets/js/cars3';
 import { getBlogDetails, addVoteComment, removeVoteComment } from '../../../../store/actions';
 
 export default function BlogDetails(props) {
@@ -13,13 +16,87 @@ export default function BlogDetails(props) {
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
   };
+
+  //---------------------------EDIT FUNCTIONS----------------------------------------
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const [stateDisabled, setStateDisabled] = useState(false);
+  const [editValue, setEditValue] = useState({
+    title: blogDetails && blogDetails.title,
+    // body: blogDetails.body,
+    // image: blogDetails.image,
+    // brand: blogDetails.brand,
+    // model: blogDetails.model,
+  });
+  const handleEditChange = (event) => {
+    const { value, name } = event.target;
+    if (name === "brand") {
+      setStateDisabled(true);
+    }
+    setEditValue((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
+  const handleImageChange = (event) => {
+    setEditValue((previous) => {
+      return {
+        ...previous,
+        image: event.target.files[0],
+      };
+    });
+  };
+  const handleEditSubmit = (params) => {
+    
+    const formData = new FormData();
+    formData.append("image", editValue.image);
+    formData.append("name", editValue.name);
+    formData.append("description", editValue.description);
+    formData.append("carBrand", editValue.carBrand);
+    formData.append("carModel", editValue.carModel);
+
+    const config = {
+      headers: {
+        "content-type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    axios
+      .put(
+        `http://localhost:3000/vendor/updateItem/${params}`,
+        formData,
+        config
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+          closeModal();
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  //---------------------------END EDIT FUNCTIONS----------------------------------------
+
   const [inputValue, setInputValue] = useState({
     content: "",
   });
   const [replyInput, setReplyInput] = useState({
     replyContent: "",
   });
-
   const handleChange = (event) => {
     const { value, name } = event.target;
     setInputValue((previous) => {
@@ -87,12 +164,10 @@ export default function BlogDetails(props) {
 
   const addVote = (id) => {
     dispatch(addVoteComment(id));
-
-  }
+  };
   const removeVote = (id) => {
     dispatch(removeVoteComment(id));
-
-  }
+  };
 
   useEffect(() => {
     getBlog(blogID);
@@ -146,6 +221,106 @@ export default function BlogDetails(props) {
         </p>
       </div>
 
+      {/* --------------------- EDIT SECTION--------------- */}
+      <Button variant="info" onClick={() => openModal(props.id)}>
+        Edit
+      </Button>
+
+      <Modal show={isOpen} onHide={!isOpen}>
+        <Modal.Header>
+          <Modal.Title>Edit your product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Blog title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Title"
+                name="title"
+                id="title"
+                value={editValue.title}
+                onChange={handleEditChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Blog Image</Form.Label>
+              <Form.Control
+                type="file"
+                name="image"
+                id="image"
+                onChange={handleImageChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Blog Content</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Enter Blog description"
+                name="body"
+                id="body"
+                value={editValue.body}
+                onChange={handleEditChange}
+              />
+            </Form.Group>
+            <Form.Row>
+              <Form.Group as={Col}>
+                <Form.Label>Brand</Form.Label>
+                <Form.Control
+                  defaultValue="Choose..."
+                  as="select"
+                  name="brand"
+                  id="brand"
+                  value={editValue.brand}
+                  onChange={handleEditChange}
+                >
+                  {cars2.map((item, index) => {
+                    return (
+                      <option key={index} value={item.make}>
+                        {item.make}
+                      </option>
+                    );
+                  })}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Model</Form.Label>
+                <Form.Control
+                  defaultValue="Choose..."
+                  as="select"
+                  name="model"
+                  id="model"
+                  value={editValue.model}
+                  onChange={handleEditChange}
+                  disabled={!stateDisabled}
+                >
+                  {cars3.map((item, index) => {
+                    return (
+                      <option key={index} value={item.model}>
+                        {item.model}
+                      </option>
+                    );
+                  })}
+                </Form.Control>
+              </Form.Group>
+            </Form.Row>
+
+            <Button
+              variant="primary"
+              type="button"
+              onClick={() => handleEditSubmit(props.id)}
+            >
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={closeModal}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {/* <!-- Comments Form --> */}
       <div className="card my-4">
         <h5 className="card-header">Leave a Comment:</h5>
@@ -170,30 +345,42 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-          return (
-            <div className="media mb-1" key={index}>
-              <button className="btn btn-info" onClick={() => addVote(item._id)}><i className="fas fa-arrow-circle-up" /></button>
-              <span className="btn badge-pill btn-success">{item.vote.numberOfVoting}</span>
-              <button className="btn btn-info" onClick={() => removeVote(item._id)}><i class="fas fa-arrow-circle-down" /></button>
+            return (
+              <div className="media mb-1" key={index}>
+                <button
+                  className="btn btn-info"
+                  onClick={() => addVote(item._id)}
+                >
+                  <i className="fas fa-arrow-circle-up" />
+                </button>
+                <span className="btn badge-pill btn-success">
+                  {item.vote.numberOfVoting}
+                </span>
+                <button
+                  className="btn btn-info"
+                  onClick={() => removeVote(item._id)}
+                >
+                  <i class="fas fa-arrow-circle-down" />
+                </button>
 
-              <img
-                className="d-flex mr-3 rounded-circle"
-                src={item.image}
-                alt=""
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              />
-              <hr />
-              <br />
-              <div className="media-body">
-                <h5 className="mt-0">
-                  {item.person.firstName ? item.person.firstName : null}
-                </h5>
+                <img
+                  className="d-flex mr-3 rounded-circle"
+                  src={item.image}
+                  alt=""
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
                 <hr />
                 <br />
-                <p>{item.content}</p>
-              </div>
+                <div className="media-body">
+                  <h5 className="mt-0">
+                    {item.person.firstName ? item.person.firstName : null}
+                  </h5>
+                  <hr />
+                  <br />
+                  <p>{item.content}</p>
+                </div>
 
-              {/* <form
+                {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -209,7 +396,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-              {/* {item
+                {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -229,15 +416,10 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-            </div>
-          );
-        })
+              </div>
+            );
+          })
         : "LOADING"}
-
-
-
-
-
 
       {/* <!-- Comment with nested comments --> */}
       {/* <div className="media mb-4">
