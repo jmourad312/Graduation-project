@@ -95,6 +95,30 @@ getModel = (req, res) => {
     });
 };
 
+addCollection = (req, res) => {
+  const collection = new Collection(req.body);
+  collection.save();
+  carItem
+    .updateOne(
+      { _id: req.params.id },
+      { $push: { itemCollection: carItem._id } }
+    )
+    .then((data) => {
+      return res.status(200).json({
+        Data: data,
+        Message: "done add brand",
+        Success: true,
+      });
+    })
+    .catch((error) => {
+      return res.status(200).json({
+        Data: error.message,
+        Message: "can't add brand",
+        Success: false,
+      });
+    });
+};
+
 //---------------------------------------------user -------------------------------------------------------------------
 
 //show all users
@@ -313,6 +337,7 @@ module.exports = {
   addBrand,
   getBrand,
   getModel,
+  addCollection,
   addUserBan,
   removeUserBan,
   showAllUsers,
