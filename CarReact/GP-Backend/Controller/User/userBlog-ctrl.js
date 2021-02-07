@@ -54,14 +54,8 @@ addNewPost = (req, res) => {
 
   post
     .save()
-    .then(() => {
-      user.updateOne({ person: Idperson }, { $push: { postsUser: post._id } }).catch((e) => {
-        return res.status(200).json({
-          Data: error.message,
-          Message: "You must Type any words",
-          Success: false,
-        });
-      })
+    .then((data) => {
+      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } })
       return res.json({
         Data: post._id,
         Message: "New post is created successfully",
