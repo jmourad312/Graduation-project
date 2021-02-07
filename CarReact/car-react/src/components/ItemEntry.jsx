@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setProductId } from "../store/actions";
+import { getProductDetails, setProductId } from "../store/actions";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
 
 export default function ItemEntry(props) {
+  
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -15,6 +16,21 @@ export default function ItemEntry(props) {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const productDetails = useSelector(state => state.productDetails.Data);
+  
+  // const getProduct = async (params) => {
+  //   await dispatch(getProductDetails(params));
+  //   // console.log(productDetails);
+  //   openModal()
+  //   setNewValue()
+  // };
+  // const setNewValue = () =>{
+  //   setEditValue({
+  //     name : productDetails.name
+  //   });
+  // }
+
+
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
     name: "",
@@ -133,8 +149,9 @@ export default function ItemEntry(props) {
           <Button variant="info" onClick={openModal}>
             Edit
           </Button>
+
           <Modal show={isOpen} onHide={!isOpen}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>Edit your product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -159,12 +176,11 @@ export default function ItemEntry(props) {
                     onChange={handleImageChange}
                   />
                 </Form.Group>
-                <Form.Group >
+                <Form.Group>
                   <Form.Label>Product Name</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
-                    type="file"
                     placeholder="Enter product description"
                     name="description"
                     id="description"
@@ -173,7 +189,7 @@ export default function ItemEntry(props) {
                   />
                 </Form.Group>
                 <Form.Row>
-                  <Form.Group as={Col} >
+                  <Form.Group as={Col}>
                     <Form.Label>Price</Form.Label>
                     <Form.Control
                       type="number"
@@ -183,7 +199,7 @@ export default function ItemEntry(props) {
                       onChange={handleChange}
                     />
                   </Form.Group>
-                  <Form.Group as={Col} >
+                  <Form.Group as={Col}>
                     <Form.Label>Brand</Form.Label>
                     <Form.Control
                       defaultValue="Choose..."
@@ -224,7 +240,11 @@ export default function ItemEntry(props) {
                   </Form.Group>
                 </Form.Row>
 
-                <Button variant="primary" type="button" onClick={()=>handleSubmit(props.id)}>
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={() => handleSubmit(props.id)}
+                >
                   Submit
                 </Button>
               </Form>

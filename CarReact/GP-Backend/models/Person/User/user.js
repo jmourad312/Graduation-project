@@ -27,6 +27,12 @@ var user = new schema({
       ref: "BookmarkPosts",
     },
   ],
+  postsUser: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
 
   banned: { type: Boolean, default: false },
 

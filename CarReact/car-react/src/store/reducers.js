@@ -28,6 +28,7 @@ export default (
     userSignIn: {},
     userSignUp: {},
     token: "",
+    userBlogs: [],
     //vendor------------------
     vendor: [],
     vendorID: "",
@@ -148,6 +149,11 @@ export default (
       return {
         ...state,
         userID: action.payload,
+      };
+    case TYPES.GET_USER_BLOG:
+      return {
+        ...state,
+        userBlogs: action.payload,
       };
 
     case TYPES.USER_SIGN_IN:

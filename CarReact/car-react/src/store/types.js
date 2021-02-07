@@ -3,6 +3,8 @@
 //-------USER----------------------------
 export const GET_USER = "GET_USER";
 export const GET_USER_ID = "GET_USER_ID";
+export const GET_USER_BLOG = "GET_USER_BLOG";
+
 
 export const ADD_USER = "ADD_USER";
 export const USER_SIGN_IN = "USER_SIGN_IN";

@@ -52,10 +52,13 @@ addNewPost = (req, res) => {
     });
   }
 
+
+
   post
     .save()
-    .then(() => {
-      return res.status(200).json({
+    .then((data) => {
+      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } }).then(console.log("Done")).catch(console.log("error"))
+      return res.json({
         Data: post._id,
         Message: "New post is created successfully",
         Success: true,
@@ -63,7 +66,7 @@ addNewPost = (req, res) => {
     })
     .catch((error) => {
       console.log(req.body);
-      return res.status(200).json({
+      return res.json({
         Data: error.message,
         Message: "You must Type any words",
         Success: false,
@@ -281,7 +284,7 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: [{ path: "person", select: "firstName"}, { path: "vote", select: "numberOfVoting" }],
+      populate: [{ path: "person", select: "firstName" }, { path: "vote", select: "numberOfVoting" }],
       select: "-post ",
     },
   ];
@@ -346,28 +349,28 @@ showPostsOfUser = (req, res) => {
   const populateQuery = [{ path: "person", select: "firstName" }];
 
   Post.find({ person: IdPerson })
-  .sort({ _id: -1 })
-  .populate(populateQuery)
-  .exec ((error, data) => {
-    if (error || !data.length) {
+    .sort({ _id: -1 })
+    .populate(populateQuery)
+    .exec((error, data) => {
+      if (error || !data.length) {
+        return res.json({
+          Data: error,
+          Message: "no blogs found",
+          Success: false,
+        });
+      }
       return res.json({
-        Data: error,
-        Message: "no blogs found",
-        Success: false,
+        Data: data,
+        Message: "posts for:" + data.person.firstName,
+        Success: true,
       });
-    }
-    return res.json({
-      Data: data,
-      Message: "posts for:"+data.person.firstName,
-      Success: true,
     });
-  });
 };
 
 // remove voting on comment
 removeVoteFromComment = async (req, res) => {
 
-  const personVote = await Vote.find({ person: { $in: req.user._id },  comment: req.params.id  })
+  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
   console.log(personVote)
   if (personVote.length == 0) {
     return res.json({
@@ -399,7 +402,7 @@ removeVoteFromComment = async (req, res) => {
 
 voteToComment = async (req, res) => {
 
-  const personVote = await Vote.find({ person: { $in: req.user._id },  comment: req.params.id  })
+  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
   console.log(personVote)
 
   if (personVote.length > 0) {
