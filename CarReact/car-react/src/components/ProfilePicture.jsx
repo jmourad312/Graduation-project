@@ -41,25 +41,51 @@ export default function ProfilePicture(props) {
   //     });
   // };
 
-  useEffect(() => {
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $("#imagePreview").css(
-            "background-image",
-            "url(" + e.target.result + ")"
-          );
-          $("#imagePreview").hide();
-          $("#imagePreview").fadeIn(650);
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#imagePreview").css(
+          "background-image",
+          "url(" + e.target.result + ")"
+        );
+        $("#imagePreview").hide();
+        $("#imagePreview").fadeIn(650);
+      };
+      const formData = new FormData();
+      formData.append("image", reader.readAsDataURL(input.files[0]));
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+      const URL = `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
+        "UserID"
+      )}`;
+      axios
+        .put(URL,formData,config)
+        .then((req) => {
+          console.log(req);
+          if (req.data.Success === true) {
+            console.log("Success");
+            // props.history.push("/MyProfile");
+          } else {
+            console.log("fail");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      reader.readAsDataURL(input.files[0]);
     }
-    $("#imageUpload").change(function () {
-      readURL(this);
-    });
-  }, []);
+  }
+  $("#imageUpload").change(function () {
+    readURL(this);
+    console.log("hellloooooooooooooooooooooo")
+  });
+  // useEffect(() => {
+  // }, []);
   return (
     <div className="profpic">
       <div className="container">
@@ -73,8 +99,8 @@ export default function ProfilePicture(props) {
                 accept=".png, .jpg, .jpeg"
                 // onChange={handleChange}
               />
-              <label for="imageUpload" 
-              // onSubmit={handleSubmit}
+              <label
+                for="imageUpload"
               ></label>
             </form>
             {/* <Uploady
