@@ -12,14 +12,14 @@ router.get('/getModel/:name',Admin.getModel);
 
 //Ban
 router.post('/addUserBan/:id',Admin.addUserBan);
-router.post('/addUserBan/:id',Admin.removeUserBan);
+router.post('/removeUserBan/:id',Admin.removeUserBan);
 router.post('/addVendorBan/:id',Admin.addVendorBan);
-router.post('/addVendorBan/:id',Admin.removeVendorBan);
+router.post('/removeVendorBan/:id',Admin.removeVendorBan);
 
 //Calculate 
 
 router.get('/usersNumber',Admin.usersNumber);
-router.get('/VendorsNumber',Admin.vendorsNumber);
+router.get('/vendorsNumber',Admin.vendorsNumber);
 router.get('/vendorItems',Admin.numberOfItem);
 
 // show all 
