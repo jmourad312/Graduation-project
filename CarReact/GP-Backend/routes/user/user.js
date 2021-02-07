@@ -4,6 +4,8 @@ const passport = require("passport");
 const userProfileCtrl = require("../../controller/User/userProfile-ctrl");
 const userBlogCtrl = require("../../Controller/User/userBlog-ctrl");
 const userItemCtrl = require('../../Controller/User/userItem-ctrl');
+const userRateCtrl = require('../../Controller/User/userRate-ctrl');
+
 const upload = require('../../middleware/upload').upload;
 
 function canView(req, resp, next) {
@@ -93,6 +95,21 @@ router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false
 router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
 
 router.get("/showVendorProfile/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showVendorProfile);
+
+// feedback Item and vendor
+
+router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.writeFeedback);
+// {
+//     comment:String,
+//     rating:Number,
+//     car:IDitem,
+//     vendor:IDperson   
+// }
+
+
+
+router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
+    // params => idfeedback
 
 
 module.exports = router;

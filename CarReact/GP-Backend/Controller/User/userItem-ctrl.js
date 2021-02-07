@@ -9,7 +9,6 @@ const Person = require("../../models/Person/person");
 // write feedback item
 //show all item search 
 
-
 // get part of product
 partOfItem = (req, res) => {
   const populateQuery = { path: "person", select: "firstName" };
@@ -116,28 +115,30 @@ showFilterItems = (req, res) => {
 };
 
 showVendorProfile = (req, res) => {
-    const populateQuery = [
-        { path: "person", select: "-password -email -role -codeToResetPassword -subscribe" },
-        { path: "vendorFeedBack" }
-    ]
+  const populateQuery = [
+    { path: "person", select: "-password -email -role -codeToResetPassword -subscribe" },
+    { path: "vendorFeedBack" }
+  ]
 
-    Vendor.findOne({ person: req.params.id }, { __v: 0, banned: 0, workshopSchedule: 0 }).populate(populateQuery).exec((error, data) => {
-        if (error || data.length == 0) {
-            return res.json({
-                "Data": err,
-                "Message": "No Data found in DB",
-                "Success": false
-            })
-        }
-        return res.json({
-            "Data": data,
-            "Message": "Done Get Vendor Profile",
-            "Success": true
-        })
+  Vendor.findOne({ person: req.params.id }, { __v: 0, banned: 0, workshopSchedule: 0 }).populate(populateQuery).exec((error, data) => {
+    if (error || data.length == 0) {
+      return res.json({
+        "Data": err,
+        "Message": "No Data found in DB",
+        "Success": false
+      })
+    }
+    return res.json({
+      "Data": data,
+      "Message": "Done Get Vendor Profile",
+      "Success": true
     })
+  })
 
 
 }
 
-
-module.exports = { partOfItem, showFilterItems, showDetailsItem, showVendorProfile }
+module.exports = {
+  partOfItem, showFilterItems,
+  showDetailsItem, showVendorProfile
+}
