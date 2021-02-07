@@ -5,6 +5,7 @@ const Admin = require('../../Controller/Admin/admin-ctrl')
 
 router.post('/addBrand',Admin.addBrand);
 router.post('/addModel/:id',Admin.addModel);
+router.post('/addCollection/:id',Admin.addCollection);
 
 router.get('/getBrand',Admin.getBrand);
 router.get('/getModel/:name',Admin.getModel);
