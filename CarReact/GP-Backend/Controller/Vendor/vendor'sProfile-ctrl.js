@@ -142,7 +142,7 @@ updateProfile = async (req, res) => {
         }
         else {
 
-            vendor.updateOne({ person: req.params.id }, data, { upsert: true, new: true }, (error, dataOfVendor) => {
+            vendor.updateOne({ person: req.params.id }, {...body}, { upsert: true, new: true }, (error, dataOfVendor) => {
                 if (error) {
                     return res.status(400).json({
                         Data: null,
