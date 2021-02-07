@@ -142,10 +142,9 @@ usersNumber = (req, res) => {
 //add ban
 addUserBan = (req, res) => {
   const IdPerson = req.user._id;
-  const userBan = User.banned;
   User.updateOne(
-    { _id: req.params.id, person: IdPerson },
-    { $set: { userBan: true } },
+    { person: IdPerson },
+    { $set: { banned: true } },
 
     (err, result) => {
       if (err) {
@@ -157,7 +156,7 @@ addUserBan = (req, res) => {
       }
       return res.status(200).json({
         Data: result,
-        Message: `${IdPerson.firstName} is pnanned successfully`,
+        Message: "this user is pnanned successfully",
         Success: true,
       });
     }
@@ -167,10 +166,9 @@ addUserBan = (req, res) => {
 // remove ban
 removeUserBan = (req, res) => {
   const IdPerson = req.user._id;
-  const userUnBan = User.banned;
   User.updateOne(
-    { _id: req.params.id, person: IdPerson },
-    { $set: { userUnBan: false } },
+    { person: IdPerson },
+    { $set: { banned: false } },
 
     (err, result) => {
       if (err) {
@@ -193,10 +191,10 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
-  Vendor.find({}, (err, users) => {
+  Vendor.find({}, (err, vendors) => {
     const vendorMap = {};
 
-    users.forEach((vendor) => {
+    vendors.forEach((vendor) => {
       vendorMap[vendor._id] = vendor;
     });
 
@@ -263,11 +261,10 @@ numberOfItem = (req, res) => {
 
 // addBan
 addVendorBan = (req, res) => {
-  const IdPerson = req.user._id;
-  const vendorBan = Vendor.banned;
+  const IdPerson = req.vendor._id;
   Vendor.updateOne(
-    { _id: req.params.id, person: IdPerson },
-    { $set: { vendorBan: true } },
+    { person: IdPerson },
+    { $set: { banned: true } },
 
     (err, result) => {
       if (err) {
@@ -288,11 +285,11 @@ addVendorBan = (req, res) => {
 
 // remove ban
 removeVendorBan = (req, res) => {
-  const IdPerson = req.user._id;
-  const vendorUnBan = Vendor.banned;
+  const IdPerson = req.vendor._id;
+
   Vendor.updateOne(
-    { _id: req.params.id, person: IdPerson },
-    { $set: { vendorUnBan: false } },
+    { person: IdPerson },
+    { $set: { banned: false } },
 
     (err, result) => {
       if (err) {
