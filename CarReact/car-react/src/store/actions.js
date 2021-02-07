@@ -321,7 +321,7 @@ export const getVendorsAction = (params) => async (dispatch) => {
       `http://localhost:3000/vendor/showVendorProfile/${params}`,
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
-    console.log(res);
+    // console.log(res);
     dispatch({
       type: TYPES.GET_VENDOR,
       payload: res.data,

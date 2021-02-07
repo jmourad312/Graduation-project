@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Image from '../../../../components/Image'
 import profilePic from "../../../../assets/Images/pexels-photo-220453.jpeg";
+import VendorProfilePicture from "../../../../components/VendorProfilePicture";
 import VendorProfileRight from './VendorProfileRight';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVendorsAction, setVendorIdAction } from '../../../../store/actions';
@@ -16,9 +17,9 @@ dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
 
     useEffect(() => {
       dispatch(getVendorsAction(localStorage.getItem("VendorID")));
-      console.log(vendor ? vendor.person : "loading");
-      console.log(localStorage.getItem("VendorID"));
-    }, [localStorage.getItem("VendorID")]);
+      // console.log(vendor ? vendor.person : "loading");
+      // console.log(localStorage.getItem("VendorID"));
+    }, [vendor]);
 
     return (
       <div className="vendorAdmin">
@@ -27,7 +28,12 @@ dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
             <div style={{ marginTop: "10%" }}>
               <div className="row m-auto newCont">
                 <div className="col-3">
-                  <Image
+                  <VendorProfilePicture
+                    image={
+                      vendor ? (vendor.person ? vendor.person.image : "null") : "null"
+                    }
+                  />
+                  {/* <Image
                     src={
                       vendor
                         ? vendor.person
@@ -38,7 +44,7 @@ dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
                     alt="profile picture"
                     height="100%"
                     width="100%"
-                  />
+                  /> */}
                 </div>
                 <div className="col-9">
                   <p className="mt-3 button raise">

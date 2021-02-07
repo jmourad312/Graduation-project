@@ -26,13 +26,6 @@ export default function MyItems() {
             price={item.price}
             carBrand={item.carBrand}
             carModel={item.carModel}
-
-            // key={""}
-            // key={""}
-            // key={""}
-            // key={""}
-            // key={""}
-            // key={""}
           />
         );
     }

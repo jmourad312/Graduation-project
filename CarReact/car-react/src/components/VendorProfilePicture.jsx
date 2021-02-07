@@ -21,7 +21,7 @@ export default function ProfilePicture(props) {
           Authorization: localStorage.getItem("Authorization"),
         },
       };
-      const URL = `http://localhost:3000/user/updateUserProfile/${localStorage.getItem(
+      const URL = `http://localhost:3000/vendor/updateProfile/${localStorage.getItem(
         "VendorID"
       )}`;
       axios
