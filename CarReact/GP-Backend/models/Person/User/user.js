@@ -20,6 +20,12 @@ var user = new schema({
       ref: "FavouriteItems",
     },
   ],
+  recentlyViewed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
 
   bookmarkPosts: [
     {

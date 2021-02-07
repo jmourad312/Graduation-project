@@ -106,4 +106,30 @@ updateUserPassword = async (req, res) => {
   );
 };
 
-module.exports = { showUserProfile, updateUserProfile, updateUserPassword };
+recentlyViewed = (req,res) => {
+
+  user.updateOne({person:req.user._id},{
+    $push: {
+      recentlyViewed: {
+        $each: [req.body.id],
+        $slice: -5
+      }
+    }
+
+  },(error,data)=>{
+    if(error) {
+      return res.json({
+        Data: error,
+        Message: "can't add to Recent view",
+        Success: true,
+      });
+    }
+    return res.json({
+      Data: data.n,
+      Message: "Done add to Recent view",
+      Success: true,
+    });
+  });
+}
+
+module.exports = { showUserProfile, updateUserProfile, updateUserPassword, recentlyViewed };

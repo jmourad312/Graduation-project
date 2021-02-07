@@ -47,6 +47,8 @@ router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: fa
 
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("image"), userProfileCtrl.updateUserProfile);
 
+router.post("/recentlyViewed", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.recentlyViewed)
+
 // user routes on Blog
 router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
 
@@ -67,8 +69,6 @@ router.post("/showFilterPosts", userBlogCtrl.showFilterPosts)
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 
 router.get("/showAllPosts", userBlogCtrl.showAllPosts)
-
-router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser)
 
 
 //vote 
