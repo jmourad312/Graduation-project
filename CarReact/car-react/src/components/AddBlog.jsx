@@ -111,6 +111,7 @@ export default function AddBlog() {
       console.log(inputValue);
     // setInputValue("");
   };
+  
 
   return (
     <div className="addBlog">
