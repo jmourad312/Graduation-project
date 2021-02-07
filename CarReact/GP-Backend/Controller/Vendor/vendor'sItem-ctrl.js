@@ -109,7 +109,7 @@ getOneItem = async (req, res) => {
 updateItem = (req, res) => {
   const IdVendor = req.user._id;
   let { ...data } = req.body;
-  carItem.updateOne({ _id: req.params.id, vendor: IdVendor },
+  carItem.updateOne({ _id: req.params.id, person: IdVendor },
     data, { upsert: true, new: true }, (err, result) => {
       if (err) {
         return res.status(400).json({
