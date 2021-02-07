@@ -15,11 +15,13 @@ export default function BlogDetails(props) {
 
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
+    console.log(blogDetails);
   };
 
   //---------------------------EDIT FUNCTIONS----------------------------------------
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
+    console.log(blogDetails);
     setIsOpen(true);
   };
   const closeModal = () => {
@@ -27,12 +29,13 @@ export default function BlogDetails(props) {
   };
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
-    title: blogDetails && blogDetails.title,
-    // body: blogDetails.body,
-    // image: blogDetails.image,
-    // brand: blogDetails.brand,
-    // model: blogDetails.model,
+    title: blogDetails ? blogDetails.title : "",
+    body: blogDetails ? blogDetails.body : "",
+    image: blogDetails ? blogDetails.image : "",
+    brand: blogDetails ? blogDetails.brand : "",
+    model: blogDetails ? blogDetails.model : "",
   });
+
   const handleEditChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
@@ -169,11 +172,11 @@ export default function BlogDetails(props) {
     dispatch(removeVoteComment(id));
   };
 
-  useEffect(() => {
-    getBlog(blogID);
+  // useEffect(() => {
+    // getBlog(blogID);
     // console.log(blogDetails);
     // console.log(blogID);
-  }, []);
+  // }, []);
   useEffect(() => {
     getBlog(blogID);
     // console.log(blogDetails);
