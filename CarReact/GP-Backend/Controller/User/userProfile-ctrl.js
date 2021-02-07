@@ -15,6 +15,8 @@ showUserProfile = (req, res) => {
         "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword",
     },
     { path: "userSubscription", select: "-__v -_id" },
+    { path: "postsUser", select: "-__v -comment -updatedPosts" },
+
   ];
   user
     .findOne(
