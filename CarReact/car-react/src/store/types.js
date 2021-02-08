@@ -4,12 +4,9 @@
 export const GET_USER = "GET_USER";
 export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_BLOG = "GET_USER_BLOG";
-
-
 export const ADD_USER = "ADD_USER";
-export const USER_SIGN_IN = "USER_SIGN_IN";
-export const USER_SIGN_UP = "USER_SIGN_UP";
 
+export const USER_SIGN_IN = "USER_SIGN_IN";
 //-------Vendor---------------------------
 export const GET_VENDOR = "GET_VENDOR";
 export const GET_VENDOR_ID = "GET_VENDOR_ID";
@@ -17,7 +14,6 @@ export const GET_VENDOR_ITEMS = "GET_VENDOR_ITEMS";
 
 
 export const VENDOR_SIGN_IN = "VENDOR_SIGN_IN";
-export const VENDOR_SIGN_UP = "VENDOR_SIGN_UP";
 
 //--------BLOG---------------------
 export const GET_BLOGS = "GET_BLOGS";

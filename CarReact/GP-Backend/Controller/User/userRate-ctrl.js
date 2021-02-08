@@ -1,15 +1,15 @@
-const FeedBack = require("../../models/Feedback/feedBack");
+const FeedBack = require("../../models/Feedback/feedback");
 const carItem = require("../../models/CarDetails/sparePartCar");
 const Vendor = require("../../models/Person/Vendor/vendor")
 
-writeFeedback =  (req, res) => {
+writeFeedback = (req, res) => {
 
-// {
-//     comment:String,
-//     rating:Number,
-//     car:IDitem,
-//     vendor:IDperson   
-// }
+    // {
+    //     comment:String,
+    //     rating:Number,
+    //     car:IDitem,
+    //     vendor:IDperson   
+    // }
     const body = req.body
 
     const IdUser = req.user._id;
@@ -22,7 +22,7 @@ writeFeedback =  (req, res) => {
         });
     }
 
-    const feedback = new FeedBack({ ...body});
+    const feedback = new FeedBack({ ...body });
     feedback.user = IdUser;
     if (body.vendor) { feedback.vendor = body.vendor }
     if (body.car) { feedback.car = body.car }
@@ -48,8 +48,8 @@ writeFeedback =  (req, res) => {
 
             if (req.body.car) {
                 carItem.updateOne(
-                    { person: req.body.vendor },
-                    { $push: { itemFeedBack: data._id } }).then(console.log("Done"))
+                    { _id: req.body.car },
+                    { $push: { feedback:{$each:[data._id]}  } }).then(console.log("Done"))
             }
 
             return res.json({
@@ -69,18 +69,8 @@ writeFeedback =  (req, res) => {
 
 removeFeedback = async (req, res) => {
 
-    // params => idfeedback
-
-    const feedbackUser = await FeedBack.find({ _id: req.params.id, user: req.user._id })
-    console.log(feedbackUser)
-
-    Vendor.updateOne({person:feedbackUser.vendor},{$pull:{vendorFeedBack:feedbackUser._id}}).then("Done")
-
-    carItem.updateOne({_id:feedbackUser.car},{$pull:{itemFeedBack:feedbackUser._id}}).then("Done")
-
-
-    FeedBack.deleteOne({ _id: req.params.id}, (err, data) => {
-        if (err ) {
+    FeedBack.findOneAndDelete({ _id: req.params.id }, (err, data) => {
+        if (err) {
             return res.json({
                 "Data": {},
                 "Message": "Can't delete item from database",
@@ -95,6 +85,10 @@ removeFeedback = async (req, res) => {
                 "Success": false
             })
         }
+
+        Vendor.updateOne({ person: data.vendor }, { $pull: { vendorFeedBack: data._id } }).then("Done")
+
+        carItem.updateOne({ _id: data.car }, { $pull: { feedback: data._id } }).then("Done")
 
         return res.json({
             "Data": {},

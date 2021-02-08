@@ -28,9 +28,9 @@ function validateAdmin(req, resp, next) {
   } else next();
 }
 
-router.post("/admin/addAds", upload.array("images", 5), AdminCtrl.addAds);
-router.delete("/admin/deleteAds/:id", AdminCtrl.deleteAds);
+router.post("/admin/addAds",passport.authenticate("jwt", { session: false }), validateAdmin, upload.array("images", 5), AdminCtrl.addAds);
+router.delete("/admin/deleteAds/:id",passport.authenticate("jwt", { session: false }), validateAdmin, AdminCtrl.deleteAds);
 
-router.get ("/showAds", userCtrl.showAds)
+router.get ("/showAds",passport.authenticate("jwt", { session: false }), canViewall, userCtrl.showAds)
 
 module.exports = router;

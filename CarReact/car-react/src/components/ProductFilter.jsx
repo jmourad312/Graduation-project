@@ -4,6 +4,7 @@ import cars2 from '../assets/js/cars2';
 import cars from "../assets/js/cars";
 import { useDispatch, useSelector } from 'react-redux';
 import { filterCarBrand, filterCarModel, resultFromFilterProduct } from '../store/actions';
+import SimpleSearch from './SimpleSearch';
 
 
 export default function ProductFilter(props) {
@@ -66,7 +67,7 @@ export default function ProductFilter(props) {
 
   return (
     <div className={props.class}>
-
+      {/* <SimpleSearch /> */}
       <div className="input-group mb-3">
         <input type="text" name="search" onChange={handleChange} value={state.search} className="form-control" placeholder="Search" />
         <div className="input-group-append">

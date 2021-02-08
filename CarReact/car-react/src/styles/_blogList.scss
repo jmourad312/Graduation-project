@@ -6,162 +6,134 @@
     margin-top: 10%;
 
     .blog-post {
-      .text-multiline-truncate {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      /* RESET */
-      /* DEFAULT STYLE */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        background: #ebecf0;
-        font-family: "Open Sans", sans-serif;
-        min-height: 100vh;
-        a {
-          text-decoration: none;
-          color: #172b4d;
-        }
-        h1 {
-          font-family: "Song Myung", serif;
-        }
-      }
-      &:root {
-        font-size: 16px;
-        --card-img-height: 200px;
-      }
-      .card-container {
+      .cards {
         width: 100%;
-        height: 100vh;
         display: flex;
-        flex-flow: row wrap;
+        display: -webkit-flex;
         justify-content: center;
-        align-items: center;
-        transition: all 200ms ease-in-out;
+        -webkit-justify-content: center;
+        max-width: 820px;
+      }
+
+      .card--1 .card__img,
+      .card--1 .card__img--hover {
+        background-image: url("https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+      }
+
+      .card--2 .card__img,
+      .card--2 .card__img--hover {
+        background-image: url("https://images.pexels.com/photos/307008/pexels-photo-307008.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+      }
+
+      .card__clock {
+        width: 15px;
+        vertical-align: middle;
+        fill: #ad7d52;
+      }
+      .card__time {
+        font-size: 12px;
+        color: #ad7d52;
+        vertical-align: middle;
+        margin-left: 5px;
+      }
+
+      .card__clock-info {
+        float: right;
+      }
+
+      .card__img {
+        visibility: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 235px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+
+      .card__info-hover {
+        position: absolute;
+        padding: 16px;
+        width: 100%;
+        opacity: 0;
+        top: 0;
+      }
+
+      .card__img--hover {
+        transition: 0.2s all ease-out;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        position: absolute;
+        height: 235px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        top: 0;
       }
       .card {
-        align-self: flex-start;
+        margin-right: 25px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+        background-color: #fff;
+        width: 100%;
         position: relative;
-        width: 325px;
-        min-width: 275px;
-        margin: 1.25rem 0.75rem;
-        background: white;
-        transition: all 300ms ease-in-out;
-        .card-img {
-          visibility: hidden;
-          width: 100%;
-          height: var(--card-img-height);
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
-        }
-        .card-img-hovered {
-          --card-img-hovered-overlay: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0)
-          );
-          transition: all 350ms ease-in-out;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-size: cover;
-          width: 100%;
-          position: absolute;
-          height: var(--card-img-height);
-          top: 0;
-        }
-        .card-info {
-          position: relative;
-          padding: 0.75rem 1.25rem;
-          transition: all 200ms ease-in-out;
-          .card-about {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0;
-            transition: all 200ms ease-in-out;
-            .card-tag {
-              width: 60px;
-              max-width: 100px;
-              padding: 0.2rem 0.5rem;
-              font-size: 12px;
-              text-align: center;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              background: #505f79;
-              color: #fff;
-            }
-            .card-tag.tag-news {
-              background: #36b37e;
-            }
-            .card-tag.tag-deals {
-              background: #ffab00;
-            }
-            .card-tag.tag-politics {
-              width: 71px;
-              background: #ff5630;
-            }
-          }
-          .card-title {
-            z-index: 10;
-            font-size: 1.5rem;
-            padding-bottom: 0.75rem;
-            transition: all 350ms ease-in-out;
-          }
-          .card-creator {
-            padding-bottom: 0.75rem;
-            transition: all 250ms ease-in-out;
-          }
-        }
-        &:hover {
-          cursor: pointer;
-          box-shadow: 0px 15px 35px rgba(227, 252, 239, 0.1),
-            0px 5px 15px rgba(0, 0, 0, 0.07);
-          transform: scale(1.025);
-          .card-img-hovered {
-            --card-img-hovered-overlay: linear-gradient(
-              to bottom,
-              rgba(0, 0, 0, 0),
-              rgba(0, 0, 0, 0.65)
-            );
-            height: 100%;
-          }
-          .card-about {
-            opacity: 0;
-          }
-          .card-creator {
-            opacity: 0;
-          }
-          .card-info {
-            background-color: transparent;
-          }
-          .card-title {
-            color: #ebecf0;
-            transform: translate(0, 40px);
-          }
-        }
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
       }
-      // .card-1 {
-      //   .card-img {
-      //     background-image: var(--card-img-hovered-overlay),
-      //       url(https://source.unsplash.com/Qm_n6aoYzDs);
-      //   }
-      //   .card-img-hovered {
-      //     background-image: var(--card-img-hovered-overlay),
-      //       url(https://source.unsplash.com/Qm_n6aoYzDs);
-      //   }
-      // }
-      .card-4 {
-        .card-img {
-          background-image: var(--card-img-hovered-overlay),
-        }
-        .card-img-hovered {
-          background-image: var(--card-img-hovered-overlay),
-        }
+      .card:hover {
+        box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+        transform: scale(1.1, 1.1);
+      }
+
+      .card__info {
+        z-index: 2;
+        background-color: #fff;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 16px 24px 24px 24px;
+      }
+
+      .card__category {
+        font-family: "Raleway", sans-serif;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 2px;
+        font-weight: 500;
+        color: #868686;
+      }
+
+      .card__title {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-family: "Roboto Slab", serif;
+      }
+
+      .card__by {
+        font-size: 12px;
+        font-family: "Raleway", sans-serif;
+        font-weight: 500;
+      }
+
+      .card__author {
+        font-weight: 600;
+        text-decoration: none;
+        color: #ad7d52;
+      }
+
+      .card:hover .card__img--hover {
+        height: 100%;
+        opacity: 0.3;
+      }
+
+      .card:hover .card__info {
+        background-color: transparent;
+        position: relative;
+      }
+
+      .card:hover .card__info-hover {
+        opacity: 1;
       }
     }
   }

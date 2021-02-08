@@ -29,8 +29,10 @@ export default (
     userSignUp: {},
     token: "",
     userBlogs: [],
+    isUserLoggedIn: false,
     //vendor------------------
     vendor: [],
+    isVendorLoggedIn: false,
     vendorID: "",
     vendorItems: [],
 
@@ -159,14 +161,8 @@ export default (
     case TYPES.USER_SIGN_IN:
       return {
         ...state,
-        userSignIn: action.payload,
+        isUserLoggedIn: action.payload,
       };
-    case TYPES.USER_SIGN_UP:
-      return {
-        ...state,
-        userSignUp: action.payload,
-      };
-
     //---------------Vendor------------
     case TYPES.GET_VENDOR:
       return {
@@ -187,14 +183,8 @@ export default (
     case TYPES.VENDOR_SIGN_IN:
       return {
         ...state,
-        vendorSignIn: action.payload,
+        isVendorLoggedIn: action.payload,
       };
-    case TYPES.VENDOR_SIGN_UP:
-      return {
-        ...state,
-        vendorSignUp: action.payload,
-      };
-
     default:
       return state;
   }

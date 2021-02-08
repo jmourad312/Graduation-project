@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../../../../components/Loading';
-import LoginButton from '../../../../components/LoginButton';
-import ProductComp from '../../../../components/ProductComp';
-import ProductFilter from '../../../../components/ProductFilter';
-import { getProductsAction } from '../../../../store/actions';
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../../../components/Loading";
+import LoginButton from "../../../../components/LoginButton";
+import ProductComp from "../../../../components/ProductComp";
+import ProductFilter from "../../../../components/ProductFilter";
+import UserIcon from "../../../../components/UserIcon";
+import { getProductsAction, getUsersAction } from "../../../../store/actions";
 
 export default function ProductsList() {
-  
   const products = useSelector((state) => state.products);
   // console.log(products);
   const dispatch = useDispatch();
@@ -20,9 +19,10 @@ export default function ProductsList() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+    dispatch(getUsersAction(localStorage.getItem("UserID")));
+  }, [localStorage.getItem("UserID")]);
 
-  const createProducts = (prod) =>{
+  const createProducts = (prod) => {
     return (
       <ProductComp
         key={prod._id}
@@ -36,10 +36,11 @@ export default function ProductsList() {
         // category={prod.category}
       />
     );
-  }
+  };
   return (
     <div className="productList">
-    <LoginButton/>
+      <LoginButton />
+      <UserIcon />
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "10%" }}>

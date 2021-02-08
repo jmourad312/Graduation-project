@@ -20,11 +20,11 @@ export default function MyProfile() {
 
   return (
     <div>
-      <Ads
+      {/* <Ads
         class="pater"
         imgSrc="../../../../assets/Images/13.jpg"
         hoverImgSrc="../../../../assets/Images/14.jpg"
-      />
+      /> */}
       <section className="myProfile container">
         <div className="row">
           <ProfileLeft
