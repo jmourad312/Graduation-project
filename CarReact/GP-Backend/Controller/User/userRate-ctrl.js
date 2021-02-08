@@ -72,6 +72,7 @@ removeFeedback = async (req, res) => {
     // params => idfeedback
 
     const feedbackUser = await FeedBack.find({ _id: req.params.id, user: req.user._id })
+    console.log(feedbackUser)
 
     Vendor.updateOne({person:feedbackUser.vendor},{$pull:{vendorFeedBack:feedbackUser._id}}).then("Done")
 
@@ -89,7 +90,7 @@ removeFeedback = async (req, res) => {
 
         if (data.n == 0) {
             return res.json({
-                "Data": data,
+                "Data": data.n,
                 "Message": "Data with that id: " + req.params.id + " don't exist",
                 "Success": false
             })
