@@ -20,14 +20,14 @@ export default function ProductDetails(props) {
     <section className="products-details">
       {/* <!-- start product details --> */}
       <div className="container mx-auto mt-3">
-        <div className="row shadow-sm  mb-4 bg-light rounded-lg">
+        <div className="row shadow-sm mb-4 bg-light rounded-lg">
           {/* <!-- image of produce --> */}
           <div className="col-md-4">
             <img
               src={productDetails && productDetails.image}
               // width="100%"
               // height="100%"
-              style={{ maxHeight: "400px", maxWidth: "400px" }}
+              style={{ maxHeight: "400px", maxWidth: "350px" }}
               alt=""
             />
           </div>
@@ -82,14 +82,14 @@ export default function ProductDetails(props) {
                 >
                   <i className="far fa-heart  text-danger"></i>
                 </span>
-                <span
+                {/* <span
                   className="fa-lg"
                   data-toggle="tooltip"
                   title="compare product"
                   data-placement="bottom"
                 >
                   <i className="fas fa-sliders-h  text-primary"></i>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function ProductDetails(props) {
                 />
                 <p>location one </p>
               </div>
-              <div className="pl-3">
+              {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
                   width="70px"
@@ -174,7 +174,7 @@ export default function ProductDetails(props) {
                   alt=""
                 />
                 <p>location two </p>
-              </div>
+              </div> */}
             </div>
             {/* </div> */}
 
