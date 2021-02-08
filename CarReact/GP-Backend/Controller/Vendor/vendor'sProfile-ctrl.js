@@ -4,6 +4,8 @@ const subscription = require('../../models/Person/Vendor/subscription')
 const bcrypt = require('bcryptjs');
 const gettoken = require('../../token/gerenrate-token')
 const transporter = require('../../config/configEmail')
+const Feedback = require('../../models/Feedback/feedback')
+
 
 //forget password
 forgetPassword = (req, res) => {
@@ -165,7 +167,7 @@ updateProfile = async (req, res) => {
 showVendorProfile = (req, res) => {
     const IdPerson = req.params.id
     const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription", select: "-__v -_id -person" }];
-    vendor.findOne({ person: IdPerson }, { vendorFeedBack: 0, __v: 0, _id: 0 }).populate(populateQuery).exec((err, data) => {
+    vendor.findOne({ person: IdPerson }, {__v: 0, _id: 0 }).populate(populateQuery).exec( async (err, data) => {
         if (err || data.length == 0) {
             return res.json({
                 Data: err,
@@ -173,8 +175,11 @@ showVendorProfile = (req, res) => {
                 Success: false,
             });
         }
+        
+        const feedback = await Feedback.find({_id:{$in:data.vendorFeedBack}},{__v:0,car:0}).populate({path:"user",select:"firstName"})
+
         return res.json({
-            Data: data,
+            Data: data,feedback,
             Message: "Done Fet vendor profile",
             Success: true,
         });

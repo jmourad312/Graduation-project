@@ -1,6 +1,5 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
-const Person = require("../../models/Person/person");
-
+const Feedback = require('../../models/Feedback/feedback')
 // favourite item
 // last seen item
 // click item show items details
@@ -40,14 +39,10 @@ partOfItem = (req, res) => {
 };
 
 // show all posts of all users
-showDetailsItem = (req, res) => {
+showDetailsItem = async (req, res) => {
 
   const idItem = req.params.id ; 
   const populateQuery = [
-    // {
-    //   path: "feedback",  populate: { path: "user", select: "firstName" },
-    //   select: "-car -vendor",
-    // },
     { path: "person", select: "firstName" },
   ];
 
@@ -57,7 +52,7 @@ showDetailsItem = (req, res) => {
       {__v:0}
     )
     .populate(populateQuery)
-    .exec((error, data) => {
+    .exec(async (error, data) => {
       if (error || data.length == 0) {
         return res.json({
           Data: error,
@@ -66,9 +61,10 @@ showDetailsItem = (req, res) => {
         });
       }
 
-      console.log(data.feedback)
+      const feedback = await Feedback.find({_id:{$in:data.feedback}},{__v:0,car:0}).populate({path:"user",select:"firstName"})
+      
       return res.json({
-        Data: data,
+        Data: {data,feedback},
         Message: "Details product",
         Success: true,
       });

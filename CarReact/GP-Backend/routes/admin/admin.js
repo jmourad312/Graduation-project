@@ -32,6 +32,7 @@ router.post('/addBrand', passport.authenticate("jwt", { session: false }), valid
 router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addModel);
 router.post('/addCollection/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
 
+//********************************************************************************* */
 router.get('/getBrand',Admin.getBrand);
 router.get('/getModel/:name', Admin.getModel);
 
