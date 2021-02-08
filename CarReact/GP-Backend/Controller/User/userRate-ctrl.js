@@ -36,7 +36,7 @@ writeFeedback =  (req, res) => {
         });
     }
 
-    FeedBack
+    feedback
         .save()
         .then((data) => {
 
@@ -71,15 +71,15 @@ removeFeedback = async (req, res) => {
 
     // params => idfeedback
 
-    const feedbackUser = await FeedBack.findOne({ _id: req.params.id, user: req.user._id })
+    const feedbackUser = await FeedBack.find({ _id: req.params.id, user: req.user._id })
 
     Vendor.updateOne({person:feedbackUser.vendor},{$pull:{vendorFeedBack:feedbackUser._id}}).then("Done")
 
     carItem.updateOne({_id:feedbackUser.car},{$pull:{itemFeedBack:feedbackUser._id}}).then("Done")
 
 
-    FeedBack.deleteOne({ _id: req.params.id, user: req.user._id }, (err, data) => {
-        if (err) {
+    FeedBack.deleteOne({ _id: req.params.id}, (err, data) => {
+        if (err ) {
             return res.json({
                 "Data": {},
                 "Message": "Can't delete item from database",
@@ -89,7 +89,7 @@ removeFeedback = async (req, res) => {
 
         if (data.n == 0) {
             return res.json({
-                "Data": {},
+                "Data": data,
                 "Message": "Data with that id: " + req.params.id + " don't exist",
                 "Success": false
             })

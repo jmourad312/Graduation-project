@@ -2,6 +2,7 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 
 //create new Item
 addItem = (req, res) => {
+
   console.log(req.body);
   console.log(req.file);
 
@@ -75,7 +76,7 @@ getOneItem = async (req, res) => {
   const IdVendor = req.user._id;
 
   await carItem
-    .findOne({ _id: req.params.id, vendor: IdVendor }, (err, items) => {
+    .findOne({ _id: req.params.id, person: IdVendor }, (err, items) => {
       if (err) {
         return res.status(400).json({
           Data: null,
@@ -195,7 +196,7 @@ numberOfItem = (req, res) => {
 // get part of product 
 partOfItem = (req, res) => {
   const IdVendor = req.user._id;
-  carItem.find({ vendor: IdVendor }, { __v: 0 }).sort({ _id: -1 }).skip(+req.params.skip).limit(10).exec((err, data) => {
+  carItem.find({ person: IdVendor }, { __v: 0 }).sort({ _id: -1 }).skip(+req.params.skip).limit(10).exec((err, data) => {
     if (err) {
       res.json({
         "Data": {},
