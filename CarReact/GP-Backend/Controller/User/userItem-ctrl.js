@@ -21,7 +21,7 @@ partOfItem = (req, res) => {
     .populate(populateQuery)
     .sort({ _id: -1 })
     .skip(0)
-    .limit(12)
+    .limit(9)
     .exec((err, data) => {
       if (err || data.length == 0) {
         return res.json({
@@ -33,7 +33,7 @@ partOfItem = (req, res) => {
 
       return res.json({
         Data: data,
-        Message: `6 protuct `,
+        Message: `9 protuct `,
         Success: true,
       });
     });
