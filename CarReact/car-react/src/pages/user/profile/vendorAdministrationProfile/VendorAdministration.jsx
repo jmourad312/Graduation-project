@@ -62,7 +62,7 @@ dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
                   </p>
                 </div>
               </div>
-              <div className="row vendorright">
+              <div className="vendorright">
                 <div className="col-3"></div>
                 <div className="col-9 mt-5  ">
                   <VendorProfileRight
