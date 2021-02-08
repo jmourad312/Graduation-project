@@ -32,8 +32,8 @@ router.post('/addBrand', passport.authenticate("jwt", { session: false }), valid
 router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addModel);
 router.post('/addCollection/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
 
-router.get('/getBrand', passport.authenticate("jwt", { session: false }), canViewall, Admin.getBrand);
-router.get('/getModel/:name', passport.authenticate("jwt", { session: false }), canViewall, Admin.getModel);
+router.get('/getBrand',Admin.getBrand);
+router.get('/getModel/:name', Admin.getModel);
 
 //Ban
 router.post('/addUserBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addUserBan);

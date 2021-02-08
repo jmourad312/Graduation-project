@@ -49,7 +49,7 @@ writeFeedback = (req, res) => {
             if (req.body.car) {
                 carItem.updateOne(
                     { _id: req.body.car },
-                    { $push: { feedback: data._id } }).then(console.log("Done"))
+                    { $push: { feedback:{$each:[data._id]}  } }).then(console.log("Done"))
             }
 
             return res.json({

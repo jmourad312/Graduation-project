@@ -42,14 +42,18 @@ partOfItem = (req, res) => {
 // show all posts of all users
 showDetailsItem = (req, res) => {
 
+  const idItem = req.params.id ; 
   const populateQuery = [
+    // {
+    //   path: "feedback",  populate: { path: "user", select: "firstName" },
+    //   select: "-car -vendor",
+    // },
     { path: "person", select: "firstName" },
   ];
 
-
   carItem
     .findOne(
-      { _id: req.params.id },
+      { _id: idItem},
       {__v:0}
     )
     .populate(populateQuery)
@@ -61,6 +65,8 @@ showDetailsItem = (req, res) => {
           Success: false,
         });
       }
+
+      console.log(data.feedback)
       return res.json({
         Data: data,
         Message: "Details product",
