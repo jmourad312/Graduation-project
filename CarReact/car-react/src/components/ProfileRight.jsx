@@ -61,7 +61,7 @@ export default function ProfileRight(props) {
   //       </Switch>
   //     </CSSTransition>
   //   </TransitionGroup>
-  ));
+  // ));
 
   return (
     <div className={props.class}>
