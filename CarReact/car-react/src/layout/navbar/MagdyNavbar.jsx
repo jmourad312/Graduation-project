@@ -36,7 +36,7 @@ export default function MagdyNavbar() {
                     <li className="menu__item" id="item9"><Link className="menu__link" onClick={handleClick} to="/ContactUs">ContactUs</Link></li>
                     {/* <li className="menu__item" id="item10"><Link className="menu__link" onClick={handleClick} to="/Privacy">Privacy</Link></li>
                     <li className="menu__item" id="item11"><Link className="menu__link" onClick={handleClick} to="/TermsOfService">TermsOfService</Link></li> */}
-                    {/* <li className="menu__item" id="item12"><Link className="menu__link" onClick={handleClick} to="/VendorProfileUser">VendorProfileUser</Link></li> */}
+                    <li className="menu__item" id="item12"><Link className="menu__link" onClick={handleClick} to="/VendorProfileUser">VendorProfileUser</Link></li>
                     {/* <li className="menu__item" id="item13"><Link className="menu__link" onClick={handleClick} to="/ProductDetails">ProductDetails</Link></li> */}
                     <li className="menu__item" id="item14"><Link className="menu__link" onClick={handleClick} to="/MyProfile">MyProfile</Link></li>
                     {/* <li className="menu__item" id="item15"><Link className="menu__link" onClick={handleClick} to="/DisplayUserProfile">DisplayUserProfile</Link></li> */}
