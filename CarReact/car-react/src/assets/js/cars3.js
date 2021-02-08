@@ -1,8 +1,5 @@
 const cars3 = [
   {
-    model: "bez",
-  },
-  {
     model: "benz A-Class",
   },
   {
