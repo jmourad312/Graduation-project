@@ -15,8 +15,8 @@ export default function BlogEntry(props) {
 
 
   return (
-    <div className="col-md-6 col-lg-6 col-xl-4 mb-4">
-      <div className="card blog-post" onClick={() => handleClick(props.id)}>
+    <div className="col-md-6 col-lg-6 col-xl-4 mb-4 blog-post">
+      {/* <div className="card blog-post" onClick={() => handleClick(props.id)}>
         <div className="rounded">
           <img
             className="img-fluid card-img-top"
@@ -59,6 +59,30 @@ export default function BlogEntry(props) {
                 <i className=" mr-2"></i>
                 {props.replies}
               </a>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      <div class="card-container">
+        <div class="card card-4">
+          <div
+            class="card-img"
+            style={{ background: `url(${props.imgSrc})`,backgroundSize: "10% 10%", }}
+          ></div>
+          <a href="" class="card-link">
+            <div
+              class="card-img-hovered"
+              style={{ background: `url(${props.imgSrc})` }}
+            ></div>
+          </a>
+          <div class="card-info">
+            <div class="card-about">
+              <a class="card-tag tag-news">NEWS</a>
+              <div class="card-time">{props.date}</div>
+            </div>
+            <h1 class="card-title">{props.cardTitle}</h1>
+            <div class="card-creator">
+              by <a href="">{props.userName}</a>
             </div>
           </div>
         </div>
