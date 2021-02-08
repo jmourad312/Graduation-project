@@ -82,14 +82,14 @@ export default function ProductDetails(props) {
                 >
                   <i className="far fa-heart  text-danger"></i>
                 </span>
-                {/* <span
+                <span
                   className="fa-lg"
                   data-toggle="tooltip"
                   title="compare product"
                   data-placement="bottom"
                 >
                   <i className="fas fa-sliders-h  text-primary"></i>
-                </span> */}
+                </span>
               </div>
             </div>
           </div>
@@ -165,6 +165,15 @@ export default function ProductDetails(props) {
                   alt=""
                 />
                 <p>location one </p>
+              </div>
+              <div className="pl-3">
+                <img
+                  src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
+                  width="70px"
+                  height="70px"
+                  alt=""
+                />
+                <p>location two </p>
               </div>
             </div>
             {/* </div> */}
