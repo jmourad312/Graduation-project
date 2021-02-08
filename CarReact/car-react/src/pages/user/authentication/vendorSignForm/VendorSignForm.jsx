@@ -41,6 +41,7 @@ export default function VendorSignForm(props) {
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("VendorID", res.data.Data);
         console.log(localStorage.getItem("Authorization"));
+        console.log(res.data);
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
           props.history.push(
