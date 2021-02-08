@@ -17,6 +17,7 @@ const VendorRoute = require("./routes/vendor/vendor");
 const AdminRoute = require("./routes/admin/admin");
 
 const blogRoute = require("./routes/blog/blog");
+const AdsRoute = require('./routes/Ads/ads')
 const upload = require("./middleware/upload").upload;
 
 //server
@@ -43,8 +44,10 @@ app.use("/user", UserRoute);
 app.use("/vendor", VendorRoute);
 app.use("/vendor/auth", AuthVendorRoute);
 
-// app.use("/admin/auth",AuthAdminRoute);
+app.use("/admin/auth",AuthAdminRoute);
 app.use("/admin", AdminRoute);
+app.use("/", AdsRoute);
+
 
 app.use("/blog", blogRoute);
 

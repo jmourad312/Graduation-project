@@ -33,7 +33,9 @@ function canViewall(req, resp, next) {
 function validateUser(req, resp, next) {
   console.log(req.user)
   const { role, _id } = req.user;
-  if (!((role == "user" || role == "admin") && (_id == req.params.id || _id == req.body.id))) {
+  //!((role == "user" || role == "admin") && (_id == req.params.id || _id == req.body.id))
+
+  if (!( (role == "user" && (_id == req.params.id || _id == req.body.id) ) || (role == "admin"))) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -118,7 +120,7 @@ router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), 
 
 
 router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
-    // params => idfeedback
+// params => idfeedback
 
 
 module.exports = router;

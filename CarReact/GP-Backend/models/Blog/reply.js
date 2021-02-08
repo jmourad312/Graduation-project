@@ -3,11 +3,8 @@ const mongoose = require("mongoose");
 var schema = mongoose.Schema;
 var reply = new schema(
   {
-    content: {
-      type: "String",
-      default: "",
-    },
-    image: [String],
+    content: { type: String, required: true ,lowercase: true },
+    image: String,
     person: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
@@ -22,11 +19,10 @@ var reply = new schema(
         ref: "Reply",
       },
     ],
-    vote: 
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Voting",
-      },
+    vote: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Voting",
+    },
   },
   { timestamps: true }
 );

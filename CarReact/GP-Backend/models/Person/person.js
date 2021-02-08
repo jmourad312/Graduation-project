@@ -12,15 +12,9 @@ var person = new schema({
   phoneNumber: Number,
   subscribe: Boolean,
   role: { type: String, enum: ["user", "admin", "vendor"], default: "user" },
-  region: {
-    country: String,
-    region: String,
-    location: [
-      {
-        city: String,
-        address: String,
-      },
-    ],
+  location: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Location",
   },
   codeToResetPassword:Number,
 }
