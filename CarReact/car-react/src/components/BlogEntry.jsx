@@ -99,12 +99,12 @@ export default function BlogEntry(props) {
 
           </div>
           <div class="card__img" style={{ background: `url(${props.imgSrc})`}}></div>
-          <a href="#" class="card_link">
+          <p class="card_link">
             <div class="card__img--hover" style={{ background: `url(${props.imgSrc})` }} ></div>
-          </a>
+          </p>
           <div class="card__info">
             <h3 class="card__title">{props.cardTitle}</h3>
-            <span class="card__by">by <a href="#" class="card__author" title="author">{props.userName}</a></span>
+            <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
             <br/>
             <small>
               <i className="badge badge-dark">{props.cardBrand}</i>

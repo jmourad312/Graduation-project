@@ -82,14 +82,14 @@ export default function ProductDetails(props) {
                 >
                   <i className="far fa-heart  text-danger"></i>
                 </span>
-                <span
+                {/* <span
                   className="fa-lg"
                   data-toggle="tooltip"
                   title="compare product"
                   data-placement="bottom"
                 >
                   <i className="fas fa-sliders-h  text-primary"></i>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
