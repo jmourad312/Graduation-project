@@ -66,14 +66,14 @@ resetPassword = async (req, res) => {
         const password = await bcrypt.hash(req.body.password, saltRounds);
         person.updateOne({ email: req.body.email }, { password }, (error, data) => {
             if (error) {
-                return res.status(400).json({
+                return res.json({
                     Data: null,
                     Message: "You can't update your password",
                     Success: false,
                 });
             }
             else {
-                return res.status(200).json({
+                return res.json({
                     Data: data.n,
                     Message: "your password updated ",
                     Success: true,
@@ -82,7 +82,7 @@ resetPassword = async (req, res) => {
         })
     }
     else {
-        return res.status(400).json({
+        return res.json({
             Data: null,
             Message: "You can't update your password",
             Success: false,
@@ -123,16 +123,16 @@ updateProfile = async (req, res) => {
 
     const saltRounds = await bcrypt.genSalt(10);
     const update = {}
-    
-    if(req.body.password){
+
+    if (req.body.password) {
         update.password = await bcrypt.hash(req.body.password, saltRounds);
     }
 
-    if(req.file){
-        update.image = "http://localhost:3000/images/"+req.file.filename;
+    if (req.file) {
+        update.image = "http://localhost:3000/images/" + req.file.filename;
     }
 
-    person.updateOne({ _id: req.params.id }, {...body,...update}, { upsert: true, new: true }, (errorPerson, dataOfPerson) => {
+    person.updateOne({ _id: req.params.id }, { ...body, ...update }, { upsert: true, new: true }, (errorPerson, dataOfPerson) => {
         if (errorPerson) {
             return res.status(400).json({
                 Data: null,
@@ -142,7 +142,7 @@ updateProfile = async (req, res) => {
         }
         else {
 
-            vendor.updateOne({ person: req.params.id }, {...body}, { upsert: true, new: true }, (error, dataOfVendor) => {
+            vendor.updateOne({ person: req.params.id }, { ...body }, { upsert: true, new: true }, (error, dataOfVendor) => {
                 if (error) {
                     return res.status(400).json({
                         Data: null,
@@ -166,21 +166,22 @@ showVendorProfile = (req, res) => {
     const IdPerson = req.params.id
     const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription", select: "-__v -_id -person" }];
     vendor.findOne({ person: IdPerson }, { vendorFeedBack: 0, __v: 0, _id: 0 }).populate(populateQuery).exec((err, data) => {
-        if (err) {
-            return res.status(400).json({
+        if (err || data.length == 0) {
+            return res.json({
                 Data: err,
-                Message: "*****************",
+                Message: "this Vendor doesn't exsist",
                 Success: false,
             });
         }
-        else {
-            return res.status(200).json({
-                Data: data,
-                Message: ":D :D",
-                Success: true,
-            });
-        }
+        return res.json({
+            Data: data,
+            Message: "Done Fet vendor profile",
+            Success: true,
+        });
     });
 };
 
-module.exports = { updateProfilePassword, updateProfile, forgetPassword, resetPassword, showVendorProfile }
+module.exports = {
+    updateProfilePassword, updateProfile,
+    forgetPassword, resetPassword, showVendorProfile
+}
