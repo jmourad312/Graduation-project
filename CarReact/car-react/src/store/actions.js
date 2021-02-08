@@ -274,36 +274,12 @@ export const getUserBlogs = () => async (dispatch) => {
 };
 
 //-------------------user sign in
-export const userSignInAction = () => async (dispatch) => {
-  try {
-    const req = await axios.post("http://localhost:3000/user/auth/signin");
-    console.log(req);
-    dispatch({
-      type: TYPES.USER_SIGN_IN,
-      payload: req.data,
-    });
-    console.log(req);
-
-  } catch (error) {
-    console.log(error);
-  }
+export const userSignInAction = (payload) => {
+  return {
+    type: TYPES.USER_SIGN_IN,
+    payload,
+  };
 };
-//*--------------------user sign up
-export const userSignUpAction = () => async (dispatch) => {
-  try {
-    const req = await axios.post("http://localhost:3000/user/auth/signup");
-    console.log(req);
-    dispatch({
-      type: TYPES.USER_SIGN_UP,
-      payload: req.data,
-    });
-    console.log(req);
-
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 
 //VENDOR----------------------------------------------------------
 export const setVendorIdAction = (payload) => {
@@ -343,42 +319,12 @@ export const getVendorsItemsAction = () => async (dispatch) => {
   }
 };
 //-------------------vendor sign in
-export const vendorSignInAction = () => async (dispatch) => {
-  try {
-    const req = await axios.post("http://localhost:3000/vendor/auth/signin");
-    console.log(req);
-    dispatch({
-      type: TYPES.VENDOR_SIGN_IN,
-      payload: req.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const vendorSignInAction = (payload) => {
+  return {
+    type: TYPES.VENDOR_SIGN_IN,
+    payload,
+  };
 };
-//-------------------vendor sign Up
-export const vendorSignUpAction = () => async (dispatch) => {
-  try {
-    const req = await axios.post("http://localhost:3000/vendor/auth/signup");
-    console.log(req);
-    dispatch({
-      type: TYPES.VENDOR_SIGN_UP,
-      payload: req.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
 ///-----savee token
 export const setToken = (payload) => {
   return {

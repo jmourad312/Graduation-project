@@ -64,7 +64,7 @@ export default function BlogEntry(props) {
         </div>
       </div> */}
       <div class="card-container">
-        <div class="card card-4">
+        <div class="card card-4" onClick={() => handleClick(props.id)}>
           <div
             class="card-img"
             style={{ background: `url(${props.imgSrc})`,backgroundSize: "10% 10%", }}
