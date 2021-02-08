@@ -27,6 +27,7 @@ export default function ProductsList() {
         key={prod._id}
         id={prod._id}
         image={prod.image}
+        description={prod.description}
         price={prod.price}
         name={prod.name}
         brand={prod.carBrand}
