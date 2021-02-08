@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../../components/Loading';
+import LoginButton from '../../../../components/LoginButton';
 import ProductComp from '../../../../components/ProductComp';
 import ProductFilter from '../../../../components/ProductFilter';
 import { getProductsAction } from '../../../../store/actions';
@@ -38,6 +39,7 @@ export default function ProductsList() {
   }
   return (
     <div className="productList">
+    <LoginButton/>
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "10%" }}>
