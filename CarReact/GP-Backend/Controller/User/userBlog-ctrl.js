@@ -4,7 +4,6 @@ const user = require("../../models/Person/User/user");
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
 const Vote = require("../../models/Blog/votingPost");
-const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 // add post
 // delete post
