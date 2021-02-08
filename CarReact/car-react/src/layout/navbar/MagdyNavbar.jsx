@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 // import GaussianBlur from "react-gaussian-blur";
 // import ColorMatrix from "react-color-matrix";
 
 export default function MagdyNavbar() {
+    const [checked, setchecked] = useState(false)
+    const handleClick=()=>{
+        setchecked(!checked);
+    }
 
     return (
         <div className="magdyNav">
             <nav className="menu" id="anything">
-                <input className="menu__toggle" id="menu-toggle" type="checkbox" />
+                <input className="menu__toggle" checked={checked} onClick={handleClick} id="menu-toggle" type="checkbox" />
                 <label className="menu__toggle-label" for="menu-toggle"></label>
                 <label className="menu__toggle-label menu__toggle-label--closer" for="menu-toggle">
                     <svg className="menu__icon" preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
@@ -21,25 +25,25 @@ export default function MagdyNavbar() {
                     </svg>
                 </label>
                 <ul className="menu__content">
-                    <li className="menu__item" id="item1"><Link className="menu__link" to="/SignChoice">Auth</Link></li>
-                    <li className="menu__item" id="item2"><Link className="menu__link" to="/SignUp">SignUp</Link></li>
-                    <li className="menu__item" id="item3"><Link className="menu__link" to="/SignForm">SignForm</Link></li>
-                    <li className="menu__item" id="item4"><Link className="menu__link" to="/BlogList">BlogList</Link></li>
-                    <li className="menu__item" id="item5"><Link className="menu__link" to="/ProductsList">ProductsList</Link></li>
-                    <li className="menu__item" id="item6"><Link className="menu__link" to="/AddBlog">AddBlog</Link></li>
-                    <li className="menu__item" id="item7"><Link className="menu__link" to="/BlogDetails">BlogDetails</Link></li>
-                    <li className="menu__item" id="item8"><Link className="menu__link" to="/AboutUs">AboutUs</Link></li>
-                    <li className="menu__item" id="item9"><Link className="menu__link" to="/ContactUs">ContactUs</Link></li>
-                    <li className="menu__item" id="item10"><Link className="menu__link" to="/Privacy">Privacy</Link></li>
-                    <li className="menu__item" id="item11"><Link className="menu__link" to="/TermsOfService">TermsOfService</Link></li>
-                    <li className="menu__item" id="item12"><Link className="menu__link" to="/VendorProfileUser">VendorProfileUser</Link></li>
-                    <li className="menu__item" id="item13"><Link className="menu__link" to="/ProductDetails">ProductDetails</Link></li>
-                    <li className="menu__item" id="item14"><Link className="menu__link" to="/MyProfile">MyProfile</Link></li>
-                    <li className="menu__item" id="item15"><Link className="menu__link" to="/DisplayUserProfile">DisplayUserProfile</Link></li>
-                    <li className="menu__item" id="item17"><Link className="menu__link" to="/VendorAdministration">VendorAdmin</Link></li>
+                    <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Auth</Link></li>
+                    <li className="menu__item" id="item2"><Link className="menu__link" onClick={handleClick} to="/SignUp">SignUp</Link></li>
+                    <li className="menu__item" id="item3"><Link className="menu__link" onClick={handleClick} to="/SignForm">SignForm</Link></li>
+                    <li className="menu__item" id="item4"><Link className="menu__link" onClick={handleClick} to="/BlogList">BlogList</Link></li>
+                    <li className="menu__item" id="item5"><Link className="menu__link" onClick={handleClick} to="/ProductsList">ProductsList</Link></li>
+                    <li className="menu__item" id="item6"><Link className="menu__link" onClick={handleClick} to="/AddBlog">AddBlog</Link></li>
+                    <li className="menu__item" id="item7"><Link className="menu__link" onClick={handleClick} to="/BlogDetails">BlogDetails</Link></li>
+                    <li className="menu__item" id="item8"><Link className="menu__link" onClick={handleClick} to="/AboutUs">AboutUs</Link></li>
+                    <li className="menu__item" id="item9"><Link className="menu__link" onClick={handleClick} to="/ContactUs">ContactUs</Link></li>
+                    <li className="menu__item" id="item10"><Link className="menu__link" onClick={handleClick} to="/Privacy">Privacy</Link></li>
+                    <li className="menu__item" id="item11"><Link className="menu__link" onClick={handleClick} to="/TermsOfService">TermsOfService</Link></li>
+                    <li className="menu__item" id="item12"><Link className="menu__link" onClick={handleClick} to="/VendorProfileUser">VendorProfileUser</Link></li>
+                    <li className="menu__item" id="item13"><Link className="menu__link" onClick={handleClick} to="/ProductDetails">ProductDetails</Link></li>
+                    <li className="menu__item" id="item14"><Link className="menu__link" onClick={handleClick} to="/MyProfile">MyProfile</Link></li>
+                    <li className="menu__item" id="item15"><Link className="menu__link" onClick={handleClick} to="/DisplayUserProfile">DisplayUserProfile</Link></li>
+                    <li className="menu__item" id="item17"><Link className="menu__link" onClick={handleClick} to="/VendorAdministration">VendorAdmin</Link></li>
                 </ul>
             </nav>
-            {/* <svg id="item16" >
+            <svg id="item16" >
                 <defs>
                     <filter id="goo">
                         <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="BLUR"></feGaussianBlur>
@@ -48,7 +52,7 @@ export default function MagdyNavbar() {
                         <feBlend in="SourceGraphic" in2="goo"></feBlend>
                     </filter>
                 </defs>
-            </svg> */}
+            </svg>
 
         </div>
     )
