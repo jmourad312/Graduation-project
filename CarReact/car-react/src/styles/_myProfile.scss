@@ -1,23 +1,29 @@
 .myProfile{
-    background-color: $body-pattern;
+    // background-color: $body-pattern;
     
     .profileLeft{
-        background-image: url("../"+$dark-pattern);
-        margin-top: 10%;
+        // background-image: url("../"+$dark-pattern);
+        background-color: rgb(27, 34, 43);
+        margin-top: 5%;
         padding: 15px;
+        height: 90vh;
+        max-height: 90vh;
+        border-radius: 50px 15px 15px 50px;
         // border: 2px solid saddlebrown;
         text-align: center;
     }
     .profileright{
         background-image: url("../"+$dark-pattern);
+        border-radius: 0px 50px 50px 0px;
         // background-color: #010003;
         // background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
         margin-top: 10%;
-        padding: 15px;
+        height: 80vh;
+        padding: 5px;
         // border: 2px solid saddlebrown;
         .profileRightContent{
             color: aliceblue;
-            margin: 10% 0 0 10%;
+            margin: 10% 0 10% 0;
         }
     }
 }
