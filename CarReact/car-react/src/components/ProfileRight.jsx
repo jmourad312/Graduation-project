@@ -1,6 +1,6 @@
 import React, { Suspense, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
-import { __RouterContext } from "react-router";
+import { useLocation, __RouterContext } from "react-router";
 
 import BasicDetails from "../pages/user/profile/myProfile/basicDetails/BasicDetails";
 import BlogPosts from "../pages/user/profile/myProfile/blogPosts/BlogPosts";
@@ -12,7 +12,8 @@ import Loading from "./Loading";
 import { useTransition, animated } from "react-spring";
 
 export default function ProfileRight(props) {
-  const { location } = useContext(__RouterContext);
+  const location = useLocation();
+  // const { location2 } = useContext(__RouterContext);
 
   const transitions = useTransition(location, (location) => location.pathname, {
     from: {
@@ -35,9 +36,9 @@ export default function ProfileRight(props) {
   return (
     <div className={props.class}>
       <Suspense fallback={<Loading />}>
-        {transitions.map(({ item, props, key }) => (
-          <animated.div key={key} style={props}>
-            <Switch location={item}>
+        {/* {transitions.map(({ item, props, key }) => ( */}
+          {/* <animated.div key={key} style={props}> */}
+            <Switch >
               <div className="profileRightContent position-absolute w-100">
                 <Route exact path={`/MyProfile/BasicDetails/`}>
                   <BasicDetails person={props.person} />
@@ -59,8 +60,8 @@ export default function ProfileRight(props) {
                 </Route>
               </div>
             </Switch>
-          </animated.div>
-        ))}
+          {/* </animated.div> */}
+        {/* ))} */}
       </Suspense>
     </div>
   );
