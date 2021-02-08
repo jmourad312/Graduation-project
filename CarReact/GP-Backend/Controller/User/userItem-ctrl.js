@@ -65,7 +65,7 @@ showDetailsItem = async (req, res) => {
       const feedback = await Feedback.find({_id:{$in:data.feedback}},{__v:0,car:0}).populate({path:"user",select:"firstName"})
       
       return res.json({
-        Data: {data,feedback},
+        Data: data,feedback,
         Message: "Details product",
         Success: true,
       });
