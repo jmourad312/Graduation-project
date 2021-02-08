@@ -35,7 +35,7 @@ export default function ProductComp(props) {
   };
 
   return (
-    <div className="col-md-3 col-lg-3 col-xl-3 mb-3 productComp">
+    <div className="col-md-4 col-lg-4 col-xl-4 mb-1 productComp">
       {/* <div className="card product">
         <div className="d-flex justify-content-between position-absolute w-100">
           <div className="label-new">
