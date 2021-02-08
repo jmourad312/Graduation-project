@@ -8,10 +8,10 @@ var car = new schema({
   available: Boolean,
   case: String,
   image: String,
-  itemFeedBack: [
+  feedback: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "FeedBack",
+      ref: "Feedback",
     },
   ],
   carBrand: String,

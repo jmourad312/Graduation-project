@@ -12,7 +12,7 @@ const {
 } = require("../../Validation/validation");
 
 //signup
-router.post("/signup", async (req, resp) => {
+router.post("/signup", async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
@@ -34,7 +34,7 @@ router.post("/signup", async (req, resp) => {
     },
     (errorPerson, dataOfPerson) => {
       if (errorPerson) {
-        resp.json({
+        res.json({
           Data: {},
           Message: "Can't add user to database,  " + err,
           Success: false,
@@ -48,7 +48,7 @@ router.post("/signup", async (req, resp) => {
           },
           (errorSubscription, dataOfSubscription) => {
             if (errorSubscription) {
-              resp.json({
+              res.json({
                 Data: {},
                 Message: "Can't add user to database,  " + errorSubscription,
                 Success: false,
@@ -67,14 +67,14 @@ router.post("/signup", async (req, resp) => {
                 (errorVendor) => {
                   if (errorVendor) {
                     console.log(err);
-                    resp.json({
+                    res.json({
                       Data: {},
                       Message: "Can't add user to database,  " + errorVendor,
                       Success: false,
                     });
                   } else {
                     const token = gettoken.token(dataOfPerson);
-                    resp.header("Authorization", "Bearer " + token).json({
+                    res.header("Authorization", "Bearer " + token).json({
                       Data: dataOfPerson._id,
                       Message: "Done Sign up ",
                       Success: true,
@@ -91,20 +91,20 @@ router.post("/signup", async (req, resp) => {
 });
 
 //signin
-router.post("/signin", (req, resp) => {
+router.post("/signin", (req, res) => {
   const { error } = loginValidation(req.body);
   // throw validation errors
   if (error) return res.status(400).json({ error: error.details[0].message });
   Person.findOne({ email: req.body.email }, (err, data) => {
     if (err) {
-      resp.json({
+      res.json({
         Data: null,
         Message: "Can't get userdata from database,  " + err,
         Success: false,
       });
     } else {
       if (data == null) {
-        resp.json({
+        res.json({
           Data: {},
           Message: "Can't find user with this email " + data,
           Success: false,
@@ -116,14 +116,14 @@ router.post("/signin", (req, resp) => {
           data.password,
           async (err, result) => {
             if (err) {
-              resp.json({
+              res.json({
                 Data: null,
                 Message: err,
                 Success: false,
               });
             } else {
               if (result == false) {
-                resp.json({
+                res.json({
                   Data: {},
                   Message: "Wrong Password",
                   Success: false,
@@ -131,7 +131,7 @@ router.post("/signin", (req, resp) => {
               } else {
                 //create and assign a token
                 const token = gettoken.token(data);
-                resp.header("Authorization", "Bearer " + token).json({
+                res.header("Authorization", "Bearer " + token).json({
                   Data: data._id,
                   Message: "Done Sign in ",
                   Success: true,

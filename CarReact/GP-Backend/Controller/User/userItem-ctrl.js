@@ -41,14 +41,16 @@ partOfItem = (req, res) => {
 
 // show all posts of all users
 showDetailsItem = (req, res) => {
+
   const populateQuery = [
     { path: "person", select: "firstName" },
-    // {path: "itemFeedBack"}
   ];
+
+
   carItem
     .findOne(
       { _id: req.params.id },
-      { name: 1, price: 1, description: 1, image: 1, carModel: 1, carBrand: 1 }
+      {__v:0}
     )
     .populate(populateQuery)
     .exec((error, data) => {

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 var schema = mongoose.Schema;
-var feedBack = new schema(
+var feedback = new schema(
   {
     comment: { type: String, lowercase: true },
     rating: {
@@ -26,4 +26,4 @@ var feedBack = new schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("FeedBack ", feedBack);
+module.exports = mongoose.model("Feedback ", feedback);
