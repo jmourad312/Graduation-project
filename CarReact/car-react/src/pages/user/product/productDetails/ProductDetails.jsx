@@ -166,15 +166,6 @@ export default function ProductDetails(props) {
                 />
                 <p>location one </p>
               </div>
-              <div className="pl-3">
-                <img
-                  src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
-                  width="70px"
-                  height="70px"
-                  alt=""
-                />
-                <p>location two </p>
-              </div>
             </div>
             {/* </div> */}
 
