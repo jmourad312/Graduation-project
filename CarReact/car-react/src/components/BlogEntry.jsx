@@ -8,7 +8,7 @@ export default function BlogEntry(props) {
   const blogID = useSelector(state => state.blogID)
   const dispatch = useDispatch();
 
-  const handleClick = (params) =>{
+  const handleClick = (params) => {
     dispatch(setBlogId(params));
     history.push(`/BlogDetails/${props.id}`);
   }
@@ -63,11 +63,11 @@ export default function BlogEntry(props) {
           </div>
         </div>
       </div> */}
-      <div class="card-container">
+      {/* <div class="card-container">
         <div class="card card-4" onClick={() => handleClick(props.id)}>
           <div
             class="card-img"
-            style={{ background: `url(${props.imgSrc})`,backgroundSize: "10% 10%", }}
+            style={{ background: `url(${props.imgSrc})`}}
           ></div>
           <a href="" class="card-link">
             <div
@@ -86,7 +86,33 @@ export default function BlogEntry(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      <section class="cards">
+        <article class="card card--1" onClick={() => handleClick(props.id)}>
+          <div class="card__info-hover">
+          <i class="fas fa-bookmark"></i>
+            <div class="card__clock-info">
+              <svg class="card__clock" viewBox="0 0 24 24"><path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
+              </svg><span class="card__time">{props.date}</span>
+            </div>
+
+          </div>
+          <div class="card__img" style={{ background: `url(${props.imgSrc})`}}></div>
+          <a href="#" class="card_link">
+            <div class="card__img--hover" style={{ background: `url(${props.imgSrc})` }} ></div>
+          </a>
+          <div class="card__info">
+            <h3 class="card__title">{props.cardTitle}</h3>
+            <span class="card__by">by <a href="#" class="card__author" title="author">{props.userName}</a></span>
+            <br/>
+            <small>
+              <i className="badge badge-dark">{props.cardBrand}</i>
+              <i className="badge badge-dark">{props.cardModel}</i>
+            </small>
+          </div>
+        </article>
+      </section>
     </div>
   );
 }
