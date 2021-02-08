@@ -35,9 +35,10 @@ export default function ProfileRight(props) {
   return (
     <div className={props.class}>
       <Suspense fallback={<Loading />}>
-        {transitions.map(({ item, props, key }) => (
-          <animated.div key={key} style={props}>
-            <Switch location={item}>
+        {/* {transitions.map(({ item, props, key }) => ( */}
+         {/* <animated.div key={key} style={props}> */}
+         {/* location={item} */}
+             <Switch >
               <div className="profileRightContent position-absolute w-100">
                 <Route exact path={`/MyProfile/BasicDetails/`}>
                   <BasicDetails person={props.person} />
@@ -59,8 +60,8 @@ export default function ProfileRight(props) {
                 </Route>
               </div>
             </Switch>
-          </animated.div>
-        ))}
+           {/* </animated.div> */}
+        {/* ))} */}
       </Suspense>
     </div>
   );
