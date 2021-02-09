@@ -43,7 +43,7 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <section className="products-details" >
+      <section className="products-details">
         {/* <!-- start product details --> */}
         <div className="container mx-auto mt-3">
           <div className="row shadow-sm mb-4 bg-light rounded-lg">
@@ -60,7 +60,8 @@ export default function ProductDetails(props) {
 
             <div className="col-md-8">
               <h2>
-                {productDetails && productDetails.name}<br /> By:{" "}
+                {productDetails && productDetails.name}
+                <br /> By:{" "}
                 <Link to="#">
                   {productDetails
                     ? productDetails.person
@@ -76,10 +77,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                    <span className="badge badge-pill badge-danger" style={{ fontSize: "15px" }}>
-                      Not Avalible
-                    </span>
-                  ))}
+                  <span
+                    className="badge badge-pill badge-danger"
+                    style={{ fontSize: "15px" }}
+                  >
+                    Not Avalible
+                  </span>
+                ))}
 
               {/* <!-- number of stars --> */}
               <div className="mt-3 star" style={{ fontSize: "20px" }}>
@@ -102,12 +106,13 @@ export default function ProductDetails(props) {
                   </li>
                 </span>
                 <span
-                  className="fa-lg pr-3"
-                  data-toggle="tooltip"
+                  className="fa-lg button fill"
                   title="Add to favorate"
-                  data-placement="bottom"
                 >
-                  <i className="far fa-heart  text-danger fa-pull-right mt-4" style={{ fontSize: "30px" }}></i>
+                  <i
+                    className="far fa-heart mt-4"
+                    style={{ fontSize: "30px" }}
+                  ></i>
                 </span>
                 {/* <span
                   className="fa-lg"
@@ -131,7 +136,11 @@ export default function ProductDetails(props) {
               <h3>
                 <strong
                   className="pl-3"
-                  style={{ borderLeft: "3px solid red", height: "100%", fontSize: "30px" }}
+                  style={{
+                    borderLeft: "3px solid red",
+                    height: "100%",
+                    fontSize: "30px",
+                  }}
                 >
                   Product Information
                 </strong>
@@ -164,7 +173,7 @@ export default function ProductDetails(props) {
               {/* </div> */}
 
               {/* <div [hidden]="tab == 1 || tab == 3"> */}
-              
+
               {/* </div> */}
 
               <h3>
@@ -186,7 +195,9 @@ export default function ProductDetails(props) {
                   />
                 </div> */}
                 <div className="form-group">
-                  <label style={{ fontSize: "1.5rem" }} for="review">review:</label>
+                  <label style={{ fontSize: "1.5rem" }} for="review">
+                    review:
+                  </label>
                   <input
                     type="review"
                     className="form-control"
@@ -201,11 +212,9 @@ export default function ProductDetails(props) {
               </form>
               {/* </div> */}
             </div>
-            <div className="col-4">
-              Product Rating (User Comments)
-            </div>
+            <div className="col-4">Product Rating (User Comments)</div>
             <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
-            <h3>
+              <h3>
                 <span
                   className="pl-3"
                   style={{ borderLeft: "3px solid red", height: "100%" }}
@@ -214,17 +223,16 @@ export default function ProductDetails(props) {
               </h3>
               <br />
               <div className="d-flex flex-wrap">
-                
                 <iframe
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                    width="100%"
-                    height="300"
-                    frameborder="0"
-                    style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
-                    allowfullscreen
-                  ></iframe>
-                  <p>location one </p>
-                
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                  width="100%"
+                  height="300"
+                  frameborder="0"
+                  style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
+                  allowfullscreen
+                ></iframe>
+                <p>location one </p>
+
                 {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
