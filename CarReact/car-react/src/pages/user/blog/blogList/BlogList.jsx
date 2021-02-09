@@ -15,12 +15,12 @@ export default function BlogList() {
   const blogs = useSelector(state => state.blogs);
   const dispatch = useDispatch();
   const getBlogs = () =>{
-  //  dispatch(getBlogsAction());
+   dispatch(getBlogsAction());
   }
 
   useEffect(() => {
     getBlogs();
-  }, [blogs]);
+  },[blogs.Data]);
     // useEffect(() => {
     //   getBlogs();
     // }, []);
@@ -93,10 +93,11 @@ const pageTransitions = {
     >
       <section className="container">
         
+        
         {/* <Button onClick={getProducts} value={"SHOW ITEMS"} /> */}
-        <div className="row">
-          <div className="col-3 mt-5">
           <AddBlog />
+        <div className="row">
+          <div className="col-3">
           <BlogFilter class="blog-filter" />
           </div>
           <div className="col-9 blog-contents">
@@ -105,8 +106,8 @@ const pageTransitions = {
                 {blogs.Data ? blogs.Data.map(createItem) : <Loading />}
               </div>
             </section>
-            
           </div>
+        
         </div>
       </section>
     </motion.section>

@@ -39,7 +39,7 @@ export default (
     vendorSignIn: {},
     vendorSignUp: {},
     //-------------------MISC-------------
-    classNAME:"profileright"
+    classNAME:"profileright2"
   },
   action
 ) => {
