@@ -383,7 +383,7 @@ removeVoteFromComment = async (req, res) => {
     { comment: req.params.id },
     { $pull: { person: req.user._id }, $inc: { numberOfVoting: -1 } },
     (error, data) => {
-      if (error) {
+      if (error || !data) {
         return res.json({
           Data: error,
           Message: "can't vote",
@@ -416,7 +416,7 @@ voteToComment = async (req, res) => {
     { comment: req.params.id },
     { $push: { person: req.user._id }, $inc: { numberOfVoting: 1 } },
     (error, data) => {
-      if (error) {
+      if (error || !data) {
         return res.json({
           Data: error,
           Message: "can't vote",
