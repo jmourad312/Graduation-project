@@ -67,7 +67,7 @@ export default function Settings(props) {
       variants={props.variants}
       transition={props.transition}
     >
-      <form>
+      <form className="ml-5">
         <h5>Edit</h5>
         <div className="row">
           <div className="form-group col-4">
