@@ -68,16 +68,17 @@ export default function Settings(props) {
       transition={props.transition}
     >
       <form>
+        <h5>Edit</h5>
         <div className="row">
           <div className="form-group col-4">
             <Label
               id="firstName"
               class="text-light"
-              value="Update your first name"
+              value="First Name"
             />
             <Input
               id="firstName"
-              class="form-control"
+              class="form-control w-75"
               value={userInfo.firstName}
               name="firstName"
               onChange={handleChange}
@@ -89,11 +90,11 @@ export default function Settings(props) {
             <Label
               id="middleName"
               class="text-light"
-              value="Update your Middle name"
+              value="Middle Name"
             />
             <Input
               id="middleName"
-              class="form-control"
+              class="form-control w-75"
               value={userInfo.middleName}
               name="middleName"
               onChange={handleChange}
@@ -105,11 +106,11 @@ export default function Settings(props) {
             <Label
               id="lastName"
               class="text-light"
-              value="Update your Last name"
+              value="Last Name"
             />
             <Input
               id="lastName"
-              class="form-control"
+              class="form-control w-75"
               value={userInfo.lastName}
               name="lastName"
               onChange={handleChange}
@@ -123,56 +124,51 @@ export default function Settings(props) {
           <Label
             id="phoneNumber"
             class="text-light"
-            value="Update your Phone number"
+            value="Phone Number"
           />
           <Input
             id="phoneNumber"
-            class="form-control"
+            class="form-control w-25"
             value={userInfo.phoneNumber}
             name="phoneNumber"
             onChange={handleChange}
             placeHolder="Phone number"
-            type="number"
+            type=""
           />
         </div>
-        <div className="row">
-          <div className="col-6">
-            <div className="form-group">
-              <Label
-                id="password"
-                class="text-light"
-                value="Update your Password"
-              />
-              <Input
-                id="password"
-                class="form-control"
-                value={userInfo.password}
-                name="password"
-                onChange={handleChange}
-                placeHolder="Password"
-                type="password"
-              />
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
-              <Label
-                id="confirmPassword"
-                class="text-light"
-                value="Confirm your paasword"
-              />
-              <Input
-                id="confirmPassword"
-                class="form-control"
-                value={userInfo.confirmPassword}
-                name="confirmPassword"
-                onChange={handleChange}
-                placeHolder="Confirm password"
-                type="password"
-              />
-            </div>
-          </div>
+        <div className="form-group">
+          <Label
+            id="password"
+            class="text-light"
+            value="Update your Password"
+          />
+          <Input
+            id="password"
+            class="form-control w-50"
+            value={userInfo.password}
+            name="password"
+            onChange={handleChange}
+            placeHolder="Password"
+            type="password"
+          />
         </div>
+        <div className="form-group">
+          <Label
+            id="confirmPassword"
+            class="text-light"
+            value="Confirm your paasword"
+          />
+          <Input
+            id="confirmPassword"
+            class="form-control w-50"
+            value={userInfo.confirmPassword}
+            name="confirmPassword"
+            onChange={handleChange}
+            placeHolder="Confirm password"
+            type="password"
+          />
+        </div>
+
         <Button2
           onClick={handleSubmit}
           //   type="submit"
