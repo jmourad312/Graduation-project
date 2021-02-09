@@ -1,6 +1,6 @@
 .myProfile{
     // background-color: $body-pattern;
-    
+    overflow: hidden;
     .profileLeft{
         // background-image: url("../"+$dark-pattern);
         background-color: rgb(27, 34, 43);
@@ -13,6 +13,7 @@
         text-align: center;
         z-index: 5;
     }
+    
     .profileright{
         background-image: url("../"+$dark-pattern);
         border-radius: 0px 50px 50px 0px;
@@ -27,6 +28,8 @@
         .profileRightContent{
             color: aliceblue;
             margin: 2% 0 10% 0;
+            transition: all .9s;
+
         }
         
     }
@@ -42,7 +45,9 @@
         .profileRightContent{
             color: aliceblue;
             margin: 2% 0 10% 0;
-            display: none;
+            opacity: -10;
+            transition: all 0.1s;
+            
         }
         
     }

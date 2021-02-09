@@ -14,7 +14,7 @@ export default function ProfileLeft(props) {
     dispatch(setClass("profileright2"));
     setTimeout(() => {
       dispatch(setClass("profileright"));
-    }, 1000);
+    }, 700);
   };
   return (
     <div className={props.class}>
@@ -35,20 +35,20 @@ export default function ProfileLeft(props) {
         {/* <div className="mt-3 button raise">
           <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
         </div> */}
-        <p className="mt-3 button raise" onClick={handleClick}>
-          <Link to={`/MyProfile/RecentViews`}>Recently viewed</Link>
+        <p className="mt-3 button raise">
+          <Link to={`/MyProfile/RecentViews`} onClick={handleClick}>Recently viewed</Link>
         </p>
-        <p className="mt-3 button raise" onClick={handleClick}>
-          <Link to={`/MyProfile/BlogPosts`}>My blog posts</Link>
+        <p className="mt-3 button raise">
+          <Link to={`/MyProfile/BlogPosts`} onClick={handleClick}>My blog posts</Link>
         </p>
-        <p className="mt-3 button fill" onClick={handleClick}>
-          <Link to={`/MyProfile/FavouriteItems`}>Favourite items</Link>
+        <p className="mt-3 button fill">
+          <Link to={`/MyProfile/FavouriteItems`} onClick={handleClick}>Favourite items</Link>
         </p>
-        <p className="mt-3 button pulse" onClick={handleClick}>
-          <Link to={`/MyProfile/BookmarkedPosts`}>Bookmarked posts</Link>
+        <p className="mt-3 button pulse">
+          <Link to={`/MyProfile/BookmarkedPosts`} onClick={handleClick}>Bookmarked posts</Link>
         </p>
-        <p className="mt-3 button up" onClick={handleClick}>
-          <Link to={`/MyProfile/Settings`}>Settings</Link>
+        <p className="mt-3 button up">
+          <Link to={`/MyProfile/Settings`} onClick={handleClick}>Settings</Link>
         </p>
       </div>
     </div>

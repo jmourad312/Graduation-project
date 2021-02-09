@@ -80,7 +80,7 @@ export default function ProfileRight(props) {
     },
   };
   const pageTransitions ={
-    duration:1.6,
+    duration:1.3,
     type: 'tween',
     ease:"easeIn"
   }
