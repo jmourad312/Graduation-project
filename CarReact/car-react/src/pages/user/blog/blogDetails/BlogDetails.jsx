@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -185,8 +186,32 @@ export default function BlogDetails(props) {
     // console.log(blogDetails);
     // console.log(blogID);
   }, [blogDetails]);
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      y: "100vh",
+      scale: 0.1,
+    },
+  };
+  const pageTransitions = {
+    duration: 1,
+    type: "tween",
+    ease: "easeIn",
+  };
   return (
-    <div className="container p-5">
+    <motion.div
+      className="container p-5"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <div className="blogDetails">
         <div className="header">
           <div className="row">
@@ -545,6 +570,6 @@ export default function BlogDetails(props) {
       {/* </div> */}
       {/* </div> */}
       {/* </div> */}
-    </div>
+    </motion.div>
   );
 }

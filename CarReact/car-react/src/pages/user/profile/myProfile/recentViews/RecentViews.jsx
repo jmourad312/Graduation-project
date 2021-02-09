@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
@@ -12,16 +13,21 @@ export default function RecentViews(props) {
       history.push(`/ProductDetails/${params}`);
     };
   return (
-    <div className="RecentViews">
+    <motion.div
+      className="RecentViews"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={props.variants}
+      transition={props.transition}
+    >
       <div className="container">
         {props.recentlyViewed.map((item) => {
           return (
             <div className="card">
               <img className="card-img-top" src={item.image} alt="Card" />
               <div className="card-body">
-                <h4 className="card-title">
-                  {item.name}
-                </h4>
+                <h4 className="card-title">{item.name}</h4>
                 <p className="card-text">{item.description}</p>
                 <p className="card-text">{item.price}</p>
                 <small>
@@ -39,6 +45,6 @@ export default function RecentViews(props) {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
