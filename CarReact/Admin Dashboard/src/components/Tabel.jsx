@@ -25,7 +25,7 @@ export function Tabel(props) {
 
                                         return (
                                             <tr>
-                                                <td>{item.person ? item.person._id : "loadind"}</td>
+                                                <td>{item.person._id}</td>
                                                 <td>{item.person.firstName}</td>
                                                 <td>{item.person.email}</td>
                                                 <td>{item.banned}</td>
@@ -35,7 +35,7 @@ export function Tabel(props) {
                                             </tr>
                                         )
                                     })}
-                                    
+
                                 </tbody>
 
 
