@@ -105,8 +105,6 @@ router.put("/addFavouriteItems", passport.authenticate("jwt", { session: false }
 router.put("/removeFavouriteItems", passport.authenticate("jwt", { session: false }), canView, userProfileCtrl.removeFavouriteItems)
 
 
-
-
 // feedback Item and vendor
 
 router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.writeFeedback);
