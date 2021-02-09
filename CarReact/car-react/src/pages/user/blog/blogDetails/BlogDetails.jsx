@@ -34,12 +34,13 @@ export default function BlogDetails(props) {
   };
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
-    title: blogDetails ? blogDetails.title : "",
-    body: blogDetails ? blogDetails.body : "",
-    image: blogDetails ? blogDetails.image : "",
-    brand: blogDetails ? blogDetails.brand : "",
-    model: blogDetails ? blogDetails.model : "",
+    title:  "",
+    body: "",
+    image:  "",
+    brand:  "",
+    model:  "",
   });
+  
 
   const handleEditChange = (event) => {
     const { value, name } = event.target;

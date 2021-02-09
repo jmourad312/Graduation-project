@@ -10,6 +10,9 @@ import { getProductsAction, getUsersAction } from "../../../../store/actions";
 
 export default function ProductsList() {
   const products = useSelector((state) => state.products.Data);
+  const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
+  const isVendorLoggedIn = useSelector((state) => state.isVendorLoggedIn);
+  console.log(isUserLoggedIn);
   const dispatch = useDispatch();
   
   
@@ -66,7 +69,7 @@ export default function ProductsList() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <LoginButton />
+      {!isUserLoggedIn && <LoginButton />}
       <UserIcon />
       <div className="container">
         <div className="row">
