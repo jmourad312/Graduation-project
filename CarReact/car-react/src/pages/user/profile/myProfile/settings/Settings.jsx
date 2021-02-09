@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Button2 from "../../../../../components/Button2";
@@ -6,7 +7,7 @@ import Input from "../../../../../components/Input";
 import Label from "../../../../../components/Label";
 import Loading from "../../../../../components/Loading";
 
-export default function Settings() {
+export default function Settings(props) {
   const user = useSelector((state) => state.user.Data);
   // {user ? user.person : "null"}
 
@@ -53,14 +54,19 @@ export default function Settings() {
         .catch((error) => {
           console.log(error);
         });
-    }
-    else {
-        alert("Please check your password")
+    } else {
+      alert("Please check your password");
     }
   };
 
   return (
-    <div>
+    <motion.div
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={props.variants}
+      transition={props.transition}
+    >
       <form>
         <div className="row">
           <div className="form-group col-4">
@@ -169,11 +175,11 @@ export default function Settings() {
         </div>
         <Button2
           onClick={handleSubmit}
-        //   type="submit"
+          //   type="submit"
           class="btn btn-success"
           value="Submit"
         />
       </form>
-    </div>
+    </motion.div>
   );
 }
