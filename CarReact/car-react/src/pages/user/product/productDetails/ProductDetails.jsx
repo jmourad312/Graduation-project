@@ -106,11 +106,12 @@ export default function ProductDetails(props) {
                   </li>
                 </span>
                 <span
-                  className="fa-lg button fill"
+                  className="fa-lg button fill fa-pull-right"
+                  style={{padding:"5px"}}
                   title="Add to favorate"
                 >
                   <i
-                    className="far fa-heart mt-4"
+                    className="far fa-heart"
                     style={{ fontSize: "30px" }}
                   ></i>
                 </span>
