@@ -1,8 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
+import { Tabel } from '../../components/Tabel'
+import { getUserAction, getVendorAction } from '../../store/action'
+import { useSelector, useDispatch } from "react-redux";
+
 
 
 export default function Admin() {
+
+    const stateRedux = useSelector((state) => state)
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+         dispatch(getUserAction)
+         dispatch(getVendorAction)
+
+      }, []) 
+      ;
+    const getUsers = () => {
+        dispatch(getUserAction)
+    }
+
+    const getVendors = () => {
+        dispatch(getVendorAction)
+    }
+
+
+
+
+
+
+
     const [BarData, setBarData] = useState({
         labels: ["Users", "Products", "Blogs"],
         datasets: [{
@@ -135,7 +164,7 @@ export default function Admin() {
                             <div className="col-md-7 mb-4">
                                 <div className="card">
                                     <div className="card-body">
-                                        <Bar data={BarData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true,labels:{fontSize:30}} }} />
+                                        <Bar data={BarData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true, labels: { fontSize: 30 } } }} />
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +173,7 @@ export default function Admin() {
                                 <div className="card mb-4">
                                     <div className="card-header text-center">Pie chart</div>
                                     <div className="card-body">
-                                        <Pie data={PieData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true, position: 'right',labels:{fontSize:15}} }} />
+                                        <Pie data={PieData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true, position: 'right', labels: { fontSize: 15 } } }} />
                                     </div>
                                 </div>
 
@@ -172,122 +201,11 @@ export default function Admin() {
 
 
                         {/* User List */}
-                        <div className="row wow fadeIn">
-                            <div className="col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <table className="table table-hover">
-                                            <thead className="blue-grey lighten-4">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>User ID</th>
-                                                    <th>Email</th>
-                                                    <th>Dolor</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                    <th>Ban</th>
-                                                </tr>
-                                            </thead>
 
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Cell 1</td>
-                                                    <td>Cell 2</td>
-                                                    <td>Cell 3</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Cell 4</td>
-                                                    <td>Cell 5</td>
-                                                    <td>Cell 6</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Cell 7</td>
-                                                    <td>Cell 8</td>
-                                                    <td>Cell 9</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
+                        <Tabel data={stateRedux.users.Data}  ></Tabel>
                         {/* Vendor List */}
-                        <div className="row wow fadeIn">
-                            <div className="col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <table className="table table-hover">
-                                            <thead className="blue-grey lighten-4">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Vendor ID</th>
-                                                    <th>Email</th>
-                                                    <th>Dolor</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                    <th>Ban</th>
-                                                </tr>
-                                            </thead>
+                        <Tabel data={stateRedux.vendors.Data}  ></Tabel>
 
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Cell 1</td>
-                                                    <td>Cell 2</td>
-                                                    <td>Cell 3</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Cell 4</td>
-                                                    <td>Cell 5</td>
-                                                    <td>Cell 6</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Cell 7</td>
-                                                    <td>Cell 8</td>
-                                                    <td>Cell 9</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
 
                         {/* Blog List */}
                         <div className="row wow fadeIn">
@@ -414,7 +332,7 @@ export default function Admin() {
                                 <div className="card">
                                     <div className="card-header">Doughnut Chart</div>
                                     <div className="card-body">
-                                        <Doughnut data={DoughnutData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true,labels:{fontSize:25} } }} />
+                                        <Doughnut data={DoughnutData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true, labels: { fontSize: 25 } } }} />
                                     </div>
 
                                 </div>
