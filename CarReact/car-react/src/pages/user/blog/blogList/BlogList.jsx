@@ -92,16 +92,20 @@ const pageTransitions = {
       transition={pageTransitions}
     >
       <section className="container">
-        <AddBlog />
+        
         {/* <Button onClick={getProducts} value={"SHOW ITEMS"} /> */}
         <div className="row">
-          <BlogFilter class="col-3 blog-filter" />
+          <div className="col-3 mt-5">
+          <AddBlog />
+          <BlogFilter class="blog-filter" />
+          </div>
           <div className="col-9 blog-contents">
             <section>
               <div className="row">
                 {blogs.Data ? blogs.Data.map(createItem) : <Loading />}
               </div>
             </section>
+            
           </div>
         </div>
       </section>
