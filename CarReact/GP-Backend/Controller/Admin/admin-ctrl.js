@@ -123,14 +123,9 @@ addCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
-  User.find({}, (err, users) => {
-    const userMap = {};
-    const populateQuery = [{ path: "person", select: "firstName , email" }];
-    users
-      .forEach((user) => {
-        userMap[user._id] = user;
-      })
-      .populate(populateQuery);
+  const populateQuery = [{ path: "person", select: "firstName , email" }];
+
+  User.find({}).populate(populateQuery).exec((err, users) => {
 
     if (err) {
       return res.status(400).json({
@@ -140,8 +135,7 @@ showAllUsers = (req, res) => {
       });
     }
     return res.status(200).json({
-      Data: userMap,
-      populateQuery,
+      Data: users,
       Message: "this is the full number of users",
       Success: true,
     });
@@ -213,19 +207,16 @@ removeUserBan = (req, res) => {
     }
   );
 };
-
 //---------------------------------------------vendor -------------------------------------------------------------------
 
 // show all vendors
 showAllVendors = (req, res) => {
-  Vendor.find({}, (err, vendors) => {
-    const vendorMap = {};
-    const populateQuery = [{ path: "person", select: "firstName , email" }];
-    vendors
-      .forEach((vendor) => {
-        vendorMap[vendor._id] = vendor;
-      })
-      .populate(populateQuery);
+  const populateQuery = [{ path: "person", select: "firstName , email" }];
+
+
+  Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
+
+      
 
     if (err) {
       return res.status(400).json({
@@ -235,8 +226,7 @@ showAllVendors = (req, res) => {
       });
     }
     return res.status(200).json({
-      Data: vendorMap,
-      populateQuery,
+      Data: vendors,
       Message: "this is the full number of users",
       Success: true,
     });

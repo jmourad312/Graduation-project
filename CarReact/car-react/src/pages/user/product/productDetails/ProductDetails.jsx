@@ -1,3 +1,4 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,36 @@ export default function ProductDetails(props) {
   useEffect(() => {
     getProducts(productID);
   }, [productDetails]);
+
+  const handleAddFavourite= () =>{
+    console.log(productID);
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      id: productID,
+    };
+
+    const URL = "http://localhost:3000/user/addFavouriteItems";
+
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const pageVariants = {
     in: {
@@ -43,7 +74,7 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-       <section className="products-details" >
+      <section className="products-details" >
         {/* <!-- start product details --> */}
         <div className="container">
           <div className="row bg-light">
@@ -77,13 +108,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                  <span
-                    className="badge badge-pill badge-danger"
-                    style={{ fontSize: "15px" }}
-                  >
-                    Not Avalible
-                  </span>
-                ))}
+                    <span
+                      className="badge badge-pill badge-danger"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Not Avalible
+                    </span>
+                  ))}
 
               {/* <!-- number of stars --> */}
               <div className="mt-3 star" style={{ fontSize: "20px" }}>
@@ -107,8 +138,9 @@ export default function ProductDetails(props) {
                 </span>
                 <span
                   className="fa-lg button fill fa-pull-right"
-                  style={{padding:"5px"}}
+                  style={{ padding: "5px" }}
                   title="Add to favorate"
+                  onClick={handleAddFavourite}
                 >
                   <i
                     className="far fa-heart"
@@ -232,7 +264,7 @@ export default function ProductDetails(props) {
                   style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
                   allowfullscreen
                 ></iframe>
-                <p>location one </p>
+                
 
                 {/* <div className="pl-3">
                 <img

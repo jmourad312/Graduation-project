@@ -8,13 +8,11 @@
             text-align: center;
             .newCont{
                 background-color: #010003;
-                background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
-            }
+                background-image: url("../"+$dark-pattern);            }
         }
         .vendorright{
             background-color: #010003;
-            background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
-            padding: 15px;
+            background-image: url("../"+$dark-pattern);            padding: 15px;
             // border: 2px solid saddlebrown;
             .vendorRightContent{
                 color: aliceblue;
