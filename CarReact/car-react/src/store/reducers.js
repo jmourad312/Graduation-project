@@ -38,6 +38,8 @@ export default (
 
     vendorSignIn: {},
     vendorSignUp: {},
+    //-------------------MISC-------------
+    classNAME:"profileright2"
   },
   action
 ) => {
@@ -184,6 +186,13 @@ export default (
       return {
         ...state,
         isVendorLoggedIn: action.payload,
+      };
+
+    //-----------------------------MISC----------------
+    case TYPES.CHANGE_STYLE:
+      return {
+        ...state,
+        classNAME: action.payload,
       };
     default:
       return state;

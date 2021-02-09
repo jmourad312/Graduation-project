@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Button2 from "../../../../components/Button2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserIdAction } from "../../../../store/actions";
+import { setUserIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
@@ -46,6 +46,8 @@ export default function Signform(props) {
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
+          dispatch(userSignInAction(true));
+          dispatch(vendorSignInAction(false));
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
@@ -82,6 +84,8 @@ export default function Signform(props) {
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
+          dispatch(userSignInAction(true));
+          dispatch(vendorSignInAction(false));
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })

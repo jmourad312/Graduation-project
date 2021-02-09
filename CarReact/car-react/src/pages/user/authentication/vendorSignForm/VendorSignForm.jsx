@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
-import { setVendorIdAction } from "../../../../store/actions";
+import { setVendorIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 import axios from "axios";
 
 export default function VendorSignForm(props) {
@@ -44,6 +44,8 @@ export default function VendorSignForm(props) {
         console.log(res.data);
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
+          dispatch(userSignInAction(false));
+          dispatch(vendorSignInAction(true));
           props.history.push(
             `/VendorAdministration/${localStorage.getItem("VendorID")}`
           );
@@ -86,6 +88,8 @@ export default function VendorSignForm(props) {
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
+          dispatch(userSignInAction(false));
+          dispatch(vendorSignInAction(true));
           props.history.push(
             `/VendorAdministration/${localStorage.getItem("VendorID")}`
           );

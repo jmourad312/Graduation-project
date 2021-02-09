@@ -34,12 +34,13 @@ export default function BlogDetails(props) {
   };
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
-    title: blogDetails ? blogDetails.title : "",
-    body: blogDetails ? blogDetails.body : "",
-    image: blogDetails ? blogDetails.image : "",
-    brand: blogDetails ? blogDetails.brand : "",
-    model: blogDetails ? blogDetails.model : "",
+    title:  "",
+    body: "",
+    image:  "",
+    brand:  "",
+    model:  "",
   });
+  
 
   const handleEditChange = (event) => {
     const { value, name } = event.target;
@@ -217,7 +218,7 @@ export default function BlogDetails(props) {
           <div className="row">
             <div className="col-6">
               <p
-                className="font-weight-bold"
+                className="font-weight-bold truncate"
                 style={{ fontSize: "26px", marginBottom: "0" }}
               >
                 {" "}
@@ -244,7 +245,7 @@ export default function BlogDetails(props) {
               </p>
               <hr />
               <h5 className="mt-0">Post Details</h5>
-              <p>{blogDetails && blogDetails.body}</p>
+              <p className="truncate">{blogDetails && blogDetails.body}</p>
               <hr />
 
               <hr />
@@ -395,42 +396,42 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-            return (
-              <div className="media mb-1" key={index}>
-                <button
-                  className="btn btn-info"
-                  onClick={() => addVote(item._id)}
-                >
-                  <i className="fas fa-arrow-circle-up" />
-                </button>
-                <span className="btn badge-pill btn-success">
-                  {item.vote.numberOfVoting}
-                </span>
-                <button
-                  className="btn btn-info"
-                  onClick={() => removeVote(item._id)}
-                >
-                  <i class="fas fa-arrow-circle-down" />
-                </button>
+          return (
+            <div className="media mb-1" key={index}>
+              <button
+                className="btn btn-info"
+                onClick={() => addVote(item._id)}
+              >
+                <i className="fas fa-arrow-circle-up" />
+              </button>
+              <span className="btn badge-pill btn-success">
+                {item.vote.numberOfVoting}
+              </span>
+              <button
+                className="btn btn-info"
+                onClick={() => removeVote(item._id)}
+              >
+                <i class="fas fa-arrow-circle-down" />
+              </button>
 
-                <img
-                  className="d-flex mr-3 rounded-circle"
-                  src={item.image}
-                  alt=""
-                  style={{ maxHeight: "300px", maxWidth: "300px" }}
-                />
+              <img
+                className="d-flex mr-3 rounded-circle"
+                src={item.image}
+                alt=""
+                style={{ maxHeight: "300px", maxWidth: "300px" }}
+              />
+              <hr />
+              <br />
+              <div className="media-body">
+                <h5 className="mt-0">
+                  {item.person.firstName ? item.person.firstName : null}
+                </h5>
                 <hr />
                 <br />
-                <div className="media-body">
-                  <h5 className="mt-0">
-                    {item.person.firstName ? item.person.firstName : null}
-                  </h5>
-                  <hr />
-                  <br />
-                  <p>{item.content}</p>
-                </div>
+                <p>{item.content}</p>
+              </div>
 
-                {/* <form
+              {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -446,7 +447,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                {/* {item
+              {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -466,9 +467,9 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-              </div>
-            );
-          })
+            </div>
+          );
+        })
         : "LOADING"}
 
       {/* <!-- Comment with nested comments --> */}

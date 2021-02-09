@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import LoginButton from "../../../../components/LoginButton";
@@ -9,19 +9,24 @@ import UserIcon from "../../../../components/UserIcon";
 import { getProductsAction, getUsersAction } from "../../../../store/actions";
 
 export default function ProductsList() {
-  const products = useSelector((state) => state.products);
-  // console.log(products);
+  const products = useSelector((state) => state.products.Data);
+  const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
+  const isVendorLoggedIn = useSelector((state) => state.isVendorLoggedIn);
+  console.log(isUserLoggedIn);
   const dispatch = useDispatch();
+  
+  
   // console.log(products);
   const getProducts = () => {
     dispatch(getProductsAction());
   };
-  // console.log(products);
-
+  
   useEffect(() => {
     getProducts();
     dispatch(getUsersAction(localStorage.getItem("UserID")));
-  }, [localStorage.getItem("UserID")]);
+  }, []);
+  
+
 
   const createProducts = (prod) => {
     return (
@@ -64,16 +69,16 @@ export default function ProductsList() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <LoginButton />
+      {!isUserLoggedIn && <LoginButton />}
       <UserIcon />
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "10%" }}>
             <ProductFilter />
           </div>
-          <div className="col-9" style={{ marginTop: "1%" }}>
+          <div className="col-9" style={{ marginTop: "3%" }}>
             <div className="row">
-              {products.Data ? products.Data.map(createProducts) : <Loading />}
+              {products ? products.map(createProducts) : <Loading />}
             </div>
           </div>
         </div>
