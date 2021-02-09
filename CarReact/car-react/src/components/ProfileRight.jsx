@@ -12,6 +12,8 @@ import Loading from "./Loading";
 import "../styles.scss";
 // import {AnimatePresence}
 import { AnimatePresence, motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { setClass } from "../store/actions";
 // import { useTransition, animated } from "react-spring";
 // import { CSSTransition, TransitionGroup } from "react-transition-group";
 export default function ProfileRight(props) {
@@ -62,6 +64,7 @@ export default function ProfileRight(props) {
   //     </CSSTransition>
   //   </TransitionGroup>
   // ));
+  
   const location = useLocation();
   const pageVariants = {
 
@@ -71,13 +74,13 @@ export default function ProfileRight(props) {
       scale: 1,
     },
     out: {
-      opacity: 0,
+      opacity: -1,
       x: "-20vw",
       scale: 0.1,
     },
   };
   const pageTransitions ={
-    duration:0.6,
+    duration:1.6,
     type: 'tween',
     ease:"easeIn"
   }

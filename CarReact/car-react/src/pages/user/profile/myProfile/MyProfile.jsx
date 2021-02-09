@@ -11,6 +11,7 @@ export default function MyProfile() {
   const dispatch = useDispatch();
   // const userID = useSelector((state) => state.userID);
   const user = useSelector((state) => state.user.Data);
+  const classNAME = useSelector(state => state.classNAME)
   dispatch(setUserIdAction(localStorage.getItem("UserID")));
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function MyProfile() {
             person={user ? user.person : "null"}
           />
           <ProfileRight
-            class="col-9 profileright"
+            class={"col-9 "+ classNAME}
             person={user ? user.person : "null"}
             bookmarkPosts={user ? user.bookmarkPosts : "null"}
             favouriteItems={user ? user.favouriteItems : "null"}

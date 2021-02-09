@@ -8,6 +8,16 @@ import axios from 'axios';
 //     payload,
 //   };
 // };
+export const setClass = (payload) => {
+  return {
+    type: TYPES.CHANGE_STYLE,
+    payload,
+  };
+};
+
+
+
+
 
 // products requests --------------------------
 
