@@ -27,21 +27,52 @@ export default function BookmarkedPosts(props) {
       transition={props.transition}
     >
       <div className="container mt-3">
-        <div className="media border p-3">
-          <img src="" alt="John Doe" className="mr-3 rounded-circle" />
-          <div className="media-body">
-            <h4>
-              John Doe{" "}
-              <small>
-                <i>Posted on February 19, 2016</i>
-              </small>
-            </h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
+        {user
+          ? user.bookmarkPosts.map((post) => {
+              return (
+                <div>
+                  <div className="media border-rounded p-3" key={post._id}>
+                    <img
+                      src={post.image}
+                      alt="John Doe"
+                      className="mr-3 rounded-circle"
+                    />
+                    <div className="media-body">
+                      <h2
+                        className="text-truncate"
+                        style={{ maxWidth: "500px" }}
+                      >
+                        {post.title}
+                      </h2>
+                      <strong>
+                        <i> Posted on </i>
+                      </strong>
+                      {post.createdAt}
+                      <h4
+                        className="text-truncate"
+                        style={{ maxWidth: "500px" }}
+                      >
+                        {post.body}
+                      </h4>
+                      <strong>
+                        <i className="badge badge-light">{post.brand}</i>{" "}
+                        <i className="badge badge-light">{post.model}</i>
+                      </strong>
+                    </div>
+                  </div>
+                  <hr
+                    className="position-relative"
+                    style={{
+                      borderTop: "6px dotted lightblue",
+                      // borderTop: "0",
+                      width: "40px",
+                      left: "350px",
+                    }}
+                  />
+                </div>
+              );
+            })
+          : "Loading"}
       </div>
     </motion.div>
   );
