@@ -71,7 +71,7 @@ export default function ProductsList() {
           <div className="col-3" style={{ marginTop: "10%" }}>
             <ProductFilter />
           </div>
-          <div className="col-9" style={{ marginTop: "1%" }}>
+          <div className="col-9" style={{ marginTop: "3%" }}>
             <div className="row">
               {products.Data ? products.Data.map(createProducts) : <Loading />}
             </div>

@@ -103,7 +103,7 @@ export default function BlogEntry(props) {
             <div class="card__img--hover" style={{ background: `url(${props.imgSrc})` }} ></div>
           </p>
           <div class="card__info">
-            <h3 class="card__title">{props.cardTitle}</h3>
+            <h3 class="card__title text-truncate">{props.cardTitle}</h3>
             <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
             <br/>
             <small>
