@@ -6,10 +6,11 @@ import ProfilePicture from "./ProfilePicture";
 import { useSelector } from "react-redux";
 
 export default function ProfileLeft(props) {
+  const user = useSelector((state) => state.user.Data);
 
   return (
     <div className={props.class}>
-      <div style={{ height: "300px" }}>
+      <div style={{ height: "200px" }}>
         {/* <Image
           src={profilePic}
           alt="profile picture"
@@ -19,9 +20,13 @@ export default function ProfileLeft(props) {
         <ProfilePicture image={props.image} />
       </div>
       <div className="mt-3">
-        <div className="mt-3 button raise">
-          <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
+        <div className="text-light" style={{fontSize:"2rem"}}>
+          <p>{props.person ? props.person.firstName : "Loading"}</p>
+          <p>{props.person ? props.person.email : "Loading"}</p>
         </div>
+        {/* <div className="mt-3 button raise">
+          <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
+        </div> */}
         <p className="mt-3 button raise">
           <Link to={`/MyProfile/RecentViews`}>Recently viewed</Link>
         </p>
@@ -29,14 +34,10 @@ export default function ProfileLeft(props) {
           <Link to={`/MyProfile/BlogPosts`}>My blog posts</Link>
         </p>
         <p className="mt-3 button fill">
-          <Link to={`/MyProfile/FavouriteItems`}>
-            Favourite items
-          </Link>
+          <Link to={`/MyProfile/FavouriteItems`}>Favourite items</Link>
         </p>
         <p className="mt-3 button pulse">
-          <Link to={`/MyProfile/BookmarkedPosts`}>
-            Bookmarked posts
-          </Link>
+          <Link to={`/MyProfile/BookmarkedPosts`}>Bookmarked posts</Link>
         </p>
         <p className="mt-3 button up">
           <Link to={`/MyProfile/Settings`}>Settings</Link>

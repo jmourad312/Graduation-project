@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ads from "../../../../components/Ads";
 
@@ -18,6 +18,7 @@ export default function MyProfile() {
     console.log(user ? user.person : "loading");
     console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
+
   const pageVariants = {
     in: {
       opacity: 10,
@@ -37,7 +38,6 @@ export default function MyProfile() {
     type: "tween",
     ease: "anticipate",
   };
-
   return (
     <motion.div
       initial="out"
@@ -56,6 +56,7 @@ export default function MyProfile() {
           <ProfileLeft
             class="col-3 profileLeft"
             image={user ? (user.person ? user.person.image : "null") : "null"}
+            person={user ? user.person : "null"}
           />
           <ProfileRight
             class="col-9 profileright"
@@ -63,7 +64,7 @@ export default function MyProfile() {
             bookmarkPosts={user ? user.bookmarkPosts : "null"}
             favouriteItems={user ? user.favouriteItems : "null"}
             postsUser={user ? user.postsUser : "null"}
-            recentlyViewed={user ? user.recentlyViewed : "null"}
+            // recentlyViewed={user ? user.recentlyViewed : "null"}
           />
         </div>
       </section>

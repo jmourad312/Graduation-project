@@ -64,6 +64,7 @@ export default function ProfileRight(props) {
   // ));
   const location = useLocation();
   const pageVariants = {
+
     in: {
       opacity: 1,
       x: "0vw",
@@ -71,12 +72,12 @@ export default function ProfileRight(props) {
     },
     out: {
       opacity: 0,
-      x: "-10vw",
-      scale: 0.5,
+      x: "-40vw",
+      scale: 0.1,
     },
   };
   const pageTransitions ={
-    duration:0.3,
+    duration:0.6,
     type: 'tween',
     ease:"easeIn"
   }
