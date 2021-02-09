@@ -43,10 +43,10 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <section className="products-details">
+       <section className="products-details" >
         {/* <!-- start product details --> */}
-        <div className="container mx-auto mt-3">
-          <div className="row shadow-sm mb-4 bg-light rounded-lg">
+        <div className="container">
+          <div className="row bg-light">
             {/* <!-- image of produce --> */}
             <div className="col-md-4">
               <img
