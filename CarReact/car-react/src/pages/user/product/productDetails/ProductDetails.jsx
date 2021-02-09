@@ -17,6 +17,7 @@ export default function ProductDetails(props) {
   useEffect(() => {
     getProducts(productID);
   }, [productDetails]);
+  
   const pageVariants = {
     in: {
       opacity: 10,
