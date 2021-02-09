@@ -60,7 +60,7 @@ export default function ProductDetails(props) {
 
             <div className="col-md-8 p-2">
               <h2>
-                {productDetails && productDetails.name} By{" "}
+                {productDetails && productDetails.name}<br/> By:{" "}
                 <Link to="#">
                   {productDetails
                     ? productDetails.person
