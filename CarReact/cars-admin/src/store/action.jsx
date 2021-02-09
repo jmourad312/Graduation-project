@@ -7,3 +7,10 @@ export const setLoginAction = (payload) => {
       payload
     }
   }
+
+  export const setTokenAction = (payload) => {
+    return {
+      type: TYPES.TOKEN,
+      payload
+    }
+  }

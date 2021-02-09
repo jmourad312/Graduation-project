@@ -13,7 +13,7 @@ function App() {
 
       <Router>
 
-        <Admin />
+        {/* <Admin /> */}
         <Routes />
 
       </Router>

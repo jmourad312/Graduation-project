@@ -2,6 +2,7 @@ import * as TYPES from './types'
 
 export default (state = {
     login: false,
+    token:""
 
 }, action) => {
     switch (action.type) {
@@ -11,6 +12,12 @@ export default (state = {
                 ...state,
                 login: action.payload,
             };
+
+            case TYPES.TOKEN:
+                return{
+                    ...state,
+                    token:action.payload
+                }
 
 
 
