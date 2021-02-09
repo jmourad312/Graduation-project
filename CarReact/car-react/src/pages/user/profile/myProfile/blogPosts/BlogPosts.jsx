@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SimpleDelete from "../../../../../components/SimpleDelete";
 import { getUsersAction } from "../../../../../store/actions";
-// import Footer from '../../../../../layout/footer/Footer'
+// import Footer from '../../../../../layout/footer/Footer';
 
 export default function BlogPosts(props) {
   const user = useSelector((state) => state.user.Data);

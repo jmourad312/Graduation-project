@@ -37,6 +37,8 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
-
+//--------------misc------------------
 export const GET_TOKEN = "GET_TOKEN";
+export const CHANGE_STYLE = "CHANGE_STYLE";
+
 

@@ -8,7 +8,6 @@ const Comment = require("../../models/Blog/reply");
 
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
-const Person = require ('../../models/Person/person')
 
 //addban user
 //removebaanuser
@@ -124,12 +123,14 @@ addCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
-  Person.find({}, (err, persons) => {
+  User.find({}, (err, users) => {
     const userMap = {};
-
-    persons.forEach((person) => {
-      personMap[person._id] = person;
-    });
+    const populateQuery = [{ path: "person", select: "firstName , email" }];
+    users
+      .forEach((user) => {
+        userMap[user._id] = user;
+      })
+      .populate(populateQuery);
 
     if (err) {
       return res.status(400).json({
@@ -139,7 +140,8 @@ showAllUsers = (req, res) => {
       });
     }
     return res.status(200).json({
-      Data: personMap,
+      Data: userMap,
+      populateQuery,
       Message: "this is the full number of users",
       Success: true,
     });
@@ -218,10 +220,12 @@ removeUserBan = (req, res) => {
 showAllVendors = (req, res) => {
   Vendor.find({}, (err, vendors) => {
     const vendorMap = {};
-
-    vendors.forEach((vendor) => {
-      vendorMap[vendor._id] = vendor;
-    });
+    const populateQuery = [{ path: "person", select: "firstName , email" }];
+    vendors
+      .forEach((vendor) => {
+        vendorMap[vendor._id] = vendor;
+      })
+      .populate(populateQuery);
 
     if (err) {
       return res.status(400).json({
@@ -232,6 +236,7 @@ showAllVendors = (req, res) => {
     }
     return res.status(200).json({
       Data: vendorMap,
+      populateQuery,
       Message: "this is the full number of users",
       Success: true,
     });
