@@ -52,5 +52,5 @@ router.get('/vendorItems', passport.authenticate("jwt", { session: false }), val
 router.get('/showAllUsers', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.showAllUsers);
 router.get('/showAllVendors', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.showAllVendors);
 
-
+router.get('/vendorAndProducts',Admin.vendorAndProducts)
 module.exports = router;

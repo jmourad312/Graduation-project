@@ -216,7 +216,7 @@ showAllVendors = (req, res) => {
 
   Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
 
-      
+
 
     if (err) {
       return res.status(400).json({
@@ -328,6 +328,43 @@ removeVendorBan = (req, res) => {
   );
 };
 
+// vendor and number of product 
+vendorAndProducts = (req, res) => {
+
+  carItem.aggregate([
+    {
+      $lookup: {
+        from: 'person',
+        localField: 'person',
+        foreignField: "_id",
+        as: 'person'
+      }
+    }
+    ,{
+    $group:
+    {
+      _id: "$person",
+      count: { $sum: 1 }
+    }
+  }], function (err, result) {
+    if (err) {
+      return res.status(400).json({
+        Data: err,
+        Message: `can't get data`,
+        Success: true,
+      });    }
+    else {
+      return res.status(200).json({
+        Data: result,
+        Message: `number of product per vendor`,
+        Success: true,
+      });
+    }
+  })
+
+}
+
+
 module.exports = {
   addModel,
   addBrand,
@@ -343,4 +380,5 @@ module.exports = {
   showAllVendors,
   vendorsNumber,
   numberOfItem,
+  vendorAndProducts
 };
