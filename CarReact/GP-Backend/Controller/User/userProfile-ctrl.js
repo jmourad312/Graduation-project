@@ -142,14 +142,16 @@ recentlyViewed = (req, res) => {
 addBookmarkPosts = async (req, res) => {
 
   const PostAtBookmark = await user.find({ bookmarkPosts: { $in: req.body.id }, person: req.user._id })
-  console.log(PostAtBookmark)
-  if (PostAtBookmark.length !== 0) {
-    return res.json({
-      Data: null,
-      Message: "You already add to bookmark",
-      Success: false,
-    });
-  }
+
+  // console.log(PostAtBookmark)
+  
+  // if (PostAtBookmark) {
+  //   return res.json({
+  //     Data: null,
+  //     Message: "You already add to bookmark",
+  //     Success: false,
+  //   });
+  // }
 
 
   user.updateOne({ person: req.user._id }, {
