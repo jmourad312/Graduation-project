@@ -1,3 +1,4 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,36 @@ export default function ProductDetails(props) {
   useEffect(() => {
     getProducts(productID);
   }, [productDetails]);
+
+  const handleAddFavourite= () =>{
+    console.log(productID);
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      id: productID,
+    };
+
+    const URL = "http://localhost:3000/user/addFavouriteItems";
+
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const pageVariants = {
     in: {
@@ -109,6 +140,7 @@ export default function ProductDetails(props) {
                   className="fa-lg button fill fa-pull-right"
                   style={{padding:"5px"}}
                   title="Add to favorate"
+                  onClick={handleAddFavourite}
                 >
                   <i
                     className="far fa-heart"

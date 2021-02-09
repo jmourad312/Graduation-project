@@ -15,6 +15,8 @@ export default function BlogDetails(props) {
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
+  // const user = useSelector((state) => state.user.Data.person);
+
 
   const dispatch = useDispatch();
 
@@ -34,13 +36,12 @@ export default function BlogDetails(props) {
   };
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
-    title:  "",
+    title: "",
     body: "",
-    image:  "",
-    brand:  "",
-    model:  "",
+    image: "",
+    brand: "",
+    model: "",
   });
-  
 
   const handleEditChange = (event) => {
     const { value, name } = event.target;
@@ -97,6 +98,38 @@ export default function BlogDetails(props) {
         console.log(error);
       });
   };
+
+  const handleAddBookmark = () =>{
+    console.log(blogID);
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      id: blogID,
+    };
+
+    const URL = "http://localhost:3000/user/addBookmarkPosts";
+
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+
   //---------------------------END EDIT FUNCTIONS----------------------------------------
 
   const [inputValue, setInputValue] = useState({
@@ -273,6 +306,20 @@ export default function BlogDetails(props) {
       </div>
 
       {/* --------------------- EDIT SECTION--------------- */}
+      <p
+        onClick={handleAddBookmark}
+        className="button pulse"
+        style={{
+          width: "84px",
+          height: "34px",
+          padding: "5px",
+          background: "grey",
+          cursor: "pointer",
+          display: "inline",
+        }}
+      >
+        Bookmark
+      </p>
       <Button variant="info" onClick={() => openModal(props.id)}>
         Edit
       </Button>
@@ -396,42 +443,42 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-          return (
-            <div className="media mb-1" key={index}>
-              <button
-                className="btn btn-info"
-                onClick={() => addVote(item._id)}
-              >
-                <i className="fas fa-arrow-circle-up" />
-              </button>
-              <span className="btn badge-pill btn-success">
-                {item.vote.numberOfVoting}
-              </span>
-              <button
-                className="btn btn-info"
-                onClick={() => removeVote(item._id)}
-              >
-                <i class="fas fa-arrow-circle-down" />
-              </button>
+            return (
+              <div className="media mb-1" key={index}>
+                <button
+                  className="btn btn-info"
+                  onClick={() => addVote(item._id)}
+                >
+                  <i className="fas fa-arrow-circle-up" />
+                </button>
+                <span className="btn badge-pill btn-success">
+                  {item.vote.numberOfVoting}
+                </span>
+                <button
+                  className="btn btn-info"
+                  onClick={() => removeVote(item._id)}
+                >
+                  <i class="fas fa-arrow-circle-down" />
+                </button>
 
-              <img
-                className="d-flex mr-3 rounded-circle"
-                src={item.image}
-                alt=""
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              />
-              <hr />
-              <br />
-              <div className="media-body">
-                <h5 className="mt-0">
-                  {item.person.firstName ? item.person.firstName : null}
-                </h5>
+                <img
+                  className="d-flex mr-3 rounded-circle"
+                  src={item.image}
+                  alt=""
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
                 <hr />
                 <br />
-                <p>{item.content}</p>
-              </div>
+                <div className="media-body">
+                  <h5 className="mt-0">
+                    {item.person.firstName ? item.person.firstName : null}
+                  </h5>
+                  <hr />
+                  <br />
+                  <p>{item.content}</p>
+                </div>
 
-              {/* <form
+                {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -447,7 +494,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-              {/* {item
+                {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -467,9 +514,9 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-            </div>
-          );
-        })
+              </div>
+            );
+          })
         : "LOADING"}
 
       {/* <!-- Comment with nested comments --> */}
