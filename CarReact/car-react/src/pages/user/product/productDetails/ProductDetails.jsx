@@ -43,7 +43,7 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-       <section className="products-details" >
+      <section className="products-details" >
         {/* <!-- start product details --> */}
         <div className="container">
           <div className="row bg-light">
@@ -77,13 +77,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                  <span
-                    className="badge badge-pill badge-danger"
-                    style={{ fontSize: "15px" }}
-                  >
-                    Not Avalible
-                  </span>
-                ))}
+                    <span
+                      className="badge badge-pill badge-danger"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Not Avalible
+                    </span>
+                  ))}
 
               {/* <!-- number of stars --> */}
               <div className="mt-3 star" style={{ fontSize: "20px" }}>
@@ -107,7 +107,7 @@ export default function ProductDetails(props) {
                 </span>
                 <span
                   className="fa-lg button fill fa-pull-right"
-                  style={{padding:"5px"}}
+                  style={{ padding: "5px" }}
                   title="Add to favorate"
                 >
                   <i
@@ -232,7 +232,7 @@ export default function ProductDetails(props) {
                   style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
                   allowfullscreen
                 ></iframe>
-                <p>location one </p>
+                
 
                 {/* <div className="pl-3">
                 <img

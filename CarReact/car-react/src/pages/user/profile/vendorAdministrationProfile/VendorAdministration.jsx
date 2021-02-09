@@ -13,27 +13,27 @@ import { getVendorsAction, setVendorIdAction } from '../../../../store/actions';
 export default function VendorAdministration() {
   const dispatch = useDispatch();
   const vendor = useSelector((state) => state.vendor.Data);
-dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
+  dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
 
-    useEffect(() => {
-      dispatch(getVendorsAction(localStorage.getItem("VendorID")));
-      // console.log(vendor ? vendor.person : "loading");
-      // console.log(localStorage.getItem("VendorID"));
-    }, [vendor]);
+  useEffect(() => {
+    dispatch(getVendorsAction(localStorage.getItem("VendorID")));
+    // console.log(vendor ? vendor.person : "loading");
+    // console.log(localStorage.getItem("VendorID"));
+  }, [vendor]);
 
-    return (
-      <div className="vendorAdmin">
-        <section className="container">
-          <div className="vendorleft">
-            <div style={{ marginTop: "10%" }}>
-              <div className="row m-auto newCont">
-                <div className="col-3">
-                  <VendorProfilePicture
-                    image={
-                      vendor ? (vendor.person ? vendor.person.image : "null") : "null"
-                    }
-                  />
-                  {/* <Image
+  return (
+    <div className="vendorAdmin">
+      <section className="container">
+        <div className="vendorleft">
+          <div style={{ marginTop: "10%" }}>
+            <div className="row m-auto newCont">
+              <div className="col-3">
+                <VendorProfilePicture
+                  image={
+                    vendor ? (vendor.person ? vendor.person.image : "null") : "null"
+                  }
+                />
+                {/* <Image
                     src={
                       vendor
                         ? vendor.person
@@ -45,36 +45,44 @@ dispatch(setVendorIdAction(localStorage.getItem("VendorID")));
                     height="100%"
                     width="100%"
                   /> */}
-                </div>
-                <div className="col-9">
-                  <p className="mt-3 button raise">
-                    <Link to={`/VendorAdministration/VendorDetails`}>
-                      Basic details
-                    </Link>
-                  </p>
-                  <p className="mt-3 button raise">
-                    <Link to="/VendorAdministration/MyItems">My Items</Link>
-                  </p>
-                  <p className="mt-3 button up">
-                    <Link to="/VendorAdministration/VendorSettings">
-                      Settings
-                    </Link>
-                  </p>
-                </div>
               </div>
-              <div className="vendorright">
-                <div className="col-3"></div>
-                <div className="col-9 mt-5  ">
-                  <VendorProfileRight
-                    vendor={vendor ? vendor.person : "null"}
-                  />
+              <div className="col-9">
+                <div className="row">
+                  <div className="col-4">
+                    <p className="mt-3 button raise">
+                      <Link to={`/VendorAdministration/VendorDetails`}>
+                        Basic details
+                    </Link>
+                    </p>
+                  </div>
+                  <div className="col-4">
+                    <p className="mt-3 button raise">
+                      <Link to="/VendorAdministration/MyItems">My Items</Link>
+                    </p>
+                  </div>
+                  <div className="col-4">
+                    <p className="mt-3 button up">
+                      <Link to="/VendorAdministration/VendorSettings">
+                        Settings
+                    </Link>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="vendorright">
+              <div className="col-3"></div>
+              <div className="col-9 mt-5  ">
+                <VendorProfileRight
+                  vendor={vendor ? vendor.person : "null"}
+                />
+              </div>
+            </div>
           </div>
-        </section>
-      </div>
-    );
+        </div>
+      </section>
+    </div>
+  );
 }
 
 
