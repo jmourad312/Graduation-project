@@ -43,7 +43,7 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <section className="products-details">
+      <section className="products-details" style={{ fontSize: "30px" }}>
         {/* <!-- start product details --> */}
         <div className="container mx-auto mt-3">
           <div className="row shadow-sm mb-4 bg-light rounded-lg">
@@ -76,13 +76,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                  <span className="badge badge-pill badge-danger">
+                  <span className="badge badge-pill badge-danger" style={{ fontSize: "20px" }}>
                     Not Avalible
                   </span>
                 ))}
 
               {/* <!-- number of stars --> */}
-              <div className="mt-3 star">
+              <div className="mt-3 star" style={{ fontSize: "25px" }}>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"></span>
@@ -90,18 +90,18 @@ export default function ProductDetails(props) {
                 <span className="fa fa-star"> No review</span>
               </div>
               {/* <!-- description --> */}
-              <div className="mt-3">
+              <div className="mt-3" style={{ fontSize: "30px" }}>
                 {productDetails && productDetails.description}
               </div>
               {/* <!-- Add to favorate and compare product --> */}
               {/* <!-- price --> */}
               <div className="mt-3">
-                <span className="" style={{ fontSize: "25px" }}>
+                <span className="" style={{ fontSize: "50px" }}>
                   <li className="fas fa-coins pr-2 text-warning">
-                    {productDetails && productDetails.price}
+                    {productDetails && productDetails.price} LE
                   </li>
                 </span>
-                <div className="d-flex justify-content-end">
+                <div className="d-flex justify-content-end" style={{ fontSize: "30px" }}>
                   <span
                     className="fa-lg pr-3"
                     data-toggle="tooltip"
