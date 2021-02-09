@@ -327,6 +327,23 @@ removeVendorBan = (req, res) => {
     }
   );
 };
+//vendors with its product 
+calculateProducts = (req,res) =>{
+  const IdPerson = req.vendor._id;
+  carItem.aggregate(
+    [
+      {
+        $group:
+          {
+            _id:IdPerson,
+            totalAmount: { $sum: carItem },
+  
+          }
+      }
+    ]
+ )
+
+}
 
 module.exports = {
   addModel,
