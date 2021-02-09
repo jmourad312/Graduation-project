@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
@@ -37,8 +38,32 @@ export default function ProductsList() {
       />
     );
   };
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      y: "-100vh",
+      scale: 0.1,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
-    <div className="productList">
+    <motion.div
+      className="productList"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <LoginButton />
       <UserIcon />
       <div className="container">
@@ -53,6 +78,6 @@ export default function ProductsList() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

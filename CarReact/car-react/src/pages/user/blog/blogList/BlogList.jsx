@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 // import Button from "../../../../components/Button";
 import { getBlogsAction } from "../../../../store/actions";
 import Loading from '../../../../components/Loading';
+import { motion } from "framer-motion";
 
 export default function BlogList() {
   
@@ -64,9 +65,32 @@ export default function BlogList() {
     );
   }
   // const blogs = useSelector(state => state.blogs);
-
+const pageVariants = {
+  in: {
+    opacity: 10,
+    y: "0vh",
+    scale: 1,
+  },
+  out: {
+    opacity: 0,
+    y: "-100vh",
+    scale: 0.1,
+  },
+};
+const pageTransitions = {
+  duration: 1.5,
+  type: "tween",
+  ease: "anticipate",
+};
   return (
-    <section className="blog">
+    <motion.section
+      className="blog"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <section className="container">
         <AddBlog />
         {/* <Button onClick={getProducts} value={"SHOW ITEMS"} /> */}
@@ -75,13 +99,13 @@ export default function BlogList() {
           <div className="col-9 blog-contents">
             <section>
               <div className="row">
-                {blogs.Data?blogs.Data.map(createItem):<Loading />}
+                {blogs.Data ? blogs.Data.map(createItem) : <Loading />}
               </div>
             </section>
           </div>
         </div>
       </section>
-    </section>
+    </motion.section>
   );
 }
 

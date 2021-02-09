@@ -1,8 +1,8 @@
 import React, { Suspense, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useTransition, animated } from "react-spring";
-import { __RouterContext } from "react-router";
+import { useLocation, __RouterContext } from "react-router";
+import { AnimatePresence, motion } from "framer-motion";
 
 
 // const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
@@ -72,55 +72,46 @@ const VendorAdministration = React.lazy(() =>
 // const GoogleBooks = React.lazy(() => import("../Pages/GoogleBooks"));
 
 export default function Routes() {
-  const { location } = useContext(__RouterContext);
-
+  const location = useLocation();
+  
   return (
     <Suspense fallback={<Loading />}>
-      
-          <Switch>
-          {/* <div className="position-absolute w-100"> */}
 
-            <Route path="/" exact component={Homepage2} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/SignUp" exact component={SignUp} />
-            <Route path="/AddBlog" exact component={AddBlog} />
+      <Switch>
+        {/* <div className="position-absolute w-100"> */}
 
-            <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
+        <Route path="/" exact component={Homepage2} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/SignUp" exact component={SignUp} />
+        <Route path="/AddBlog" exact component={AddBlog} />
 
-            <Route path="/BlogList" exact component={BlogList} />
-            <Route path="/AboutUs" exact component={AboutUs} />
-            <Route path="/ContactUs" exact component={ContactUs} />
-            <Route path="/Privacy" exact component={Privacy} />
-            <Route path="/TermsOfService" exact component={TermsOfService} />
-            <Route
-              path="/VendorProfileUser"
-              exact
-              component={VendorProfileUser}
-            />
-            <Route
-              path="/ProductDetails/:id?"
-              exact
-              component={ProductDetails}
-            />
-            <Route path="/ProductsList" exact component={ProductsList} />
+        <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
 
-            <Route path="/MyProfile/(page)?" component={MyProfile} />
+        <Route path="/BlogList" exact component={BlogList} />
+        <Route path="/AboutUs" exact component={AboutUs} />
+        <Route path="/ContactUs" exact component={ContactUs} />
+        <Route path="/Privacy" exact component={Privacy} />
+        <Route path="/TermsOfService" exact component={TermsOfService} />
+        <Route path="/VendorProfileUser" exact component={VendorProfileUser} />
+        <Route path="/ProductDetails/:id?" exact component={ProductDetails} />
+        <Route path="/ProductsList" exact component={ProductsList} />
 
-            <Route path="/SignForm" exact component={Signform} />
-            <Route path="/VendorSignForm" exact component={VendorSignForm} />
-            <Route path="/SignChoice" exact component={SignChoice} />
-            <Route
-              path="/VendorAdministration/(page)?"
-              component={VendorAdministration}
-            />
-            <Route
-              path="/DisplayUserProfile"
-              exact
-              component={DisplayUserProfile}
-            />
-          {/* </div> */}
-          </Switch>
-        
+        <Route path="/MyProfile/(page)?" component={MyProfile} />
+
+        <Route path="/SignForm" exact component={Signform} />
+        <Route path="/VendorSignForm" exact component={VendorSignForm} />
+        <Route path="/SignChoice" exact component={SignChoice} />
+        <Route
+          path="/VendorAdministration/(page)?"
+          component={VendorAdministration}
+        />
+        <Route
+          path="/DisplayUserProfile"
+          exact
+          component={DisplayUserProfile}
+        />
+        {/* </div> */}
+      </Switch>
     </Suspense>
   );
 }

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ads from "../../../../components/Ads";
@@ -17,9 +18,34 @@ export default function MyProfile() {
     console.log(user ? user.person : "loading");
     console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      x: "0vw",
+      y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      x: "-100vw",
+      y: "-100vh",
+      scale: 0.1,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
 
   return (
-    <div>
+    <motion.div
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       {/* <Ads
         class="pater"
         imgSrc="../../../../assets/Images/13.jpg"
@@ -37,10 +63,10 @@ export default function MyProfile() {
             bookmarkPosts={user ? user.bookmarkPosts : "null"}
             favouriteItems={user ? user.favouriteItems : "null"}
             postsUser={user ? user.postsUser : "null"}
-            recentlyViewed={user?user.recentlyViewed:"null"}
+            recentlyViewed={user ? user.recentlyViewed : "null"}
           />
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 }
