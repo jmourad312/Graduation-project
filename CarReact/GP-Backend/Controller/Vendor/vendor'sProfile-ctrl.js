@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const gettoken = require('../../token/gerenrate-token')
 const transporter = require('../../config/configEmail')
 const Feedback = require('../../models/Feedback/feedback')
+const Location = require ('../../models/Location/location')
 
 
 //forget password
@@ -185,6 +186,9 @@ showVendorProfile = (req, res) => {
         });
     });
 };
+
+
+
 
 module.exports = {
     updateProfilePassword, updateProfile,

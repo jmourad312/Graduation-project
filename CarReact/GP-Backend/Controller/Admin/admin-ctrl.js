@@ -8,6 +8,7 @@ const Comment = require("../../models/Blog/reply");
 
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
+const Person = require ('../../models/Person/person')
 
 //addban user
 //removebaanuser
@@ -123,11 +124,11 @@ addCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
-  User.find({}, (err, users) => {
+  Person.find({}, (err, persons) => {
     const userMap = {};
 
-    users.forEach((user) => {
-      userMap[user._id] = user;
+    persons.forEach((person) => {
+      personMap[person._id] = person;
     });
 
     if (err) {
@@ -138,7 +139,7 @@ showAllUsers = (req, res) => {
       });
     }
     return res.status(200).json({
-      Data: userMap,
+      Data: personMap,
       Message: "this is the full number of users",
       Success: true,
     });

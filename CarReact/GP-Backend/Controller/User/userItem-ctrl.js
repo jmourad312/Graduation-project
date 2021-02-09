@@ -8,6 +8,7 @@ const Feedback = require('../../models/Feedback/feedback')
 // write feedback item
 //show all item search 
 
+
 // get part of product
 partOfItem = (req, res) => {
   const populateQuery = { path: "person", select: "firstName" };

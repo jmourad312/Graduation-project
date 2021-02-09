@@ -14,7 +14,6 @@ var location = new schema({
       {
         city: String,
         address: String,
-        required: true,
       },
     ],
   },
