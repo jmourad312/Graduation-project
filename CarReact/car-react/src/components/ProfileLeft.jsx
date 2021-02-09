@@ -20,7 +20,7 @@ export default function ProfileLeft(props) {
         <ProfilePicture image={props.image} />
       </div>
       <div className="mt-3">
-        <div className="text-light" style={{fontSize:"2rem"}}>
+        <div className="text-light" style={{fontSize:"1.5rem"}}>
           <p>{props.person ? props.person.firstName : "Loading"}</p>
           <p>{props.person ? props.person.email : "Loading"}</p>
         </div>

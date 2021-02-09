@@ -36,7 +36,7 @@ export default function BlogPosts(props) {
                         className="mr-3 rounded-circle"
                       />
                       <div className="media-body">
-                        <h2>{post.title}</h2>
+                        <h2 className="text-truncate" style={{maxWidth: "500px"}}>{post.title}</h2>
                         <strong>
                           <i> Posted on </i>
                         </strong>

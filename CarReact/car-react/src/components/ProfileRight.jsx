@@ -72,7 +72,7 @@ export default function ProfileRight(props) {
     },
     out: {
       opacity: 0,
-      x: "-40vw",
+      x: "-20vw",
       scale: 0.1,
     },
   };
