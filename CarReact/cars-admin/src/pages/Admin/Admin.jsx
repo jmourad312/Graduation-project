@@ -432,7 +432,7 @@ export default function Admin() {
                                     <div className="card-header">Google map</div>
                                     <div className="card-body">
                                         <div id="map-container" className="map-container" style={{ height: "500px" }}>
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13916.823277035688!2d30.8606271!3d29.305637700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb77971253ebcb45f!2z2KfZhNmF2LPZhNmH2IwgUWVzbSBBbCBGYXlvdW0sIEZhaXl1bSwgRmFpeXVtIEdvdmVybm9yYXRl!5e0!3m2!1sen!2seg!4v1612708610475!5m2!1sen!2seg" width="600" height="450" frameborder="0" style={{ border: "0;" }} allowfullscreen="" aria-hidden="false" tabindex="0" />
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13916.823277035688!2d30.8606271!3d29.305637700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb77971253ebcb45f!2z2KfZhNmF2LPZhNmH2IwgUWVzbSBBbCBGYXlvdW0sIEZhaXl1bSwgRmFpeXVtIEdvdmVybm9yYXRl!5e0!3m2!1sen!2seg!4v1612708610475!5m2!1sen!2seg" width="600" height="450" frameBorder="0" style={{ border: "0" }} allowFullScreen="" aria-hidden="false" tabIndex="0" />
                                         </div>
                                     </div>
                                 </div>

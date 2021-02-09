@@ -290,7 +290,7 @@ showDetailsPost = (req, res) => {
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 })
     .populate(populateQuery)
     .exec((error, data) => {
-      if (error || data.length == 0) {
+      if (error || !data) {
         return res.status(400).json({
           Data: error,
           Message: "no blogs found",
