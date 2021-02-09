@@ -13,23 +13,12 @@ export default function Admin() {
 
 
     useEffect(() => {
-         dispatch(getUserAction)
-         dispatch(getVendorAction)
-
-      }, []) 
-      ;
-    const getUsers = () => {
         dispatch(getUserAction)
-    }
-
-    const getVendors = () => {
         dispatch(getVendorAction)
-    }
+    }, [])
 
-
-
-
-
+    console.log(stateRedux.users==[])
+    console.log(stateRedux.vendors)
 
 
     const [BarData, setBarData] = useState({
@@ -201,10 +190,14 @@ export default function Admin() {
 
 
                         {/* User List */}
+                        {
+                            stateRedux.users.length != 0  ? <Tabel data={stateRedux.users.Data}  ></Tabel> : <p>uhiuhuyhu</p>
+                        }
 
-                        <Tabel data={stateRedux.users.Data}  ></Tabel>
                         {/* Vendor List */}
-                        <Tabel data={stateRedux.vendors.Data}  ></Tabel>
+                        {
+                            stateRedux.vendors.length !=0 ? <Tabel data={stateRedux.vendors.Data}  ></Tabel> : <p>bjhvhvghv</p>
+                        }
 
 
                         {/* Blog List */}

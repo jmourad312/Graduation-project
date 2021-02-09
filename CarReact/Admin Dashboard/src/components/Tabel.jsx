@@ -1,4 +1,5 @@
 export function Tabel(props) {
+    console.log(props.data)
     return (
         <>
             <div className="row wow fadeIn">
@@ -10,8 +11,6 @@ export function Tabel(props) {
 
                                 <thead className="blue-grey lighten-4">
                                     <tr>
-                                        <th>#</th>
-                                        <th>ID</th>
                                         <th>firstName</th>
                                         <th>Email</th>
                                         <th>Banned</th>
@@ -24,20 +23,20 @@ export function Tabel(props) {
                                 <tbody>
                                     {props.data.map((item, index) => {
 
-                                        <tr>
-                                            <th scope="row">{index+1}</th>
-                                            <td>{item._id}</td>
-                                            <td>{item.firstName}</td>
-                                            <th>{props.email}</th>
-                                            <td>{props.banned}</td>
-                                            <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                            <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                            <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                        </tr>
-
+                                        return (
+                                            <tr>
+                                                <td>{item.person ? item.person._id : "loadind"}</td>
+                                                <td>{item.person.firstName}</td>
+                                                <td>{item.person.email}</td>
+                                                <td>{item.banned}</td>
+                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+                                                <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
+                                                <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
+                                            </tr>
+                                        )
                                     })}
+                                    
                                 </tbody>
-
 
 
                             </table>
