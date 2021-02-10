@@ -5,13 +5,25 @@ import { Link } from "react-router-dom";
 import Button2 from "../../../../components/Button2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
-
+import {
+  setUserIdAction,
+  userSignInAction,
+  vendorSignInAction,
+} from "../../../../store/actions";
+import Modal from "react-bootstrap/Modal";
+import VerticalModal from "../../../../components/VerticalModal";
+import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
-  // const [changeClassBack, setChangeClassBack] = useState("forgotpass")
+  // const [changeClassBack, setChangeClassBack] = useState("forgotpass");
+  const [modalShow, setModalShow] = useState(false);
+  const [modaleInfo, setModaleInfo] = useState({
+    heading: "",
+    title: "",
+    content: "",
+  });
   const [changePayment, setChangePayment] = useState("payment");
-  const userID = useSelector(state => state.userID)
+  const userID = useSelector((state) => state.userID);
   const dispatch = useDispatch();
 
   const setUserID = (params) => {
@@ -193,14 +205,48 @@ export default function Signform(props) {
               Sign Up
             </button>
             <p>
-              By signing up you agree to our <span>TERMS</span> and{" "}
-              <span>Privacy Policy</span>
+              By signing up you agree to our{" "}
+              <span
+                style={{ color: "#4d8ba8", cursor: "pointer" }}
+                onClick={() => {
+                  setModalShow(true);
+                  setModaleInfo({
+                    heading: termsAndPrivacy.terms.heading,
+                    title: termsAndPrivacy.terms.title,
+                    content: termsAndPrivacy.terms.content,
+                  });
+                }}
+              >
+                TERMS
+              </span>{" "}
+              and{" "}
+              <span
+                style={{ color: "#4d8ba8", cursor: "pointer" }}
+                onClick={() => {
+                  setModalShow(true);
+                  setModaleInfo({
+                    heading: termsAndPrivacy.privacy.heading,
+                    title: termsAndPrivacy.privacy.title,
+                    content: termsAndPrivacy.privacy.content,
+                  });
+                }}
+              >
+                Privacy Policy
+              </span>
             </p>
             {/* <button className="button" onClick={switchPayment}>
                 Sign Up
               </button> */}
           </form>
         </div>
+        <VerticalModal
+          heading={modaleInfo.heading}
+          title={modaleInfo.title}
+          content={modaleInfo.content}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+
         <div className="form-container sign-in-container ">
           <form className="form1" onSubmit={handleSignInSubmit}>
             <h1>Sign in</h1>

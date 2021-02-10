@@ -95,9 +95,9 @@ const pageTransitions = {
         
         
         {/* <Button onClick={getProducts} value={"SHOW ITEMS"} /> */}
-          <AddBlog />
+          {/* <AddBlog /> */}
         <div className="row">
-          <div className="col-3">
+          <div className="col-3" style={{marginTop:"10%"}}>
           <BlogFilter class="blog-filter" />
           </div>
           <div className="col-9 blog-contents">
