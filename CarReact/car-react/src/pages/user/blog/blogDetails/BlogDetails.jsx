@@ -5,6 +5,8 @@ import { Button, Col, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 import {
   getBlogDetails,
   addVoteComment,
@@ -256,6 +258,8 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="blogDetails">
         <div className="header">
           <div className="row">

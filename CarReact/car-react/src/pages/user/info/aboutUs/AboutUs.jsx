@@ -1,4 +1,5 @@
 import React from "react";
+import ContactUsPic from "../../../../components/ContactUsPic";
 
 export default function AboutUs() {
   return (
@@ -25,7 +26,7 @@ export default function AboutUs() {
           </a>
          
         </div>
-
+        <ContactUsPic/>
         <div className="section" id="p1">
           <span className="name">Hajar Shalby</span>
           <span className="border"></span>
