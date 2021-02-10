@@ -158,11 +158,12 @@ usersNumber = (req, res) => {
       Success: true,
     });
   });
+
 };
 
 //add ban
 addUserBan = (req, res) => {
-  const IdPerson = req.user._id;
+  const IdPerson = req.body._id;
   User.updateOne(
     { person: IdPerson },
     { $set: { banned: true } },
@@ -327,6 +328,7 @@ removeVendorBan = (req, res) => {
     }
   );
 };
+
 //vendors with its product 
 calculateProducts = (req,res) =>{
   const IdPerson = req.vendor._id;

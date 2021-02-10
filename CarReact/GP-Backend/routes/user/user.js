@@ -116,9 +116,10 @@ router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), 
 // }
 
 
-
 router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
 // params => idfeedback
 
 
 module.exports = router;
+
+
