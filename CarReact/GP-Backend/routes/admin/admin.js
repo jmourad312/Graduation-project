@@ -43,7 +43,7 @@ router.post('/addVendorBan/:id', passport.authenticate("jwt", { session: false }
 router.post('/removeVendorBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeVendorBan);
 
 //Calculate 
-
+router.get('/countAll', passport.authenticate("jwt", { session: false }), validateAdmin,Admin.countAll)
 router.get('/usersNumber', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.usersNumber);
 router.get('/vendorsNumber', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.vendorsNumber);
 router.get('/vendorItems', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.numberOfItem);

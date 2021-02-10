@@ -5,6 +5,7 @@ export default (state = {
     token: "",
     users: [],
     vendors: [],
+    countData:{}
 
 }, action) => {
     switch (action.type) {
@@ -32,7 +33,11 @@ export default (state = {
                 ...state,
                 vendors: action.payload
             }
-
+        case TYPES.GET_COUNT_DATA:
+            return {
+                ...state,
+                countData: action.payload
+            }
 
 
 

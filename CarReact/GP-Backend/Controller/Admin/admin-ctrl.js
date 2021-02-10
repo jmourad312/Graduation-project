@@ -279,6 +279,32 @@ numberOfItem = (req, res) => {
   });
 };
 
+numberOfBlogs = (req, res) => {
+  Post.countDocuments({}, function (err, count) {
+    if (err) {
+      res.json({
+        Data: [],
+        Message: "Can't get number of Post from database,  " + err,
+        Success: false,
+      });
+    } else {
+      if (count.length == 0) {
+        res.json({
+          Data: {},
+          Message: "No Data found in DB",
+          Success: false,
+        });
+      } else {
+        res.json({
+          Data: count,
+          Message: "Number of all Post:" + count,
+          Success: true,
+        });
+      }
+    }
+  });
+};
+
 // addBan
 addVendorBan = (req, res) => {
   const IdPerson = req.vendor._id;
@@ -340,28 +366,58 @@ vendorAndProducts = (req, res) => {
         as: 'Person'
       }
     }
-    ,{
-    $group:
-    {
-      _id: "$person",
-      count: { $sum: 1 }
-    }
-  }], function (err, result) {
-    if (err) {
-      return res.status(400).json({
-        Data: err,
-        Message: `can't get data`,
-        Success: true,
-      });    }
-    else {
-      return res.status(200).json({
-        Data: result,
-        Message: `number of product per vendor`,
+    , {
+      $group:
+      {
+        _id: "$person",
+        count: { $sum: 1 }
+      }
+    }], function (err, result) {
+      if (err) {
+        return res.status(400).json({
+          Data: err,
+          Message: `can't get data`,
+          Success: true,
+        });
+      }
+      else {
+        return res.status(200).json({
+          Data: result,
+          Message: `number of product per vendor`,
+          Success: true,
+        });
+      }
+    })
+
+}
+
+countAll = (req, res) => {
+
+  Promise.all([
+    User.count().exec(),
+    Vendor.count().exec(),
+     carItem.count().exec(),
+      Post.count().exec(),])
+
+    .then((counts,error)=> {
+      if(error){
+        return res.json({
+          Data: error,
+          Message: `Can't count`,
+          Success: false,
+        });
+      }
+      return res.json({
+        Data: {
+          "user":counts[0],
+          "vendor":counts[1],
+          "product":counts[2],
+          "blogs":counts[3]
+        },
+        Message: `Done`,
         Success: true,
       });
-    }
-  })
-
+    });
 }
 
 
@@ -380,5 +436,6 @@ module.exports = {
   showAllVendors,
   vendorsNumber,
   numberOfItem,
-  vendorAndProducts
+  vendorAndProducts,
+  countAll
 };
