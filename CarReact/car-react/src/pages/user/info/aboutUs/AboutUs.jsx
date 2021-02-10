@@ -23,6 +23,7 @@ export default function AboutUs() {
             {" "}
             <img src="../../../../assets/Images/person1.jpg" alt="" />{" "}
           </a>
+         
         </div>
 
         <div className="section" id="p1">

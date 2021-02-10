@@ -301,10 +301,10 @@
     bottom: 0;
     transition: all 1s ease-in-out;
   }
-  button {
+  button {   
     border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background-color: #ff4b2b;
+    // border: 1px solid rgb(44, 44, 44);
+    background-color: #f95959;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -405,8 +405,8 @@
 
   .overlay {
     background: #ff416c;
-    background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    background: -webkit-linear-gradient(to right,  #242222,  rgb(44, 44, 44));
+    background: linear-gradient(to right, #242222,  rgb(44, 44, 44));
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
