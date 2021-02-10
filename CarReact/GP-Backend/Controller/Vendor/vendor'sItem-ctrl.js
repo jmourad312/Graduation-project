@@ -1,4 +1,5 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
+const vendor = require('../../models/Person/Vendor/vendor')
 
 //create new Item
 addItem = (req, res) => {
@@ -33,7 +34,11 @@ addItem = (req, res) => {
 
   car
     .save()
-    .then(() => {
+    .then((data) => {
+
+      vendor.updateOne({person:req.user._id},{
+        $push:{vendorItems:data._id}
+      }).then("Done").catch("error")
       return res.status(200).json({
         Data: car._id,
         Message: "New car item is created",

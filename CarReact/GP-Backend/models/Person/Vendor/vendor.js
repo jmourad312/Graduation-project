@@ -19,6 +19,10 @@ var vendor = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "FeedBack",
   }],
+  vendorItems: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Car",
+  }],
 
   banned: {type:Boolean,default:false},
 });
