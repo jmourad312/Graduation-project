@@ -4,6 +4,7 @@ import $ from "jquery";
 import { useDispatch } from "react-redux";
 import { setVendorIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 import axios from "axios";
+import icon from '../../../../assets/Images/icon.png'
 
 export default function VendorSignForm(props) {
 
@@ -290,9 +291,8 @@ export default function VendorSignForm(props) {
               {/* <!-- Brand Box --> */}
               <div className="col-sm-6 brand">
                 <Link to="" className="logo">
-                  LOGO
+                <img src={icon} alt="" style={{width:"50px" , height:"50px"}}/>
                 </Link>
-
                 <div className="heading">
                   <h2>DREKSYONY</h2>
                   <p>Your Right Choice</p>
