@@ -138,7 +138,7 @@ export default function ProductDetails(props) {
                     {productDetails && productDetails.price} LE
                   </li>
                 </span>
-                {localStorage.getItem("UserID") === undefined && (
+                {localStorage.getItem("UserID") !== null && (
                   <span
                     className="fa-lg button fill fa-pull-right"
                     style={{ padding: "5px" }}

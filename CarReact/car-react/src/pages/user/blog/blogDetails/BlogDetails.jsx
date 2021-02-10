@@ -251,17 +251,20 @@ export default function BlogDetails(props) {
   };
   return (
     <motion.div
-      className="container p-5"
+      className="container"
       initial="out"
       animate="in"
       exit="out"
       variants={pageVariants}
       transition={pageTransitions}
     >
-      {localStorage.getItem("Authorization") === null && <LoginButton />}
-      {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="blogDetails">
         <div className="header">
+        <div style={{position:"absolute",top:"5%",right:"-30%"}}>
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
+        </div>
           <div className="row">
             <div className="col-6">
               <p
@@ -335,7 +338,7 @@ export default function BlogDetails(props) {
         Bookmark
       </p> */}
       <div className="row">
-        {localStorage.getItem("UserID") === undefined && (
+        {localStorage.getItem("UserID") !== null && (
           <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
             Bookmark
           </button>

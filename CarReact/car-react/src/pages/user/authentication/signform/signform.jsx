@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import $ from "jquery";
 // import { useEffect } from 'react';
 import Button2 from "../../../../components/Button2";
@@ -160,6 +160,13 @@ export default function Signform(props) {
   // confirmButton.addEventListener('click', () => {
   //     container.classList.remove("bottom-panel-active");
   // });
+  const handlegoogle = () => {
+    window.location.replace("http://localhost:3000/user/auth/google");
+  };
+  const handlefacebook = () => {
+    window.location.replace("http://localhost:3000/user/auth/facebook");
+  };
+
   const pageVariants = {
     in: {
       opacity: 10,
@@ -191,16 +198,10 @@ export default function Signform(props) {
           <form className="form1" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
             <div className="social-container">
-              <Link
-                to="http://localhost:3000/user/auth/facebook"
-                className="social"
-              >
+              <Link onClick={handlefacebook} className="social">
                 <i className="fab fa-facebook-f"></i>
               </Link>
-              <Link
-                to="http://localhost:3000/user/auth/google"
-                className="social"
-              >
+              <Link onClick={handlegoogle} className="social">
                 <i className="fab fa-google-plus-g"></i>
               </Link>
               {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
