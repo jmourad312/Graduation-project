@@ -52,11 +52,11 @@ router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: fa
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("image"), userProfileCtrl.updateUserProfile);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.array("images",6), userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
-router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }),  upload.array("images",6) ,canView, userBlogCtrl.updatePost);
+router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), upload.single("image") ,canView, userBlogCtrl.updatePost);
 
 router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
 
