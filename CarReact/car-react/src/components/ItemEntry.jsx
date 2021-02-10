@@ -141,22 +141,26 @@ export default function ItemEntry(props) {
             <i className="badge badge-light text-truncate">{props.carModel}</i>
           </strong>
           <br/>
+          <div className="row centerbtn">
           <button
-            className="btn btn-success"
+            className="btn btn-info"
+            style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} 
             onClick={() => handleClick(props.id)}
           >
             <i class="fas fa-info-circle"></i>
           </button>
           <button
             className="btn btn-danger"
-            onClick={() => handleDelete(props.id)}
+            style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}}            onClick={() => handleDelete(props.id)}
           >
             <i class="fas fa-trash-alt"></i>
           </button>
-          <Button variant="info" onClick={openModal}>
-            <i class="fas fa-edit"></i>
+          <Button 
+          variant="success" 
+          style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}}          onClick={openModal}>
+            <i class="fas fa-pen"></i>
           </Button>
-
+          </div>
           <Modal show={isOpen} onHide={!isOpen}>
             <Modal.Header>
               <Modal.Title>Edit your product</Modal.Title>
