@@ -153,7 +153,7 @@ export default function MyItems(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Product Name</Form.Label>
+                <Form.Label>Enter Product Image</Form.Label>
                 <Form.Control
                   type="file"
                   name="image"
@@ -162,7 +162,7 @@ export default function MyItems(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Product Name</Form.Label>
+                <Form.Label>Product Description</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}

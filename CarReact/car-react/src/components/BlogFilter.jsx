@@ -66,13 +66,13 @@ export default function BlogFilter(props) {
     model: "",
   });
   const handleImageChange = (event) => {
-    console.log(event.target.files[0]);
+    console.log(event.target.files);
     setInputValue((previous) => {
-      return {
-        ...previous,
-        image: event.target.files[0],
-        // loaded: 0,
-      };
+        return {
+          ...previous,
+          image: event.target.files[0],
+          // loaded: 0,
+        };
     });
   };
 
@@ -160,7 +160,7 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
-      {localStorage.getItem("UserID") === undefined &&
+      {localStorage.getItem("UserID") !== null &&
         <Button variant="info" onClick={openModal}>
           Add new Blog
         </Button>
@@ -191,6 +191,7 @@ export default function BlogFilter(props) {
                 name="image"
                 id="image"
                 onChange={handleImageChange}
+                multiple
                 required
               />
             </Form.Group>

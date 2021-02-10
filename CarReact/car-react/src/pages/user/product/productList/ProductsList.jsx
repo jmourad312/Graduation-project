@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { Overlay } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import LoginButton from "../../../../components/LoginButton";
@@ -74,9 +75,10 @@ export default function ProductsList() {
 
       <div className="container">
         <div className="row">
-          <div className="col-3" style={{ marginTop: "10%" }}>
+          <div className="col-3" style={{ marginTop: "5%" }}>
             <ProductFilter />
           </div>
+          
           <div className="col-9" style={{ marginTop: "2%" }}>
             <div className="row">
               {products ? products.map(createProducts) : <Loading />}

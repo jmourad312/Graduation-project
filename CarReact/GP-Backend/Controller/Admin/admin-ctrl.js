@@ -159,6 +159,7 @@ usersNumber = (req, res) => {
       Success: true,
     });
   });
+
 };
 
 //add ban
@@ -372,6 +373,24 @@ removeVendorBan = (req, res) => {
     }
   );
 };
+
+//vendors with its product 
+calculateProducts = (req,res) =>{
+  const IdPerson = req.vendor._id;
+  carItem.aggregate(
+    [
+      {
+        $group:
+          {
+            _id:IdPerson,
+            totalAmount: { $sum: carItem },
+  
+          }
+      }
+    ]
+ )
+
+}
 
 // vendor and number of product 
 vendorAndProducts = (req, res) => {
