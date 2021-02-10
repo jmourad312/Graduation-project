@@ -41,9 +41,12 @@ export function Tabel(props) {
                                                     </Button>
                                                 </td>
 
+                                                <td>
+                                                    <Button className="page-link" parameter={item.person._id} key={index + 1} handelClick={props.handelClickDelete}
+                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i>}>
 
-                                                <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-
+                                                    </Button>
+                                                </td>
 
                                                 <td>
                                                     <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClick}

@@ -2,7 +2,7 @@ import { instance } from "../../network/axiosConfig";
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '../../components/Navbar'
 
-export default function Model(props) {
+export default function EditVendor(props) {
 
     const data = props.location.state.data;
 
@@ -12,7 +12,7 @@ export default function Model(props) {
         middelName: "",
         password: "",
         email: "",
-        image: ""
+        image:""
     });
 
     useEffect(() => {
@@ -22,7 +22,6 @@ export default function Model(props) {
             middelName: data.person.middelName,
             password: "",
             email: data.person.email,
-            image:""
         });
     }, [])
 
@@ -37,9 +36,11 @@ export default function Model(props) {
     };
 
     const handleImageChange = (event) => {
-        setEditValue({
-            ...editValue,
-            image: event.target.files[0],
+        setEditValue((previous) => {
+            return {
+                ...previous,
+                image: event.target.files[0],
+            };
         });
     };
 
@@ -61,7 +62,7 @@ export default function Model(props) {
             },
         };
         try {
-            const res = await instance.put(`user/updateUserProfile/${data.person._id}`, formData, config);
+            const res = await instance.put(`vendor/updateProfile/${data.person._id}`, formData, config);
             console.log(res)
 
         } catch (error) {
@@ -73,10 +74,11 @@ export default function Model(props) {
     return (
         <div className="admin">
             <div className="container-for-admin">
+                
                 <Navbar />
 
                 <div className="container mt-2 pt-1">
-                    <h2 className="mt-5">Edit your Profile</h2>           
+                    <h2 className="mt-5">Edit your Profile</h2>
                     <div className="form-group">
                         <label >firstName:</label>
                         <input type="text" className="form-control" value={editValue.firstName} name="firstName" onChange={handleEditChange} />
@@ -106,10 +108,11 @@ export default function Model(props) {
                         <label>Password:</label>
                         <input type="password" className="form-control" value={editValue.password} name="password" onChange={handleEditChange} />
                     </div>
-                    <button type="sumbit" className="btn btn-primary" onClick={handleEditSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={handleEditSubmit}>Submit</button>
                 </div>
             </div>
         </div>
+
 
     )
 }

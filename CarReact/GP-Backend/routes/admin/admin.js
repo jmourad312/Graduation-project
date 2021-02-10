@@ -42,6 +42,11 @@ router.post('/removeUserBan', passport.authenticate("jwt", { session: false }), 
 router.post('/addVendorBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addVendorBan);
 router.post('/removeVendorBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeVendorBan);
 
+//delete
+router.delete('/deleteUser/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteUser)
+router.delete('/deleteVendor/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteVendor)
+
+
 //Calculate 
 router.get('/countAll', passport.authenticate("jwt", { session: false }), validateAdmin,Admin.countAll)
 router.get('/usersNumber', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.usersNumber);

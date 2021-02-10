@@ -100,11 +100,40 @@ export default function Admin(props) {
         }
     }
 
-    const goToEditUser = async(parameter) =>{
+    const goToEditUser = async (parameter) => {
         props.history.push({
-            pathname:'/EditUser',
-            state:{data:parameter}
+            pathname: '/EditUser',
+            state: { data: parameter }
         })
+    }
+
+    const goToEditVendor = async (parameter) => {
+        props.history.push({
+            pathname: '/EditVendor',
+            state: { data: parameter }
+        })
+    }
+
+    const goToDeleteUser = async (parameter) => {
+        try {
+            const res = await instance.delete(`admin/deleteUser/${parameter}`,
+                { headers: { Authorization: localStorage.getItem("Authorization") } });
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const goToDeleteVendor = async (parameter) => {
+        try {
+            const res = await instance.delete(`admin/deleteVendor/${parameter}`,
+                { headers: { Authorization: localStorage.getItem("Authorization") } });
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //console.log(stateRedux.countData.Data)
@@ -262,7 +291,7 @@ export default function Admin(props) {
                             <>
                                 <div onLoad={() => getPartUser(0)}></div>
                                 <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
-                                <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} ></Tabel>
+                                <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} handelClickDelete={goToDeleteUser}></Tabel>
                             </>
                         }
 
@@ -271,7 +300,7 @@ export default function Admin(props) {
                             stateRedux.vendors.length != 0 &&
                             <>
                                 <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
-                                <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} ></Tabel>
+                                <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} handelClickEdit={goToEditVendor} handelClickDelete={goToDeleteVendor}></Tabel>
                             </>
                         }
 

@@ -8,6 +8,7 @@ const Comment = require("../../models/Blog/reply");
 
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
+const Person = require('../../models/Person/person')
 
 //addban user
 //removebaanuser
@@ -182,6 +183,24 @@ addUserBan = (req, res) => {
       });
     }
   );
+};
+
+deleteUser = (req, res) => {
+  Person.deleteOne({_id:req.params.id}, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete user",
+        Success: false,
+      });
+    }
+    User.deleteOne({person:req.params.id}).then("Done")
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
 };
 
 // remove ban
@@ -420,6 +439,23 @@ countAll = (req, res) => {
     });
 }
 
+deleteVendor = (req, res) => {
+  Person.deleteOne({_id:req.params.id}, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete user",
+        Success: false,
+      });
+    }
+    Vendor.deleteOne({person:req.params.id}).then("Done")
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
+};
 
 module.exports = {
   addModel,
@@ -437,5 +473,7 @@ module.exports = {
   vendorsNumber,
   numberOfItem,
   vendorAndProducts,
-  countAll
+  countAll,
+  deleteVendor,
+  deleteUser
 };
