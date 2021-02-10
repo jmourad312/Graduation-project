@@ -372,7 +372,7 @@ export default function BlogDetails(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog Image</Form.Label>
+              <Form.Label>Blog image</Form.Label>
               <Form.Control
                 type="file"
                 name="image"
