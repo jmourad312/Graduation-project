@@ -3,7 +3,7 @@ import React from "react";
 export default function ContactUs() {
   return (
     <section className="contact-us">
-      <section id="contact" className="content-section text-center">
+      <section  className="content-section text-center">
         <div className="contact-section">
           <div className="container" >
             <h2 style={{ fontWeight: "700" }}>Contact Us</h2>
@@ -72,7 +72,7 @@ export default function ContactUs() {
         </div>
       </section>
 
-      <section id="contact">
+      <section className="contactinfo">
         <div className="container">
           <div className="row">
             <div className="col-4">
