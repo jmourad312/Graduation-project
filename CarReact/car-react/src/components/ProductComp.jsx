@@ -11,6 +11,7 @@ export default function ProductComp(props) {
 
   const handleClick = (params) => {
     dispatch(setProductId(params));
+    localStorage.setItem("ProductID",params)
     history.push(`/ProductDetails/${props.id}`);
     axios
       .put(
