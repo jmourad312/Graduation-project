@@ -7,11 +7,8 @@ export default function ContactUs() {
         <div className="contact-section">
           <div className="container" >
             <h2 style={{ fontWeight: "700" }}>Contact Us</h2>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur
-              adipisci consectetur id molestiae ab nemo iste fugit sapiente
-              iusto ut, distinctio nesciunt veritatis libero cupiditate.
-              Voluptas, asperiores quam? Asperiores, dolorem.
+            <p style={{ fontWeight: "600",fontSize:"30px" }}>
+              Feel free to contact us anytime
             </p>
 
             <div className="row">
@@ -76,7 +73,7 @@ export default function ContactUs() {
         <div className="container">
           <div className="row">
             <div className="col-4">
-              <div className="card pb-1">
+              <div className="card contrastclass pb-1">
                 <div className="card-body text-center">
                   <i className="fa fa-phone fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase">call us</h4>
@@ -85,7 +82,7 @@ export default function ContactUs() {
               </div>
             </div>
             <div className="col-4">
-              <div className="card pb-3">
+              <div className="card contrastclass pb-3">
                 <div className="card-body text-center">
                   <i className="fa fa-map-marker fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase">office loaction</h4>
@@ -94,7 +91,7 @@ export default function ContactUs() {
               </div>
             </div>
             <div className="col-4">
-              <div className="card">
+              <div className="card contrastclass">
                 <div className="card-body text-center">
                   <i className="fa fa-globe fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase">email</h4>
