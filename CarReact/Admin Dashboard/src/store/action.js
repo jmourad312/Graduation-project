@@ -46,6 +46,21 @@ export const setLoginAction = (payload) => {
     }
   }
 
+  export const getCountDataAction = async (dispatch) => {
+
+    try {
+        const res = await instance.get("admin/countAll",
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
+        console.log(res);
+        dispatch({
+            type: TYPES.GET_COUNT_DATA,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
 
 
   

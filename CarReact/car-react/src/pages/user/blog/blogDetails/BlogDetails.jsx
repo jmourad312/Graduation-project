@@ -5,6 +5,8 @@ import { Button, Col, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 import {
   getBlogDetails,
   addVoteComment,
@@ -15,8 +17,16 @@ export default function BlogDetails(props) {
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
-  // const user = useSelector((state) => state.user.Data.person);
+  const userID = useSelector((state) => state.userID);
+  const [checkOwner, setCheckOwner] = useState(false);
 
+  const checkOwnerDetails = () => {
+    if (blogDetails.person._id === localStorage.getItem("UserID")) {
+      setCheckOwner(true);
+    } else {
+      setCheckOwner(false);
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -66,10 +76,10 @@ export default function BlogDetails(props) {
   const handleEditSubmit = (params) => {
     const formData = new FormData();
     formData.append("image", editValue.image);
-    formData.append("name", editValue.name);
-    formData.append("description", editValue.description);
-    formData.append("carBrand", editValue.carBrand);
-    formData.append("carModel", editValue.carModel);
+    formData.append("title", editValue.title);
+    formData.append("body", editValue.body);
+    formData.append("brand", editValue.brand);
+    formData.append("model", editValue.model);
 
     const config = {
       headers: {
@@ -79,11 +89,7 @@ export default function BlogDetails(props) {
       },
     };
     axios
-      .put(
-        `http://localhost:3000/user/updatePost/${params}`,
-        formData,
-        config
-      )
+      .put(`http://localhost:3000/user/updatePost/${params}`, formData, config)
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -97,6 +103,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
+    closeModal();
   };
 
   const handleAddBookmark = () => {
@@ -127,8 +134,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-  }
-
+  };
 
   //---------------------------END EDIT FUNCTIONS----------------------------------------
 
@@ -219,6 +225,12 @@ export default function BlogDetails(props) {
     getBlog(localStorage.getItem("BlogID"));
     // console.log(blogDetails);
     // console.log(blogID);
+    if (blogDetails) {
+      console.log(blogDetails.person._id);
+      console.log(userID);
+
+      checkOwnerDetails();
+    }
   }, [blogDetails]);
   const pageVariants = {
     in: {
@@ -246,6 +258,8 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="blogDetails">
         <div className="header">
           <div className="row">
@@ -321,16 +335,20 @@ export default function BlogDetails(props) {
         Bookmark
       </p> */}
       <div className="row">
-        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
-          Bookmark
-        </button>
-        <Button
-          variant="info"
-          style={{ margin: "10px" }}
-          onClick={() => openModal(props.id)}
-        >
-          Edit
-        </Button>
+        {localStorage.getItem("UserID") === undefined && (
+          <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+            Bookmark
+          </button>
+        )}
+        {checkOwner && (
+          <Button
+            variant="info"
+            style={{ margin: "10px" }}
+            onClick={() => openModal(props.id)}
+          >
+            Edit
+          </Button>
+        )}
       </div>
 
       <Modal show={isOpen} onHide={!isOpen}>
@@ -412,17 +430,16 @@ export default function BlogDetails(props) {
                 </Form.Control>
               </Form.Group>
             </Form.Row>
-
           </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button
-              variant="primary"
-              type="button"
-              onClick={() => handleEditSubmit(blogID)}
-            >
-              Submit
-            </Button>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => handleEditSubmit(localStorage.getItem("BlogID"))}
+          >
+            Submit
+          </Button>
           <Button variant="danger" onClick={closeModal}>
             Cancel
           </Button>

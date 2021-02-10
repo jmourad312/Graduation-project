@@ -8,6 +8,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getBlogsAction } from "../../../../store/actions";
 import Loading from '../../../../components/Loading';
 import { motion } from "framer-motion";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 
 export default function BlogList() {
   
@@ -92,13 +94,14 @@ const pageTransitions = {
       transition={pageTransitions}
     >
       <section className="container">
-        
-        
+        {localStorage.getItem("Authorization") === null && <LoginButton />}
+        {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
         {/* <Button onClick={getProducts} value={"SHOW ITEMS"} /> */}
-          {/* <AddBlog /> */}
+        {/* <AddBlog /> */}
         <div className="row">
-          <div className="col-3" style={{marginTop:"10%"}}>
-          <BlogFilter class="blog-filter" />
+          <div className="col-3" style={{ marginTop: "10%" }}>
+            <BlogFilter class="blog-filter" />
           </div>
           <div className="col-9 blog-contents">
             <section>
@@ -107,7 +110,6 @@ const pageTransitions = {
               </div>
             </section>
           </div>
-        
         </div>
       </section>
     </motion.section>

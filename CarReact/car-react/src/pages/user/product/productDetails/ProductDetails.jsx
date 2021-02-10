@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
 
 export default function ProductDetails(props) {
@@ -72,7 +74,9 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <section className="products-details" >
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+      <section className="products-details">
         {/* <!-- start product details --> */}
         <div className="container">
           <div className="row bg-light">
@@ -106,13 +110,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                    <span
-                      className="badge badge-pill badge-danger"
-                      style={{ fontSize: "15px" }}
-                    >
-                      Not Avalible
-                    </span>
-                  ))}
+                  <span
+                    className="badge badge-pill badge-danger"
+                    style={{ fontSize: "15px" }}
+                  >
+                    Not Avalible
+                  </span>
+                ))}
 
               {/* <!-- number of stars --> */}
               <div className="mt-3 star" style={{ fontSize: "20px" }}>
@@ -134,17 +138,19 @@ export default function ProductDetails(props) {
                     {productDetails && productDetails.price} LE
                   </li>
                 </span>
-                <span
-                  className="fa-lg button fill fa-pull-right"
-                  style={{ padding: "5px" }}
-                  title="Add to favorate"
-                  onClick={handleAddFavourite}
-                >
-                  <i
-                    className="far fa-heart"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </span>
+                {localStorage.getItem("UserID") === undefined && (
+                  <span
+                    className="fa-lg button fill fa-pull-right"
+                    style={{ padding: "5px" }}
+                    title="Add to favorate"
+                    onClick={handleAddFavourite}
+                  >
+                    <i
+                      className="far fa-heart"
+                      style={{ fontSize: "30px" }}
+                    ></i>
+                  </span>
+                )}
                 {/* <span
                   className="fa-lg"
                   data-toggle="tooltip"
@@ -262,7 +268,6 @@ export default function ProductDetails(props) {
                   style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
                   allowfullscreen
                 ></iframe>
-                
 
                 {/* <div className="pl-3">
                 <img

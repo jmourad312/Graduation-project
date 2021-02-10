@@ -13,6 +13,7 @@ import {
 import Modal from "react-bootstrap/Modal";
 import VerticalModal from "../../../../components/VerticalModal";
 import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
+import { motion } from "framer-motion";
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
   // const [changeClassBack, setChangeClassBack] = useState("forgotpass");
@@ -60,6 +61,7 @@ export default function Signform(props) {
           console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
+          localStorage.removeItem("VendorID");
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
@@ -98,6 +100,7 @@ export default function Signform(props) {
           console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
+          localStorage.removeItem("VendorID");
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
@@ -157,9 +160,32 @@ export default function Signform(props) {
   // confirmButton.addEventListener('click', () => {
   //     container.classList.remove("bottom-panel-active");
   // });
-
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      // y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      // y: "-100vh",
+      scale: 0.01,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
-    <div className="signform ">
+    <motion.div
+      className="signform "
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <div className="container " id="container">
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
@@ -428,6 +454,6 @@ export default function Signform(props) {
           </section>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

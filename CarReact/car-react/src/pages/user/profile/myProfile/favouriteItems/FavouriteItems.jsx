@@ -18,6 +18,7 @@ export default function FavouriteItems(props) {
   let history = useHistory();
   const handleClick = (params) => {
     dispatch(setProductId(params));
+    localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
   };
   return (

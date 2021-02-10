@@ -3,8 +3,9 @@ import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
 import { Pagination } from '../../components/Pagination'
 import { Navbar } from '../../components/Navbar'
+import { instance } from "../../network/axiosConfig";
 
-import { getUserAction, getVendorAction } from '../../store/action'
+import { getUserAction, getVendorAction,getCountDataAction} from '../../store/action'
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Admin() {
@@ -25,11 +26,47 @@ export default function Admin() {
     useEffect(() => {
         dispatch(getUserAction)
         dispatch(getVendorAction)
-    }, [])
+        dispatch(getCountDataAction)
+        getCountData()
+    },[])
 
-    //console.log(stateRedux.users)
+     const getCountData = async () => {
+
+        try {
+            const res = await instance.get("admin/countAll",
+            {headers: { Authorization: localStorage.getItem("Authorization")}});
+            console.log(res);
+            setData(res.data)
+
+        } catch (error) {
+            console.log(error);
+        }
+      }
+
+    const setData = (countData)=>{
+        setBarData({
+            ...BarData,
+            datasets:[{
+                data:[countData.Data.user,
+                    countData.Data.vendor
+                    ,countData.Data.product
+                    ,countData.Data.blogs]
+            }]
+        })
+        setPieData({
+            ...BarData,
+            datasets:[{
+                data:[countData.Data.user,
+                    countData.Data.vendor
+                    ,countData.Data.product
+                    ,countData.Data.blogs]
+            }]
+        })
+    }
+
+    //console.log(stateRedux.countData.Data)
     //console.log(stateRedux.vendors)
-    const getPartUser =  (skip) => {
+    const getPartUser = (skip) => {
         setState({
             ...state,
             user: stateRedux.users.Data.slice(skip, skip + numberItemPerPage)
@@ -56,45 +93,26 @@ export default function Admin() {
         })
     }
     const [BarData, setBarData] = useState({
-        labels: ["Users", "Products", "Blogs"],
+        labels: ["Users","Vendors", "Products", "Blogs"],
         datasets: [{
             label: ["Conclusion Chart"],
-            data: [100, 309, 80],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            data: [0,0, 0, 0],
+            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
+            hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"],
             borderWidth: 1
         }]
     })
+
+
     const [PieData, setPieData] = useState({
-        labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+        labels: ["Users","Vendors", "Products", "Blogs"],
         datasets: [{
-            data: [300, 50, 100, 40, 120],
-            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-            hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            data: [0, 0, 0, 0],
+            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
+            hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"]
         }]
     });
-    const [DoughnutData, setDoughnutData] = useState({
-        labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
-        datasets: [{
-            data: [300, 50, 100, 40, 120],
-            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-            hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
-        }]
-    })
+
     return (
 
         <div className="admin">
@@ -168,39 +186,33 @@ export default function Admin() {
                                     <div className="card-body">
                                         {/*List group links*/}
                                         <div className="list-group list-group-flush">
+
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Users
-                                        <span className="badge badge-success badge-pill pull-right">100
-                                           {/* <i className="fa fa-arrow-up ml-1"></i> */}
-                                                </span>
+                                        <span className="badge badge-success badge-pill pull-right">
+                                            {stateRedux.countData.Success == true && stateRedux.countData.Data.user}</span>
                                             </a>
+
+                                            <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Vendors
+                                        <span className="badge badge-info badge-pill pull-right">
+                                        {stateRedux.countData.Success == true && stateRedux.countData.Data.vendor}</span>
+                                            </a>
+
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Products
-                                        <span className="badge badge-info badge-pill pull-right">309</span>
+                                        <span className="badge badge-info badge-pill pull-right">
+                                        {stateRedux.countData.Success == true && stateRedux.countData.Data.product}</span>
                                             </a>
+
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Blogs
-                                        <span className="badge badge-info badge-pill pull-right">80</span>
+                                        <span className="badge badge-info badge-pill pull-right">
+                                        {stateRedux.countData.Success == true && stateRedux.countData.Data.blogs}</span>
                                             </a>
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        {/* Doughnut Chart */}
-                        <div className="row wow fadeIn">
-                            <div className="col-lg-12 col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-header">Doughnut Chart</div>
-                                    <div className="card-body">
-                                        <Doughnut data={DoughnutData} options={{ title: { display: true, text: 'Average Rainfall per month', fontSize: 20 }, legend: { display: true, labels: { fontSize: 25 } } }} />
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
 
                         {/* User List */}
                         {

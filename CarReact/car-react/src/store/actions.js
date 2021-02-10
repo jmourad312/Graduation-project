@@ -265,6 +265,8 @@ export const getUsersAction = (params) => async (dispatch) => {
       type: TYPES.GET_USER,
       payload: res.data,
     });
+    localStorage.setItem("ProfileImage", res.data.Data.person.image);
+
   } catch (error) {
     console.log(error);
   }
@@ -309,6 +311,7 @@ export const getVendorsAction = (params) => async (dispatch) => {
       type: TYPES.GET_VENDOR,
       payload: res.data,
     });
+    localStorage.setItem("ProfileImage",res.data.Data.person.image)
   } catch (error) {
     console.log(error);
   }

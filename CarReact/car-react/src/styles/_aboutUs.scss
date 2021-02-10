@@ -1,15 +1,15 @@
 .about-us{
     .team-section {
-    overflow: hidden;
+    // overflow: hidden;
     text-align: center;
-    background: rgb(0, 0, 0);
-    padding: 60px;
+    background: rgba(0, 0, 0, 0);
+    // padding: 131px;
   }
 
   .team-section h1 {
     text-transform: uppercase;
-    color: white;
-    margin-bottom: 60px;
+    color: rgb(0, 0, 0);
+    // margin-bottom: 60px;
     font-size: 40px;
   }
 
@@ -24,6 +24,7 @@
 
   .ps {
     margin-bottom: 40px;
+    border: 1px solid blue;
   }
 
   .ps a {
