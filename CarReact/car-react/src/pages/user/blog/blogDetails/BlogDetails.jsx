@@ -22,7 +22,7 @@ export default function BlogDetails(props) {
 
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
-    console.log(blogDetails);
+    // console.log(blogDetails);
   };
 
   //---------------------------EDIT FUNCTIONS----------------------------------------
@@ -80,7 +80,7 @@ export default function BlogDetails(props) {
     };
     axios
       .put(
-        `http://localhost:3000/vendor/updateItem/${params}`,
+        `http://localhost:3000/user/updatePost/${params}`,
         formData,
         config
       )
@@ -216,7 +216,7 @@ export default function BlogDetails(props) {
   // console.log(blogID);
   // }, []);
   useEffect(() => {
-    getBlog(blogID);
+    getBlog(localStorage.getItem("BlogID"));
     // console.log(blogDetails);
     // console.log(blogID);
   }, [blogDetails]);
@@ -321,12 +321,17 @@ export default function BlogDetails(props) {
         Bookmark
       </p> */}
       <div className="row">
-        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>Bookmark</button>
-        <Button variant="info" style={{ margin: "10px" }} onClick={() => openModal(props.id)}>
+        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+          Bookmark
+        </button>
+        <Button
+          variant="info"
+          style={{ margin: "10px" }}
+          onClick={() => openModal(props.id)}
+        >
           Edit
-      </Button>
+        </Button>
       </div>
-
 
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
@@ -408,16 +413,16 @@ export default function BlogDetails(props) {
               </Form.Group>
             </Form.Row>
 
-            <Button
-              variant="primary"
-              type="button"
-              onClick={() => handleEditSubmit(props.id)}
-            >
-              Submit
-            </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
+            <Button
+              variant="primary"
+              type="button"
+              onClick={() => handleEditSubmit(blogID)}
+            >
+              Submit
+            </Button>
           <Button variant="danger" onClick={closeModal}>
             Cancel
           </Button>
@@ -447,42 +452,42 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-          return (
-            <div className="media mb-1" key={index}>
-              <button
-                className="btn btn-info"
-                onClick={() => addVote(item._id)}
-              >
-                <i className="fas fa-arrow-circle-up" />
-              </button>
-              <span className="btn badge-pill btn-success">
-                {item.vote.numberOfVoting}
-              </span>
-              <button
-                className="btn btn-info"
-                onClick={() => removeVote(item._id)}
-              >
-                <i class="fas fa-arrow-circle-down" />
-              </button>
+            return (
+              <div className="media mb-1" key={index}>
+                <button
+                  className="btn btn-info"
+                  onClick={() => addVote(item._id)}
+                >
+                  <i className="fas fa-arrow-circle-up" />
+                </button>
+                <span className="btn badge-pill btn-success">
+                  {item.vote.numberOfVoting}
+                </span>
+                <button
+                  className="btn btn-info"
+                  onClick={() => removeVote(item._id)}
+                >
+                  <i class="fas fa-arrow-circle-down" />
+                </button>
 
-              <img
-                className="d-flex mr-3 rounded-circle"
-                src={item.image}
-                alt=""
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              />
-              <hr />
-              <br />
-              <div className="media-body">
-                <h5 className="mt-0">
-                  {item.person.firstName ? item.person.firstName : null}
-                </h5>
+                <img
+                  className="d-flex mr-3 rounded-circle"
+                  src={item.image}
+                  alt=""
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
                 <hr />
                 <br />
-                <p>{item.content}</p>
-              </div>
+                <div className="media-body">
+                  <h5 className="mt-0">
+                    {item.person.firstName ? item.person.firstName : null}
+                  </h5>
+                  <hr />
+                  <br />
+                  <p>{item.content}</p>
+                </div>
 
-              {/* <form
+                {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -498,7 +503,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-              {/* {item
+                {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -518,9 +523,9 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-            </div>
-          );
-        })
+              </div>
+            );
+          })
         : "LOADING"}
 
       {/* <!-- Comment with nested comments --> */}
