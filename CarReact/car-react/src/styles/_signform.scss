@@ -301,10 +301,10 @@
     bottom: 0;
     transition: all 1s ease-in-out;
   }
-  button {
+  button {   
     border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background-color: #ff4b2b;
+    // border: 1px solid rgb(44, 44, 44);
+    background-color: #f95959;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
@@ -352,8 +352,9 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 800px;
     max-width: 100%;
+    height: 600px;
     min-height: 480px;
   }
 
@@ -405,8 +406,8 @@
 
   .overlay {
     background: #ff416c;
-    background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    background: -webkit-linear-gradient(to right,  #242222,  rgb(44, 44, 44));
+    background: linear-gradient(to right, #242222,  rgb(44, 44, 44));
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

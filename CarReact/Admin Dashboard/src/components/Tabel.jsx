@@ -1,5 +1,6 @@
 export function Tabel(props) {
 <<<<<<< HEAD
+<<<<<<< HEAD
   console.log(props.data);
   return (
     <>
@@ -51,9 +52,12 @@ export function Tabel(props) {
                 </tbody>
               </table>
 =======
+=======
+    console.log(props.data)
+>>>>>>> 2339a20f6c6c8d0d53ae64767480866e21526c68
     return (
         <>
-            <div className="row wow fadeIn">
+            <div className="row wow fadeIn" id={props.id}>
                 <div className="col-md-12 mb-4">
                     <div className="card">
                         <div className="card-body">

@@ -22,7 +22,7 @@ export default function BlogDetails(props) {
 
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
-    console.log(blogDetails);
+    // console.log(blogDetails);
   };
 
   //---------------------------EDIT FUNCTIONS----------------------------------------
@@ -80,7 +80,7 @@ export default function BlogDetails(props) {
     };
     axios
       .put(
-        `http://localhost:3000/vendor/updateItem/${params}`,
+        `http://localhost:3000/user/updatePost/${params}`,
         formData,
         config
       )
@@ -99,7 +99,7 @@ export default function BlogDetails(props) {
       });
   };
 
-  const handleAddBookmark = () =>{
+  const handleAddBookmark = () => {
     console.log(blogID);
     const config = {
       headers: {
@@ -216,7 +216,7 @@ export default function BlogDetails(props) {
   // console.log(blogID);
   // }, []);
   useEffect(() => {
-    getBlog(blogID);
+    getBlog(localStorage.getItem("BlogID"));
     // console.log(blogDetails);
     // console.log(blogID);
   }, [blogDetails]);
@@ -306,7 +306,7 @@ export default function BlogDetails(props) {
       </div>
 
       {/* --------------------- EDIT SECTION--------------- */}
-      <p
+      {/* <p
         onClick={handleAddBookmark}
         className="button pulse"
         style={{
@@ -319,10 +319,19 @@ export default function BlogDetails(props) {
         }}
       >
         Bookmark
-      </p>
-      <Button variant="info" onClick={() => openModal(props.id)}>
-        Edit
-      </Button>
+      </p> */}
+      <div className="row">
+        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+          Bookmark
+        </button>
+        <Button
+          variant="info"
+          style={{ margin: "10px" }}
+          onClick={() => openModal(props.id)}
+        >
+          Edit
+        </Button>
+      </div>
 
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
@@ -404,16 +413,16 @@ export default function BlogDetails(props) {
               </Form.Group>
             </Form.Row>
 
-            <Button
-              variant="primary"
-              type="button"
-              onClick={() => handleEditSubmit(props.id)}
-            >
-              Submit
-            </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
+            <Button
+              variant="primary"
+              type="button"
+              onClick={() => handleEditSubmit(blogID)}
+            >
+              Submit
+            </Button>
           <Button variant="danger" onClick={closeModal}>
             Cancel
           </Button>

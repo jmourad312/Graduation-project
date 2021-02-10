@@ -12,11 +12,9 @@ export default function ProductDetails(props) {
   const getProducts = (params) => {
     dispatch(getProductDetails(params));
   };
+  
   useEffect(() => {
-    getProducts(productID);
-  }, []);
-  useEffect(() => {
-    getProducts(productID);
+    getProducts(localStorage.getItem("ProductID"));
   }, [productDetails]);
 
   const handleAddFavourite= () =>{

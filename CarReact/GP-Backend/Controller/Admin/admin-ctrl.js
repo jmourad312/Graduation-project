@@ -354,7 +354,7 @@ vendorAndProducts = (req, res) => {
         from: 'person',
         localField: 'person',
         foreignField: "_id",
-        as: 'person'
+        as: 'Person'
       }
     }
     ,{

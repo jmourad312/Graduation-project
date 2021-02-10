@@ -28,17 +28,17 @@ export default function MagdyNavbar() {
                     <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Auth</Link></li>
                     {/* <li className="menu__item" id="item2"><Link className="menu__link" onClick={handleClick} to="/SignUp">SignUp</Link></li> */}
                     {/* <li className="menu__item" id="item3"><Link className="menu__link" onClick={handleClick} to="/SignForm">SignForm</Link></li> */}
-                    <li className="menu__item" id="item4"><Link className="menu__link" onClick={handleClick} to="/BlogList">BlogList</Link></li>
-                    <li className="menu__item" id="item5"><Link className="menu__link" onClick={handleClick} to="/ProductsList">ProductsList</Link></li>
+                    <li className="menu__item" id="item4"><Link className="menu__link" onClick={handleClick} to="/BlogList">Blog List</Link></li>
+                    <li className="menu__item" id="item5"><Link className="menu__link" onClick={handleClick} to="/ProductsList">Products List</Link></li>
                     {/* <li className="menu__item" id="item6"><Link className="menu__link" onClick={handleClick} to="/AddBlog">AddBlog</Link></li>
                     <li className="menu__item" id="item7"><Link className="menu__link" onClick={handleClick} to="/BlogDetails">BlogDetails</Link></li> */}
-                    <li className="menu__item" id="item8"><Link className="menu__link" onClick={handleClick} to="/AboutUs">AboutUs</Link></li>
-                    <li className="menu__item" id="item9"><Link className="menu__link" onClick={handleClick} to="/ContactUs">ContactUs</Link></li>
+                    <li className="menu__item" id="item8"><Link className="menu__link" onClick={handleClick} to="/AboutUs">About Us</Link></li>
+                    <li className="menu__item" id="item9"><Link className="menu__link" onClick={handleClick} to="/ContactUs">Contact Us</Link></li>
                     {/* <li className="menu__item" id="item10"><Link className="menu__link" onClick={handleClick} to="/Privacy">Privacy</Link></li>
                     <li className="menu__item" id="item11"><Link className="menu__link" onClick={handleClick} to="/TermsOfService">TermsOfService</Link></li> */}
                     <li className="menu__item" id="item12"><Link className="menu__link" onClick={handleClick} to="/VendorProfileUser">VendorProfileUser</Link></li>
                     {/* <li className="menu__item" id="item13"><Link className="menu__link" onClick={handleClick} to="/ProductDetails">ProductDetails</Link></li> */}
-                    <li className="menu__item" id="item14"><Link className="menu__link" onClick={handleClick} to="/MyProfile">MyProfile</Link></li>
+                    <li className="menu__item" id="item14"><Link className="menu__link" onClick={handleClick} to="/MyProfile">My Profile</Link></li>
                     {/* <li className="menu__item" id="item15"><Link className="menu__link" onClick={handleClick} to="/DisplayUserProfile">DisplayUserProfile</Link></li> */}
                     <li className="menu__item" id="item17"><Link className="menu__link" onClick={handleClick} to="/VendorAdministration">VendorAdmin</Link></li>
                 </ul>

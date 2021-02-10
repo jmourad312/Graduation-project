@@ -4,11 +4,12 @@ import $ from "jquery";
 import { useDispatch } from "react-redux";
 import { setVendorIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 import axios from "axios";
+import icon from '../../../../assets/Images/icon.png'
 
 export default function VendorSignForm(props) {
 
   const dispatch = useDispatch();
-  const setVendorID=(params)=>{
+  const setVendorID = (params) => {
     dispatch(setVendorIdAction(params))
   }
 
@@ -290,9 +291,8 @@ export default function VendorSignForm(props) {
               {/* <!-- Brand Box --> */}
               <div className="col-sm-6 brand">
                 <Link to="" className="logo">
-                  LOGO
+                <img src={icon} alt="" style={{width:"50px" , height:"50px"}}/>
                 </Link>
-
                 <div className="heading">
                   <h2>DREKSYONY</h2>
                   <p>Your Right Choice</p>
@@ -312,7 +312,7 @@ export default function VendorSignForm(props) {
                 <div className="login form-peice switched">
                   <form className="login-form" onSubmit={handleVendorSignIn}>
                     <div className="form-group">
-                      <label for="email">Email Adderss</label>
+                      <label for="email" style={{ fontWeight: "600", fontSize: "15px" }}>Email Adderss</label>
                       <input
                         type="email"
                         name="email"
@@ -324,7 +324,7 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="password">Password</label>
+                      <label for="password" style={{ fontWeight: "600", fontSize: "15px" }}>Password</label>
                       <input
                         type="password"
                         name="password"
@@ -336,7 +336,7 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="CTA">
-                      <input type="submit" value="Login" />
+                      <input type="submit" style={{ fontWeight: "600", fontSize: "15px" }} value="Login" />
                       <a href="#" className="switch">
                         I'm New
                       </a>
@@ -351,7 +351,7 @@ export default function VendorSignForm(props) {
                     <div className="row">
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="firstName">First Name</label>
+                          <label for="firstName" style={{ fontWeight: "600", fontSize: "15px" }}>First Name</label>
                           <input
                             type="text"
                             name="firstName"
@@ -365,7 +365,7 @@ export default function VendorSignForm(props) {
                       </div>
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="middleName">Middle Name</label>
+                          <label for="middleName" style={{ fontWeight: "600", fontSize: "15px" }}>Middle Name</label>
                           <input
                             type="text"
                             name="middleName"
@@ -379,7 +379,7 @@ export default function VendorSignForm(props) {
                       </div>
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="lastName">Last Name</label>
+                          <label for="lastName" style={{ fontWeight: "600", fontSize: "15px" }}>Last Name</label>
                           <input
                             type="text"
                             name="lastName"
@@ -393,7 +393,7 @@ export default function VendorSignForm(props) {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label for="email">Email Adderss</label>
+                      <label for="email" style={{ fontWeight: "600", fontSize: "15px" }}>Email Adderss</label>
                       <input
                         type="email"
                         name="email"
@@ -406,14 +406,14 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="phone">
-                        Phone Number - <small>Optional</small>
+                      <label for="phone" style={{ fontWeight: "600", fontSize: "15px" }}>
+                        Phone Number - <small style={{ fontSize: "15px" }}>Optional</small>
                       </label>
                       <input type="text" name="phone" id="phone" />
                     </div>
 
                     <div className="form-group">
-                      <label for="password">Password</label>
+                      <label for="password" style={{ fontWeight: "600", fontSize: "15px" }}>Password</label>
                       <input
                         type="password"
                         name="password"
@@ -426,7 +426,7 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="confirmPassword">Confirm Password</label>
+                      <label for="confirmPassword" style={{ fontWeight: "600", fontSize: "15px" }}>Confirm Password</label>
                       <input
                         type="password"
                         name="confirmPassword"
@@ -439,10 +439,9 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="CTA">
-                      <input type="submit" value="Signup Now" id="submit" />
-                      <a href="#" className="switch">
-                        I have an account
-                      </a>
+                      <input style={{ fontWeight: "600", fontSize: "15px" }} type="submit" value="Signup Now" id="submit" />
+                      <br />
+                      <a href="#" className="switch" >I have an account</a>
                     </div>
                   </form>
                 </div>

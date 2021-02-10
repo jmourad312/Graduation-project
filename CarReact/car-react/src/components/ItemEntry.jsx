@@ -65,6 +65,7 @@ export default function ItemEntry(props) {
   let history = useHistory();
   const handleClick = (params) => {
     dispatch(setProductId(params));
+    localStorage.setItem("ProductID",params)
     history.push(`/ProductDetails/${props.id}`);
   };
 
