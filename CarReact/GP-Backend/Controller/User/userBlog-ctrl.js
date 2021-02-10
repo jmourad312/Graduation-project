@@ -14,22 +14,15 @@ const Vote = require("../../models/Blog/votingPost");
 // add post to bookmarks
 // show posts in bookmarks
 
-
 //add post
 addNewPost = (req, res) => {
   console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));
 
-  // const images = [];
-  // req.files.map((file) => {
-  //   images.push("http://localhost:3000/images/" + file.filename);
-  //   console.log(images)
-  // });
-
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
-  }
+  const images = [];
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+  });
 
   const IdPerson = req.user._id;
   if (!body) {
@@ -40,7 +33,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post({ ...body, ...Postinput });
+  const post = new Post({ ...body, images });
   post.person = IdPerson;
 
   if (!post) {
@@ -51,12 +44,13 @@ addNewPost = (req, res) => {
     });
   }
 
-
-
   post
     .save()
     .then((data) => {
-      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } }).then(console.log("Done")).catch(console.log("error"))
+      user
+        .updateOne({ person: req.user._id }, { $push: { postsUser: data._id } })
+        .then(console.log("Done"))
+        .catch(console.log("error"));
       return res.json({
         Data: post._id,
         Message: "New post is created successfully",
@@ -108,11 +102,11 @@ updatePost = (req, res) => {
   console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));
 
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
-  }
-
+  const images = [];
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+  });
+  
   if (!body) {
     return res.json({
       Data: null,
@@ -123,7 +117,7 @@ updatePost = (req, res) => {
 
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    {...body,...Postinput},
+    { ...body, images },
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
@@ -299,7 +293,10 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: [{ path: "person", select: "firstName" }, { path: "vote", select: "numberOfVoting" }],
+      populate: [
+        { path: "person", select: "firstName" },
+        { path: "vote", select: "numberOfVoting" },
+      ],
       select: "-post ",
     },
   ];
@@ -384,9 +381,11 @@ showPostsOfUser = (req, res) => {
 
 // remove voting on comment
 removeVoteFromComment = async (req, res) => {
-
-  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
-  console.log(personVote)
+  const personVote = await Vote.find({
+    person: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVote);
   if (personVote.length == 0) {
     return res.json({
       Data: null,
@@ -416,9 +415,11 @@ removeVoteFromComment = async (req, res) => {
 };
 
 voteToComment = async (req, res) => {
-
-  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
-  console.log(personVote)
+  const personVote = await Vote.find({
+    person: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVote);
 
   if (personVote.length > 0) {
     return res.json({

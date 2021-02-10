@@ -10,7 +10,6 @@ export default function ContactUs() {
             <p style={{ fontWeight: "600",fontSize:"30px" }}>
               Feel free to contact us anytime
             </p>
-
             <div className="row">
               <div className="col-2"></div>
               <div className="col-8">
@@ -46,24 +45,24 @@ export default function ContactUs() {
         <div className="list-inline banner-social-buttons">
           
             <a href="#" className="btn btn-lg contrastclass mr-2">
-              <i className="fa fa-twitter text-primary" >
+              <i className="fa fa-twitter text-dark">
                 {" "}
               </i>
                 <span className="network-name ml-1">Twitter</span>
             </a>
           
             <a href="#" className="btn btn-lg contrastclass mr-2">
-              <i className="fa fa-facebook text-white " style={{backgroundColor:"blue",border:"4px solid",borderColor:"blue",borderRadius:"10%"}} >
+              <i className="fa fa-facebook text-dark">
                 {" "}
               </i>
                 <span className="network-name ml-1">Facebook</span>
             </a>
           
             <a href="#" className="btn btn-lg contrastclass">
-              <i className="fa fa-youtube-play" style={{backgroundColor:"red",border:"2px solid",borderColor:"red",borderRadius:"10%"}}>
+              <i className="fa fa-youtube-play">
                 {" "}
               </i>
-                <span className="network-name ml-1" >Youtube</span>
+                <span className="network-name ml-1">Youtube</span>
             </a>
          
         </div>

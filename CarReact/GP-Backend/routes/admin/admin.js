@@ -32,15 +32,15 @@ router.post('/addBrand', passport.authenticate("jwt", { session: false }), valid
 router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addModel);
 router.post('/addCollection/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
 
-//********************************************************************************* */
+//**********************************************************************************//
 router.get('/getBrand',Admin.getBrand);
 router.get('/getModel/:name', Admin.getModel);
 
 //Ban
-router.post('/addUserBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addUserBan);
-router.post('/removeUserBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeUserBan);
-router.post('/addVendorBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addVendorBan);
-router.post('/removeVendorBan/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeVendorBan);
+router.post('/addUserBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addUserBan);
+router.post('/removeUserBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeUserBan);
+router.post('/addVendorBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addVendorBan);
+router.post('/removeVendorBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.removeVendorBan);
 
 //Calculate 
 router.get('/countAll', passport.authenticate("jwt", { session: false }), validateAdmin,Admin.countAll)
