@@ -17,8 +17,8 @@ const Vote = require("../../models/Blog/votingPost");
 //add post
 addNewPost = (req, res) => {
   console.log(req.file);
-  const body = JSON.parse(JSON.stringify(req.body));
 
+  const body = JSON.parse(JSON.stringify(req.body));
   const images = [];
   req.files.map((file) => {
     images.push("http://localhost:3000/images/" + file.filename);
@@ -106,7 +106,7 @@ updatePost = (req, res) => {
   req.files.map((file) => {
     images.push("http://localhost:3000/images/" + file.filename);
   });
-  
+
   if (!body) {
     return res.json({
       Data: null,
