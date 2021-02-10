@@ -66,10 +66,10 @@ export default function BlogDetails(props) {
   const handleEditSubmit = (params) => {
     const formData = new FormData();
     formData.append("image", editValue.image);
-    formData.append("name", editValue.name);
-    formData.append("description", editValue.description);
-    formData.append("carBrand", editValue.carBrand);
-    formData.append("carModel", editValue.carModel);
+    formData.append("title", editValue.title);
+    formData.append("body", editValue.body);
+    formData.append("brand", editValue.brand);
+    formData.append("model", editValue.model);
 
     const config = {
       headers: {
@@ -97,6 +97,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
+      closeModal();
   };
 
   const handleAddBookmark = () => {
@@ -412,17 +413,16 @@ export default function BlogDetails(props) {
                 </Form.Control>
               </Form.Group>
             </Form.Row>
-
           </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button
-              variant="primary"
-              type="button"
-              onClick={() => handleEditSubmit(blogID)}
-            >
-              Submit
-            </Button>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => handleEditSubmit(localStorage.getItem("BlogID"))}
+          >
+            Submit
+          </Button>
           <Button variant="danger" onClick={closeModal}>
             Cancel
           </Button>

@@ -16,7 +16,7 @@ router.post("/signup", async (req, res) => {
   
   const { error } = registerValidation(req.body);
   if (error) {
-    return res.status(400).json({ error: error.details[0].message });
+    return res.json({ error: error.details[0].message });
   }
   const saltRounds = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, saltRounds);

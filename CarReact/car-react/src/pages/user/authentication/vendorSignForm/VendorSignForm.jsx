@@ -18,7 +18,7 @@ export default function VendorSignForm(props) {
     middleName: "",
     lastName: "",
     email: "",
-    phoneNumber: 0,
+    phoneNumber: null,
     password: "",
     confirmPassword: "",
   });
@@ -43,16 +43,21 @@ export default function VendorSignForm(props) {
         localStorage.setItem("VendorID", res.data.Data);
         console.log(localStorage.getItem("Authorization"));
         console.log(res.data);
+        console.log(vendorSignUpInfo);
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          dispatch(userSignInAction(false));
-          dispatch(vendorSignInAction(true));
+          console.log(vendorSignUpInfo);
+
+          // dispatch(userSignInAction(false));
+          // dispatch(vendorSignInAction(true));
           props.history.push(
             `/VendorAdministration/${localStorage.getItem("VendorID")}`
           );
         }
       })
       .catch((error) => {
+        console.log(vendorSignUpInfo);
+
         console.log(error);
       });
   };
@@ -89,8 +94,8 @@ export default function VendorSignForm(props) {
         console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
-          dispatch(userSignInAction(false));
-          dispatch(vendorSignInAction(true));
+          // dispatch(userSignInAction(false));
+          // dispatch(vendorSignInAction(true));
           props.history.push(
             `/VendorAdministration/${localStorage.getItem("VendorID")}`
           );
@@ -102,6 +107,7 @@ export default function VendorSignForm(props) {
   };
 
   useEffect(() => {
+    const email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     /*global $, document, window, setTimeout, navigator, console, location*/
     $(document).ready(function () {
       "use strict";
@@ -141,6 +147,8 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             usernameError = true;
+          
+
           } else {
             $(this)
               .siblings(".error")
@@ -153,7 +161,7 @@ export default function VendorSignForm(props) {
         }
         // Email
         if ($(this).hasClass("email")) {
-          if ($(this).val().length == "") {
+          if ($(this).val().length === 0) {
             $(this)
               .siblings("span.error")
               .text("Please type your email address")
@@ -161,7 +169,14 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             emailError = true;
-          } else {
+          }  else if (!email_regex.test($(this).val())){
+            $(this)
+              .siblings("span.error")
+              .text("Please type a valid email address")
+              .fadeIn()
+              .parent(".form-group")
+              .addClass("hasError");
+          }else {
             $(this)
               .siblings(".error")
               .text("")
@@ -291,7 +306,11 @@ export default function VendorSignForm(props) {
               {/* <!-- Brand Box --> */}
               <div className="col-sm-6 brand">
                 <Link to="" className="logo">
-                <img src={icon} alt="" style={{width:"50px" , height:"50px"}}/>
+                  <img
+                    src={icon}
+                    alt=""
+                    style={{ width: "50px", height: "50px" }}
+                  />
                 </Link>
                 <div className="heading">
                   <h2>DREKSYONY</h2>
@@ -312,7 +331,12 @@ export default function VendorSignForm(props) {
                 <div className="login form-peice switched">
                   <form className="login-form" onSubmit={handleVendorSignIn}>
                     <div className="form-group">
-                      <label for="email" style={{ fontWeight: "600", fontSize: "15px" }}>Email Adderss</label>
+                      <label
+                        for="email"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Email Adderss
+                      </label>
                       <input
                         type="email"
                         name="email"
@@ -324,7 +348,12 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="password" style={{ fontWeight: "600", fontSize: "15px" }}>Password</label>
+                      <label
+                        for="password"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Password
+                      </label>
                       <input
                         type="password"
                         name="password"
@@ -336,7 +365,11 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="CTA">
-                      <input type="submit" style={{ fontWeight: "600", fontSize: "15px" }} value="Login" />
+                      <input
+                        type="submit"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        value="Login"
+                      />
                       <a href="#" className="switch">
                         I'm New
                       </a>
@@ -351,7 +384,12 @@ export default function VendorSignForm(props) {
                     <div className="row">
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="firstName" style={{ fontWeight: "600", fontSize: "15px" }}>First Name</label>
+                          <label
+                            for="firstName"
+                            style={{ fontWeight: "600", fontSize: "15px" }}
+                          >
+                            First Name
+                          </label>
                           <input
                             type="text"
                             name="firstName"
@@ -365,12 +403,18 @@ export default function VendorSignForm(props) {
                       </div>
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="middleName" style={{ fontWeight: "600", fontSize: "15px" }}>Middle Name</label>
+                          <label
+                            for="middleName"
+                            style={{ fontWeight: "600", fontSize: "15px" }}
+                          >
+                            Middle Name-{" "}
+                            <small style={{ fontSize: "8px" }}>Optional</small>
+                          </label>
                           <input
                             type="text"
                             name="middleName"
                             id="middleName"
-                            className="name"
+                            className=""
                             value={vendorSignUpInfo.middleName}
                             onChange={changeVendorSignUpInfo}
                           />
@@ -379,12 +423,18 @@ export default function VendorSignForm(props) {
                       </div>
                       <div className="col-4">
                         <div className="form-group">
-                          <label for="lastName" style={{ fontWeight: "600", fontSize: "15px" }}>Last Name</label>
+                          <label
+                            for="lastName"
+                            style={{ fontWeight: "600", fontSize: "15px" }}
+                          >
+                            Last Name-{" "}
+                            <small style={{ fontSize: "10px" }}>Optional</small>
+                          </label>
                           <input
                             type="text"
                             name="lastName"
                             id="lastName"
-                            className="name"
+                            className=""
                             value={vendorSignUpInfo.lastName}
                             onChange={changeVendorSignUpInfo}
                           />
@@ -393,7 +443,12 @@ export default function VendorSignForm(props) {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label for="email" style={{ fontWeight: "600", fontSize: "15px" }}>Email Adderss</label>
+                      <label
+                        for="email"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Email Adderss
+                      </label>
                       <input
                         type="email"
                         name="email"
@@ -406,14 +461,29 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="phone" style={{ fontWeight: "600", fontSize: "15px" }}>
-                        Phone Number - <small style={{ fontSize: "15px" }}>Optional</small>
+                      <label
+                        for="phoneNumber"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Phone Number -{" "}
+                        <small style={{ fontSize: "15px" }}>Optional</small>
                       </label>
-                      <input type="text" name="phone" id="phone" />
+                      <input
+                        type="number"
+                        name="phoneNumber"
+                        id="phoneNumber"
+                        value={vendorSignUpInfo.phoneNumber}
+                        onChange={changeVendorSignUpInfo}
+                      />
                     </div>
 
                     <div className="form-group">
-                      <label for="password" style={{ fontWeight: "600", fontSize: "15px" }}>Password</label>
+                      <label
+                        for="password"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Password
+                      </label>
                       <input
                         type="password"
                         name="password"
@@ -426,7 +496,12 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="form-group">
-                      <label for="confirmPassword" style={{ fontWeight: "600", fontSize: "15px" }}>Confirm Password</label>
+                      <label
+                        for="confirmPassword"
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                      >
+                        Confirm Password
+                      </label>
                       <input
                         type="password"
                         name="confirmPassword"
@@ -439,9 +514,16 @@ export default function VendorSignForm(props) {
                     </div>
 
                     <div className="CTA">
-                      <input style={{ fontWeight: "600", fontSize: "15px" }} type="submit" value="Signup Now" id="submit" />
+                      <input
+                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        type="submit"
+                        value="Signup Now"
+                        id="submit"
+                      />
                       <br />
-                      <a href="#" className="switch" >I have an account</a>
+                      <a href="#" className="switch">
+                        I have an account
+                      </a>
                     </div>
                   </form>
                 </div>

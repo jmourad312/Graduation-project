@@ -123,7 +123,7 @@ updatePost = (req, res) => {
 
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    {...data,...Postinput},
+    {...body,...Postinput},
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
