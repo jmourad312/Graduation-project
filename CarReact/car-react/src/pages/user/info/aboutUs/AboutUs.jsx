@@ -1,9 +1,13 @@
 import React from "react";
 import ContactUsPic from "../../../../components/ContactUsPic";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 
 export default function AboutUs() {
   return (
     <section className="about-us">
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="team-section">
         <h1>Our Team</h1>
         {/* <span className="border"></span>
