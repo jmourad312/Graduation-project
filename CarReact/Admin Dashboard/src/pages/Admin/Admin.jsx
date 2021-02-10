@@ -1,26 +1,60 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
+import { Pagination } from '../../components/Pagination'
+
 import { getUserAction, getVendorAction } from '../../store/action'
 import { useSelector, useDispatch } from "react-redux";
 
-
-
 export default function Admin() {
+
+
+    const numberItemPerPage = 5;
+
+    const [state, setState] = useState({
+        user: [],
+        vendor: [],
+        blogs: [],
+        products: []
+    })
 
     const stateRedux = useSelector((state) => state)
     const dispatch = useDispatch();
 
-
     useEffect(() => {
         dispatch(getUserAction)
         dispatch(getVendorAction)
+
     }, [])
 
-    console.log(stateRedux.users==[])
-    console.log(stateRedux.vendors)
+    //console.log(stateRedux.users)
+    //console.log(stateRedux.vendors)
+    const getPartUser = (skip) => {
+        setState({
+            ...state,
+            user: stateRedux.users.Data.slice(skip, skip + numberItemPerPage)
+        })
+    }
+    const getPartVendor = (skip) => {
+        setState({
+            ...state,
+            vendor: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage)
+        })
+    }
+    
+    const getPartBlog = (skip) => {
+        setState({
+            ...state,
+            blogs: stateRedux.users.Data.slice(skip, skip + numberItemPerPage)
+        })
+    }
 
-
+    const getPartProduct = (skip) => {
+        setState({
+            ...state,
+            products: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage)
+        })
+    }
     const [BarData, setBarData] = useState({
         labels: ["Users", "Products", "Blogs"],
         datasets: [{
@@ -65,6 +99,8 @@ export default function Admin() {
 
         <div className="admin">
             <div className="container-for-admin">
+
+
                 {/* Main Navigation */}
                 <header>
 
@@ -87,22 +123,7 @@ export default function Admin() {
                                         </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link waves-effect" href="#">About Us</a>
-                                    </li>
-                                </ul>
-
-                                {/* Right */}
-                                <ul className="navbar-nav nav-flex-icons">
-                                    <li className="nav-item">
-                                        <a href="" className="nav-link waves-effect"
-                                            target="_blank">
-                                            <i className="fab fa-facebook-f"></i>
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="" className="nav-link waves-effect" target="_blank">
-                                            <i className="fab fa-twitter"></i>
-                                        </a>
+                                        <a className="nav-link waves-effect" href="#">Log Out</a>
                                     </li>
                                 </ul>
                             </div>
@@ -112,15 +133,21 @@ export default function Admin() {
                     {/* Sidebar */}
                     <div className="sidebar-fixed bg-dark position-fixed">
                         <div className="list-group list-group-flush mt-5">
-                            <a href="#" className="list-group-item active waves-effect">
+                            <a href="#Dashboard" className="list-group-item active waves-effect">
                                 <i className="fa fa-pie-chart mr-3"></i>Dashboard
-                    </a>
-                            <a href="#" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Profile</a>
-                            <a href="#" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-table mr-3"></i>Tables</a>
-                            <a href="#" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-map mr-3"></i>Maps</a>
+                            </a>
+                            <a href="#userTabel" className="list-group-item list-group-item-action waves-effect">
+                                <i className="fa fa-user mr-3"></i>User Details
+                            </a>
+                            <a href="#vendorTabel" className="list-group-item list-group-item-action waves-effect">
+                                <i className="fa fa-user mr-3"></i>Vendor Details
+                            </a>
+                            <a href="#blogTabel" className="list-group-item list-group-item-action waves-effect">
+                                <i className="fa fa-user mr-3"></i>Blog
+                            </a>
+                            <a href="#productTabel" className="list-group-item list-group-item-action waves-effect">
+                                <i className="fa fa-user mr-3"></i>Product
+                            </a>
                         </div>
                     </div>
 
@@ -135,18 +162,11 @@ export default function Admin() {
                         <div className="card mb-4 wow fadeIn">
                             <div className="card-body d-sm-flex justify-content-between">
                                 <h4 className="mb-2 mb-sm-0 pt-1">
-                                    <span>Home Page / Dashboard</span>
+                                    <span>Dashboard</span>
                                 </h4>
-
-                                <form className="d-flex justify-content-center">
-                                    {/* Default input  */}
-                                    <input type="search" placeholder="Type your query" aria-label="Search" className="form-control" />
-                                    <button className="btn btn-primary btn-sm my-0 p" type="submit">
-                                        <i className="fa fa-search"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
+
 
                         {/* Bar Chart */}
                         <div className="row wow fadeIn">
@@ -188,137 +208,6 @@ export default function Admin() {
                             </div>
                         </div>
 
-
-                        {/* User List */}
-                        {
-                            stateRedux.users.length != 0  ? <Tabel data={stateRedux.users.Data}  ></Tabel> : <p>uhiuhuyhu</p>
-                        }
-
-                        {/* Vendor List */}
-                        {
-                            stateRedux.vendors.length !=0 ? <Tabel data={stateRedux.vendors.Data}  ></Tabel> : <p>bjhvhvghv</p>
-                        }
-
-
-                        {/* Blog List */}
-                        <div className="row wow fadeIn">
-                            <div className="col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <table className="table table-hover">
-                                            <thead className="blue-grey lighten-4">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Blog ID</th>
-                                                    <th>Email</th>
-                                                    <th>Dolor</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                    <th>Ban</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Cell 1</td>
-                                                    <td>Cell 2</td>
-                                                    <td>Cell 3</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Cell 4</td>
-                                                    <td>Cell 5</td>
-                                                    <td>Cell 6</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Cell 7</td>
-                                                    <td>Cell 8</td>
-                                                    <td>Cell 9</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        {/* product List */}
-                        <div className="row wow fadeIn">
-                            <div className="col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <table className="table table-hover">
-                                            <thead className="blue-grey lighten-4">
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Product ID</th>
-                                                    <th>Owner</th>
-                                                    <th>Dolor</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                    <th>Ban</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Cell 1</td>
-                                                    <td>Cell 2</td>
-                                                    <td>Cell 3</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Cell 4</td>
-                                                    <td>Cell 5</td>
-                                                    <td>Cell 6</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Cell 7</td>
-                                                    <td>Cell 8</td>
-                                                    <td>Cell 9</td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                    <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
                         {/* Doughnut Chart */}
                         <div className="row wow fadeIn">
                             <div className="col-lg-12 col-md-12 mb-4">
@@ -336,23 +225,118 @@ export default function Admin() {
                         </div>
 
 
-                        {/* Map */}
-                        <div className="row wow fadeIn">
-                            <div className="col-md-12 mb-4">
-                                <div className="card">
-                                    <div className="card-header">Google map</div>
-                                    <div className="card-body">
-                                        <div id="map-container" className="map-container" style={{ height: "500px" }}>
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13916.823277035688!2d30.8606271!3d29.305637700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb77971253ebcb45f!2z2KfZhNmF2LPZhNmH2IwgUWVzbSBBbCBGYXlvdW0sIEZhaXl1bSwgRmFpeXVtIEdvdmVybm9yYXRl!5e0!3m2!1sen!2seg!4v1612708610475!5m2!1sen!2seg" width="600" height="450" frameBorder="0" style={{ border: "0" }} allowFullScreen="" aria-hidden="false" tabIndex="0" />
+
+
+                        {/* User List */}
+                        {
+                            stateRedux.users.length != 0 &&
+                            <>
+                                <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
+                                <Tabel id="userTabel" data={state.user}  ></Tabel>
+                            </>
+                        }
+
+                        {/* Vendor List */}
+                        {
+
+                            stateRedux.vendors.length != 0 &&
+                            <>
+                                <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
+
+                                <Tabel id="vendorTabel" data={state.vendor}  ></Tabel>
+                            </>
+                        }
+
+                        {/* Blog List */}
+                        {stateRedux.users.length != 0 &&
+
+                            <div className=" row wow fadeIn" id="blogTabel">
+
+                                <div className="col-md-12 mb-4">
+                                    <div className="card">
+                                        <div className="card-body">
+                                        <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
+                                        
+                                            <table className="table table-hover">
+                                                <thead className="blue-grey lighten-4">
+
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>User ID</th>
+                                                        <th>User name</th>
+                                                        <th>Number of blogs</th>
+                                                        <th>Details</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {state.blogs.map((item, index) => {
+
+                                                        return (
+                                                            <tr>
+                                                                <td>{index + 1}</td>
+                                                                <td>{item.person._id}</td>
+                                                                <td>{item.person.firstName}</td>
+                                                                <td>{item.postsUser.length}</td>
+                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+
+                                            </table>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        }
+                        {/* product List */}
+                        {stateRedux.vendors.length != 0 &&
+                            <div className="row wow fadeIn" id="productTabel">
+                                <div className="col-md-12 mb-4">
+                                    <div className="card">
+                                        <div className="card-body">
+                                        <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
+                                            <table className="table table-hover">
+                                                <thead className="blue-grey lighten-4">
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>Vendor ID</th>
+                                                        <th>Vendor name</th>
+                                                        <th>Number of product</th>
+                                                        <th>Details</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {state.products.map((item, index) => {
+
+                                                        return (
+                                                            <tr>
+                                                                <td>{index + 1}</td>
+                                                                <td>{item.person._id}</td>
+                                                                <td>{item.person.firstName}</td>
+                                                                <td>{item.vendorItems.length}</td>
+                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+
                     </div>
                 </main>
-
-
             </div>
         </div>
     )

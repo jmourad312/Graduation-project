@@ -1,7 +1,8 @@
 export function Tabel(props) {
+    console.log(props.data)
     return (
         <>
-            <div className="row wow fadeIn">
+            <div className="row wow fadeIn" id={props.id}>
                 <div className="col-md-12 mb-4">
                     <div className="card">
                         <div className="card-body">
