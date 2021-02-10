@@ -1,3 +1,5 @@
+import { Button } from "./Button";
+
 export function Tabel(props) {
     console.log(props.data)
     return (
@@ -32,9 +34,23 @@ export function Tabel(props) {
                                                 <td>{item.person.firstName}</td>
                                                 <td>{item.person.email}</td>
                                                 <td>{String(item.banned)}</td>
-                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+
+                                                <td>
+                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit}
+                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                    </Button>
+                                                </td>
+
+
                                                 <td><i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i></td>
-                                                <td><i style={{ fontSize: '20px' }} className="fas fa-ban"></i></td>
+
+
+                                                <td>
+                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClick}
+                                                        name={<i style={{ fontSize: '20px' }} className="fas fa-ban"></i>}>
+
+                                                    </Button>
+                                                </td>
                                             </tr>
                                         )
                                     })}

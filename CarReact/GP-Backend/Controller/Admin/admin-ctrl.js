@@ -162,14 +162,14 @@ usersNumber = (req, res) => {
 
 //add ban
 addUserBan = (req, res) => {
-  const IdPerson = req.user._id;
+  const IdPerson = req.body.id;
   User.updateOne(
     { person: IdPerson },
     { $set: { banned: true } },
 
     (err, result) => {
       if (err) {
-        return res.status(400).json({
+        return res.json({
           Data: null,
           Message: "You can't ban this user",
           Success: false,
@@ -186,7 +186,7 @@ addUserBan = (req, res) => {
 
 // remove ban
 removeUserBan = (req, res) => {
-  const IdPerson = req.user._id;
+  const IdPerson = req.body.id;
   User.updateOne(
     { person: IdPerson },
     { $set: { banned: false } },
@@ -307,7 +307,7 @@ numberOfBlogs = (req, res) => {
 
 // addBan
 addVendorBan = (req, res) => {
-  const IdPerson = req.vendor._id;
+  const IdPerson = req.body.id;
   Vendor.updateOne(
     { person: IdPerson },
     { $set: { banned: true } },
@@ -331,7 +331,7 @@ addVendorBan = (req, res) => {
 
 // remove ban
 removeVendorBan = (req, res) => {
-  const IdPerson = req.vendor._id;
+  const IdPerson = req.body.id;
 
   Vendor.updateOne(
     { person: IdPerson },
