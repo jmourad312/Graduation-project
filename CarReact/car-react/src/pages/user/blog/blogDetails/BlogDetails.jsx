@@ -15,8 +15,16 @@ export default function BlogDetails(props) {
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
-  // const user = useSelector((state) => state.user.Data.person);
+  const userID = useSelector((state) => state.userID);
+  const [checkOwner, setCheckOwner] = useState(false);
 
+  const checkOwnerDetails = () => {
+    if (blogDetails.person._id === localStorage.getItem("UserID")) {
+      setCheckOwner(true);
+    } else {
+      setCheckOwner(false);
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -79,11 +87,7 @@ export default function BlogDetails(props) {
       },
     };
     axios
-      .put(
-        `http://localhost:3000/user/updatePost/${params}`,
-        formData,
-        config
-      )
+      .put(`http://localhost:3000/user/updatePost/${params}`, formData, config)
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -97,7 +101,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-      closeModal();
+    closeModal();
   };
 
   const handleAddBookmark = () => {
@@ -128,8 +132,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-  }
-
+  };
 
   //---------------------------END EDIT FUNCTIONS----------------------------------------
 
@@ -220,6 +223,12 @@ export default function BlogDetails(props) {
     getBlog(localStorage.getItem("BlogID"));
     // console.log(blogDetails);
     // console.log(blogID);
+    if (blogDetails) {
+      console.log(blogDetails.person._id);
+      console.log(userID);
+
+      checkOwnerDetails();
+    }
   }, [blogDetails]);
   const pageVariants = {
     in: {
@@ -322,16 +331,20 @@ export default function BlogDetails(props) {
         Bookmark
       </p> */}
       <div className="row">
-        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
-          Bookmark
-        </button>
-        <Button
-          variant="info"
-          style={{ margin: "10px" }}
-          onClick={() => openModal(props.id)}
-        >
-          Edit
-        </Button>
+        {localStorage.getItem("UserID") === undefined && (
+          <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+            Bookmark
+          </button>
+        )}
+        {checkOwner && (
+          <Button
+            variant="info"
+            style={{ margin: "10px" }}
+            onClick={() => openModal(props.id)}
+          >
+            Edit
+          </Button>
+        )}
       </div>
 
       <Modal show={isOpen} onHide={!isOpen}>

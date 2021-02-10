@@ -69,8 +69,9 @@ export default function ProductsList() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      {!isUserLoggedIn && <LoginButton />}
-      <UserIcon />
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "10%" }}>

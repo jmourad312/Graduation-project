@@ -2,10 +2,35 @@ import React from "react";
 import vendorImage from "../../../../assets/Images/car-vendor.jpg";
 import ownerImage from "../../../../assets/Images/car-owner.jpg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function SignChoice() {
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      // y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      // y: "-100vh",
+      scale: 0.01,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
-    <div className="signChoice">
+    <motion.div
+      className="signChoice"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <div className="container">
         <div className="row">
           <Link className="col-6" to="/VendorSignForm">
@@ -75,6 +100,6 @@ export default function SignChoice() {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

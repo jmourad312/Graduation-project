@@ -18,7 +18,7 @@ export default function MyProfile() {
     dispatch(getUsersAction(localStorage.getItem("UserID")));
     console.log(user ? user.person : "loading");
     console.log(localStorage.getItem("UserID"));
-  }, [localStorage.getItem("UserID")]);
+  }, [user]);
 
   const pageVariants = {
     in: {

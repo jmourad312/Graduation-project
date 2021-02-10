@@ -160,9 +160,11 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
+      {localStorage.getItem("UserID") === undefined &&
         <Button variant="info" onClick={openModal}>
           Add new Blog
         </Button>
+      }
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>

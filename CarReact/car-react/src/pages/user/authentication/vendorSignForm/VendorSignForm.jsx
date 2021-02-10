@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setVendorIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 import axios from "axios";
 import icon from '../../../../assets/Images/icon.png'
+import { motion } from "framer-motion";
 
 export default function VendorSignForm(props) {
 
@@ -47,6 +48,7 @@ export default function VendorSignForm(props) {
         if (res.data.Success === true) {
           console.log("hhkhkhkhk");
           console.log(vendorSignUpInfo);
+          localStorage.removeItem("UserID");
 
           // dispatch(userSignInAction(false));
           // dispatch(vendorSignInAction(true));
@@ -96,6 +98,7 @@ export default function VendorSignForm(props) {
           console.log("hhkhkhkhk");
           // dispatch(userSignInAction(false));
           // dispatch(vendorSignInAction(true));
+          localStorage.removeItem("UserID");
           props.history.push(
             `/VendorAdministration/${localStorage.getItem("VendorID")}`
           );
@@ -296,9 +299,32 @@ export default function VendorSignForm(props) {
       });
     });
   }, []);
-
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      // y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      // y: "-100vh",
+      scale: 0.01,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
-    <div className="vendorSignForm">
+    <motion.div
+      className="vendorSignForm"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <div className="container">
         <div className="adjust">
           <section id="formHolder">
@@ -533,6 +559,6 @@ export default function VendorSignForm(props) {
           </section>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
