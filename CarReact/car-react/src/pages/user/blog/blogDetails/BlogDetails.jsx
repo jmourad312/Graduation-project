@@ -48,7 +48,7 @@ export default function BlogDetails(props) {
   const [editValue, setEditValue] = useState({
     title: "",
     body: "",
-    images: [],
+    image: "",
     brand: "",
     model: "",
   });
@@ -69,13 +69,13 @@ export default function BlogDetails(props) {
     setEditValue((previous) => {
       return {
         ...previous,
-        images: event.target.files,
+        image: event.target.files[0],
       };
     });
   };
   const handleEditSubmit = (params) => {
     const formData = new FormData();
-    formData.append("images", editValue.images);
+    formData.append("image", editValue.image);
     formData.append("title", editValue.title);
     formData.append("body", editValue.body);
     formData.append("brand", editValue.brand);
@@ -314,7 +314,7 @@ export default function BlogDetails(props) {
               <img
                 className=""
                 style={{ width: "400px" }}
-                src={blogDetails && blogDetails.images[0]}
+                src={blogDetails && blogDetails.image}
                 alt=""
               />
             </div>
@@ -372,11 +372,11 @@ export default function BlogDetails(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog images</Form.Label>
+              <Form.Label>Blog image</Form.Label>
               <Form.Control
                 type="file"
-                name="images"
-                id="images"
+                name="image"
+                id="image"
                 onChange={handleImageChange}
               />
             </Form.Group>
@@ -529,7 +529,7 @@ export default function BlogDetails(props) {
                         <div className="media mt-4">
                           <img
                             className="d-flex mr-3 rounded-circle"
-                            src={rep.images}
+                            src={rep.image}
                             alt=""
                             style={{ maxHeight: "300px", maxWidth: "300px" }}
                           />

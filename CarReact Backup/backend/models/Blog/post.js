@@ -7,7 +7,7 @@ var post = new schema({
   model:String,
   brand:String,
   state:{type:Boolean, default:false},
-  image: [],
+  images: [],
   person: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Person",

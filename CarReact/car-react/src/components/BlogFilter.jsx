@@ -61,7 +61,7 @@ export default function BlogFilter(props) {
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
-    images: "AVC",
+    image: "",
     brand: "",
     model: "",
   });
@@ -70,7 +70,7 @@ export default function BlogFilter(props) {
     setInputValue((previous) => {
         return {
           ...previous,
-          images: event.target.files,
+          image: event.target.files[0],
           // loaded: 0,
         };
     });
@@ -92,7 +92,7 @@ export default function BlogFilter(props) {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    formData.append("images", inputValue.images);
+    formData.append("image", inputValue.image);
     formData.append("title", inputValue.title);
     formData.append("body", inputValue.body);
     formData.append("brand", inputValue.brand);
@@ -188,8 +188,8 @@ export default function BlogFilter(props) {
               <Form.Label>Blog Image</Form.Label>
               <Form.Control
                 type="file"
-                name="images"
-                id="images"
+                name="image"
+                id="image"
                 onChange={handleImageChange}
                 multiple
                 required
