@@ -5,8 +5,8 @@ export default function ContactUs() {
     <section className="contact-us">
       <section id="contact" className="content-section text-center">
         <div className="contact-section">
-          <div className="container">
-            <h2>Contact Us</h2>
+          <div className="container" >
+            <h2 style={{ fontWeight: "700" }}>Contact Us</h2>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur
               adipisci consectetur id molestiae ab nemo iste fugit sapiente
@@ -15,10 +15,11 @@ export default function ContactUs() {
             </p>
 
             <div className="row">
-              <div className="col-md-8 col-md-offset-2">
+              <div className="col-2"></div>
+              <div className="col-8">
                 <form className="form">
                   <div className="form-group ">
-                    <label for="Name2">Name</label>
+                    <label for="Name2" style={{ fontWeight: "600", fontSize: "25px" }}>Name</label>
                     <input
                       type="text"
                       className="form-control"
@@ -28,7 +29,7 @@ export default function ContactUs() {
                   </div>
 
                   <div className="form-group">
-                    <label for="Email2">Email</label>
+                    <label for="Email2" style={{ fontWeight: "600", fontSize: "25px" }}>Email</label>
                     <input
                       type="email"
                       className="form-control"
@@ -37,24 +38,25 @@ export default function ContactUs() {
                     />
                   </div>
                   <div className="form-group ">
-                    <label for="exampleInputText">Your Message</label>
+                    <label for="exampleInputText" style={{ fontWeight: "600", fontSize: "25px" }}>Your Message</label>
                     <textarea
                       className="form-control inputheight"
                       placeholder="Description"
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn ">
+                  <button type="submit" className="btn btn-info">
                     Send Message
                   </button>
                 </form>
               </div>
+              <div className="col-2"></div>
             </div>
           </div>
         </div>
         <hr />
 
         <h3>Our Social Sites</h3>
-        <ul className="list-inline banner-social-buttons color">
+        <ul className="list-inline centerbtn banner-social-buttons row">
           <li>
             <a href="#" className="btn btn-lg">
               <i className="fa fa-twitter">
@@ -85,7 +87,7 @@ export default function ContactUs() {
       <section id="contact">
         <div className="container">
           <div className="row">
-            <div className="col-sm-12 col-md-6 col-lg-4 my-5">
+            <div className="col-4">
               <div className="card border-0">
                 <div className="card-body text-center">
                   <i className="fa fa-phone fa-5x mb-3" aria-hidden="true"></i>
@@ -94,8 +96,7 @@ export default function ContactUs() {
                 </div>
               </div>
             </div>
-
-            <div className="col-sm-12 col-md-6 col-lg-4 my-5">
+            <div className="col-4">
               <div className="card border-0">
                 <div className="card-body text-center">
                   <i className="fa fa-map-marker fa-5x mb-3" aria-hidden="true"></i>
@@ -104,7 +105,7 @@ export default function ContactUs() {
                 </div>
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-4 my-5">
+            <div className="col-4">
               <div className="card border-0">
                 <div className="card-body text-center">
                   <i className="fa fa-globe fa-5x mb-3" aria-hidden="true"></i>
