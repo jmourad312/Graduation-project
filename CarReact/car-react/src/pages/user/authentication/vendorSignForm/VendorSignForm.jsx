@@ -18,7 +18,7 @@ export default function VendorSignForm(props) {
     middleName: "",
     lastName: "",
     email: "",
-    phoneNumber: null,
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
@@ -469,7 +469,7 @@ export default function VendorSignForm(props) {
                         <small style={{ fontSize: "15px" }}>Optional</small>
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         name="phoneNumber"
                         id="phoneNumber"
                         value={vendorSignUpInfo.phoneNumber}
