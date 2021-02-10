@@ -104,10 +104,26 @@ deletePost = (req, res) => {
 //update post
 updatePost = (req, res) => {
   const IdPerson = req.user._id;
-  let { ...data } = req.body;
+
+  console.log(req.file);
+  const body = JSON.parse(JSON.stringify(req.body));
+
+  const Postinput = {};
+  if (req.file) {
+    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  }
+
+  if (!body) {
+    return res.json({
+      Data: null,
+      Message: "You must Type any words",
+      Success: false,
+    });
+  }
+
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    data,
+    {...data,...Postinput},
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
