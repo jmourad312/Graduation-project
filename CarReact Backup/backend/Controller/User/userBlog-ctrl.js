@@ -17,7 +17,12 @@ const BookmarkPostsList = require("../../models/Blog/bookmarkPostsList");
 
 //add post
 addNewPost = (req, res) => {
-  const body = req.body;
+  // const body = req.body;
+  const body = JSON.parse(JSON.stringify(req.body));
+  const images = [];
+  req.files.map((file) => {
+    images.push("http://localhost:3000/images/" + file.filename);
+  });
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
@@ -27,7 +32,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post(body);
+  const post = new Post({ ...body, images });
   post.person = IdPerson;
 
   if (!post) {

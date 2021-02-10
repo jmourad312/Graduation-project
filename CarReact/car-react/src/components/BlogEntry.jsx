@@ -99,9 +99,9 @@ export default function BlogEntry(props) {
             </div>
 
           </div>
-          <div class="card__img" style={{ background: `url(${props.imgSrc})`}}></div>
+          <div class="card__img" style={{ background: `url(${props.imgSrc[0]})`}}></div>
           <p class="card_link">
-            <div class="card__img--hover" style={{ background: `url(${props.imgSrc})` }} ></div>
+            <div class="card__img--hover" style={{ background: `url(${props.imgSrc[0]})` }} ></div>
           </p>
           <div class="card__info">
             <h3 class="card__title text-truncate">{props.cardTitle}</h3>
