@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
 import { Pagination } from '../../components/Pagination'
+import { Navbar } from '../../components/Navbar'
 
 import { getUserAction, getVendorAction } from '../../store/action'
 import { useSelector, useDispatch } from "react-redux";
@@ -24,12 +25,11 @@ export default function Admin() {
     useEffect(() => {
         dispatch(getUserAction)
         dispatch(getVendorAction)
-
     }, [])
 
     //console.log(stateRedux.users)
     //console.log(stateRedux.vendors)
-    const getPartUser = (skip) => {
+    const getPartUser =  (skip) => {
         setState({
             ...state,
             user: stateRedux.users.Data.slice(skip, skip + numberItemPerPage)
@@ -41,7 +41,7 @@ export default function Admin() {
             vendor: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage)
         })
     }
-    
+
     const getPartBlog = (skip) => {
         setState({
             ...state,
@@ -105,31 +105,8 @@ export default function Admin() {
                 <header>
 
                     {/* Navbar */}
-                    <nav className="navbar bg-dark fixed-top navbar-expand-lg scrolling-navbar">
-                        <div className="container-fluid">
-                            {/* Collapse */}
-                            <button className="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"><i className="fa fa-bars white"></i></span>
-                            </button>
 
-                            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                                {/* Left */}
-                                <ul className="navbar-nav mr-auto">
-                                    <li className="nav-item active">
-                                        <a className="nav-link waves-effect" href="#">Home
-                                    <span className="sr-only">(current)</span>
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a className="nav-link waves-effect" href="#">Log Out</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-
+                    <Navbar />
                     {/* Sidebar */}
                     <div className="sidebar-fixed bg-dark position-fixed">
                         <div className="list-group list-group-flush mt-5">
@@ -225,14 +202,16 @@ export default function Admin() {
                         </div>
 
 
-
-
                         {/* User List */}
                         {
                             stateRedux.users.length != 0 &&
+
                             <>
+                                <div onLoad={() => getPartUser(0)}></div>
+
                                 <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
                                 <Tabel id="userTabel" data={state.user}  ></Tabel>
+
                             </>
                         }
 
@@ -255,8 +234,8 @@ export default function Admin() {
                                 <div className="col-md-12 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                        <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
-                                        
+                                            <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
+
                                             <table className="table table-hover">
                                                 <thead className="blue-grey lighten-4">
 
@@ -301,7 +280,7 @@ export default function Admin() {
                                 <div className="col-md-12 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                        <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
+                                            <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
                                             <table className="table table-hover">
                                                 <thead className="blue-grey lighten-4">
                                                     <tr>
