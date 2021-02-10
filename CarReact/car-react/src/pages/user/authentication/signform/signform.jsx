@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // import $ from "jquery";
 // import { useEffect } from 'react';
 import Button2 from "../../../../components/Button2";
@@ -13,6 +13,7 @@ import {
 import Modal from "react-bootstrap/Modal";
 import VerticalModal from "../../../../components/VerticalModal";
 import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
+import { motion } from "framer-motion";
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
   // const [changeClassBack, setChangeClassBack] = useState("forgotpass");
@@ -60,6 +61,7 @@ export default function Signform(props) {
           console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
+          localStorage.removeItem("VendorID");
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
@@ -98,6 +100,7 @@ export default function Signform(props) {
           console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
+          localStorage.removeItem("VendorID");
           props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
         }
       })
@@ -157,24 +160,48 @@ export default function Signform(props) {
   // confirmButton.addEventListener('click', () => {
   //     container.classList.remove("bottom-panel-active");
   // });
+  const handlegoogle = () => {
+    window.location.replace("http://localhost:3000/user/auth/google");
+  };
+  const handlefacebook = () => {
+    window.location.replace("http://localhost:3000/user/auth/facebook");
+  };
 
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      // y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      // y: "-100vh",
+      scale: 0.01,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
-    <div className="signform ">
+    <motion.div
+      className="signform "
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransitions}
+    >
       <div className="container " id="container">
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
             <div className="social-container">
-              <Link
-                to="http://localhost:3000/user/auth/facebook"
-                className="social"
-              >
+              <Link onClick={handlefacebook} className="social">
                 <i className="fab fa-facebook-f"></i>
               </Link>
-              <Link
-                to="http://localhost:3000/user/auth/google"
-                className="social"
-              >
+              <Link onClick={handlegoogle} className="social">
                 <i className="fab fa-google-plus-g"></i>
               </Link>
               {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
@@ -428,6 +455,6 @@ export default function Signform(props) {
           </section>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

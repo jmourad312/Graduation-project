@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function LoginButton() {
   return (
     <div className="loginButton">
       <div class="wrapper">
-        <a class="cta" href="#">
+        <Link class="cta" to="/SignChoice">
           <span>LOGIN</span>
           <span>
             <svg
@@ -40,7 +41,7 @@ export default function LoginButton() {
               </g>
             </svg>
           </span>
-        </a>
+        </Link>
       </div>
     </div>
   );

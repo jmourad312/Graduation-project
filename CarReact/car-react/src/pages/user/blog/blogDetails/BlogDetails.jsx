@@ -5,6 +5,8 @@ import { Button, Col, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 import {
   getBlogDetails,
   addVoteComment,
@@ -15,8 +17,16 @@ export default function BlogDetails(props) {
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
-  // const user = useSelector((state) => state.user.Data.person);
+  const userID = useSelector((state) => state.userID);
+  const [checkOwner, setCheckOwner] = useState(false);
 
+  const checkOwnerDetails = () => {
+    if (blogDetails.person._id === localStorage.getItem("UserID")) {
+      setCheckOwner(true);
+    } else {
+      setCheckOwner(false);
+    }
+  };
 
   const dispatch = useDispatch();
 
@@ -79,11 +89,7 @@ export default function BlogDetails(props) {
       },
     };
     axios
-      .put(
-        `http://localhost:3000/user/updatePost/${params}`,
-        formData,
-        config
-      )
+      .put(`http://localhost:3000/user/updatePost/${params}`, formData, config)
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -97,7 +103,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-      closeModal();
+    closeModal();
   };
 
   const handleAddBookmark = () => {
@@ -128,8 +134,7 @@ export default function BlogDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-  }
-
+  };
 
   //---------------------------END EDIT FUNCTIONS----------------------------------------
 
@@ -220,6 +225,12 @@ export default function BlogDetails(props) {
     getBlog(localStorage.getItem("BlogID"));
     // console.log(blogDetails);
     // console.log(blogID);
+    if (blogDetails) {
+      console.log(blogDetails.person._id);
+      console.log(userID);
+
+      checkOwnerDetails();
+    }
   }, [blogDetails]);
   const pageVariants = {
     in: {
@@ -240,7 +251,7 @@ export default function BlogDetails(props) {
   };
   return (
     <motion.div
-      className="container p-5"
+      className="container"
       initial="out"
       animate="in"
       exit="out"
@@ -249,6 +260,11 @@ export default function BlogDetails(props) {
     >
       <div className="blogDetails">
         <div className="header">
+        <div style={{position:"absolute",top:"5%",right:"-30%"}}>
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
+        </div>
           <div className="row">
             <div className="col-6">
               <p
@@ -322,16 +338,20 @@ export default function BlogDetails(props) {
         Bookmark
       </p> */}
       <div className="row">
-        <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
-          Bookmark
-        </button>
-        <Button
-          variant="info"
-          style={{ margin: "10px" }}
-          onClick={() => openModal(props.id)}
-        >
-          Edit
-        </Button>
+        {localStorage.getItem("UserID") !== null && (
+          <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+            Bookmark
+          </button>
+        )}
+        {checkOwner && (
+          <Button
+            variant="info"
+            style={{ margin: "10px" }}
+            onClick={() => openModal(props.id)}
+          >
+            Edit
+          </Button>
+        )}
       </div>
 
       <Modal show={isOpen} onHide={!isOpen}>

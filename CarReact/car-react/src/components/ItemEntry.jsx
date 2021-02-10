@@ -8,7 +8,6 @@ import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
 
 export default function ItemEntry(props) {
-  
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -16,8 +15,8 @@ export default function ItemEntry(props) {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const productDetails = useSelector(state => state.productDetails.Data);
-  
+  const productDetails = useSelector((state) => state.productDetails.Data);
+
   // const getProduct = async (params) => {
   //   await dispatch(getProductDetails(params));
   //   // console.log(productDetails);
@@ -29,7 +28,6 @@ export default function ItemEntry(props) {
   //     name : productDetails.name
   //   });
   // }
-
 
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
@@ -65,7 +63,7 @@ export default function ItemEntry(props) {
   let history = useHistory();
   const handleClick = (params) => {
     dispatch(setProductId(params));
-    localStorage.setItem("ProductID",params)
+    localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${props.id}`);
   };
 
@@ -106,7 +104,11 @@ export default function ItemEntry(props) {
       },
     };
     axios
-      .put(`http://localhost:3000/vendor/updateItem/${params}`, formData, config)
+      .put(
+        `http://localhost:3000/vendor/updateItem/${params}`,
+        formData,
+        config
+      )
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -122,33 +124,37 @@ export default function ItemEntry(props) {
       });
   };
   return (
-    <div className="col-md-6 col-lg-6 col-xl-4 mb-4">
-      <div className="card">
-        <img className="card-img-top" src={props.image} alt="Card" />
+    <div className="col-3">
+      <div className="card" style={{ width: "150px" }}>
+        <img
+          className="card-img-top"
+          src={props.image}
+          alt="Card"
+          style={{ height: "150px", width: "146px" }}
+        />
         <div className="card-body">
-          <h4 className="card-title">{props.name}</h4>
-          <p className="card-text">{props.description}</p>
-          <p className="card-text">{props.price}</p>
-          <p className="card-text">{props.carBrand}</p>
-          <p className="card-text">{props.carModel}</p>
-
+          <h4 className="card-title text-truncate">{props.name}</h4>
+          <p className="card-text text-truncate">{props.description}</p>
+          <p className="card-text text-truncate">{props.price}</p>
+          <strong>
+            <i className="badge badge-light text-truncate">{props.carBrand}</i>{" "}
+            <i className="badge badge-light text-truncate">{props.carModel}</i>
+          </strong>
+          <br/>
           <button
             className="btn btn-success"
             onClick={() => handleClick(props.id)}
           >
-            Details
+            <i class="fas fa-info-circle"></i>
           </button>
-          <br />
-          <br />
-
           <button
             className="btn btn-danger"
             onClick={() => handleDelete(props.id)}
           >
-            Delete item
+            <i class="fas fa-trash-alt"></i>
           </button>
           <Button variant="info" onClick={openModal}>
-            Edit
+            <i class="fas fa-edit"></i>
           </Button>
 
           <Modal show={isOpen} onHide={!isOpen}>
@@ -241,6 +247,9 @@ export default function ItemEntry(props) {
                   </Form.Group>
                 </Form.Row>
 
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
                 <Button
                   variant="primary"
                   type="button"
@@ -248,9 +257,6 @@ export default function ItemEntry(props) {
                 >
                   Submit
                 </Button>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
               <Button variant="danger" onClick={closeModal}>
                 Cancel
               </Button>

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import LoginButton from "../../../../components/LoginButton";
+import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
 
 export default function ProductDetails(props) {
@@ -72,7 +74,9 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <section className="products-details" >
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+      <section className="products-details">
         {/* <!-- start product details --> */}
         <div className="container">
           <div className="row bg-light">
@@ -106,13 +110,13 @@ export default function ProductDetails(props) {
                     Avalible
                   </span>
                 ) : (
-                    <span
-                      className="badge badge-pill badge-danger"
-                      style={{ fontSize: "15px" }}
-                    >
-                      Not Avalible
-                    </span>
-                  ))}
+                  <span
+                    className="badge badge-pill badge-danger"
+                    style={{ fontSize: "15px" }}
+                  >
+                    Not Avalible
+                  </span>
+                ))}
 
               {/* <!-- number of stars --> */}
               <div className="mt-3 star" style={{ fontSize: "20px" }}>
@@ -134,17 +138,19 @@ export default function ProductDetails(props) {
                     {productDetails && productDetails.price} LE
                   </li>
                 </span>
-                <span
-                  className="fa-lg button fill fa-pull-right"
-                  style={{ padding: "5px" }}
-                  title="Add to favorate"
-                  onClick={handleAddFavourite}
-                >
-                  <i
-                    className="far fa-heart"
-                    style={{ fontSize: "30px" }}
-                  ></i>
-                </span>
+                {localStorage.getItem("UserID") !== null && (
+                  <span
+                    className="fa-lg button fill fa-pull-right"
+                    style={{ padding: "5px" }}
+                    title="Add to favorate"
+                    onClick={handleAddFavourite}
+                  >
+                    <i
+                      className="far fa-heart"
+                      style={{ fontSize: "30px" }}
+                    ></i>
+                  </span>
+                )}
                 {/* <span
                   className="fa-lg"
                   data-toggle="tooltip"
@@ -243,28 +249,73 @@ export default function ProductDetails(props) {
               </form>
               {/* </div> */}
             </div>
-            <div className="col-4">Product Rating (User Comments)</div>
-            <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
-              <h3>
-                <span
-                  className="pl-3"
-                  style={{ borderLeft: "3px solid red", height: "100%" }}
-                ></span>
-                Location
-              </h3>
-              <br />
-              <div className="d-flex flex-wrap">
-                <iframe
-                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                  width="100%"
-                  height="300"
-                  frameborder="0"
-                  style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
-                  allowfullscreen
-                ></iframe>
-                
+            {localStorage.getItem("Authorization") !== null ? (
+              <div className="col-4">Product Rating (User Comments)</div>
+            ) : (
+              <div
+                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                style={{
+                  height: "300px",
+                  width: "300px",
+                  border: "solid white 3px",
+                }}
+              >
+                <h3
+                  style={{
+                    color: "#737373",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
+                  }}
+                >
+                  Please Sign in to view this Item's Rating
+                </h3>
+              </div>
+            )}
 
-                {/* <div className="pl-3">
+            {localStorage.getItem("UserID") !== null ? (
+              <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
+                <h3>
+                  <span
+                    className="pl-3"
+                    style={{ borderLeft: "3px solid red", height: "100%" }}
+                  ></span>
+                  Location
+                </h3>
+                <br />
+                <div className="d-flex flex-wrap">
+                  <iframe
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                    width="100%"
+                    height="300"
+                    frameborder="0"
+                    style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            ) : (
+              <div
+                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                style={{
+                  height: "300px",
+                  width: "300px",
+                  border: "solid white 3px",
+                }}
+              >
+                <h3
+                  style={{
+                    color: "#737373",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
+                  }}
+                >
+                  Please Sign in as a user to view this Item's Location
+                </h3>
+              </div>
+            )}
+            {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
                   width="70px"
@@ -273,8 +324,6 @@ export default function ProductDetails(props) {
                 />
                 <p>location two </p>
               </div> */}
-              </div>
-            </div>
           </div>
         </div>
         {/* <!-- end Location ,reviews,PRODUCT INFORMATION --> */}

@@ -2,7 +2,7 @@
     h1,
   h2,
   h3 {
-    margin: 4px 0 35px 0;
+    margin: 0px 0 35px 0;
     letter-spacing: 1px;
   }
 
@@ -20,12 +20,10 @@
     border-color: #181818;
     transition: all .2s ease-in-out;
     transform: scale(1.18);
-
-    
   }
 
   #contact .card:hover i,#contact .card:hover h4{
-    color: #920b0b;
+    color: #494444;
   }
 
   ul{
@@ -41,21 +39,22 @@
     color: #181616;
   }
 
-  li a:hover,
-  li a:focus,
-  button {
-    text-decoration: none;
-    background-color: #d80606;
-  }
 
-  #contact {
-    background: #1f1e1e;
-    color: #f4f4f4;
-    padding: 50px;
-  }
+  .contactinfo {
+    margin-top: 30px;
+    }
 
   textarea.form-control {
     height: 100px;
     resize: none;
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+
+  }
+  input{
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+  }
+  .contrastclass{
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+
   }
 }
