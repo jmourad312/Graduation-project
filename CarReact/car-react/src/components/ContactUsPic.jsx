@@ -1,37 +1,39 @@
 import React from 'react'
 
-export default function ContactUsPic() {
+export default function ContactUsPic({name,prof,bkImage,prImage}) {
     return (
       <div className="contactUsPic">
-        <div class="background"></div>
+        <div className="background"></div>
 
-        <div class="outer-div">
-          <div class="inner-div">
-            <div class="front">
-              <div class="front__bkg-photo"></div>
-              <div class="front__face-photo"></div>
-              <div class="front__text">
-                <h3 class="front__text-header">Bobby Korec</h3>
-                <p class="front__text-para">
-                  <i class="fas fa-map-marker-alt front-icons"></i>Seattle
-                </p>
-
-                <span class="front__text-hover">Hover to Find Me</span>
+        <div className="outer-div">
+          <div className="inner-div">
+            <div className="front">
+              <div
+                className="front__bkg-photo"
+              ></div>
+              <div
+                className="front__face-photo"
+              ></div>
+              <div className="front__text">
+                <h3 className="front__text-header">{name}</h3>
+                <p className="front__text-para">{prof}</p>
+                <span className="front__text-hover">Hover to Find Me</span>
               </div>
             </div>
-            <div class="back">
-              <div class="social-media-wrapper">
+            <div className="back">
+              <p className="" style={{ maxWidth: "200px" }}></p>
+              <div className="social-media-wrapper">
                 <a href="#" class="social-icon">
-                  <i class="fab fa-codepen" aria-hidden="true"></i>
+                  <i class="fab fa-facebook-square"></i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i class="fab fa-github-square" aria-hidden="true"></i>
+                  <i class="fab fa-twitter-square"></i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i class="fab fa-linkedin-square" aria-hidden="true"></i>
+                  <i class="fab fa-github-square"></i>
                 </a>
                 <a href="#" class="social-icon">
-                  <i class="fab fa-instagram" aria-hidden="true"></i>
+                  <i class="fab fa-linkedin"></i>
                 </a>
               </div>
             </div>
