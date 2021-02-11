@@ -13,7 +13,6 @@ export default function ProductsList() {
   const products = useSelector((state) => state.products.Data);
   const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
   const isVendorLoggedIn = useSelector((state) => state.isVendorLoggedIn);
-  console.log(isUserLoggedIn);
   const dispatch = useDispatch();
   
   
@@ -37,7 +36,8 @@ export default function ProductsList() {
         image={prod.image}
         description={prod.description}
         price={prod.price}
-        name={prod.name}
+        name={prod.person.firstName}
+        title={prod.name}
         brand={prod.carBrand}
         model={prod.carModel}
         // category={prod.category}
@@ -76,7 +76,7 @@ export default function ProductsList() {
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "5%" }}>
-            <ProductFilter />
+            <ProductFilter className="ProductFilter"/>
           </div>
           
           <div className="col-9" style={{ marginTop: "2%" }}>
