@@ -498,6 +498,30 @@ getItemsVendor = async (req, res) => {
 
 };
 
+getBlogsUser = (req, res) => {
+  const IdPerson = req.params.id;
+
+  const populateQuery = [{ path: "person"}];
+
+  Post.find({ person: IdPerson })
+    .sort({ _id: -1 })
+    .populate(populateQuery)
+    .exec((error, data) => {
+      if (error || !data.length) {
+        return res.json({
+          Data: error,
+          Message: "no blogs found",
+          Success: false,
+        });
+      }
+      return res.json({
+        Data: data,
+        Message: "posts for:",
+        Success: true,
+      });
+    });
+};
+
 module.exports = {
   addModel,
   addBrand,
@@ -517,5 +541,6 @@ module.exports = {
   countAll,
   deleteVendor,
   deleteUser,
-  getItemsVendor
+  getItemsVendor,
+  getBlogsUser
 };

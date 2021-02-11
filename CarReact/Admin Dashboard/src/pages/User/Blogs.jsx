@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from '../../components/Card'
 import { Navbar } from '../../components/Navbar'
 import { useSelector, useDispatch } from "react-redux";
-import {getItemsVendor} from '../../store/action'
+import { getBlogsUser } from '../../store/action'
+import BlogEntry from '../../components/BlogEntry';
+
 
 export default function Blogs(props) {
 
@@ -12,33 +13,32 @@ export default function Blogs(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getItemsVendor(data._id))
+        dispatch(getBlogsUser(data._id))
     }, [])
 
-    const handelClickDetails = (parameter)=>{
+    const handelClickDetails = (parameter) => {
         props.history.push({
-            pathname: '/DetailsProduct',
+            pathname: '/DetailsBlog',
             state: { data: parameter }
         })
     }
 
-    const createProducts = (prod) => {
+    const createBlog = (blog) => {
         return (
-          <Card
-            key={prod._id}
-            id={prod._id}
-            image={prod.image}
-            description={prod.description}
-            price={prod.price}
-            name={data.firstName}
-            title={prod.name}
-            brand={prod.carBrand}
-            model={prod.carModel}
-            // category={prod.category}
-            details={handelClickDetails}
-          />
+            <BlogEntry
+                key={blog._id}
+                id={blog._id}
+                imgSrc={blog.image}
+                cardTitle={blog.title}
+                userName={blog.person.firstName ? blog.person.firstName : "User"}
+                date={blog.createdAt}
+                cardContent={blog.body}
+                cardBrand={blog.brand}
+                cardModel={blog.model}
+                details={handelClickDetails}
+            />
         );
-      };
+    };
 
     return (
 
@@ -47,10 +47,12 @@ export default function Blogs(props) {
                 <Navbar />
                 <h1 className="m-5">Products By {data.firstName}</h1>
 
-                <div className="col-12" style={{ marginTop: "2%" }}>
-                    <div className="row">
-                        {stateRedux.products.length !=0 && stateRedux.products.Data.map(createProducts)}
-                    </div>
+                <div className="col-9 blog-contents">
+                    <section>
+                        <div className="row">
+                            {stateRedux.blogs.length !=0 && stateRedux.blogs.Data.map(createBlog)}
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>

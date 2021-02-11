@@ -76,5 +76,20 @@ export const setLoginAction = (payload) => {
 }
 
 
+export const getBlogsUser = (id) => async (dispatch) =>{
+  try {
+      const res = await instance.get(`user/showPostsOfUser/${id}`,
+      {headers: { Authorization: localStorage.getItem("Authorization")}});
+      console.log(res);
+      dispatch({
+          type: TYPES.GET_BLOGSS,
+          payload: res.data
+      })
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+
 
   

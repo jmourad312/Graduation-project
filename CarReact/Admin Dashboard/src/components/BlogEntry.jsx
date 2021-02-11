@@ -3,7 +3,7 @@ export default function BlogEntry(props) {
         <>
             <div className="col-md-6 col-lg-6 col-xl-4 mb-4 blog-post">
                 <section className="cards">
-                    <article className="card card--1" onClick={() => handleClick(props.id)}>
+                    <article className="card card--1" onClick={() => props.details(props.id)}>
                         <div className="card__info-hover">
                             <i className="fas fa-bookmark"></i>
                             <div className="card__clock-info">

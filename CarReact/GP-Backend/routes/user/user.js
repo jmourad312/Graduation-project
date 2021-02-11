@@ -29,7 +29,7 @@ async function canViewall(req, resp, next) {
   const { role, _id } = req.user;
 
   const dataUser =  await User.findOne({person:_id},{banned:1})
-  const dataVendor =  await vendor.findOne({person:_id},{banned:1})
+  const dataVendor =  await Vendor.findOne({person:_id},{banned:1})
 
   if (! ( (role == "user"  &&  dataUser.banned==false ) || role == "admin" || (role == "vendor"  && dataVendor.banned==false ))) {
     resp.json({
@@ -68,7 +68,7 @@ router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }
 
 router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), upload.single("image") ,canView, userBlogCtrl.updatePost);
 
-router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
+router.get("/showPostsOfUser/:id?", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
 
 // add comment or reply in comment 
 router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addComment);
