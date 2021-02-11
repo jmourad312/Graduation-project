@@ -233,7 +233,7 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
-        <Button variant="danger" onClick={handleSearchClick}>
+        <Button variant="dark" onClick={handleSearchClick}>
           Filter
         </Button>
       </div>
@@ -250,7 +250,7 @@ export default function BlogFilter(props) {
           zIndex: "100",
           position: "fixed",
           right: "300px",
-          bottom: "-43px",
+          bottom: "-5%",
         }}
       >
         {blogs && (
