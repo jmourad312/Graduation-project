@@ -10,21 +10,21 @@ import UserIcon from "../../../../components/UserIcon";
 import { getProductsAction, getUsersAction } from "../../../../store/actions";
 
 export default function ProductsList() {
-  const products = useSelector((state) => state.products.Data);
+  const products = useSelector((state) => state.products);
   const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
   const isVendorLoggedIn = useSelector((state) => state.isVendorLoggedIn);
   const dispatch = useDispatch();
   
   
   // console.log(products);
-  const getProducts = () => {
-    dispatch(getProductsAction());
-  };
+  // const getProducts = () => {
+  //   dispatch(getProductsAction());
+  // };
   
-  useEffect(() => {
-    getProducts();
-    dispatch(getUsersAction(localStorage.getItem("UserID")));
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  //   dispatch(getUsersAction(localStorage.getItem("UserID")));
+  // }, []);
   
 
 
@@ -76,12 +76,39 @@ export default function ProductsList() {
       <div className="container">
         <div className="row">
           <div className="col-3" style={{ marginTop: "5%" }}>
-            <ProductFilter className="ProductFilter"/>
+            <ProductFilter className="ProductFilter" />
           </div>
-          
+
           <div className="col-9" style={{ marginTop: "2%" }}>
             <div className="row">
-              {products ? products.map(createProducts) : <Loading />}
+              {products ? (
+                products.Success ? (
+                  products.Data.map(createProducts)
+                ) : (
+                  <div
+                    style={{
+                      height: "600px",
+                      width: "600px",
+                      position: "absolute",
+                      left: "15%",
+                      top: "25%",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        position: "relative",
+                        top: "40%",
+                        left: "0%",
+                        textAlign: "center",
+                      }}
+                    >
+                      Sorry, No Items match your search
+                    </h2>
+                  </div>
+                )
+              ) : (
+                <Loading />
+              )}
             </div>
           </div>
         </div>
