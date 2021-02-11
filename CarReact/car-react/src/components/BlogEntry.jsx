@@ -105,12 +105,12 @@ export default function BlogEntry(props) {
           </p>
           <div class="card__info">
             <h3 class="card__title text-truncate">{props.cardTitle}</h3>
-            <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
+            <span class="card__by">by <span class="card__author" style={{fontSize:"20px"}} title="author">{props.userName}</span></span>
             <br/>
-            <small>
+            <strong>
               <i className="badge badge-dark">{props.cardBrand}</i>
-              <i className="badge badge-dark">{props.cardModel}</i>
-            </small>
+              <i className="badge badge-dark ml-1">{props.cardModel}</i>
+            </strong>
           </div>
         </article>
       </section>

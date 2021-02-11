@@ -189,12 +189,13 @@ export default function BlogFilter(props) {
             className="form-control"
             placeholder="Search"
           />
-          <div className="input-group-append">
+          <div className="input-group-append mb-5">
             <button
               className="btn"
               style={{
                 background:
                   "linear-gradient(to right,  rgb(197, 191, 191),  rgb(88, 84, 84) )",
+                  
               }}
               onClick={handleSearchClick}
               type="button"
@@ -270,9 +271,9 @@ export default function BlogFilter(props) {
         className="pagination"
         style={{
           zIndex: "100",
-          position: "fixed",
-          right: "300px",
-          bottom: "-5%",
+          position: "absolute",
+          left: "300px",
+          bottom: "-83.5%",
         }}
       >
         {blogs && (
