@@ -98,7 +98,7 @@ router.get("/partOfItem", passport.authenticate("jwt", { session: false }), canV
 
 router.get("/showDetailsItem/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showDetailsItem);
 
-router.post("/showFilterItems", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
+router.post("/showFilterItems/:skip", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showFilterItems);
 
 router.get("/showVendorProfile/:id", passport.authenticate("jwt", { session: false }), canViewall, userItemCtrl.showVendorProfile);
 
