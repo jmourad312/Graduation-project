@@ -343,17 +343,17 @@ showFilterPosts = (req, res) => {
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
-    .skip(0)
-    .limit(9)
+    .skip(req.params.skip)
+    .limit(6)
     .exec((error, data) => {
       if (error || data.length == 0) {
-        return res.status(200).json({
+        return res.json({
           Data: error,
           Message: "no blogs found",
           Success: false,
         });
       }
-      return res.status(200).json({
+      return res.json({
         Data: data,
         Message: "posts: filter",
         Success: true,

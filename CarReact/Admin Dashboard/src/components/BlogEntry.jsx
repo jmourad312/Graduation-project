@@ -1,3 +1,5 @@
+import { Button } from '../components/Button'
+
 export default function BlogEntry(props) {
     return (
         <>
@@ -24,6 +26,17 @@ export default function BlogEntry(props) {
                                 <i className="badge badge-dark">{props.cardBrand}</i>
                                 <i className="badge badge-dark">{props.cardModel}</i>
                             </small>
+                        </div>
+                        <div className="d-flex">
+
+                            <Button className="btn btn-info mx-auto m-2" parameter={props.id} key={props.id} handelClick={props.handelClickEdit}
+                                name={<i style={{ fontSize: '20px' }} className='fas fa-pen'></i>}>
+                            </Button>
+
+                            <Button className="btn btn-danger mx-auto m-2" parameter={props.id} key={props.id} handelClick={props.handelClickDelete}
+                                name={<i style={{ fontSize: '20px' }} className='fas fa-trash'></i>}>
+                            </Button>
+
                         </div>
                     </article>
                 </section>

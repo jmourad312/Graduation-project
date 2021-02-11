@@ -22,6 +22,14 @@ export default function Items(props) {
         })
     }
 
+    const handelClickEdit = (parameter) => {
+
+    }
+
+    const handelClickDelete = (parameter) => {
+        
+    }
+
     const createProducts = (prod) => {
         return (
           <Card
@@ -36,6 +44,8 @@ export default function Items(props) {
             model={prod.carModel}
             // category={prod.category}
             details={handelClickDetails}
+            edit={handelClickEdit}
+            delete={handelClickDelete}
           />
         );
       };
