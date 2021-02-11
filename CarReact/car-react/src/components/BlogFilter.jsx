@@ -10,44 +10,63 @@ import {
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
+import { Pagination } from "./Pagination";
+import Loading from "./Loading";
 
 export default function BlogFilter(props) {
   const [state, setState] = useState({
     model: "",
     brand: "",
   });
-
+  const [itemsInDB, setItemsInDB] = useState(0);
+  const blogs = useSelector((state) => state.blogs.Data);
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(filterCarBrand());
+    dispatch(resultFromFilter({}, 0));
+    setItemsInDB(blogs);
   }, []);
 
   const handleChange = (event) => {
-    switch (event.target.name) {
-      case "brand":
-        setState({
-          ...state,
-          brand: event.target.value,
-        });
-        dispatch(resultFromFilter({ brand: event.target.value }));
-        dispatch(filterCarModel(event.target.value));
-
-        break;
-      case "model":
-        setState({
-          ...state,
-          model: event.target.value,
-        });
-        dispatch(
-          resultFromFilter({ brand: state.brand, model: event.target.value })
-        );
-
-        break;
+    const { value, name } = event.target;
+    if (name === "brand") {
+      dispatch(filterCarModel(value));
     }
-  };
+    setState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+    // switch (event.target.name) {
+    //   case "brand":
+    //     setState({
+    //       ...state,
+    //       brand: event.target.value,
+    //     });
+    //     dispatch(resultFromFilter({ brand: event.target.value }));
+    //     dispatch(filterCarModel(event.target.value));
 
+    //     break;
+    //   case "model":
+    //     setState({
+    //       ...state,
+    //       model: event.target.value,
+    //     });
+    //     dispatch(
+    //       resultFromFilter({ brand: state.brand, model: event.target.value })
+    //     );
+
+    //     break;
+    // }
+  };
+  const handleClick = (params) => {
+    console.log(params);
+    dispatch(resultFromFilter(state.brand, params));
+    // dispatch(filterCarModel(event.target.value));
+  };
 
   //-------------ADD BLOG ----------------------------------------
   const [isOpen, setIsOpen] = useState(false);
@@ -136,7 +155,9 @@ export default function BlogFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-md mb-3"
         >
-          <option value="" key="no-value">choose Brand</option>
+          <option value="" key="no-value">
+            choose Brand
+          </option>
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index}>
               {item.name}
@@ -153,7 +174,9 @@ export default function BlogFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-sm mb-3"
         >
-          <option value="" key="no-value">choose Model</option>
+          <option value="" key="no-value">
+            choose Model
+          </option>
           {stateRedux.model.map((item, index) => (
             <option value={item.model} key={index}>
               {item.model}
@@ -162,18 +185,32 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
-        {localStorage.getItem("UserID") !== null &&
+        {localStorage.getItem("UserID") !== null && (
           <Button variant="info" onClick={openModal}>
             Add new Blog
-        </Button>
-        }
+          </Button>
+        )}
+      </div>
+      <div
+        className="pagination"
+        style={{ zIndex: "100", position: "absolute", bottom: "10px" }}
+      >
+        {blogs ? (
+          <Pagination
+            NumberOfItemsInDB={itemsInDB}
+            NumberToShow={6}
+            handleClick={handleClick}
+          />
+        ) : (
+          <Loading />
+        )}
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
           <Modal.Title>Add a blog post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form >
+          <Form>
             <Form.Group>
               <Form.Label>Blog title</Form.Label>
               <Form.Control
@@ -256,18 +293,12 @@ export default function BlogFilter(props) {
                 </Form.Control>
               </Form.Group>
             </Form.Row>
-
-
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="primary"
-            type="button"
-            onClick={handleSubmit}
-          >
+          <Button variant="primary" type="button" onClick={handleSubmit}>
             Submit
-            </Button>
+          </Button>
 
           <Button variant="danger" onClick={closeModal}>
             Cancel

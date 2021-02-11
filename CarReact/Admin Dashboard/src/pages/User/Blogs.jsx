@@ -23,6 +23,14 @@ export default function Blogs(props) {
         })
     }
 
+    const handelClickEdit = (parameter) => {
+
+    }
+
+    const handelClickDelete = (parameter) => {
+        
+    }
+
     const createBlog = (blog) => {
         return (
             <BlogEntry
@@ -36,6 +44,8 @@ export default function Blogs(props) {
                 cardBrand={blog.brand}
                 cardModel={blog.model}
                 details={handelClickDetails}
+                edit={handelClickEdit}
+                delete={handelClickDelete}
             />
         );
     };

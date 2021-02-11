@@ -339,22 +339,24 @@ showFilterPosts = (req, res) => {
   }
   console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
-
+//comment
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
-    .skip(0)
-    .limit(9)
-    .exec((error, data) => {
+    .skip(+req.params.skip)
+    .limit(6)
+    .exec(async (error, data) => {
       if (error || data.length == 0) {
-        return res.status(200).json({
+        return res.json({
           Data: error,
           Message: "no blogs found",
           Success: false,
         });
       }
-      return res.status(200).json({
+      const TotalItem = await Post.countDocuments(queryCond).then("Done").catch("Error")
+      return res.json({
         Data: data,
+        TotalItem:TotalItem,
         Message: "posts: filter",
         Success: true,
       });

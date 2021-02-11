@@ -2,7 +2,8 @@ function Button2(props) {
   return (
     <button
       className={props.class}
-      onClick={props.onClick}
+      onClick={() => props.handleClick(props.parameter)}
+      key={props.key}
     >
       {props.value}
     </button>

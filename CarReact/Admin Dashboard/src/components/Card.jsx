@@ -1,3 +1,5 @@
+import { Button } from '../components/Button'
+
 export function Card(props) {
 
   return (
@@ -10,9 +12,9 @@ export function Card(props) {
               <i className="fas fa-bookmark"></i>
 
             </div>
-            <div className="card__img" style={{background: `url(${props.image})`}}></div>
+            <div className="card__img" style={{ background: `url(${props.image})` }}></div>
             <p className="card_link">
-              <div className="card__img--hover" style={{background: `url(${props.image})`}} ></div>
+              <div className="card__img--hover" style={{ background: `url(${props.image})` }} ></div>
             </p>
             <div className="card__info">
               <h4 className="card__title text-truncate">{props.title}</h4>
@@ -25,9 +27,21 @@ export function Card(props) {
                 <i className="badge badge-dark">{props.model}</i>
               </small>
             </div>
+
+            <div className="d-flex">
+
+              <Button className="btn btn-info mx-auto m-2" parameter={props.id} key={props.id} handelClick={props.handelClickEdit}
+                name={<i style={{ fontSize: '20px' }} className='fas fa-pen'></i>}>
+              </Button>
+
+              <Button className="btn btn-danger mx-auto m-2" parameter={props.id} key={props.id} handelClick={props.handelClickDelete}
+                name={<i style={{ fontSize: '20px' }} className='fas fa-trash'></i>}>
+              </Button>
+              </div>
+
           </article>
         </section>
       </div>
-    </div >
+      </div >
   );
 }
