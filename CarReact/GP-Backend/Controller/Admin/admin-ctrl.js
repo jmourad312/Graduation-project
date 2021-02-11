@@ -212,11 +212,10 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName , email" }];
+  const populateQuery = [{ path: "person", select: "firstName email" }];
 
 
   Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
-
 
 
     if (err) {
