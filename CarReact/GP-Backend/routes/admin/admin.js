@@ -27,6 +27,9 @@ function canViewall(req, resp, next) {
     } else next();
 }
 
+router.get('/test/:id/:i?',(req,res)=>{
+    console.log(req.params.i)
+})
 
 router.post('/addBrand', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addBrand);
 router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addModel);

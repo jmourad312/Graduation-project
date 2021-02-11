@@ -142,11 +142,13 @@ updateItem = (req, res) => {
 deleteItem = (req, res) => {
   let IdVendor = req.user._id;
 
-//   if(req.params.idperson){
-//     IdVendor = req.params.idperson;
-//  }
+  if(req.params.idperson){
+    IdVendor = req.params.idperson;
+ }
 
-  carItem.deleteOne({ _id: req.params.id, person: IdVendor }, (err, data) => {
+ console.log(req.params)
+
+  carItem.deleteOne({ _id: req.params.id, person: IdVendor }, async (err, data) => {
     if (err) {
      return res.json({
         "Data": err,
@@ -162,8 +164,8 @@ deleteItem = (req, res) => {
         })
       }
 
-      vendor.updateOne({person:req.user._id},{
-        $pull:{vendorItems:data._id}
+     await vendor.updateOne({person:IdVendor},{
+        $pull:{vendorItems:req.params.id}
       }).then("Done").catch("error")
 
        return res.json({
