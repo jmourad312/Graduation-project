@@ -172,7 +172,7 @@ export default function Settings(props) {
         <Button2
           onClick={handleSubmit}
           //   type="submit"
-          class="btn btn-success"
+          class="btn btn-dark"
           value="Submit"
         />
       </form>
