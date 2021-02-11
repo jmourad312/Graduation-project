@@ -165,6 +165,7 @@ export default function BlogDetails(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
+    console.log(blogID);
     axios
       .post(`http://localhost:3000/user/addComment/${blogID}`, inputValue, {
         headers: { Authorization: localStorage.getItem("Authorization") },
@@ -260,11 +261,11 @@ export default function BlogDetails(props) {
     >
       <div className="blogDetails">
         <div className="header">
-        <div style={{position:"absolute",top:"5%",right:"-30%"}}>
-      {localStorage.getItem("Authorization") === null && <LoginButton />}
-      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+          <div style={{ position: "absolute", top: "5%", right: "-30%" }}>
+            {localStorage.getItem("Authorization") === null && <LoginButton />}
+            {localStorage.getItem("Authorization") !== null && <UserIcon />}
 
-        </div>
+          </div>
           <div className="row">
             <div className="col-6">
               <p
@@ -274,7 +275,7 @@ export default function BlogDetails(props) {
                 {" "}
                 {blogDetails ? blogDetails.title : "LOADING"}{" "}
               </p>
-              <p>
+              <p style={{ fontWeight: "600", fontSize: "20px" }}>
                 by{" "}
                 <span>
                   {" "}
@@ -283,7 +284,7 @@ export default function BlogDetails(props) {
               </p>
               <hr />
               <p>
-                <span style={{ color: "gray" }}>
+                <span style={{ fontWeight: "700" }}>
                   Date :{blogDetails && blogDetails.createdAt}
                 </span>
                 {/* <span style={{ color: "gray" }}> Viewed </span> 3 */}
@@ -294,18 +295,17 @@ export default function BlogDetails(props) {
                 </span>
               </p>
               <hr />
-              <h5 className="mt-0">Post Details</h5>
-              <p className="truncate">{blogDetails && blogDetails.body}</p>
+              <h5 className="mt-0" style={{ fontWeight: "700" }}>Post Details</h5>
+              <p className="truncate" style={{ fontWeight: "600", fontSize: "20px" }}>{blogDetails && blogDetails.body}</p>
               <hr />
 
-              <hr />
               <p>
                 {" "}
-                <span className="text-secondary">Tags</span>{" "}
-                <span className="badge badge-info">
+                <span className="" style={{ fontWeight: "700" }}>Tags</span>{" "}
+                <span className="badge badge-dark" style={{ fontSize: "20px" }}>
                   {blogDetails && blogDetails.brand}
                 </span>
-                <span className="badge badge-info">
+                <span className="badge badge-dark ml-1" style={{ fontSize: "20px" }}>
                   {blogDetails && blogDetails.model}
                 </span>
               </p>
@@ -313,7 +313,7 @@ export default function BlogDetails(props) {
             <div className="col-6">
               <img
                 className=""
-                style={{ width: "400px" }}
+                style={{ width: "400px", height: "300px", borderRadius: "10%" }}
                 src={blogDetails && blogDetails.image}
                 alt=""
               />
@@ -339,12 +339,13 @@ export default function BlogDetails(props) {
       </p> */}
       <div className="row">
         {localStorage.getItem("UserID") !== null && (
-          <button className="bookmarkbtn fourth" onClick={handleAddBookmark}>
+          <button className="bookmarkbtn fourth" style={{ marginLeft: "30px" }} onClick={handleAddBookmark}>
             Bookmark
           </button>
         )}
         {checkOwner && (
           <Button
+
             variant="info"
             style={{ margin: "10px" }}
             onClick={() => openModal(props.id)}
@@ -449,20 +450,20 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <div className="card my-4">
+      <div className="card bgforleavecomment">
         <h5 className="card-header">Leave a Comment:</h5>
         <div className="card-body">
           <form method="post" onSubmit={handleSubmit}>
             <div className="form-group">
               <textarea
-                className="form-control"
+                className="form-control bgforleavecomment2"
                 rows="3"
                 name="content"
                 value={inputValue.content}
                 onChange={handleChange}
               ></textarea>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-dark">
               Submit
             </button>
           </form>
@@ -472,42 +473,42 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-            return (
-              <div className="media mb-1" key={index}>
-                <button
-                  className="btn btn-info"
-                  onClick={() => addVote(item._id)}
-                >
-                  <i className="fas fa-arrow-circle-up" />
-                </button>
-                <span className="btn badge-pill btn-success">
-                  {item.vote.numberOfVoting}
-                </span>
-                <button
-                  className="btn btn-info"
-                  onClick={() => removeVote(item._id)}
-                >
-                  <i class="fas fa-arrow-circle-down" />
-                </button>
+          return (
+            <div className="media mb-1" key={index}>
+              <button
+                className="btn btn-info"
+                onClick={() => addVote(item._id)}
+              >
+                <i className="fas fa-arrow-circle-up" />
+              </button>
+              <span className="btn badge-pill btn-success">
+                {item.vote.numberOfVoting}
+              </span>
+              <button
+                className="btn btn-info"
+                onClick={() => removeVote(item._id)}
+              >
+                <i class="fas fa-arrow-circle-down" />
+              </button>
 
-                <img
-                  className="d-flex mr-3 rounded-circle"
-                  src={item.image}
-                  alt=""
-                  style={{ maxHeight: "300px", maxWidth: "300px" }}
-                />
+              <img
+                className="d-flex mr-3 rounded-circle"
+                src={item.image}
+                alt=""
+                style={{ maxHeight: "300px", maxWidth: "300px" }}
+              />
+              <hr />
+              <br />
+              <div className="media-body">
+                <h5 className="mt-0">
+                  {item.person.firstName ? item.person.firstName : null}
+                </h5>
                 <hr />
                 <br />
-                <div className="media-body">
-                  <h5 className="mt-0">
-                    {item.person.firstName ? item.person.firstName : null}
-                  </h5>
-                  <hr />
-                  <br />
-                  <p>{item.content}</p>
-                </div>
+                <p>{item.content}</p>
+              </div>
 
-                {/* <form
+              {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -523,7 +524,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                {/* {item
+              {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -543,9 +544,9 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-              </div>
-            );
-          })
+            </div>
+          );
+        })
         : "LOADING"}
 
       {/* <!-- Comment with nested comments --> */}
