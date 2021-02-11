@@ -29,7 +29,7 @@
     .card__img {
       visibility: hidden;
       background-size: cover;
-      background-position: center;
+      background-position: top !important;
       background-repeat: no-repeat;
       width: 100%;
       height: 235px;
@@ -48,7 +48,7 @@
     .card__img--hover {
       transition: 0.2s all ease-out;
       background-size: cover;
-      background-position: center;
+      background-position: top !important;
       background-repeat: no-repeat;
       width: 100%;
       position: absolute;
