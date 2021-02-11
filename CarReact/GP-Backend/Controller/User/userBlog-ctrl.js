@@ -339,7 +339,7 @@ showFilterPosts = (req, res) => {
   }
   console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
-
+//comment
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
