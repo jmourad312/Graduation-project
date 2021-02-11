@@ -3,19 +3,17 @@ import React, { useEffect } from "react";
 import AddBlog from "../../../../components/AddBlog";
 import BlogEntry from "../../../../components/BlogEntry";
 import BlogFilter from "../../../../components/BlogFilter";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 // import Button from "../../../../components/Button";
 import { getBlogsAction } from "../../../../store/actions";
-import Loading from '../../../../components/Loading';
+import Loading from "../../../../components/Loading";
 import { motion } from "framer-motion";
 import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
 import { Pagination } from "../../../../components/Pagination";
 
 export default function BlogList() {
-  
-  
-  const blogs = useSelector(state => state.blogs.Data);
+  const blogs = useSelector((state) => state.blogs);
   const dispatch = useDispatch();
   // const getBlogs = () =>{
   //  dispatch(getBlogsAction());
@@ -23,13 +21,10 @@ export default function BlogList() {
 
   useEffect(() => {
     // getBlogs();
-  },[blogs]);
-    
-  const handleClick =(params)=>{
+  }, [blogs]);
 
-  }
-  function createItem (blog) {
-
+  const handleClick = (params) => {};
+  function createItem(blog) {
     return (
       <BlogEntry
         key={blog._id}
@@ -40,7 +35,7 @@ export default function BlogList() {
         badgeClass={blog.state ? "badge-primary" : null}
         // badgeValue={blog.badgeValue}
         cardTitle={blog.title}
-        userName={blog.person.firstName ? blog.person.firstName : "User"}
+        userName={blog.person ? blog.person.firstName : "User"}
         date={blog.createdAt}
         cardContent={blog.body}
         cardBrand={blog.brand}
@@ -50,23 +45,23 @@ export default function BlogList() {
     );
   }
   // const blogs = useSelector(state => state.blogs);
-const pageVariants = {
-  in: {
-    opacity: 10,
-    y: "0vh",
-    scale: 1,
-  },
-  out: {
-    opacity: 0,
-    y: "-100vh",
-    scale: 0.1,
-  },
-};
-const pageTransitions = {
-  duration: 1.5,
-  type: "tween",
-  ease: "anticipate",
-};
+  const pageVariants = {
+    in: {
+      opacity: 10,
+      y: "0vh",
+      scale: 1,
+    },
+    out: {
+      opacity: 0,
+      y: "-100vh",
+      scale: 0.1,
+    },
+  };
+  const pageTransitions = {
+    duration: 1.5,
+    type: "tween",
+    ease: "anticipate",
+  };
   return (
     <motion.section
       className="blog"
@@ -89,9 +84,28 @@ const pageTransitions = {
           <div className="col-9 blog-contents">
             <section>
               <div className="row">
-                {blogs ? blogs.map(createItem) : <Loading />}
+                {blogs ? (
+                  blogs.Success ? (
+                    blogs.Data.map(createItem)
+                  ) : (
+                    <div
+                      style={{
+                        height: "600px",
+                        width: "600px",
+                        position: "absolute",
+                        left:"15%",
+                        top:"25%"
+                      }}
+                    >
+                    <h2 style={{position:"relative",top:"40%",left:"0%",textAlign:"center"}}>
+                      Sorry, No posts match your search
+                    </h2>
+                    </div>
+                  )
+                ) : (
+                  <Loading />
+                )}
               </div>
-              
             </section>
           </div>
         </div>
@@ -99,4 +113,3 @@ const pageTransitions = {
     </motion.section>
   );
 }
-
