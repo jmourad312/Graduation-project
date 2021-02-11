@@ -68,11 +68,11 @@ export default function BlogFilter(props) {
   const handleImageChange = (event) => {
     console.log(event.target.files);
     setInputValue((previous) => {
-        return {
-          ...previous,
-          image: event.target.files[0],
-          // loaded: 0,
-        };
+      return {
+        ...previous,
+        image: event.target.files[0],
+        // loaded: 0,
+      };
     });
   };
 
@@ -136,6 +136,7 @@ export default function BlogFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-md mb-3"
         >
+          <option value="" key="no-value">choose Brand</option>
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index}>
               {item.name}
@@ -152,6 +153,7 @@ export default function BlogFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-sm mb-3"
         >
+          <option value="" key="no-value">choose Model</option>
           {stateRedux.model.map((item, index) => (
             <option value={item.model} key={index}>
               {item.model}
@@ -160,18 +162,18 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
-      {localStorage.getItem("UserID") !== null &&
-        <Button variant="info" onClick={openModal}>
-          Add new Blog
+        {localStorage.getItem("UserID") !== null &&
+          <Button variant="info" onClick={openModal}>
+            Add new Blog
         </Button>
-      }
+        }
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
           <Modal.Title>Add a blog post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form >
             <Form.Group>
               <Form.Label>Blog title</Form.Label>
               <Form.Control
@@ -182,6 +184,7 @@ export default function BlogFilter(props) {
                 value={inputValue.title}
                 onChange={handleInputChange}
                 required
+                maxLength="50"
               />
             </Form.Group>
             <Form.Group>
@@ -206,6 +209,8 @@ export default function BlogFilter(props) {
                 value={inputValue.body}
                 onChange={handleInputChange}
                 required
+                maxLength="150"
+                style={{ resize: "none" }}
               />
             </Form.Group>
             <Form.Row>
@@ -252,15 +257,18 @@ export default function BlogFilter(props) {
               </Form.Group>
             </Form.Row>
 
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
+
           </Form>
         </Modal.Body>
         <Modal.Footer>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={handleSubmit}
+          >
+            Submit
+            </Button>
+
           <Button variant="danger" onClick={closeModal}>
             Cancel
           </Button>

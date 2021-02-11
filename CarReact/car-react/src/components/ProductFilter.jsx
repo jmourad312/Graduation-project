@@ -67,7 +67,7 @@ export default function ProductFilter(props) {
 
   return (
   
-    <div className={props.class}>
+    <div className={props.className}>
       {/* <SimpleSearch /> */}
       <div className="input-group mb-3">
         <input type="text" name="search" onChange={handleChange} value={state.search} className="form-control" placeholder="Search" />
