@@ -55,7 +55,7 @@ export default function Blogs(props) {
         <div className="admin">
             <div className="container-for-admin">
                 <Navbar />
-                <h1 className="m-5">Products By {data.firstName}</h1>
+                <h1 className="m-5">Blogs By {data.firstName}</h1>
 
                 <div className="col-9 blog-contents">
                     <section>

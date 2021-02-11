@@ -4,14 +4,9 @@ export function Card(props) {
 
   return (
 
-    <div className="col-4 productComp mb-2" >
-      <div className="productList">
+    <div className="col-4 productComp mb-2 blog-post" >
         <section className="cards">
           <article className="card card--1" onClick={() => props.details(props.id)}>
-            <div className="card__info-hover">
-              <i className="fas fa-bookmark"></i>
-
-            </div>
             <div className="card__img" style={{ background: `url(${props.image})` }}></div>
             <p className="card_link">
               <div className="card__img--hover" style={{ background: `url(${props.image})` }} ></div>
@@ -42,6 +37,5 @@ export function Card(props) {
           </article>
         </section>
       </div>
-      </div >
   );
 }
