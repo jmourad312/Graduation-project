@@ -76,7 +76,7 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addCommentReply);
 
 // show posts
-router.post("/showFilterPosts", userBlogCtrl.showFilterPosts)
+router.post("/showFilterPosts/:skip", userBlogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 

@@ -343,9 +343,9 @@ showFilterPosts = (req, res) => {
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
-    .skip(req.params.skip)
+    .skip(+req.params.skip)
     .limit(6)
-    .exec((error, data) => {
+    .exec(async (error, data) => {
       if (error || data.length == 0) {
         return res.json({
           Data: error,
@@ -353,8 +353,10 @@ showFilterPosts = (req, res) => {
           Success: false,
         });
       }
+      const TotalItem = await Post.countDocuments(queryCond).then("Done").catch("Error")
       return res.json({
         Data: data,
+        TotalItem:TotalItem,
         Message: "posts: filter",
         Success: true,
       });
