@@ -90,6 +90,14 @@ export default function BlogFilter(props) {
     console.log(filterState);
     // handleSearchClick();
   };
+  const handleClear = () => {
+    setFilterState({
+      model: "",
+      brand: "",
+      search: "",
+    });
+    dispatch(resultFromFilter({}, 0));
+  };
 
   //-------------ADD BLOG ----------------------------------------
   const [isOpen, setIsOpen] = useState(false);
@@ -236,12 +244,26 @@ export default function BlogFilter(props) {
         <Button variant="dark" onClick={handleSearchClick}>
           Filter
         </Button>
+        <button
+          type="button"
+          className="btn btn-danger ml-5"
+          // style={{
+          //   background:
+          //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
+          // }}
+          onClick={handleClear}
+        >
+          Clear filter
+        </button>
       </div>
-      <div>
+      <div style={{ position: "relative", top: "150px", right: "10px",textAlign:"center" }}>
         {localStorage.getItem("UserID") !== null && (
-          <Button variant="info" onClick={openModal}>
-            Add new Blog
-          </Button>
+          <div>
+          <label for="add" style={{fontSize:"25px"}}>Add new post</label>
+          <p onClick={openModal} id="add" style={{cursor:"pointer"}}>
+            <i class="fas fa-4x fa-plus-circle"></i>
+          </p>
+          </div>
         )}
       </div>
       <div
