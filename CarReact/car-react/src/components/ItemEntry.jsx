@@ -154,11 +154,11 @@ export default function ItemEntry(props) {
           </Button>
           </div> */}
 
-        <section class="cards" onClick={() => handleClick(props.id)}>
-          <article class="card card--1">
-            <div class="card__img" style={{ background: `url(${props.image})` }}></div>
+        <section class="cards" >
+          <article class="card card--1" >
+            <div class="card__img" style={{ background: `url(${props.image})` }} ></div>
             <p class="card_link">
-              <div class="card__img--hover" style={{ background: `url(${props.image})` }} ></div>
+              <div class="card__img--hover" style={{ background: `url(${props.image})` }} onClick={() => handleClick(props.id)} ></div>
             </p>
             <div class="card__info">
               <h4 class="card__title text-truncate">{props.name}</h4>
