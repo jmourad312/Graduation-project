@@ -7,10 +7,16 @@ const userItemCtrl = require('../../Controller/User/userItem-ctrl');
 const userRateCtrl = require('../../Controller/User/userRate-ctrl');
 
 const upload = require('../../middleware/upload').upload;
+const User = require("../../models/Person/User/user");
+const Vendor = require("../../models/Person/Vendor/vendor");
 
-function canView(req, resp, next) {
-  const { role } = req.user;
-  if (!(role == "user" || role == "admin")) {
+
+async function canView(req, resp, next) {
+  const { role, _id } = req.user;
+
+  const data =  await User.findOne({person:_id},{banned:1})
+
+  if (!( (role == "user" && data.banned==false ) || role == "admin")) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -19,9 +25,13 @@ function canView(req, resp, next) {
   } else next();
 }
 
-function canViewall(req, resp, next) {
-  const { role } = req.user;
-  if (!(role == "user" || role == "admin" || role == "vendor")) {
+async function canViewall(req, resp, next) {
+  const { role, _id } = req.user;
+
+  const dataUser =  await User.findOne({person:_id},{banned:1})
+  const dataVendor =  await Vendor.findOne({person:_id},{banned:1})
+
+  if (! ( (role == "user"  &&  dataUser.banned==false ) || role == "admin" || (role == "vendor"  && dataVendor.banned==false ))) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -30,12 +40,12 @@ function canViewall(req, resp, next) {
   } else next();
 }
 
-function validateUser(req, resp, next) {
+async function validateUser(req, resp, next) {
   console.log(req.user)
   const { role, _id } = req.user;
-  //!((role == "user" || role == "admin") && (_id == req.params.id || _id == req.body.id))
+  const data =  await User.findOne({person:_id},{banned:1})
 
-  if (!( (role == "user" && (_id == req.params.id || _id == req.body.id) ) || (role == "admin"))) {
+  if (!( (role == "user" && (_id == req.params.id || _id == req.body.id) && data.banned==false ) || (role == "admin"))) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -58,7 +68,7 @@ router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }
 
 router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), upload.single("image") ,canView, userBlogCtrl.updatePost);
 
-router.get("/showPostsOfUser", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
+router.get("/showPostsOfUser/:id?", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
 
 // add comment or reply in comment 
 router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addComment);
@@ -66,7 +76,7 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addCommentReply);
 
 // show posts
-router.post("/showFilterPosts", userBlogCtrl.showFilterPosts)
+router.post("/showFilterPosts/:skip", userBlogCtrl.showFilterPosts)
 
 router.get("/showDetailsPost/:id", userBlogCtrl.showDetailsPost)
 

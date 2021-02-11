@@ -10,11 +10,12 @@ import Loading from '../../../../components/Loading';
 import { motion } from "framer-motion";
 import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
+import { Pagination } from "../../../../components/Pagination";
 
 export default function BlogList() {
   
   
-  const blogs = useSelector(state => state.blogs);
+  const blogs = useSelector(state => state.blogs.Data);
   const dispatch = useDispatch();
   // const getBlogs = () =>{
   //  dispatch(getBlogsAction());
@@ -23,30 +24,12 @@ export default function BlogList() {
   useEffect(() => {
     // getBlogs();
   },[blogs]);
-    // useEffect(() => {
-    //   getBlogs();
-    // }, []);
+    
+  const handleClick =(params)=>{
 
-  // const items = [];
-  // blogs.Data.forEach(element => {
-  //   items.push(element)
-  // });
+  }
   function createItem (blog) {
-    // return <BlogEntry
-    //   key={blog.id}
-    //   imgClass={blog.imgClass}
-    //   imgSrc={blog.imgSrc}
-    //   imgAlt={blog.imgAlt}
-    //   badgeClass={blog.badgeClass}
-    //   badgeValue={blog.badgeValue}
-    //   cardTitle={blog.cardTitle}
-    //   userName={blog.userName}
-    //   date={blog.date}
-    //   cardContent={blog.cardContent}
-    //   cardBrand={blog.cardBrand}
-    //   cardModel={blog.cardModel}
-    //   replies={blog.replies}
-    // />
+
     return (
       <BlogEntry
         key={blog._id}
@@ -106,8 +89,9 @@ const pageTransitions = {
           <div className="col-9 blog-contents">
             <section>
               <div className="row">
-                {blogs.Data ? blogs.Data.map(createItem) : <Loading />}
+                {blogs ? blogs.map(createItem) : <Loading />}
               </div>
+              
             </section>
           </div>
         </div>

@@ -25,10 +25,8 @@ export function Navbar(props) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {/* Left */}
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link waves-effect" href="#">Home
-                               <span className="sr-only">(current)</span>
-                            </a>
+                        <li className="nav-item">
+                        <Link className="nav-link waves-effect" to={'Admin'}>Home</Link>
                         </li>
                         <li className="nav-item">
                         <Link className="nav-link waves-effect" to={'LoginIn'} onClick={logout}>Logout</Link>

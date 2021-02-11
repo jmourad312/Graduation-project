@@ -78,26 +78,29 @@ deletePost = (req, res) => {
   const IdPerson = req.user._id;
   Post.deleteOne({ _id: req.params.id, person: IdPerson }, (err, data) => {
     if (err) {
-      res.json({
+      return res.json({
         Data: {},
         Message: "Can't delete Post from database",
         Success: false,
       });
-    } else {
+    }
       if (data.n == 0) {
-        res.json({
+        return res.json({
           Data: {},
           Message: "Data with that id: " + req.params.id + " don't exist",
           Success: false,
         });
-      } else {
-        res.json({
+      }
+
+      user.updateOne({person:req.user._id},{
+        $pull:{postsUser:data._id}
+      }).then("Done").catch("error")
+
+       return res.json({
           Data: {},
           Message: "Your Post is deleted successfully ",
           Success: true,
         });
-      }
-    }
   });
 };
 
@@ -336,22 +339,24 @@ showFilterPosts = (req, res) => {
   }
   console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
-
+//comment
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
-    .skip(0)
-    .limit(9)
-    .exec((error, data) => {
+    .skip(+req.params.skip)
+    .limit(6)
+    .exec(async (error, data) => {
       if (error || data.length == 0) {
-        return res.status(200).json({
+        return res.json({
           Data: error,
           Message: "no blogs found",
           Success: false,
         });
       }
-      return res.status(200).json({
+      const TotalItem = await Post.countDocuments(queryCond).then("Done").catch("Error")
+      return res.json({
         Data: data,
+        TotalItem:TotalItem,
         Message: "posts: filter",
         Success: true,
       });
@@ -359,7 +364,12 @@ showFilterPosts = (req, res) => {
 };
 
 showPostsOfUser = (req, res) => {
-  const IdPerson = req.user._id;
+
+  var IdPerson = req.user._id;
+
+  if(req.params.id){
+     IdPerson = req.params.id;
+  }
 
   const populateQuery = [{ path: "person", select: "firstName" }];
 
@@ -376,7 +386,7 @@ showPostsOfUser = (req, res) => {
       }
       return res.json({
         Data: data,
-        Message: "posts for:" + data.person.firstName,
+        Message: "posts",
         Success: true,
       });
     });

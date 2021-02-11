@@ -79,19 +79,20 @@ export default function ProductDetails(props) {
       <section className="products-details">
         {/* <!-- start product details --> */}
         <div className="container">
-          <div className="row bg-light">
+          
+          <div className="row ">
             {/* <!-- image of produce --> */}
-            <div className="col-md-4">
+            <div className="col-4 bg-white mt-5">
               <img
                 src={productDetails && productDetails.image}
                 // width="100%"
                 // height="100%"
-                style={{ maxHeight: "400px", maxWidth: "350px" }}
+                style={{ height: "300px", width: "300px" }}
                 alt=""
               />
             </div>
 
-            <div className="col-md-8">
+            <div className="col-8 bg-white mt-5">
               <h2>
                 {productDetails && productDetails.name}
                 <br /> By:{" "}
@@ -162,6 +163,8 @@ export default function ProductDetails(props) {
               </div>
             </div>
           </div>
+         
+          
         </div>
         {/* <!-- end product details --> */}
 

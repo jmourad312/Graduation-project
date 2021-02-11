@@ -32,14 +32,23 @@
   }
   
   .fourth {
-    border-color: #f1c40f;
+    border-color: #1b1b1b;
     color: rgb(29, 27, 27);
-    background-image: linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #747371 50%, transparent 50%);
     background-position: 100%;
     background-size: 400%;
     transition: 300ms ease-in-out;
+    background-color: rgb(180, 177, 177);
   }
   .fourth:hover {
     background-position: 0;
+  }
+
+  .bgforleavecomment{
+    background-color: rgba(163, 160, 160, 0.575);
+  }
+  .bgforleavecomment2{
+    background-color: rgba(128, 128, 128, 0.123);
+    color: black;
   }
 }

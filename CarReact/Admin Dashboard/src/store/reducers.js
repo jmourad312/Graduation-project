@@ -5,7 +5,10 @@ export default (state = {
     token: "",
     users: [],
     vendors: [],
-    countData:{}
+    countData: {},
+    products: [],
+    blogs: [],
+
 
 }, action) => {
     switch (action.type) {
@@ -32,14 +35,23 @@ export default (state = {
             return {
                 ...state,
                 vendors: action.payload
-            }
+            };
         case TYPES.GET_COUNT_DATA:
             return {
                 ...state,
                 countData: action.payload
+            };
+
+        case TYPES.GET_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload
+            };
+        case TYPES.GET_BLOGSS:
+            return {
+                ...state,
+                blogs: action.payload
             }
-
-
 
 
 

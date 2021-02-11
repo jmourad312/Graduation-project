@@ -8,6 +8,7 @@ const Comment = require("../../models/Blog/reply");
 
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
+const Person = require('../../models/Person/person')
 
 //addban user
 //removebaanuser
@@ -123,7 +124,7 @@ addCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName , email" }];
+  const populateQuery = [{ path: "person", select: "firstName lastName middleName email" }];
 
   User.find({}).populate(populateQuery).exec((err, users) => {
 
@@ -185,6 +186,24 @@ addUserBan = (req, res) => {
   );
 };
 
+deleteUser = (req, res) => {
+  Person.deleteOne({_id:req.params.id}, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete user",
+        Success: false,
+      });
+    }
+    User.deleteOne({person:req.params.id}).then("Done")
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
+};
+
 // remove ban
 removeUserBan = (req, res) => {
   const IdPerson = req.body.id;
@@ -212,7 +231,7 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName email" }];
+  const populateQuery = [{ path: "person", select: "firstName  lastName middleName email" }];
 
 
   Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
@@ -438,6 +457,69 @@ countAll = (req, res) => {
     });
 }
 
+deleteVendor = (req, res) => {
+  Person.deleteOne({_id:req.params.id}, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete user",
+        Success: false,
+      });
+    }
+    Vendor.deleteOne({person:req.params.id}).then("Done")
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
+};
+
+
+getItemsVendor = async (req, res) => {
+  const IdVendor = req.params.id;
+
+   carItem
+    .find({ person: IdVendor }, (error, items) => {
+      if (error || items.length == 0) {
+        return res.json({
+          Data: error,
+          Message: "Item not found",
+          Success: false,
+        });
+      }
+      return res.json({
+        Data: items,
+        Message: "number of items:"+items.length,
+        Success: true,
+      });
+    })
+
+};
+
+getBlogsUser = (req, res) => {
+  const IdPerson = req.params.id;
+
+  const populateQuery = [{ path: "person"}];
+
+  Post.find({ person: IdPerson })
+    .sort({ _id: -1 })
+    .populate(populateQuery)
+    .exec((error, data) => {
+      if (error || !data.length) {
+        return res.json({
+          Data: error,
+          Message: "no blogs found",
+          Success: false,
+        });
+      }
+      return res.json({
+        Data: data,
+        Message: "posts for:",
+        Success: true,
+      });
+    });
+};
 
 module.exports = {
   addModel,
@@ -455,5 +537,9 @@ module.exports = {
   vendorsNumber,
   numberOfItem,
   vendorAndProducts,
-  countAll
+  countAll,
+  deleteVendor,
+  deleteUser,
+  getItemsVendor,
+  getBlogsUser
 };

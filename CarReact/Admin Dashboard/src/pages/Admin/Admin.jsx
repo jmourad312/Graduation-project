@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
+import { Button } from '../../components/Button'
 import { Pagination } from '../../components/Pagination'
 import { Navbar } from '../../components/Navbar'
 import { instance } from "../../network/axiosConfig";
@@ -100,10 +101,53 @@ export default function Admin(props) {
         }
     }
 
-    const goToEditUser = async(parameter) =>{
+    const goToEditUser = async (parameter) => {
         props.history.push({
-            pathname:'/EditUser',
-            state:{data:parameter}
+            pathname: '/EditUser',
+            state: { data: parameter }
+        })
+    }
+
+    const goToEditVendor = async (parameter) => {
+        props.history.push({
+            pathname: '/EditVendor',
+            state: { data: parameter }
+        })
+    }
+
+    const goToDeleteUser = async (parameter) => {
+        try {
+            const res = await instance.delete(`admin/deleteUser/${parameter}`,
+                { headers: { Authorization: localStorage.getItem("Authorization") } });
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const goToDeleteVendor = async (parameter) => {
+        try {
+            const res = await instance.delete(`admin/deleteVendor/${parameter}`,
+                { headers: { Authorization: localStorage.getItem("Authorization") } });
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const ProductsVendor = (parameter) => {
+        props.history.push({
+            pathname: '/Items',
+            state: { data: parameter }
+        })
+    }
+
+    const BlogsUser = (parameter) => {
+        props.history.push({
+            pathname: '/Blogs',
+            state: { data: parameter }
         })
     }
 
@@ -135,6 +179,7 @@ export default function Admin(props) {
             products: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage)
         })
     }
+
     const [BarData, setBarData] = useState({
         labels: ["Users", "Vendors", "Products", "Blogs"],
         datasets: [{
@@ -230,22 +275,22 @@ export default function Admin(props) {
                                         <div className="list-group list-group-flush">
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Users
-                                        <span className="badge badge-success badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.user}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Vendors
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.vendor}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Products
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.product}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Blogs
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.blogs}</span>
                                             </a>
 
@@ -262,7 +307,7 @@ export default function Admin(props) {
                             <>
                                 <div onLoad={() => getPartUser(0)}></div>
                                 <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
-                                <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} ></Tabel>
+                                <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} handelClickDelete={goToDeleteUser}></Tabel>
                             </>
                         }
 
@@ -271,7 +316,7 @@ export default function Admin(props) {
                             stateRedux.vendors.length != 0 &&
                             <>
                                 <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
-                                <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} ></Tabel>
+                                <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} handelClickEdit={goToEditVendor} handelClickDelete={goToDeleteVendor}></Tabel>
                             </>
                         }
 
@@ -306,7 +351,11 @@ export default function Admin(props) {
                                                                 <td>{item.person._id}</td>
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.postsUser.length}</td>
-                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+                                                                <td >
+                                                                    <Button disabled={item.postsUser.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={BlogsUser}
+                                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                                    </Button>
+                                                                </td>
                                                             </tr>
                                                         )
                                                     })}
@@ -350,7 +399,13 @@ export default function Admin(props) {
                                                                 <td>{item.person._id}</td>
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.vendorItems.length}</td>
-                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+
+                                                                <td >
+                                                                    <Button disabled={item.vendorItems.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={ProductsVendor}
+                                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                                    </Button>
+                                                                </td>
+
                                                             </tr>
                                                         )
                                                     })}

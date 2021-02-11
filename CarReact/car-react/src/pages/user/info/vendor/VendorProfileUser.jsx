@@ -6,79 +6,67 @@ export default function VendorProfileUser() {
       <div className="bg">
         <div className="container">
           {/* <!-- vendor info --> */}
-          <h1 className="text-center mb-5">Vendor Profile</h1>
+          <h2 className="text-center">Vendor Info</h2>
           <section className="row">
             <div className="media">
-              <div className="col-lg-4">
+              <div className="col-10">
+                <div className="media-body">
+                  <div className="">
+                    <h3><i className="fa fa-envelope fa-1x mr-2" aria-hidden="true"></i>
+                      Don't hesitate to contact us
+                      </h3>
+                    <h5>
+                      Phone: +1 (0) 000 0000 001 <br/>
+                      Email: youremail@mail.com
+                    </h5>
+                    <iframe 
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                width="300"
+                height="200"
+                style={{ border: "rgb(0, 0, 0) solid", borderRadius: "5%" }}
+                allowfullscreen
+              ></iframe>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="col-4">
                 <img
                   className="rounded-circle"
-                  style={{width: "100%"}}
+                  style={{ width: "100%", height: "100%" }}
                   src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
                   alt="Generic placeholder"
                 />
               </div>
-              <div className="col-lg-8">
-                <div className="media-body">
-                  <h5 className="m-5">Media heading</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                  scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                  vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                  nisi vulputate fringilla. Donec lacinia congue felis in
-                  faucibus.
-                </div>
-              </div>
             </div>
           </section>
-          <hr className="hr " />
+          {/* <hr className="hr " /> */}
           {/* <!-- map & address --> */}
-          <h1 className="text-center mb-3">Vendor's Location</h1>
-          <section className="row">
-            <div className="col-lg-6">
-              <div className="m-5">
-                <h4>
-                  <i
-                    className="fa fa-envelope fa-2x"
-                    aria-hidden="true"
-                    aria-hidden="true"
-                  ></i>
-                  Don't hesitate to contact us
-                </h4>
-
-                <p className="m-5">
-                  Phone: +1 (0) 000 0000 001 <br />
-                  Email: youremail@mail.com
-                </p>
-              </div>
-            </div>
-
-            <div className="col-lg-6">
-              <div>
-                <div className="map-responsive">
-                  <iframe
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                    width="600"
-                    height="450"
-                    frameborder="0"
-                    style={{ border: "rgb(0, 0, 0) solid", borderRadius: "5%" }}
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          </section>
+          {/* <h1 className="text-center">Vendor's Location</h1>
+          <div className="row">
+          <div className="centercontent">
+              <iframe 
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                width="300"
+                height="200"
+                style={{ border: "rgb(0, 0, 0) solid", borderRadius: "5%" }}
+                allowfullscreen
+              ></iframe>
+          </div>
+          </div> */}
           <hr className="hr " />
 
           {/* <!-- items --> */}
-          <h1 className="text-center mb-3">Available Items</h1>
-          <section className="row mb-5">
+          <h2 className="text-center mb-3">Available Items</h2>
+          <section className="row">
             <div className="container">
-              <div className="row mb-3">
+              <div className="row">
                 {/* <!-- <div className="col-6">
                               <h3 className="mb-3">Carousel cards title </h3>
                           </div> --> */}
                 <div className="m-auto">
                   <a
-                    className="btn btn-success btn-lg rounded-circle mr-5"
+                    className="btn btn-dark rounded-circle mr-5"
                     href="#carouselExampleIndicators2"
                     role="button"
                     data-slide="prev"
@@ -86,7 +74,7 @@ export default function VendorProfileUser() {
                     <i className="fas fa-arrow-left"></i>
                   </a>
                   <a
-                    className="btn btn-success btn-lg rounded-circle"
+                    className="btn btn-dark rounded-circle"
                     href="#carouselExampleIndicators2"
                     role="button"
                     data-slide="next"
@@ -94,7 +82,7 @@ export default function VendorProfileUser() {
                     <i className="fa fa-arrow-right"></i>
                   </a>
                 </div>
-                <div className="col-12 m-lg-3">
+                <div className="col-12">
                   <div
                     id="carouselExampleIndicators2"
                     className="carousel slide"
@@ -103,7 +91,7 @@ export default function VendorProfileUser() {
                     <div className="carousel-inner">
                       <div className="carousel-item active">
                         <div className="row">
-                          <div className="col-md-4">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -121,7 +109,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -139,7 +127,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -161,7 +149,7 @@ export default function VendorProfileUser() {
                       </div>
                       <div className="carousel-item">
                         <div className="row">
-                          <div className="col-md-4">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -179,7 +167,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4 mb-3">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -197,7 +185,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4 mb-3">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -219,7 +207,7 @@ export default function VendorProfileUser() {
                       </div>
                       <div className="carousel-item">
                         <div className="row">
-                          <div className="col-md-4 mb-3">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -237,7 +225,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4 mb-3">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"
@@ -255,7 +243,7 @@ export default function VendorProfileUser() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-4 mb-3">
+                          <div className="col-4">
                             <div className="card">
                               <img
                                 className="img-fluid"

@@ -229,10 +229,10 @@ export const filterCarModel = (namebrand) => async (dispatch) => {
 //     console.log(error);
 //   }
 // };
-export const resultFromFilter = (data) => async (dispatch) => {
+export const resultFromFilter = (data,params) => async (dispatch) => {
   try {
     console.log(data)
-    const res = await axios.post('http://localhost:3000/user/showFilterPosts',data);
+    const res = await axios.post(`http://localhost:3000/user/showFilterPosts/${params}`,data);
     console.log(res);
     dispatch({
       type: TYPES.GET_BLOGS,

@@ -66,12 +66,13 @@ export default function ProductFilter(props) {
   };
 
   return (
-    <div className={props.class}>
+  
+    <div className={props.className}>
       {/* <SimpleSearch /> */}
       <div className="input-group mb-3">
         <input type="text" name="search" onChange={handleChange} value={state.search} className="form-control" placeholder="Search" />
         <div className="input-group-append">
-          <button className="btn btn-success" onClick={actionToFilterOption} type="button">Go</button>
+          <button className="btn" style={{background: "linear-gradient(to right,  rgb(197, 191, 191),  rgb(88, 84, 84) )"}} onClick={actionToFilterOption} type="button">Go</button>
         </div>
       </div>
 
@@ -94,7 +95,7 @@ export default function ProductFilter(props) {
           value={state.brand}
           name="brand"
           onChange={handleChange}
-          className="custom-select custom-select-lg mb-3"
+          className="custom-select custom-select-md mb-3"
         >
           <option value="" key="no-value">choose Brand</option>
           {stateRedux.brand.map((item, index) => (
@@ -123,9 +124,9 @@ export default function ProductFilter(props) {
         </select>
       </div>
 
-      <button type="button" onClick={actionToFilterOption} className="btn btn-success">Filter No0o0o0o0o0o0ow</button>
+      <button type="button" onClick={actionToFilterOption} className="btn btncenter" style={{background: "linear-gradient(to right, rgb(197, 191, 191),  rgb(88, 84, 84) )"}}>Confirm Filter</button>
 
     </div>
+    
   );
-
 }
