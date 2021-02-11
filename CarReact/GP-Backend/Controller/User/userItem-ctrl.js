@@ -42,15 +42,15 @@ partOfItem = (req, res) => {
 // show all posts of all users
 showDetailsItem = async (req, res) => {
 
-  const idItem = req.params.id ; 
+  const idItem = req.params.id;
   const populateQuery = [
     { path: "person", select: "firstName" },
   ];
 
   carItem
     .findOne(
-      { _id: idItem},
-      {__v:0}
+      { _id: idItem },
+      { __v: 0 }
     )
     .populate(populateQuery)
     .exec(async (error, data) => {
@@ -62,10 +62,10 @@ showDetailsItem = async (req, res) => {
         });
       }
 
-      const feedback = await Feedback.find({_id:{$in:data.feedback}},{__v:0,car:0}).populate({path:"user",select:"firstName"})
-      
+      const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
+
       return res.json({
-        Data: data,feedback,
+        Data: data, feedback,
         Message: "Details product",
         Success: true,
       });
@@ -104,9 +104,9 @@ showFilterItems = (req, res) => {
     .find(queryCond, { __v: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
-    .skip(0)
-    .limit(9)
-    .exec((error, data) => {
+    .skip(+req.params.skip)
+    .limit(6)
+    .exec(async (error, data) => {
       if (error || data.length == 0) {
         return res.json({
           Data: error,
@@ -114,8 +114,10 @@ showFilterItems = (req, res) => {
           Success: false,
         });
       }
+      const TotalItem = await carItem.countDocuments(queryCond).then("Done").catch("Error")
       return res.json({
         Data: data,
+        TotalItem:TotalItem,
         Message: `posts: filter ${data.length}`,
         Success: true,
       });
