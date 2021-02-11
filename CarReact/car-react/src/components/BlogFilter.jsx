@@ -250,7 +250,7 @@ export default function BlogFilter(props) {
           zIndex: "100",
           position: "fixed",
           right: "300px",
-          bottom: "-100px",
+          bottom: "-43px",
         }}
       >
         {blogs && (
