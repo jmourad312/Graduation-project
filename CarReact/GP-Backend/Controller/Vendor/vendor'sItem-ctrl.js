@@ -143,31 +143,30 @@ deleteItem = (req, res) => {
   const IdVendor = req.user._id;
   carItem.deleteOne({ _id: req.params.id, person: IdVendor }, (err, data) => {
     if (err) {
-      res.json({
+     return res.json({
         "Data": {},
         "Message": "Can't delete item from database",
         "Success": false
       })
     }
-    else {
-      if (data.n == 0) {
-        res.json({
+       if (data.n == 0) {
+        return res.json({
           "Data": {},
           "Message": "Data with that id: " + req.params.id + " don't exist",
           "Success": false
         })
       }
 
-      else {
-        res.json({
+      vendor.updateOne({person:req.user._id},{
+        $pull:{vendorItems:data._id}
+      }).then("Done").catch("error")
+
+       return res.json({
           "Data": {},
           "Message": "Done delete",
           "Success": true
         })
-      }
-    }
   })
-
 }
 
 //get number of product

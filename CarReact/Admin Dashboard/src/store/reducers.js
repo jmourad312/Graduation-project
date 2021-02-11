@@ -5,7 +5,8 @@ export default (state = {
     token: "",
     users: [],
     vendors: [],
-    countData:{}
+    countData:{},
+    products:[],
 
 }, action) => {
     switch (action.type) {
@@ -39,10 +40,14 @@ export default (state = {
                 countData: action.payload
             }
 
+            case TYPES.GET_PRODUCTS:
+                return {
+                    ...state,
+                    products: action.payload
+                }
 
 
-
-
+            
 
 
         default:

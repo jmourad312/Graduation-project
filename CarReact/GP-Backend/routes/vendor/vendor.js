@@ -4,12 +4,16 @@ const passport = require("passport");
 const vendorItemCtrl = require("../../controller/Vendor/vendor'sItem-ctrl");
 const vendorprofiileCtrl = require("../../controller/Vendor/vendor'sProfile-ctrl");
 const upload = require('../../middleware/upload').upload;
+const Vendor = require('../../models/Person/Vendor/vendor')
 
 
+async function canView(req, resp, next) {
+  console.log(req.user)
 
-function canView(req, resp, next) {
-  const { role } = req.user;
-  if (!(role == "vendor" || role == "admin")) {
+  const { role,_id } = req.user;
+  const data =  await Vendor.findOne({person:_id},{banned:1})
+  
+  if (!( (role == "vendor" && data.banned == false) || role == "admin")   ) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -18,12 +22,12 @@ function canView(req, resp, next) {
   } else next();
 }
 
-function validateVendor(req, resp, next) {
+async function validateVendor  (req, resp, next) {
   console.log(req.user)
   const { role, _id } = req.user;
+  const data =  await Vendor.findOne({person:_id},{banned:1})
 
-
-  if (!((role == "vendor" && _id == req.params.id) || role == "admin")) {
+  if (!((role == "vendor" && _id == req.params.id && data.banned==false) || role == "admin")) {
     resp.json({
       Data: null,
       Message: "can't access",

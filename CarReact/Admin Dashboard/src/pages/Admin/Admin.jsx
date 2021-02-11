@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
+import { Button } from '../../components/Button'
 import { Pagination } from '../../components/Pagination'
 import { Navbar } from '../../components/Navbar'
 import { instance } from "../../network/axiosConfig";
@@ -136,6 +137,20 @@ export default function Admin(props) {
         }
     }
 
+    const ProductsVendor = (parameter) => {
+        props.history.push({
+            pathname: '/Items',
+            state: { data: parameter }
+        })
+    }
+
+    const BlogsUser = (parameter) => {
+        props.history.push({
+            pathname: '/Blogs',
+            state: { data: parameter }
+        })
+    }
+
     //console.log(stateRedux.countData.Data)
     //console.log(stateRedux.vendors)
     const getPartUser = (skip) => {
@@ -164,6 +179,7 @@ export default function Admin(props) {
             products: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage)
         })
     }
+
     const [BarData, setBarData] = useState({
         labels: ["Users", "Vendors", "Products", "Blogs"],
         datasets: [{
@@ -259,22 +275,22 @@ export default function Admin(props) {
                                         <div className="list-group list-group-flush">
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Users
-                                        <span className="badge badge-success badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.user}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Vendors
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.vendor}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Products
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.product}</span>
                                             </a>
 
                                             <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize: "20px" }}>No.Blogs
-                                        <span className="badge badge-info badge-pill pull-right">
+                                        <span className="badge badge-info badge-pill pull-right ml-2">
                                                     {stateRedux.countData.Success == true && stateRedux.countData.Data.blogs}</span>
                                             </a>
 
@@ -335,7 +351,11 @@ export default function Admin(props) {
                                                                 <td>{item.person._id}</td>
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.postsUser.length}</td>
-                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+                                                                <td >
+                                                                    <Button disabled={item.postsUser.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={BlogsUser}
+                                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                                    </Button>
+                                                                </td>
                                                             </tr>
                                                         )
                                                     })}
@@ -379,7 +399,13 @@ export default function Admin(props) {
                                                                 <td>{item.person._id}</td>
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.vendorItems.length}</td>
-                                                                <td><i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i></td>
+
+                                                                <td >
+                                                                    <Button disabled={item.vendorItems.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={ProductsVendor}
+                                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                                    </Button>
+                                                                </td>
+
                                                             </tr>
                                                         )
                                                     })}

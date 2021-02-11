@@ -124,7 +124,7 @@ addCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName , email" }];
+  const populateQuery = [{ path: "person", select: "firstName lastName middleName email" }];
 
   User.find({}).populate(populateQuery).exec((err, users) => {
 
@@ -231,7 +231,7 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
-  const populateQuery = [{ path: "person", select: "firstName , email" }];
+  const populateQuery = [{ path: "person", select: "firstName  lastName middleName email" }];
 
 
   Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
@@ -476,6 +476,28 @@ deleteVendor = (req, res) => {
   });
 };
 
+
+getItemsVendor = async (req, res) => {
+  const IdVendor = req.params.id;
+
+   carItem
+    .find({ person: IdVendor }, (error, items) => {
+      if (error || items.length == 0) {
+        return res.json({
+          Data: error,
+          Message: "Item not found",
+          Success: false,
+        });
+      }
+      return res.json({
+        Data: items,
+        Message: "number of items:"+items.length,
+        Success: true,
+      });
+    })
+
+};
+
 module.exports = {
   addModel,
   addBrand,
@@ -494,5 +516,6 @@ module.exports = {
   vendorAndProducts,
   countAll,
   deleteVendor,
-  deleteUser
+  deleteUser,
+  getItemsVendor
 };

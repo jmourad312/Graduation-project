@@ -9,7 +9,7 @@ export default function Model(props) {
     const [editValue, setEditValue] = useState({
         firstName: "",
         lastName: "",
-        middelName: "",
+        middleName: "",
         password: "",
         email: "",
         image: ""
@@ -19,7 +19,7 @@ export default function Model(props) {
         setEditValue({
             firstName: data.person.firstName,
             lastName: data.person.lastName,
-            middelName: data.person.middelName,
+            middleName: data.person.middleName,
             password: "",
             email: data.person.email,
             image:""
@@ -49,7 +49,7 @@ export default function Model(props) {
         editValue.image !="" && formData.append("image", editValue.image);
         formData.append("firstName", editValue.firstName);
         formData.append("lastName", editValue.lastName);
-        formData.append("middelName", editValue.middelName);
+        formData.append("middleName", editValue.middleName);
         formData.append("email", editValue.email);
         editValue.password.length !=0 && formData.append("password", editValue.password);
 
@@ -84,8 +84,8 @@ export default function Model(props) {
 
 
                     <div className="form-group">
-                        <label >middelName</label>
-                        <input type="text" className="form-control" value={editValue.middelName} name="middelName" onChange={handleEditChange} />
+                        <label >middleName</label>
+                        <input type="text" className="form-control" value={editValue.middleName} name="middleName" onChange={handleEditChange} />
                     </div>
 
                     <div className="form-group">

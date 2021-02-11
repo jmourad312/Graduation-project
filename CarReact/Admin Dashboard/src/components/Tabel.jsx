@@ -1,7 +1,7 @@
 import { Button } from "./Button";
 
 export function Tabel(props) {
-    console.log(props.data);
+    console.log(props.data.person);
 
     return (
         <>
@@ -45,14 +45,12 @@ export function Tabel(props) {
                                                 <td>
                                                     <Button className="page-link" parameter={item.person._id} key={index + 1} handelClick={props.handelClickDelete}
                                                         name={<i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i>}>
-
                                                     </Button>
                                                 </td>
 
                                                 <td>
                                                     <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClick}
                                                         name={<i style={{ fontSize: '20px' }} className="fas fa-ban"></i>}>
-
                                                     </Button>
                                                 </td>
                                             </tr>
