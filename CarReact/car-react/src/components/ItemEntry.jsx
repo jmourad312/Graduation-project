@@ -125,13 +125,11 @@ export default function ItemEntry(props) {
   };
   return (
     <div className="col-3">
-      <div className="card" style={{ width: "150px" }}>
-        <img
-          className="card-img-top"
-          src={props.image}
-          alt="Card"
-          style={{ height: "150px", width: "146px" }}
-        />
+      <div className="itemEntry">
+
+
+        {/* <div className="card" style={{ width: "150px" }}>
+        <img className="card-img-top" src={props.image} alt="Card" style={{ height: "100px", width: "146px" }}/>
         <div className="card-body">
           <h4 className="card-title text-truncate">{props.name}</h4>
           <p className="card-text text-truncate">{props.description}</p>
@@ -142,132 +140,163 @@ export default function ItemEntry(props) {
           </strong>
           <br/>
           <div className="row centerbtn">
-          <button
-            className="btn btn-info"
-            style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} 
-            onClick={() => handleClick(props.id)}
+          <button className="btn btn-info" style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={() => handleClick(props.id)}
           >
             <i class="fas fa-info-circle"></i>
           </button>
-          <button
-            className="btn btn-danger"
-            style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}}            onClick={() => handleDelete(props.id)}
-          >
+          <button className="btn btn-danger" style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={() => handleDelete(props.id)}>
             <i class="fas fa-trash-alt"></i>
           </button>
           <Button 
           variant="success" 
-          style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}}          onClick={openModal}>
+          style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={openModal}>
+            <i class="fas fa-pen"></i>
+          </Button>
+          </div> */}
+
+        <section class="cards" >
+          <article class="card card--1" >
+            <div class="card__img" style={{ background: `url(${props.image})` }} ></div>
+            <p class="card_link">
+              <div class="card__img--hover" style={{ background: `url(${props.image})` }} onClick={() => handleClick(props.id)} ></div>
+            </p>
+            <div class="card__info">
+              <h4 class="card__title text-truncate">{props.name}</h4>
+              <h6 className="card-text text-truncate">
+              {props.description}
+              </h6>
+              <h5 className="card-text" style={{ color: "yellow" }}>
+                <i class="fas fa-coins"></i> {props.price}
+              </h5>
+              {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
+                        <br /> */}
+              <small>
+                <i className="badge badge-dark">{props.carBrand}</i>
+                <i className="badge badge-dark">{props.carModel}</i>
+              </small>
+            </div>
+            <div className="row centerbtn">
+          <button className="btn btn-danger" style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={() => handleDelete(props.id)}>
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <Button 
+          variant="dark" 
+          style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={openModal}>
             <i class="fas fa-pen"></i>
           </Button>
           </div>
-          <Modal show={isOpen} onHide={!isOpen}>
-            <Modal.Header>
-              <Modal.Title>Edit your product</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Product Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter product Name"
-                    name="name"
-                    id="name"
-                    value={editValue.name}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Product Name</Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="image"
-                    id="image"
-                    onChange={handleImageChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Product Name</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter product description"
-                    name="description"
-                    id="description"
-                    value={editValue.description}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Row>
-                  <Form.Group as={Col}>
-                    <Form.Label>Price</Form.Label>
-                    <Form.Control
-                      type="number"
-                      name="price"
-                      id="price"
-                      value={editValue.price}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Control
-                      defaultValue="Choose..."
-                      as="select"
-                      name="carBrand"
-                      id="carBrand"
-                      value={editValue.carBrand}
-                      onChange={handleChange}
-                    >
-                      {cars2.map((item, index) => {
-                        return (
-                          <option key={index} value={item.make}>
-                            {item.make}
-                          </option>
-                        );
-                      })}
-                    </Form.Control>
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Control
-                      defaultValue="Choose..."
-                      as="select"
-                      name="carModel"
-                      id="carModel"
-                      value={editValue.carModel}
-                      onChange={handleChange}
-                      disabled={!stateDisabled}
-                    >
-                      {cars3.map((item, index) => {
-                        return (
-                          <option key={index} value={item.model}>
-                            {item.model}
-                          </option>
-                        );
-                      })}
-                    </Form.Control>
-                  </Form.Group>
-                </Form.Row>
+          </article>
+        </section>
+     
 
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button
-                  variant="primary"
-                  type="button"
-                  onClick={() => handleSubmit(props.id)}
+
+
+      <Modal show={isOpen} onHide={!isOpen}>
+        <Modal.Header>
+          <Modal.Title>Edit your product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter product Name"
+                name="name"
+                id="name"
+                value={editValue.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                type="file"
+                name="image"
+                id="image"
+                onChange={handleImageChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Enter product description"
+                name="description"
+                id="description"
+                value={editValue.description}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Row>
+              <Form.Group as={Col}>
+                <Form.Label>Price</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="price"
+                  id="price"
+                  value={editValue.price}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Brand</Form.Label>
+                <Form.Control
+                  defaultValue="Choose..."
+                  as="select"
+                  name="carBrand"
+                  id="carBrand"
+                  value={editValue.carBrand}
+                  onChange={handleChange}
                 >
-                  Submit
+                  {cars2.map((item, index) => {
+                    return (
+                      <option key={index} value={item.make}>
+                        {item.make}
+                      </option>
+                    );
+                  })}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Brand</Form.Label>
+                <Form.Control
+                  defaultValue="Choose..."
+                  as="select"
+                  name="carModel"
+                  id="carModel"
+                  value={editValue.carModel}
+                  onChange={handleChange}
+                  disabled={!stateDisabled}
+                >
+                  {cars3.map((item, index) => {
+                    return (
+                      <option key={index} value={item.model}>
+                        {item.model}
+                      </option>
+                    );
+                  })}
+                </Form.Control>
+              </Form.Group>
+            </Form.Row>
+
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => handleSubmit(props.id)}
+          >
+            Submit
                 </Button>
-              <Button variant="danger" onClick={closeModal}>
-                Cancel
+          <Button variant="danger" onClick={closeModal}>
+            Cancel
               </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      </div>
+        </Modal.Footer>
+      </Modal>
     </div>
+  </div >
   );
 }

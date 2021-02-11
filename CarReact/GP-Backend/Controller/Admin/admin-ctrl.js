@@ -237,7 +237,6 @@ showAllVendors = (req, res) => {
   Vendor.find({}).populate(populateQuery).exec((err, vendors) => {
 
 
-
     if (err) {
       return res.status(400).json({
         Data: null,
