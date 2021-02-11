@@ -14,58 +14,81 @@ import { Pagination } from "./Pagination";
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
-  const [state, setState] = useState({
+  const [filterState, setFilterState] = useState({
     model: "",
     brand: "",
+    search: "",
   });
   const [itemsInDB, setItemsInDB] = useState(0);
-  const blogs = useSelector((state) => state.blogs.Data);
+  const blogs = useSelector((state) => state.blogs.TotalItem);
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(filterCarBrand());
     dispatch(resultFromFilter({}, 0));
-    setItemsInDB(blogs);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("TotalBlogs", blogs);
+    setItemsInDB(localStorage.getItem("TotalBlogs"));
+  }, [blogs]);
 
   const handleChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
       dispatch(filterCarModel(value));
+      setFilterState((previous) => {
+        return {
+          ...previous,
+          model: "",
+        };
+      });
     }
-    setState((previous) => {
+    setFilterState((previous) => {
       return {
         ...previous,
         [name]: value,
       };
     });
-    // switch (event.target.name) {
-    //   case "brand":
-    //     setState({
-    //       ...state,
-    //       brand: event.target.value,
-    //     });
-    //     dispatch(resultFromFilter({ brand: event.target.value }));
-    //     dispatch(filterCarModel(event.target.value));
 
-    //     break;
-    //   case "model":
-    //     setState({
-    //       ...state,
-    //       model: event.target.value,
-    //     });
-    //     dispatch(
-    //       resultFromFilter({ brand: state.brand, model: event.target.value })
-    //     );
+    //   switch (event.target.name) {
+    //     case "brand":
+    //       setState({
+    //         ...state,
+    //         brand: event.target.value,
+    //       });
+    //       // dispatch(resultFromFilter({ brand: event.target.value }));
+    //       // dispatch(filterCarModel(event.target.value));
+    //       console.log(state);
 
-    //     break;
-    // }
+    //       break;
+    //     case "model":
+    //       setState({
+    //         ...state,
+    //         model: event.target.value,
+    //       });
+    //       // dispatch(
+    //       //   resultFromFilter({ brand: state.brand, model: event.target.value })
+    //       // );
+    //       console.log(state);
+
+    //       break;
+    //   }
   };
   const handleClick = (params) => {
     console.log(params);
-    dispatch(resultFromFilter(state.brand, params));
+    dispatch(resultFromFilter(filterState, params));
     // dispatch(filterCarModel(event.target.value));
+  };
+  const handleSearchClick = () => {
+    dispatch(resultFromFilter(filterState, 0));
+  };
+  const functionGdeda = (e) => {
+    console.log(filterState);
+    handleChange(e);
+    console.log(filterState);
+    // handleSearchClick();
   };
 
   //-------------ADD BLOG ----------------------------------------
@@ -149,10 +172,34 @@ export default function BlogFilter(props) {
       </div>
 
       <div className="mb-5">
+        <div className="input-group mb-3">
+          <input
+            type="text"
+            name="search"
+            onChange={handleChange}
+            value={filterState.search}
+            className="form-control"
+            placeholder="Search"
+          />
+          <div className="input-group-append">
+            <button
+              className="btn"
+              style={{
+                background:
+                  "linear-gradient(to right,  rgb(197, 191, 191),  rgb(88, 84, 84) )",
+              }}
+              onClick={handleSearchClick}
+              type="button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
         <select
-          value={state.brand}
+          value={filterState.brand}
           name="brand"
           onChange={handleChange}
+          // onSelect={handleChange}
           className="custom-select custom-select-md mb-3"
         >
           <option value="" key="no-value">
@@ -168,10 +215,11 @@ export default function BlogFilter(props) {
 
       <div>
         <select
-          value={state.model}
-          disabled={!state.brand}
+          value={filterState.model}
+          disabled={!filterState.brand}
           name="model"
           onChange={handleChange}
+          // onSelect={handleChange}
           className="custom-select custom-select-sm mb-3"
         >
           <option value="" key="no-value">
@@ -185,6 +233,11 @@ export default function BlogFilter(props) {
         </select>
       </div>
       <div>
+        <Button variant="dark" onClick={handleSearchClick}>
+          Filter
+        </Button>
+      </div>
+      <div>
         {localStorage.getItem("UserID") !== null && (
           <Button variant="info" onClick={openModal}>
             Add new Blog
@@ -193,16 +246,19 @@ export default function BlogFilter(props) {
       </div>
       <div
         className="pagination"
-        style={{ zIndex: "100", position: "absolute", bottom: "10px" }}
+        style={{
+          zIndex: "100",
+          position: "fixed",
+          right: "300px",
+          bottom: "-5%",
+        }}
       >
-        {blogs ? (
+        {blogs && (
           <Pagination
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}
             handleClick={handleClick}
           />
-        ) : (
-          <Loading />
         )}
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
