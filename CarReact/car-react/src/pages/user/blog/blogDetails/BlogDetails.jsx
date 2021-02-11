@@ -469,26 +469,27 @@ export default function BlogDetails(props) {
           </form>
         </div>
       </div>
-
+      <h3 className="text-center mt-2">Comments</h3>
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
           return (
             <div className="media mb-1" key={index}>
+             
               <button
-                className="btn btn-info"
+                className="btn" style={{position:"absolute",left:"-17px",fontSize:"20px"}}
                 onClick={() => addVote(item._id)}
               >
-                <i className="fas fa-arrow-circle-up" />
-              </button>
-              <span className="btn badge-pill btn-success">
+                <i class="fas fa-chevron-up"></i>
+              </button> 
+              <span className="btn badge-pill" style={{position:"relative",left:"-30px",top:"40px",fontSize:"20px"}}>
                 {item.vote.numberOfVoting}
-              </span>
+              </span>   
               <button
-                className="btn btn-info"
+                className="btn" style={{position:"relative",left:"-70px",top:"80px",fontSize:"20px"}}
                 onClick={() => removeVote(item._id)}
               >
-                <i class="fas fa-arrow-circle-down" />
+                <i class="fas fa-chevron-down"></i>
               </button>
 
               <img
@@ -506,6 +507,7 @@ export default function BlogDetails(props) {
                 <hr />
                 <br />
                 <p>{item.content}</p>
+                <hr style={{border:"1px solid"}}/>
               </div>
 
               {/* <form
