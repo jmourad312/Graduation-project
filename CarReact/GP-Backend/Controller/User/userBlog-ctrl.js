@@ -81,7 +81,7 @@ deletePost = (req, res) => {
     IdPerson = req.params.idperson;
  }
 
-  Post.deleteOne({ _id: req.params.id, person: IdPerson }, (err, data) => {
+  Post.deleteOne({ _id: req.params.id, person: IdPerson },async  (err, data) => {
     if (err) {
       return res.json({
         Data: {},
@@ -97,8 +97,8 @@ deletePost = (req, res) => {
         });
       }
 
-      user.updateOne({person:req.user._id},{
-        $pull:{postsUser:data._id}
+     await user.updateOne({person:IdPerson},{
+        $pull:{postsUser:req.params.id}
       }).then("Done").catch("error")
 
        return res.json({
