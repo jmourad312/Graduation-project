@@ -26,4 +26,4 @@ var feedback = new schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Feedback ", feedback);
+module.exports = mongoose.model("Feedback", feedback);

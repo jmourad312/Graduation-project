@@ -60,15 +60,7 @@ export default function BookmarkedPosts(props) {
                       </strong>
                     </div>
                   </div>
-                  <hr
-                    className="position-relative"
-                    style={{
-                      borderTop: "6px dotted lightblue",
-                      // borderTop: "0",
-                      width: "40px",
-                      left: "350px",
-                    }}
-                  />
+                  
                 </div>
               );
             })

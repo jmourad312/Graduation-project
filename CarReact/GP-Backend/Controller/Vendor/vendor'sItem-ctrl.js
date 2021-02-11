@@ -140,11 +140,16 @@ updateItem = (req, res) => {
 };
 
 deleteItem = (req, res) => {
-  const IdVendor = req.user._id;
+  let IdVendor = req.user._id;
+
+//   if(req.params.idperson){
+//     IdVendor = req.params.idperson;
+//  }
+
   carItem.deleteOne({ _id: req.params.id, person: IdVendor }, (err, data) => {
     if (err) {
      return res.json({
-        "Data": {},
+        "Data": err,
         "Message": "Can't delete item from database",
         "Success": false
       })

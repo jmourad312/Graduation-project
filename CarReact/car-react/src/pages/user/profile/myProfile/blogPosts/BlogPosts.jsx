@@ -32,7 +32,7 @@ export default function BlogPosts(props) {
                     <div className="media border-rounded p-3" key={post._id}>
                       <img
                         src={post.image}
-                        alt="John Doe"
+                        alt="No Supported Image"
                         className="mr-3 rounded-circle"
                       />
                       <div className="media-body">
@@ -54,7 +54,7 @@ export default function BlogPosts(props) {
                       </div>
                       <SimpleDelete id={post._id} />
                     </div>
-                    <hr
+                    {/* <hr
                       className="position-relative"
                       style={{
                         borderTop: "6px dotted lightblue",
@@ -62,7 +62,7 @@ export default function BlogPosts(props) {
                         width: "40px",
                         left: "350px",
                       }}
-                    />
+                    /> */}
                   </div>
                 );
               })

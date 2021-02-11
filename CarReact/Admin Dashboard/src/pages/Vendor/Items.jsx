@@ -3,6 +3,8 @@ import { Card } from '../../components/Card'
 import { Navbar } from '../../components/Navbar'
 import { useSelector, useDispatch } from "react-redux";
 import {getItemsVendor} from '../../store/action'
+import { instance } from "../../network/axiosConfig";
+
 
 export default function Items(props) {
 
@@ -26,7 +28,15 @@ export default function Items(props) {
 
     }
 
-    const handelClickDelete = (parameter) => {
+    const handelClickDelete = async (parameter) => {
+        try {
+            const res = await instance.delete(`vendor/deleteItem/${parameter._id}/${parameter.person._id}`,
+            {headers: { Authorization: localStorage.getItem("Authorization")}});
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
         
     }
 
@@ -42,8 +52,9 @@ export default function Items(props) {
             title={prod.name}
             brand={prod.carBrand}
             model={prod.carModel}
+            dataItem={prod}
             // category={prod.category}
-            details={handelClickDetails}
+            // details={handelClickDetails}
             edit={handelClickEdit}
             delete={handelClickDelete}
           />

@@ -3,7 +3,7 @@ import { Navbar } from '../../components/Navbar'
 import { useSelector, useDispatch } from "react-redux";
 import { getBlogsUser } from '../../store/action'
 import BlogEntry from '../../components/BlogEntry';
-
+import { instance } from "../../network/axiosConfig";
 
 export default function Blogs(props) {
 
@@ -27,8 +27,15 @@ export default function Blogs(props) {
 
     }
 
-    const handelClickDelete = (parameter) => {
-        
+    const handelClickDelete = async (parameter) => {
+        try {
+            const res = await instance.delete(`user/deletePost/${parameter._id}/${parameter.person._id}`,
+            {headers: { Authorization: localStorage.getItem("Authorization")}});
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const createBlog = (blog) => {
@@ -39,11 +46,12 @@ export default function Blogs(props) {
                 imgSrc={blog.image}
                 cardTitle={blog.title}
                 userName={blog.person.firstName ? blog.person.firstName : "User"}
+                dataItem={blog}
                 date={blog.createdAt}
                 cardContent={blog.body}
                 cardBrand={blog.brand}
                 cardModel={blog.model}
-                details={handelClickDetails}
+                //details={handelClickDetails}
                 edit={handelClickEdit}
                 delete={handelClickDelete}
             />
