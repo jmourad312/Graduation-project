@@ -134,7 +134,7 @@ export default function BlogFilter(props) {
           value={state.brand}
           name="brand"
           onChange={handleChange}
-          className="custom-select custom-select-lg mb-3"
+          className="custom-select custom-select-md mb-3"
         >
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index}>
