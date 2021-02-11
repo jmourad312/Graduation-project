@@ -1,78 +1,133 @@
-import React, { useEffect, useState } from 'react'
-import Dropdown from './Dropdown'
-import cars2 from '../assets/js/cars2';
+import React, { useEffect, useState } from "react";
+import Dropdown from "./Dropdown";
+import cars2 from "../assets/js/cars2";
 import cars from "../assets/js/cars";
-import { useDispatch, useSelector } from 'react-redux';
-import { filterCarBrand, filterCarModel, resultFromFilterProduct } from '../store/actions';
-import SimpleSearch from './SimpleSearch';
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterCarBrand,
+  filterCarModel,
+  resultFromFilterProduct,
+} from "../store/actions";
+import SimpleSearch from "./SimpleSearch";
+import { Pagination } from "./Pagination";
+import $ from "jquery";
 
 export default function ProductFilter(props) {
+  const products = useSelector((state) => state.products.TotalItem);
+  const [itemsInDB, setItemsInDB] = useState(0);
+
   const [state, setState] = useState({
     model: "",
     brand: "",
     search: "",
     priceMoreThan: 0,
-    priceLessThan: 0
+    priceLessThan: 0,
   });
+  
 
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(filterCarBrand());
+    dispatch(resultFromFilterProduct({}, 0));
   }, []);
 
-  const actionToFilterOption = () => {
+  useEffect(() => {
+    localStorage.setItem("TotalProducts", products);
+    setItemsInDB(localStorage.getItem("TotalProducts"));
+  }, [products]);
 
-    dispatch(resultFromFilterProduct(state))
-
-  }
+  // const actionToFilterOption = () => {
+  //   dispatch(resultFromFilterProduct(state));
+  // };
 
   const handleChange = (event) => {
-    switch (event.target.name) {
-      case "brand":
-        setState({
-          ...state,
-          brand: event.target.value,
-        });
-        dispatch(filterCarModel(event.target.value))
-        break;
-      case "model":
-        setState({
-          ...state,
-          model: event.target.value,
-        });
-        break;
-      case "search":
-        setState({
-          ...state,
-          search: event.target.value,
-        });
-        break;
-      case "priceLess":
-        setState({
-          ...state,
-          priceLessThan: +event.target.value,
-        });
-        break;
-      case "priceMore":
-        setState({
-          ...state,
-          priceMoreThan: +event.target.value,
-        });
-        break;
+    const { value, name } = event.target;
+    if (name === "brand") {
+      dispatch(filterCarModel(value));
+      setState((previous) => {
+        return {
+          ...previous,
+          model: "",
+        };
+      });}
+      setState((previous) => {
+        return {
+          ...previous,
+          [name]: value,
+        };
+      });
     }
+    const handlePriceChange = (event) =>{
+
+      switch (event.target.name) {
+        case "priceLess":
+          setState({
+            ...state,
+            priceLessThan: +event.target.value,
+          });
+          break;
+        case "priceMore":
+          setState({
+            ...state,
+            priceMoreThan: +event.target.value,
+          });
+          break;
+        default:
+        break;
+      }
+    }
+
+  const handleClick = (params) => {
+    console.log(params);
+    dispatch(resultFromFilterProduct(state, params));
+    // dispatch(filterCarModel(event.target.value));
+  };
+  const handleSearchClick = () => {
+    dispatch(resultFromFilterProduct(state, 0));
   };
 
+  const handleClear = () =>{
+    setState({
+      model: "",
+      brand: "",
+      search: "",
+      priceLessThan: 0,
+      priceMoreThan: 0,
+    });
+    dispatch(resultFromFilterProduct({}, 0));
+
+    // handleSearchClick();
+    // setTimeout(() => {
+    //   handleSearchClick();
+    // }, 5000);
+  }
+
   return (
-  
     <div className={props.className}>
       {/* <SimpleSearch /> */}
       <div className="input-group mb-3">
-        <input type="text" name="search" onChange={handleChange} value={state.search} className="form-control" placeholder="Search" />
+        <input
+          type="text"
+          name="search"
+          onChange={handleChange}
+          value={state.search}
+          className="form-control"
+          placeholder="Search"
+        />
         <div className="input-group-append">
-          <button className="btn" style={{background: "linear-gradient(to right,  rgb(197, 191, 191),  rgb(88, 84, 84) )"}} onClick={actionToFilterOption} type="button">Go</button>
+          <button
+            className="btn"
+            style={{
+              background:
+                "linear-gradient(to right,  rgb(197, 191, 191),  rgb(88, 84, 84) )",
+            }}
+            onClick={handleSearchClick}
+            type="button"
+          >
+            Search
+          </button>
         </div>
       </div>
 
@@ -81,13 +136,35 @@ export default function ProductFilter(props) {
       </div>
 
       <div className="mb-5">
-        <input type="range" name="priceLess" onChange={handleChange} value={state.priceLessThan} className="form-range" min="0" max="100" step="10" />
-        <label htmlFor="customRange" className="form-label ml-2">Form: {state.priceLessThan}</label>
+        <input
+          type="range"
+          name="priceLess"
+          onChange={handlePriceChange}
+          value={state.priceLessThan}
+          className="form-range"
+          min="0"
+          max="999"
+          step="10"
+        />
+        <label htmlFor="customRange" className="form-label ml-2">
+          Form: {state.priceLessThan}
+        </label>
       </div>
 
       <div className="mb-5">
-        <input type="range" name="priceMore" onChange={handleChange} value={state.priceMoreThan} className="form-range" min="100" max="500" step="10" />
-        <label htmlFor="customRange" className="form-label ml-2">To: {state.priceMoreThan} </label>
+        <input
+          type="range"
+          name="priceMore"
+          onChange={handlePriceChange}
+          value={state.priceMoreThan}
+          className="form-range"
+          min="1000"
+          max="5000"
+          step="10"
+        />
+        <label htmlFor="customRange" className="form-label ml-2">
+          To: {state.priceMoreThan}{" "}
+        </label>
       </div>
 
       <div className="mb-5">
@@ -97,7 +174,9 @@ export default function ProductFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-md mb-3"
         >
-          <option value="" key="no-value">choose Brand</option>
+          <option value="" key="no-value">
+            choose Brand
+          </option>
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index}>
               {item.name}
@@ -114,7 +193,9 @@ export default function ProductFilter(props) {
           onChange={handleChange}
           className="custom-select custom-select-sm mb-3"
         >
-          <option value="" key="no-value">choose Model</option>
+          <option value="" key="no-value">
+            choose Model
+          </option>
 
           {stateRedux.model.map((item, index) => (
             <option value={item.model} key={index}>
@@ -123,10 +204,45 @@ export default function ProductFilter(props) {
           ))}
         </select>
       </div>
-
-      <button type="button" onClick={actionToFilterOption} className="btn btncenter" style={{background: "linear-gradient(to right, rgb(197, 191, 191),  rgb(88, 84, 84) )"}}>Confirm Filter</button>
-
+      <button
+        type="button"
+        onClick={handleSearchClick}
+        className="btn btn-dark mr-4"
+        // style={{
+        //   background:
+        //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
+        // }}
+      >
+        ApplyFilter
+      </button>
+      <button
+        type="button"
+        className="btn btn-danger "
+        // style={{
+        //   background:
+        //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
+        // }}
+        onClick={handleClear}
+      >
+        Clear filter
+      </button>
+      <div
+        className="pagination"
+        style={{
+          zIndex: "100",
+          position: "fixed",
+          right: "300px",
+          bottom: "-5%",
+        }}
+      >
+        {products && (
+          <Pagination
+            NumberOfItemsInDB={itemsInDB}
+            NumberToShow={6}
+            handleClick={handleClick}
+          />
+        )}
+      </div>
     </div>
-    
   );
 }

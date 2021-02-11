@@ -54,10 +54,10 @@ export const setProductId = (payload) => {
     payload,
   };
 };
-export const resultFromFilterProduct = (data) => async (dispatch) => {
+export const resultFromFilterProduct = (data,params) => async (dispatch) => {
   try {
     console.log(data)
-    const res = await axios.post('http://localhost:3000/user/showFilterItems',data,
+    const res = await axios.post(`http://localhost:3000/user/showFilterItems/${params}`,data,
     { headers: { Authorization: localStorage.getItem("Authorization") } });
     console.log(res);
     dispatch({
