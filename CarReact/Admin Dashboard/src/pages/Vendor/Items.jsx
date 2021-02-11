@@ -30,7 +30,7 @@ export default function Items(props) {
 
     const handelClickDelete = async (parameter) => {
         try {
-            const res = await instance.delete(`vendor/deleteItem/${parameter._id}/${parameter.person._id}`,
+            const res = await instance.delete(`vendor/deleteItem/${parameter._id}/${data._id}`,
             {headers: { Authorization: localStorage.getItem("Authorization")}});
             console.log(res);
 
