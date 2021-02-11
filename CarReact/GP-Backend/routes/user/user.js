@@ -64,7 +64,7 @@ router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: fal
 // user routes on Blog
 router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
 
-router.delete("/deletePost/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
+router.delete("/deletePost/:id/:idperson?", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
 router.put("/updatePost/:id", passport.authenticate("jwt", { session: false }), upload.single("image") ,canView, userBlogCtrl.updatePost);
 

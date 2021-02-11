@@ -7,4 +7,4 @@ var vendorSubscription = new schema({
   endAt: Date,
 });
 
-module.exports = mongoose.model(" VendorSubscription", vendorSubscription);
+module.exports = mongoose.model("VendorSubscription", vendorSubscription);

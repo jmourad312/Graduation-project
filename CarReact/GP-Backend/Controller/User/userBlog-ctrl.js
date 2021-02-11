@@ -75,7 +75,12 @@ addNewPost = (req, res) => {
 
 //delete post
 deletePost = (req, res) => {
-  const IdPerson = req.user._id;
+  let IdPerson = req.user._id;
+
+  if(req.params.idperson){
+    IdPerson = req.params.idperson;
+ }
+
   Post.deleteOne({ _id: req.params.id, person: IdPerson }, (err, data) => {
     if (err) {
       return res.json({
