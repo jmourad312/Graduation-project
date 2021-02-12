@@ -13,7 +13,7 @@ export default function VendorDetails(props) {
           transition={props.transition}
         >
           <form method="post">
-            <div className="row">
+            <div className="row mt-5">
               <div className="col-md-2"></div>
               <div className="col-md-10">
                 <div className="tab-content profile-tab" id="myTabContent">
@@ -33,7 +33,7 @@ export default function VendorDetails(props) {
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <label>Name</label>
+                        <label>First Name</label>
                       </div>
                       <div className="col-md-6">
                         <p>{props.vendor.firstName}</p>
@@ -41,7 +41,7 @@ export default function VendorDetails(props) {
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <label>Name</label>
+                        <label>Middle Name</label>
                       </div>
                       <div className="col-md-6">
                         <p>{props.vendor.middleName}</p>
@@ -49,7 +49,7 @@ export default function VendorDetails(props) {
                     </div>
                     <div className="row">
                       <div className="col-md-6">
-                        <label>Name</label>
+                        <label>Last Name</label>
                       </div>
                       <div className="col-md-6">
                         <p>{props.vendor.lastName}</p>

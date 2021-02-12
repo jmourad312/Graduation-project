@@ -122,7 +122,7 @@ export default function MyItems(props) {
       >
         <div className="container">
           <Button
-            variant="info"
+            variant="dark"
             style={{ margin: "10px" }}
             onClick={() => openModal()}
           >
@@ -137,7 +137,7 @@ export default function MyItems(props) {
 
         <Modal show={isOpen} onHide={!isOpen}>
           <Modal.Header>
-            <Modal.Title>Edit your product</Modal.Title>
+            <Modal.Title>Add your product</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -204,7 +204,7 @@ export default function MyItems(props) {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label>Brand</Form.Label>
+                  <Form.Label>Model</Form.Label>
                   <Form.Control
                     defaultValue="Choose..."
                     as="select"
@@ -228,7 +228,7 @@ export default function MyItems(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button
-              variant="primary"
+              variant="dark"
               type="button"
               onClick={handleSubmit}
             >

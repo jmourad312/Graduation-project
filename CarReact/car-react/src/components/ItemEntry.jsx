@@ -285,7 +285,7 @@ export default function ItemEntry(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant="primary"
+            variant="dark"
             type="button"
             onClick={() => handleSubmit(props.id)}
           >
