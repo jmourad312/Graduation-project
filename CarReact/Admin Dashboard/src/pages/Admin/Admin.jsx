@@ -183,12 +183,20 @@ export default function Admin(props) {
     const [BarData, setBarData] = useState({
         labels: ["Users", "Vendors", "Products", "Blogs"],
         datasets: [{
-            label: ["Conclusion Chart"],
             data: [0, 0, 0, 0],
             backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
             hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"],
             borderWidth: 1
-        }]
+        }],
+        plotOptions: {
+            series: {
+                colorByPoint: true,
+                dataLabels: {
+                    allowOverlap: true
+                }
+            },
+            /* ... */
+  }
     })
 
     const [PieData, setPieData] = useState({
@@ -305,9 +313,10 @@ export default function Admin(props) {
                         {
                             stateRedux.users.length != 0 &&
                             <>
+                            <h3>Users</h3>
                                 <div onLoad={() => getPartUser(0)}></div>
-                                <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
                                 <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} handelClickDelete={goToDeleteUser}></Tabel>
+                                <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
                             </>
                         }
 
@@ -315,8 +324,9 @@ export default function Admin(props) {
                         {
                             stateRedux.vendors.length != 0 &&
                             <>
-                                <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
+                                                        <h3>Vendors</h3>
                                 <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} handelClickEdit={goToEditVendor} handelClickDelete={goToDeleteVendor}></Tabel>
+                                <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
                             </>
                         }
 
@@ -326,16 +336,16 @@ export default function Admin(props) {
                             <div className=" row wow fadeIn" id="blogTabel">
 
                                 <div className="col-md-12 mb-4">
-                                    <div className="card">
+                                        <h3>Blogs</h3>
+                                    <div className="card mb-4">
                                         <div className="card-body">
-                                            <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
 
                                             <table className="table table-hover">
                                                 <thead className="blue-grey lighten-4">
 
                                                     <tr>
                                                         <th>Index</th>
-                                                        <th>User ID</th>
+                                                        {/* <th>User ID</th> */}
                                                         <th>User name</th>
                                                         <th>Number of blogs</th>
                                                         <th>Details</th>
@@ -348,7 +358,7 @@ export default function Admin(props) {
                                                         return (
                                                             <tr>
                                                                 <td>{index + 1}</td>
-                                                                <td>{item.person._id}</td>
+                                                                {/* <td>{item.person._id}</td> */}
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.postsUser.length}</td>
                                                                 <td >
@@ -367,6 +377,7 @@ export default function Admin(props) {
                                         </div>
 
                                     </div>
+                                    <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
 
 
                                 </div>
@@ -376,14 +387,14 @@ export default function Admin(props) {
                         {stateRedux.vendors.length != 0 &&
                             <div className="row wow fadeIn" id="productTabel">
                                 <div className="col-md-12 mb-4">
-                                    <div className="card">
+                                <h3>Products</h3>
+                                    <div className="card mb-4">
                                         <div className="card-body">
-                                            <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
                                             <table className="table table-hover">
                                                 <thead className="blue-grey lighten-4">
                                                     <tr>
                                                         <th>Index</th>
-                                                        <th>Vendor ID</th>
+                                                        {/* <th>Vendor ID</th> */}
                                                         <th>Vendor name</th>
                                                         <th>Number of product</th>
                                                         <th>Details</th>
@@ -396,7 +407,7 @@ export default function Admin(props) {
                                                         return (
                                                             <tr>
                                                                 <td>{index + 1}</td>
-                                                                <td>{item.person._id}</td>
+                                                                {/* <td>{item.person._id}</td> */}
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.vendorItems.length}</td>
 
@@ -411,8 +422,10 @@ export default function Admin(props) {
                                                     })}
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
+                                            <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
                                 </div>
                             </div>
                         }

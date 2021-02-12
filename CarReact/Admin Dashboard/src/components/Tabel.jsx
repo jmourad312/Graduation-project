@@ -15,7 +15,7 @@ export function Tabel(props) {
                                 <thead className="blue-grey lighten-4">
                                     <tr>
                                         <th>Index</th>
-                                        <th>ID</th>
+                                        {/* <th>ID</th> */}
                                         <th>firstName</th>
                                         <th>Email</th>
                                         <th>Banned</th>
@@ -29,22 +29,22 @@ export function Tabel(props) {
                                     {props.data.map((item, index) => {
 
                                         return (
-                                            <tr>
+                                            <tr >
                                                 <td>{index + 1}</td>
-                                                <td>{item.person._id}</td>
+                                                {/* <td>{item.person._id}</td> */}
                                                 <td>{item.person.firstName}</td>
                                                 <td>{item.person.email}</td>
                                                 <td>{String(item.banned)}</td>
 
-                                                <td>
-                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit}
-                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
+                                                <td >
+                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit} 
+                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-pen'></i>}>
                                                     </Button>
                                                 </td>
 
                                                 <td>
                                                     <Button className="page-link" parameter={item.person._id} key={index + 1} handelClick={props.handelClickDelete}
-                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-trash ml-3'></i>}>
+                                                        name={<i style={{ fontSize: '20px' }} className='fas fa-trash '></i>}>
                                                     </Button>
                                                 </td>
 
