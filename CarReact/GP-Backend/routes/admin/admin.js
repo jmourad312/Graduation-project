@@ -46,10 +46,12 @@ router.get('/getCollection', Admin.getCollection);
 //delete
 router.delete('/deleteBrand/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteBrand);
 router.delete('/deleteCollection/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteCollection);
+router.delete('/deleteModel/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteModel);
 
 //update 
 router.put("/updateBrand/:id", passport.authenticate("jwt", { session: false }), validateAdmin, Admin.updateBrand);
 router.put("/updateCollection/:id", passport.authenticate("jwt", { session: false }), validateAdmin, Admin.updateCollection);
+router.put("/updateModel/:id", passport.authenticate("jwt", { session: false }), validateAdmin, Admin.updateModel);
 
 /////////////////////////////////////////////////////////////////////////////////////
 

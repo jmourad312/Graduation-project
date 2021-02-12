@@ -1,14 +1,37 @@
 import { Navbar } from "../components/Navbar";
 import React, { useEffect, useState } from "react";
 import { instance } from "../network/axiosConfig";
+import { Button2 } from "../components/Button";
+import { Button, Col, Form, Modal } from "react-bootstrap";
+import { InputField } from "../components/InputField";
 
 export default function AddPartCar(props) {
-
   const [state, setState] = useState({
     Brand: "",
     Model: "",
     Collection: "",
     brandForModel: "",
+  });
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = (name,id, edit) => {
+    setShow(true);
+    setEdit({
+      name: name,
+      id: id,
+      whatEdit: edit,
+    });
+  };
+
+  const [edit, setEdit] = useState({
+    name: "",
+    id: 0,
+    whatEdit: "",
   });
 
   const [stateAxios, setStateAxios] = useState({
@@ -27,6 +50,13 @@ export default function AddPartCar(props) {
         ...previous,
         [name]: value,
       };
+    });
+  };
+
+  const handleEdit = (event) => {
+    setEdit({
+      ...edit,
+      name: event.target.value,
     });
   };
 
@@ -108,6 +138,67 @@ export default function AddPartCar(props) {
       console.log(res);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handelClickEditModel = async () => {
+    setShow(false);
+
+    try {
+      const res = await instance.put(`admin/updateModel/${edit.id}`, {model:edit.name},{
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      });
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelClickDeleteModel = async (parameter) => {
+    try {
+      const res = await instance.delete(`admin/deleteModel/${parameter._id}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      });
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handelClickEditBrand = async () => {
+    setShow(false);
+    try {
+      const res = await instance.put(
+        `admin/updateBrand/${edit.id}`,
+        { name: edit.name },
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelClickDeleteBrand = async (parameter) => {
+    try {
+      const res = await instance.delete(`admin/deleteBrand/${parameter._id}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      });
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const Edit = () => {
+    if (edit.whatEdit == "Model") {
+      handelClickEditModel();
+    }
+    if (edit.whatEdit == "Brand") {
+      handelClickEditBrand();
     }
   };
 
@@ -211,6 +302,8 @@ export default function AddPartCar(props) {
                 <tr>
                   <th>Index</th>
                   <th>Brand</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -218,7 +311,36 @@ export default function AddPartCar(props) {
                   return (
                     <tr key={index + 1}>
                       <td>{index + 1}</td>
-                      <td contenteditable="true">{item.name}</td>
+                      <td>{item.name}</td>
+                      <td>
+                        <Button
+                          className="page-link"
+                          style={{width:"100%"}}
+                          onClick={() => {
+                            handleShow(item.name,item._id, "Brand");
+                          }}
+                        >
+                          <i
+                            style={{ fontSize: "20px" }}
+                            className="fas fa-pen"
+                          ></i>
+                        </Button>
+                      </td>
+
+                      <td>
+                        <Button2
+                          className="page-link"
+                          parameter={item}
+                          key={index + 1}
+                          handelClick={handelClickDeleteBrand}
+                          name={
+                            <i
+                              style={{ fontSize: "20px" }}
+                              className="fas fa-trash "
+                            ></i>
+                          }
+                        ></Button2>
+                      </td>
                     </tr>
                   );
                 })}
@@ -268,6 +390,8 @@ export default function AddPartCar(props) {
                   <tr>
                     <th>Index</th>
                     <th>Model</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -276,7 +400,36 @@ export default function AddPartCar(props) {
                       return (
                         <tr key={index + 1}>
                           <td>{index + 1}</td>
-                          <td contenteditable="true">{item.model}</td>
+                          <td>{item.model}</td>
+                          <td>
+                              <Button
+                                className="page-link"
+                                style={{width:"100%"}}
+                                onClick={() => {
+                                  handleShow(item.model,item._id, "Model");
+                                }}
+                              >
+                                <i
+                                  style={{ fontSize: "20px" }}
+                                  className="fas fa-pen"
+                                ></i>
+                              </Button>
+                          </td>
+
+                          <td>
+                            <Button2
+                              className="page-link"
+                              parameter={item}
+                              key={index + 1}
+                              handelClick={handelClickDeleteModel}
+                              name={
+                                <i
+                                  style={{ fontSize: "20px" }}
+                                  className="fas fa-trash "
+                                ></i>
+                              }
+                            ></Button2>
+                          </td>
                         </tr>
                       );
                     })}
@@ -286,11 +439,10 @@ export default function AddPartCar(props) {
           </div>
 
           {/* Collection */}
-          <div className="container tabel mt-5">
-            <button
-              className="btn btn-success"
-              onClick={getCollection}
-            >Get Collection</button>
+          {/* <div className="container tabel mt-5">
+            <button className="btn btn-success" onClick={getCollection}>
+              Get Collection
+            </button>
             <div hidden={stateAxios.Collection.length == 0}>
               <input
                 type="text"
@@ -329,11 +481,32 @@ export default function AddPartCar(props) {
                 </tbody>
               </table>
             </div>
-          </div>
-           
+          </div> */}
         </div>
       </div>
-      
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <InputField
+            value={edit.name}
+            type="text"
+            handleChange={(e) => handleEdit(e)}
+            className="form-control"
+            name="name"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={Edit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

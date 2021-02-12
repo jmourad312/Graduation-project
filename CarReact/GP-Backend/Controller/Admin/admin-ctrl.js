@@ -5,7 +5,7 @@ const Collection = require("../../models/CarDetails/ItemCollection");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
-const feedback = require('../../models/Feedback/feedback')
+const feedback = require("../../models/Feedback/feedback");
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
 const Person = require("../../models/Person/person");
@@ -65,7 +65,7 @@ updateBrand = (req, res) => {
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
-        return res.status(400).json({
+        return res.json({
           Data: null,
           Message: "You can't update an item ",
           Success: false,
@@ -136,6 +136,53 @@ getModel = (req, res) => {
         Success: true,
       });
     });
+};
+
+deleteModel = (req, res) => {
+  Brand.updateOne(
+    { name: req.params.id },
+    { $pull: { carModel: req.params.id } }
+  )
+
+    .then(async (data) => {
+      await Model.deleteOne({ _id: req.params.id }).then("Done").catch("Error");
+      return res.status(200).json({
+        Data: data.n,
+        Message: "done delete model",
+        Success: true,
+      });
+    })
+    .catch((error) => {
+      return res.json({
+        Data: error.message,
+        Message: "can't delete model",
+        Success: false,
+      });
+    });
+};
+
+updateModel = (req, res) => {
+  const body = req.body;
+
+  Model.updateOne(
+    { _id: req.params.id },
+    body,
+    { upsert: true, new: true },
+    (err, result) => {
+      if (err) {
+        return res.json({
+          Data: err,
+          Message: "You can't update an Model",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: result,
+        Message: "You can update an Model ",
+        Success: true,
+      });
+    }
+  );
 };
 
 //Collection
@@ -560,7 +607,6 @@ countAll = (req, res) => {
 };
 
 deleteVendor = (req, res) => {
-
   Person.deleteOne({ _id: req.params.id }, async (err, data) => {
     if (err) {
       return res.json({
@@ -569,9 +615,9 @@ deleteVendor = (req, res) => {
         Success: false,
       });
     }
-    
-   await Vendor.deleteOne({ person: req.params.id }).then("Done");
-   await carItem.deleteMany({ person: req.params.id })
+
+    await Vendor.deleteOne({ person: req.params.id }).then("Done");
+    await carItem.deleteMany({ person: req.params.id });
 
     return res.json({
       Data: data.n,
@@ -665,6 +711,8 @@ module.exports = {
   getCollection,
   updateBrand,
   deleteBrand,
+  updateModel,
+  deleteModel,
   updateCollection,
   deleteCollection,
 };
