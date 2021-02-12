@@ -5,7 +5,7 @@ const Collection = require("../../models/CarDetails/ItemCollection");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
-
+const feedback = require('../../models/Feedback/feedback')
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
 const Person = require("../../models/Person/person");
@@ -560,7 +560,8 @@ countAll = (req, res) => {
 };
 
 deleteVendor = (req, res) => {
-  Person.deleteOne({ _id: req.params.id }, (err, data) => {
+
+  Person.deleteOne({ _id: req.params.id }, async (err, data) => {
     if (err) {
       return res.json({
         Data: err,
@@ -568,7 +569,10 @@ deleteVendor = (req, res) => {
         Success: false,
       });
     }
-    Vendor.deleteOne({ person: req.params.id }).then("Done");
+    
+   await Vendor.deleteOne({ person: req.params.id }).then("Done");
+   await carItem.deleteMany({ person: req.params.id })
+
     return res.json({
       Data: data.n,
       Message: "Done deletes",

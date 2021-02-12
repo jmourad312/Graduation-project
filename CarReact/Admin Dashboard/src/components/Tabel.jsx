@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button2 } from "./Button";
 
 export function Tabel(props) {
     console.log(props.data.person);
@@ -37,21 +37,21 @@ export function Tabel(props) {
                                                 <td>{String(item.banned)}</td>
 
                                                 <td >
-                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit} 
+                                                    <Button2 className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit} 
                                                         name={<i style={{ fontSize: '20px' }} className='fas fa-pen'></i>}>
-                                                    </Button>
+                                                    </Button2>
                                                 </td>
 
                                                 <td>
-                                                    <Button className="page-link" parameter={item.person._id} key={index + 1} handelClick={props.handelClickDelete}
+                                                    <Button2 className="page-link" parameter={item.person._id} key={index + 1} handelClick={props.handelClickDelete}
                                                         name={<i style={{ fontSize: '20px' }} className='fas fa-trash '></i>}>
-                                                    </Button>
+                                                    </Button2>
                                                 </td>
 
                                                 <td>
-                                                    <Button className="page-link" parameter={item} key={index + 1} handelClick={props.handelClick}
+                                                    <Button2 className="page-link" parameter={item} key={index + 1} handelClick={props.handelClick}
                                                         name={<i style={{ fontSize: '20px' }} className="fas fa-ban"></i>}>
-                                                    </Button>
+                                                    </Button2>
                                                 </td>
                                             </tr>
                                         )

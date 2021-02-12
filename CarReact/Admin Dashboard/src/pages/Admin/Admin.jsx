@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { Tabel } from '../../components/Tabel'
-import { Button } from '../../components/Button'
+import { Button2 } from '../../components/Button'
 import { Pagination } from '../../components/Pagination'
 import { Navbar } from '../../components/Navbar'
 import { instance } from "../../network/axiosConfig";
@@ -365,9 +365,9 @@ export default function Admin(props) {
                                                                 <td>{item.person.firstName}</td>
                                                                 <td>{item.postsUser.length}</td>
                                                                 <td >
-                                                                    <Button disabled={item.postsUser.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={BlogsUser}
+                                                                    <Button2 disabled={item.postsUser.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={BlogsUser}
                                                                         name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
-                                                                    </Button>
+                                                                    </Button2>
                                                                 </td>
                                                             </tr>
                                                         )
@@ -414,9 +414,9 @@ export default function Admin(props) {
                                                                 <td>{item.vendorItems.length}</td>
 
                                                                 <td >
-                                                                    <Button disabled={item.vendorItems.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={ProductsVendor}
+                                                                    <Button2 disabled={item.vendorItems.length == 0} className="page-link" parameter={item.person} key={index + 1} handelClick={ProductsVendor}
                                                                         name={<i style={{ fontSize: '20px' }} className='fas fa-pen ml-1'></i>}>
-                                                                    </Button>
+                                                                    </Button2>
                                                                 </td>
 
                                                             </tr>

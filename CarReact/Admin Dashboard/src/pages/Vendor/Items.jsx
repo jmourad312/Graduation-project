@@ -48,7 +48,7 @@ export default function Items(props) {
             image={prod.image}
             description={prod.description}
             price={prod.price}
-            name={data.firstName}
+            name={data.firstName ? data.firstName : "vendor" }
             title={prod.name}
             brand={prod.carBrand}
             model={prod.carModel}

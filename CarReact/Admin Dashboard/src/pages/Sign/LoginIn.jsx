@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputField } from '../../components/InputField'
-import { Button } from '../../components/Button'
+import { Button2 } from '../../components/Button'
 import { useSelector,useDispatch } from "react-redux";
 import { instance } from "../../network/axiosConfig";
 import {setLoginAction, setTokenAction} from '../../store/action'
@@ -76,7 +76,7 @@ export default function Loginin(props) {
             <div className="container text-center mt-5 d-flex justify-content-center">
                 <div className="card mb-2 shadow p-4 bg-white" style={{ width: "300px" }}>
                     <div className="card-header">
-                        <h2 style={{  fontFamily: "Georgia, serif"}}>Darkasiuni</h2>
+                        <h2 style={{  fontFamily: "Georgia, serif"}}>DREKSYONY</h2>
                     </div>
                     <div className="card-body">
                         <InputField value={state.email} type="email" handleChange={(e) => tiggreValue(e)} className="form-control" name="email" error={error.email} />
@@ -85,7 +85,7 @@ export default function Loginin(props) {
                     </div>
                     <div className="card bg-danger text-white">
                         <div className="card-footer">
-                            <Button className="btn text-white" handelClick={getLogIN} parameter={state} name="Log IN" />
+                            <Button2 className="btn text-white" handelClick={getLogIN} parameter={state} name="Log IN" />
                         </div>
                     </div>
                 </div>

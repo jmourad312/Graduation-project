@@ -1,4 +1,4 @@
-import { Button } from './Button'
+import { Button2 } from './Button'
 
 export  function Pagination(props) {
 
@@ -14,7 +14,7 @@ export  function Pagination(props) {
                 skip.map((number, index) => {
                     return (
                         <li className="page-item">
-                        <Button className="page-link" handelClick={props.handelClick} key={index} parameter={number} name={index+1} />
+                        <Button2 className="page-link" handelClick={props.handelClick} key={index} parameter={number} name={index+1} />
                         </li >
                     )
                 })
