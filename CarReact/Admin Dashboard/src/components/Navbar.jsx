@@ -31,6 +31,12 @@ export function Navbar(props) {
                         <li className="nav-item">
                         <Link className="nav-link waves-effect" to={'LoginIn'} onClick={logout}>Logout</Link>
                         </li>
+                        <li className="nav-item">
+                        <Link className="nav-link waves-effect" to={'AddPerson'}>AddPerson</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link className="nav-link waves-effect" to={'AddPartCar'}>AddPartCar</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

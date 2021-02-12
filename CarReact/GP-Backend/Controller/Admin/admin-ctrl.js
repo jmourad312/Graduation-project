@@ -42,7 +42,7 @@ addBrand = (req, res) => {
 addModel = (req, res) => {
   const model = new Model(req.body);
   model.save();
-  Brand.updateOne({ _id: req.params.id }, { $push: { carModel: model._id } })
+  Brand.updateOne({name: req.params.id }, { $push: { carModel: model._id } })
 
     .then((data) => {
       return res.status(200).json({
@@ -98,43 +98,47 @@ getModel = (req, res) => {
 
 addCollection = (req, res) => {
   const collection = new Collection(req.body);
-  collection.save();
-  carItem
-    .updateOne(
-      { _id: req.params.id },
-      { $push: { itemCollection: carItem._id } }
-    )
+  collection.save()
     .then((data) => {
-      return res.status(200).json({
+      return res.json({
         Data: data,
-        Message: "done add brand",
+        Message: "done add collection",
         Success: true,
       });
     })
     .catch((error) => {
       return res.status(200).json({
         Data: error.message,
-        Message: "can't add brand",
+        Message: "can't add collection",
         Success: false,
       });
     });
 };
 
-getCollaction = (req, res) => {
-  Collection.find({}, { name: 1, _id: 1 }, (error, data) => {
-    if (error || data.length == 0) {
-      return res.status(400).json({
-        Data: null,
-        Message: "Brand not found",
-        Success: false,
+//---------------------------------------------user -------------------------------------------------------------------
+
+//show all users
+showAllUsers = (req, res) => {
+  const populateQuery = [
+    { path: "person", select: "firstName lastName middleName email" },
+  ];
+
+  User.find({})
+    .populate(populateQuery)
+    .exec((err, users) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't count the number of users",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: users,
+        Message: "this is the full number of users",
+        Success: true,
       });
-    }
-    return res.status(200).json({
-      Data: data,
-      Message: "احلى براند لاحلى زبون",
-      Success: true,
     });
-  });
 };
 
 //---------------------------------------------user -------------------------------------------------------------------
@@ -532,6 +536,15 @@ getBlogsUser = (req, res) => {
     });
 };
 
+getCollection = (req, res) => {
+  Collection.find({}, { type: 1, _id: 1 }, (error, data) => {
+    if (error || data.length == 0) {
+      return res.json({ Data: error, Message: "Brand not found", Success: false });
+    }
+    return res.json({ Data: data, Message: "احلى براند لاحلى زبون", Success: true });
+  });
+};
+
 module.exports = {
   addModel,
   addBrand,
@@ -553,4 +566,5 @@ module.exports = {
   deleteUser,
   getItemsVendor,
   getBlogsUser,
+  getCollection
 };
