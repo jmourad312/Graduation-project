@@ -39,27 +39,6 @@ addBrand = (req, res) => {
     });
 };
 
-addModel = (req, res) => {
-  const model = new Model(req.body);
-  model.save();
-  Brand.updateOne({name: req.params.id }, { $push: { carModel: model._id } })
-
-    .then((data) => {
-      return res.status(200).json({
-        Data: data.n,
-        Message: "done add brand",
-        Success: true,
-      });
-    })
-    .catch((error) => {
-      return res.status(200).json({
-        Data: error.message,
-        Message: "can't add brand",
-        Success: false,
-      });
-    });
-};
-
 getBrand = (req, res) => {
   Brand.find({}, { name: 1, _id: 1 }, (error, data) => {
     if (error || data.length == 0) {
@@ -75,6 +54,69 @@ getBrand = (req, res) => {
       Success: true,
     });
   });
+};
+
+updateBrand = (req, res) => {
+  const body = req.body;
+
+  Brand.updateOne(
+    { _id: req.params.id },
+    body,
+    { upsert: true, new: true },
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't update an item ",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: result,
+        Message: "You can update an item ",
+        Success: true,
+      });
+    }
+  );
+};
+
+deleteBrand = (req, res) => {
+  Brand.deleteOne({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete user",
+        Success: false,
+      });
+    }
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
+};
+
+//Model
+addModel = (req, res) => {
+  const model = new Model(req.body);
+  model.save();
+  Brand.updateOne({ name: req.params.id }, { $push: { carModel: model._id } })
+
+    .then((data) => {
+      return res.status(200).json({
+        Data: data.n,
+        Message: "done add brand",
+        Success: true,
+      });
+    })
+    .catch((error) => {
+      return res.status(200).json({
+        Data: error.message,
+        Message: "can't add brand",
+        Success: false,
+      });
+    });
 };
 
 getModel = (req, res) => {
@@ -96,9 +138,11 @@ getModel = (req, res) => {
     });
 };
 
+//Collection
 addCollection = (req, res) => {
   const collection = new Collection(req.body);
-  collection.save()
+  collection
+    .save()
     .then((data) => {
       return res.json({
         Data: data,
@@ -111,6 +155,73 @@ addCollection = (req, res) => {
         Data: error.message,
         Message: "can't add collection",
         Success: false,
+      });
+    });
+};
+
+updateCollection = (req, res) => {
+  const body = req.body;
+
+  Collection.updateOne(
+    { _id: req.params.id },
+    body,
+    { upsert: true, new: true },
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't update an Collection",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: result,
+        Message: "You can update an Collection ",
+        Success: true,
+      });
+    }
+  );
+};
+
+deleteCollection = (req, res) => {
+  Collection.deleteOne({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      return res.json({
+        Data: err,
+        Message: "You can't delete Collection",
+        Success: false,
+      });
+    }
+    return res.json({
+      Data: data.n,
+      Message: "Done deletes",
+      Success: true,
+    });
+  });
+};
+
+//---------------------------------------------user -------------------------------------------------------------------
+
+//show all users
+showAllUsers = (req, res) => {
+  const populateQuery = [
+    { path: "person", select: "firstName lastName middleName email" },
+  ];
+
+  User.find({})
+    .populate(populateQuery)
+    .exec((err, users) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't count the number of users",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: users,
+        Message: "this is the full number of users",
+        Success: true,
       });
     });
 };
@@ -427,8 +538,7 @@ countAll = (req, res) => {
     Vendor.count().exec(),
     carItem.count().exec(),
     Post.count().exec(),
-  ])
-  .then((counts, error) => {
+  ]).then((counts, error) => {
     if (error) {
       return res.json({
         Data: error,
@@ -517,9 +627,17 @@ getBlogsUser = (req, res) => {
 getCollection = (req, res) => {
   Collection.find({}, { type: 1, _id: 1 }, (error, data) => {
     if (error || data.length == 0) {
-      return res.json({ Data: error, Message: "Brand not found", Success: false });
+      return res.json({
+        Data: error,
+        Message: "Brand not found",
+        Success: false,
+      });
     }
-    return res.json({ Data: data, Message: "احلى براند لاحلى زبون", Success: true });
+    return res.json({
+      Data: data,
+      Message: "احلى براند لاحلى زبون",
+      Success: true,
+    });
   });
 };
 
@@ -544,5 +662,9 @@ module.exports = {
   deleteUser,
   getItemsVendor,
   getBlogsUser,
-  getCollection
+  getCollection,
+  updateBrand,
+  deleteBrand,
+  updateCollection,
+  deleteCollection,
 };

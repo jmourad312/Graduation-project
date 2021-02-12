@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
-import { setVendorIdAction, userSignInAction, vendorSignInAction } from "../../../../store/actions";
 import axios from "axios";
 import icon from '../../../../assets/Images/icon.png'
 import { motion } from "framer-motion";
@@ -10,9 +9,8 @@ import { motion } from "framer-motion";
 export default function VendorSignForm(props) {
 
   const dispatch = useDispatch();
-  const setVendorID = (params) => {
-    dispatch(setVendorIdAction(params))
-  }
+  
+
 
   const [vendorSignUpInfo, setVendorSignUpInfo] = useState({
     firstName: "",
@@ -39,7 +37,6 @@ export default function VendorSignForm(props) {
       .post("http://localhost:3000/vendor/auth/signup", vendorSignUpInfo)
       .then((res) => {
         console.log(res);
-        setVendorID(res.data.Data);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("VendorID", res.data.Data);
         console.log(localStorage.getItem("Authorization"));
@@ -88,7 +85,6 @@ export default function VendorSignForm(props) {
       .post("http://localhost:3000/vendor/auth/signin", vendorSignInInfo)
       .then((res) => {
         console.log(res);
-        setVendorID(res.data.Data);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
@@ -142,10 +138,10 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             usernameError = true;
-          } else if ($(this).val().length > 1 && $(this).val().length <= 6) {
+          } else if ($(this).val().length > 1 && $(this).val().length <= 3) {
             $(this)
               .siblings("span.error")
-              .text("Please type at least 6 characters")
+              .text("Please type at least 3 characters")
               .fadeIn()
               .parent(".form-group")
               .addClass("hasError");

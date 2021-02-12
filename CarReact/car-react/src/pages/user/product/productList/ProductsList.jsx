@@ -21,10 +21,10 @@ export default function ProductsList() {
   //   dispatch(getProductsAction());
   // };
   
-  // useEffect(() => {
-  //   getProducts();
-  //   dispatch(getUsersAction(localStorage.getItem("UserID")));
-  // }, []);
+  useEffect(() => {
+    // getProducts();
+    dispatch(getUsersAction(localStorage.getItem("UserID")));
+  }, []);
   
 
 

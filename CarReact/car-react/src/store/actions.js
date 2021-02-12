@@ -254,6 +254,7 @@ export const setUserIdAction = (payload) => {
     payload,
   };
 };
+
 export const getUsersAction = (params) => async (dispatch) => {
   try {
     const res = await axios.get(

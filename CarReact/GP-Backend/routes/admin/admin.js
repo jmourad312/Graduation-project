@@ -36,9 +36,22 @@ router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), v
 router.post('/addCollection', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
 
 //**********************************************************************************//
+
 router.get('/getBrand',Admin.getBrand);
 router.get('/getModel/:name', Admin.getModel);
 router.get('/getCollection', Admin.getCollection);
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//delete
+router.delete('/deleteBrand/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteBrand);
+router.delete('/deleteCollection/:id',passport.authenticate("jwt", { session: false }), validateAdmin, Admin.deleteCollection);
+
+//update 
+router.put("/updateBrand/:id", passport.authenticate("jwt", { session: false }), validateAdmin, Admin.updateBrand);
+router.put("/updateCollection/:id", passport.authenticate("jwt", { session: false }), validateAdmin, Admin.updateCollection);
+
+/////////////////////////////////////////////////////////////////////////////////////
 
 //Ban
 router.post('/addUserBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addUserBan);

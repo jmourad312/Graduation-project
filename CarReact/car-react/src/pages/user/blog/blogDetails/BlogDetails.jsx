@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
 import LoginButton from "../../../../components/LoginButton";
+import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import {
   getBlogDetails,
@@ -21,8 +22,10 @@ export default function BlogDetails(props) {
   const [checkOwner, setCheckOwner] = useState(false);
 
   const checkOwnerDetails = () => {
-    if (blogDetails.person._id === localStorage.getItem("UserID")) {
-      setCheckOwner(true);
+    if (blogDetails.person) {
+      if (blogDetails.person._id === localStorage.getItem("UserID")) {
+        setCheckOwner(true);
+      }
     } else {
       setCheckOwner(false);
     }
@@ -105,6 +108,35 @@ export default function BlogDetails(props) {
       });
     closeModal();
   };
+  const [toastStatus, setToastStatus] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const toggleStatus = () => {
+    setToastStatus(true);
+    setTimeout(() => {
+      setToastStatus(false);
+    }, 2000);
+  };
+  const handleRemoveBookmark = () => {
+    console.log(blogID);
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const body = {
+      id: blogID,
+    };
+    const URL = "http://localhost:3000/user/removeBookmarkPosts";
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const handleAddBookmark = () => {
     console.log(blogID);
@@ -125,10 +157,12 @@ export default function BlogDetails(props) {
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
+          toggleStatus();
+          setToastMessage("Blog added to bookmarks");
         } else {
-          console.log("fail");
+          handleRemoveBookmark();
+          toggleStatus();
+          setToastMessage("Blog removed from bookmarks");
         }
       })
       .catch((error) => {
@@ -224,12 +258,7 @@ export default function BlogDetails(props) {
   // }, []);
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
-    // console.log(blogDetails);
-    // console.log(blogID);
     if (blogDetails) {
-      console.log(blogDetails.person._id);
-      console.log(userID);
-
       checkOwnerDetails();
     }
   }, [blogDetails]);
@@ -259,12 +288,18 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
+      <div style={{ position: "absolute", top: "200px",right:"-150px" }}>
+        <ToastMessage
+          showFunction={toggleStatus}
+          status={toastStatus}
+          message={toastMessage}
+        />
+      </div>
       <div className="blogDetails">
         <div className="header">
           <div style={{ position: "absolute", top: "5%", right: "-30%" }}>
             {localStorage.getItem("Authorization") === null && <LoginButton />}
             {localStorage.getItem("Authorization") !== null && <UserIcon />}
-
           </div>
           <div className="row">
             <div className="col-6">
@@ -279,7 +314,11 @@ export default function BlogDetails(props) {
                 by{" "}
                 <span>
                   {" "}
-                  {blogDetails ? blogDetails.person.firstName : "LOADING"}
+                  {blogDetails
+                    ? blogDetails.person
+                      ? blogDetails.person.firstName
+                      : "User"
+                    : "LOADING"}
                 </span>
               </p>
               <hr />
@@ -295,17 +334,29 @@ export default function BlogDetails(props) {
                 </span>
               </p>
               <hr />
-              <h5 className="mt-0" style={{ fontWeight: "700" }}>Post Details</h5>
-              <p className="truncate" style={{ fontWeight: "600", fontSize: "20px" }}>{blogDetails && blogDetails.body}</p>
+              <h5 className="mt-0" style={{ fontWeight: "700" }}>
+                Post Details
+              </h5>
+              <p
+                className="truncate"
+                style={{ fontWeight: "600", fontSize: "20px" }}
+              >
+                {blogDetails && blogDetails.body}
+              </p>
               <hr />
 
               <p>
                 {" "}
-                <span className="" style={{ fontWeight: "700" }}>Tags</span>{" "}
+                <span className="" style={{ fontWeight: "700" }}>
+                  Tags
+                </span>{" "}
                 <span className="badge badge-dark" style={{ fontSize: "20px" }}>
                   {blogDetails && blogDetails.brand}
                 </span>
-                <span className="badge badge-dark ml-1" style={{ fontSize: "20px" }}>
+                <span
+                  className="badge badge-dark ml-1"
+                  style={{ fontSize: "20px" }}
+                >
                   {blogDetails && blogDetails.model}
                 </span>
               </p>
@@ -321,7 +372,6 @@ export default function BlogDetails(props) {
           </div>
         </div>
       </div>
-
       {/* --------------------- EDIT SECTION--------------- */}
       {/* <p
         onClick={handleAddBookmark}
@@ -339,13 +389,16 @@ export default function BlogDetails(props) {
       </p> */}
       <div className="row">
         {localStorage.getItem("UserID") !== null && (
-          <button className="bookmarkbtn fourth" style={{ marginLeft: "30px" }} onClick={handleAddBookmark}>
+          <button
+            className="bookmarkbtn fourth"
+            style={{ marginLeft: "30px" }}
+            onClick={handleAddBookmark}
+          >
             Bookmark
           </button>
         )}
         {checkOwner && (
           <Button
-
             variant="info"
             style={{ margin: "10px" }}
             onClick={() => openModal(props.id)}
@@ -354,7 +407,6 @@ export default function BlogDetails(props) {
           </Button>
         )}
       </div>
-
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
           <Modal.Title>Edit your product</Modal.Title>
@@ -473,44 +525,62 @@ export default function BlogDetails(props) {
       {/* <!-- Single Comment --> */}
       {blogDetails
         ? blogDetails.comment.map((item, index) => {
-          return (
-            <div className="media mb-1" key={index}>
-             
-              <button
-                className="btn" style={{position:"absolute",left:"-17px",fontSize:"20px"}}
-                onClick={() => addVote(item._id)}
-              >
-                <i class="fas fa-chevron-up"></i>
-              </button> 
-              <span className="btn badge-pill" style={{position:"relative",left:"-30px",top:"40px",fontSize:"20px"}}>
-                {item.vote.numberOfVoting}
-              </span>   
-              <button
-                className="btn" style={{position:"relative",left:"-70px",top:"80px",fontSize:"20px"}}
-                onClick={() => removeVote(item._id)}
-              >
-                <i class="fas fa-chevron-down"></i>
-              </button>
+            return (
+              <div className="media mb-1" key={index}>
+                <button
+                  className="btn"
+                  style={{
+                    position: "absolute",
+                    left: "-17px",
+                    fontSize: "20px",
+                  }}
+                  onClick={() => addVote(item._id)}
+                >
+                  <i class="fas fa-chevron-up"></i>
+                </button>
+                <span
+                  className="btn badge-pill"
+                  style={{
+                    position: "relative",
+                    left: "-30px",
+                    top: "40px",
+                    fontSize: "20px",
+                  }}
+                >
+                  {item.vote.numberOfVoting}
+                </span>
+                <button
+                  className="btn"
+                  style={{
+                    position: "relative",
+                    left: "-70px",
+                    top: "80px",
+                    fontSize: "20px",
+                  }}
+                  onClick={() => removeVote(item._id)}
+                >
+                  <i class="fas fa-chevron-down"></i>
+                </button>
 
-              <img
-                className="d-flex mr-3 rounded-circle"
-                src={item.image}
-                alt=""
-                style={{ maxHeight: "300px", maxWidth: "300px" }}
-              />
-              <hr />
-              <br />
-              <div className="media-body">
-                <h5 className="mt-0">
-                  {item.person.firstName ? item.person.firstName : null}
-                </h5>
+                <img
+                  className="d-flex mr-3 rounded-circle"
+                  src={item.image}
+                  alt=""
+                  style={{ maxHeight: "300px", maxWidth: "300px" }}
+                />
                 <hr />
                 <br />
-                <p>{item.content}</p>
-                <hr style={{border:"1px solid"}}/>
-              </div>
+                <div className="media-body">
+                  <h5 className="mt-0">
+                    {item.person.firstName ? item.person.firstName : null}
+                  </h5>
+                  <hr />
+                  <br />
+                  <p>{item.content}</p>
+                  <hr style={{ border: "1px solid" }} />
+                </div>
 
-              {/* <form
+                {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -526,7 +596,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-              {/* {item
+                {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -546,11 +616,10 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-            </div>
-          );
-        })
+              </div>
+            );
+          })
         : "LOADING"}
-
       {/* <!-- Comment with nested comments --> */}
       {/* <div className="media mb-4">
           <img
@@ -599,7 +668,6 @@ export default function BlogDetails(props) {
             </div>
           </div>
         </div> */}
-
       {/* <div>
         <h2>Related Questions</h2>
         <div className="row mt-3">
