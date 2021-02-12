@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
 import LoginButton from "../../../../components/LoginButton";
+import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import {
   getBlogDetails,
@@ -107,6 +108,35 @@ export default function BlogDetails(props) {
       });
     closeModal();
   };
+  const [toastStatus, setToastStatus] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const toggleStatus = () => {
+    setToastStatus(true);
+    setTimeout(() => {
+      setToastStatus(false);
+    }, 2000);
+  };
+  const handleRemoveBookmark = () => {
+    console.log(blogID);
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const body = {
+      id: blogID,
+    };
+    const URL = "http://localhost:3000/user/removeBookmarkPosts";
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const handleAddBookmark = () => {
     console.log(blogID);
@@ -127,10 +157,12 @@ export default function BlogDetails(props) {
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
+          toggleStatus();
+          setToastMessage("Blog added to bookmarks");
         } else {
-          console.log("fail");
+          handleRemoveBookmark();
+          toggleStatus();
+          setToastMessage("Blog removed from bookmarks");
         }
       })
       .catch((error) => {
@@ -226,12 +258,7 @@ export default function BlogDetails(props) {
   // }, []);
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
-    // console.log(blogDetails);
-    // console.log(blogID);
     if (blogDetails) {
-      // console.log(blogDetails.person._id);
-      // console.log(userID);
-
       checkOwnerDetails();
     }
   }, [blogDetails]);
@@ -261,6 +288,13 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
+      <div style={{ position: "absolute", top: "200px",right:"-150px" }}>
+        <ToastMessage
+          showFunction={toggleStatus}
+          status={toastStatus}
+          message={toastMessage}
+        />
+      </div>
       <div className="blogDetails">
         <div className="header">
           <div style={{ position: "absolute", top: "5%", right: "-30%" }}>
@@ -338,7 +372,6 @@ export default function BlogDetails(props) {
           </div>
         </div>
       </div>
-
       {/* --------------------- EDIT SECTION--------------- */}
       {/* <p
         onClick={handleAddBookmark}
@@ -374,7 +407,6 @@ export default function BlogDetails(props) {
           </Button>
         )}
       </div>
-
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
           <Modal.Title>Edit your product</Modal.Title>
@@ -588,7 +620,6 @@ export default function BlogDetails(props) {
             );
           })
         : "LOADING"}
-
       {/* <!-- Comment with nested comments --> */}
       {/* <div className="media mb-4">
           <img
@@ -637,7 +668,6 @@ export default function BlogDetails(props) {
             </div>
           </div>
         </div> */}
-
       {/* <div>
         <h2>Related Questions</h2>
         <div className="row mt-3">

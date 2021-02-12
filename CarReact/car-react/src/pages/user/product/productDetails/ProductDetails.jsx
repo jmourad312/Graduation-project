@@ -1,9 +1,10 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginButton from "../../../../components/LoginButton";
+import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
 
@@ -14,13 +15,40 @@ export default function ProductDetails(props) {
   const getProducts = (params) => {
     dispatch(getProductDetails(params));
   };
-  
+
   useEffect(() => {
     getProducts(localStorage.getItem("ProductID"));
   }, [productDetails]);
 
-  const handleAddFavourite= () =>{
-    console.log(productID);
+  const [toastStatus, setToastStatus] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const toggleStatus = () => {
+    setToastStatus(true);
+    setTimeout(() => {
+      setToastStatus(false)
+    }, 2000);
+  };
+  const handleRemoveFavourite = () => {
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  };
+  const body = {
+    id: productID,
+  };
+  const URL = "http://localhost:3000/user/removeFavouriteItems";
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const handleAddFavourite = () => {
     const config = {
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -39,15 +67,20 @@ export default function ProductDetails(props) {
         console.log(req);
         if (req.data.Success === true) {
           console.log("Success");
+          setToastMessage("Item added to favourite");
+          toggleStatus();
           // props.history.push("/MyProfile");
         } else {
           console.log("fail");
+          handleRemoveFavourite();
+          toggleStatus();
+          setToastMessage("Item removed from favourites");
         }
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const pageVariants = {
     in: {
@@ -76,10 +109,14 @@ export default function ProductDetails(props) {
     >
       {localStorage.getItem("Authorization") === null && <LoginButton />}
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
-      <section className="products-details">
+      <section className="products-details container">
         {/* <!-- start product details --> */}
         <div className="container">
-          
+          <ToastMessage
+            showFunction={toggleStatus}
+            status={toastStatus}
+            message={toastMessage}
+          />
           <div className="row ">
             {/* <!-- image of produce --> */}
             <div className="col-4 bg-white mt-5">
@@ -163,8 +200,6 @@ export default function ProductDetails(props) {
               </div>
             </div>
           </div>
-         
-          
         </div>
         {/* <!-- end product details --> */}
 
