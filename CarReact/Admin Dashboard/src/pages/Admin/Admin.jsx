@@ -224,19 +224,19 @@ export default function Admin(props) {
                     <div className="sidebar-fixed bg-dark position-fixed">
                         <div className="list-group list-group-flush mt-5">
                             <a href="#Dashboard" className="list-group-item active waves-effect">
-                                <i className="fa fa-pie-chart mr-3"></i>Dashboard
+                                <i className="fas fa-lg mr-3">Dashboard</i>
                             </a>
                             <a href="#userTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>User Details
+                                <i className="fa fa-lg fa-user mr-4">User </i>
                             </a>
                             <a href="#vendorTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Vendor Details
+                            <i class="fas fa-lg fa-hard-hat mr-2">Vendor</i> 
                             </a>
                             <a href="#blogTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Blog
+                                <i className="fab fa-lg fa-blogger mr-4">Blog</i>
                             </a>
                             <a href="#productTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Product
+                                <i className="fab fa-lg fa-product-hunt mr-1">Product</i>
                             </a>
                         </div>
                     </div>
