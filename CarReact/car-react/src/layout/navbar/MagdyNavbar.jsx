@@ -25,7 +25,7 @@ export default function MagdyNavbar() {
                     </svg>
                 </label>
                 <ul className="menu__content">
-                    <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Auth</Link></li>
+                    <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Sign Here</Link></li>
                     {/* <li className="menu__item" id="item2"><Link className="menu__link" onClick={handleClick} to="/SignUp">SignUp</Link></li> */}
                     {/* <li className="menu__item" id="item3"><Link className="menu__link" onClick={handleClick} to="/SignForm">SignForm</Link></li> */}
                     <li className="menu__item" id="item4"><Link className="menu__link" onClick={handleClick} to="/BlogList">Blog List</Link></li>
