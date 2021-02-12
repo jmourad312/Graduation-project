@@ -9,6 +9,9 @@ const EditUser = lazy(() => import('../pages/Edit/Model'))
 const EditVendor = lazy(()=> import('../pages/Edit/EditVendor') )
 const Items = lazy(()=> import('../pages/Vendor/Items') )
 const Blogs = lazy(()=> import('../pages/User/Blogs'))
+const AddPerson = lazy(()=> import('../pages/AddPerson'))
+const AddPartCar = lazy(()=> import('../pages/AddPartCar'))
+
 
 
 export function Routes() {
@@ -43,7 +46,8 @@ export function Routes() {
                     <GuardedRoute path="/EditVendor" exact component={EditVendor} meta={{ auth: true }} />
                     <GuardedRoute path="/Items" exact component={Items} meta={{ auth: true }} />
                     <GuardedRoute path="/Blogs" exact component={Blogs} meta={{ auth: true }} />
-
+                    <GuardedRoute path="/AddPerson" exact component={AddPerson} meta={{ auth: true }} />
+                    <GuardedRoute path="/AddPartCar" exact component={AddPartCar} meta={{ auth: true }} />
                 </Switch>
             </GuardProvider>
         </Suspense>
