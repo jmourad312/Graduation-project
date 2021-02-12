@@ -138,10 +138,10 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             usernameError = true;
-          } else if ($(this).val().length > 1 && $(this).val().length <= 6) {
+          } else if ($(this).val().length > 1 && $(this).val().length <= 3) {
             $(this)
               .siblings("span.error")
-              .text("Please type at least 6 characters")
+              .text("Please type at least 3 characters")
               .fadeIn()
               .parent(".form-group")
               .addClass("hasError");
