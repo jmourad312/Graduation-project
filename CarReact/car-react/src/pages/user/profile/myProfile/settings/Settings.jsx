@@ -1,15 +1,11 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import Button2 from "../../../../../components/Button2";
 import Input from "../../../../../components/Input";
 import Label from "../../../../../components/Label";
-import Loading from "../../../../../components/Loading";
 
 export default function Settings(props) {
-  const user = useSelector((state) => state.user.Data);
-  // {user ? user.person : "null"}
 
   const [userInfo, setUserInfo] = useState({
     firstName: "",

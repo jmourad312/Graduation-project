@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import VendorDetails from './VendorBasicDetails/VendorDetails';
 import MyItems from './VendorItems/MyItems';
 import VendorSettings from './VendorSettings/VendorSettings';
@@ -7,7 +7,6 @@ import Loading from '../../../../components/Loading';
 import { AnimatePresence } from 'framer-motion';
 
 export default function ProfileRight(props) {
-  const location = useLocation();
   const pageVariants = {
     in: {
       opacity: 1,

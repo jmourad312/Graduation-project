@@ -1,15 +1,12 @@
 import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
 import Button2 from '../../../../../components/Button2';
 import Input from '../../../../../components/Input';
 import Label from '../../../../../components/Label';
 
 export default function VendorSettings(props) {
 
-    const user = useSelector((state) => state.user.Data);
-    // {user ? user.person : "null"}
 
     const [vendorInfo, setUserInfo] = useState({
       firstName: "",
