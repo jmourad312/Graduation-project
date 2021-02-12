@@ -1,4 +1,4 @@
-import { Button } from "../components/Button";
+import { Button2 } from "../components/Button";
 
 export default function BlogEntry(props) {
     return (
@@ -28,13 +28,13 @@ export default function BlogEntry(props) {
                         </div>
                         <div className="d-flex">
 
-                            <Button className="btn btn-info mx-auto m-2" parameter={props.dataItem} key={props.id} handelClick={props.edit}
+                            <Button2 className="btn btn-info mx-auto m-2" parameter={props.dataItem} key={props.id} handelClick={props.edit}
                                 name={<i style={{fontSize: '20px' }} className='fas fa-pen'></i>}>
-                            </Button>
+                            </Button2>
 
-                            <Button className="btn btn-danger mx-auto m-2 " parameter={props.dataItem} key={props.id} handelClick={props.delete}
+                            <Button2 className="btn btn-danger mx-auto m-2 " parameter={props.dataItem} key={props.id} handelClick={props.delete}
                                 name={<i style={{fontSize: '20px' }} className='fas fa-trash'></i>}>
-                            </Button>
+                            </Button2>
 
                         </div>
                     </article>

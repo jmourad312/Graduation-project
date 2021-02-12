@@ -330,8 +330,7 @@ export default function AddPartCar(props) {
               </table>
             </div>
           </div>
-        
-        
+           
         </div>
       </div>
       

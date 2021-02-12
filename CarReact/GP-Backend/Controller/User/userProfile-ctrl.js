@@ -211,9 +211,6 @@ addFavouriteItems = async (req, res) => {
     });
   }
 
-
-
-
   user.updateOne({ person: req.user._id }, {
     $push: {
       favouriteItems: req.body.id,
