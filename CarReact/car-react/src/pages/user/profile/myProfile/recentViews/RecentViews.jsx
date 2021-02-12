@@ -6,18 +6,17 @@ import Loading from "../../../../../components/Loading";
 import {
   getUsersAction,
   setProductId,
-  setUserIdAction,
 } from "../../../../../store/actions";
 
 export default function RecentViews(props) {
   const user = useSelector((state) => state.user.Data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUsersAction(localStorage.getItem("UserID")));
     console.log(user ? user.person : "loading");
     console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
-  const dispatch = useDispatch();
   let history = useHistory();
 
   const handleClick = (params) => {

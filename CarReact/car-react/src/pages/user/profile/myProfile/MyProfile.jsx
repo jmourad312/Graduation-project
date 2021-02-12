@@ -5,14 +5,12 @@ import Ads from "../../../../components/Ads";
 
 import ProfileLeft from "../../../../components/ProfileLeft";
 import ProfileRight from "../../../../components/ProfileRight";
-import { getUsersAction, setUserIdAction } from "../../../../store/actions";
+import { getUsersAction } from "../../../../store/actions";
 
 export default function MyProfile() {
   const dispatch = useDispatch();
-  // const userID = useSelector((state) => state.userID);
   const user = useSelector((state) => state.user.Data);
   const classNAME = useSelector(state => state.classNAME)
-  dispatch(setUserIdAction(localStorage.getItem("UserID")));
 
   useEffect(() => {
     dispatch(getUsersAction(localStorage.getItem("UserID")));

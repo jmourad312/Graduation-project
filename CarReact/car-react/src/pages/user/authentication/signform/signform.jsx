@@ -6,7 +6,6 @@ import Button2 from "../../../../components/Button2";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setUserIdAction,
   userSignInAction,
   vendorSignInAction,
 } from "../../../../store/actions";
@@ -27,9 +26,7 @@ export default function Signform(props) {
   const userID = useSelector((state) => state.userID);
   const dispatch = useDispatch();
 
-  const setUserID = (params) => {
-    dispatch(setUserIdAction(params));
-  };
+
 
   const [userSignUpInfo, setUserSignUpInfo] = useState({
     firstName: "",
@@ -52,7 +49,6 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
       .then((res) => {
         console.log(res);
-        setUserID(res.data.Data);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("UserID", res.data.Data);
 
@@ -90,7 +86,6 @@ export default function Signform(props) {
       .post("http://localhost:3000/user/auth/signin", userSignInInfo)
       .then((res) => {
         console.log(res);
-        setUserID(res.data.Data);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
