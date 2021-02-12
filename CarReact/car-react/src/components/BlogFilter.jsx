@@ -50,8 +50,9 @@ export default function BlogFilter(props) {
         ...previous,
         [name]: value,
       };
-    });
 
+    });
+    handleSearchClick();
     //   switch (event.target.name) {
     //     case "brand":
     //       setState({
@@ -99,6 +100,14 @@ export default function BlogFilter(props) {
     dispatch(resultFromFilter({}, 0));
   };
 
+  const handleClear2 = () => {
+    setFilterState({
+      search: "",
+    });
+    dispatch(resultFromFilter({}, 0));
+
+  };
+
   //-------------ADD BLOG ----------------------------------------
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
@@ -125,6 +134,14 @@ export default function BlogFilter(props) {
       };
     });
   };
+
+  const handleFocus = () => {
+    document.getElementById("focus").focus();
+  }
+
+  
+
+
 
   const handleInputChange = (event) => {
     const { value, name } = event.target;
@@ -176,11 +193,11 @@ export default function BlogFilter(props) {
   return (
     <div className={props.class}>
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3">Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
       </div>
 
       <div className="mb-5">
-        <div className="input-group mb-3">
+        {/* <div className="input-group mb-3">
           <input
             type="text"
             name="search"
@@ -203,8 +220,18 @@ export default function BlogFilter(props) {
               Search
             </button>
           </div>
+        </div> */}
+
+        <div class="search">
+          <input type="checkbox" id="trigger" onClick={handleFocus} class="search__checkbox" />
+          <label class="search__label-init" for="trigger"></label>
+          <label class="search__label-active" onClick={handleClear2} for="trigger"></label>
+          <div class="search__border"></div>
+          <input type="text" class="search__input" id="focus" name="search" onChange={handleChange} value={filterState.search} />
+          <div class="search__close" ></div>
         </div>
         <select
+         style={{marginTop:"70px"}}
           value={filterState.brand}
           name="brand"
           onChange={handleChange}
@@ -257,13 +284,13 @@ export default function BlogFilter(props) {
           Clear filter
         </button>
       </div>
-      <div style={{ position: "relative", top: "150px", right: "10px",textAlign:"center" }}>
+      <div style={{ position: "relative", top: "150px", right: "10px", textAlign: "center" }}>
         {localStorage.getItem("UserID") !== null && (
           <div>
-          <label for="add" style={{fontSize:"25px"}}>Add new post</label>
-          <p onClick={openModal} id="add" style={{cursor:"pointer"}}>
-            <i class="fas fa-4x fa-plus-circle"></i>
-          </p>
+            <label for="add" style={{ fontSize: "25px" }}>Add new post</label>
+            <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
+              <i class="fas fa-4x fa-plus-circle"></i>
+            </p>
           </div>
         )}
       </div>
