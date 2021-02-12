@@ -224,19 +224,19 @@ export default function Admin(props) {
                     <div className="sidebar-fixed bg-dark position-fixed">
                         <div className="list-group list-group-flush mt-5">
                             <a href="#Dashboard" className="list-group-item active waves-effect">
-                                <i className="fa fa-pie-chart mr-3"></i>Dashboard
+                                <i className="fas fa-lg mr-3">Dashboard</i>
                             </a>
                             <a href="#userTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>User Details
+                                <i className="fa fa-lg fa-user mr-4">User </i>
                             </a>
                             <a href="#vendorTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Vendor Details
+                            <i class="fas fa-lg fa-hard-hat mr-2">Vendor</i> 
                             </a>
                             <a href="#blogTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Blog
+                                <i className="fab fa-lg fa-blogger mr-4">Blog</i>
                             </a>
                             <a href="#productTabel" className="list-group-item list-group-item-action waves-effect">
-                                <i className="fa fa-user mr-3"></i>Product
+                                <i className="fab fa-lg fa-product-hunt mr-1">Product</i>
                             </a>
                         </div>
                     </div>
@@ -317,6 +317,7 @@ export default function Admin(props) {
                                 <div onLoad={() => getPartUser(0)}></div>
                                 <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} handelClickDelete={goToDeleteUser}></Tabel>
                                 <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
+                                <hr style={{border:"1px solid"}}/>
                             </>
                         }
 
@@ -327,7 +328,9 @@ export default function Admin(props) {
                                                         <h3>Vendors</h3>
                                 <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} handelClickEdit={goToEditVendor} handelClickDelete={goToDeleteVendor}></Tabel>
                                 <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
+                                <hr style={{border:"1px solid"}}/>
                             </>
+                            
                         }
 
                         {/* Blog List */}
@@ -378,8 +381,7 @@ export default function Admin(props) {
 
                                     </div>
                                     <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
-
-
+                                    <hr style={{border:"1px solid"}}/>
                                 </div>
                             </div>
                         }
@@ -426,6 +428,7 @@ export default function Admin(props) {
                                         </div>
                                     </div>
                                             <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
+                                           
                                 </div>
                             </div>
                         }
