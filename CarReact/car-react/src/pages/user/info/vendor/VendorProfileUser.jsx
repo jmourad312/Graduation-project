@@ -1,6 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
-export default function VendorProfileUser() {
+export default function VendorProfileUser(props) {
+  
+  const getVendor = (params) =>{
+
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const URL = `http://localhost:3000/user/showVendorProfile/${params}`;
+
+    axios
+      .get(URL, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  
+  useEffect(() => {
+    console.log(props.match.params.id);
+    getVendor(props.match.params.id);
+  }, []);
+  
+
   return (
     <section className="vendor-profile">
       <div className="bg">

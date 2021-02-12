@@ -25,19 +25,19 @@ export default function ProductDetails(props) {
   const toggleStatus = () => {
     setToastStatus(true);
     setTimeout(() => {
-      setToastStatus(false)
+      setToastStatus(false);
     }, 2000);
   };
   const handleRemoveFavourite = () => {
-  const config = {
-    headers: {
-      Authorization: localStorage.getItem("Authorization"),
-    },
-  };
-  const body = {
-    id: productID,
-  };
-  const URL = "http://localhost:3000/user/removeFavouriteItems";
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const body = {
+      id: productID,
+    };
+    const URL = "http://localhost:3000/user/removeFavouriteItems";
     axios
       .put(URL, body, config)
       .then((req) => {
@@ -46,7 +46,7 @@ export default function ProductDetails(props) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const handleAddFavourite = () => {
     const config = {
@@ -133,7 +133,15 @@ export default function ProductDetails(props) {
               <h2>
                 {productDetails && productDetails.name}
                 <br /> By:{" "}
-                <Link to="#">
+                <Link
+                  to={`/VendorProfileUser/${
+                    productDetails
+                      ? productDetails.person
+                        ? productDetails.person._id
+                        : null
+                      : null
+                  }`}
+                >
                   {productDetails
                     ? productDetails.person
                       ? productDetails.person.firstName

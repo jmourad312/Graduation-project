@@ -64,8 +64,8 @@ export default function Routes() {
         <Route path="/ContactUs" exact component={ContactUs} />
         <Route path="/Privacy" exact component={Privacy} />
         <Route path="/TermsOfService" exact component={TermsOfService} />
-        <Route path="/VendorProfileUser" exact component={VendorProfileUser} />
-        <Route path="/ProductDetails/:id?" exact component={ProductDetails} />
+        <Route path="/VendorProfileUser/:id" exact component={VendorProfileUser} />
+        <Route path="/ProductDetails/:id" exact component={ProductDetails} />
         <Route path="/ProductsList" exact component={ProductsList} />
 
         <Route path="/MyProfile/(page)?" component={MyProfile} />
