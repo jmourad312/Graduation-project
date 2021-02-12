@@ -317,6 +317,7 @@ export default function Admin(props) {
                                 <div onLoad={() => getPartUser(0)}></div>
                                 <Tabel id="userTabel" data={state.user} handelClick={banneduser} handelClickEdit={goToEditUser} handelClickDelete={goToDeleteUser}></Tabel>
                                 <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartUser} />
+                                <hr style={{border:"1px solid"}}/>
                             </>
                         }
 
@@ -327,7 +328,9 @@ export default function Admin(props) {
                                                         <h3>Vendors</h3>
                                 <Tabel id="vendorTabel" data={state.vendor} handelClick={bannedvendor} handelClickEdit={goToEditVendor} handelClickDelete={goToDeleteVendor}></Tabel>
                                 <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartVendor} />
+                                <hr style={{border:"1px solid"}}/>
                             </>
+                            
                         }
 
                         {/* Blog List */}
@@ -378,8 +381,7 @@ export default function Admin(props) {
 
                                     </div>
                                     <Pagination NumberOfItemsInDB={stateRedux.users.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartBlog} />
-
-
+                                    <hr style={{border:"1px solid"}}/>
                                 </div>
                             </div>
                         }
@@ -426,6 +428,7 @@ export default function Admin(props) {
                                         </div>
                                     </div>
                                             <Pagination NumberOfItemsInDB={stateRedux.vendors.Data.length} NumberToShow={numberItemPerPage} handelClick={getPartProduct} />
+                                           
                                 </div>
                             </div>
                         }
