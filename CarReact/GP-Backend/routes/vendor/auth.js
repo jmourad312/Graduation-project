@@ -37,7 +37,7 @@ router.post("/signup", async (req, res) => {
       if (errorPerson) {
         res.json({
           Data: {},
-          Message: "Can't add user to database,  " + err,
+          Message: "Can't add user to database,  " + errorPerson,
           Success: false,
         });
       } else {
