@@ -30,7 +30,7 @@ export default function FavouriteItems(props) {
       variants={props.variants}
       transition={props.transition}
     >
-      <div className="container">
+      <div className="container" style={{fontSize:"1.5rem"}}>
         <div className="row">
           {user ? user.favouriteItems.map((item) => {
             return (
@@ -73,7 +73,7 @@ export default function FavouriteItems(props) {
                         <i className="badge badge-dark">{item.carModel}</i>
                       </small>
                     </div>
-                    <button className="btn btn-dark" onClick={() => handleClick(item._id)}>Go to product</button>
+                    <button className="btn btn-dark" style={{fontSize:"1.5rem"}} onClick={() => handleClick(item._id)}>Go to product</button>
                   </article>
                 </section>
               </div>

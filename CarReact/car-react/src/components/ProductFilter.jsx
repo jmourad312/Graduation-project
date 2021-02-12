@@ -23,7 +23,7 @@ export default function ProductFilter(props) {
     priceMoreThan: 0,
     priceLessThan: 0,
   });
-  
+
 
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -51,33 +51,39 @@ export default function ProductFilter(props) {
           ...previous,
           model: "",
         };
-      });}
-      setState((previous) => {
-        return {
-          ...previous,
-          [name]: value,
-        };
       });
     }
-    const handlePriceChange = (event) =>{
+    setState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+    handleSearchClick();
+  }
+  const handlePriceChange = (event) => {
 
-      switch (event.target.name) {
-        case "priceLess":
-          setState({
-            ...state,
-            priceLessThan: +event.target.value,
-          });
-          break;
-        case "priceMore":
-          setState({
-            ...state,
-            priceMoreThan: +event.target.value,
-          });
-          break;
-        default:
+    switch (event.target.name) {
+      case "priceLess":
+        setState({
+          ...state,
+          priceLessThan: +event.target.value,
+        });
         break;
-      }
+      case "priceMore":
+        setState({
+          ...state,
+          priceMoreThan: +event.target.value,
+        });
+        break;
+      default:
+        break;
     }
+  }
+
+  const handleFocus=()=>{
+    document.getElementById("focus").focus();
+  }
 
   const handleClick = (params) => {
     console.log(params);
@@ -88,7 +94,7 @@ export default function ProductFilter(props) {
     dispatch(resultFromFilterProduct(state, 0));
   };
 
-  const handleClear = () =>{
+  const handleClear = () => {
     setState({
       model: "",
       brand: "",
@@ -96,6 +102,7 @@ export default function ProductFilter(props) {
       priceLessThan: 0,
       priceMoreThan: 0,
     });
+    
     dispatch(resultFromFilterProduct({}, 0));
 
     // handleSearchClick();
@@ -103,11 +110,18 @@ export default function ProductFilter(props) {
     //   handleSearchClick();
     // }, 5000);
   }
+  const handleClear2 = () => {
+    setState({
+      search: "",
+    });
+    dispatch(resultFromFilterProduct({}, 0));
+
+  };
 
   return (
     <div className={props.className}>
       {/* <SimpleSearch /> */}
-      <div className="input-group mb-3">
+      {/* <div className="input-group mb-3">
         <input
           type="text"
           name="search"
@@ -129,13 +143,22 @@ export default function ProductFilter(props) {
             Search
           </button>
         </div>
+      </div> */}
+
+      <div class="search">
+        <input type="checkbox" id="trigger" onClick={handleFocus} class="search__checkbox" />
+        <label class="search__label-init" for="trigger"></label>
+        <label class="search__label-active" onClick={handleClear2} for="trigger"></label>
+        <div class="search__border"></div>
+        <input type="text" class="search__input" id="focus" name="search" onChange={handleChange} value={state.search}/>
+        <div class="search__close"></div>
       </div>
 
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3">Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
       </div>
-
-      <div className="mb-5">
+      <hr style={{borderColor:"grey",border:"1px solid"}}/>
+      <div className="mb-5" style={{marginTop:"120px"}}>
         <input
           type="range"
           name="priceLess"
@@ -146,7 +169,7 @@ export default function ProductFilter(props) {
           max="999"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2">
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           Form: {state.priceLessThan}
         </label>
       </div>
@@ -162,7 +185,7 @@ export default function ProductFilter(props) {
           max="5000"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2">
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           To: {state.priceMoreThan}{" "}
         </label>
       </div>
@@ -172,9 +195,10 @@ export default function ProductFilter(props) {
           value={state.brand}
           name="brand"
           onChange={handleChange}
-          className="custom-select custom-select-md mb-3"
+          className="custom-select custom-select-lg mb-3"
+          style={{fontWeight:"700"}}
         >
-          <option value="" key="no-value">
+          <option value="" key="no-value" style={{fontWeight:"700"}}>
             choose Brand
           </option>
           {stateRedux.brand.map((item, index) => (
@@ -191,9 +215,10 @@ export default function ProductFilter(props) {
           disabled={!state.brand}
           name="model"
           onChange={handleChange}
-          className="custom-select custom-select-sm mb-3"
+          className="custom-select custom-select-lg mb-3"
+          style={{fontWeight:"700"}}
         >
-          <option value="" key="no-value">
+          <option value="" key="no-value" style={{fontWeight:"700"}}> 
             choose Model
           </option>
 
@@ -207,17 +232,19 @@ export default function ProductFilter(props) {
       <button
         type="button"
         onClick={handleSearchClick}
-        className="btn btn-dark mr-4"
-        // style={{
-        //   background:
-        //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
-        // }}
+        className="btn btn-dark mr-2"
+        style={{fontWeight:"700",height:"60px"}}
+      // style={{
+      //   background:
+      //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
+      // }}
       >
         ApplyFilter
       </button>
       <button
         type="button"
         className="btn btn-danger "
+        style={{fontWeight:"700",height:"60px"}}
         // style={{
         //   background:
         //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
@@ -233,6 +260,7 @@ export default function ProductFilter(props) {
           position: "fixed",
           right: "300px",
           bottom: "-5%",
+          
         }}
       >
         {products && (

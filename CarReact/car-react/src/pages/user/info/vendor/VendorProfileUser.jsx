@@ -1,9 +1,20 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import SlickSlider from "../../../../components/SlickSlider";
 
 export default function VendorProfileUser(props) {
+
+  const [vendor, setVendor] = useState({
+    firstName: "",
+    lastName: "",
+    image: "",
+    phoneNumber: 0,
+    vendorItems:[],
+  });
+
+  // const [vendorItems, setVendorItems] = useState([])
   
-  const getVendor = (params) =>{
+  const getVendor = async (params) =>{
 
     const config = {
       headers: {
@@ -14,10 +25,18 @@ export default function VendorProfileUser(props) {
 
     axios
       .get(URL, config)
-      .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
+      .then((res) => {
+        console.log(res);
+        if (res.data.Success === true) {
           console.log("Success");
+          // console.log(res.data.Data.person);
+          setVendor({
+            firstName: res.data.Data.person.firstName,
+            lastName: res.data.Data.person.lastName,
+            image: res.data.Data.person.image,
+            phoneNumber: res.data.Data.person.phoneNumber,
+            vendorItems: res.data.Data.vendorItems,
+          });
         } else {
           console.log("fail");
         }
@@ -25,6 +44,7 @@ export default function VendorProfileUser(props) {
       .catch((error) => {
         console.log(error);
       });
+      console.log(vendor);
   }
   
   useEffect(() => {
@@ -39,36 +59,42 @@ export default function VendorProfileUser(props) {
         <div className="container">
           {/* <!-- vendor info --> */}
           <h2 className="text-center">Vendor Info</h2>
-          <section className="row">
+          <section className="row mt-5">
             <div className="media">
-              <div className="col-10">
+              <div className="col-3">
+                <img
+                  className="rounded-circle"
+                  style={{ width: "250px", height: "230px" }}
+                  src={vendor.image}
+                  alt="Generic placeholder"
+                />
+              </div>
+              <div className="col-5">
                 <div className="media-body">
                   <div className="">
-                    <h3><i className="fa fa-envelope fa-1x mr-2" aria-hidden="true"></i>
+                    <h3>
+                      <i
+                        className="fa fa-envelope fa-1x mr-2"
+                        aria-hidden="true"
+                      ></i>
                       Don't hesitate to contact us
-                      </h3>
-                    <h5>
-                      Phone: +1 (0) 000 0000 001 <br/>
-                      Email: youremail@mail.com
-                    </h5>
-                    <iframe 
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                width="300"
-                height="200"
-                style={{ border: "rgb(0, 0, 0) solid", borderRadius: "5%" }}
-                allowfullscreen
-              ></iframe>
+                    </h3>
+                Name: {vendor.firstName}{" "}{vendor.lastName}
+                    <h5>Phone: {vendor.phoneNumber}</h5>
                   </div>
                 </div>
               </div>
-              
               <div className="col-4">
-                <img
-                  className="rounded-circle"
-                  style={{ width: "100%", height: "100%" }}
-                  src="https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-4.png"
-                  alt="Generic placeholder"
-                />
+                    <iframe
+                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                      width="300"
+                      height="200"
+                      style={{
+                        border: "rgb(0, 0, 0) solid",
+                        borderRadius: "5%",
+                      }}
+                      allowfullscreen
+                    ></iframe>
               </div>
             </div>
           </section>
@@ -90,12 +116,13 @@ export default function VendorProfileUser(props) {
 
           {/* <!-- items --> */}
           <h2 className="text-center mb-3">Available Items</h2>
-          <section className="row">
+          <SlickSlider items={vendor.vendorItems} />
+          {/* <section className="row">
             <div className="container">
               <div className="row">
-                {/* <!-- <div className="col-6">
+                <div className="col-6">
                               <h3 className="mb-3">Carousel cards title </h3>
-                          </div> --> */}
+                          </div>
                 <div className="m-auto">
                   <a
                     className="btn btn-dark rounded-circle mr-5"
@@ -300,7 +327,7 @@ export default function VendorProfileUser(props) {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
     </section>

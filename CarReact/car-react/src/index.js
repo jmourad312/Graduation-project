@@ -5,7 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import "./styles.scss";
 import { Provider } from "react-redux";
 import store from "./store/store";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // import $ from 'jquery';
 // import 'bootstrap/dist/css/bootstrap.css';
 // import 'bootstrap/scss/bootstrap.scss';

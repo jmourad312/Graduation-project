@@ -56,7 +56,7 @@ export default function RecentViews(props) {
                 //     </div>
                 //   </div>
                 // </div>
-                <div className="col-4 mb-3 h-25 w-25">
+                <div className="col-4 mb-3 h-25 w-25" style={{fontSize:"1.5rem"}}>
                   <section class="cards">
                     <article class="card card--1">
                       <div class="card__img" style={{ background: `url(${item.image})` }}></div>
@@ -78,7 +78,7 @@ export default function RecentViews(props) {
                           <i className="badge badge-dark">{item.carModel}</i>
                         </small>
                       </div>
-                      <button className="btn btn-dark" onClick={() => handleClick(item._id)}>Go to product</button>
+                      <button className="btn btn-dark" style={{fontSize:"1.5rem"}} onClick={() => handleClick(item._id)}>Go to product</button>
                     </article>
                   </section>
                 </div>
