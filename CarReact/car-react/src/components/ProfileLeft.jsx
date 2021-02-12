@@ -27,27 +27,28 @@ export default function ProfileLeft(props) {
         /> */}
         <ProfilePicture image={props.image} />
       </div>
-      <div className="mt-3">
+      <div className="mt-2 mr-2">
         <div className="text-light" style={{fontSize:"1.5rem"}}>
           <p>{props.person ? props.person.firstName : "Loading"}</p>
+          <hr style={{borderColor:"grey"}}/>
           <p>{props.person ? props.person.email : "Loading"}</p>
         </div>
         {/* <div className="mt-3 button raise">
           <Link to={`/MyProfile/BasicDetails`}>Basic details</Link>
         </div> */}
-        <p className="mt-3 button raise">
+        <p className=" button raise" style={{fontSize:"20px",fontWeight:"700",width:"100%"}}>
           <Link to={`/MyProfile/RecentViews`} onClick={handleClick}>Recently viewed</Link>
         </p>
-        <p className="mt-3 button raise">
+        <p className=" button raise" style={{fontSize:"20px",fontWeight:"700",width:"100%"}}>
           <Link to={`/MyProfile/BlogPosts`} onClick={handleClick}>My blog posts</Link>
         </p>
-        <p className="mt-3 button fill">
+        <p className=" button fill" style={{fontSize:"20px",fontWeight:"700",width:"100%"}}>
           <Link to={`/MyProfile/FavouriteItems`} onClick={handleClick}>Favourite items</Link>
         </p>
-        <p className="mt-3 button pulse">
+        <p className=" button pulse" style={{fontSize:"20px",fontWeight:"700",width:"100%"}}>
           <Link to={`/MyProfile/BookmarkedPosts`} onClick={handleClick}>Bookmarked posts</Link>
         </p>
-        <p className="mt-3 button up">
+        <p className=" button up" style={{fontSize:"20px",fontWeight:"700",width:"100%"}}>
           <Link to={`/MyProfile/Settings`} onClick={handleClick}>Settings</Link>
         </p>
       </div>

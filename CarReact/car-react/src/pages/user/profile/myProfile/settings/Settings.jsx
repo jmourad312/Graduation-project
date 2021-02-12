@@ -63,8 +63,8 @@ export default function Settings(props) {
       variants={props.variants}
       transition={props.transition}
     >
-      <form className="ml-5">
-        <h5>Edit</h5>
+      <form className="ml-5" style={{fontSize:"1.5rem"}}>
+        <h3>Edit</h3>
         <div className="row">
           <div className="form-group col-4">
             <Label

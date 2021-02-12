@@ -66,14 +66,14 @@ export default function ProductComp(props) {
               <div className="card__img--hover" style={{ background: `url(${props.image})` }} ></div>
             </p>
             <div className="card__info">
-              <h4 className="card__title text-truncate">{props.title}</h4>
-              <span className="price" style={{fontWeight:"600",color:"goldenrod",fontSize:"25px"}}>{props.price} LE</span> <br/>
-              <p className="text-truncate">{props.description}</p>
-              <span className="card__by">by <span className="card__author" title="author">{props.name}</span></span>
+              <h4 className="card__title text-truncate" style={{fontWeight:"600"}}>{props.title}</h4>
+              <span className="price" style={{fontWeight:"700",color:"goldenrod",fontSize:"25px"}}>{props.price} LE</span> <br/>
+              <p className="text-truncate" style={{fontSize:"20px",fontWeight:"700"}}>{props.description}</p>
+              <span className="card__by"style={{fontWeight:"700"}}>By <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}} title="author">{props.name}</span></span>
               <br />
               <small>
-                <i className="badge badge-dark">{props.brand}</i>
-                <i className="badge badge-dark">{props.model}</i>
+                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>
+                <i className="badge badge-dark ml-1" style={{fontSize:"15px"}}>{props.model}</i>
               </small>
             </div>
           </article>

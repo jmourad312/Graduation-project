@@ -157,7 +157,7 @@ export default function ProductFilter(props) {
       <div className="mb-4 ml-2" filter="price">
         <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
       </div>
-
+      <hr style={{borderColor:"grey",border:"1px solid"}}/>
       <div className="mb-5" style={{marginTop:"120px"}}>
         <input
           type="range"
@@ -169,7 +169,7 @@ export default function ProductFilter(props) {
           max="999"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2">
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           Form: {state.priceLessThan}
         </label>
       </div>
@@ -185,7 +185,7 @@ export default function ProductFilter(props) {
           max="5000"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2">
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           To: {state.priceMoreThan}{" "}
         </label>
       </div>
@@ -195,9 +195,10 @@ export default function ProductFilter(props) {
           value={state.brand}
           name="brand"
           onChange={handleChange}
-          className="custom-select custom-select-md mb-3"
+          className="custom-select custom-select-lg mb-3"
+          style={{fontWeight:"700"}}
         >
-          <option value="" key="no-value">
+          <option value="" key="no-value" style={{fontWeight:"700"}}>
             choose Brand
           </option>
           {stateRedux.brand.map((item, index) => (
@@ -214,9 +215,10 @@ export default function ProductFilter(props) {
           disabled={!state.brand}
           name="model"
           onChange={handleChange}
-          className="custom-select custom-select-sm mb-3"
+          className="custom-select custom-select-lg mb-3"
+          style={{fontWeight:"700"}}
         >
-          <option value="" key="no-value">
+          <option value="" key="no-value" style={{fontWeight:"700"}}> 
             choose Model
           </option>
 
@@ -230,7 +232,8 @@ export default function ProductFilter(props) {
       <button
         type="button"
         onClick={handleSearchClick}
-        className="btn btn-dark mr-4"
+        className="btn btn-dark mr-2"
+        style={{fontWeight:"700",height:"60px"}}
       // style={{
       //   background:
       //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
@@ -241,6 +244,7 @@ export default function ProductFilter(props) {
       <button
         type="button"
         className="btn btn-danger "
+        style={{fontWeight:"700",height:"60px"}}
         // style={{
         //   background:
         //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
@@ -256,6 +260,7 @@ export default function ProductFilter(props) {
           position: "fixed",
           right: "300px",
           bottom: "-5%",
+          
         }}
       >
         {products && (

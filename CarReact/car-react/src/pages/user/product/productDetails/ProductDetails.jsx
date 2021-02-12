@@ -117,40 +117,40 @@ export default function ProductDetails(props) {
             status={toastStatus}
             message={toastMessage}
           />
-          <div className="row ">
-            {/* <!-- image of produce --> */}
-            <div className="col-4 bg-white mt-5">
-              <img
-                src={productDetails && productDetails.image}
-                // width="100%"
-                // height="100%"
-                style={{ height: "300px", width: "300px" }}
-                alt=""
-              />
-            </div>
+          <div style={{paddingTop:"15px"}}>
+            <div className="row bg-white" style={{ borderRadius: "3%" }}>
+              {/* <!-- image of produce --> */}
+              <div className="col-4" style={{paddingLeft:"0px",paddingRight:"0px"}} >
+                <img
+                  src={productDetails && productDetails.image}
+                  // width="100%"
+                  // height="100%"
+                  style={{ height: "300px", width: "350px" }}
+                  alt=""
+                />
+              </div>
 
-            <div className="col-8 bg-white mt-5">
-              <h2>
-                {productDetails && productDetails.name}
-                <br /> By:{" "}
-                <Link
-                  to={`/VendorProfileUser/${
-                    productDetails
+              <div className="col-8">
+                <h2>
+                  {productDetails && productDetails.name}
+                  <br /> By:{" "}
+                  <Link style={{ color: "rgb(21, 34, 214)", textDecoration: "underline " }}
+                    to={`/VendorProfileUser/${productDetails
                       ? productDetails.person
                         ? productDetails.person._id
                         : null
                       : null
-                  }`}
-                >
-                  {productDetails
-                    ? productDetails.person
-                      ? productDetails.person.firstName
-                      : "(LOADING)"
-                    : "LOADING"}
-                </Link>
-              </h2>
-              {/* <!-- avalible or not --> */}
-              {productDetails &&
+                      }`}
+                  >
+                    {productDetails
+                      ? productDetails.person
+                        ? productDetails.person.firstName
+                        : "(LOADING)"
+                      : "LOADING"}
+                  </Link>
+                </h2>
+                {/* <!-- avalible or not --> */}
+                {/* {productDetails &&
                 (productDetails.available ? (
                   <span className="badge badge-pill badge-success">
                     Avalible
@@ -162,42 +162,42 @@ export default function ProductDetails(props) {
                   >
                     Not Avalible
                   </span>
-                ))}
+                ))} */}
 
-              {/* <!-- number of stars --> */}
-              <div className="mt-3 star" style={{ fontSize: "20px" }}>
+                {/* <!-- number of stars --> */}
+                {/* <div className="mt-3 star" style={{ fontSize: "20px" }}>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"></span>
                 <span className="fa fa-star"> No review</span>
-              </div>
-              {/* <!-- description --> */}
-              <div className="mt-3" style={{ fontSize: "30px" }}>
-                {productDetails && productDetails.description}
-              </div>
-              {/* <!-- Add to favorate and compare product --> */}
-              {/* <!-- price --> */}
-              <div className="mt-3">
-                <span className="" style={{ fontSize: "40px" }}>
-                  <li className="fas fa-coins pr-2 text-warning">
-                    {productDetails && productDetails.price} LE
+              </div> */}
+                {/* <!-- description --> */}
+                <div className="mt-3" style={{ fontSize: "30px" }}>
+                  {productDetails && productDetails.description}
+                </div>
+                {/* <!-- Add to favorate and compare product --> */}
+                {/* <!-- price --> */}
+                <div className="mt-3">
+                  <span className="" style={{ fontSize: "40px" }}>
+                    <li className="fas fa-coins pr-2 text-warning">
+                      {productDetails && productDetails.price} LE
                   </li>
-                </span>
-                {localStorage.getItem("UserID") !== null && (
-                  <span
-                    className="fa-lg button fill fa-pull-right"
-                    style={{ padding: "5px" }}
-                    title="Add to favorate"
-                    onClick={handleAddFavourite}
-                  >
-                    <i
-                      className="far fa-heart"
-                      style={{ fontSize: "30px" }}
-                    ></i>
                   </span>
-                )}
-                {/* <span
+                  {localStorage.getItem("UserID") !== null && (
+                    <span
+                      className="fa-lg button fill fa-pull-right"
+                      style={{ padding: "10px", marginTop: "80px" }}
+                      title="Add to favorate"
+                      onClick={handleAddFavourite}
+                    >
+                      <i
+                        className="far fa-heart"
+                        style={{ fontSize: "30px" }}
+                      ></i>
+                    </span>
+                  )}
+                  {/* <span
                   className="fa-lg"
                   data-toggle="tooltip"
                   title="compare product"
@@ -205,6 +205,7 @@ export default function ProductDetails(props) {
                 >
                   <i className="fas fa-sliders-h  text-primary"></i>
                 </span> */}
+                </div>
               </div>
             </div>
           </div>
@@ -296,28 +297,36 @@ export default function ProductDetails(props) {
               {/* </div> */}
             </div>
             {localStorage.getItem("Authorization") !== null ? (
-              <div className="col-4">Product Rating (User Comments)</div>
+              <div className="col-4 text-center">
+                <div className=" star" style={{ fontSize: "30px" }}>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"> No review</span>
+                </div>
+              </div>
             ) : (
-              <div
-                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
-                style={{
-                  height: "300px",
-                  width: "300px",
-                  border: "solid white 3px",
-                }}
-              >
-                <h3
+                <div
+                  className="col-4 shadow-sm p-2 mb-4 rounded-lg"
                   style={{
-                    color: "#737373",
-                    position: "relative",
-                    top: "35%",
-                    textAlign: "center",
+                    height: "300px",
+                    width: "300px",
+                    border: "solid white 3px",
                   }}
                 >
-                  Please Sign in to view this Item's Rating
+                  <h3
+                    style={{
+                      color: "#737373",
+                      position: "relative",
+                      top: "35%",
+                      textAlign: "center",
+                    }}
+                  >
+                    Please Sign in to view this Item's Rating
                 </h3>
-              </div>
-            )}
+                </div>
+              )}
 
             {localStorage.getItem("UserID") !== null ? (
               <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
@@ -341,26 +350,26 @@ export default function ProductDetails(props) {
                 </div>
               </div>
             ) : (
-              <div
-                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
-                style={{
-                  height: "300px",
-                  width: "300px",
-                  border: "solid white 3px",
-                }}
-              >
-                <h3
+                <div
+                  className="col-4 shadow-sm p-2 mb-4 rounded-lg"
                   style={{
-                    color: "#737373",
-                    position: "relative",
-                    top: "35%",
-                    textAlign: "center",
+                    height: "300px",
+                    width: "300px",
+                    border: "solid white 3px",
                   }}
                 >
-                  Please Sign in as a user to view this Item's Location
+                  <h3
+                    style={{
+                      color: "#737373",
+                      position: "relative",
+                      top: "35%",
+                      textAlign: "center",
+                    }}
+                  >
+                    Please Sign in as a user to view this Item's Location
                 </h3>
-              </div>
-            )}
+                </div>
+              )}
             {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
