@@ -1,22 +1,10 @@
-import React, { Suspense, useContext } from "react";
+import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useLocation, __RouterContext } from "react-router";
-import { AnimatePresence, motion } from "framer-motion";
 
-
-// const AuthRoutes = React.lazy(() => import("../pages/user/authentication/AuthRoutes"));
 const Homepage2 = React.lazy(() => import("../layout/Homepage/Homepage2"));
 
-const Login = React.lazy(() =>
-  import("../pages/user/authentication/login/Login")
-);
-const SignUp = React.lazy(() =>
-  import("../pages/user/authentication/signUp/SignUp")
-);
-const AddBlog = React.lazy(() =>
-  import("../components/AddBlog.jsx")
-);
+
 const BlogDetails = React.lazy(() =>
   import("../pages/user/blog/blogDetails/BlogDetails.jsx")
 );
@@ -42,9 +30,6 @@ const ProductDetails = React.lazy(() =>
 const ProductsList = React.lazy(() =>
   import("../pages/user/product/productList/ProductsList")
 );
-const DisplayUserProfile = React.lazy(() =>
-  import("../pages/user/profile/displayProfile/DisplayUserProfile")
-);
 const MyProfile = React.lazy(() =>
   import("../pages/user/profile/myProfile/MyProfile")
 );
@@ -63,27 +48,14 @@ const VendorAdministration = React.lazy(() =>
 
 
 
-
-// const Contact = React.lazy(() => import("../Pages/Contact"));
-// const Counter = React.lazy(() => import("../Pages/Counter"));
-// const Users = React.lazy(() => import("../Pages/Users"));
-// const Products = React.lazy(() => import("../Pages/Products"));
-// const ChangeCont = React.lazy(() => import("../Pages/ChangeCont"));
-// const GoogleBooks = React.lazy(() => import("../Pages/GoogleBooks"));
-
 export default function Routes() {
-  const location = useLocation();
   
   return (
     <Suspense fallback={<Loading />}>
 
       <Switch>
-        {/* <div className="position-absolute w-100"> */}
 
         <Route path="/" exact component={Homepage2} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/SignUp" exact component={SignUp} />
-        <Route path="/AddBlog" exact component={AddBlog} />
 
         <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
 
@@ -105,12 +77,7 @@ export default function Routes() {
           path="/VendorAdministration/(page)?"
           component={VendorAdministration}
         />
-        <Route
-          path="/DisplayUserProfile"
-          exact
-          component={DisplayUserProfile}
-        />
-        {/* </div> */}
+        
       </Switch>
     </Suspense>
   );
