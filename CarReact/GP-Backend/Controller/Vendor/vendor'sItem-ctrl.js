@@ -115,7 +115,11 @@ getOneItem = async (req, res) => {
 
 updateItem = (req, res) => {
 
-  const IdVendor = req.user._id;
+  let IdVendor = req.user._id;
+
+  if(req.params.idperson){
+    IdVendor = req.params.idperson;
+ }
 
   const body = JSON.parse(JSON.stringify(req.body));
 

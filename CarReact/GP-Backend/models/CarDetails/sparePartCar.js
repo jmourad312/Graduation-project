@@ -16,10 +16,7 @@ var car = new schema({
   ],
   carBrand: String,
   carModel: String,
-  itemCollection: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ItemCollection",
-  },
+  itemCollection: String,
   person: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Person",

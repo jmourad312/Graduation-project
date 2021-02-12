@@ -111,7 +111,11 @@ deletePost = (req, res) => {
 
 //update post
 updatePost = (req, res) => {
-  const IdPerson = req.user._id;
+  let IdPerson = req.user._id;
+
+  if(req.params.idperson){
+    IdPerson = req.params.idperson;
+ }
 
   console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));

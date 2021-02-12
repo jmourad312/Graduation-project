@@ -45,6 +45,7 @@ export default function Items(props) {
           <Card
             key={prod._id}
             id={prod._id}
+            idperson={data._id}
             image={prod.image}
             description={prod.description}
             price={prod.price}
