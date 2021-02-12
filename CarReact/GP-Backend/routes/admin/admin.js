@@ -33,11 +33,12 @@ router.get('/test/:id/:i?',(req,res)=>{
 
 router.post('/addBrand', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addBrand);
 router.post('/addModel/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addModel);
-router.post('/addCollection/:id', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
+router.post('/addCollection', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addCollection);
 
 //**********************************************************************************//
 router.get('/getBrand',Admin.getBrand);
 router.get('/getModel/:name', Admin.getModel);
+router.get('/getCollection', Admin.getCollection);
 
 //Ban
 router.post('/addUserBan', passport.authenticate("jwt", { session: false }), validateAdmin, Admin.addUserBan);
