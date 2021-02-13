@@ -14,10 +14,6 @@ var feedback = new schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Car",
     },
-    vendor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Person",
-    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
@@ -26,4 +22,4 @@ var feedback = new schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Feedback", feedback);
+module.exports = mongoose.model("Feedback",feedback);

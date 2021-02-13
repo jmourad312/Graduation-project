@@ -15,10 +15,6 @@ var vendor = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorSubscription",
   },
-  vendorFeedBack: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "FeedBack",
-  }],
   vendorItems: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Car",

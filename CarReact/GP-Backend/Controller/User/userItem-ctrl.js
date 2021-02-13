@@ -46,6 +46,7 @@ showDetailsItem = async (req, res) => {
   const idItem = req.params.id;
   const populateQuery = [
     { path: "person", select: "firstName" },
+    { path: "feedback"}
   ];
 
   carItem
@@ -63,10 +64,10 @@ showDetailsItem = async (req, res) => {
         });
       }
 
-      const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
+      //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
 
       return res.json({
-        Data: data, feedback,
+        Data: data,
         Message: "Details product",
         Success: true,
       });

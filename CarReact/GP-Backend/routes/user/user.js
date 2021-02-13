@@ -122,7 +122,6 @@ router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), 
 //     comment:String,
 //     rating:Number,
 //     car:IDitem,
-//     vendor:IDperson   
 // }
 
 
