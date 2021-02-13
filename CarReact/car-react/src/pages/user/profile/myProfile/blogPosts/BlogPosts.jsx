@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import SimpleDelete from "../../../../../components/SimpleDelete";
 import { getUsersAction } from "../../../../../store/actions";
 // import Footer from '../../../../../layout/footer/Footer';
+import { useHistory } from "react-router-dom";
+
 
 export default function BlogPosts(props) {
+  const history = useHistory();
   const user = useSelector((state) => state.user.Data);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +30,12 @@ export default function BlogPosts(props) {
         <div className="container mt-3">
           {user ? (
             user.postsUser.length === 0 ? (
-              <div>no items</div>
+              <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",position:"absolute",left:"40%" }}
+              >No blogs yet <p className="text-center" style={{fontSize:"20px",fontWeight:"200"}}>to add blog </p>
+              <div className="text-center" onClick={() => history.push("/BlogList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
+                Go to Blogs List 
+              </div>
+              </div>
             ) : (
               user.postsUser.map((post) => {
                 return (

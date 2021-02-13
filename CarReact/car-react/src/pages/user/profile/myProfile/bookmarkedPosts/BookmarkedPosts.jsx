@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersAction } from "../../../../../store/actions";
+import { useHistory } from "react-router-dom";
 
 export default function BookmarkedPosts(props) {
+  const history = useHistory();
+
   const carBrand = ["BMW", "AUDI", "MAZARATI", "HYUNDAI"];
   const carBrand2 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
   const carBrand3 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
@@ -31,7 +34,12 @@ export default function BookmarkedPosts(props) {
         {user
           ?
             user.bookmarkPosts.length === 0 ? (
-              <div>no items</div>
+              <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",position:"absolute",left:"30%" }}
+              >No Bookmarked Posts yet
+              <div className="text-center" onClick={() => history.push("/BlogList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
+                Go to Blogs List 
+              </div>
+              </div>
             ) : user.bookmarkPosts.map((post) => {
               let time = post.createdAt.split("T");
               console.log(time)

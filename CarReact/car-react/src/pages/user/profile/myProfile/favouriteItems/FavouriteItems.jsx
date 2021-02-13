@@ -6,6 +6,7 @@ import Loading from "../../../../../components/Loading";
 import { getUsersAction, setProductId } from "../../../../../store/actions";
 // import Review from '../../../../../components/Review'
 
+
 export default function FavouriteItems(props) {
   const user = useSelector((state) => state.user.Data);
   const dispatch = useDispatch();
@@ -32,7 +33,14 @@ export default function FavouriteItems(props) {
     >
       <div className="container" style={{fontSize:"1.5rem"}}>
         <div className="row">
-          {user ? user.favouriteItems.length === 0 ? (<div>not items</div>) : user.favouriteItems.map((item) => {
+          {user ? user.favouriteItems.length === 0 ? (
+          <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",position:"absolute",left:"30%" }}
+          >No Favourite Items yet
+          <div className="text-center" onClick={() => history.push("/ProductsList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
+            Go to Products List 
+          </div>
+          </div>
+          ) : user.favouriteItems.map((item) => {
             return (
               <div className="col-4 mb-3 h-25 w-25">
                 {/* <div className="card">
