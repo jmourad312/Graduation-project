@@ -50,5 +50,4 @@ router.put("/updateProfilePassword/:id", passport.authenticate('jwt', { session:
 router.put("/updateProfile/:id", passport.authenticate('jwt', { session: false }), validateVendor, upload.single("image"), vendorprofiileCtrl.updateProfile);
 router.get('/showVendorProfile/:id', passport.authenticate('jwt', { session: false }), validateVendor, vendorprofiileCtrl.showVendorProfile);
 
-
 module.exports = router;

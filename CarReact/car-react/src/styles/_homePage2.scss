@@ -414,4 +414,14 @@
       }
     }
   }
+  @keyframes moveUpAndDown {
+    0%   {top: 200px;}
+    25%  {top: 150px;}
+    50%  {top: 100px;}
+    75%  {top: 150px}
+    100% {top: 200px;}
+  }
+  #myDiv{
+    animation: moveUpAndDown 2s linear infinite;
+  }
 }

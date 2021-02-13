@@ -163,6 +163,10 @@ export default function Signform(props) {
   const handlefacebook = () => {
     window.location.replace("http://localhost:3000/user/auth/facebook");
   };
+  //--------------------------FORGOT PASSWORD-------------------------
+  const [forgotState, setForgotState] = useState({
+    
+  })
 
   const pageVariants = {
     in: {
@@ -395,11 +399,12 @@ export default function Signform(props) {
           </div>
         </div>
         <div className={changeClass} id="forgotpass" style={{ left: "0px" }}>
-          <i
+          {/* <i
             className="fas fa-arrow-circle-left"
             style={{ fontSize: "50px" }}
             onClick={switchBack}
-          ></i>
+          ></i> */}
+          <i class="fas fa-times-circle fa-3x closeIcon" style={{cursor:"pointer",position:"relative",left:"92%",top:"2%"}} onClick={switchBack}></i>
           <h2 className="text-center">Rest Your Password</h2>
           <form className="text-center">
             <input
@@ -407,6 +412,22 @@ export default function Signform(props) {
               className="w-75 text-center"
               placeholder="Email"
             />
+            <br />
+            <button
+              className="btn buttoncolor text-white"
+              style={{
+                width: "200px",
+                height: "70px",
+                fontSize: "25px",
+                borderRadius: "20px",
+              }}
+              value="Send email"
+            >
+              Send email
+            </button>
+            </form>
+            <br />
+            <form className="text-center">      
             <input
               type="text"
               className="w-75 text-center"
@@ -434,18 +455,6 @@ export default function Signform(props) {
                 value="submit"
               >
                 Submit
-              </button>
-              <button
-                className="btn buttoncolor text-white ml-5"
-                style={{
-                  width: "200px",
-                  height: "70px",
-                  fontSize: "25px",
-                  borderRadius: "20px",
-                }}
-                value="Send email"
-              >
-                Send email
               </button>
             </div>
           </form>
