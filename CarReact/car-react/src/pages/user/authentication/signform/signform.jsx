@@ -96,7 +96,9 @@ export default function Signform(props) {
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
           localStorage.removeItem("VendorID");
-          props.history.push(`/MyProfile/${localStorage.getItem("UserID")}`);
+          props.history.push(
+            `/MyProfile/RecentViews`
+          );
         }
       })
       .catch((error) => {
@@ -199,7 +201,7 @@ export default function Signform(props) {
               <Link onClick={handlegoogle} className="social">
                 <i className="fab fa-google-plus-g"></i>
               </Link> */}
-              {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
+            {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
             {/* </div> */}
             {/* <span>or use your email for registration</span> */}
             <input
@@ -223,13 +225,21 @@ export default function Signform(props) {
               value={userSignUpInfo.password}
               onChange={changeUserSignUpInfo}
             />
-            <button className="button" type="submit" style={{height:"70px",fontSize:"20px"}}>
+            <button
+              className="button"
+              type="submit"
+              style={{ height: "70px", fontSize: "20px" }}
+            >
               Sign Up
             </button>
-            <p style={{fontWeight:"600"}}>
+            <p style={{ fontWeight: "600" }}>
               By signing up you agree to our{" "}
               <span
-                style={{ color: "#4d8ba8", cursor: "pointer",textDecoration:"underline" }}
+                style={{
+                  color: "#4d8ba8",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
                 onClick={() => {
                   setModalShow(true);
                   setModaleInfo({
@@ -243,7 +253,11 @@ export default function Signform(props) {
               </span>{" "}
               and{" "}
               <span
-                style={{ color: "#4d8ba8", cursor: "pointer",textDecoration:"underline"  }}
+                style={{
+                  color: "#4d8ba8",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                }}
                 onClick={() => {
                   setModalShow(true);
                   setModaleInfo({
@@ -285,7 +299,7 @@ export default function Signform(props) {
               >
                 <i className="fab fa-google-plus-g"></i>
               </Link> */}
-              {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
+            {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
             {/* </div> */}
             {/* <span>or use your account</span> */}
             <br />
@@ -305,9 +319,23 @@ export default function Signform(props) {
               onChange={changeUserSignInInfo}
             />
             <br />
-            <p onClick={switchClass} style={{cursor:"pointer",textDecoration:"underline",color:"black"}}>Forgot your password?</p>
+            <p
+              onClick={switchClass}
+              style={{
+                cursor: "pointer",
+                textDecoration: "underline",
+                color: "black",
+              }}
+            >
+              Forgot your password?
+            </p>
             <br />
-            <button className="button"style={{height:"70px",fontSize:"20px"}}>Sign In</button>
+            <button
+              className="button"
+              style={{ height: "70px", fontSize: "20px" }}
+            >
+              Sign In
+            </button>
           </form>
         </div>
         {/* <div className="form-container forget-password-container">
@@ -322,9 +350,9 @@ export default function Signform(props) {
         <div className="overlay-container ">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p style={{fontSize:"20px"}}>
-                To keep connected with us please login with your personal info
+              <h1>DREKSYONY</h1>
+              <p style={{ fontSize: "20px" }}>
+                The right place for all your car needs
               </p>
               <button
                 className="button ghost"
@@ -334,14 +362,17 @@ export default function Signform(props) {
                     .getElementById("container")
                     .classList.remove("right-panel-active");
                   console.log("hello");
-                }}style={{height:"70px",fontSize:"20px"}}
+                }}
+                style={{ height: "70px", fontSize: "20px" }}
               >
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p style={{fontSize:"20px"}}>Enter your personal details and start journey with us</p>
+              <h1>DREKSYONY</h1>
+              <p style={{ fontSize: "20px" }}>
+                The right place for all your car needs
+              </p>
               <button
                 className="button ghost"
                 onClick={() => {
@@ -350,7 +381,8 @@ export default function Signform(props) {
                     .classList.add("right-panel-active");
                   console.log("hello");
                 }}
-                id="signUp"style={{height:"70px",fontSize:"20px"}}
+                id="signUp"
+                style={{ height: "70px", fontSize: "20px" }}
               >
                 Sign Up
               </button>
@@ -362,19 +394,60 @@ export default function Signform(props) {
                 </div>   */}
           </div>
         </div>
-        <div className={changeClass} id="forgotpass" style={{left:"0px"}} >
-          <i className="fas fa-arrow-circle-left" style={{fontSize:"50px"}} onClick={switchBack}></i>
-           <h2 className="text-center" >Rest Your Password</h2>
+        <div className={changeClass} id="forgotpass" style={{ left: "0px" }}>
+          <i
+            className="fas fa-arrow-circle-left"
+            style={{ fontSize: "50px" }}
+            onClick={switchBack}
+          ></i>
+          <h2 className="text-center">Rest Your Password</h2>
           <form className="text-center">
-              <input type="email" className="w-75 text-center" placeholder="Email" />
-            <input type="text" className="w-75 text-center" placeholder="Input your code here" />
-            <input type="password" className="w-75 text-center" placeholder="New password" />
-            <input type="password" className="w-75 text-center" placeholder="Confirm new password" />
+            <input
+              type="email"
+              className="w-75 text-center"
+              placeholder="Email"
+            />
+            <input
+              type="text"
+              className="w-75 text-center"
+              placeholder="Input your code here"
+            />
+            <input
+              type="password"
+              className="w-75 text-center"
+              placeholder="New password"
+            />
+            <input
+              type="password"
+              className="w-75 text-center"
+              placeholder="Confirm new password"
+            />
             <div className="text-center">
-            <button className="btn buttoncolor text-white" style={{width:"200px",height:"70px",fontSize:"25px",borderRadius:"20px"}} value="submit">Submit</button>
-            <button className="btn buttoncolor text-white ml-5" style={{width:"200px",height:"70px",fontSize:"25px",borderRadius:"20px"}} value="Send email">Send email</button>
+              <button
+                className="btn buttoncolor text-white"
+                style={{
+                  width: "200px",
+                  height: "70px",
+                  fontSize: "25px",
+                  borderRadius: "20px",
+                }}
+                value="submit"
+              >
+                Submit
+              </button>
+              <button
+                className="btn buttoncolor text-white ml-5"
+                style={{
+                  width: "200px",
+                  height: "70px",
+                  fontSize: "25px",
+                  borderRadius: "20px",
+                }}
+                value="Send email"
+              >
+                Send email
+              </button>
             </div>
-            
           </form>
         </div>
         <div className={changePayment}>

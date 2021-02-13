@@ -81,6 +81,55 @@ export default function ProductDetails(props) {
         console.log(error);
       });
   };
+  //--------------------------------REVIEW--------------------------------
+  const [userFeedbackInfo, setuserFeedbackInfo] = useState({
+    comment: "",
+  });
+  const handleCommentChange = (event)=>{
+    const { value, name } = event.target;
+    setuserFeedbackInfo((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  }
+  const handleAddReview = () => {
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  };
+
+  const body = {
+    car: productID,
+    comment: userFeedbackInfo.comment,
+  };
+
+  const URL = "http://localhost:3000/user/writeFeedback";
+
+  axios
+    .post(URL, body, config)
+    .then((req) => {
+      console.log(req);
+      if (req.data.Success === true) {
+        console.log("Success");
+        setToastMessage("Item added to favourite");
+        toggleStatus();
+        // props.history.push("/MyProfile");
+      } else {
+        console.log("fail");
+        handleRemoveFavourite();
+        toggleStatus();
+        setToastMessage("Item removed from favourites");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+
 
   const pageVariants = {
     in: {
@@ -117,10 +166,13 @@ export default function ProductDetails(props) {
             status={toastStatus}
             message={toastMessage}
           />
-          <div style={{paddingTop:"15px"}}>
+          <div style={{ paddingTop: "15px" }}>
             <div className="row bg-white" style={{ borderRadius: "3%" }}>
               {/* <!-- image of produce --> */}
-              <div className="col-4" style={{paddingLeft:"0px",paddingRight:"0px"}} >
+              <div
+                className="col-4"
+                style={{ paddingLeft: "0px", paddingRight: "0px" }}
+              >
                 <img
                   src={productDetails && productDetails.image}
                   // width="100%"
@@ -134,13 +186,18 @@ export default function ProductDetails(props) {
                 <h2>
                   {productDetails && productDetails.name}
                   <br /> By:{" "}
-                  <Link style={{ color: "rgb(21, 34, 214)", textDecoration: "underline " }}
-                    to={`/VendorProfileUser/${productDetails
-                      ? productDetails.person
-                        ? productDetails.person._id
+                  <Link
+                    style={{
+                      color: "rgb(21, 34, 214)",
+                      textDecoration: "underline ",
+                    }}
+                    to={`/VendorProfileUser/${
+                      productDetails
+                        ? productDetails.person
+                          ? productDetails.person._id
+                          : null
                         : null
-                      : null
-                      }`}
+                    }`}
                   >
                     {productDetails
                       ? productDetails.person
@@ -182,7 +239,7 @@ export default function ProductDetails(props) {
                   <span className="" style={{ fontSize: "40px" }}>
                     <li className="fas fa-coins pr-2 text-warning">
                       {productDetails && productDetails.price} LE
-                  </li>
+                    </li>
                   </span>
                   {localStorage.getItem("UserID") !== null && (
                     <span
@@ -260,40 +317,60 @@ export default function ProductDetails(props) {
 
               {/* </div> */}
 
-              <h3>
-                <span
-                  className="pl-3"
-                  style={{ borderLeft: "3px solid red", height: "100%" }}
-                ></span>
-                Write your Feedback
-              </h3>
-              <br />
-              <form>
-                {/* <div className="form-group">
-                  <label style={{fontSize:"20px"}} for="email">Email address:</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Enter email"
-                    id="email"
-                  />
-                </div> */}
-                <div className="form-group">
-                  <label style={{ fontSize: "1.5rem" }} for="review">
-                    review:
-                  </label>
-                  <input
-                    type="review"
-                    className="form-control"
-                    placeholder="Enter your review"
-                    id="review"
-                  />
-                </div>
+              {localStorage.getItem("UserID") ? (
+                <>
+                  {" "}
+                  <h3>
+                    <span
+                      className="pl-3"
+                      style={{ borderLeft: "3px solid red", height: "100%" }}
+                    ></span>
+                    Write your Feedback
+                  </h3>
+                  <br />
+                  <form>
+                    <div className="form-group">
+                      <label style={{ fontSize: "1.5rem" }} for="comment">
+                        Review:
+                      </label>
+                      <input
+                        value={userFeedbackInfo.comment}
+                        onChange={handleCommentChange}
+                        type="review"
+                        name="comment"
+                        className="form-control"
+                        placeholder="Enter your review"
+                        id="comment"
+                      />
+                    </div>
 
-                <button type="submit" className="btn btn-success">
-                  Submit
-                </button>
-              </form>
+                    <button type="button" onClick={handleAddReview} className="btn btn-success">
+                      Submit
+                    </button>
+                  </form>{" "}
+                </>
+              ) : (
+                <div
+                  style={{
+                    height: "600px",
+                    width: "300px",
+                    position: "absolute",
+                    left: "0%",
+                    top: "0%",
+                  }}
+                >
+                  <h2
+                    style={{
+                      position: "relative",
+                      top: "40%",
+                      left: "0%",
+                      textAlign: "center",
+                    }}
+                  >
+                    Only registered car owners can submit a review
+                  </h2>
+                </div>
+              )}
               {/* </div> */}
             </div>
             {localStorage.getItem("Authorization") !== null ? (
@@ -307,26 +384,26 @@ export default function ProductDetails(props) {
                 </div>
               </div>
             ) : (
-                <div
-                  className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+              <div
+                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                style={{
+                  height: "300px",
+                  width: "300px",
+                  border: "solid white 3px",
+                }}
+              >
+                <h3
                   style={{
-                    height: "300px",
-                    width: "300px",
-                    border: "solid white 3px",
+                    color: "#737373",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
                   }}
                 >
-                  <h3
-                    style={{
-                      color: "#737373",
-                      position: "relative",
-                      top: "35%",
-                      textAlign: "center",
-                    }}
-                  >
-                    Please Sign in to view this Item's Rating
+                  Please Sign in to view this Item's Rating
                 </h3>
-                </div>
-              )}
+              </div>
+            )}
 
             {localStorage.getItem("UserID") !== null ? (
               <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
@@ -350,26 +427,26 @@ export default function ProductDetails(props) {
                 </div>
               </div>
             ) : (
-                <div
-                  className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+              <div
+                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                style={{
+                  height: "300px",
+                  width: "300px",
+                  border: "solid white 3px",
+                }}
+              >
+                <h3
                   style={{
-                    height: "300px",
-                    width: "300px",
-                    border: "solid white 3px",
+                    color: "#737373",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
                   }}
                 >
-                  <h3
-                    style={{
-                      color: "#737373",
-                      position: "relative",
-                      top: "35%",
-                      textAlign: "center",
-                    }}
-                  >
-                    Please Sign in as a user to view this Item's Location
+                  Only registered car owners can view this Item's Location
                 </h3>
-                </div>
-              )}
+              </div>
+            )}
             {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"

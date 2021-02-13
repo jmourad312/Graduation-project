@@ -259,10 +259,10 @@ export default function VendorSignForm(props) {
         event.preventDefault();
 
         if (
-          usernameError == true ||
-          emailError == true ||
-          passwordError == true ||
-          passConfirm == true
+          usernameError === true ||
+          emailError === true ||
+          passwordError === true ||
+          passConfirm === true
         ) {
           $(".name, .email, .pass, .passConfirm").blur();
         } else {
