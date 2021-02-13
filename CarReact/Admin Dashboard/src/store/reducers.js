@@ -8,6 +8,7 @@ export default (state = {
     countData: {},
     products: [],
     blogs: [],
+    contacts:[]
 
 
 }, action) => {
@@ -51,11 +52,16 @@ export default (state = {
             return {
                 ...state,
                 blogs: action.payload
-            }
+            };
+            case TYPES.GET_CONTACTS:
+                return {
+                    ...state,
+                    contacts: action.payload
+                }
 
 
 
-
+            
 
         default:
             return state;

@@ -6,10 +6,25 @@ import UserIcon from "../../../../components/UserIcon";
 export default function AboutUs() {
   return (
     <section className="about-us">
-      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {/* {localStorage.getItem("Authorization") === null && <LoginButton />} */}
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="team-section">
-        <h1>Our Team</h1>
+        <h1
+          style={{
+            position: "relative",
+            right: "40px",
+          }}
+        >
+          Our Team
+        </h1>
+        <hr
+          style={{
+            width: "300px",
+            position: "relative",
+            left: "40%",
+            borderTop: "3px solid black",
+          }}
+        />
         {/* <span className="border"></span>
         <div className="ps">
           <a href="#p1">
@@ -30,28 +45,29 @@ export default function AboutUs() {
           </a>
          
         </div> */}
-        <div style={{ position: "absolute", left: "10%",top:"4%" }}>
+
+        <div style={{ position: "absolute", left: "10%", top: "4%" }}>
+          <ContactUsPic
+            name="Hajar Shalaby"
+            prof="MEARN Full Stack Developer"
+          />
+        </div>
+        <div style={{ position: "absolute", left: "30%", top: "4%" }}>
+          <ContactUsPic
+            name="Mohamed Magdy"
+            prof="MEARN Full Stack Developer"
+          />
+        </div>
+        <div style={{ position: "absolute", left: "50%", top: "4%" }}>
+          <ContactUsPic name="Nora Alaa" prof="MEARN Full Stack Developer" />
+        </div>
+        <div style={{ position: "absolute", left: "70%", top: "4%" }}>
           <ContactUsPic
             name="Youssef Mourad"
             prof="MEARN Full Stack Developer"
             bkImage="../../../../assets/Images/13.jpg"
             prImage="../../../../assets/Images/13.jpg"
           />
-        </div>
-        <div style={{ position: "absolute", left: "30%",top:"4%" }}>
-          <ContactUsPic
-            name="Hajar Shalaby"
-            prof="MEARN Full Stack Developer"
-          />
-        </div>
-        <div style={{ position: "absolute", left: "50%",top:"4%" }}>
-          <ContactUsPic
-            name="Mohamed Magdy"
-            prof="MEARN Full Stack Developer"
-          />
-        </div>
-        <div style={{ position: "absolute", left: "70%",top:"4%" }}>
-          <ContactUsPic name="Nora Alaa" prof="MEARN Full Stack Developer" />
         </div>
         {/* <div className="section" id="p1">
           <span className="name">Hajar Shalby</span>
@@ -100,18 +116,16 @@ export default function AboutUs() {
         <div className="inner-container">
           <h1>About Us</h1>
           <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            velit ducimus, enim inventore earum, eligendi nostrum pariatur
-            necessitatibus eius dicta a voluptates sit deleniti autem error eos
-            totam nisi neque voluptates sit deleniti autem error eos totam nisi
-            neque.
+            We are a highly skilled group of MEARN FUll Stack Developers, we
+            enjoy coding and bringing new concepts and projects to life.
           </p>
           <div className="skills">
             <span>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est
-              laborum repudiandae dolorum nulla repellendus quas alias, ea
-              excepturi minus soluta amet earum, possimus iusto labore, facere
-              perferendis consectetur modi totam.
+              We are highly trained graduates from the Information and
+              Technology Institute or "ITI" for short, and we are ready for any
+              project, we are a perfect asset to any company or team, please
+              feel free to reach out to us so that we can assist you with any
+              project you'd want
             </span>
           </div>
         </div>

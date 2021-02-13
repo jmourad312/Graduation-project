@@ -12,10 +12,8 @@ function App() {
     <div className="App">
 
       <Router>
-
         {/* <Admin /> */}
         <Routes />
-
       </Router>
     </div>
   );

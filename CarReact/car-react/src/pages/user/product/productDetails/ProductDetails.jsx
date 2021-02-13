@@ -266,7 +266,6 @@ export default function ProductDetails(props) {
         <div className="container mt-3">
           <div className="row">
             <div className="col-4 content">
-              {/* <div [hidden]="tab == 2 || tab == 3"> */}
               <h3>
                 <strong
                   className="pl-3"
@@ -370,30 +369,43 @@ export default function ProductDetails(props) {
               )}
               {/* </div> */}
             </div>
-            <div
-              className="col-4 text-center"
-              style={{
-                maxHeight: "400px",
-                overflowX: "hidden",
-                overflowY: "scroll",
-              }}
-            >
-              {productDetails
-                ? productDetails.feedback
-                  ? productDetails.feedback.map((item) => {
-                      let postTime = item.createdAt.split("T");
-                      return (
-                        <>
-                          <p>User: {item.user.firstName}</p>
-                          <p>Posted at: {postTime[0]}</p>
-                          <p>comment: {item.comment}</p>
-                          <hr />
-                        </>
-                      );
-                    })
-                  : "loading"
-                : "loading"}
+
+            <div className="col-4 text-center">
+              {" "}
+              {productDetails ? (
+                productDetails.feedback.length === 0 ? (
+                  <div>be the first to rate this item</div>
+                ) : (
+                  <div
+                    className="col-4 text-center"
+                    style={{
+                      maxHeight: "400px",
+                      overflowX: "hidden",
+                      overflowY: "scroll",
+                    }}
+                  >
+                    {productDetails
+                      ? productDetails.feedback
+                        ? productDetails.feedback.map((item) => {
+                            let postTime = item.createdAt.split("T");
+                            return (
+                              <>
+                                <p>User: {item.user.firstName}</p>
+                                <p>Posted at: {postTime[0]}</p>
+                                <p>comment: {item.comment}</p>
+                                <hr />
+                              </>
+                            );
+                          })
+                        : "loading"
+                      : "loading"}
+                  </div>
+                )
+              ) : (
+                "Loading"
+              )}
             </div>
+
             {/* {localStorage.getItem("Authorization") !== null ? (
               <div className="col-4 text-center">
                 <div className=" star" style={{ fontSize: "30px" }}>
