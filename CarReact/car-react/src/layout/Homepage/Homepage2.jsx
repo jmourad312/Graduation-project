@@ -145,7 +145,9 @@ export default function Homepage2() {
         const targetY = this.targetY;
 
         return (
-          (lastX === targetX || lastX - 1 === targetX || lastX + 1 === targetX) &&
+          (lastX === targetX ||
+            lastX - 1 === targetX ||
+            lastX + 1 === targetX) &&
           (lastY === targetY || lastY - 1 === targetY || lastY + 1 === targetY)
         );
       }
@@ -346,27 +348,33 @@ export default function Homepage2() {
               data-id="1"
             >
               <img
-                src="https://i.pinimg.com/originals/cf/df/22/cfdf2282a9534e774a47bae5be535ceb.jpg"
+                src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=889&q=80"
                 alt=""
               />
             </div>
             <div className="slider__images-item" data-id="2">
               <img
-                src="https://img.freepik.com/free-photo/professional-mechanic-uniform-is-check-quality-new-car-engine-oil-before-delivering-customers-while-working-car-repair-center_61243-665.jpg?size=626&ext=jpg&ga=GA1.2.1153051939.1598227200"
+                src="https://image.freepik.com/free-photo/modern-cars-are-studio-room_37416-77.jpg"
                 alt=""
               />
             </div>
             <div className="slider__images-item" data-id="3">
-              <img src="https://wallpaperaccess.com/full/811596.jpg" alt="" />
+              <img
+                src="https://image.freepik.com/free-vector/car-led-lights-realistic-composition-with-view-night-road-silhouettes-automobile-traffic-lights-illustration_1284-28531.jpg"
+                alt=""
+              />
             </div>
             <div className="slider__images-item" data-id="4">
               <img
-                src="https://cdn.hipwallpaper.com/i/65/55/OCoh1G.jpg"
+                src="https://carinsider.co/wp-content/uploads/2020/03/5-Best-Used-Car-Buying-Websites-730x412.jpg"
                 alt=""
               />
             </div>
             <div className="slider__images-item" data-id="5">
-              <img src="https://wallpaperaccess.com/full/122375.jpg" alt="" />
+              <img
+                src="https://images.unsplash.com/photo-1577380777497-55be8529ef15?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80"
+                alt=""
+              />
             </div>
           </div>
           <div className="slider__text">
