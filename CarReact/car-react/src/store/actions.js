@@ -15,10 +15,6 @@ export const setClass = (payload) => {
   };
 };
 
-
-
-
-
 // products requests --------------------------
 
 export const getProductsAction = () => async (dispatch) =>{
@@ -317,10 +313,10 @@ export const getVendorsAction = (params) => async (dispatch) => {
     console.log(error);
   }
 };
-export const getVendorsItemsAction = () => async (dispatch) => {
+export const getVendorsItemsAction = (data,params) => async (dispatch) => {
   try {
-    const res = await axios.get(
-      `http://localhost:3000/vendor/getItems`,
+    const res = await axios.post(
+      `http://localhost:3000/vendor/getItems/${params}`,data,
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     // console.log(res);

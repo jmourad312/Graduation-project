@@ -59,8 +59,33 @@ addItem = (req, res) => {
 getItems = async (req, res) => {
   const IdVendor = req.user._id;
 
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  const queryCond = {};
+ ///////      0
+  if (req.body.priceMoreThan) {
+    console.log(req.body.priceMoreThan);
+    queryCond.$and = [
+      { price: { $gte: +req.body.priceLessThan } },
+      { price: { $lte: +req.body.priceMoreThan } },
+    ];
+  }
+
+  if (req.body.search) {
+    queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }];
+  }
+
+  if (req.body.brand) {
+    queryCond.carBrand = req.body.brand;
+  }
+  if (req.body.model) {
+    queryCond.carModel = req.body.model;
+  }
+
+  console.log(queryCond);
+
    carItem
-    .find({ person: IdVendor }, (error, items) => {
+    .find({ person: IdVendor,...queryCond }).sort({ _id: -1 }).skip(+req.params.skip)
+    .limit(4).exec( async (error, items) => {
       if (error || items.length == 0) {
         return res.json({
           Data: error,
@@ -68,8 +93,11 @@ getItems = async (req, res) => {
           Success: false,
         });
       }
+      console.log(items)
+      const TotalItem = await carItem.countDocuments({ person: IdVendor,...queryCond }).then("Done").catch("Error")
       return res.json({
         Data: items,
+        TotalItem:TotalItem,
         Message: "number of items:"+items.length,
         Success: true,
       });
