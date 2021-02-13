@@ -155,7 +155,7 @@ export default function ProductFilter(props) {
       </div>
 
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center" style={{fontFamily:"cursive"}}>Filter Options</h4>
       </div>
       <hr style={{borderColor:"grey",border:"1px solid"}}/>
       <div className="mb-5" style={{marginTop:"120px"}}>
@@ -169,7 +169,7 @@ export default function ProductFilter(props) {
           max="999"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700",fontFamily:"cursive"}}>
           Form: {state.priceLessThan}
         </label>
       </div>
@@ -185,7 +185,7 @@ export default function ProductFilter(props) {
           max="5000"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700",fontFamily:"cursive"}}>
           To: {state.priceMoreThan}{" "}
         </label>
       </div>
@@ -202,7 +202,7 @@ export default function ProductFilter(props) {
             choose Brand
           </option>
           {stateRedux.brand.map((item, index) => (
-            <option value={item.name} key={index}>
+            <option value={item.name} key={index} style={{fontWeight:"700"}}>
               {item.name}
             </option>
           ))}
@@ -223,7 +223,7 @@ export default function ProductFilter(props) {
           </option>
 
           {stateRedux.model.map((item, index) => (
-            <option value={item.model} key={index}>
+            <option value={item.model} key={index} style={{fontWeight:"700"}}>
               {item.model}
             </option>
           ))}
@@ -239,7 +239,7 @@ export default function ProductFilter(props) {
       //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
       // }}
       >
-        ApplyFilter
+        Apply Filter
       </button>
       <button
         type="button"
@@ -251,16 +251,16 @@ export default function ProductFilter(props) {
         // }}
         onClick={handleClear}
       >
-        Clear filter
+        Clear Filter
       </button>
       <div
         className="pagination"
         style={{
           zIndex: "100",
-          position: "fixed",
-          right: "300px",
-          bottom: "-5%",
-          
+          position: "absolute",
+          left: "350px",
+          bottom: "-15.5%",
+          height:"50px"
         }}
       >
         {products && (

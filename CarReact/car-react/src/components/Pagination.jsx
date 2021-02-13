@@ -8,12 +8,12 @@ export function Pagination(props) {
   }
 
   return (
-    <ul className="pagination justify-content-center">
+    <ul className="pagination justify-content-center" >
       {skip.map((number, index) => {
         return (
-          <li className="page-item">
+          <li className="page-item" >
             <Button2
-              class="page-link"
+              class="page-link bg-dark text-white"
               handleClick={props.handleClick}
               key={index}
               parameter={number}

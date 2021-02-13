@@ -31,7 +31,8 @@ export default function SignChoice() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <div className="container">
+      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",fontFamily:"cursive",color:"transparent",WebkitBackgroundClip:"text"}}>Register or Signin as</h1>
+      <div className="container" style={{height:"650px"}}>
         <div className="row">
           <Link className="col-6" to="/VendorSignForm">
             <div className="card">
@@ -58,10 +59,9 @@ export default function SignChoice() {
                   fill="transparent"
                 />
               </svg>
-
               <div className="card__content">
-                <h4 className="card__title">Login as</h4>
-                <h3>Vendor</h3>
+                <h4 className="card__title" style={{fontSize:"60px"}} >Vendor</h4>
+                {/* <h3 >Vendor</h3> */}
               </div>
             </div>
           </Link>
@@ -93,8 +93,8 @@ export default function SignChoice() {
               </svg>
 
               <div className="card__content">
-                <h4 className="card__title">Login as</h4>
-                <h3>Owner</h3>
+                <h4 className="card__title" style={{fontSize:"60px"}} >Car Owner</h4>
+                {/* <h3 >Car Owner</h3> */}
               </div>
             </div>
           </Link>

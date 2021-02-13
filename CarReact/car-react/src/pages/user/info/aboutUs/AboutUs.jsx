@@ -30,7 +30,7 @@ export default function AboutUs() {
           </a>
          
         </div> */}
-        <div style={{ position: "absolute", left: "10%" }}>
+        <div style={{ position: "absolute", left: "10%",top:"4%" }}>
           <ContactUsPic
             name="Youssef Mourad"
             prof="MEARN Full Stack Developer"
@@ -38,19 +38,19 @@ export default function AboutUs() {
             prImage="../../../../assets/Images/13.jpg"
           />
         </div>
-        <div style={{ position: "absolute", left: "30%" }}>
+        <div style={{ position: "absolute", left: "30%",top:"4%" }}>
           <ContactUsPic
             name="Hajar Shalaby"
             prof="MEARN Full Stack Developer"
           />
         </div>
-        <div style={{ position: "absolute", left: "50%" }}>
+        <div style={{ position: "absolute", left: "50%",top:"4%" }}>
           <ContactUsPic
             name="Mohamed Magdy"
             prof="MEARN Full Stack Developer"
           />
         </div>
-        <div style={{ position: "absolute", left: "70%" }}>
+        <div style={{ position: "absolute", left: "70%",top:"4%" }}>
           <ContactUsPic name="Nora Alaa" prof="MEARN Full Stack Developer" />
         </div>
         {/* <div className="section" id="p1">
@@ -96,7 +96,7 @@ export default function AboutUs() {
         </div> */}
       </div>
 
-      <div className="about-section position-absolute" style={{ top: "60%" }}>
+      <div className="about-section position-absolute" style={{ top: "53%" }}>
         <div className="inner-container">
           <h1>About Us</h1>
           <p className="text">

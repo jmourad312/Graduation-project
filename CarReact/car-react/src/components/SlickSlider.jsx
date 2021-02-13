@@ -11,7 +11,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "red" }}
+      style={{ ...style,  transform:"scale(3)",paddingLeft:"0.5px",borderRadius:"100%",fontSize:"3rem" }}
       onClick={onClick}
     />
   );
@@ -22,7 +22,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", }}
+      style={{ ...style,transform:"scale(3)",paddingRight:"60px",fontSize:"3rem" }}
       onClick={onClick}
     />
   );
@@ -31,55 +31,53 @@ function SamplePrevArrow(props) {
 
 
 export default function SlickSlider(props) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   var history = useHistory();
-    
-    const handleClick = (params) => {
-      dispatch(setProductId(params));
-      localStorage.setItem("ProductID", params);
-      history.push(`/ProductDetails/${params}`);
-      axios
-        .put(
-          `http://localhost:3000/user/recentlyViewed`,
-          { id: props.id },
-          {
-            headers: { Authorization: localStorage.getItem("Authorization") },
-          }
-        )
-        .then((req) => {
-          console.log(req);
-          if (req.data.Success === true) {
-            console.log("Success");
-            // props.history.push("/MyProfile");
-          } else {
-            console.log("fail");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    const settings = {
-      dots: true,
-      infinite: true,
-      pauseOnHover: true,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      //   autoplay: true,
-      speed: 1500,
-      autoplaySpeed: 1000,
-      cssEase: "linear",
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,
-    };
-    return (
-      <div>
-        <h2>Auto Play</h2>
-        <Slider {...settings}>
-        {props.items.map((item,index)=>{
-            return (
-                <div className="productComp">
 
+  const handleClick = (params) => {
+    dispatch(setProductId(params));
+    localStorage.setItem("ProductID", params);
+    history.push(`/ProductDetails/${params}`);
+    axios
+      .put(
+        `http://localhost:3000/user/recentlyViewed`,
+        { id: props.id },
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const settings = {
+    dots: true,
+    infinite: true,
+    pauseOnHover: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    //   autoplay: true,
+    speed: 1500,
+    autoplaySpeed: 1000,
+    cssEase: "linear",
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
+  return (
+    <div>
+      <Slider {...settings}>
+        {props.items.map((item, index) => {
+          return (
+            <div className="SliderStyle">
               <div className="productList">
                 <section className="cards">
                   <article
@@ -121,11 +119,11 @@ export default function SlickSlider(props) {
                   </article>
                 </section>
               </div>
-                </div>
-            );
+            </div>
+          );
         })}
-          
-        </Slider>
-      </div>
-    );
+
+      </Slider>
+    </div>
+  );
 }

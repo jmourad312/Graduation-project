@@ -6,8 +6,8 @@ export default function ContactUs() {
       <section  className="content-section text-center">
         <div className="contact-section">
           <div className="container" >
-            <h2 style={{ fontWeight: "700" }}>Contact Us</h2>
-            <p style={{ fontWeight: "600",fontSize:"30px" }}>
+            <h1 style={{ fontWeight: "700",fontSize:"45px",fontFamily:"cursive",backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",color:"transparent",WebkitBackgroundClip:"text" }}>Contact Us</h1>
+            <p style={{ fontWeight: "600",fontSize:"35px",fontFamily:"cursive",backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",color:"transparent",WebkitBackgroundClip:"text" }}>
               Feel free to contact us anytime
             </p>
             <div className="row">
@@ -15,7 +15,7 @@ export default function ContactUs() {
               <div className="col-8">
                 <form className="form">
                   <div className="form-group">
-                    <label for="Email2" style={{ fontWeight: "600", fontSize: "25px" }}>Email</label>
+                    <label for="Email2" style={{ fontWeight: "600", fontSize: "30px",fontFamily:"cursive",backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",color:"transparent",WebkitBackgroundClip:"text" }}>Email</label>
                     <input
                       type="email"
                       className="form-control"
@@ -24,13 +24,13 @@ export default function ContactUs() {
                     />
                   </div>
                   <div className="form-group ">
-                    <label for="exampleInputText" style={{ fontWeight: "600", fontSize: "25px" }}>Your Message</label>
+                    <label for="exampleInputText" style={{ fontWeight: "600", fontSize: "25px",fontFamily:"cursive",backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",color:"transparent",WebkitBackgroundClip:"text" }}>Your Message</label>
                     <textarea
                       className="form-control inputheight"
                       placeholder="Description"
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn contrastclass">
+                  <button type="submit" className="btn contrastclass" style={{fontWeight:"600",fontSize:"25px"}}>
                     Send Message
                   </button>
                 </form>
@@ -41,24 +41,24 @@ export default function ContactUs() {
         </div>
         <hr />
 
-        <h3>Our Social Sites</h3>
+        <h3 style={{fontWeight:"600",fontFamily:"cursive",backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",color:"transparent",WebkitBackgroundClip:"text"}}>Our Social Sites</h3>
         <div className="list-inline banner-social-buttons">
           
-            <a href="#" className="btn btn-lg contrastclass mr-2">
+            <a href="#" className="btn btn-lg contrastclass mr-2" style={{fontSize:"30px"}}>
               <i className="fa fa-twitter text-dark">
                 {" "}
               </i>
                 <span className="network-name ml-1">Twitter</span>
             </a>
           
-            <a href="#" className="btn btn-lg contrastclass mr-2">
+            <a href="#" className="btn btn-lg contrastclass mr-2" style={{fontSize:"30px"}}>
               <i className="fa fa-facebook text-dark">
                 {" "}
               </i>
                 <span className="network-name ml-1">Facebook</span>
             </a>
           
-            <a href="#" className="btn btn-lg contrastclass">
+            <a href="#" className="btn btn-lg contrastclass" style={{fontSize:"30px"}}>
               <i className="fa fa-youtube-play">
                 {" "}
               </i>
@@ -75,8 +75,8 @@ export default function ContactUs() {
               <div className="card contrastclass pb-1">
                 <div className="card-body text-center">
                   <i className="fa fa-phone fa-2x" aria-hidden="true"></i>
-                  <h4 className="text-uppercase">call us</h4>
-                  <p>+8801683615582,+8801750603409</p>
+                  <h4 className="text-uppercase"style={{fontWeight:"700"}}>call us</h4>
+                  <p style={{fontWeight:"700"}}>+8801683615582,+8801750603409</p>
                 </div>
               </div>
             </div>
@@ -84,8 +84,8 @@ export default function ContactUs() {
               <div className="card contrastclass pb-3">
                 <div className="card-body text-center">
                   <i className="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                  <h4 className="text-uppercase">office loaction</h4>
-                  <address>Suite 02, Level 12, Sahera Tropical Center</address>
+                  <h4 className="text-uppercase" style={{fontWeight:"700"}}>office loaction</h4>
+                  <address style={{fontWeight:"600"}}>Suite 02, Level 12, Sahera Tropical Center</address>
                 </div>
               </div>
             </div>
@@ -93,8 +93,8 @@ export default function ContactUs() {
               <div className="card contrastclass">
                 <div className="card-body text-center">
                   <i className="fa fa-globe fa-2x" aria-hidden="true"></i>
-                  <h4 className="text-uppercase">email</h4>
-                  <p>http://al.a.noman1416@gmail.com</p>
+                  <h4 className="text-uppercase"style={{fontWeight:"700"}}>email</h4>
+                  <p style={{fontWeight:"700"}}>http://al.a.noman1416@gmail.com</p>
                 </div>
               </div>
             </div>

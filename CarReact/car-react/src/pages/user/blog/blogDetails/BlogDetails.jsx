@@ -311,7 +311,7 @@ export default function BlogDetails(props) {
                 {blogDetails ? blogDetails.title : "LOADING"}{" "}
               </p>
               <p style={{ fontWeight: "600", fontSize: "20px" }}>
-                by{" "}
+                By{" "}
                 <span>
                   {" "}
                   {blogDetails
@@ -345,7 +345,7 @@ export default function BlogDetails(props) {
               </p>
               <hr />
 
-              <p>
+              {/* <p>
                 {" "}
                 <span className="" style={{ fontWeight: "700" }}>
                   Tags
@@ -359,7 +359,7 @@ export default function BlogDetails(props) {
                 >
                   {blogDetails && blogDetails.model}
                 </span>
-              </p>
+              </p> */}
             </div>
             <div className="col-6">
               <img

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  
 }
 
 .signform {
@@ -11,9 +12,9 @@
   font-family: "Montserrat", sans-serif;
   height: 100vh;
   // margin: -20px 0 50px;
-
+  
   .forgotpass {
-    background-color: #ff4364;
+    background: linear-gradient(to right, rgb(255, 255, 255), #383535 );    content: "";
     height: 100%;
     width: 100%;
     margin-left: 0;
@@ -21,6 +22,12 @@
     top: 100%;
     z-index: -1;
     transition: all 1s;
+    
+    .buttoncolor{
+      background: linear-gradient(-45deg, #110f11, #424c53);
+
+    }
+    
   }
   .open {
     background-color: #c2929a;
@@ -301,7 +308,7 @@
     bottom: 0;
     transition: all 1s ease-in-out;
   }
-  button {   
+  .button {   
     border-radius: 20px;
     // border: 1px solid rgb(44, 44, 44);
     background-color: #f95959;

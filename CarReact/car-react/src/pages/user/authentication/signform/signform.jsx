@@ -192,16 +192,16 @@ export default function Signform(props) {
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
-            <div className="social-container">
+            {/* <div className="social-container">
               <Link onClick={handlefacebook} className="social">
                 <i className="fab fa-facebook-f"></i>
               </Link>
               <Link onClick={handlegoogle} className="social">
                 <i className="fab fa-google-plus-g"></i>
-              </Link>
+              </Link> */}
               {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
-            </div>
-            <span>or use your email for registration</span>
+            {/* </div> */}
+            {/* <span>or use your email for registration</span> */}
             <input
               type="text"
               placeholder="Name"
@@ -223,13 +223,13 @@ export default function Signform(props) {
               value={userSignUpInfo.password}
               onChange={changeUserSignUpInfo}
             />
-            <button className="button" type="submit">
+            <button className="button" type="submit" style={{height:"70px",fontSize:"20px"}}>
               Sign Up
             </button>
-            <p>
+            <p style={{fontWeight:"600"}}>
               By signing up you agree to our{" "}
               <span
-                style={{ color: "#4d8ba8", cursor: "pointer" }}
+                style={{ color: "#4d8ba8", cursor: "pointer",textDecoration:"underline" }}
                 onClick={() => {
                   setModalShow(true);
                   setModaleInfo({
@@ -243,7 +243,7 @@ export default function Signform(props) {
               </span>{" "}
               and{" "}
               <span
-                style={{ color: "#4d8ba8", cursor: "pointer" }}
+                style={{ color: "#4d8ba8", cursor: "pointer",textDecoration:"underline"  }}
                 onClick={() => {
                   setModalShow(true);
                   setModaleInfo({
@@ -272,7 +272,7 @@ export default function Signform(props) {
         <div className="form-container sign-in-container ">
           <form className="form1" onSubmit={handleSignInSubmit}>
             <h1>Sign in</h1>
-            <div className="social-container">
+            {/* <div className="social-container">
               <Link
                 to="http://localhost:3000/user/auth/facebook"
                 className="social"
@@ -284,10 +284,10 @@ export default function Signform(props) {
                 className="social"
               >
                 <i className="fab fa-google-plus-g"></i>
-              </Link>
+              </Link> */}
               {/* <a to="#" className="social"><i className="fab fa-linkedin-in"></i></a> */}
-            </div>
-            <span>or use your account</span>
+            {/* </div> */}
+            {/* <span>or use your account</span> */}
             <br />
             <input
               type="email"
@@ -305,9 +305,9 @@ export default function Signform(props) {
               onChange={changeUserSignInInfo}
             />
             <br />
-            <p onClick={switchClass}>Forgot your password?</p>
+            <p onClick={switchClass} style={{cursor:"pointer",textDecoration:"underline",color:"black"}}>Forgot your password?</p>
             <br />
-            <button className="button">Sign In</button>
+            <button className="button"style={{height:"70px",fontSize:"20px"}}>Sign In</button>
           </form>
         </div>
         {/* <div className="form-container forget-password-container">
@@ -323,7 +323,7 @@ export default function Signform(props) {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
-              <p>
+              <p style={{fontSize:"20px"}}>
                 To keep connected with us please login with your personal info
               </p>
               <button
@@ -334,14 +334,14 @@ export default function Signform(props) {
                     .getElementById("container")
                     .classList.remove("right-panel-active");
                   console.log("hello");
-                }}
+                }}style={{height:"70px",fontSize:"20px"}}
               >
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
               <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
+              <p style={{fontSize:"20px"}}>Enter your personal details and start journey with us</p>
               <button
                 className="button ghost"
                 onClick={() => {
@@ -350,7 +350,7 @@ export default function Signform(props) {
                     .classList.add("right-panel-active");
                   console.log("hello");
                 }}
-                id="signUp"
+                id="signUp"style={{height:"70px",fontSize:"20px"}}
               >
                 Sign Up
               </button>
@@ -362,22 +362,19 @@ export default function Signform(props) {
                 </div>   */}
           </div>
         </div>
-        <div className={changeClass} id="forgotpass">
-          <i className="fas fa-arrow-circle-left" onClick={switchBack}></i>
-          This is the testing div
-          <form>
-            <div className="row w-100">
-              <div className="col-9">
-                <input type="email" placeholder="Email" />
-              </div>
-              <div className="col-3">
-                <Button2 className="btn btn-primary" value="Send email" />
-              </div>
+        <div className={changeClass} id="forgotpass" style={{left:"0px"}} >
+          <i className="fas fa-arrow-circle-left" style={{fontSize:"50px"}} onClick={switchBack}></i>
+           <h2 className="text-center" >Rest Your Password</h2>
+          <form className="text-center">
+              <input type="email" className="w-75 text-center" placeholder="Email" />
+            <input type="text" className="w-75 text-center" placeholder="Input your code here" />
+            <input type="password" className="w-75 text-center" placeholder="New password" />
+            <input type="password" className="w-75 text-center" placeholder="Confirm new password" />
+            <div className="text-center">
+            <button className="btn buttoncolor text-white" style={{width:"200px",height:"70px",fontSize:"25px"}} value="submit">Submit</button>
+            <button className="btn buttoncolor text-white ml-5" style={{width:"200px",height:"70px",fontSize:"25px"}} value="Send email">Send email</button>
             </div>
-            <input type="text" placeholder="Input your code here" />
-            <input type="password" placeholder="New password" />
-            <input type="password" placeholder="Confirm new password" />
-            <Button2 value="submit" />
+            
           </form>
         </div>
         <div className={changePayment}>

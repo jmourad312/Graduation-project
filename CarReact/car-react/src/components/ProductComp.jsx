@@ -69,7 +69,7 @@ export default function ProductComp(props) {
               <h4 className="card__title text-truncate" style={{fontWeight:"600"}}>{props.title}</h4>
               <span className="price" style={{fontWeight:"700",color:"goldenrod",fontSize:"25px"}}>{props.price} LE</span> <br/>
               <p className="text-truncate" style={{fontSize:"20px",fontWeight:"700"}}>{props.description}</p>
-              <span className="card__by"style={{fontWeight:"700"}}>By <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}} title="author">{props.name}</span></span>
+              <span className="card__by"style={{fontWeight:"700"}}>By <span className="card__author"  title="author">{props.name}</span></span>
               <br />
               <small>
                 <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>

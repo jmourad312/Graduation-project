@@ -336,7 +336,7 @@ export default function VendorSignForm(props) {
                 </Link>
                 <div className="heading">
                   <h2>DREKSYONY</h2>
-                  <p>Your Right Choice</p>
+                  <p style={{fontWeight:"700",fontSize:"20px"}}>Your Right Choice</p>
                 </div>
 
                 <div className="success-msg">
@@ -355,7 +355,7 @@ export default function VendorSignForm(props) {
                     <div className="form-group">
                       <label
                         for="email"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Email Adderss
                       </label>
@@ -372,7 +372,7 @@ export default function VendorSignForm(props) {
                     <div className="form-group">
                       <label
                         for="password"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Password
                       </label>
@@ -392,7 +392,7 @@ export default function VendorSignForm(props) {
                         style={{ fontWeight: "600", fontSize: "15px" }}
                         value="Login"
                       />
-                      <a href="#" className="switch">
+                      <a href="#" className="switch" style={{fontSize:"20px"}}>
                         I'm New
                       </a>
                     </div>
@@ -408,7 +408,7 @@ export default function VendorSignForm(props) {
                         <div className="form-group">
                           <label
                             for="firstName"
-                            style={{ fontWeight: "600", fontSize: "15px" }}
+                            style={{ fontWeight: "600", fontSize: "20px" }}
                           >
                             First Name
                           </label>
@@ -420,7 +420,7 @@ export default function VendorSignForm(props) {
                             value={vendorSignUpInfo.firstName}
                             onChange={changeVendorSignUpInfo}
                           />
-                          <span className="error"></span>
+                          <span className="error" style={{fontSize: "15px" }}></span>
                         </div>
                       </div>
                       <div className="col-4">
@@ -429,8 +429,8 @@ export default function VendorSignForm(props) {
                             for="middleName"
                             style={{ fontWeight: "600", fontSize: "15px" }}
                           >
-                            Middle Name-{" "}
-                            <small style={{ fontSize: "8px" }}>Optional</small>
+                            Middle Name{" "}
+                            <small style={{fontWeight: "700",fontSize:"8px"}}>-optional</small>
                           </label>
                           <input
                             type="text"
@@ -440,7 +440,7 @@ export default function VendorSignForm(props) {
                             value={vendorSignUpInfo.middleName}
                             onChange={changeVendorSignUpInfo}
                           />
-                          <span className="error"></span>
+                          <span className="error" style={{fontSize: "15px" }}></span>
                         </div>
                       </div>
                       <div className="col-4">
@@ -449,8 +449,8 @@ export default function VendorSignForm(props) {
                             for="lastName"
                             style={{ fontWeight: "600", fontSize: "15px" }}
                           >
-                            Last Name-{" "}
-                            <small style={{ fontSize: "10px" }}>Optional</small>
+                            Last Name{" "}
+                            <small style={{fontWeight: "700",fontSize:"8px"}}>-optional</small>
                           </label>
                           <input
                             type="text"
@@ -460,14 +460,14 @@ export default function VendorSignForm(props) {
                             value={vendorSignUpInfo.lastName}
                             onChange={changeVendorSignUpInfo}
                           />
-                          <span className="error"></span>
+                          <span className="error" style={{fontSize: "15px" }}></span>
                         </div>
                       </div>
                     </div>
                     <div className="form-group">
                       <label
                         for="email"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Email Adderss
                       </label>
@@ -479,16 +479,16 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.email}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error"></span>
+                      <span className="error" style={{fontSize: "15px" }}></span>
                     </div>
 
                     <div className="form-group">
                       <label
                         for="phoneNumber"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Phone Number -{" "}
-                        <small style={{ fontSize: "15px" }}>Optional</small>
+                        <small style={{ fontSize: "20px" }}>Optional</small>
                       </label>
                       <input
                         type="text"
@@ -502,7 +502,7 @@ export default function VendorSignForm(props) {
                     <div className="form-group">
                       <label
                         for="password"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Password
                       </label>
@@ -514,13 +514,13 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.password}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error"></span>
+                      <span className="error" style={{fontSize: "15px" }}></span>
                     </div>
 
                     <div className="form-group">
                       <label
                         for="confirmPassword"
-                        style={{ fontWeight: "600", fontSize: "15px" }}
+                        style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Confirm Password
                       </label>
@@ -532,7 +532,7 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.confirmPassword}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error"></span>
+                      <span className="error" style={{fontSize: "15px" }}></span>
                     </div>
 
                     <div className="CTA">
@@ -543,7 +543,7 @@ export default function VendorSignForm(props) {
                         id="submit"
                       />
                       <br />
-                      <a href="#" className="switch">
+                      <a href="#" className="switch" style={{fontSize:"20px"}}>
                         I have an account
                       </a>
                     </div>

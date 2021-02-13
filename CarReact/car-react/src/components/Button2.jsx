@@ -4,6 +4,7 @@ function Button2(props) {
       className={props.class}
       onClick={() => props.handleClick(props.parameter)}
       key={props.key}
+      style={{fontSize:"25px"}}
     >
       {props.value}
     </button>
