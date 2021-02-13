@@ -371,8 +371,8 @@ export default function Signform(props) {
             <input type="password" className="w-75 text-center" placeholder="New password" />
             <input type="password" className="w-75 text-center" placeholder="Confirm new password" />
             <div className="text-center">
-            <button className="btn buttoncolor text-white" style={{width:"200px",height:"70px",fontSize:"25px"}} value="submit">Submit</button>
-            <button className="btn buttoncolor text-white ml-5" style={{width:"200px",height:"70px",fontSize:"25px"}} value="Send email">Send email</button>
+            <button className="btn buttoncolor text-white" style={{width:"200px",height:"70px",fontSize:"25px",borderRadius:"20px"}} value="submit">Submit</button>
+            <button className="btn buttoncolor text-white ml-5" style={{width:"200px",height:"70px",fontSize:"25px",borderRadius:"20px"}} value="Send email">Send email</button>
             </div>
             
           </form>
