@@ -32,7 +32,7 @@ export default function FavouriteItems(props) {
     >
       <div className="container" style={{fontSize:"1.5rem"}}>
         <div className="row">
-          {user ? user.favouriteItems.map((item) => {
+          {user ? user.favouriteItems.length === 0 ? (<div>not items</div>) : user.favouriteItems.map((item) => {
             return (
               <div className="col-4 mb-3 h-25 w-25">
                 {/* <div className="card">
