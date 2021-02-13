@@ -4,7 +4,7 @@ const sendContactUs = (req, res) => {
 
     const body = req.body;
 
-    if(req.body.email || req.body.message){
+    if(!(req.body.email || req.body.message)){
         return res.json({
             Data: null,
             Message: "You must provide a message and your email ",
