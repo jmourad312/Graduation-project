@@ -531,12 +531,13 @@ export default function BlogDetails(props) {
           </div>
         </div>
         <div className="col-6" style={{marginTop:"-80px"}}>
-          <h3 className="text-center">Comments</h3>
+          <h3 className="text-center mb-4">Comments</h3>
           {/* <!-- Single Comment --> */}
           {blogDetails
             ? blogDetails.comment.map((item, index) => {
                 return (
                   <div className="media mb-1" key={index}>
+                  <div className="mr-2">
                     <button
                       className="btn"
                       style={{
@@ -571,6 +572,7 @@ export default function BlogDetails(props) {
                     >
                       <i class="fas fa-chevron-down"></i>
                     </button>
+                  </div>
 
                     {/* <img
                       className="d-flex mr-3 rounded-circle"
@@ -585,7 +587,7 @@ export default function BlogDetails(props) {
                         {item.person.firstName ? item.person.firstName : null}
                       </h5>
                       <hr />
-                      <p style={{fontSize:"2rem"}}>{item.content}</p>
+                      <p style={{fontSize:"1.5rem"}}>{item.content}</p>
                       <hr style={{ border: "1px solid" }} />
                     </div>
 
