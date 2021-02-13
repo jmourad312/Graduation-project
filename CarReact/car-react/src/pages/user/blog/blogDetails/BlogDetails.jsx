@@ -342,12 +342,12 @@ export default function BlogDetails(props) {
                 </span>
               </p>
               <hr />
-              <h5 className="mt-0" style={{ fontWeight: "700" }}>
+              <h5 className="mt-0" style={{ fontWeight: "700", fontSize: "25px" }}>
                 Post Details
               </h5>
               <p
                 className="truncate"
-                style={{ fontWeight: "600", fontSize: "20px" }}
+                style={{ fontWeight: "600", fontSize: "25px" }}
               >
                 {blogDetails && blogDetails.body}
               </p>
@@ -370,7 +370,7 @@ export default function BlogDetails(props) {
             </div>
             <div className="col-6">
               <img
-                className=""
+                className="ml-lg-5"
                 style={{ width: "400px", height: "300px", borderRadius: "10%" }}
                 src={blogDetails && blogDetails.image}
                 alt=""
