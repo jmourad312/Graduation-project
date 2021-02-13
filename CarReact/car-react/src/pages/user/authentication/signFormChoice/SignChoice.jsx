@@ -31,7 +31,7 @@ export default function SignChoice() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",fontFamily:"cursive",color:"transparent",WebkitBackgroundClip:"text"}}>Register or Signin as</h1>
+      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",fontFamily:"cursive",color:"transparent",WebkitBackgroundClip:"text"}}>Register or Login as</h1>
       <div className="container" style={{height:"650px"}}>
         <div className="row">
           <Link className="col-6" to="/VendorSignForm">
