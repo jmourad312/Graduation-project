@@ -510,22 +510,27 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <h3 className="text-center mb-4"  style={{ fontWeight: "700", fontSize: "40px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
+      <h3 className="text-center mb-4" style={{ fontWeight: "700", fontSize: "40px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
       <div className="row">
 
-        <div className="col-8">
+        <div className="col-8" >
 
           {/* <!-- Single Comment --> */}
           {blogDetails
-            ? blogDetails.comment.length === 0 ? (<div>be the first to comment on this post</div>) : blogDetails.comment.map((item, index) => {
+            ? blogDetails.comment.length === 0 ? (<div className="text-center mt-5"  
+            style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",color:"black"}}>No Comments Yet</div>) : 
+            <div style={{maxHeight:"300px",overflowY:"scroll",overflowX:"hidden"}}>
+            {blogDetails.comment.map((item, index) => {
               return (
+
+               
                 <div className="media mb-1" key={index}>
                   <div className="mr-2">
                     <button
                       className="btn"
                       style={{
-                        position: "absolute",
-                        left: "52px",
+                        position: "relative",
+                        left: "80.7px",
                         fontSize: "20px",
                       }}
                       onClick={() => addVote(item._id)}
@@ -539,6 +544,7 @@ export default function BlogDetails(props) {
                         left: "40px",
                         top: "40px",
                         fontSize: "20px",
+                        fontWeight:"700"
                       }}
                     >
                       {item.vote.numberOfVoting}
@@ -612,7 +618,8 @@ export default function BlogDetails(props) {
                   : "LOADING"} */}
                 </div>
               );
-            })
+            })}
+            </div> 
             : "LOADING"}
         </div>
         <div className="col-4">
