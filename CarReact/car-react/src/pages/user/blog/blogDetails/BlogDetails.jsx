@@ -16,7 +16,7 @@ import {
 } from "../../../../store/actions";
 
 export default function BlogDetails(props) {
-  
+
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
@@ -303,7 +303,7 @@ export default function BlogDetails(props) {
         />
       </div>
       <div className="blogDetails">
-        <div className="header">
+        <div className="header" style={{ paddingBottom: "0px" }}>
           <div style={{ position: "absolute", top: "5%", right: "-30%" }}>
             {localStorage.getItem("Authorization") === null && <LoginButton />}
             {localStorage.getItem("Authorization") !== null && <UserIcon />}
@@ -351,21 +351,20 @@ export default function BlogDetails(props) {
               >
                 {blogDetails && blogDetails.body}
               </p>
-              <hr />
 
               {/* <p>
                 {" "}
                 <span className="" style={{ fontWeight: "700" }}>
-                  Tags
+                Tags
                 </span>{" "}
                 <span className="badge badge-dark" style={{ fontSize: "20px" }}>
-                  {blogDetails && blogDetails.brand}
+                {blogDetails && blogDetails.brand}
                 </span>
                 <span
-                  className="badge badge-dark ml-1"
-                  style={{ fontSize: "20px" }}
+                className="badge badge-dark ml-1"
+                style={{ fontSize: "20px" }}
                 >
-                  {blogDetails && blogDetails.model}
+                {blogDetails && blogDetails.model}
                 </span>
               </p> */}
             </div>
@@ -377,6 +376,7 @@ export default function BlogDetails(props) {
                 alt=""
               />
             </div>
+            <hr style={{ border: "2px solid black", width: "100%" }} />
           </div>
         </div>
       </div>
@@ -510,116 +510,71 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
+      <h3 className="text-center mb-4"  style={{ fontWeight: "700", fontSize: "60px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 70%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
       <div className="row">
-        <div className="col-6">
-          {localStorage.getItem("Authorization") ? (
-            <div className="card bgforleavecomment">
-              <h5 className="card-header">Leave a Comment:</h5>
-              <div className="card-body">
-                <form method="post" onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <textarea
-                      className="form-control bgforleavecomment2"
-                      rows="3"
-                      name="content"
-                      value={inputValue.content}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-dark">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="shadow-sm p-2 mb-4 rounded-lg"
-              onClick={()=>history.push(`/SignChoice`)}
-              style={{
-                height: "300px",
-                width: "500px",
-                border: "solid white 3px",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            >
-              <h3
-                style={{
-                  color: "#737373",
-                  position: "relative",
-                  top: "35%",
-                  textAlign: "center",
-                }}
-              >
-                Only registered users can add comments
-              </h3>
-            </div>
-          )}
-        </div>
-        <div className="col-6" style={{ marginTop: "-50px" }}>
-        
-          <h3 className="text-center mb-4">Comments</h3>
+
+        <div className="col-8">
+
           {/* <!-- Single Comment --> */}
           {blogDetails
-            ? blogDetails.comment.length === 0 ? (<div>be the first to comment on this post</div>): blogDetails.comment.map((item, index) => {
-                return (
-                  <div className="media mb-1" key={index}>
-                    <div className="mr-2">
-                      <button
-                        className="btn"
-                        style={{
-                          position: "absolute",
-                          left: "52px",
-                          fontSize: "20px",
-                        }}
-                        onClick={() => addVote(item._id)}
-                      >
-                        <i class="fas fa-chevron-up"></i>
-                      </button>
-                      <span
-                        className="btn badge-pill"
-                        style={{
-                          position: "relative",
-                          left: "40px",
-                          top: "40px",
-                          fontSize: "20px",
-                        }}
-                      >
-                        {item.vote.numberOfVoting}
-                      </span>
-                      <button
-                        className="btn"
-                        style={{
-                          position: "relative",
-                          left: "0px",
-                          top: "80px",
-                          fontSize: "20px",
-                        }}
-                        onClick={() => removeVote(item._id)}
-                      >
-                        <i class="fas fa-chevron-down"></i>
-                      </button>
-                    </div>
+            ? blogDetails.comment.length === 0 ? (<div>be the first to comment on this post</div>) : blogDetails.comment.map((item, index) => {
+              return (
+                <div className="media mb-1" key={index}>
+                  <div className="mr-2">
+                    <button
+                      className="btn"
+                      style={{
+                        position: "absolute",
+                        left: "52px",
+                        fontSize: "20px",
+                      }}
+                      onClick={() => addVote(item._id)}
+                    >
+                      <i class="fas fa-chevron-up"></i>
+                    </button>
+                    <span
+                      className="btn badge-pill"
+                      style={{
+                        position: "relative",
+                        left: "40px",
+                        top: "40px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {item.vote.numberOfVoting}
+                    </span>
+                    <button
+                      className="btn"
+                      style={{
+                        position: "relative",
+                        left: "0px",
+                        top: "80px",
+                        fontSize: "20px",
+                      }}
+                      onClick={() => removeVote(item._id)}
+                    >
+                      <i class="fas fa-chevron-down"></i>
+                    </button>
+                  </div>
 
-                    {/* <img
+                  {/* <img
                       className="d-flex mr-3 rounded-circle"
                       src={item.image}
                       alt=""
                       style={{ maxHeight: "300px", maxWidth: "300px" }}
                     /> */}
+                  <hr />
+                  <br />
+                  <div className="media-body">
+                    <h5 className="mt-0">
+                      {item.person.firstName ? item.person.firstName : null}
+                    </h5>
                     <hr />
-                    <br />
-                    <div className="media-body">
-                      <h5 className="mt-0">
-                        {item.person.firstName ? item.person.firstName : null}
-                      </h5>
-                      <hr />
-                      <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
-                      <hr style={{ border: "1px solid" }} />
-                    </div>
+                    <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
+                    <hr style={{ border: "1px solid" }} />
+                  </div>
 
-                    {/* <form
+                  {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -635,7 +590,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                    {/* {item
+                  {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -655,10 +610,56 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-                  </div>
-                );
-              })
+                </div>
+              );
+            })
             : "LOADING"}
+        </div>
+        <div className="col-4">
+          {localStorage.getItem("Authorization") ? (
+            <div className="card bgforleavecomment text-center">
+              <h5 className="card-header">Leave a Comment:</h5>
+              <div className="card-body">
+                <form method="post" onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <textarea
+                      className="form-control bgforleavecomment2"
+                      rows="3"
+                      name="content"
+                      value={inputValue.content}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-dark">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          ) : (
+              <div
+                className="shadow-sm p-2 mb-4 rounded-lg"
+                onClick={() => history.push(`/SignChoice`)}
+                style={{
+                  height: "300px",
+                  width: "500px",
+                  border: "solid white 3px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <h3
+                  style={{
+                    color: "#737373",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
+                  }}
+                >
+                  Only registered users can add comments
+              </h3>
+              </div>
+            )}
         </div>
       </div>
 
