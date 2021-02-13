@@ -9,13 +9,17 @@ export default function VerticalModal(props) {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {props.heading}
-          </Modal.Title>
+          {/* <Modal.Title id="contained-modal-title-vcenter">
+            <p style={{ direction: "rtl", textAlign: "right" }}>
+              {props.heading}
+            </p>
+          </Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
-          <h4>{props.title}</h4>
-          <div>
+          {/* <h4 style={{ direction: "rtl", textAlign: "right" }}>
+            {props.title}
+          </h4> */}
+          <div style={{ direction: "rtl", textAlign: "right" }}>
             {props.content}
           </div>
         </Modal.Body>

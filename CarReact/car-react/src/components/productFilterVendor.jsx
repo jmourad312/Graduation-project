@@ -111,7 +111,7 @@ export default function ProductFilterVendor(props) {
   };
 
   return (
-    <div className={props.className}>
+    <div className="productFilterVendor" style={{left:"15px",marginRight:"20px"}}>
  
       <div class="search">
         <input type="checkbox" id="trigger" onClick={handleFocus} class="search__checkbox" />
@@ -122,11 +122,11 @@ export default function ProductFilterVendor(props) {
         <div class="search__close"></div>
       </div>
 
-      <div className="mb-4 ml-2" filter="price">
+      <div className="ml-2" filter="price">
         <h4 className="font-weight-bold mb-3 text-center" style={{fontFamily:"cursive"}}>Filter Options</h4>
       </div>
       <hr style={{borderColor:"grey",border:"1px solid"}}/>
-      <div className="mb-5" style={{marginTop:"120px"}}>
+      <div className="" style={{marginTop:"70px",width:"300px"}}>
         <input
           type="range"
           name="priceLess"
@@ -142,7 +142,7 @@ export default function ProductFilterVendor(props) {
         </label>
       </div>
 
-      <div className="mb-5">
+      <div className="">
         <input
           type="range"
           name="priceMore"
@@ -158,7 +158,7 @@ export default function ProductFilterVendor(props) {
         </label>
       </div>
 
-      <div className="mb-5">
+      <div className="mb-3">
         <select
           value={state.brand}
           name="brand"
@@ -177,7 +177,7 @@ export default function ProductFilterVendor(props) {
         </select>
       </div>
 
-      <div className="mb-5">
+      <div className="mb-3">
         <select
           value={state.model}
           disabled={!state.brand}
@@ -227,7 +227,7 @@ export default function ProductFilterVendor(props) {
           zIndex: "100",
           position: "absolute",
           left: "350px",
-          bottom: "-15.5%",
+          bottom: "-3.5%",
           height:"50px"
         }}
       >

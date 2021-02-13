@@ -79,8 +79,10 @@ export default function VendorProfileUser(props) {
                       ></i>
                       Don't hesitate to contact us
                     </h3>
+                    <h2>
                 Name: {vendor.firstName}{" "}{vendor.lastName}
-                    <h5>Phone: {vendor.phoneNumber?vendor.phoneNumber:"Not Provided"}</h5>
+                    </h2>
+                    <h4>Phone: {vendor.phoneNumber?vendor.phoneNumber:"Not Provided"}</h4>
                   </div>
                 </div>
               </div>
@@ -113,7 +115,6 @@ export default function VendorProfileUser(props) {
           </div>
           </div> */}
           <hr className="hr " />
-
           {/* <!-- items --> */}
           <h2 className="text-center mb-3">Available Items</h2>
           <SlickSlider items={vendor.vendorItems} />
