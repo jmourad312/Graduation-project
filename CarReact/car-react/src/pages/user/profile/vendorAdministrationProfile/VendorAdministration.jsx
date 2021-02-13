@@ -60,7 +60,7 @@ const pageTransitions = {
 
       <section className="container">
         <div className="vendorTop">
-          <div style={{ marginTop: "10%" }}>
+          <div style={{ marginTop: "9.5%" }}>
             <div className="row newCont">
               <div className="col-3 ml-5">
                 <VendorProfilePicture
@@ -74,9 +74,8 @@ const pageTransitions = {
                 />
               </div>
               <div className="col-8">
-                <div className="row mt-4">
-                  <div className="col-2"></div>
-                  <div className="col-4">
+                <div className="row mt-4" style={{marginBottom:"40px"}}>
+                  {/* <div className="col-4">
                     <p className="mt-3 button raise">
                       <Link
                         to={`/VendorAdministration/VendorDetails`}
@@ -85,33 +84,23 @@ const pageTransitions = {
                         Basic details
                       </Link>
                     </p>
-                  </div>
-                  <div className="col-4">
-                    <p className="mt-3 button raise">
-                      <Link
-                        to="/VendorAdministration/MyItems"
-                        onClick={handleClick}
-                      >
+                  </div> */}
+                    <p className="w-75 button raise m-auto">
+                      <Link to="/VendorAdministration/MyItems" style={{fontSize:"19.9px",fontWeight:"700"}} onClick={handleClick}>
                         My Items
                       </Link>
                     </p>
-                  </div>
                 </div>
-                <div className="col-2"></div>
 
                 <div className="row">
-                  <div className="col-4"></div>
-                  <div className="col-4">
-                    <p className="mt-3 button up">
+                    <p className="w-75 button up m-auto">
                       <Link
                         to="/VendorAdministration/VendorSettings"
-                        onClick={handleClick}
+                        onClick={handleClick} style={{fontSize:"19.9px",fontWeight:"700"}}
                       >
                         Settings
                       </Link>
                     </p>
-                  </div>
-                  <div className="col-4"></div>
                 </div>
               </div>
             </div>
@@ -119,11 +108,11 @@ const pageTransitions = {
         </div>
         <div className={classChange}>
           <div className="row">
-            <div className="col-1"></div>
-            <div className="col-10">
+            
+            <div className="col-12">
               <VendorProfileRight vendor={vendor ? vendor.person : "null"} />
             </div>
-            <div className="col-1"></div>
+            
           </div>
         </div>
       </section>

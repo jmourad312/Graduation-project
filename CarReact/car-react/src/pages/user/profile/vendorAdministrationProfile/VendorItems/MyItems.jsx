@@ -47,7 +47,7 @@ export default function MyItems(props) {
       if (value === "") {
         setStateDisabled(false);
       }
-      else{
+      else {
         setStateDisabled(true);
         dispatch(filterCarModel(value));
       }
@@ -126,7 +126,6 @@ export default function MyItems(props) {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      <ProductFilterVendor className="ProductFilter"/>
       <motion.div
         className="FavouriteItems"
         initial="out"
@@ -136,16 +135,17 @@ export default function MyItems(props) {
         transition={props.transition}
       >
         <div className="container">
-          <Button
-            variant="dark"
-            style={{ margin: "10px" }}
-            onClick={() => openModal()}
-          >
-            <i class="far fa-plus-square"></i>
-            {" Add"}
-          </Button>
           {/* <AddItem /> */}
           <div className="row">
+            <ProductFilterVendor className="ProductFilter" />
+            <Button
+              variant="dark"
+              style={{ height: "50px", position: "absolute", top: "85%", right: "82%", background: "linear-gradient(-45deg, #110f11, #424c53)" }}
+              onClick={() => openModal()}
+            >
+              <i class="far fa-plus-square"></i>
+              {" Add"}
+            </Button>
             {vendorItems ? vendorItems.map(createItem) : <Loading />}
           </div>
         </div>
