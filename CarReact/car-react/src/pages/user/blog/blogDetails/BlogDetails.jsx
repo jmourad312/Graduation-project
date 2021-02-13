@@ -8,6 +8,7 @@ import cars3 from "../../../../assets/js/cars3";
 import LoginButton from "../../../../components/LoginButton";
 import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
+import { useHistory } from "react-router-dom";
 import {
   getBlogDetails,
   addVoteComment,
@@ -15,6 +16,7 @@ import {
 } from "../../../../store/actions";
 
 export default function BlogDetails(props) {
+  
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
@@ -283,7 +285,7 @@ export default function BlogDetails(props) {
   if (blogDetails) {
     var blogTime = blogDetails.createdAt.split("T");
   }
-  
+  const history = useHistory();
   return (
     <motion.div
       className="container"
@@ -510,69 +512,94 @@ export default function BlogDetails(props) {
       {/* <!-- Comments Form --> */}
       <div className="row">
         <div className="col-6">
-          <div className="card bgforleavecomment">
-            <h5 className="card-header">Leave a Comment:</h5>
-            <div className="card-body">
-              <form method="post" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <textarea
-                    className="form-control bgforleavecomment2"
-                    rows="3"
-                    name="content"
-                    value={inputValue.content}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
-                <button type="submit" className="btn btn-dark">
-                  Submit
-                </button>
-              </form>
+          {localStorage.getItem("Authorization") ? (
+            <div className="card bgforleavecomment">
+              <h5 className="card-header">Leave a Comment:</h5>
+              <div className="card-body">
+                <form method="post" onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <textarea
+                      className="form-control bgforleavecomment2"
+                      rows="3"
+                      name="content"
+                      value={inputValue.content}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-dark">
+                    Submit
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              className="shadow-sm p-2 mb-4 rounded-lg"
+              onClick={()=>history.push(`/SignChoice`)}
+              style={{
+                height: "300px",
+                width: "500px",
+                border: "solid white 3px",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            >
+              <h3
+                style={{
+                  color: "#737373",
+                  position: "relative",
+                  top: "35%",
+                  textAlign: "center",
+                }}
+              >
+                Only registered users can add comments
+              </h3>
+            </div>
+          )}
         </div>
-        <div className="col-6" style={{marginTop:"-80px"}}>
+        <div className="col-6" style={{ marginTop: "-50px" }}>
           <h3 className="text-center mb-4">Comments</h3>
           {/* <!-- Single Comment --> */}
           {blogDetails
             ? blogDetails.comment.map((item, index) => {
                 return (
                   <div className="media mb-1" key={index}>
-                  <div className="mr-2">
-                    <button
-                      className="btn"
-                      style={{
-                        position: "absolute",
-                        left: "52px",
-                        fontSize: "20px",
-                      }}
-                      onClick={() => addVote(item._id)}
-                    >
-                      <i class="fas fa-chevron-up"></i>
-                    </button>
-                    <span
-                      className="btn badge-pill"
-                      style={{
-                        position: "relative",
-                        left: "40px",
-                        top: "40px",
-                        fontSize: "20px",
-                      }}
-                    >
-                      {item.vote.numberOfVoting}
-                    </span>
-                    <button
-                      className="btn"
-                      style={{
-                        position: "relative",
-                        left: "0px",
-                        top: "80px",
-                        fontSize: "20px",
-                      }}
-                      onClick={() => removeVote(item._id)}
-                    >
-                      <i class="fas fa-chevron-down"></i>
-                    </button>
-                  </div>
+                    <div className="mr-2">
+                      <button
+                        className="btn"
+                        style={{
+                          position: "absolute",
+                          left: "52px",
+                          fontSize: "20px",
+                        }}
+                        onClick={() => addVote(item._id)}
+                      >
+                        <i class="fas fa-chevron-up"></i>
+                      </button>
+                      <span
+                        className="btn badge-pill"
+                        style={{
+                          position: "relative",
+                          left: "40px",
+                          top: "40px",
+                          fontSize: "20px",
+                        }}
+                      >
+                        {item.vote.numberOfVoting}
+                      </span>
+                      <button
+                        className="btn"
+                        style={{
+                          position: "relative",
+                          left: "0px",
+                          top: "80px",
+                          fontSize: "20px",
+                        }}
+                        onClick={() => removeVote(item._id)}
+                      >
+                        <i class="fas fa-chevron-down"></i>
+                      </button>
+                    </div>
 
                     {/* <img
                       className="d-flex mr-3 rounded-circle"
@@ -587,7 +614,7 @@ export default function BlogDetails(props) {
                         {item.person.firstName ? item.person.firstName : null}
                       </h5>
                       <hr />
-                      <p style={{fontSize:"1.5rem"}}>{item.content}</p>
+                      <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
                       <hr style={{ border: "1px solid" }} />
                     </div>
 
