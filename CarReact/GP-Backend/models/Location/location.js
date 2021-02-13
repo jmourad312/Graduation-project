@@ -7,16 +7,13 @@ var location = new schema({
     ref: "Person",
   },
 
-  region: {
-    country: { type: String, default: "Egypt" },
-    region: { type: String, required: true },
-    place: [
-      {
-        city: String,
-        address: String,
-      },
-    ],
-  },
+  location: { 
+    type: {
+       type: String,
+       default:"Point" 
+    },
+    coordinates: [Number],
+    },
 });
 
 module.exports = mongoose.model("Location", location);
