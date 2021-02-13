@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import LoginButton from "../../../../components/LoginButton";
 import ToastMessage from "../../../../components/ToastMessage";
+import UserIcon from "../../../../components/UserIcon";
 
 export default function ContactUs() {
   
@@ -71,13 +73,23 @@ export default function ContactUs() {
 
   return (
     <section className="contact-us">
-    <div style={{position:"absolute",top:"45%",right:"29%",height:"100px",width:"300px"}}>
-      <ToastMessage
-        showFunction={toggleStatus}
-        status={toastStatus}
-        message={toastMessage}
-      />
-    </div>
+      {localStorage.getItem("Authorization") === null && <LoginButton />}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+      <div
+        style={{
+          position: "absolute",
+          top: "45%",
+          right: "29%",
+          height: "100px",
+          width: "300px",
+        }}
+      >
+        <ToastMessage
+          showFunction={toggleStatus}
+          status={toastStatus}
+          message={toastMessage}
+        />
+      </div>
       <section className="content-section text-center">
         <div className="contact-section">
           <div className="container">
