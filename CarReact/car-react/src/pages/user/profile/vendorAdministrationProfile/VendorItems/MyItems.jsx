@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ItemEntry from "../../../../../components/ItemEntry";
 import Loading from "../../../../../components/Loading";
-import { getVendorsItemsAction } from "../../../../../store/actions";
+import ProductFilterVendor from "../../../../../components/productFilterVendor";
+
+import {
+  getVendorsItemsAction,
+  filterCarModel,
+  filterCarBrand,
+} from "../../../../../store/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import axios from "axios";
@@ -11,6 +17,8 @@ import cars3 from "../../../../../assets/js/cars3";
 
 export default function MyItems(props) {
   const vendorItems = useSelector((state) => state.vendorItems.Data);
+  const stateRedux = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const getItems = () => {
     // console.log(vendorItems);
@@ -36,7 +44,13 @@ export default function MyItems(props) {
   const handleChange = (event) => {
     const { value, name } = event.target;
     if (name === "carBrand") {
-      setStateDisabled(true);
+      if (value === "") {
+        setStateDisabled(false);
+      }
+      else {
+        setStateDisabled(true);
+        dispatch(filterCarModel(value));
+      }
     }
     setInputValue((previous) => {
       return {
@@ -92,8 +106,9 @@ export default function MyItems(props) {
   };
 
   useEffect(() => {
-    getItems();
-  });
+    dispatch(filterCarBrand());
+  }, []);
+
   const createItem = (item) => {
     return (
       <ItemEntry
@@ -120,16 +135,17 @@ export default function MyItems(props) {
         transition={props.transition}
       >
         <div className="container">
-          <Button
-            variant="dark"
-            style={{ margin: "10px" }}
-            onClick={() => openModal()}
-          >
-            <i class="far fa-plus-square"></i>
-            {" Add"}
-          </Button>
           {/* <AddItem /> */}
           <div className="row">
+            <ProductFilterVendor className="ProductFilter" />
+            <Button
+              variant="dark"
+              style={{ height: "50px", position: "absolute", top: "85%", right: "82%", background: "linear-gradient(-45deg, #110f11, #424c53)" }}
+              onClick={() => openModal()}
+            >
+              <i class="far fa-plus-square"></i>
+              {" Add"}
+            </Button>
             {vendorItems ? vendorItems.map(createItem) : <Loading />}
           </div>
         </div>
@@ -193,10 +209,14 @@ export default function MyItems(props) {
                     value={inputValue.carBrand}
                     onChange={handleChange}
                   >
-                    {cars2.map((item, index) => {
+                    <option key={"no-value"} value="">
+                      Choose brand
+                    </option>
+                    ;
+                    {stateRedux.brand.map((item, index) => {
                       return (
-                        <option key={index} value={item.make}>
-                          {item.make}
+                        <option key={index} value={item.name}>
+                          {item.name}
                         </option>
                       );
                     })}
@@ -213,7 +233,10 @@ export default function MyItems(props) {
                     onChange={handleChange}
                     disabled={!stateDisabled}
                   >
-                    {cars3.map((item, index) => {
+                    <option key={"no-value"} value="">
+                      Choose model
+                    </option>
+                    {stateRedux.model.map((item, index) => {
                       return (
                         <option key={index} value={item.model}>
                           {item.model}
@@ -226,11 +249,7 @@ export default function MyItems(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant="dark"
-              type="button"
-              onClick={handleSubmit}
-            >
+            <Button variant="dark" type="button" onClick={handleSubmit}>
               Submit
             </Button>
             <Button variant="danger" onClick={closeModal}>

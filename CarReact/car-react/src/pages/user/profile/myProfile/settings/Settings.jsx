@@ -64,7 +64,6 @@ export default function Settings(props) {
       transition={props.transition}
     >
       <form className="ml-5" style={{fontSize:"1.5rem"}}>
-        <h3>Edit</h3>
         <div className="row">
           <div className="form-group col-4">
             <Label
@@ -136,7 +135,7 @@ export default function Settings(props) {
           <Label
             id="password"
             class="text-light"
-            value="Update your Password"
+            value="New Password"
           />
           <Input
             id="password"
@@ -152,7 +151,7 @@ export default function Settings(props) {
           <Label
             id="confirmPassword"
             class="text-light"
-            value="Confirm your paasword"
+            value="Confirm New Password"
           />
           <Input
             id="confirmPassword"
@@ -160,7 +159,7 @@ export default function Settings(props) {
             value={userInfo.confirmPassword}
             name="confirmPassword"
             onChange={handleChange}
-            placeHolder="Confirm password"
+            placeHolder="Confirm New Password"
             type="password"
           />
         </div>

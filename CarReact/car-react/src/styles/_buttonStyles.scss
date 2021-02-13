@@ -55,7 +55,7 @@ $colors: (
   fill: #c9336c,
   pulse: #efa26e,
   raise: #60d2ff,
-  up: #b3a670,
+  up: #aa953f,
   close1: #cac0c0,
   slide1: #6699c8,
   offset: #205545,
@@ -74,6 +74,7 @@ $colors: (
 .button {
   color: var(--color);
   transition: 0.45s;
+  
 
   &:hover,
   &:focus {

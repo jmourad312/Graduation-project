@@ -10,21 +10,10 @@ export default function AboutUs() {
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="team-section">
         <h1
-          style={{
-            position: "relative",
-            right: "40px",
-          }}
+          style={{ fontWeight: "700", fontSize: "60px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 70%)", color: "transparent", WebkitBackgroundClip: "text" }}
         >
           Our Team
         </h1>
-        <hr
-          style={{
-            width: "300px",
-            position: "relative",
-            left: "40%",
-            borderTop: "3px solid black",
-          }}
-        />
         {/* <span className="border"></span>
         <div className="ps">
           <a href="#p1">
@@ -114,18 +103,39 @@ export default function AboutUs() {
 
       <div className="about-section position-absolute" style={{ top: "53%" }}>
         <div className="inner-container">
-          <h1>About Us</h1>
-          <p className="text">
-            We are a highly skilled group of MEARN FUll Stack Developers, we
+          <h1 style={{
+            fontWeight: "800", fontSize: "30px",
+            fontFamily: "cursive",
+            backgroundImage:
+              "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
+            color: "transparent",
+            WebkitBackgroundClip: "text",
+          }}>About Us</h1>
+          <p className="text" style={{
+            fontWeight: "600",
+            fontFamily: "cursive",
+            backgroundImage:
+              "linear-gradient(to top, #08091d 70%, #a2a5a8 100%)",
+            color: "transparent",
+            WebkitBackgroundClip: "text",
+          }}>
+            We are a highly skilled group of MEARN Full Stack Developers, we
             enjoy coding and bringing new concepts and projects to life.
           </p>
-          <div className="skills">
+          <div className="skills" style={{
+            fontWeight: "600",
+            fontFamily: "cursive",
+            backgroundImage:
+              "linear-gradient(to top, #08091d 80%, #a2a5a8 100%)",
+            color: "transparent",
+            WebkitBackgroundClip: "text",
+          }}>
             <span>
               We are highly trained graduates from the Information and
               Technology Institute or "ITI" for short, and we are ready for any
               project, we are a perfect asset to any company or team, please
               feel free to reach out to us so that we can assist you with any
-              project you'd want
+              project you'd want.
             </span>
           </div>
         </div>

@@ -10,7 +10,6 @@ import {
 } from "../store/actions";
 import SimpleSearch from "./SimpleSearch";
 import { Pagination } from "./Pagination";
-import $ from "jquery";
 
 export default function ProductFilter(props) {
   const products = useSelector((state) => state.products.TotalItem);

@@ -65,17 +65,17 @@ export default function VendorSettings(props) {
           variants={props.variants}
           transition={props.transition}
         >
-          <form>
+          <form className="ml-5" style={{fontSize:"1.5rem"}}>
             <div className="row">
               <div className="form-group col-4">
                 <Label
                   id="firstName"
                   class="text-light"
-                  value="Update your first name"
+                  value="First Name"
                 />
                 <Input
                   id="firstName"
-                  class="form-control"
+                  class="form-control w-75"
                   value={vendorInfo.firstName}
                   name="firstName"
                   onChange={handleChange}
@@ -87,11 +87,11 @@ export default function VendorSettings(props) {
                 <Label
                   id="middleName"
                   class="text-light"
-                  value="Update your Middle name"
+                  value="Middle Name"
                 />
                 <Input
                   id="middleName"
-                  class="form-control"
+                  class="form-control w-75"
                   value={vendorInfo.middleName}
                   name="middleName"
                   onChange={handleChange}
@@ -103,11 +103,11 @@ export default function VendorSettings(props) {
                 <Label
                   id="lastName"
                   class="text-light"
-                  value="Update your Last name"
+                  value="Last Name"
                 />
                 <Input
                   id="lastName"
-                  class="form-control"
+                  class="form-control w-75"
                   value={vendorInfo.lastName}
                   name="lastName"
                   onChange={handleChange}
@@ -121,29 +121,28 @@ export default function VendorSettings(props) {
               <Label
                 id="phoneNumber"
                 class="text-light"
-                value="Update your Phone number"
+                value="Phone Number"
               />
               <Input
                 id="phoneNumber"
-                class="form-control"
+                class="form-control w-25"
                 value={vendorInfo.phoneNumber}
                 name="phoneNumber"
                 onChange={handleChange}
                 placeHolder="Phone number"
-                type="number"
+                type=""
               />
             </div>
-            <div className="row">
-              <div className="col-6">
+           
                 <div className="form-group">
                   <Label
                     id="password"
                     class="text-light"
-                    value="Update your Password"
+                    value="New Password"
                   />
                   <Input
                     id="password"
-                    class="form-control"
+                    class="form-control w-50"
                     value={vendorInfo.password}
                     name="password"
                     onChange={handleChange}
@@ -151,30 +150,29 @@ export default function VendorSettings(props) {
                     type="password"
                   />
                 </div>
-              </div>
-              <div className="col-6">
+            
                 <div className="form-group">
                   <Label
                     id="confirmPassword"
                     class="text-light"
-                    value="Confirm your paasword"
+                    value="Confirm New password"
                   />
                   <Input
                     id="confirmPassword"
-                    class="form-control"
+                    class="form-control w-50"
                     value={vendorInfo.confirmPassword}
                     name="confirmPassword"
                     onChange={handleChange}
-                    placeHolder="Confirm password"
+                    placeHolder="Confirm New Password"
                     type="password"
                   />
                 </div>
-              </div>
-            </div>
+             
+           
             <Button2
               onClick={handleSubmit}
               //   type="submit"
-              class="btn btn-success"
+              class="btn btn-dark"
               value="Submit"
             />
           </form>

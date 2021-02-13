@@ -38,7 +38,7 @@ async function validateVendor  (req, resp, next) {
 
 //router.get('/path',passport.authenticate('jwt', { session: false }),canView,nameOfFunction);
 router.post("/add", passport.authenticate('jwt', { session: false }), upload.single("image"), canView, vendorItemCtrl.addItem);
-router.get("/getItems", passport.authenticate('jwt', { session: false }), canView, vendorItemCtrl.getItems);
+router.post("/getItems/:skip", passport.authenticate('jwt', { session: false }), canView, vendorItemCtrl.getItems);
 router.get("/getItem/:id", passport.authenticate('jwt', { session: false }), canView, vendorItemCtrl.getOneItem);
 router.put("/updateItem/:id/:idperson?", passport.authenticate('jwt', { session: false }), upload.single("image"), canView, vendorItemCtrl.updateItem);
 router.delete("/deleteItem/:id/:idperson?", passport.authenticate('jwt', { session: false }), canView, vendorItemCtrl.deleteItem);
@@ -49,6 +49,5 @@ router.put("/updateProfilePassword/:id", passport.authenticate('jwt', { session:
 // router.put("/updateProfile/:id",passport.authenticate('jwt', { session: false }),validateVendor,vendorprofiileCtrl.updateProfile);
 router.put("/updateProfile/:id", passport.authenticate('jwt', { session: false }), validateVendor, upload.single("image"), vendorprofiileCtrl.updateProfile);
 router.get('/showVendorProfile/:id', passport.authenticate('jwt', { session: false }), validateVendor, vendorprofiileCtrl.showVendorProfile);
-
 
 module.exports = router;

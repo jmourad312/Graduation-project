@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getProductDetails, setProductId } from "../store/actions";
+import { getProductDetails, setProductId,  filterCarModel,filterCarBrand } from "../store/actions";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
@@ -16,6 +16,7 @@ export default function ItemEntry(props) {
     setIsOpen(false);
   };
   const productDetails = useSelector((state) => state.productDetails.Data);
+  const stateRedux = useSelector((state) => state);
 
   // const getProduct = async (params) => {
   //   await dispatch(getProductDetails(params));
@@ -31,17 +32,24 @@ export default function ItemEntry(props) {
 
   const [stateDisabled, setStateDisabled] = useState(false);
   const [editValue, setEditValue] = useState({
-    name: "",
-    description: "",
-    image: "",
-    carBrand: "",
-    carModel: "",
-    price: 0,
+    name: props.name,
+    description: props.description,
+    image: props.image,
+    carBrand: props.carBrand,
+    carModel: props.carModel,
+    price: props.price,
   });
+
   const handleChange = (event) => {
     const { value, name } = event.target;
     if (name === "carBrand") {
-      setStateDisabled(true);
+      if (value === "") {
+        setStateDisabled(false);
+      }
+      else{
+        setStateDisabled(true);
+        dispatch(filterCarModel(value));
+      }
     }
     setEditValue((previous) => {
       return {
@@ -123,6 +131,9 @@ export default function ItemEntry(props) {
         console.log(error);
       });
   };
+  useEffect(() => {
+    dispatch(filterCarBrand());
+  }, []);
   return (
     <div className="col-3">
       <div className="itemEntry">
@@ -250,10 +261,10 @@ export default function ItemEntry(props) {
                   value={editValue.carBrand}
                   onChange={handleChange}
                 >
-                  {cars2.map((item, index) => {
+                  {stateRedux.brand.map((item, index) => {
                     return (
-                      <option key={index} value={item.make}>
-                        {item.make}
+                      <option key={index} value={item.name}>
+                        {item.name}
                       </option>
                     );
                   })}
@@ -270,7 +281,7 @@ export default function ItemEntry(props) {
                   onChange={handleChange}
                   disabled={!stateDisabled}
                 >
-                  {cars3.map((item, index) => {
+                  {stateRedux.model.map((item, index) => {
                     return (
                       <option key={index} value={item.model}>
                         {item.model}

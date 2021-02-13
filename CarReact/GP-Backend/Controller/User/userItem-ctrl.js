@@ -83,9 +83,7 @@ showFilterItems = (req, res) => {
   if (req.body.priceMoreThan) {
     console.log(req.body.priceMoreThan);
     queryCond.$and = [
-      //----------------------     0
       { price: { $gte: +req.body.priceLessThan } },
-      //-----------------------   1000
       { price: { $lte: +req.body.priceMoreThan } },
     ];
   }

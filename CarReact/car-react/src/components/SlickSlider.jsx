@@ -95,9 +95,7 @@ export default function SlickSlider(props) {
                       ></div>
                     </p>
                     <div className="card__info">
-                      <h4 className="card__title text-truncate">
-                        {item.title}
-                      </h4>
+                      <h4 className="card__title text-truncate">{item.name}</h4>
                       <span
                         className="price"
                         style={{
@@ -108,13 +106,11 @@ export default function SlickSlider(props) {
                       >
                         {item.price} LE
                       </span>{" "}
-                      <br />
                       <p className="text-truncate">{item.description}</p>
-                      <br />
-                      <small>
-                        <i className="badge badge-dark">{item.brand}</i>
-                        <i className="badge badge-dark">{item.model}</i>
-                      </small>
+                      <strong>
+                        <i className="badge badge-dark">{item.carBrand}</i>{"  "}
+                        <i className="badge badge-dark">{item.carModel}</i>
+                      </strong>
                     </div>
                   </article>
                 </section>
