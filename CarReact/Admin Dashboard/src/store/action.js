@@ -16,10 +16,10 @@ export const setLoginAction = (payload) => {
     }
   }
 
-  export const getUserAction = async (dispatch) => {
+  export const getUserAction = (skip) => async (dispatch) => {
 
     try {
-        const res = await instance.get("admin/showAllUsers",
+        const res = await instance.get(`admin/showAllUsers/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
         console.log(res);
         dispatch({
@@ -31,10 +31,10 @@ export const setLoginAction = (payload) => {
     }
   }
 
-  export const getVendorAction = async (dispatch) => {
+  export const getVendorAction = (skip) => async (dispatch) => {
 
     try {
-        const res = await instance.get("admin/showAllVendors",
+        const res = await instance.get(`admin/showAllVendors/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
         console.log(res);
         dispatch({
@@ -90,10 +90,10 @@ export const getBlogsUser = (id) => async (dispatch) =>{
   }
 }
 
-export const getContactAction = async (dispatch) => {
+export const getContactAction = (skip) => async (dispatch) => {
 
   try {
-      const res = await instance.get("admin/getContactUs",
+      const res = await instance.get(`admin/getContactUs/${skip}`,
       {headers: { Authorization: localStorage.getItem("Authorization")}});
       console.log(res);
       dispatch({
@@ -104,5 +104,35 @@ export const getContactAction = async (dispatch) => {
       console.log(error);
   }
 }
+
+export const getBlogAction = (skip) => async (dispatch) => {
+
+    try {
+        const res = await instance.get(`admin/showAllUsers/${skip}`,
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
+        console.log(res);
+        dispatch({
+            type: TYPES.GET_N_BLOGS,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  export const getProductAction = (skip) => async (dispatch) => {
+
+    try {
+        const res = await instance.get(`admin/showAllVendors/${skip}`,
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
+        console.log(res);
+        dispatch({
+            type: TYPES.GET_N_PRODUCTS,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   

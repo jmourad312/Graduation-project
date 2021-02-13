@@ -1,6 +1,7 @@
-import * as TYPES from './types'
+import * as TYPES from "./types";
 
-export default (state = {
+export default (
+  state = {
     login: false,
     token: "",
     users: [],
@@ -8,62 +9,69 @@ export default (state = {
     countData: {},
     products: [],
     blogs: [],
-    contacts:[]
+    contacts: [],
+    nblog: [],
+    nproduct: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case TYPES.LOGIN:
+      return {
+        ...state,
+        login: action.payload,
+      };
 
+    case TYPES.TOKEN:
+      return {
+        ...state,
+        token: action.payload,
+      };
 
-}, action) => {
-    switch (action.type) {
+    case TYPES.GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
 
-        case TYPES.LOGIN:
-            return {
-                ...state,
-                login: action.payload,
-            };
+    case TYPES.GET_VENDORS:
+      return {
+        ...state,
+        vendors: action.payload,
+      };
+    case TYPES.GET_COUNT_DATA:
+      return {
+        ...state,
+        countData: action.payload,
+      };
 
-        case TYPES.TOKEN:
-            return {
-                ...state,
-                token: action.payload
-            };
+    case TYPES.GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case TYPES.GET_BLOGSS:
+      return {
+        ...state,
+        blogs: action.payload,
+      };
+    case TYPES.GET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+      };
+    case TYPES.GET_N_BLOGS:
+      return {
+        ...state,
+        nblog: action.payload,
+      };
+    case TYPES.GET_N_PRODUCTS:
+      return {
+        ...state,
+        nproduct: action.payload,
+      };
 
-        case TYPES.GET_USERS:
-            return {
-                ...state,
-                users: action.payload
-            };
-
-        case TYPES.GET_VENDORS:
-            return {
-                ...state,
-                vendors: action.payload
-            };
-        case TYPES.GET_COUNT_DATA:
-            return {
-                ...state,
-                countData: action.payload
-            };
-
-        case TYPES.GET_PRODUCTS:
-            return {
-                ...state,
-                products: action.payload
-            };
-        case TYPES.GET_BLOGSS:
-            return {
-                ...state,
-                blogs: action.payload
-            };
-            case TYPES.GET_CONTACTS:
-                return {
-                    ...state,
-                    contacts: action.payload
-                }
-
-
-
-            
-
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };

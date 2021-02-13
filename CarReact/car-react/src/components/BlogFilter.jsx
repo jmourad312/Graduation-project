@@ -12,6 +12,8 @@ import { Button, Col, Form, Modal } from "react-bootstrap";
 import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
 import { Pagination } from "./Pagination";
+import { PaginationReact } from "./PaginationReact";
+
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
@@ -81,7 +83,7 @@ export default function BlogFilter(props) {
   };
   const handleClick = (params) => {
     console.log(params);
-    dispatch(resultFromFilter(filterState, params));
+    dispatch(resultFromFilter(filterState, params.selected*6));
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {
@@ -310,7 +312,7 @@ export default function BlogFilter(props) {
         }}
       >
         {blogs && (
-          <Pagination
+          <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}
             handleClick={handleClick}

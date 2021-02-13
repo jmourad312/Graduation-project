@@ -169,13 +169,13 @@ router.get(
 
 // show all
 router.get(
-  "/showAllUsers",
+  "/showAllUsers/:skip",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
   Admin.showAllUsers
 );
 router.get(
-  "/showAllVendors",
+  "/showAllVendors/:skip",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
   Admin.showAllVendors
@@ -196,7 +196,7 @@ router.get(
 // ContactUs
 router.post("/sendContact", ContactCtrl.sendContactUs);
 router.get(
-  "/getContactUs",
+  "/getContactUs/:skip",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
   ContactCtrl.getContactUs
