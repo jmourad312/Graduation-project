@@ -60,21 +60,14 @@ removeFeedback = async (req, res) => {
  const IdUser = req.user._id;
 
   FeedBack.findOneAndDelete({ _id: req.params.id,user : IdUser}, (err, data) => {
-    if (err) {
+    if (err || !data) {
       return res.json({
-        Data: {},
+        Data: err,
         Message: "Can't delete item from database",
         Success: false,
       });
     }
 
-    if (!data) {
-      return res.json({
-        Data: data.n,
-        Message: "Data with that id: " + req.params.id + " don't exist",
-        Success: false,
-      });
-    }
 
     carItem
       .updateOne({ _id: data.car }, { $pull: { feedback: data._id } })
