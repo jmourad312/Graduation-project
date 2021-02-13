@@ -7,6 +7,7 @@ import {
   filterCarBrand,
   resultFromFilter,
 } from "../store/actions";
+import { useHistory } from "react-router-dom";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
@@ -14,6 +15,7 @@ import { Pagination } from "./Pagination";
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
+  const history = useHistory();
   const [filterState, setFilterState] = useState({
     model: "",
     brand: "",
@@ -288,14 +290,14 @@ export default function BlogFilter(props) {
       </div>
       
       <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
-        {localStorage.getItem("UserID") !== null && (
+        {localStorage.getItem("UserID") !== null ? (
           <div>
             <label for="add" style={{ fontSize: "30px",fontWeight:"700",fontFamily:"cursive" }}>Add new post</label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>
             </p>
           </div>
-        )}
+        ):(<div style={{cursor:"pointer",fontSize:"1.5rem"}} onClick={()=>history.push("/SignChoice")}>Only registered car owners can add new blog posts</div>)}
       </div>
       <div
         className="pagination"
