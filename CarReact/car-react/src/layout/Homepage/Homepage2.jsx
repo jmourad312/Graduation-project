@@ -145,8 +145,8 @@ export default function Homepage2() {
         const targetY = this.targetY;
 
         return (
-          (lastX == targetX || lastX - 1 == targetX || lastX + 1 == targetX) &&
-          (lastY == targetY || lastY - 1 == targetY || lastY + 1 == targetY)
+          (lastX === targetX || lastX - 1 === targetX || lastX + 1 === targetX) &&
+          (lastY === targetY || lastY - 1 === targetY || lastY + 1 === targetY)
         );
       }
       positionImage({ xCoeff, yCoeff }) {
@@ -171,7 +171,7 @@ export default function Homepage2() {
         const nextId = dot.dataset.id;
         const currentId = this.activeImg[0].dataset.id;
 
-        if (currentId == nextId) return;
+        if (currentId === nextId) return;
 
         this.startTransition(nextId);
       }
@@ -316,7 +316,7 @@ export default function Homepage2() {
         slider.next();
       });
 
-      timer = setTimeout(autoSlide, 5000);
+      timer = setTimeout(autoSlide, 1000);
     }
 
     function stopAutoSlide() {

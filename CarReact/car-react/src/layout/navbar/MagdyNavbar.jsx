@@ -9,6 +9,14 @@ export default function MagdyNavbar() {
         setchecked(!checked);
     }
 
+    const logout = () => {
+      localStorage.removeItem("UserID");
+      localStorage.removeItem("VendorID");
+      localStorage.removeItem("Authorization");
+      localStorage.removeItem("ProfileImage");
+      handleClick();
+    };
+
     return (
         <div className="magdyNav">
             <nav className="menu" id="anything">
@@ -30,7 +38,14 @@ export default function MagdyNavbar() {
                         <li className="menu__item" id="item5"><Link className="menu__link" onClick={handleClick} to="/ProductsList">Products List</Link></li>
                      </>
                     )}
-                    <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Sign Here</Link></li>
+                    {localStorage.getItem("Authorization") ? 
+                     <>
+                        <li className="menu__item" id="item1"><Link className="menu__link" onClick={logout} to="/">Logout</Link></li> 
+                     </> :
+                     <>
+                        <li className="menu__item" id="item1"><Link className="menu__link" onClick={handleClick} to="/SignChoice">Sign Here</Link></li> 
+                     </>
+                    }
                     <li className="menu__item" id="item4"><Link className="menu__link" onClick={handleClick} to="/BlogList">Blog List</Link></li>
                     <li className="menu__item" id="item8"><Link className="menu__link" onClick={handleClick} to="/AboutUs">About Us</Link></li>
                     <li className="menu__item" id="item9"><Link className="menu__link" onClick={handleClick} to="/ContactUs">Contact Us</Link></li>

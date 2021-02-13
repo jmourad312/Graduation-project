@@ -81,11 +81,12 @@ export default function ProductDetails(props) {
         console.log(error);
       });
   };
+
   //--------------------------------REVIEW--------------------------------
   const [userFeedbackInfo, setuserFeedbackInfo] = useState({
     comment: "",
   });
-  const handleCommentChange = (event)=>{
+  const handleCommentChange = (event) => {
     const { value, name } = event.target;
     setuserFeedbackInfo((previous) => {
       return {
@@ -93,43 +94,35 @@ export default function ProductDetails(props) {
         [name]: value,
       };
     });
-  }
+  };
   const handleAddReview = () => {
-  const config = {
-    headers: {
-      Authorization: localStorage.getItem("Authorization"),
-    },
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      car: localStorage.getItem("ProductID"),
+      comment: userFeedbackInfo.comment,
+    };
+
+    const URL = "http://localhost:3000/user/writeFeedback";
+
+    axios
+      .post(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
-  const body = {
-    car: productID,
-    comment: userFeedbackInfo.comment,
-  };
-
-  const URL = "http://localhost:3000/user/writeFeedback";
-
-  axios
-    .post(URL, body, config)
-    .then((req) => {
-      console.log(req);
-      if (req.data.Success === true) {
-        console.log("Success");
-        setToastMessage("Item added to favourite");
-        toggleStatus();
-        // props.history.push("/MyProfile");
-      } else {
-        console.log("fail");
-        handleRemoveFavourite();
-        toggleStatus();
-        setToastMessage("Item removed from favourites");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-
 
   const pageVariants = {
     in: {
@@ -344,7 +337,11 @@ export default function ProductDetails(props) {
                       />
                     </div>
 
-                    <button type="button" onClick={handleAddReview} className="btn btn-success">
+                    <button
+                      type="button"
+                      onClick={handleAddReview}
+                      className="btn btn-success"
+                    >
                       Submit
                     </button>
                   </form>{" "}
@@ -373,7 +370,31 @@ export default function ProductDetails(props) {
               )}
               {/* </div> */}
             </div>
-            {localStorage.getItem("Authorization") !== null ? (
+            <div
+              className="col-4 text-center"
+              style={{
+                maxHeight: "400px",
+                overflowX: "hidden",
+                overflowY: "scroll",
+              }}
+            >
+              {productDetails
+                ? productDetails.feedback
+                  ? productDetails.feedback.map((item) => {
+                      let postTime = item.createdAt.split("T");
+                      return (
+                        <>
+                          <p>User: {item.user.firstName}</p>
+                          <p>Posted at: {postTime[0]}</p>
+                          <p>comment: {item.comment}</p>
+                          <hr />
+                        </>
+                      );
+                    })
+                  : "loading"
+                : "loading"}
+            </div>
+            {/* {localStorage.getItem("Authorization") !== null ? (
               <div className="col-4 text-center">
                 <div className=" star" style={{ fontSize: "30px" }}>
                   <span className="fa fa-star"></span>
@@ -384,6 +405,7 @@ export default function ProductDetails(props) {
                 </div>
               </div>
             ) : (
+
               <div
                 className="col-4 shadow-sm p-2 mb-4 rounded-lg"
                 style={{
@@ -403,7 +425,7 @@ export default function ProductDetails(props) {
                   Please Sign in to view this Item's Rating
                 </h3>
               </div>
-            )}
+            )} */}
 
             {localStorage.getItem("UserID") !== null ? (
               <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">

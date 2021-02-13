@@ -17,6 +17,7 @@ export default function BookmarkedPosts(props) {
     console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
 
+  // const date = new Date ()
   return (
     <motion.div
       className="BookmarkedPosts"
@@ -28,7 +29,12 @@ export default function BookmarkedPosts(props) {
     >
       <div className="container mt-3">
         {user
-          ? user.bookmarkPosts.map((post) => {
+          ?
+            user.bookmarkPosts.length === 0 ? (
+              <div>no items</div>
+            ) : user.bookmarkPosts.map((post) => {
+              let time = post.createdAt.split("T");
+              console.log(time)
               return (
                 <div>
                   <div className="media border-rounded p-3" key={post._id}>
@@ -47,7 +53,7 @@ export default function BookmarkedPosts(props) {
                       <strong>
                         <i> Posted on </i>
                       </strong>
-                      {post.createdAt}
+                      {time[0]}
                       <h4
                         className="text-truncate"
                         style={{ maxWidth: "500px" }}

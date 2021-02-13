@@ -279,6 +279,11 @@ export default function BlogDetails(props) {
     type: "tween",
     ease: "easeIn",
   };
+
+  if (blogDetails) {
+    var blogTime = blogDetails.createdAt.split("T");
+  }
+  
   return (
     <motion.div
       className="container"
@@ -288,7 +293,7 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <div style={{ position: "absolute", top: "200px",right:"-150px" }}>
+      <div style={{ position: "absolute", top: "200px", right: "-150px" }}>
         <ToastMessage
           showFunction={toggleStatus}
           status={toastStatus}
@@ -324,7 +329,8 @@ export default function BlogDetails(props) {
               <hr />
               <p>
                 <span style={{ fontWeight: "700" }}>
-                  Date :{blogDetails && blogDetails.createdAt}
+                  Date :
+                  {blogDetails && blogTime ? " " + blogTime[0] : "Loading"}
                 </span>
                 {/* <span style={{ color: "gray" }}> Viewed </span> 3 */}
                 <span className="badge badge-success">
@@ -502,85 +508,90 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <div className="card bgforleavecomment">
-        <h5 className="card-header">Leave a Comment:</h5>
-        <div className="card-body">
-          <form method="post" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <textarea
-                className="form-control bgforleavecomment2"
-                rows="3"
-                name="content"
-                value={inputValue.content}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-            <button type="submit" className="btn btn-dark">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-      <h3 className="text-center mt-2">Comments</h3>
-      {/* <!-- Single Comment --> */}
-      {blogDetails
-        ? blogDetails.comment.map((item, index) => {
-            return (
-              <div className="media mb-1" key={index}>
-                <button
-                  className="btn"
-                  style={{
-                    position: "absolute",
-                    left: "-17px",
-                    fontSize: "20px",
-                  }}
-                  onClick={() => addVote(item._id)}
-                >
-                  <i class="fas fa-chevron-up"></i>
-                </button>
-                <span
-                  className="btn badge-pill"
-                  style={{
-                    position: "relative",
-                    left: "-30px",
-                    top: "40px",
-                    fontSize: "20px",
-                  }}
-                >
-                  {item.vote.numberOfVoting}
-                </span>
-                <button
-                  className="btn"
-                  style={{
-                    position: "relative",
-                    left: "-70px",
-                    top: "80px",
-                    fontSize: "20px",
-                  }}
-                  onClick={() => removeVote(item._id)}
-                >
-                  <i class="fas fa-chevron-down"></i>
-                </button>
-
-                <img
-                  className="d-flex mr-3 rounded-circle"
-                  src={item.image}
-                  alt=""
-                  style={{ maxHeight: "300px", maxWidth: "300px" }}
-                />
-                <hr />
-                <br />
-                <div className="media-body">
-                  <h5 className="mt-0">
-                    {item.person.firstName ? item.person.firstName : null}
-                  </h5>
-                  <hr />
-                  <br />
-                  <p>{item.content}</p>
-                  <hr style={{ border: "1px solid" }} />
+      <div className="row">
+        <div className="col-6">
+          <div className="card bgforleavecomment">
+            <h5 className="card-header">Leave a Comment:</h5>
+            <div className="card-body">
+              <form method="post" onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <textarea
+                    className="form-control bgforleavecomment2"
+                    rows="3"
+                    name="content"
+                    value={inputValue.content}
+                    onChange={handleChange}
+                  ></textarea>
                 </div>
+                <button type="submit" className="btn btn-dark">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div className="col-6" style={{marginTop:"-80px"}}>
+          <h3 className="text-center mb-4">Comments</h3>
+          {/* <!-- Single Comment --> */}
+          {blogDetails
+            ? blogDetails.comment.map((item, index) => {
+                return (
+                  <div className="media mb-1" key={index}>
+                  <div className="mr-2">
+                    <button
+                      className="btn"
+                      style={{
+                        position: "absolute",
+                        left: "52px",
+                        fontSize: "20px",
+                      }}
+                      onClick={() => addVote(item._id)}
+                    >
+                      <i class="fas fa-chevron-up"></i>
+                    </button>
+                    <span
+                      className="btn badge-pill"
+                      style={{
+                        position: "relative",
+                        left: "40px",
+                        top: "40px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {item.vote.numberOfVoting}
+                    </span>
+                    <button
+                      className="btn"
+                      style={{
+                        position: "relative",
+                        left: "0px",
+                        top: "80px",
+                        fontSize: "20px",
+                      }}
+                      onClick={() => removeVote(item._id)}
+                    >
+                      <i class="fas fa-chevron-down"></i>
+                    </button>
+                  </div>
 
-                {/* <form
+                    {/* <img
+                      className="d-flex mr-3 rounded-circle"
+                      src={item.image}
+                      alt=""
+                      style={{ maxHeight: "300px", maxWidth: "300px" }}
+                    /> */}
+                    <hr />
+                    <br />
+                    <div className="media-body">
+                      <h5 className="mt-0">
+                        {item.person.firstName ? item.person.firstName : null}
+                      </h5>
+                      <hr />
+                      <p style={{fontSize:"1.5rem"}}>{item.content}</p>
+                      <hr style={{ border: "1px solid" }} />
+                    </div>
+
+                    {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -596,7 +607,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                {/* {item
+                    {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -616,10 +627,13 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-              </div>
-            );
-          })
-        : "LOADING"}
+                  </div>
+                );
+              })
+            : "LOADING"}
+        </div>
+      </div>
+
       {/* <!-- Comment with nested comments --> */}
       {/* <div className="media mb-4">
           <img

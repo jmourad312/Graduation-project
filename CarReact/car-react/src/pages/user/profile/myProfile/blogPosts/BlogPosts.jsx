@@ -25,8 +25,11 @@ export default function BlogPosts(props) {
         transition={props.transition}
       >
         <div className="container mt-3">
-          {user
-            ? user.postsUser.map((post) => {
+          {user ? (
+            user.postsUser.length === 0 ? (
+              <div>no items</div>
+            ) : (
+              user.postsUser.map((post) => {
                 return (
                   <div>
                     <div className="media border-rounded p-3" key={post._id}>
@@ -36,7 +39,12 @@ export default function BlogPosts(props) {
                         className="mr-3 rounded-circle"
                       />
                       <div className="media-body">
-                        <h2 className="text-truncate" style={{maxWidth: "500px"}}>{post.title}</h2>
+                        <h2
+                          className="text-truncate"
+                          style={{ maxWidth: "500px" }}
+                        >
+                          {post.title}
+                        </h2>
                         <strong>
                           <i> Posted on </i>
                         </strong>
@@ -66,7 +74,10 @@ export default function BlogPosts(props) {
                   </div>
                 );
               })
-            : "Loading"}
+            )
+          ) : (
+            "Loading"
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
