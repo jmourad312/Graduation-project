@@ -163,6 +163,10 @@ export default function Signform(props) {
   const handlefacebook = () => {
     window.location.replace("http://localhost:3000/user/auth/facebook");
   };
+  //--------------------------FORGOT PASSWORD-------------------------
+  const [forgotState, setForgotState] = useState({
+    
+  })
 
   const pageVariants = {
     in: {
@@ -421,7 +425,9 @@ export default function Signform(props) {
             >
               Send email
             </button>
+            </form>
             <br />
+            <form className="text-center">      
             <input
               type="text"
               className="w-75 text-center"
