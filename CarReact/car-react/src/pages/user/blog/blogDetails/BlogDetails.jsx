@@ -510,7 +510,7 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <h3 className="text-center mb-4"  style={{ fontWeight: "700", fontSize: "60px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 70%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
+      <h3 className="text-center mb-4"  style={{ fontWeight: "700", fontSize: "40px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
       <div className="row">
 
         <div className="col-8">
