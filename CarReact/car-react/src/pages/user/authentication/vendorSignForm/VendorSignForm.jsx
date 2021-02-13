@@ -24,6 +24,8 @@ export default function VendorSignForm(props) {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    latitude: 0,
+    longitude: 0,
   });
   const changeVendorSignUpInfo = (event) => {
     const { value, name } = event.target;
@@ -292,6 +294,20 @@ export default function VendorSignForm(props) {
         window.location.reload(true);
       });
     });
+    // var x = document.getElementById("demo");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } 
+    }
+    function showPosition(position) {
+      setVendorSignUpInfo({
+        longitude: position.coords.longitude,
+        latitude: position.coords.latitude,
+      });
+    }
+    getLocation();
+    console.log(vendorSignUpInfo);
   }, []);
   const pageVariants = {
     in: {
@@ -310,6 +326,8 @@ export default function VendorSignForm(props) {
     type: "tween",
     ease: "anticipate",
   };
+    console.log(vendorSignUpInfo);
+
   return (
     <motion.div
       className="vendorSignForm"
@@ -430,6 +448,20 @@ export default function VendorSignForm(props) {
                           ></span>
                         </div>
                       </div>
+                      {/* <input
+                        type="hidden"
+                        name="latitude"
+                        id="latitude"
+                        value={vendorSignUpInfo.latitude}
+                        onChange={changeVendorSignUpInfo}
+                      />
+                      <input
+                        type="hidden"
+                        name="longitude"
+                        id="longitude"
+                        value={vendorSignUpInfo.longitude}
+                        onChange={changeVendorSignUpInfo}
+                      /> */}
                       {/* <div className="col-4">
                         <div className="form-group">
                           <label
