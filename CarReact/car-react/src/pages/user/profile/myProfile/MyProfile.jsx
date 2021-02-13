@@ -5,6 +5,7 @@ import Ads from "../../../../components/Ads";
 
 import ProfileLeft from "../../../../components/ProfileLeft";
 import ProfileRight from "../../../../components/ProfileRight";
+import UserIcon from "../../../../components/UserIcon";
 import { getUsersAction } from "../../../../store/actions";
 
 export default function MyProfile() {
@@ -50,6 +51,8 @@ export default function MyProfile() {
         imgSrc="../../../../assets/Images/13.jpg"
         hoverImgSrc="../../../../assets/Images/14.jpg"
       /> */}
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
       <section className="myProfile container">
         <div className="row">
           <ProfileLeft
@@ -58,7 +61,7 @@ export default function MyProfile() {
             person={user ? user.person : "null"}
           />
           <ProfileRight
-            class={"col-9 "+ classNAME}
+            class={"col-9 " + classNAME}
             person={user ? user.person : "null"}
             bookmarkPosts={user ? user.bookmarkPosts : "null"}
             favouriteItems={user ? user.favouriteItems : "null"}

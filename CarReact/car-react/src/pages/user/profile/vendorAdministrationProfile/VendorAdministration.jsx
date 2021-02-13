@@ -5,6 +5,7 @@ import VendorProfileRight from './VendorProfileRight';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVendorsAction } from '../../../../store/actions';
 import { motion } from 'framer-motion';
+import UserIcon from '../../../../components/UserIcon';
 
 export default function VendorAdministration() {
   const dispatch = useDispatch();
@@ -55,6 +56,8 @@ const pageTransitions = {
       variants={pageVariants}
       transition={pageTransitions}
     >
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
+
       <section className="container">
         <div className="vendorTop">
           <div style={{ marginTop: "10%" }}>
@@ -69,21 +72,28 @@ const pageTransitions = {
                       : "null"
                   }
                 />
-
               </div>
               <div className="col-8">
                 <div className="row mt-4">
                   <div className="col-2"></div>
                   <div className="col-4">
                     <p className="mt-3 button raise">
-                      <Link to={`/VendorAdministration/VendorDetails`} onClick={handleClick}>
+                      <Link
+                        to={`/VendorAdministration/VendorDetails`}
+                        onClick={handleClick}
+                      >
                         Basic details
                       </Link>
                     </p>
                   </div>
                   <div className="col-4">
                     <p className="mt-3 button raise">
-                      <Link to="/VendorAdministration/MyItems" onClick={handleClick}>My Items</Link>
+                      <Link
+                        to="/VendorAdministration/MyItems"
+                        onClick={handleClick}
+                      >
+                        My Items
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -93,7 +103,10 @@ const pageTransitions = {
                   <div className="col-4"></div>
                   <div className="col-4">
                     <p className="mt-3 button up">
-                      <Link to="/VendorAdministration/VendorSettings" onClick={handleClick}>
+                      <Link
+                        to="/VendorAdministration/VendorSettings"
+                        onClick={handleClick}
+                      >
                         Settings
                       </Link>
                     </p>

@@ -30,7 +30,15 @@ export default function UserIcon() {
         <img src={localStorage.getItem("ProfileImage")} alt="user profile" />
       </div>
       <div className={classState}>
-        <p>My profile</p>
+        <Link
+          to={
+            localStorage.getItem("UserID")
+              ? "/MyProfile/RecentViews"
+              : "/VendorAdministration"
+          }
+        >
+          My profile
+        </Link>
         <Link className="nav-link waves-effect" to={"/"} onClick={logout}>
           Logout
         </Link>
