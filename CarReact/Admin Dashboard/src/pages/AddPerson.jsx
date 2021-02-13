@@ -106,8 +106,8 @@ export default function AddPerson(props) {
 
   return (
     <>
-      <div className="admin">
-        <div className="">
+      <div className="">
+        <div className="container-for-admin mb-5">
           <Navbar />
 
           <div className="container mt-5 pt-5">
@@ -126,7 +126,7 @@ export default function AddPerson(props) {
                   className="custom-select custom-select-md mb-3"
                 >
                   <option value="" key="no-value">
-                    SignUp As...
+                    Make account to...
                   </option>
                   <option value="User" key="User">
                     User

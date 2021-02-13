@@ -90,6 +90,19 @@ export const getBlogsUser = (id) => async (dispatch) =>{
   }
 }
 
+export const getContactAction = async (dispatch) => {
 
+  try {
+      const res = await instance.get("admin/getContactUs",
+      {headers: { Authorization: localStorage.getItem("Authorization")}});
+      console.log(res);
+      dispatch({
+          type: TYPES.GET_CONTACTS,
+          payload: res.data
+      })
+  } catch (error) {
+      console.log(error);
+  }
+}
 
   

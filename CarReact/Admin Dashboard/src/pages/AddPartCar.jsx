@@ -279,22 +279,23 @@ export default function AddPartCar(props) {
           <Navbar />
           {/* BRAND  */}
           <div className="container tabel mt-5 pt-5">
+          <h3>Brand In Database</h3>
             <input
               type="text"
-              class="form-control"
+              className="form-control mb-2"
               value={state.Brand}
               name="Brand"
               onChange={(e) => handleChange(e)}
               onKeyPress={(e) => {
                 if (e.which == 13) setBrandData();
               }}
-              placeholder="Add Brand"
+              placeholder="Write a Brand and click enter to save it in the database"
             />
             <input
               type="text"
               id="myInput"
               onKeyUp={searchTabel}
-              placeholder="Search for names.."
+              placeholder="Search for Brand"
             />
 
             <table id="myTable" className="table table-hover">
@@ -346,10 +347,13 @@ export default function AddPartCar(props) {
                 })}
               </tbody>
             </table>
+            <hr style={{ border: "1px solid" }} />
           </div>
+
 
           {/* Model */}
           <div className="container tabel mt-5 pt-5">
+          <h3>Model In Database</h3>
             <select
               value={state.brandForModel}
               name="brandForModel"
@@ -357,7 +361,7 @@ export default function AddPartCar(props) {
               className="custom-select custom-select-md mb-3"
             >
               <option value="" key="no-value">
-                choose Brand
+                Choose a brand to see its models
               </option>
               {stateAxios.Brand.map((item, index) => (
                 <option value={item.name} key={index}>
@@ -368,21 +372,21 @@ export default function AddPartCar(props) {
             <div hidden={!state.brandForModel}>
               <input
                 type="text"
-                class="form-control"
+                className="form-control mb-2"
                 value={state.Model}
                 name="Model"
                 onChange={(e) => handleChange(e)}
                 onKeyPress={(e) => {
                   if (e.which == 13) sentModelData();
                 }}
-                placeholder="Add Model"
-              />
+                placeholder="Write a model and click enter to save it in the database"
+                />
 
               <input
                 type="text"
                 id="myInput2"
                 onKeyUp={searchTabel2}
-                placeholder="Search for names.."
+                placeholder="Search for Brand.."
               />
 
               <table id="myTable2" className="table table-hover">

@@ -195,7 +195,7 @@ router.get(
 
 // ContactUs
 router.post("/sendContact", ContactCtrl.sendContactUs);
-router.post(
+router.get(
   "/getContactUs",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
