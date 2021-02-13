@@ -8,6 +8,10 @@ const bcrypt = require("bcryptjs");
 // 1- show info
 showUserProfile = (req, res) => {
   const IdPerson = req.params.id;
+  const option = {
+    limit: 0,
+    skip: +req.params.skip,
+  };
   const populateQuery = [
     {
       path: "person",
@@ -16,14 +20,31 @@ showUserProfile = (req, res) => {
     },
     { path: "userSubscription", select: "-__v -_id" },
 
-    { path: "postsUser", select: "-__v -comment -updatedPosts" },
+    {
+      path: "postsUser",
+      select: "-__v -comment -updatedPosts",
+      options: option,
+    },
 
-    { path: "favouriteItems", populate: { path: "person", select: "firstName" }  ,select: "-__v -comment -updatedPosts" },
+    {
+      path: "favouriteItems",
+      populate: { path: "person", select: "firstName" },
+      select: "-__v -comment -updatedPosts",
+      options: option,
+    },
 
-    { path: "bookmarkPosts", populate: { path: "person", select: "firstName" }  , select: "-__v -comment -updatedPosts" },
+    {
+      path: "bookmarkPosts",
+      populate: { path: "person", select: "firstName" },
+      select: "-__v -comment -updatedPosts",
+      options: option,
+    },
 
-    { path: "recentlyViewed", populate: { path: "person", select: "firstName" }  , select: "-__v" },
-
+    {
+      path: "recentlyViewed",
+      populate: { path: "person", select: "firstName" },
+      select: "-__v",
+    },
   ];
   user
     .findOne(
@@ -50,7 +71,6 @@ showUserProfile = (req, res) => {
 
 //update info
 updateUserProfile = async (req, res) => {
-
   const body = JSON.parse(JSON.stringify(req.body));
 
   const saltRounds = await bcrypt.genSalt(10);
@@ -114,35 +134,39 @@ updateUserPassword = async (req, res) => {
 };
 
 recentlyViewed = (req, res) => {
-
-  user.updateOne({ person: req.user._id }, {
-    $push: {
-      recentlyViewed: {
-        $each: [req.body.id],
-        $slice: -5
+  user.updateOne(
+    { person: req.user._id },
+    {
+      $push: {
+        recentlyViewed: {
+          $each: [req.body.id],
+          $slice: -5,
+        },
+      },
+    },
+    (error, data) => {
+      if (error) {
+        return res.json({
+          Data: error,
+          Message: "can't add to Recent view",
+          Success: true,
+        });
       }
-    }
-
-  }, (error, data) => {
-    if (error) {
       return res.json({
-        Data: error,
-        Message: "can't add to Recent view",
+        Data: data.n,
+        Message: "Done add to Recent view",
         Success: true,
       });
     }
-    return res.json({
-      Data: data.n,
-      Message: "Done add to Recent view",
-      Success: true,
-    });
-  });
-}
+  );
+};
 
 addBookmarkPosts = async (req, res) => {
+  const PostAtBookmark = await user.find(
+    { bookmarkPosts: { $in: req.body.id }, person: req.user._id },
+    { bookmarkPosts: 1 }
+  );
 
-  const PostAtBookmark = await user.find({ bookmarkPosts: { $in: req.body.id }, person: req.user._id },{bookmarkPosts:1})
-  
   if (PostAtBookmark.length != 0) {
     return res.json({
       Data: null,
@@ -151,13 +175,15 @@ addBookmarkPosts = async (req, res) => {
     });
   }
 
-  user.updateOne({ person: req.user._id }, {
-    $push: {
-      bookmarkPosts: req.body.id,
-    }
-  }
+  user.updateOne(
+    { person: req.user._id },
+    {
+      $push: {
+        bookmarkPosts: req.body.id,
+      },
+    },
 
-    , (error, data) => {
+    (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -170,19 +196,20 @@ addBookmarkPosts = async (req, res) => {
         Message: "Done add to Recent view",
         Success: true,
       });
-    });
-
-}
+    }
+  );
+};
 
 removeBookmarkPosts = (req, res) => {
+  user.updateOne(
+    { person: req.user._id },
+    {
+      $pull: {
+        bookmarkPosts: req.body.id,
+      },
+    },
 
-  user.updateOne({ person: req.user._id }, {
-    $pull: {
-      bookmarkPosts: req.body.id,
-    }
-  }
-
-    , (error, data) => {
+    (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -195,14 +222,16 @@ removeBookmarkPosts = (req, res) => {
         Message: "Done add to Recent view",
         Success: true,
       });
-    });
-
-}
+    }
+  );
+};
 
 addFavouriteItems = async (req, res) => {
-
-  const ItemAddToFavourite = await user.find({ favouriteItems: { $in: req.body.id }, person: req.user._id })
-  console.log(ItemAddToFavourite)
+  const ItemAddToFavourite = await user.find({
+    favouriteItems: { $in: req.body.id },
+    person: req.user._id,
+  });
+  console.log(ItemAddToFavourite);
   if (ItemAddToFavourite.length !== 0) {
     return res.json({
       Data: null,
@@ -211,13 +240,15 @@ addFavouriteItems = async (req, res) => {
     });
   }
 
-  user.updateOne({ person: req.user._id }, {
-    $push: {
-      favouriteItems: req.body.id,
-    }
-  }
+  user.updateOne(
+    { person: req.user._id },
+    {
+      $push: {
+        favouriteItems: req.body.id,
+      },
+    },
 
-    , (error, data) => {
+    (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -230,17 +261,20 @@ addFavouriteItems = async (req, res) => {
         Message: "Done add to Recent view",
         Success: true,
       });
-    });
-}
+    }
+  );
+};
 
 removeFavouriteItems = (req, res) => {
-  user.updateOne({ person: req.user._id }, {
-    $pull: {
-      favouriteItems: req.body.id,
-    }
-  }
+  user.updateOne(
+    { person: req.user._id },
+    {
+      $pull: {
+        favouriteItems: req.body.id,
+      },
+    },
 
-    , (error, data) => {
+    (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -253,10 +287,17 @@ removeFavouriteItems = (req, res) => {
         Message: "Done add to Recent view",
         Success: true,
       });
-    });
-}
+    }
+  );
+};
 
 module.exports = {
-  showUserProfile, updateUserProfile, updateUserPassword,
-  recentlyViewed, addBookmarkPosts, removeBookmarkPosts, addFavouriteItems, removeFavouriteItems
+  showUserProfile,
+  updateUserProfile,
+  updateUserPassword,
+  recentlyViewed,
+  addBookmarkPosts,
+  removeBookmarkPosts,
+  addFavouriteItems,
+  removeFavouriteItems,
 };
