@@ -558,10 +558,11 @@ export default function BlogDetails(props) {
           )}
         </div>
         <div className="col-6" style={{ marginTop: "-50px" }}>
+        
           <h3 className="text-center mb-4">Comments</h3>
           {/* <!-- Single Comment --> */}
           {blogDetails
-            ? blogDetails.comment.map((item, index) => {
+            ? blogDetails.comment.length === 0 ? (<div>be the first to comment on this post</div>): blogDetails.comment.map((item, index) => {
                 return (
                   <div className="media mb-1" key={index}>
                     <div className="mr-2">
