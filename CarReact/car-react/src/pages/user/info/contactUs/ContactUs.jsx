@@ -1,6 +1,52 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 export default function ContactUs() {
+  
+  const [contactInput, setContactInput] = useState({
+    email:"",
+    content:""
+  })
+
+  const handleChange =(event)=>{
+    const { value, name } = event.target;
+    setContactInput((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  }
+
+  const handleSubmit = () => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      car: localStorage.getItem("ProductID"),
+      // comment: userFeedbackInfo.comment,
+    };
+
+    const URL = "http://localhost:3000/user/writeFeedback";
+
+    axios
+      .post(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <section className="contact-us">
       <section  className="content-section text-center">
@@ -20,6 +66,9 @@ export default function ContactUs() {
                       type="email"
                       className="form-control"
                       id="Email2"
+                      name="email"
+                      onChange={handleChange}
+                      value={contactInput.email}
                       placeholder="email@example.com"
                     />
                   </div>
@@ -28,9 +77,12 @@ export default function ContactUs() {
                     <textarea
                       className="form-control inputheight"
                       placeholder="Description"
+                      onChange={handleChange}
+                      name="content"
+                      value={contactInput.content}
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn contrastclass" style={{fontWeight:"600",fontSize:"25px"}}>
+                  <button type="button" className="btn contrastclass" onClick={handleSubmit} style={{fontWeight:"600",fontSize:"25px"}}>
                     Send Message
                   </button>
                 </form>
