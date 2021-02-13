@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import icon from '../../../../assets/Images/icon.png'
+import icon from "../../../../assets/Images/icon.png";
 import { motion } from "framer-motion";
-
+import VerticalModal from "../../../../components/VerticalModal";
+import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
 export default function VendorSignForm(props) {
-
   const dispatch = useDispatch();
-  
-
+  const [modalShow, setModalShow] = useState(false);
+  const [modaleInfo, setModaleInfo] = useState({
+    heading: "",
+    title: "",
+    content: "",
+  });
 
   const [vendorSignUpInfo, setVendorSignUpInfo] = useState({
     firstName: "",
@@ -60,10 +64,6 @@ export default function VendorSignForm(props) {
         console.log(error);
       });
   };
-
-
-
-
 
   const [vendorSignInInfo, setVendorSignInInfo] = useState({
     email: "",
@@ -146,8 +146,6 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             usernameError = true;
-          
-
           } else {
             $(this)
               .siblings(".error")
@@ -168,14 +166,14 @@ export default function VendorSignForm(props) {
               .parent(".form-group")
               .addClass("hasError");
             emailError = true;
-          }  else if (!email_regex.test($(this).val())){
+          } else if (!email_regex.test($(this).val())) {
             $(this)
               .siblings("span.error")
               .text("Please type a valid email address")
               .fadeIn()
               .parent(".form-group")
               .addClass("hasError");
-          }else {
+          } else {
             $(this)
               .siblings(".error")
               .text("")
@@ -336,7 +334,9 @@ export default function VendorSignForm(props) {
                 </Link>
                 <div className="heading">
                   <h2>DREKSYONY</h2>
-                  <p style={{fontWeight:"700",fontSize:"20px"}}>Your Right Choice</p>
+                  <p style={{ fontWeight: "700", fontSize: "20px" }}>
+                    Your Right Choice
+                  </p>
                 </div>
 
                 <div className="success-msg">
@@ -392,7 +392,11 @@ export default function VendorSignForm(props) {
                         style={{ fontWeight: "600", fontSize: "15px" }}
                         value="Login"
                       />
-                      <a href="#" className="switch" style={{fontSize:"20px"}}>
+                      <a
+                        href="#"
+                        className="switch"
+                        style={{ fontSize: "20px" }}
+                      >
                         I'm New
                       </a>
                     </div>
@@ -404,7 +408,7 @@ export default function VendorSignForm(props) {
                 <div className="signup form-peice">
                   <form className="signup-form" onSubmit={handleVendorSignUp}>
                     <div className="row">
-                      <div className="col-4">
+                      <div className="col-6">
                         <div className="form-group">
                           <label
                             for="firstName"
@@ -420,10 +424,13 @@ export default function VendorSignForm(props) {
                             value={vendorSignUpInfo.firstName}
                             onChange={changeVendorSignUpInfo}
                           />
-                          <span className="error" style={{fontSize: "15px" }}></span>
+                          <span
+                            className="error"
+                            style={{ fontSize: "15px" }}
+                          ></span>
                         </div>
                       </div>
-                      <div className="col-4">
+                      {/* <div className="col-4">
                         <div className="form-group">
                           <label
                             for="middleName"
@@ -442,15 +449,19 @@ export default function VendorSignForm(props) {
                           />
                           <span className="error" style={{fontSize: "15px" }}></span>
                         </div>
-                      </div>
-                      <div className="col-4">
+                      </div> */}
+                      <div className="col-6">
                         <div className="form-group">
                           <label
                             for="lastName"
                             style={{ fontWeight: "600", fontSize: "15px" }}
                           >
                             Last Name{" "}
-                            <small style={{fontWeight: "700",fontSize:"8px"}}>-optional</small>
+                            <small
+                              style={{ fontWeight: "700", fontSize: "8px" }}
+                            >
+                              -optional
+                            </small>
                           </label>
                           <input
                             type="text"
@@ -460,7 +471,10 @@ export default function VendorSignForm(props) {
                             value={vendorSignUpInfo.lastName}
                             onChange={changeVendorSignUpInfo}
                           />
-                          <span className="error" style={{fontSize: "15px" }}></span>
+                          <span
+                            className="error"
+                            style={{ fontSize: "15px" }}
+                          ></span>
                         </div>
                       </div>
                     </div>
@@ -479,7 +493,10 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.email}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error" style={{fontSize: "15px" }}></span>
+                      <span
+                        className="error"
+                        style={{ fontSize: "15px" }}
+                      ></span>
                     </div>
 
                     <div className="form-group">
@@ -514,7 +531,10 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.password}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error" style={{fontSize: "15px" }}></span>
+                      <span
+                        className="error"
+                        style={{ fontSize: "15px" }}
+                      ></span>
                     </div>
 
                     <div className="form-group">
@@ -532,23 +552,80 @@ export default function VendorSignForm(props) {
                         value={vendorSignUpInfo.confirmPassword}
                         onChange={changeVendorSignUpInfo}
                       />
-                      <span className="error" style={{fontSize: "15px" }}></span>
+                      <span
+                        className="error"
+                        style={{ fontSize: "15px" }}
+                      ></span>
                     </div>
-
+                    {/* <p>asdasdsak sajdsakd sjdskjd skksksskks </p> */}
+                    <p style={{ fontWeight: "600" }}>
+                      By signing up you agree to our{" "}
+                      <span
+                        style={{
+                          color: "#4d8ba8",
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                        }}
+                        onClick={() => {
+                          setModalShow(true);
+                          setModaleInfo({
+                            heading: termsAndPrivacy.terms.heading,
+                            title: termsAndPrivacy.terms.title,
+                            content: termsAndPrivacy.terms.content,
+                          });
+                        }}
+                      >
+                        TERMS
+                      </span>{" "}
+                      and{" "}
+                      <span
+                        style={{
+                          color: "#4d8ba8",
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                        }}
+                        onClick={() => {
+                          setModalShow(true);
+                          setModaleInfo({
+                            heading: termsAndPrivacy.privacy.heading,
+                            title: termsAndPrivacy.privacy.title,
+                            content: termsAndPrivacy.privacy.content,
+                          });
+                        }}
+                      >
+                        Privacy Policy
+                      </span>
+                    </p>
                     <div className="CTA">
-                      <input
-                        style={{ fontWeight: "600", fontSize: "15px" }}
-                        type="submit"
-                        value="Signup Now"
-                        id="submit"
-                      />
-                      <br />
-                      <a href="#" className="switch" style={{fontSize:"20px"}}>
-                        I have an account
-                      </a>
+                      <div className="row">
+                        <div className="col-6" style={{ marginLeft: "-100px" }}>
+                          <input
+                            style={{ fontWeight: "600", fontSize: "15px" }}
+                            type="submit"
+                            value="Signup Now"
+                            id="submit"
+                          />
+                        </div>
+                        <div className="col-6">
+                          <a
+                            href="#"
+                            className="switch"
+                            style={{ fontSize: "20px", paddingLeft: "3px" }}
+                          >
+                            I have an account
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </div>
+                <VerticalModal
+                  heading={modaleInfo.heading}
+                  title={modaleInfo.title}
+                  content={modaleInfo.content}
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
                 {/* <!-- End Signup Form --> */}
               </div>
             </div>
