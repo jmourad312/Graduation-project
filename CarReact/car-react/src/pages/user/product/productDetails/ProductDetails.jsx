@@ -377,7 +377,7 @@ export default function ProductDetails(props) {
                   <div>be the first to rate this item</div>
                 ) : (
                   <div
-                    className="col-4 text-center"
+                    className="text-center"
                     style={{
                       maxHeight: "400px",
                       overflowX: "hidden",
