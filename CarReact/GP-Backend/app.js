@@ -18,6 +18,8 @@ const AdminRoute = require("./routes/admin/admin");
 
 const blogRoute = require("./routes/blog/blog");
 const AdsRoute = require('./routes/Ads/ads')
+const passRoute = require('./routes/Ads/ads')
+
 const upload = require("./middleware/upload").upload;
 
 //server
@@ -50,6 +52,7 @@ app.use("/", AdsRoute);
 
 
 app.use("/blog", blogRoute);
+app.use("/auth", passRoute);
 
 //Images
 app.use(express.static("uploads"));
