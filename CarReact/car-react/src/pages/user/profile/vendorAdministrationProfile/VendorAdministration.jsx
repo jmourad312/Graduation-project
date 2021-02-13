@@ -56,9 +56,9 @@ const pageTransitions = {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      {localStorage.getItem("Authorization") !== null && <UserIcon />}
 
       <section className="container">
+      {localStorage.getItem("Authorization") !== null && <UserIcon />}
         <div className="vendorTop">
           <div style={{ marginTop: "10%" }}>
             <div className="row newCont">
