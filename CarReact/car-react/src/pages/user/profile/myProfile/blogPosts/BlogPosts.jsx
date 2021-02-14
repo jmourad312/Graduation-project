@@ -18,18 +18,18 @@ export default function BlogPosts(props) {
   const [postsPerPage] = useState(3);
 
   const dispatch = useDispatch();
-  
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  
+
   useEffect(() => {
     setPosts(user ? user.postsUser : []);
   });
 
-    // Get current posts
+  // Get current posts
 
-    const handleClick = pageNumber => setCurrentPage(pageNumber.selected+1);
+  const handleClick = pageNumber => setCurrentPage(pageNumber.selected + 1);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -75,10 +75,9 @@ export default function BlogPosts(props) {
                 </div>
               </div>
             ) : (
-              <div>
-                {currentPosts.map((post, index) => {
-                  return (
-                    <div>
+                <>
+                  {currentPosts.map((post, index) => {
+                    return (
                       <div className="media border-rounded p-3" key={index}>
                         <img
                           src={post.image}
@@ -109,30 +108,20 @@ export default function BlogPosts(props) {
                         </div>
                         <SimpleDelete id={post._id} num={index} />
                       </div>
-                      {/* <hr
-                      className="position-relative"
-                      style={{
-                        borderTop: "6px dotted lightblue",
-                        // borderTop: "0",
-                        width: "40px",
-                        left: "350px",
-                      }}
-                    /> */}
-                    </div>
-                  );
-                })}
-                <div style={{position:"absolute",top:"-40px"}}>
-                <PaginationReact
-                  NumberOfItemsInDB={posts.length}
-                  NumberToShow={postsPerPage}
-                  handleClick={handleClick}
-                />
-                </div>
-              </div>
-            )
+                    );
+                  })}
+                  <div style={{ position: "absolute", top: "100%", left: "150px" }}>
+                    <PaginationReact
+                      NumberOfItemsInDB={posts.length}
+                      NumberToShow={postsPerPage}
+                      handleClick={handleClick}
+                    />
+                  </div>
+                </>
+              )
           ) : (
-            <Loading />
-          )}
+              <Loading />
+            )}
         </div>
       </motion.div>
     </AnimatePresence>

@@ -109,7 +109,7 @@ export default function VendorProfileUser(props) {
                     <iframe
                       title="map"
                       id="myiframe"
-                      src={loc}
+                      src={`https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;output=embed`}
                       width="300"
                       height="200"
                     ></iframe>

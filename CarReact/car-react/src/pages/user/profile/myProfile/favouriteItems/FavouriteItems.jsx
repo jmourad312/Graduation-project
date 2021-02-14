@@ -13,7 +13,7 @@ export default function FavouriteItems(props) {
   let history = useHistory();
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(3);
+  const [postsPerPage] = useState(6);
   const dispatch = useDispatch();
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -137,7 +137,7 @@ export default function FavouriteItems(props) {
                     </div>
                   );
                 })}
-                <div style={{ position: "absolute", top: "610px",left:"130px" }}>
+                <div style={{ position: "absolute", top: "610px",left:"160px" }}>
                   <PaginationReact
                     NumberOfItemsInDB={items.length}
                     NumberToShow={postsPerPage}
