@@ -140,7 +140,7 @@ export default function MyItems(props) {
             <ProductFilterVendor className="ProductFilter" />
             <Button
               variant="dark"
-              style={{ height: "50px", position: "absolute", top: "85%", right: "82%", background: "linear-gradient(-45deg, #110f11, #424c53)" }}
+              style={{ height: "50px", position: "absolute", top: "85%", right: "82.5%", background: "linear-gradient(-45deg, #110f11, #424c53)" }}
               onClick={() => openModal()}
             >
               <i class="far fa-plus-square"></i>
