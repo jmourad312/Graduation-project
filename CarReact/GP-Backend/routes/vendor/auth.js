@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
       role: "vendor",
       password: password,
       location:{
-        coordinates:[req.body.longtidute,req.body.latitude]
+        coordinates:[req.body.longitude,req.body.latitude]
       }
     },
     (errorPerson, dataOfPerson) => {
