@@ -36,7 +36,8 @@ export default function BlogPosts(props) {
                 Go to Blogs List 
               </div>
               </div>
-            ) : (
+            ) : <div>
+            {(
               user.postsUser.map((post) => {
                 return (
                   <div>
@@ -82,7 +83,8 @@ export default function BlogPosts(props) {
                   </div>
                 );
               })
-            )
+            )}
+              </div>
           ) : (
             "Loading"
           )}
