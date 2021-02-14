@@ -78,12 +78,6 @@ resetPassword = async (req, res) => {
         });
       }
     });
-  } else if (codeToResetPassword === null) {
-    return res.json({
-      Data: error,
-      Message: "You can't update your password",
-      Success: false,
-    });
   } else {
     return res.json({
       Data: null,
