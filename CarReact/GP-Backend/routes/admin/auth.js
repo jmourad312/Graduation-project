@@ -6,9 +6,22 @@ const Person = require('../../models/Person/person');
 const Admin = require('../../models/Person/admin')
 const bcrypt = require('bcryptjs');
 
+function validateAdmin(req, resp, next) {
+    console.log(req.user);
+    const { role, _id } = req.user;
+    if (!(role == "admin")) {
+      resp.json({
+        Data: null,
+        Message: "can't access",
+        Success: false,
+      });
+    } else next();
+  }
+
 
 //signup
-router.post('/signup', async (req, resp) => {
+router.post('/signup',   passport.authenticate("jwt", { session: false }),
+validateAdmin,async (req, resp) => {
 
     const saltRounds = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, saltRounds);
