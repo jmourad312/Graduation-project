@@ -35,6 +35,9 @@ export function Navbar(props) {
                         <li className="nav-item">
                         <Link className="nav-link waves-effect" to={'AddPartCar'}>AddPartCar</Link>
                         </li>
+                        <li className="nav-item">
+                        <Link className="nav-link waves-effect" to={'AddAds'}>AddAds</Link>
+                        </li>
                         <li className="nav-item ml-auto"  >
                         <Link className="nav-link waves-effect" to={'LoginIn'} onClick={logout}>Logout</Link>
                         </li>
