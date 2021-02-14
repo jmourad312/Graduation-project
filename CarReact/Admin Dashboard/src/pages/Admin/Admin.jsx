@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Bar, Pie, Doughnut } from "react-chartjs-2";
 import { Tabel } from "../../components/Tabel";
 import { Button2 } from "../../components/Button";
+import { Pagination } from "../../components/Pagination";
 import { Navbar } from "../../components/Navbar";
 import { instance } from "../../network/axiosConfig";
 import { PaginationReact } from "../../components/PaginationReact";
@@ -553,7 +554,7 @@ export default function Admin(props) {
                     </div>
                   </div>
                   <PaginationReact
-                    NumberOfItemsInDB={stateRedux.vendors.Data.length}
+                    NumberOfItemsInDB={stateRedux.countData.Data.vendor}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartProduct}
                   />

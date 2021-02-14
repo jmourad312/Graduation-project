@@ -1,7 +1,6 @@
 import { Button2 } from "./Button";
 
 export function Tabel(props) {
-    console.log(props.data.person);
 
     return (
         <>
