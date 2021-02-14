@@ -9,11 +9,11 @@ export default function VendorProfileUser(props) {
     lastName: "",
     image: "",
     phoneNumber: 0,
-    vendorItems:[],
+    vendorItems: [],
+    location: [],
   });
-
+  const [loc, setLoc] = useState("")
   // const [vendorItems, setVendorItems] = useState([])
-  
   const getVendor = async (params) =>{
 
     const config = {
@@ -36,6 +36,7 @@ export default function VendorProfileUser(props) {
             image: res.data.Data.person.image,
             phoneNumber: res.data.Data.person.phoneNumber,
             vendorItems: res.data.Data.vendorItems,
+            location: res.data.Data.person.location.coordinates
           });
         } else {
           console.log("fail");
@@ -50,8 +51,22 @@ export default function VendorProfileUser(props) {
   useEffect(() => {
     console.log(props.match.params.id);
     getVendor(props.match.params.id);
+    // console.log(document.getElementById("#myiframe").src());
   }, []);
-  
+
+  useEffect(() => {
+    if (vendor) {
+      if (vendor.location) {
+        if (vendor.location[0] !== undefined) {
+          if (vendor.location[1] !== undefined) {
+            setLoc(
+              `https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;output=embed`
+            );
+          }
+        }
+      }
+    }
+  })
 
   return (
     <section className="vendor-profile">
@@ -80,24 +95,27 @@ export default function VendorProfileUser(props) {
                       Don't hesitate to contact us
                     </h3>
                     <h2>
-                Name: {vendor.firstName}{" "}{vendor.lastName}
+                      Name: {vendor.firstName} {vendor.lastName}
                     </h2>
-                    <h4>Phone: {vendor.phoneNumber?vendor.phoneNumber:"Not Provided"}</h4>
+                    <h4>
+                      Phone:{" "}
+                      {vendor.phoneNumber ? vendor.phoneNumber : "Not Provided"}
+                    </h4>
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              {vendor && vendor.location && vendor.location[0] !== undefined && vendor.location[1] !== undefined &&
+                  <div className="col-4">
                     <iframe
-                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                      title="map"
+                      id="myiframe"
+                      src={loc}
                       width="300"
                       height="200"
-                      style={{
-                        border: "rgb(0, 0, 0) solid",
-                        borderRadius: "5%",
-                      }}
-                      allowfullscreen
                     ></iframe>
-              </div>
+                  </div>
+                
+              }
             </div>
           </section>
           {/* <hr className="hr " /> */}
@@ -118,7 +136,6 @@ export default function VendorProfileUser(props) {
           {/* <!-- items --> */}
           <h2 className="text-center mb-3">Available Items</h2>
           <SlickSlider items={vendor.vendorItems} />
-          
         </div>
       </div>
     </section>
