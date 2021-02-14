@@ -26,8 +26,6 @@ export default function Signform(props) {
   const userID = useSelector((state) => state.userID);
   const dispatch = useDispatch();
 
-
-
   const [userSignUpInfo, setUserSignUpInfo] = useState({
     firstName: "",
     email: "",
@@ -96,9 +94,7 @@ export default function Signform(props) {
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
           localStorage.removeItem("VendorID");
-          props.history.push(
-            `/MyProfile/RecentViews`
-          );
+          props.history.push(`/MyProfile/RecentViews`);
         }
       })
       .catch((error) => {
@@ -165,8 +161,63 @@ export default function Signform(props) {
   };
   //--------------------------FORGOT PASSWORD-------------------------
   const [forgotState, setForgotState] = useState({
-    
-  })
+    email:"",
+    password: "",
+    confirmPassword: "",
+    code: "",
+  });
+  const newEmail=(event)=>{
+    const {value,name} = event.target
+    setForgotState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  }
+  const handleForgetSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://localhost:3000/auth/forgetPassword", forgotState)
+      .then((res) => {
+        console.log(res);
+        // savetoken(res.data.Data.token);
+        // console.log(token);
+        localStorage.setItem("Authorization2", res.data.Data);
+        console.log(localStorage.getItem("Authorization2"));
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleNewPassSubmit = (event) => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization2"),
+      },
+    };
+    console.log(forgotState);
+
+    event.preventDefault();
+    axios
+      .post("http://localhost:3000/auth/resetPassword", forgotState)
+      .then((res) => {
+        console.log(res);
+        // savetoken(res.data.Data.token);
+        // console.log(token);
+        if (res.data.Success === true) {
+          console.log("hhkhkhkhk");
+          switchBack();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
 
   const pageVariants = {
     in: {
@@ -404,13 +455,25 @@ export default function Signform(props) {
             style={{ fontSize: "50px" }}
             onClick={switchBack}
           ></i> */}
-          <i class="fas fa-times-circle fa-3x closeIcon" style={{cursor:"pointer",position:"relative",left:"92%",top:"2%"}} onClick={switchBack}></i>
+          <i
+            class="fas fa-times-circle fa-3x closeIcon"
+            style={{
+              cursor: "pointer",
+              position: "relative",
+              left: "92%",
+              top: "2%",
+            }}
+            onClick={switchBack}
+          ></i>
           <h2 className="text-center">Rest Your Password</h2>
           <form className="text-center">
             <input
               type="email"
               className="w-75 text-center"
-              placeholder="Email"
+              placeholder="Enter your Email here"
+              name="email"
+              value={forgotState.email}
+              onChange={newEmail}
             />
             <br />
             <button
@@ -422,24 +485,35 @@ export default function Signform(props) {
                 borderRadius: "20px",
               }}
               value="Send email"
+              onClick={handleForgetSubmit}
+              type="button"
             >
               Send email
             </button>
-            </form>
-            <br />
-            <form className="text-center">      
+          </form>
+          <br />
+          <form className="text-center">
             <input
               type="text"
               className="w-75 text-center"
-              placeholder="Input your code here"
+              name="code"
+              value={forgotState.code}
+              onChange={newEmail}
+              placeholder="Enter your code here"
             />
             <input
               type="password"
+              name="password"
+              value={forgotState.password}
+              onChange={newEmail}
               className="w-75 text-center"
               placeholder="New password"
             />
             <input
               type="password"
+              name="confirmPassword"
+              value={forgotState.confirmPassword}
+              onChange={newEmail}
               className="w-75 text-center"
               placeholder="Confirm new password"
             />
@@ -452,7 +526,9 @@ export default function Signform(props) {
                   fontSize: "25px",
                   borderRadius: "20px",
                 }}
+                type="button"
                 value="submit"
+                onClick={handleNewPassSubmit}
               >
                 Submit
               </button>

@@ -15,8 +15,8 @@ export default function MyProfile() {
 
   useEffect(() => {
     dispatch(getUsersAction(localStorage.getItem("UserID")));
-    console.log(user ? user.person : "loading");
-    console.log(localStorage.getItem("UserID"));
+    // console.log(user ? user.person : "loading");
+    // console.log(localStorage.getItem("UserID"));
   }, [user]);
 
   const pageVariants = {
