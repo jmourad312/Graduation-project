@@ -9,7 +9,7 @@ import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
 
 export default function ProductFilterVendor(props) {
-  const productsVendor = useSelector((state) => state.vendorItems.TotalItem);
+  const productsVendor = useSelector((state) => state.vendorItems);
   const [itemsInDB, setItemsInDB] = useState(0);
 
   const [state, setState] = useState({
@@ -31,7 +31,7 @@ export default function ProductFilterVendor(props) {
 
   useEffect(() => {
     localStorage.setItem("TotalProductsvendor", productsVendor);
-    setItemsInDB(localStorage.getItem("TotalProductsvendor"));
+    setItemsInDB(productsVendor ? productsVendor.TotalItem : 0);
   }, [productsVendor]);
 
 
@@ -80,7 +80,10 @@ export default function ProductFilterVendor(props) {
 
   const handleClick = (params) => {
     console.log(params);
+
     dispatch(getVendorsItemsAction(state, params.selected*3));
+    localStorage.setItem("TEST2", params.selected * 3);
+    
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {

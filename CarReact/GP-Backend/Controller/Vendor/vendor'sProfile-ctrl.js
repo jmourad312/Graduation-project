@@ -80,7 +80,7 @@ updateProfile = async (req, res) => {
 }
 
 showVendorProfile = (req, res) => {
-    const IdPerson = req.params.id
+    const IdPerson = req.params.id;
     const populateQuery = [{ path: "person", select: "-subscribe -role -password -createdAt -updatedAt -__v -_id -codeToResetPassword" }, { path: "VendorSubscription", select: "-__v -_id -person" }];
     vendor.findOne({ person: IdPerson }, {__v: 0, _id: 0 }).populate(populateQuery).exec( async (err, data) => {
         if (err || data.length == 0) {
@@ -100,7 +100,6 @@ showVendorProfile = (req, res) => {
         });
     });
 };
-
 
 
 

@@ -190,7 +190,7 @@ export const getBlogsFilterSearch = () => async (dispatch) => {
 export const filterCarBrand = () => async (dispatch) => {
   try {
     const res = await axios.get('http://localhost:3000/admin/getBrand');
-    console.log(res);
+    // console.log(res);
     dispatch({
       type: TYPES.GET_BRAND,
       payload: res.data.Data,

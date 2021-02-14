@@ -21,22 +21,27 @@ a:active {
   padding: 0;
 }
 ::-webkit-scrollbar {
-  width: 10px;
+	width: 10px;
+	background-color: #F5F5F5;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: $menu-icon-color;
+	-webkit-box-shadow: inset 0 0 6px rgba(75, 70, 70, 0.6);
+	background-color: #CCCCCC;
 }
+
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $hover-color;
+	background-color: rgb(37, 36, 36);
+	background-image: -webkit-linear-gradient(90deg,rgb(37, 36, 36) 0%,rgb(194, 192, 192) 50%,
+  transparent 100%,rgba(0, 0, 0, 1) 75%,transparent)
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $menu-icon-color;
+  background: $color-text;
 }
 //to make edges seem jagged
 .jagged-edges {
