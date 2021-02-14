@@ -487,7 +487,7 @@ export default function VendorSignForm(props) {
                         <div className="form-group">
                           <label
                             for="lastName"
-                            style={{ fontWeight: "600", fontSize: "15px" }}
+                            style={{ fontWeight: "600", fontSize: "20px" }}
                           >
                             Last Name{" "}
                             <small
