@@ -548,6 +548,7 @@ getBookmarksList = async (req, res) => {
   });
 };
 
+
 module.exports = {
   addNewPost,
   deletePost,

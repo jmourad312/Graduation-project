@@ -2,6 +2,8 @@ const person = require("../../models/Person/person");
 const user = require("../../models/Person/User/user");
 const userSubscription = require("../../models/Person/User/subscription");
 const bcrypt = require("bcryptjs");
+const Post = require("../../models/Blog/post");
+const carItem = require("../../models/CarDetails/sparePartCar");
 
 //User info (show info - update info)
 
@@ -177,7 +179,7 @@ addBookmarkPosts = async (req, res) => {
       },
     },
 
-    (error, data) => {
+   async (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -185,6 +187,13 @@ addBookmarkPosts = async (req, res) => {
           Success: true,
         });
       }
+     await Post.updateOne(
+        { _id: req.body.id },
+        {
+          $inc: { numOfBookmarkPost: 1 },
+        }
+      );
+
       return res.json({
         Data: data.n,
         Message: "Done add to Recent view",
@@ -203,7 +212,7 @@ removeBookmarkPosts = (req, res) => {
       },
     },
 
-    (error, data) => {
+    async(error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -211,6 +220,13 @@ removeBookmarkPosts = (req, res) => {
           Success: true,
         });
       }
+      await Post.updateOne(
+        { _id: req.body.id },
+        {
+          $inc: { numOfBookmarkPost: -1 },
+        }
+      );
+      
       return res.json({
         Data: data.n,
         Message: "Done add to Recent view",
@@ -242,7 +258,7 @@ addFavouriteItems = async (req, res) => {
       },
     },
 
-    (error, data) => {
+   async (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -250,6 +266,13 @@ addFavouriteItems = async (req, res) => {
           Success: true,
         });
       }
+      await carItem.updateOne(
+        { _id: req.body.id },
+        {
+          $inc: { numOfFavoriteItem: 1 },
+        }
+      );
+
       return res.json({
         Data: data.n,
         Message: "Done add to Recent view",
@@ -268,7 +291,7 @@ removeFavouriteItems = (req, res) => {
       },
     },
 
-    (error, data) => {
+    async(error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -276,6 +299,14 @@ removeFavouriteItems = (req, res) => {
           Success: true,
         });
       }
+
+      await carItem.updateOne(
+        { _id: req.body.id },
+        {
+          $inc: { numOfFavoriteItem: -1 },
+        }
+      );
+
       return res.json({
         Data: data.n,
         Message: "Done add to Recent view",

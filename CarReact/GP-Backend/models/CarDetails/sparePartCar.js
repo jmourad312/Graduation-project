@@ -21,6 +21,8 @@ var car = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Person",
   },
+
+  numOfFavoriteItem: Number,
 });
 
 module.exports = mongoose.model("Car", car);
