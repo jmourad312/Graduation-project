@@ -80,7 +80,7 @@ export default function ProductFilterVendor(props) {
 
   const handleClick = (params) => {
     console.log(params);
-    dispatch(getVendorsItemsAction(state, params.selected*4));
+    dispatch(getVendorsItemsAction(state, params.selected*3));
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {
@@ -112,6 +112,7 @@ export default function ProductFilterVendor(props) {
   };
 
   return (
+    <div className="col-3" style={{paddingLeft:"0px"}}>
     <div className="productFilterVendor" style={{left:"15px",marginRight:"20px"}}>
  
       <div class="search">
@@ -235,11 +236,12 @@ export default function ProductFilterVendor(props) {
         {productsVendor && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
-            NumberToShow={4}
+            NumberToShow={3}
             handleClick={handleClick}
           />
         )}
       </div>
+    </div>
     </div>
   );
 }

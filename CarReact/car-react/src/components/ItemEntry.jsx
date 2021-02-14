@@ -186,15 +186,20 @@ export default function ItemEntry(props) {
                 <i className="badge badge-dark">{props.carModel}</i>
               </small>
             </div>
-            <div className="row centerbtn">
-          <button className="btn btn-danger" style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={() => handleDelete(props.id)}>
+            <div className="row">
+              <div className="col-6">
+          <button className="btn btn-danger" style={{padding:"2px",width:"90%",height:"45px",marginLeft:"5px",marginBottom:"5px"}} onClick={() => handleDelete(props.id)}>
             <i class="fas fa-trash-alt"></i>
           </button>
+              </div>
+              <div className="col-6">
           <Button 
           variant="dark" 
-          style={{padding:"2px",width:"30px",height:"30px",marginLeft:"5px"}} onClick={openModal}>
+          style={{padding:"2px",width:"90%",height:"45px",marginLeft:"5px"}} onClick={openModal}>
             <i class="fas fa-pen"></i>
           </Button>
+
+              </div>
           </div>
           </article>
         </section>
