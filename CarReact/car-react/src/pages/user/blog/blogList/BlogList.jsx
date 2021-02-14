@@ -5,23 +5,22 @@ import BlogEntry from "../../../../components/BlogEntry";
 import BlogFilter from "../../../../components/BlogFilter";
 import { useDispatch, useSelector } from "react-redux";
 // import Button from "../../../../components/Button";
-import { getBlogsAction } from "../../../../store/actions";
+import { getBlogsAction, resultFromFilter } from "../../../../store/actions";
 import Loading from "../../../../components/Loading";
 import { motion } from "framer-motion";
 import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
 import { Pagination } from "../../../../components/Pagination";
+import Logo from "../../../../components/Logo";
+
 
 export default function BlogList() {
   const blogs = useSelector((state) => state.blogs);
   const dispatch = useDispatch();
-  // const getBlogs = () =>{
-  //  dispatch(getBlogsAction());
-  // }
 
   useEffect(() => {
-    // getBlogs();
-  }, [blogs]);
+    dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
+  });
 
   const handleClick = (params) => {};
   function createItem(blog) {

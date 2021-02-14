@@ -24,9 +24,10 @@ export default function VendorSignForm(props) {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-    latitude: 0,
     longitude: 0,
+    latitude: 0,
   });
+
   const changeVendorSignUpInfo = (event) => {
     const { value, name } = event.target;
     setVendorSignUpInfo((previous) => {

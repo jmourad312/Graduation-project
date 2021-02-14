@@ -7,6 +7,7 @@ import { getUsersAction } from "../../../../../store/actions";
 // import Footer from '../../../../../layout/footer/Footer';
 import { useHistory } from "react-router-dom";
 import { PaginationReact } from "../../../../../components/PaginationReact";
+import Loading from "../../../../../components/Loading";
 
 export default function BlogPosts(props) {
   const history = useHistory();
@@ -17,21 +18,16 @@ export default function BlogPosts(props) {
   const [postsPerPage] = useState(3);
 
   const dispatch = useDispatch();
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  
   useEffect(() => {
-    const fetchPosts = async () => {
-      await dispatch(getUsersAction(localStorage.getItem("UserID")));
-      console.log(user ? user.person : "loading");
-      console.log(localStorage.getItem("UserID"));
-      setPosts(user ? user.postsUser : []);
-
-    }
-    fetchPosts();
-  }, []);
+    setPosts(user ? user.postsUser : []);
+  });
 
     // Get current posts
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const handleClick = pageNumber => setCurrentPage(pageNumber.selected+1);
 
@@ -47,7 +43,7 @@ export default function BlogPosts(props) {
       >
         <div className="container mt-3">
           {user ? (
-            user.postsUser.length === 0 ? (
+            currentPosts.length === 0 ? (
               <div
                 className="text-center"
                 style={{
@@ -80,10 +76,10 @@ export default function BlogPosts(props) {
               </div>
             ) : (
               <div>
-                {currentPosts.map((post) => {
+                {currentPosts.map((post, index) => {
                   return (
                     <div>
-                      <div className="media border-rounded p-3" key={post._id}>
+                      <div className="media border-rounded p-3" key={index}>
                         <img
                           src={post.image}
                           alt="No Supported Image"
@@ -111,7 +107,7 @@ export default function BlogPosts(props) {
                             <i className="badge badge-light">{post.model}</i>
                           </strong>
                         </div>
-                        <SimpleDelete id={post._id} />
+                        <SimpleDelete id={post._id} num={index} />
                       </div>
                       {/* <hr
                       className="position-relative"
@@ -125,15 +121,17 @@ export default function BlogPosts(props) {
                     </div>
                   );
                 })}
+                <div style={{position:"absolute",top:"-40px"}}>
                 <PaginationReact
-                  NumberOfItemsInDB={user.postsUser.length}
+                  NumberOfItemsInDB={posts.length}
                   NumberToShow={postsPerPage}
                   handleClick={handleClick}
                 />
+                </div>
               </div>
             )
           ) : (
-            "Loading"
+            <Loading />
           )}
         </div>
       </motion.div>

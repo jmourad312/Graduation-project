@@ -84,6 +84,7 @@ export default function BlogFilter(props) {
   const handleClick = (params) => {
     console.log(params);
     dispatch(resultFromFilter(filterState, params.selected*6));
+    localStorage.setItem("TEST", params.selected*6);
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {

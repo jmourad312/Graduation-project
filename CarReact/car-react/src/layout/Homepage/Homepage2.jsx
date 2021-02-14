@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Ads from "../../components/Ads";
+import Logo from "../../components/Logo";
 
 export default function Homepage2() {
   useEffect(() => {
@@ -331,11 +332,14 @@ export default function Homepage2() {
     sliderEl.addEventListener("mousemove", stopAutoSlide);
     sliderEl.addEventListener("touchstart", stopAutoSlide);
 
-    timer = setTimeout(autoSlide, 2000);
+    timer = setTimeout(autoSlide, 6000);
   }, []);
 
   return (
     <section className="homepage2">
+    <div style={{position:"absolute",left:"35%",top:"5%",zIndex:"20"}}>
+    <Logo/>
+    </div>
       <div
         id="myDiv"
         style={{
