@@ -32,6 +32,9 @@ router.post("/signup", async (req, res) => {
       subscribe: req.body.subscribe,
       role: "vendor",
       password: password,
+      location:{
+        coordinates:[req.body.longtidute,req.body.latitude]
+      }
     },
     (errorPerson, dataOfPerson) => {
       if (errorPerson) {
