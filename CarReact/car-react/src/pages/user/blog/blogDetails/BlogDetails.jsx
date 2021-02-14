@@ -376,7 +376,29 @@ export default function BlogDetails(props) {
                 alt=""
               />
             </div>
-            <hr style={{ border: "2px solid black", width: "100%" }} />
+      <div className="row" style={{marginLeft:"710px"}}>
+        {localStorage.getItem("UserID") !== null && (
+          <button
+            className="bookmarkbtn fourth"
+            style={{ marginLeft: "30px",height:"65%" }}
+            onClick={handleAddBookmark}
+          >
+            Bookmark
+          </button>
+        )}
+        {checkOwner && (
+          <Button
+            variant="dark"
+            style={{ margin: "10px" }}
+            onClick={() => openModal(props.id)}
+          >
+            Edit
+          </Button>
+        )}
+        </div>
+      
+   
+            <hr style={{ border: "2px solid black", width: "100%",marginBottom:"8px",marginTop:"0px" }} />
           </div>
         </div>
       </div>
@@ -395,26 +417,6 @@ export default function BlogDetails(props) {
       >
         Bookmark
       </p> */}
-      <div className="row">
-        {localStorage.getItem("UserID") !== null && (
-          <button
-            className="bookmarkbtn fourth"
-            style={{ marginLeft: "30px" }}
-            onClick={handleAddBookmark}
-          >
-            Bookmark
-          </button>
-        )}
-        {checkOwner && (
-          <Button
-            variant="info"
-            style={{ margin: "10px" }}
-            onClick={() => openModal(props.id)}
-          >
-            Edit
-          </Button>
-        )}
-      </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
           <Modal.Title>Edit your product</Modal.Title>

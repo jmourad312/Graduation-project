@@ -390,10 +390,11 @@ export default function ProductDetails(props) {
                             let postTime = item.createdAt.split("T");
                             return (
                               <>
-                                <p>User: {item.user.firstName}</p>
-                                <p>Posted at: {postTime[0]}</p>
-                                <p>comment: {item.comment}</p>
-                                <hr />
+                                <p className="text-left" style={{fontWeight:"700",fontSize:"20px",marginBottom:"0px"}}>User: {item.user.firstName}</p>
+                                <p className="text-left" style={{fontWeight:"700",fontSize:"20px"}}>Posted at: {postTime[0]}</p>
+                                <hr style={{border:"0.1px solid grey",marginBottom:"5px",marginTop:"0px"}}/>
+                                <p style={{fontWeight:"700",fontSize:"20px",marginBottom:"0px"}}>{item.comment}</p>
+                                <hr style={{border:"2px solid",marginBottom:"0px"}}/>
                               </>
                             );
                           })
