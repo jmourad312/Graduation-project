@@ -62,15 +62,15 @@ export default function BookmarkedPosts(props) {
                 <div className="card m-auto" key={post._id}>
                   <div className="row">
                     <div className="col-4">
-                      <img className="d-block w-100" src={post.image} style={{height:"100%"}} alt="No Supported Image" />
+                      <img className="d-block w-100" src={post.image} style={{height:"100%"}} alt="No supported image" />
                     </div>
                     <div className="col-8">
                       <div className="card-block">
-                        <h2 className="card-title text-truncate" style={{ maxWidth: "500px",marginBottom:"0px",paddingBottom:"5px",color:"black"}}>{post.title}</h2>
-                        <strong style={{color:"black"}}><i> Posted on </i>
+                        <h2 className="card-title text-truncate" style={{ maxWidth: "500px",marginBottom:"0px",paddingBottom:"5px"}}>{post.title}</h2>
+                        <strong style={{}}><i> Posted on </i>
                         {time[0]}
                         </strong>
-                        <h4 className="text-truncate" style={{ maxWidth: "500px",marginBottom:"0px",color:"black" }}>{post.body}</h4>
+                        <h4 className="text-truncate" style={{ maxWidth: "500px",marginBottom:"0px",paddingBottom:"5px"}}>{post.body}</h4>
                         <br />
                         <strong>
                           <i className="badge badge-dark" style={{fontSize:"16px",marginBottom:"0px"}}>{post.brand}</i>{" "}
