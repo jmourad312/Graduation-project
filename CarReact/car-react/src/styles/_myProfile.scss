@@ -2,8 +2,8 @@
     // background-color: $body-pattern;
     overflow: hidden;
     .profileLeft{
-        // background-image: url("../"+$dark-pattern);
-        background-color: rgb(27, 34, 43);
+        background-image: url("../"+$dark-pattern);
+        // background-color: rgb(27, 34, 43);
         margin-top: 5%;
         padding: 15px;
         height: 90vh;
@@ -12,6 +12,10 @@
         // border: 2px solid saddlebrown;
         text-align: center;
         z-index: 5;
+        -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
     }
     
     .profileright{
@@ -23,6 +27,10 @@
         height: 80vh;
         padding: 5px;
         width: 0;
+        -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
         // border: 2px solid saddlebrown;
         transition: all 0.55s;
         .profileRightContent{
