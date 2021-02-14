@@ -22,7 +22,7 @@ var person = new schema(
         type: String,
         default: "Point",
       },
-      coordinates: [Number],
+      coordinates: [ longitude, latitude],
     },
     codeToResetPassword: Number,
   },
