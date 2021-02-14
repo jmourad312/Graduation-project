@@ -99,6 +99,18 @@ export default function AddPerson(props) {
             console.log(error);
         }
       }
+
+      if(state.person == "Admin"){
+        try {
+            const res = await instance.post("http://localhost:3000/admin/auth/signup",  {firstName:state.firstName,email:state.email,password:state.password},
+            {headers: { Authorization: localStorage.getItem("Authorization")}});
+            alert("Done add admin")
+            console.log(res);
+
+        } catch (error) {
+            console.log(error);
+        }
+      }
       if(state.person == "") {
           alert("choose sign up as vendor or user")
       }
@@ -132,6 +144,9 @@ export default function AddPerson(props) {
                     User
                   </option>
                   <option value="Vendor" key="Vendor">
+                    Vendor
+                  </option>
+                  <option value="Admin" key="Admin">
                     Vendor
                   </option>
                 </select>

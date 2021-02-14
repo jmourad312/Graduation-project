@@ -18,7 +18,7 @@ const AdminRoute = require("./routes/admin/admin");
 
 const blogRoute = require("./routes/blog/blog");
 const AdsRoute = require('./routes/Ads/ads')
-const passRoute = require('./routes/Ads/ads')
+const passRoute = require('./routes/Forgetpassword')
 
 const upload = require("./middleware/upload").upload;
 
@@ -48,11 +48,10 @@ app.use("/vendor/auth", AuthVendorRoute);
 
 app.use("/admin/auth",AuthAdminRoute);
 app.use("/admin", AdminRoute);
-app.use("/", AdsRoute);
-
 
 app.use("/blog", blogRoute);
 app.use("/auth", passRoute);
+app.use("/", AdsRoute);
 
 //Images
 app.use(express.static("uploads"));

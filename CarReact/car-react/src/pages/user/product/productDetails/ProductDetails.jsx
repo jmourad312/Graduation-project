@@ -243,7 +243,7 @@ export default function ProductDetails(props) {
                     >
                       <i
                         className="far fa-heart"
-                        style={{ fontSize: "30px" }}
+                        style={{ fontSize: "30px",cursor:"pointer" }}
                       ></i>
                     </span>
                   )}

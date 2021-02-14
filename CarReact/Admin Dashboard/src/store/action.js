@@ -21,7 +21,6 @@ export const setLoginAction = (payload) => {
     try {
         const res = await instance.get(`admin/showAllUsers/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_USERS,
             payload: res.data
@@ -36,7 +35,6 @@ export const setLoginAction = (payload) => {
     try {
         const res = await instance.get(`admin/showAllVendors/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_VENDORS,
             payload: res.data
@@ -51,7 +49,6 @@ export const setLoginAction = (payload) => {
     try {
         const res = await instance.get("admin/countAll",
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_COUNT_DATA,
             payload: res.data
@@ -65,7 +62,6 @@ export const setLoginAction = (payload) => {
     try {
         const res = await instance.get(`admin/getItemsVendor/${id}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_PRODUCTS,
             payload: res.data
@@ -80,7 +76,6 @@ export const getBlogsUser = (id) => async (dispatch) =>{
   try {
       const res = await instance.get(`user/showPostsOfUser/${id}`,
       {headers: { Authorization: localStorage.getItem("Authorization")}});
-      console.log(res);
       dispatch({
           type: TYPES.GET_BLOGSS,
           payload: res.data
@@ -95,7 +90,6 @@ export const getContactAction = (skip) => async (dispatch) => {
   try {
       const res = await instance.get(`admin/getContactUs/${skip}`,
       {headers: { Authorization: localStorage.getItem("Authorization")}});
-      console.log(res);
       dispatch({
           type: TYPES.GET_CONTACTS,
           payload: res.data
@@ -110,7 +104,6 @@ export const getBlogAction = (skip) => async (dispatch) => {
     try {
         const res = await instance.get(`admin/showAllUsers/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_N_BLOGS,
             payload: res.data
@@ -125,7 +118,6 @@ export const getBlogAction = (skip) => async (dispatch) => {
     try {
         const res = await instance.get(`admin/showAllVendors/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_N_PRODUCTS,
             payload: res.data
@@ -140,7 +132,6 @@ export const getBlogAction = (skip) => async (dispatch) => {
     try {
         const res = await instance.get(`admin/showVAds/${skip}`,
         {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
         dispatch({
             type: TYPES.GET_ADS,
             payload: res.data
