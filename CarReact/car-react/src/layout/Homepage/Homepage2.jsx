@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Ads from "../../components/Ads";
+import Logo from "../../components/Logo";
 
 export default function Homepage2() {
   useEffect(() => {
@@ -336,6 +337,9 @@ export default function Homepage2() {
 
   return (
     <section className="homepage2">
+    <div style={{position:"absolute",left:"35%",top:"5%",zIndex:"20"}}>
+    <Logo/>
+    </div>
       <div
         id="myDiv"
         style={{

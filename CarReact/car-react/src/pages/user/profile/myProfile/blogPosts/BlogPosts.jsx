@@ -7,6 +7,7 @@ import { getUsersAction } from "../../../../../store/actions";
 // import Footer from '../../../../../layout/footer/Footer';
 import { useHistory } from "react-router-dom";
 import { PaginationReact } from "../../../../../components/PaginationReact";
+import Loading from "../../../../../components/Loading";
 
 export default function BlogPosts(props) {
   const history = useHistory();
@@ -75,7 +76,7 @@ export default function BlogPosts(props) {
               </div>
             ) : (
               <div>
-                {currentPosts.map((post,index) => {
+                {currentPosts.map((post, index) => {
                   return (
                     <div>
                       <div className="media border-rounded p-3" key={index}>
@@ -120,15 +121,17 @@ export default function BlogPosts(props) {
                     </div>
                   );
                 })}
+                <div style={{position:"absolute",top:"-40px"}}>
                 <PaginationReact
                   NumberOfItemsInDB={posts.length}
                   NumberToShow={postsPerPage}
                   handleClick={handleClick}
                 />
+                </div>
               </div>
             )
           ) : (
-            "Loading"
+            <Loading />
           )}
         </div>
       </motion.div>
