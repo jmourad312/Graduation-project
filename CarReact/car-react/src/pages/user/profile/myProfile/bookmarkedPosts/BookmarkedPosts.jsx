@@ -1,19 +1,23 @@
 // import Dropdown from "../../../../../components/Dropdown";
 
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersAction } from "../../../../../store/actions";
 import { useHistory } from "react-router-dom";
 
 export default function BookmarkedPosts(props) {
   const history = useHistory();
-
-  const carBrand = ["BMW", "AUDI", "MAZARATI", "HYUNDAI"];
-  const carBrand2 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
-  const carBrand3 = ["BMW2", "AUDI", "MAZARATI", "HYUNDAI"];
   const user = useSelector((state) => state.user.Data);
   const dispatch = useDispatch();
+
+   const [posts, setPosts] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [postsPerPage] = useState(3);
+   const indexOfLastPost = currentPage * postsPerPage;
+   const indexOfFirstPost = indexOfLastPost - postsPerPage;
+   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+   
   useEffect(() => {
     dispatch(getUsersAction(localStorage.getItem("UserID")));
     console.log(user ? user.person : "loading");
