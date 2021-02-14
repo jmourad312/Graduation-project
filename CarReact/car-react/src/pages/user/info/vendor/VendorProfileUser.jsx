@@ -60,7 +60,7 @@ export default function VendorProfileUser(props) {
         if (vendor.location[0] !== undefined) {
           if (vendor.location[1] !== undefined) {
             setLoc(
-              `https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;output=embed`
+              `https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;&output=embed`
             );
           }
         }
@@ -109,7 +109,7 @@ export default function VendorProfileUser(props) {
                     <iframe
                       title="map"
                       id="myiframe"
-                      src={`https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;output=embed`}
+                      src={loc}
                       width="300"
                       height="200"
                     ></iframe>
