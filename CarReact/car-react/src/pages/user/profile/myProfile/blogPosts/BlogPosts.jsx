@@ -17,6 +17,8 @@ export default function BlogPosts(props) {
     console.log(user ? user.person : "loading");
     console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
+
+  
   return (
     <AnimatePresence exitBeforeEnter>
       <motion.div
@@ -36,7 +38,8 @@ export default function BlogPosts(props) {
                 Go to Blogs List 
               </div>
               </div>
-            ) : (
+            ) : <div>
+            {(
               user.postsUser.map((post) => {
                 return (
                   <div>
@@ -82,7 +85,8 @@ export default function BlogPosts(props) {
                   </div>
                 );
               })
-            )
+            )}
+              </div>
           ) : (
             "Loading"
           )}

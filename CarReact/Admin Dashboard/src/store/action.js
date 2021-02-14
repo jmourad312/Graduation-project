@@ -135,4 +135,19 @@ export const getBlogAction = (skip) => async (dispatch) => {
     }
   }
 
+  export const getAdsAction = (skip) => async (dispatch) => {
+
+    try {
+        const res = await instance.get(`admin/showVAds/${skip}`,
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
+        console.log(res);
+        dispatch({
+            type: TYPES.GET_ADS,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
   

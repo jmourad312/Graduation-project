@@ -14,7 +14,7 @@ export default function AddAds(props) {
     duration: 10,
     price: 0,
     ownerName: "",
-    ownerPhone: "",
+    ownerPhone: 0,
     ownerEmail: "",
   });
 
@@ -29,19 +29,17 @@ export default function AddAds(props) {
   };
 
   const handleImageChange = (event) => {
-    console.log(event.target.files[0]);
-    setState((previous) => {
-      return {
-        ...previous,
-        images: event.target.files,
-        // loaded: 0,
-      };
+    setState({
+        ...state,
+        images:event.target.files
     });
   };
 
   const sendAds = () => {
     const formData = new FormData();
-    formData.append("images", state.images);
+    for(var x = 0; x<state.images.length; x++) {
+      formData.append('images', state.images[x])
+  }
     formData.append("title", state.title);
     formData.append("description", state.description);
     formData.append("createdAT", state.createdAT);
@@ -95,13 +93,12 @@ export default function AddAds(props) {
               className="form-control"
               name="description"
             />
-            <InputField
-              value={state.images}
+            <input
               type="file"
-              handleChange={(e) => handleImageChange(e)}
+              onChange={(e) => handleImageChange(e)}
               className="form-control"
               name="images"
-              multiple={true}
+              multiple
             />
             <InputField
               value={state.price}

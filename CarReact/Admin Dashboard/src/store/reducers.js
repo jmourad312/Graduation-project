@@ -12,6 +12,7 @@ export default (
     contacts: [],
     nblog: [],
     nproduct: [],
+    ads: [],
   },
   action
 ) => {
@@ -69,6 +70,12 @@ export default (
       return {
         ...state,
         nproduct: action.payload,
+      };
+
+    case TYPES.GET_ADS:
+      return {
+        ...state,
+        ads: action.payload,
       };
 
     default:

@@ -8,10 +8,7 @@ const bcrypt = require("bcryptjs");
 // 1- show info
 showUserProfile = (req, res) => {
   const IdPerson = req.params.id;
-  const option = {
-    limit: 0,
-    skip: +req.params.skip,
-  };
+
   const populateQuery = [
     {
       path: "person",
@@ -23,21 +20,18 @@ showUserProfile = (req, res) => {
     {
       path: "postsUser",
       select: "-__v -comment -updatedPosts",
-      options: option,
     },
 
     {
       path: "favouriteItems",
       populate: { path: "person", select: "firstName" },
       select: "-__v -comment -updatedPosts",
-      options: option,
     },
 
     {
       path: "bookmarkPosts",
       populate: { path: "person", select: "firstName" },
       select: "-__v -comment -updatedPosts",
-      options: option,
     },
 
     {
