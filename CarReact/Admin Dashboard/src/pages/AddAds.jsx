@@ -28,6 +28,17 @@ export default function AddAds(props) {
     });
   };
 
+  const handleImageChange = (event) => {
+    console.log(event.target.files[0]);
+    setState((previous) => {
+      return {
+        ...previous,
+        images: event.target.files,
+        // loaded: 0,
+      };
+    });
+  };
+
   const sendAds = () => {
     const formData = new FormData();
     formData.append("images", state.images);
@@ -42,8 +53,13 @@ export default function AddAds(props) {
     formData.append("ownerEmail", state.ownerEmail);
 
     const config = {
-      headers: { Authorization: localStorage.getItem("Authorization") },
-    };
+        headers: {
+          "content-type":
+            "multipart/form-data; boundary=<calculated when request is sent>",
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+
     instance
       .post(`/admin/addAds`, formData, config)
       .then((req) => {
@@ -82,10 +98,10 @@ export default function AddAds(props) {
             <InputField
               value={state.images}
               type="file"
-              handleChange={(e) => tiggreValue(e)}
+              handleChange={(e) => handleImageChange(e)}
               className="form-control"
               name="images"
-              multiple
+              multiple={true}
             />
             <InputField
               value={state.price}
