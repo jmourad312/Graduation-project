@@ -33,51 +33,56 @@ export default function BookmarkedPosts(props) {
       <div className="container mt-3">
         {user
           ?
-            user.bookmarkPosts.length === 0 ? (
-              <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",position:"absolute",left:"30%" }}
-              >No Bookmarked Posts yet
-              <div className="text-center" onClick={() => history.push("/BlogList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
-                Go to Blogs List 
+          user.bookmarkPosts.length === 0 ? (
+            <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive", position: "absolute", left: "30%" }}
+            >No Bookmarked Posts yet
+              <div className="text-center" onClick={() => history.push("/BlogList")} style={{ fontSize: "30px", borderRadius: "25px", textDecoration: "underline", cursor: "pointer" }}>
+                Go to Blogs List
               </div>
-              </div>
-            ) : user.bookmarkPosts.map((post) => {
-              let time = post.createdAt.split("T");
-              console.log(time)
-              return (
-                <div>
-                  <div className="media border-rounded p-3" key={post._id}>
-                    <img
-                      src={post.image}
-                      alt="John Doe"
-                      className="mr-3 rounded-circle"
-                    />
-                    <div className="media-body">
-                      <h2
-                        className="text-truncate"
-                        style={{ maxWidth: "500px" }}
-                      >
-                        {post.title}
-                      </h2>
-                      <strong>
-                        <i> Posted on </i>
-                      </strong>
-                      {time[0]}
-                      <h4
-                        className="text-truncate"
-                        style={{ maxWidth: "500px" }}
-                      >
-                        {post.body}
-                      </h4>
-                      <strong>
-                        <i className="badge badge-light">{post.brand}</i>{" "}
-                        <i className="badge badge-light">{post.model}</i>
-                      </strong>
+            </div>
+          ) : user.bookmarkPosts.map((post) => {
+            let time = post.createdAt.split("T");
+            console.log(time)
+            return (
+              <div style={{paddingBottom:"15px",paddingTop:"15px"}}>
+                {/* <div className="media border-rounded p-3" key={post._id}>
+                  <img src={post.image} alt="John Doe" className="mr-3 rounded-circle" />
+                  <div className="media-body">
+                    <h2 className="text-truncate" style={{ maxWidth: "500px" }}>{post.title}</h2>
+                    <strong><i> Posted on </i></strong>
+                    {time[0]}
+                    <h4 className="text-truncate" style={{ maxWidth: "500px" }}>{post.body}</h4>
+                    <strong>
+                      <i className="badge badge-light">{post.brand}</i>{" "}
+                      <i className="badge badge-light">{post.model}</i>
+                    </strong>
+                  </div>
+                </div> */}
+
+                <div className="card m-auto" key={post._id}>
+                  <div className="row">
+                    <div className="col-4">
+                      <img className="d-block w-100" src={post.image} style={{height:"100%"}} alt="No Supported Image" />
+                    </div>
+                    <div className="col-8">
+                      <div className="card-block">
+                        <h2 className="card-title text-truncate" style={{ maxWidth: "500px",marginBottom:"0px",paddingBottom:"5px"}}>{post.title}</h2>
+                        <strong><i> Posted on </i>
+                        {time[0]}
+                        </strong>
+                        <h4 className="text-truncate" style={{ maxWidth: "500px",marginBottom:"0px" }}>{post.body}</h4>
+                        <br />
+                        <strong>
+                          <i className="badge badge-dark" style={{fontSize:"16px",marginBottom:"0px"}}>{post.brand}</i>{" "}
+                          <i className="badge badge-dark" style={{fontSize:"16px",marginBottom:"0px"}}>{post.model}</i>
+                        </strong>
+                      </div>
                     </div>
                   </div>
-                  
                 </div>
-              );
-            })
+              </div>
+            );
+          })
           : "Loading"}
       </div>
     </motion.div>
