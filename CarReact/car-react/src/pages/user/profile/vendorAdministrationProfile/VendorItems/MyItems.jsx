@@ -107,7 +107,8 @@ export default function MyItems(props) {
 
   useEffect(() => {
     dispatch(filterCarBrand());
-  }, []);
+    dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
+  }, [vendorItems]);
 
   const createItem = (item) => {
     return (
@@ -140,13 +141,53 @@ export default function MyItems(props) {
             <ProductFilterVendor className="ProductFilter" />
             <Button
               variant="dark"
-              style={{ height: "50px", position: "absolute", top: "85%", right: "82.5%", background: "linear-gradient(-45deg, #110f11, #424c53)" }}
+              style={{
+                height: "50px",
+                position: "absolute",
+                top: "85%",
+                right: "82.5%",
+                background: "linear-gradient(-45deg, #110f11, #424c53)",
+              }}
               onClick={() => openModal()}
             >
               <i class="far fa-plus-square"></i>
               {" Add"}
             </Button>
-            {vendorItems ? vendorItems.map(createItem) : <Loading />}
+            {vendorItems ? (
+              vendorItems.map(createItem)
+            ) : (
+              <div
+                className="text-center"
+                style={{
+                  fontWeight: "700",
+                  fontSize: "30px",
+                  fontFamily: "cursive",
+                  position: "absolute",
+                  left: "40%",
+                  top:"30%"
+                }}
+              >
+                No Items yet{" "}
+                <p
+                  className="text-center"
+                  style={{ fontSize: "20px", fontWeight: "200" }}
+                >
+                  to add a new product{" "}
+                </p>
+                <div
+                  className="text-center"
+                  onClick={() => openModal()}
+                  style={{
+                    fontSize: "30px",
+                    borderRadius: "25px",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  Click here
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
