@@ -522,8 +522,6 @@ export default function BlogDetails(props) {
             <div style={{maxHeight:"300px",overflowY:"scroll",overflowX:"hidden"}}>
             {blogDetails.comment.map((item, index) => {
               return (
-
-               
                 <div className="media mb-1" key={index}>
                   <div className="mr-2">
                     <button
