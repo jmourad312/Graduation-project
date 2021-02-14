@@ -11,15 +11,15 @@ import { motion } from "framer-motion";
 import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
 import { Pagination } from "../../../../components/Pagination";
+import Logo from "../../../../components/Logo";
+
 
 export default function BlogList() {
   const blogs = useSelector((state) => state.blogs);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
-    console.log("avs");
   });
 
   const handleClick = (params) => {};

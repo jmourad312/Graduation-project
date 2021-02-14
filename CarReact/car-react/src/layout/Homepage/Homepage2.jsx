@@ -332,7 +332,7 @@ export default function Homepage2() {
     sliderEl.addEventListener("mousemove", stopAutoSlide);
     sliderEl.addEventListener("touchstart", stopAutoSlide);
 
-    timer = setTimeout(autoSlide, 2000);
+    timer = setTimeout(autoSlide, 6000);
   }, []);
 
   return (

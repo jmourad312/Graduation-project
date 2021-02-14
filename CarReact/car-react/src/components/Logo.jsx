@@ -5,7 +5,7 @@ export default function Logo() {
       <div className="logo">
         <div>DREKSYONY</div>
         <div>
-          <span>all your needs</span>
+          <span>All your needs</span>
         </div>
       </div>
     );
