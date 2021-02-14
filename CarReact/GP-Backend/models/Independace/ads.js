@@ -8,12 +8,9 @@ var ads = new schema({
   expired: Date,
   duration: { type: Number, default: 10 },
   price: { type: Number, required: true },
-  owner: {
-    firstName: String,
-    lasttName: String,
-    phone: Number,
-    email: String,
-  },
+  ownerName: String,
+  ownerPhone: Number,
+  ownerEmail: String,
 
   images: [{ type: String, required: true }],
 });

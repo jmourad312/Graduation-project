@@ -10,6 +10,7 @@ import {
 } from "../store/actions";
 import SimpleSearch from "./SimpleSearch";
 import { Pagination } from "./Pagination";
+import { PaginationReact } from "./PaginationReact";
 
 export default function ProductFilter(props) {
   const products = useSelector((state) => state.products.TotalItem);
@@ -86,7 +87,7 @@ export default function ProductFilter(props) {
 
   const handleClick = (params) => {
     console.log(params);
-    dispatch(resultFromFilterProduct(state, params));
+    dispatch(resultFromFilterProduct(state, params.selected*6));
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {
@@ -263,7 +264,7 @@ export default function ProductFilter(props) {
         }}
       >
         {products && (
-          <Pagination
+          <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}
             handleClick={handleClick}

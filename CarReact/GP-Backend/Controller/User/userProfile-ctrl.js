@@ -54,13 +54,13 @@ showUserProfile = (req, res) => {
     .populate(populateQuery)
     .exec((err, data) => {
       if (err) {
-        return res.status(400).json({
+        return res.json({
           Data: err,
           Message: "*****************",
           Success: false,
         });
       } else {
-        return res.status(200).json({
+        return res.json({
           Data: data,
           Message: ":D :D",
           Success: true,

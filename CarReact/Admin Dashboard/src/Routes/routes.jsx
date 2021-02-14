@@ -11,6 +11,8 @@ const Items = lazy(()=> import('../pages/Vendor/Items') )
 const Blogs = lazy(()=> import('../pages/User/Blogs'))
 const AddPerson = lazy(()=> import('../pages/AddPerson'))
 const AddPartCar = lazy(()=> import('../pages/AddPartCar'))
+const AddAds = lazy(()=> import('../pages/AddAds'))
+
 
 
 
@@ -48,6 +50,7 @@ export function Routes() {
                     <GuardedRoute path="/Blogs" exact component={Blogs} meta={{ auth: true }} />
                     <GuardedRoute path="/AddPerson" exact component={AddPerson} meta={{ auth: true }} />
                     <GuardedRoute path="/AddPartCar" exact component={AddPartCar} meta={{ auth: true }} />
+                    <GuardedRoute path="/AddAds" exact component={AddAds} meta={{ auth: true }} />
                 </Switch>
             </GuardProvider>
         </Suspense>

@@ -5,12 +5,15 @@ import { Button2 } from "../../components/Button";
 import { Pagination } from "../../components/Pagination";
 import { Navbar } from "../../components/Navbar";
 import { instance } from "../../network/axiosConfig";
+import { PaginationReact } from "../../components/PaginationReact";
 
 import {
   getUserAction,
   getVendorAction,
   getCountDataAction,
   getContactAction,
+  getBlogAction,
+getProductAction
 } from "../../store/action";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,10 +32,13 @@ export default function Admin(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserAction);
-    dispatch(getVendorAction);
+    dispatch(getUserAction(0));
+    dispatch(getVendorAction(0));
     dispatch(getCountDataAction);
-    dispatch(getContactAction);
+    dispatch(getContactAction(0));
+    dispatch(getBlogAction(0));
+    dispatch(getProductAction(0));
+
     getCountData();
   }, []);
 
@@ -171,40 +177,24 @@ export default function Admin(props) {
     });
   };
 
-  //console.log(stateRedux.countData.Data)
-  //console.log(stateRedux.vendors)
   const getPartUser = (skip) => {
-    setState({
-      ...state,
-      user: stateRedux.users.Data.slice(skip, skip + numberItemPerPage),
-    });
+    console.log(skip)
+    dispatch(getUserAction(skip.selected*numberItemPerPage));
   };
   const getPartVendor = (skip) => {
-    setState({
-      ...state,
-      vendor: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage),
-    });
+    dispatch(getVendorAction(skip.selected*numberItemPerPage));
   };
 
   const getPartBlog = (skip) => {
-    setState({
-      ...state,
-      blogs: stateRedux.users.Data.slice(skip, skip + numberItemPerPage),
-    });
+    dispatch(getBlogAction(skip.selected*numberItemPerPage));
   };
 
   const getPartProduct = (skip) => {
-    setState({
-      ...state,
-      products: stateRedux.vendors.Data.slice(skip, skip + numberItemPerPage),
-    });
+    dispatch(getProductAction(skip.selected*numberItemPerPage));
   };
 
   const getPartContant = (skip) => {
-    setState({
-      ...state,
-      contacts: stateRedux.contacts.Data.slice(skip, skip + numberItemPerPage),
-    });
+    dispatch(getContactAction(skip.selected*numberItemPerPage));
   };
 
   const [BarData, setBarData] = useState({
@@ -405,17 +395,15 @@ export default function Admin(props) {
             {/* User List */}
             {stateRedux.users.length != 0 && (
               <>
-                <h3>Users</h3>
-                <div onLoad={() => getPartUser(0)}></div>
                 <Tabel
                   id="userTabel"
-                  data={state.user}
+                  data={stateRedux.users.Data}
                   handelClick={banneduser}
                   handelClickEdit={goToEditUser}
                   handelClickDelete={goToDeleteUser}
                 ></Tabel>
-                <Pagination
-                  NumberOfItemsInDB={stateRedux.users.Data.length}
+                <PaginationReact
+                  NumberOfItemsInDB={stateRedux.countData.Data.user}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartUser}
                 />
@@ -429,13 +417,13 @@ export default function Admin(props) {
                 <h3>Vendors</h3>
                 <Tabel
                   id="vendorTabel"
-                  data={state.vendor}
+                  data={stateRedux.vendors.Data}
                   handelClick={bannedvendor}
                   handelClickEdit={goToEditVendor}
                   handelClickDelete={goToDeleteVendor}
                 ></Tabel>
-                <Pagination
-                  NumberOfItemsInDB={stateRedux.vendors.Data.length}
+                <PaginationReact
+                  NumberOfItemsInDB={stateRedux.countData.Data.vendor}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartVendor}
                 />
@@ -444,7 +432,7 @@ export default function Admin(props) {
             )}
 
             {/* Blog List */}
-            {stateRedux.users.length != 0 && (
+            {stateRedux.nblog.length != 0 && (
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
@@ -462,7 +450,7 @@ export default function Admin(props) {
                         </thead>
 
                         <tbody>
-                          {state.blogs.map((item, index) => {
+                          {stateRedux.nblog.Data.map((item, index) => {
                             return (
                               <tr>
                                 <td>{index + 1}</td>
@@ -491,8 +479,8 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <Pagination
-                    NumberOfItemsInDB={stateRedux.users.Data.length}
+                  <PaginationReact
+                    NumberOfItemsInDB={stateRedux.countData.Data.user}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartBlog}
                   />
@@ -501,7 +489,7 @@ export default function Admin(props) {
               </div>
             )}
             {/* product List */}
-            {stateRedux.vendors.length != 0 && (
+            {stateRedux.nproduct.length != 0 && (
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
@@ -519,7 +507,7 @@ export default function Admin(props) {
                         </thead>
 
                         <tbody>
-                          {state.products.map((item, index) => {
+                          {stateRedux.nproduct.Data.map((item, index) => {
                             return (
                               <tr>
                                 <td>{index + 1}</td>
@@ -549,7 +537,7 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <Pagination
+                  <PaginationReact
                     NumberOfItemsInDB={stateRedux.vendors.Data.length}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartProduct}
@@ -560,7 +548,7 @@ export default function Admin(props) {
             )}
 
             {/* ContactUs */}
-            {stateRedux.users.length != 0 && (
+            {stateRedux.contacts.length != 0 && (
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Messages from ContactUs</h3>
@@ -577,7 +565,7 @@ export default function Admin(props) {
                         </thead>
 
                         <tbody>
-                          {state.contacts.map((item, index) => {
+                          {stateRedux.contacts.Data.map((item, index) => {
                             return (
                               <tr>
                                 <td>{index + 1}</td>
@@ -591,8 +579,8 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <Pagination
-                    NumberOfItemsInDB={stateRedux.contacts.Data.length}
+                  <PaginationReact
+                    NumberOfItemsInDB={stateRedux.contacts.count}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartContant}
                   />

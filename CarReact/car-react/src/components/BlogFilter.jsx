@@ -12,6 +12,8 @@ import { Button, Col, Form, Modal } from "react-bootstrap";
 import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
 import { Pagination } from "./Pagination";
+import { PaginationReact } from "./PaginationReact";
+
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
@@ -81,7 +83,7 @@ export default function BlogFilter(props) {
   };
   const handleClick = (params) => {
     console.log(params);
-    dispatch(resultFromFilter(filterState, params));
+    dispatch(resultFromFilter(filterState, params.selected*6));
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {
@@ -204,7 +206,7 @@ export default function BlogFilter(props) {
         <div class="search__close" ></div>
       </div>
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center" style={{fontFamily:"cursive"}}>Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center" style={{ fontFamily: "cursive" }}>Filter Options</h4>
       </div>
       <hr style={{ borderColor: "grey", border: "1px solid" }} />
       <div className="mb-5 mt-5">
@@ -235,18 +237,18 @@ export default function BlogFilter(props) {
 
 
         <select
-          style={{ marginTop: "70px",fontWeight:"700" }}
+          style={{ marginTop: "70px", fontWeight: "700" }}
           value={filterState.brand}
           name="brand"
           onChange={handleChange}
           // onSelect={handleChange}
-          className="custom-select custom-select-lg mb-3" 
+          className="custom-select custom-select-lg mb-3"
         >
-          <option value="" key="no-value" style={{fontWeight:"700"}}>
+          <option value="" key="no-value" style={{ fontWeight: "700" }}>
             choose Brand
           </option>
           {stateRedux.brand.map((item, index) => (
-            <option value={item.name} key={index} style={{fontWeight:"700"}}>
+            <option value={item.name} key={index} style={{ fontWeight: "700" }}>
               {item.name}
             </option>
           ))}
@@ -259,13 +261,13 @@ export default function BlogFilter(props) {
           name="model"
           onChange={handleChange}
           // onSelect={handleChange}
-          className="custom-select custom-select-lg mb-3" style={{fontWeight:"700"}}
+          className="custom-select custom-select-lg mb-3" style={{ fontWeight: "700" }}
         >
-          <option value="" key="no-value" style={{fontWeight:"700"}}>
+          <option value="" key="no-value" style={{ fontWeight: "700" }}>
             choose Model
           </option>
           {stateRedux.model.map((item, index) => (
-            <option value={item.model} key={index} style={{fontWeight:"700"}}>
+            <option value={item.model} key={index} style={{ fontWeight: "700" }}>
               {item.model}
             </option>
           ))}
@@ -278,7 +280,7 @@ export default function BlogFilter(props) {
         <button
           type="button"
           className="btn btn-danger ml-2"
-          style={{ fontWeight: "700", height: "60px"}}
+          style={{ fontWeight: "700", height: "60px" }}
           // style={{
           //   background:
           //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
@@ -288,29 +290,25 @@ export default function BlogFilter(props) {
           Clear Filter
         </button>
       </div>
-      
+
       <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
         {localStorage.getItem("UserID") !== null ? (
           <div>
-            <label for="add" style={{ fontSize: "30px",fontWeight:"700",fontFamily:"cursive" }}>Add new post</label>
+            <label for="add" style={{ fontSize: "30px", fontWeight: "700", fontFamily: "cursive" }}>Add new post</label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>
             </p>
           </div>
-        ):(<div style={{cursor:"pointer",fontSize:"1.5rem"}} onClick={()=>history.push("/SignChoice")}>Only registered car owners can add new blog posts</div>)}
+        ) : (<div style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "cursive", color: "black", backgroundColor: "rgba(0, 0, 0, 0.294)", borderRadius: "25px", border: "1px solid black" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-20px"}} >car owners can add new blog posts<div onClick={() => history.push("/SignForm")} style={{ fontSize: "2rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>Register Here</div></div>)}
       </div>
-      <div
-        className="pagination"
-        style={{
-          zIndex: "100",
-          position: "absolute",
-          left: "350px",
-          bottom: "-54.5%",
-          height:"50px"
-        }}
+      <div className="pagination" style={{
+        zIndex: "100", position: "absolute", left: "350px",
+        bottom: "-54.5%",
+        height: "50px"
+      }}
       >
         {blogs && (
-          <Pagination
+          <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}
             handleClick={handleClick}
