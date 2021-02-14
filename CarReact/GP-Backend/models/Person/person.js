@@ -25,7 +25,7 @@ var person = new schema(
       coordinates: [{
         longitude: Number,
         latitude: Number
-      },],
+      }],
     },
     codeToResetPassword: Number,
   },
