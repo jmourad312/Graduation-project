@@ -30,6 +30,9 @@ function validateAdmin(req, resp, next) {
 
 router.post("/admin/addAds",passport.authenticate("jwt", { session: false }), validateAdmin, upload.array("images", 5), AdminCtrl.addAds);
 router.delete("/admin/deleteAds/:id",passport.authenticate("jwt", { session: false }), validateAdmin, AdminCtrl.deleteAds);
+router.get ("/admin/showVAds/:skip",passport.authenticate("jwt", { session: false }), canViewall, AdminCtrl.showVAds)
+
+
 
 router.get ("/showAds",passport.authenticate("jwt", { session: false }), canViewall, userCtrl.showAds)
 

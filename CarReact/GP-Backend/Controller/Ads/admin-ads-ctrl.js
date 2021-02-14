@@ -5,7 +5,6 @@ const Ads = require("../../models/Independace/ads");
 
 addAds = (req, res) => {
   const body = JSON.parse(JSON.stringify(req.body));
-
   const images = [];
   req.files.map((file) => {
     images.push("http://localhost:3000/images/" + file.filename);
@@ -59,4 +58,25 @@ deleteAds = (req, res) => {
   });
 };
 
-module.exports = { addAds, deleteAds };
+showVAds = (req, res) => {
+  Ads.find({}, { __v: 0 }).skip(+req.params.skip).limit(5)
+  .exec( async (err, data) => {
+    if (err) {
+      return res.status(400).json({
+        Data: err,
+        Message: "خلاص شوفت طريق السلامة انت بقا يا فرج يا خويا ",
+        Success: false,
+      });
+    } else {
+      const length = await Ads.find({});
+      return res.status(200).json({
+        Data: data,
+        count:length,
+        Message: "هيييييه وصل وصل عبده موته وصال يا حارة ",
+        Success: true,
+      });
+    }
+  });
+};
+
+module.exports = { addAds, deleteAds,  showVAds};
