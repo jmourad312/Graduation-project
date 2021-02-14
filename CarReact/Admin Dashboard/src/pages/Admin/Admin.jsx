@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Bar, Pie, Doughnut } from "react-chartjs-2";
 import { Tabel } from "../../components/Tabel";
 import { Button2 } from "../../components/Button";
-import { Pagination } from "../../components/Pagination";
 import { Navbar } from "../../components/Navbar";
 import { instance } from "../../network/axiosConfig";
 import { PaginationReact } from "../../components/PaginationReact";
@@ -13,7 +12,8 @@ import {
   getCountDataAction,
   getContactAction,
   getBlogAction,
-getProductAction
+  getProductAction,
+  getAdsAction,
 } from "../../store/action";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -38,6 +38,7 @@ export default function Admin(props) {
     dispatch(getContactAction(0));
     dispatch(getBlogAction(0));
     dispatch(getProductAction(0));
+    dispatch(getAdsAction(0));
 
     getCountData();
   }, []);
@@ -178,24 +179,39 @@ export default function Admin(props) {
   };
 
   const getPartUser = (skip) => {
-    console.log(skip)
-    dispatch(getUserAction(skip.selected*numberItemPerPage));
+    console.log(skip);
+    dispatch(getUserAction(skip.selected * numberItemPerPage));
   };
+
   const getPartVendor = (skip) => {
-    dispatch(getVendorAction(skip.selected*numberItemPerPage));
+    dispatch(getVendorAction(skip.selected * numberItemPerPage));
   };
 
   const getPartBlog = (skip) => {
-    dispatch(getBlogAction(skip.selected*numberItemPerPage));
+    dispatch(getBlogAction(skip.selected * numberItemPerPage));
   };
 
   const getPartProduct = (skip) => {
-    dispatch(getProductAction(skip.selected*numberItemPerPage));
+    dispatch(getProductAction(skip.selected * numberItemPerPage));
   };
 
   const getPartContant = (skip) => {
-    dispatch(getContactAction(skip.selected*numberItemPerPage));
+    dispatch(getContactAction(skip.selected * numberItemPerPage));
   };
+
+  const getPartAds = (skip) => {
+    dispatch(getAdsAction(skip.selected * numberItemPerPage));
+  };
+
+  const deleteAds = async (id) => {
+    try {
+        const res = await instance.delete(`admin/deleteAds/${id}`,
+        {headers: { Authorization: localStorage.getItem("Authorization")}});
+        console.log(res);
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   const [BarData, setBarData] = useState({
     labels: ["Users", "Vendors", "Products", "Blogs"],
@@ -274,11 +290,10 @@ export default function Admin(props) {
                 href="#contactTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-product-hunt mr-1">message from contact</i>
+                <i className="fab fa-lg fa-product-hunt mr-1">
+                  message from contact
+                </i>
               </a>
-
-
-
             </div>
           </div>
         </header>
@@ -583,6 +598,68 @@ export default function Admin(props) {
                     NumberOfItemsInDB={stateRedux.contacts.count}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartContant}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* ADS */}
+            {stateRedux.ads.length != 0 && (
+              <div className=" row wow fadeIn" id="contactTabel">
+                <div className="col-md-12 mb-4">
+                  <h3>ADS</h3>
+                  <div className="card mb-4">
+                    <div className="card-body">
+                      <table className="table table-hover">
+                        <thead className="blue-grey lighten-4">
+                          <tr>
+                            <th>Index</th>
+                            <th>ownerName</th>
+                            <th>ownerPhone</th>
+                            <th>ownerEmail</th>
+                            <th>title</th>
+                            <th>createdAT</th>
+                            <th>expired</th>
+                            <th>price</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {stateRedux.ads.Data.map((item, index) => {
+                            return (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{item.ownerName}</td>
+                                <td>{item.ownerPhone}</td>
+                                <td>{item.ownerEmail}</td>
+                                <td>{item.title}</td>
+                                <td>{item.createdAT}</td>
+                                <td>{item.expired}</td>
+                                <td>{item.price}</td>
+                                <Button2
+                                  className="btn btn-danger mx-auto m-2 "
+                                  parameter={item._id}
+                                  key={item._id}
+                                  handelClick={deleteAds}
+                                  name={
+                                    <i
+                                      style={{ fontSize: "20px" }}
+                                      className="fas fa-trash"
+                                    ></i>
+                                  }
+                                ></Button2>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <PaginationReact
+                    NumberOfItemsInDB={stateRedux.ads.count}
+                    NumberToShow={numberItemPerPage}
+                    handelClick={getPartAds}
                   />
                 </div>
               </div>
