@@ -58,14 +58,15 @@ forgetPassword = (req, res) => {
 }
 //reset password
 resetPassword = async (req, res) => {
+    console.log(req.body)
     const data = await person.findOne({ email: req.body.email })
-    if (data.codeToResetPassword == req.body.code) {
+    if (data.codeToResetPassword == +req.body.code) {
         const saltRounds = await bcrypt.genSalt(10);
         const password = await bcrypt.hash(req.body.password, saltRounds);
         person.updateOne({ email: req.body.email }, { password }, (error, data) => {
             if (error) {
                 return res.json({
-                    Data: null,
+                    Data: error,
                     Message: "You can't update your password",
                     Success: false,
                 });
