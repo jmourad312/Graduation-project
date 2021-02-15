@@ -48,6 +48,7 @@
   input.star-5:checked ~ label.star:before {
     color: #fe7;
     text-shadow: 0 0 20px #952;
+
   }
 
   input.star-1:checked ~ label.star:before {
@@ -81,6 +82,7 @@
     padding: 10px;
     box-sizing: border-box;
     color: #eee;
+    
   }
 
   label.review {
@@ -91,5 +93,7 @@
   input.star:checked ~ .rev-box {
     height: 125px;
     overflow: visible;
+    transition: all 0.25s;
+
   }
 }
