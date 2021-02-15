@@ -252,7 +252,7 @@ deleteCollection = (req, res) => {
 //show all users
 showAllUsers = (req, res) => {
   const populateQuery = [
-    { path: "person", select: "firstName lastName middleName email" },
+    { path: "person", select: "firstName middleName email" },
   ];
 
   User.find({})
@@ -363,7 +363,7 @@ removeUserBan = (req, res) => {
 // show all vendors
 showAllVendors = (req, res) => {
   const populateQuery = [
-    { path: "person", select: "firstName  lastName middleName email" },
+    { path: "person", select: "firstName workshopName middleName email" },
   ];
 
   Vendor.find({})

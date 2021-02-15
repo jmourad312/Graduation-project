@@ -6,7 +6,7 @@ var person = new schema(
   {
     firstName: String,
     middleName: String,
-    lastName: String,
+    workshopName: String,
     email: { type: String, unique: true },
     password: String,
     image: {

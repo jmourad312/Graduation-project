@@ -30,7 +30,6 @@ validateAdmin,async (req, resp) => {
 
         firstName: req.body.firstName,
         middleName: req.body.middleName,
-        lastName: req.body.lastName,
         email: req.body.email,
         role: "admin",
         password: password,
