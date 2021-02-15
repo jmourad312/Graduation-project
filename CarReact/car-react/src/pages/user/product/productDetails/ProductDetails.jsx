@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginButton from "../../../../components/LoginButton";
+import Review from "../../../../components/Review";
 import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
@@ -243,7 +244,7 @@ export default function ProductDetails(props) {
                     >
                       <i
                         className="far fa-heart"
-                        style={{ fontSize: "30px",cursor:"pointer" }}
+                        style={{ fontSize: "30px", cursor: "pointer" }}
                       ></i>
                     </span>
                   )}
@@ -308,7 +309,6 @@ export default function ProductDetails(props) {
               {/* <div [hidden]="tab == 1 || tab == 3"> */}
 
               {/* </div> */}
-
               {localStorage.getItem("UserID") ? (
                 <>
                   {" "}
@@ -320,7 +320,8 @@ export default function ProductDetails(props) {
                     Write your Feedback
                   </h3>
                   <br />
-                  <form>
+                  <Review />
+                  {/* <form>
                     <div className="form-group">
                       <label style={{ fontSize: "1.5rem" }} for="comment">
                         Review:
@@ -343,7 +344,7 @@ export default function ProductDetails(props) {
                     >
                       Submit
                     </button>
-                  </form>{" "}
+                  </form>{" "} */}
                 </>
               ) : (
                 <div
@@ -390,11 +391,47 @@ export default function ProductDetails(props) {
                             let postTime = item.createdAt.split("T");
                             return (
                               <>
-                                <p className="text-left" style={{fontWeight:"700",fontSize:"20px",marginBottom:"0px"}}>User: {item.user.firstName}</p>
-                                <p className="text-left" style={{fontWeight:"700",fontSize:"20px"}}>Posted at: {postTime[0]}</p>
-                                <hr style={{border:"0.1px solid grey",marginBottom:"5px",marginTop:"0px"}}/>
-                                <p style={{fontWeight:"700",fontSize:"20px",marginBottom:"0px"}}>{item.comment}</p>
-                                <hr style={{border:"2px solid",marginBottom:"0px"}}/>
+                                <p
+                                  className="text-left"
+                                  style={{
+                                    fontWeight: "700",
+                                    fontSize: "20px",
+                                    marginBottom: "0px",
+                                  }}
+                                >
+                                  User: {item.user.firstName}
+                                </p>
+                                <p
+                                  className="text-left"
+                                  style={{
+                                    fontWeight: "700",
+                                    fontSize: "20px",
+                                  }}
+                                >
+                                  Posted at: {postTime[0]}
+                                </p>
+                                <hr
+                                  style={{
+                                    border: "0.1px solid grey",
+                                    marginBottom: "5px",
+                                    marginTop: "0px",
+                                  }}
+                                />
+                                <p
+                                  style={{
+                                    fontWeight: "700",
+                                    fontSize: "20px",
+                                    marginBottom: "0px",
+                                  }}
+                                >
+                                  {item.comment}
+                                </p>
+                                <hr
+                                  style={{
+                                    border: "2px solid",
+                                    marginBottom: "0px",
+                                  }}
+                                />
                               </>
                             );
                           })
