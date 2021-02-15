@@ -100,7 +100,7 @@ export default function SimpleDelete(props) {
       <div className="btn" id={props.num}>
         <div className="btn-back">
           <p>Sure ?</p>
-          <div className="row">
+          <div className="row" style={{marginLeft:"5px",marginRight:"15px"}}>
             <div
               type="button"
               name="delete"
@@ -111,16 +111,13 @@ export default function SimpleDelete(props) {
             >
               <button
                 className="yes"
-                style={{
-                  paddingRight: "40px",
-                  paddingLeft: "20px",
-                  marginLeft: "30px",
+                style={{paddingRight: "0px",width:"60px",paddingLeft: "0px",marginLeft: "30px",
                 }}
               >
                 Yes
               </button>
             </div>
-            <button className="no">No</button>
+            <button className="no" style={{height:"42px",paddingTop:"10px",width:"60px",paddingBottom:"10px"}}>No</button>
           </div>
         </div>
         <div className="btn-front">Delete</div>

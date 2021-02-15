@@ -250,7 +250,7 @@ export default function ProductDetails(props) {
                         rating={productRate && productRate[0].avgRate}
                       />
                     ) : (
-                      <span>Not Rated</span>
+                      <span style={{fontWeight:"700",fontSize:"20px"}}>Not Rated</span>
                     )}
                     {/* ----------------------------------------PRICE--------------------- */}
                     <div className="mt-3">
