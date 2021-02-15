@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ItemEntry from "../../../../../components/ItemEntry";
 import Loading from "../../../../../components/Loading";
 import ProductFilterVendor from "../../../../../components/productFilterVendor";
-
 import {
   getVendorsItemsAction,
   filterCarModel,
@@ -12,8 +11,6 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import axios from "axios";
-import cars2 from "../../../../../assets/js/cars2";
-import cars3 from "../../../../../assets/js/cars3";
 
 export default function MyItems(props) {
   const vendorItems = useSelector((state) => state.vendorItems.Data);
@@ -40,6 +37,7 @@ export default function MyItems(props) {
     carBrand: "",
     carModel: "",
     price: 0,
+
   });
   const handleChange = (event) => {
     const { value, name } = event.target;

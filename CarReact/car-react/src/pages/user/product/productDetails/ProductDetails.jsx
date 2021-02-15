@@ -48,9 +48,7 @@ export default function ProductDetails(props) {
     dispatch(getProductDetails(params));
   };
 
-  useEffect(() => {
-    getProducts(localStorage.getItem("ProductID"));
-  }, [productDetails]);
+  
 
   const [toastStatus, setToastStatus] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -155,6 +153,24 @@ export default function ProductDetails(props) {
         console.log(error);
       });
   };
+  const [loc, setLoc] = useState("");
+  
+
+  useEffect(() => {
+    getProducts(localStorage.getItem("ProductID"));
+  }, [productDetails]);
+
+  useEffect(() => {
+    if (productDetails) {
+      if (productDetails.person) {
+        if(productDetails.person.location){
+          setLoc(
+            `https://maps.google.com/maps?q=${productDetails.person.location.coordinates[1]},${productDetails.person.location.coordinates[0]}&hl=es&z=14&amp;&output=embed`
+            );
+          }
+      }
+    }
+  })
 
   const pageVariants = {
     in: {
@@ -199,7 +215,8 @@ export default function ProductDetails(props) {
                 style={{ paddingLeft: "0px", paddingRight: "0px" }}
               >
                 {productDetails ? (
-                  productDetails.images && productDetails.images.length === 1 ? (
+                  productDetails.images &&
+                  productDetails.images.length === 1 ? (
                     <img
                       className="ml-lg-5"
                       style={{
@@ -493,7 +510,24 @@ export default function ProductDetails(props) {
                   {localStorage.getItem("UserID") !== null ? (
                     <div className="row">
                       <div className="d-flex flex-wrap">
-                        <iframe
+                        {productDetails &&
+                          productDetails.person &&
+                          productDetails.person.location && (
+                              <iframe
+                                title="map"
+                                id="myiframe"
+                                src={loc}
+                                width="1010px"
+                                height="350px"
+                                frameborder="0"
+                                style={{
+                                  border: "1px solid black",
+                                  borderRadius: "2%",
+                                }}
+                                allowfullscreen
+                              ></iframe>
+                          )}
+                        {/* <iframe
                           title="Product Map"
                           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
                           width="1010px"
@@ -504,7 +538,7 @@ export default function ProductDetails(props) {
                             borderRadius: "2%",
                           }}
                           allowfullscreen
-                        ></iframe>
+                        ></iframe> */}
                       </div>
                     </div>
                   ) : (
