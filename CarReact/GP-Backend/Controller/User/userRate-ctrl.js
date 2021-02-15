@@ -82,10 +82,7 @@ removeFeedback = async (req, res) => {
 };
 
 rateItem = (req, res) => {
-  // {
-  //     rating:Number,
-  //     car:IDitem,
-  // }
+  
   const body = req.body;
   if (!(body.car && body.rating)) {
     return res.json({
