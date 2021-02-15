@@ -22,21 +22,24 @@ function App() {
       <Router>
         <MagdyNavbar />
         <Routes />
-       
-          <div className="container">
+
+        <div className="container">
+          <div
+            style={{ position: "absolute", left: "310px", bottom: "150px" }}
+          >
             <Ads
               class="pater"
               link="http://go.thoughtleaders.io/SenchaCodrops141117"
               imgSrc={image1}
               hoverImgSrc={image2}
             />
-            <div
-              style={{ position: "absolute", right: "310px", bottom: "150px" }}
-            >
-              <Ads2 />
-            </div>
           </div>
-
+          <div
+            style={{ position: "absolute", right: "310px", bottom: "150px" }}
+          >
+            <Ads2 />
+          </div>
+        </div>
       </Router>
     </div>
   );

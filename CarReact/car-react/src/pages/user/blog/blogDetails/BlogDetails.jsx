@@ -1,7 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Button, Col, Form, Modal } from "react-bootstrap";
+import { Button, Carousel, Col, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
@@ -14,6 +14,7 @@ import {
   addVoteComment,
   removeVoteComment,
 } from "../../../../store/actions";
+import Loading from "../../../../components/Loading";
 
 export default function BlogDetails(props) {
 
@@ -53,7 +54,7 @@ export default function BlogDetails(props) {
   const [editValue, setEditValue] = useState({
     title: "",
     body: "",
-    image: "",
+    images: [],
     brand: "",
     model: "",
   });
@@ -74,13 +75,15 @@ export default function BlogDetails(props) {
     setEditValue((previous) => {
       return {
         ...previous,
-        image: event.target.files[0],
+        image: event.target.files,
       };
     });
   };
   const handleEditSubmit = (params) => {
     const formData = new FormData();
-    formData.append("image", editValue.image);
+    for (var x = 0; x < editValue.images.length; x++) {
+      formData.append("images", editValue.images[x]);
+    }
     formData.append("title", editValue.title);
     formData.append("body", editValue.body);
     formData.append("brand", editValue.brand);
@@ -330,7 +333,7 @@ export default function BlogDetails(props) {
               </p>
               <hr />
               <p>
-                <span style={{ fontWeight: "700",fontSize:"20px" }}>
+                <span style={{ fontWeight: "700", fontSize: "20px" }}>
                   Date :
                   {blogDetails && blogTime ? " " + blogTime[0] : "Loading"}
                 </span>
@@ -342,7 +345,10 @@ export default function BlogDetails(props) {
                 </span>
               </p>
               <hr />
-              <h5 className="mt-0" style={{ fontWeight: "700", fontSize: "25px" }}>
+              <h5
+                className="mt-0"
+                style={{ fontWeight: "700", fontSize: "25px" }}
+              >
                 Post Details
               </h5>
               <p
@@ -369,36 +375,72 @@ export default function BlogDetails(props) {
               </p> */}
             </div>
             <div className="col-6">
-              <img
-                className="ml-lg-5"
-                style={{ width: "400px", height: "300px", borderRadius: "10%" }}
-                src={blogDetails && blogDetails.image}
-                alt=""
-              />
+              {blogDetails ? (
+                blogDetails.images && blogDetails.images.length === 1 ? (
+                  <img
+                    className="ml-lg-5"
+                    style={{
+                      width: "400px",
+                      height: "300px",
+                      borderRadius: "10%",
+                    }}
+                    src={blogDetails.images[0]}
+                    alt=""
+                  />
+                ) : (
+                  blogDetails.images && (
+                    <div>
+                      <Carousel interval={1000}>
+                        {blogDetails.images.map((img, index) => {
+                          return (
+                            <Carousel.Item>
+                              <img
+                                key={index}
+                                className="d-block"
+                                style={{ height: "300px", width: "500px" }}
+                                src={img}
+                                alt="Slide"
+                              />
+                            </Carousel.Item>
+                          );
+                        })}
+                      </Carousel>
+                    </div>
+                  )
+                )
+              ) : (
+                <Loading />
+              )}
             </div>
-      <div className="row" style={{marginLeft:"710px"}}>
-        {localStorage.getItem("UserID") !== null && (
-          <button
-            className="bookmarkbtn fourth"
-            style={{ marginLeft: "30px",height:"65%" }}
-            onClick={handleAddBookmark}
-          >
-            Bookmark
-          </button>
-        )}
-        {checkOwner && (
-          <Button
-            variant="dark"
-            style={{ margin: "10px" }}
-            onClick={() => openModal(props.id)}
-          >
-            Edit
-          </Button>
-        )}
-        </div>
-      
-   
-            <hr style={{ border: "2px solid black", width: "100%",marginBottom:"8px",marginTop:"0px" }} />
+            <div className="row" style={{ marginLeft: "710px" }}>
+              {localStorage.getItem("UserID") !== null && (
+                <button
+                  className="bookmarkbtn fourth"
+                  style={{ marginLeft: "30px", height: "65%" }}
+                  onClick={handleAddBookmark}
+                >
+                  Bookmark
+                </button>
+              )}
+              {checkOwner && (
+                <Button
+                  variant="dark"
+                  style={{ margin: "10px" }}
+                  onClick={() => openModal(props.id)}
+                >
+                  Edit
+                </Button>
+              )}
+            </div>
+
+            <hr
+              style={{
+                border: "2px solid black",
+                width: "100%",
+                marginBottom: "8px",
+                marginTop: "0px",
+              }}
+            />
           </div>
         </div>
       </div>
@@ -503,7 +545,6 @@ export default function BlogDetails(props) {
             variant="primary"
             type="button"
             onClick={() => handleEditSubmit(localStorage.getItem("BlogID"))}
-            
           >
             Submit
           </Button>
@@ -513,75 +554,96 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <h3 className="text-center mb-4" style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
+      <h3
+        className="text-center mb-4"
+        style={{
+          fontWeight: "700",
+          fontSize: "40px",
+          backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
+          color: "transparent",
+          WebkitBackgroundClip: "text",
+        }}
+      >
+        Comment Section
+      </h3>
       <div className="row">
-
-        <div className="col-8" >
-
+        <div className="col-8">
           {/* <!-- Single Comment --> */}
-          {blogDetails
-            ? blogDetails.comment.length === 0 ? (<div className="text-center mt-5"  
-            style={{ fontWeight: "700", fontSize: "30px",color:"black"}}>No Comments Yet</div>) : 
-            <div style={{maxHeight:"300px",overflowY:"scroll",overflowX:"hidden"}}>
-            {blogDetails.comment.map((item, index) => {
-              return (
-                <div className="media mb-1" key={index}>
-                  <div className="mr-2">
-                    <button
-                      className="btn"
-                      style={{
-                        position: "relative",
-                        left: "80.7px",
-                        fontSize: "20px",
-                      }}
-                      onClick={() => addVote(item._id)}
-                    >
-                      <i class="fas fa-chevron-up"></i>
-                    </button>
-                    <span
-                      className="btn badge-pill"
-                      style={{
-                        position: "relative",
-                        left: "40px",
-                        top: "40px",
-                        fontSize: "20px",
-                        fontWeight:"700"
-                      }}
-                    >
-                      {item.vote.upVoting-item.vote.downVoting}
-                    </span>
-                    <button
-                      className="btn"
-                      style={{
-                        position: "relative",
-                        left: "0px",
-                        top: "80px",
-                        fontSize: "20px",
-                      }}
-                      onClick={() => removeVote(item._id)}
-                    >
-                      <i class="fas fa-chevron-down"></i>
-                    </button>
-                  </div>
+          {blogDetails ? (
+            blogDetails.comment.length === 0 ? (
+              <div
+                className="text-center mt-5"
+                style={{ fontWeight: "700", fontSize: "30px", color: "black" }}
+              >
+                No Comments Yet
+              </div>
+            ) : (
+              <div
+                style={{
+                  maxHeight: "300px",
+                  overflowY: "scroll",
+                  overflowX: "hidden",
+                }}
+              >
+                {blogDetails.comment.map((item, index) => {
+                  return (
+                    <div className="media mb-1" key={index}>
+                      <div className="mr-2">
+                        <button
+                          className="btn"
+                          style={{
+                            position: "relative",
+                            left: "80.7px",
+                            fontSize: "20px",
+                          }}
+                          onClick={() => addVote(item._id)}
+                        >
+                          <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <span
+                          className="btn badge-pill"
+                          style={{
+                            position: "relative",
+                            left: "40px",
+                            top: "40px",
+                            fontSize: "20px",
+                            fontWeight: "700",
+                          }}
+                        >
+                          {item.vote.upVoting - item.vote.downVoting}
+                        </span>
+                        <button
+                          className="btn"
+                          style={{
+                            position: "relative",
+                            left: "0px",
+                            top: "80px",
+                            fontSize: "20px",
+                          }}
+                          onClick={() => removeVote(item._id)}
+                        >
+                          <i class="fas fa-chevron-down"></i>
+                        </button>
+                      </div>
 
-                  {/* <img
+                      {/* <img
                       className="d-flex mr-3 rounded-circle"
                       src={item.image}
                       alt=""
                       style={{ maxHeight: "300px", maxWidth: "300px" }}
                     /> */}
-                  <hr />
-                  <br />
-                  <div className="media-body">
-                    <h5 className="mt-0">
-                      {item.person.firstName ? item.person.firstName : null}
-                    </h5>
-                    <hr />
-                    <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
-                    <hr style={{ border: "1px solid" }} />
-                  </div>
+                      <hr />
+                      <br />
+                      <div className="media-body">
+                        <h5 className="mt-0">
+                          {item.person.firstName ? item.person.firstName : null}
+                        </h5>
+                        <hr />
+                        <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
+                        <hr style={{ border: "1px solid" }} />
+                      </div>
 
-                  {/* <form
+                      {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -597,7 +659,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                  {/* {item
+                      {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -617,16 +679,24 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-                </div>
-              );
-            })}
-            </div> 
-            : "LOADING"}
+                    </div>
+                  );
+                })}
+              </div>
+            )
+          ) : (
+            "LOADING"
+          )}
         </div>
         <div className="col-4">
           {localStorage.getItem("Authorization") ? (
             <div className="card bgforleavecomment text-center">
-              <h5 className="card-header" style={{fontSize:"25px",fontWeight:"700"}}>Leave a Comment:</h5>
+              <h5
+                className="card-header"
+                style={{ fontSize: "25px", fontWeight: "700" }}
+              >
+                Leave a Comment:
+              </h5>
               <div className="card-body">
                 <form method="post" onSubmit={handleSubmit}>
                   <div className="form-group">
@@ -638,36 +708,40 @@ export default function BlogDetails(props) {
                       onChange={handleChange}
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn btn-dark" style={{fontWeight:"700",fontSize:"20px"}}>
+                  <button
+                    type="submit"
+                    className="btn btn-dark"
+                    style={{ fontWeight: "700", fontSize: "20px" }}
+                  >
                     Submit
                   </button>
                 </form>
               </div>
             </div>
           ) : (
-              <div
-                className="shadow-sm p-2 mb-4 rounded-lg"
-                onClick={() => history.push(`/SignChoice`)}
+            <div
+              className="shadow-sm p-2 mb-4 rounded-lg"
+              onClick={() => history.push(`/SignChoice`)}
+              style={{
+                height: "300px",
+                width: "500px",
+                border: "solid white 3px",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            >
+              <h3
                 style={{
-                  height: "300px",
-                  width: "500px",
-                  border: "solid white 3px",
-                  borderRadius: "10px",
-                  cursor: "pointer",
+                  color: "#737373",
+                  position: "relative",
+                  top: "35%",
+                  textAlign: "center",
                 }}
               >
-                <h3
-                  style={{
-                    color: "#737373",
-                    position: "relative",
-                    top: "35%",
-                    textAlign: "center",
-                  }}
-                >
-                  Only registered users can add comments
+                Only registered users can add comments
               </h3>
-              </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
 

@@ -20,16 +20,17 @@ export default function BlogList() {
 
   useEffect(() => {
     dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
-  });
+  },[]);
 
   const handleClick = (params) => {};
+
   function createItem(blog) {
     return (
       <BlogEntry
         key={blog._id}
         id={blog._id}
         // imgClass={blog.imgClass}
-        imgSrc={blog.image}
+        images={blog.images}
         // imgAlt={blog.imgAlt}
         badgeClass={blog.state ? "badge-primary" : null}
         // badgeValue={blog.badgeValue}

@@ -63,7 +63,7 @@ export default function SlickSlider(props) {
     dots: true,
     infinite: true,
     pauseOnHover: true,
-    slidesToShow: 3,
+    slidesToShow: props.items.length === 1 ? 1 : props.items.length === 2 ? 2 : 3,
     slidesToScroll: 1,
     //   autoplay: true,
     speed: 1500,

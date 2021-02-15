@@ -33,7 +33,7 @@ export default function ProductsList() {
       <ProductComp
         key={prod._id}
         id={prod._id}
-        image={prod.image}
+        images={prod.images}
         description={prod.description}
         price={prod.price}
         name={prod.person.firstName}

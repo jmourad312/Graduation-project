@@ -89,7 +89,7 @@ export default function BookmarkedPosts(props) {
                       <div className="card m-auto" key={post._id}>
                         <div className="row">
                           <div className="col-4">
-                            <img className="d-block w-100" src={post.image} style={{ height: "100%" }} alt="No supported image"/>
+                            <img className="d-block w-100" src={post.images[0]} style={{ height: "100%" }} alt="No supported image"/>
                           </div>
                           <div className="col-8">
                             <div className="card-block">

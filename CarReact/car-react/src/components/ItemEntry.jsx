@@ -34,7 +34,7 @@ export default function ItemEntry(props) {
   const [editValue, setEditValue] = useState({
     name: props.name,
     description: props.description,
-    image: props.image,
+    images: props.images,
     carBrand: props.carBrand,
     carModel: props.carModel,
     price: props.price,
@@ -62,7 +62,7 @@ export default function ItemEntry(props) {
     setEditValue((previous) => {
       return {
         ...previous,
-        image: event.target.files[0],
+        images: event.target.files,
       };
     });
   };
@@ -97,7 +97,9 @@ export default function ItemEntry(props) {
   const handleSubmit = (params) => {
     // event.preventDefault();
     const formData = new FormData();
-    formData.append("image", editValue.image);
+    for (var x = 0; x < editValue.images.length; x++) {
+      formData.append("images", editValue.images[x]);
+    }
     formData.append("name", editValue.name);
     formData.append("description", editValue.description);
     formData.append("carBrand", editValue.carBrand);
@@ -167,9 +169,9 @@ export default function ItemEntry(props) {
 
         <section class="cards" >
           <article class="card card--1" >
-            <div class="card__img" style={{ background: `url(${props.image})` }} ></div>
+            <div class="card__img" style={{ background: `url(${props.images[0]})` }} ></div>
             <p class="card_link">
-              <div class="card__img--hover" style={{ background: `url(${props.image})` }} onClick={() => handleClick(props.id)} ></div>
+              <div class="card__img--hover" style={{ background: `url(${props.images[0]})` }} onClick={() => handleClick(props.id)} ></div>
             </p>
             <div class="card__info">
               <h4 class="card__title text-truncate">{props.name}</h4>
@@ -228,9 +230,10 @@ export default function ItemEntry(props) {
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="file"
-                name="image"
+                name="images"
                 id="image"
                 onChange={handleImageChange}
+                multiple
               />
             </Form.Group>
             <Form.Group>
@@ -313,6 +316,6 @@ export default function ItemEntry(props) {
         </Modal.Footer>
       </Modal>
     </div>
-  </div >
+  </div>
   );
 }

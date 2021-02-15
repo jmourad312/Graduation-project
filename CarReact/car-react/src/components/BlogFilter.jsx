@@ -30,7 +30,7 @@ export default function BlogFilter(props) {
 
   useEffect(() => {
     dispatch(filterCarBrand());
-    dispatch(resultFromFilter({}, 0));
+    // dispatch(resultFromFilter({}, 0));
   }, []);
 
   useEffect(() => {
@@ -57,6 +57,7 @@ export default function BlogFilter(props) {
 
     });
     handleSearchClick();
+  };
     //   switch (event.target.name) {
     //     case "brand":
     //       setState({
@@ -80,7 +81,6 @@ export default function BlogFilter(props) {
 
     //       break;
     //   }
-  };
   const handleClick = (params) => {
     console.log(params);
     dispatch(resultFromFilter(filterState, params.selected*6));
@@ -125,7 +125,7 @@ export default function BlogFilter(props) {
   const [inputValue, setInputValue] = useState({
     title: "",
     body: "",
-    image: "",
+    images: [],
     brand: "",
     model: "",
   });
@@ -134,20 +134,13 @@ export default function BlogFilter(props) {
     setInputValue((previous) => {
       return {
         ...previous,
-        image: event.target.files[0],
+        images: event.target.files,
         // loaded: 0,
       };
     });
   };
 
-  const handleFocus = () => {
-    document.getElementById("focus").focus();
-  }
-
-
-
-
-
+  
   const handleInputChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
@@ -160,11 +153,18 @@ export default function BlogFilter(props) {
       };
     });
   };
+  
+  const handleFocus = () => {
+    document.getElementById("focus").focus();
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    formData.append("image", inputValue.image);
+    for (var x = 0; x < inputValue.images.length; x++) {
+      formData.append("images", inputValue.images[x]);
+    }
+    // formData.append("images", inputValue.images);
     formData.append("title", inputValue.title);
     formData.append("body", inputValue.body);
     formData.append("brand", inputValue.brand);
@@ -191,9 +191,11 @@ export default function BlogFilter(props) {
       .catch((error) => {
         console.log(error);
       });
-    console.log(inputValue);
-    closeModal();
-    setInputValue("");
+      console.log(inputValue);
+      closeModal();
+      setInputValue("");
+      setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 3000);
+    
   };
   return (
     <div className={props.class}>
@@ -339,8 +341,8 @@ export default function BlogFilter(props) {
               <Form.Label>Blog Image</Form.Label>
               <Form.Control
                 type="file"
-                name="image"
-                id="image"
+                name="images"
+                id="images"
                 onChange={handleImageChange}
                 multiple
                 required
