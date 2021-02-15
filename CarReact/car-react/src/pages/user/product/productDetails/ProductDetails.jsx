@@ -245,6 +245,13 @@ export default function ProductDetails(props) {
                           : "LOADING"}
                       </Link>
                     </h2>
+                    {productRate && productRate[0] != undefined ? (
+                      <ShowRating
+                        rating={productRate && productRate[0].avgRate}
+                      />
+                    ) : (
+                      <span>Not Rated</span>
+                    )}
                     {/* ----------------------------------------PRICE--------------------- */}
                     <div className="mt-3">
                       <span className="" style={{ fontSize: "40px" }}>
@@ -253,13 +260,6 @@ export default function ProductDetails(props) {
                         </li>
                       </span>
                     </div>
-                    {productRate && productRate[0] != undefined ? (
-                      <ShowRating
-                        rating={productRate && productRate[0].avgRate}
-                      />
-                    ) : (
-                      <span>Not Rated</span>
-                    )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
