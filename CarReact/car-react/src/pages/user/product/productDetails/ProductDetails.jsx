@@ -40,6 +40,8 @@ export default function ProductDetails(props) {
 
   const productID = useSelector((state) => state.productID);
   const productDetails = useSelector((state) => state.productDetails.Data);
+  const productRate = useSelector((state) => state.productDetails.stars);
+
   const dispatch = useDispatch();
   const getProducts = (params) => {
     dispatch(getProductDetails(params));
@@ -243,29 +245,23 @@ export default function ProductDetails(props) {
                           : "LOADING"}
                       </Link>
                     </h2>
-
+                    {/* ----------------------------------------PRICE--------------------- */}
                     <div className="mt-3">
                       <span className="" style={{ fontSize: "40px" }}>
                         <li className="fas fa-coins pr-2 text-warning">
                           {productDetails && productDetails.price} LE
                         </li>
                       </span>
-                      {localStorage.getItem("UserID") !== null && (
-                        <span
-                          className="fa-lg button fill fa-pull-right"
-                          style={{ padding: "10px", marginTop: "80px" }}
-                          title="Add to favorate"
-                          onClick={handleAddFavourite}
-                        >
-                          <i
-                            className="far fa-heart"
-                            style={{ fontSize: "30px", cursor: "pointer" }}
-                          ></i>
-                        </span>
-                      )}
                     </div>
+                    {productRate && productRate[0] != undefined ? (
+                      <ShowRating
+                        rating={productRate && productRate[0].avgRate}
+                      />
+                    ) : (
+                      <span>Not Rated</span>
+                    )}
                   </div>
-
+                  {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
                     <p style={{ fontSize: "1.5rem" }}>
                       <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
@@ -284,54 +280,21 @@ export default function ProductDetails(props) {
                         : "Loading"}
                     </p>
                     <br />
-                    {/* <p>
-                  <b style={{fontSize:"20px"}}>Manufacturer: </b>{" "}
-                  {productDetails
-                    ? productDetails.case
-                      ? productDetails.case
-                      : "Loading"
-                    : "Loading"}
-                </p> */}
 
-                    {/* <!-- avalible or not --> */}
-                    {/* {productDetails &&
-                  (productDetails.available ? (
-                    <span className="badge badge-pill badge-success">
-                      Avalible
-                    </span>
-                  ) : (
-                    <span
-                      className="badge badge-pill badge-danger"
-                      style={{ fontSize: "15px" }}
-                    >
-                      Not Avalible
-                    </span>
-                  ))} */}
-
-                    {/* <!-- number of stars --> */}
-
-                    {/* <div className="mt-3 star" style={{ fontSize: "20px" }}>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"> No review</span>
-                </div> */}
-                    {/* <!-- description --> */}
-                    {/* <div className="mt-3" style={{ fontSize: "30px" }}>
-                    {productDetails && productDetails.description}
-                  </div> */}
-                    {/* <!-- Add to favorate and compare product --> */}
-                    {/* <!-- price --> */}
-
-                    {/* <span
-                    className="fa-lg"
-                    data-toggle="tooltip"
-                    title="compare product"
-                    data-placement="bottom"
-                  >
-                    <i className="fas fa-sliders-h  text-primary"></i>
-                  </span> */}
+                    {/* --------------------------------------------FAVOURITE ICON--------------------- */}
+                    {localStorage.getItem("UserID") !== null && (
+                      <span
+                        className="fa-lg button fill fa-pull-right"
+                        style={{ padding: "10px", marginTop: "80px" }}
+                        title="Add to favorate"
+                        onClick={handleAddFavourite}
+                      >
+                        <i
+                          className="far fa-heart"
+                          style={{ fontSize: "30px", cursor: "pointer" }}
+                        ></i>
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -347,7 +310,7 @@ export default function ProductDetails(props) {
               value={value}
               onChange={handleChange}
               centered
-              classes={{indicator:classes.indicator,text:classes.text}}
+              classes={{ indicator: classes.indicator, text: classes.text }}
               variant="fullWidth"
               indicatorColor="primary"
               textColor="secondary"
