@@ -33,7 +33,7 @@ export default function RecentViews(props) {
         <div className="row">
           {user ? (
             user.recentlyViewed.length === 0 ? (
-              <div className="text-center" style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",position:"absolute",left:"30%" }}
+              <div className="text-center" style={{ fontWeight: "700", fontSize: "30px",position:"absolute",left:"30%" }}
           >No Items Viewed yet
           <div className="text-center" onClick={() => history.push("/ProductsList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
             Go to Products List 
