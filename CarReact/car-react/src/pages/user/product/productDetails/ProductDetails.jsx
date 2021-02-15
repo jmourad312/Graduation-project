@@ -178,7 +178,6 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-    <ShowRating />
       {localStorage.getItem("Authorization") === null && <LoginButton />}
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <section className="products-details container">
@@ -439,6 +438,8 @@ export default function ProductDetails(props) {
                                           >
                                             User: {item.user.firstName}
                                           </p>
+                                          <ShowRating rating={item.rating} />
+
                                           <p
                                             className="text-left"
                                             style={{
