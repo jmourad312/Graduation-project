@@ -266,21 +266,23 @@ export default function ProductDetails(props) {
         {/* <!-- start Location ,reviews,PRODUCT INFORMATION --> */}
         <div className="container mt-3">
           <div className="row">
-            <div className="col-4 content">
-              <h3>
-                <strong
-                  className="pl-3"
-                  style={{
-                    borderLeft: "3px solid red",
-                    height: "100%",
-                    fontSize: "30px",
-                  }}
-                >
-                  Product Information
-                </strong>
-              </h3>
-              <br />
-              {/* <p>
+            <div className="col-8 content">
+              <div className="row">
+                <div className="col-6">
+                  <h3>
+                    <strong
+                      className="pl-3"
+                      style={{
+                        borderLeft: "3px solid red",
+                        height: "100%",
+                        fontSize: "30px",
+                      }}
+                    >
+                      Product Information
+                    </strong>
+                  </h3>
+                  <br />
+                  {/* <p>
                 <b style={{fontSize:"20px"}}>Manufacturer: </b>{" "}
                 {productDetails
                   ? productDetails.case
@@ -288,40 +290,40 @@ export default function ProductDetails(props) {
                     : "Loading"
                   : "Loading"}
               </p> */}
-              <p style={{ fontSize: "1.5rem" }}>
-                <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
-                {productDetails
-                  ? productDetails.carBrand
-                    ? productDetails.carBrand
-                    : "Loading"
-                  : "Loading"}
-              </p>
-              <p style={{ fontSize: "1.5rem" }}>
-                <b style={{ fontSize: "1.5rem" }}>Model: </b>
-                {productDetails
-                  ? productDetails.carModel
-                    ? productDetails.carModel
-                    : "Loading"
-                  : "Loading"}
-              </p>
-              {/* </div> */}
-
-              {/* <div [hidden]="tab == 1 || tab == 3"> */}
-
-              {/* </div> */}
-              {localStorage.getItem("UserID") ? (
-                <>
-                  {" "}
-                  <h3>
-                    <span
-                      className="pl-3"
-                      style={{ borderLeft: "3px solid red", height: "100%" }}
-                    ></span>
-                    Write your Feedback
-                  </h3>
-                  <br />
-                  <Review />
-                  {/* <form>
+                  <p style={{ fontSize: "1.5rem" }}>
+                    <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
+                    {productDetails
+                      ? productDetails.carBrand
+                        ? productDetails.carBrand
+                        : "Loading"
+                      : "Loading"}
+                  </p>
+                  <p style={{ fontSize: "1.5rem" }}>
+                    <b style={{ fontSize: "1.5rem" }}>Model: </b>
+                    {productDetails
+                      ? productDetails.carModel
+                        ? productDetails.carModel
+                        : "Loading"
+                      : "Loading"}
+                  </p>
+                </div>
+                <div className="col-6">
+                  {localStorage.getItem("UserID") ? (
+                    <>
+                      {" "}
+                      <h3>
+                        <span
+                          className="pl-3"
+                          style={{
+                            borderLeft: "3px solid red",
+                            height: "100%",
+                          }}
+                        ></span>
+                        Write your Feedback
+                      </h3>
+                      <br />
+                      <Review />
+                      {/* <form>
                     <div className="form-group">
                       <label style={{ fontSize: "1.5rem" }} for="comment">
                         Review:
@@ -345,104 +347,113 @@ export default function ProductDetails(props) {
                       Submit
                     </button>
                   </form>{" "} */}
-                </>
-              ) : (
-                <div
-                  style={{
-                    height: "600px",
-                    width: "300px",
-                    position: "absolute",
-                    left: "0%",
-                    top: "0%",
-                  }}
-                >
-                  <h2
-                    style={{
-                      position: "relative",
-                      top: "40%",
-                      left: "0%",
-                      textAlign: "center",
-                    }}
-                  >
-                    Only registered car owners can submit a review
-                  </h2>
+                    </>
+                  ) : (
+                    <div
+                      style={{
+                        height: "600px",
+                        width: "300px",
+                        position: "absolute",
+                        left: "0%",
+                        top: "0%",
+                      }}
+                    >
+                      <h2
+                        style={{
+                          position: "relative",
+                          top: "40%",
+                          left: "0%",
+                          textAlign: "center",
+                        }}
+                      >
+                        Only registered car owners can submit a review
+                      </h2>
+                    </div>
+                  )}
+                  {/* </div> */}
                 </div>
-              )}
-              {/* </div> */}
+              </div>
+              <div className="row">
+                <div className="text-center w-100">
+                  {" "}
+                  {productDetails ? (
+                    productDetails.feedback.length === 0 ? (
+                      <div>be the first to rate this item</div>
+                    ) : (
+                      <div
+                        className="text-center"
+                        style={{
+                          maxHeight: "400px",
+                          overflowX: "hidden",
+                          overflowY: "scroll",
+                        }}
+                      >
+                        {productDetails
+                          ? productDetails.feedback
+                            ? productDetails.feedback.map((item) => {
+                                let postTime = item.createdAt.split("T");
+                                return (
+                                  <>
+                                    <p
+                                      className="text-left"
+                                      style={{
+                                        fontWeight: "700",
+                                        fontSize: "20px",
+                                        marginBottom: "0px",
+                                      }}
+                                    >
+                                      User: {item.user.firstName}
+                                    </p>
+                                    <p
+                                      className="text-left"
+                                      style={{
+                                        fontWeight: "700",
+                                        fontSize: "20px",
+                                      }}
+                                    >
+                                      Posted at: {postTime[0]}
+                                    </p>
+                                    <hr
+                                      style={{
+                                        border: "0.1px solid grey",
+                                        marginBottom: "5px",
+                                        marginTop: "0px",
+                                      }}
+                                    />
+                                    <p
+                                      style={{
+                                        fontWeight: "700",
+                                        fontSize: "20px",
+                                        marginBottom: "0px",
+                                      }}
+                                    >
+                                      {item.comment}
+                                    </p>
+                                    <hr
+                                      style={{
+                                        border: "2px solid",
+                                        marginBottom: "0px",
+                                      }}
+                                    />
+                                  </>
+                                );
+                              })
+                            : "loading"
+                          : "loading"}
+                      </div>
+                    )
+                  ) : (
+                    "Loading"
+                  )}
+                </div>
+              </div>
             </div>
 
-            <div className="col-4 text-center">
-              {" "}
-              {productDetails ? (
-                productDetails.feedback.length === 0 ? (
-                  <div>be the first to rate this item</div>
-                ) : (
-                  <div
-                    className="text-center"
-                    style={{
-                      maxHeight: "400px",
-                      overflowX: "hidden",
-                      overflowY: "scroll",
-                    }}
-                  >
-                    {productDetails
-                      ? productDetails.feedback
-                        ? productDetails.feedback.map((item) => {
-                            let postTime = item.createdAt.split("T");
-                            return (
-                              <>
-                                <p
-                                  className="text-left"
-                                  style={{
-                                    fontWeight: "700",
-                                    fontSize: "20px",
-                                    marginBottom: "0px",
-                                  }}
-                                >
-                                  User: {item.user.firstName}
-                                </p>
-                                <p
-                                  className="text-left"
-                                  style={{
-                                    fontWeight: "700",
-                                    fontSize: "20px",
-                                  }}
-                                >
-                                  Posted at: {postTime[0]}
-                                </p>
-                                <hr
-                                  style={{
-                                    border: "0.1px solid grey",
-                                    marginBottom: "5px",
-                                    marginTop: "0px",
-                                  }}
-                                />
-                                <p
-                                  style={{
-                                    fontWeight: "700",
-                                    fontSize: "20px",
-                                    marginBottom: "0px",
-                                  }}
-                                >
-                                  {item.comment}
-                                </p>
-                                <hr
-                                  style={{
-                                    border: "2px solid",
-                                    marginBottom: "0px",
-                                  }}
-                                />
-                              </>
-                            );
-                          })
-                        : "loading"
-                      : "loading"}
-                  </div>
-                )
-              ) : (
-                "Loading"
-              )}
-            </div>
+            {/* </div> */}
+
+            {/* <div [hidden]="tab == 1 || tab == 3"> */}
+
+            {/* </div> */}
 
             {/* {localStorage.getItem("Authorization") !== null ? (
               <div className="col-4 text-center">
