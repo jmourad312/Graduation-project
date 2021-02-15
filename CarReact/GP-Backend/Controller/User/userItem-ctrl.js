@@ -12,7 +12,7 @@ const Vendor = require('../../models/Person/Vendor/vendor')
 
 // get part of product
 partOfItem = (req, res) => {
-  const populateQuery = { path: "person", select: "firstName" };
+  const populateQuery = { path: "person", select: "firstName workshopName" };
 
   carItem
     .find(
@@ -46,7 +46,7 @@ showDetailsItem = async (req, res) => {
   const idItem = req.params.id;
   const populateQuery = [
     { path: "person", select: "firstName" },
-    { path: "feedback" , populate:{ path: "user", select: "firstName" } }
+    { path: "feedback" , populate:{ path: "user", select: "firstName workshopName" } }
   ];
 
   carItem
@@ -65,11 +65,10 @@ showDetailsItem = async (req, res) => {
       }
 
   const stars = await Feedback.aggregate([
-    { $match: { car : idItem} },
+    { $match: { car : data._id} },
     { $group : {_id : null, avgRate : {  $avg : "$rating" } } }
-  ]).then ("done")
+  ]).then("done")
       //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
-
       return res.json({
         Data: data,stars,
         Message: "Details product",
@@ -104,7 +103,7 @@ showFilterItems = (req, res) => {
   }
 
   console.log(queryCond);
-  const populateQuery = [{ path: "person", select: "firstName" }];
+  const populateQuery = [{ path: "person", select: "firstName workshopName" }];
 
   carItem
     .find(queryCond, { __v: 0 })

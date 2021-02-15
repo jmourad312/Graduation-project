@@ -67,7 +67,6 @@ router.post("/signup", async (req, res) => {
         {
           firstName: req.body.firstName,
           middleName: req.body.middleName,
-          lastName: req.body.lastName,
           email: req.body.email,
           image: req.body.image,
           phoneNumber: req.body.phoneNumber,

@@ -8,7 +8,6 @@ export default function Model(props) {
 
     const [editValue, setEditValue] = useState({
         firstName: "",
-        lastName: "",
         middleName: "",
         password: "",
         email: "",
@@ -18,7 +17,6 @@ export default function Model(props) {
     useEffect(() => {
         setEditValue({
             firstName: data.person.firstName,
-            lastName: data.person.lastName,
             middleName: data.person.middleName,
             password: "",
             email: data.person.email,
@@ -48,7 +46,6 @@ export default function Model(props) {
         const formData = new FormData();
         editValue.image !="" && formData.append("image", editValue.image);
         formData.append("firstName", editValue.firstName);
-        formData.append("lastName", editValue.lastName);
         formData.append("middleName", editValue.middleName);
         formData.append("email", editValue.email);
         editValue.password.length !=0 && formData.append("password", editValue.password);
@@ -87,12 +84,6 @@ export default function Model(props) {
                         <label >middleName</label>
                         <input type="text" className="form-control" value={editValue.middleName} name="middleName" onChange={handleEditChange} />
                     </div>
-
-                    <div className="form-group">
-                        <label >lastName</label>
-                        <input type="text" className="form-control" value={editValue.lastName} name="lastName" onChange={handleEditChange} />
-                    </div>
-
                     <div className="form-group">
                         <label>image</label>
                         <input type="file" name="image" className="form-control" onChange={handleImageChange} />
