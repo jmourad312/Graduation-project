@@ -14,6 +14,12 @@ var car = new schema({
       ref: "Feedback",
     },
   ],
+  rate: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rate",
+    },
+  ],
   carBrand: String,
   carModel: String,
   itemCollection: String,

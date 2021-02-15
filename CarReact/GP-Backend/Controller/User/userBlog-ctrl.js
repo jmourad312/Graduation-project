@@ -418,7 +418,7 @@ showPostsOfUser = (req, res) => {
 downVoteToComment = async (req, res) => {
 
   const personDownVote = await Vote.find({ personDownVoting: { $in: req.user._id }, comment: req.params.id});
-  console.log("errornnnnnnnnn"+personDownVote);
+  console.log(personDownVote);
 
   if (personDownVote.length > 0) {
     return res.json({
@@ -429,6 +429,7 @@ downVoteToComment = async (req, res) => {
   }
 
   const personVoteUp = await Vote.find({ personUpVoting: { $in: req.user._id }, comment: req.params.id});
+  console.log(personVoteUp)
   if (personVoteUp.length > 0) {
 
     Vote.findOneAndUpdate(
@@ -450,7 +451,7 @@ downVoteToComment = async (req, res) => {
       }
     );
   }
-
+else{
   Vote.findOneAndUpdate(
     { comment: req.params.id },
     { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
@@ -469,6 +470,7 @@ downVoteToComment = async (req, res) => {
       });
     }
   );
+}
 
 };
 
@@ -485,6 +487,7 @@ upVoteToComment = async (req, res) => {
   }
 
   const personVoteDown = await Vote.find({ personDownVoting: { $in: req.user._id }, comment: req.params.id});
+  
   if (personVoteDown.length > 0) {
 
     Vote.findOneAndUpdate(
@@ -506,7 +509,7 @@ upVoteToComment = async (req, res) => {
       }
     );
   }
-
+else{
   Vote.findOneAndUpdate(
     { comment: req.params.id },
     { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
@@ -525,6 +528,7 @@ upVoteToComment = async (req, res) => {
       });
     }
   );
+}
 };
 
 // add posts to bookmark

@@ -123,7 +123,7 @@ router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), 
 //     rating:Number,
 //     car:IDitem,
 // }
-
+router.post("/rateItem", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.rateItem);
 
 router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
 // params => idfeedback
