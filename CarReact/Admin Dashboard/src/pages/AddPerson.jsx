@@ -147,7 +147,7 @@ export default function AddPerson(props) {
                     Vendor
                   </option>
                   <option value="Admin" key="Admin">
-                    Vendor
+                  Admin
                   </option>
                 </select>
 
