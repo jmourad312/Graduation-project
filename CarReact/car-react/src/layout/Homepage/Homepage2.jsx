@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Ads from "../../components/Ads";
 import Logo from "../../components/Logo";
+import {useTranslation} from "react-i18next";
+
 
 export default function Homepage2() {
   useEffect(() => {
@@ -335,6 +337,8 @@ export default function Homepage2() {
     timer = setTimeout(autoSlide, 6000);
   }, []);
 
+  const {t, i18n} = useTranslation();
+
   return (
     <section className="homepage2">
     <div style={{position:"absolute",left:"35%",top:"5%",zIndex:"20"}}>
@@ -358,7 +362,8 @@ export default function Homepage2() {
         className="text-center"
       >
         <i class="fas fa-3x fa-long-arrow-alt-up mr-1"></i><br/>
-        Start Navigation From Here
+        {t('navigation')}
+       
       </div>
       <div
         className="slider"
@@ -407,42 +412,42 @@ export default function Homepage2() {
               data-id="1"
             >
               <div className="slider__text-item-head">
-                <h3>Car parts</h3>
+                <h3>{t('slider.carparts')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>“Find the right car part with ease”</p>
+                <p>{t('slider.slogen')}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="2">
               <div className="slider__text-item-head">
-                <h3>Quality</h3>
+                <h3>{t('slider.Quality')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>“We value quality above all else”</p>
+                <p>{t('slider.slogen1')}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="3">
               <div className="slider__text-item-head">
-                <h3>Variety</h3>
+                <h3>{t('slider.Variety')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>“We have a variety of options for you to explore”</p>
+                <p>{t('slider.slogen2')}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="4">
               <div className="slider__text-item-head">
-                <h3>Technology</h3>
+                <h3>{t('slider.Technology')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>“Futuristic features to enjoy”</p>
+                <p>{t('slider.slogen3')}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="5">
               <div className="slider__text-item-head">
-                <h3>Design</h3>
+                <h3>{t('slider.Design')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>“Modern design to make you feel at home”</p>
+                <p>{t('slider.slogen4')}</p>
               </div>
             </div>
           </div>

@@ -1,0 +1,18 @@
+{
+    "navigation" : "Start Navigation From Here",
+    
+    "slider" :{
+        "carparts":"Car parts",
+        "slogen":"“Find the right car part with ease”",
+        "Quality":"Quality",
+        "slogen1":"We value quality above all else",
+        "Variety":"Variety",
+        "slogen2":"We value quality above all else",
+        "Technology":"Technology",
+        "slogen3":"“Futuristic features to enjoy”",
+        "Design":"Design",
+        "slogen4":"“Modern design to make you feel at home”"
+
+    }
+    
+}
