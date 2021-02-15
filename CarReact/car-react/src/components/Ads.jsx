@@ -7,7 +7,7 @@ export default function Ads(props) {
           href={props.link}
           
           rel="nofollow"
-          className={props.class}
+          className="pater"
           //   onClick="recordOutboundLink(this, 'Outbound Links', 'SenchaCodrops141117');return false;"
         >
           <img className="pater__logo" src={props.imgSrc} alt={props.imgAlt} />
