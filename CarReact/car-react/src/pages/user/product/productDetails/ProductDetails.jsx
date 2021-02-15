@@ -13,14 +13,20 @@ import { TabContainer } from "react-bootstrap";
 import InfoTwoToneIcon from "@material-ui/icons/InfoTwoTone";
 import CommentIcon from "@material-ui/icons/Comment";
 import RoomIcon from "@material-ui/icons/Room";
+import ShowRating from "../../../../components/ShowRating";
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     maxWidth: 1200,
-    height:500,
+    height: 550,
+    backgroundColor: "#ffffff7e",
+  },
+  indicator: {
+    backgroundColor: "black",
   },
 });
+
 export default function ProductDetails(props) {
 
   const classes = useStyles();
@@ -172,6 +178,7 @@ export default function ProductDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
+    <ShowRating />
       {localStorage.getItem("Authorization") === null && <LoginButton />}
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <section className="products-details container">
@@ -340,8 +347,10 @@ export default function ProductDetails(props) {
             <Tabs
               value={value}
               onChange={handleChange}
+              centered
+              classes={{indicator:classes.indicator,text:classes.text}}
               variant="fullWidth"
-              indicatorColor="secondary"
+              indicatorColor="primary"
               textColor="secondary"
               aria-label="icon label tabs example"
             >
@@ -349,213 +358,176 @@ export default function ProductDetails(props) {
               <Tab icon={<CommentIcon />} label="Reviews" />
               <Tab icon={<RoomIcon />} label="Location" />
             </Tabs>
-            {value === 0 && (
-              <TabContainer>
-                <div className="mt-3" style={{ fontSize: "30px" }}>
-                  {productDetails && productDetails.description}
-                </div>
-              </TabContainer>
-            )}
-            {value === 1 && (
-              <TabContainer>
-                <div className="row">
-                  <div className="col-3">
-                    {localStorage.getItem("UserID") ? (
-                      <>
-                        {" "}
-                        <h3>
-                          <span
-                            className="pl-3"
-                            style={{
-                              borderLeft: "3px solid red",
-                              height: "100%",
-                            }}
-                          ></span>
-                          Write your Feedback
-                        </h3>
-                        <br />
-                        <Review />
-                        {/* <form>
-                    <div className="form-group">
-                      <label style={{ fontSize: "1.5rem" }} for="comment">
-                        Review:
-                      </label>
-                      <input
-                        value={userFeedbackInfo.comment}
-                        onChange={handleCommentChange}
-                        type="review"
-                        name="comment"
-                        className="form-control"
-                        placeholder="Enter your review"
-                        id="comment"
-                      />
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={handleAddReview}
-                      className="btn btn-success"
-                    >
-                      Submit
-                    </button>
-                  </form>{" "} */}
-                      </>
-                    ) : (
-                      <div
-                        style={{
-                          height: "600px",
-                          width: "300px",
-                          position: "absolute",
-                          left: "0%",
-                          top: "0%",
-                        }}
-                      >
-                        <h2
+            <div className="p-5">
+              {value === 0 && (
+                <TabContainer>
+                  <div className="mt-3" style={{ fontSize: "30px" }}>
+                    {productDetails && productDetails.description}
+                  </div>
+                </TabContainer>
+              )}
+              {value === 1 && (
+                <TabContainer>
+                  <div className="row">
+                    <div className="col-4">
+                      {localStorage.getItem("UserID") ? (
+                        <>
+                          {" "}
+                          <h3>
+                            <span
+                              className="pl-3"
+                              style={{
+                                height: "100%",
+                              }}
+                            ></span>
+                            Write your Feedback
+                          </h3>
+                          <br />
+                          <Review />
+                        </>
+                      ) : (
+                        <div
                           style={{
-                            position: "relative",
-                            top: "40%",
+                            height: "600px",
+                            width: "300px",
+                            position: "absolute",
                             left: "0%",
-                            textAlign: "center",
+                            top: "0%",
                           }}
                         >
-                          Only registered car owners can submit a review
-                        </h2>
-                      </div>
-                    )}
-                  </div>
-                  <div className="col-9">
-                    <div className="text-center w-100">
-                      {" "}
-                      {productDetails ? (
-                        productDetails.feedback.length === 0 ? (
-                          <div>be the first to rate this item</div>
-                        ) : (
-                          <div
-                            className="text-center"
+                          <h2
                             style={{
-                              maxHeight: "400px",
-                              overflowX: "hidden",
-                              overflowY: "scroll",
+                              position: "relative",
+                              top: "40%",
+                              left: "0%",
+                              textAlign: "center",
                             }}
                           >
-                            {productDetails
-                              ? productDetails.feedback
-                                ? productDetails.feedback.map((item) => {
-                                    let postTime = item.createdAt.split("T");
-                                    return (
-                                      <>
-                                        <p
-                                          className="text-left"
-                                          style={{
-                                            fontWeight: "700",
-                                            fontSize: "20px",
-                                            marginBottom: "0px",
-                                          }}
-                                        >
-                                          User: {item.user.firstName}
-                                        </p>
-                                        <p
-                                          className="text-left"
-                                          style={{
-                                            fontWeight: "700",
-                                            fontSize: "20px",
-                                          }}
-                                        >
-                                          Posted at: {postTime[0]}
-                                        </p>
-                                        <hr
-                                          style={{
-                                            border: "0.1px solid grey",
-                                            marginBottom: "5px",
-                                            marginTop: "0px",
-                                          }}
-                                        />
-                                        <p
-                                          style={{
-                                            fontWeight: "700",
-                                            fontSize: "20px",
-                                            marginBottom: "0px",
-                                          }}
-                                        >
-                                          {item.comment}
-                                        </p>
-                                        <hr
-                                          style={{
-                                            border: "2px solid",
-                                            marginBottom: "0px",
-                                          }}
-                                        />
-                                      </>
-                                    );
-                                  })
-                                : "loading"
-                              : "loading"}
-                          </div>
-                        )
-                      ) : (
-                        "Loading"
+                            Only registered car owners can submit a review
+                          </h2>
+                        </div>
                       )}
                     </div>
+                    <div className="col-8">
+                      <div className="text-center">
+                        {" "}
+                        {productDetails ? (
+                          productDetails.feedback.length === 0 ? (
+                            <div>be the first to rate this item</div>
+                          ) : (
+                            <div
+                              className="text-center"
+                              style={{
+                                maxHeight: "400px",
+                                overflowX: "hidden",
+                                overflowY: "scroll",
+                              }}
+                            >
+                              {productDetails
+                                ? productDetails.feedback
+                                  ? productDetails.feedback.map((item) => {
+                                      let postTime = item.createdAt.split("T");
+                                      return (
+                                        <>
+                                          <p
+                                            className="text-left"
+                                            style={{
+                                              fontWeight: "700",
+                                              fontSize: "20px",
+                                              marginBottom: "0px",
+                                            }}
+                                          >
+                                            User: {item.user.firstName}
+                                          </p>
+                                          <p
+                                            className="text-left"
+                                            style={{
+                                              fontWeight: "700",
+                                              fontSize: "20px",
+                                            }}
+                                          >
+                                            Posted at: {postTime[0]}
+                                          </p>
+                                          <hr
+                                            style={{
+                                              border: "0.1px solid grey",
+                                              marginBottom: "5px",
+                                              marginTop: "0px",
+                                            }}
+                                          />
+                                          <p
+                                            style={{
+                                              fontWeight: "700",
+                                              fontSize: "20px",
+                                              marginBottom: "0px",
+                                            }}
+                                          >
+                                            {item.comment}
+                                          </p>
+                                          <hr
+                                            style={{
+                                              border: "2px solid",
+                                              marginBottom: "0px",
+                                            }}
+                                          />
+                                        </>
+                                      );
+                                    })
+                                  : "loading"
+                                : "loading"}
+                            </div>
+                          )
+                        ) : (
+                          "Loading"
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </TabContainer>
-            )}
-            {value === 2 && (
-              <TabContainer>
-                {localStorage.getItem("UserID") !== null ? (
-                  <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
-                    <div className="row"></div>
-
+                </TabContainer>
+              )}
+              {value === 2 && (
+                <TabContainer>
+                  {localStorage.getItem("UserID") !== null ? (
                     <div className="row">
-                      <h3>
-                        <span
-                          className="pl-3"
-                          style={{
-                            borderLeft: "3px solid red",
-                            height: "100%",
-                          }}
-                        ></span>
-                        Location
-                      </h3>
-                      <br />
                       <div className="d-flex flex-wrap">
                         <iframe
+                          title="Product Map"
                           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                          width="350px"
-                          height="200px"
+                          width="1010px"
+                          height="350px"
                           frameborder="0"
                           style={{
-                            border: "rgb(0, 0, 0) solid",
-                            borderRadius: "1%",
+                            border: "1px solid black",
+                            borderRadius: "2%",
                           }}
                           allowfullscreen
                         ></iframe>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div
-                    className="col-4 shadow-sm p-2 mb-4 rounded-lg"
-                    style={{
-                      height: "300px",
-                      width: "300px",
-                      border: "solid white 3px",
-                    }}
-                  >
-                    <h3
+                  ) : (
+                    <div
+                      className="col-4 shadow-sm p-2 mb-4 rounded-lg"
                       style={{
-                        color: "#737373",
-                        position: "relative",
-                        top: "35%",
-                        textAlign: "center",
+                        height: "300px",
+                        width: "300px",
+                        border: "solid white 3px",
                       }}
                     >
-                      Only registered car owners can view this Item's Location
-                    </h3>
-                  </div>
-                )}
-              </TabContainer>
-            )}
+                      <h3
+                        style={{
+                          color: "#737373",
+                          position: "relative",
+                          top: "35%",
+                          textAlign: "center",
+                        }}
+                      >
+                        Only registered car owners can view this Item's Location
+                      </h3>
+                    </div>
+                  )}
+                </TabContainer>
+              )}
+            </div>
           </Paper>
           <div className="row">
             <div className="col-8 content">
