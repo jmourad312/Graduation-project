@@ -14,6 +14,7 @@ import {
   addVoteComment,
   removeVoteComment,
 } from "../../../../store/actions";
+import Loading from "../../../../components/Loading";
 
 export default function BlogDetails(props) {
 
@@ -53,7 +54,7 @@ export default function BlogDetails(props) {
   const [editValue, setEditValue] = useState({
     title: "",
     body: "",
-    image: "",
+    images: [],
     brand: "",
     model: "",
   });
@@ -74,13 +75,15 @@ export default function BlogDetails(props) {
     setEditValue((previous) => {
       return {
         ...previous,
-        image: event.target.files[0],
+        image: event.target.files,
       };
     });
   };
   const handleEditSubmit = (params) => {
     const formData = new FormData();
-    formData.append("image", editValue.image);
+    for (var x = 0; x < editValue.images.length; x++) {
+      formData.append("images", editValue.images[x]);
+    }
     formData.append("title", editValue.title);
     formData.append("body", editValue.body);
     formData.append("brand", editValue.brand);
@@ -372,35 +375,41 @@ export default function BlogDetails(props) {
               </p> */}
             </div>
             <div className="col-6">
-              {blogDetails &&
-              blogDetails.images &&
-              blogDetails.images.length === 1 ? (
-                <img
-                  className="ml-lg-5"
-                  style={{
-                    width: "400px",
-                    height: "300px",
-                    borderRadius: "10%",
-                  }}
-                  src={blogDetails.images[0]}
-                  alt=""
-                />
+              {blogDetails ? (
+                blogDetails.images && blogDetails.images.length === 1 ? (
+                  <img
+                    className="ml-lg-5"
+                    style={{
+                      width: "400px",
+                      height: "300px",
+                      borderRadius: "10%",
+                    }}
+                    src={blogDetails.images[0]}
+                    alt=""
+                  />
+                ) : (
+                  blogDetails.images && (
+                    <div>
+                      <Carousel interval={1000}>
+                        {blogDetails.images.map((img, index) => {
+                          return (
+                            <Carousel.Item>
+                              <img
+                                key={index}
+                                className="d-block"
+                                style={{ height: "300px", width: "500px" }}
+                                src={img}
+                                alt="Slide"
+                              />
+                            </Carousel.Item>
+                          );
+                        })}
+                      </Carousel>
+                    </div>
+                  )
+                )
               ) : (
-                <div>
-                  <Carousel>
-                  {blogDetails.images.map((img,index)=>{
-                    return(
-                    <Carousel.Item>
-                      <img
-                        className="d-block w-100"
-                        src={img}
-                        alt="Slide"
-                      />
-                    </Carousel.Item>
-                      );
-                  })}
-                  </Carousel>
-                </div>
+                <Loading />
               )}
             </div>
             <div className="row" style={{ marginLeft: "710px" }}>

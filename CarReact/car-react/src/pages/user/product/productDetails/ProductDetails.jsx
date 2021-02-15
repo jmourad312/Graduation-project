@@ -9,11 +9,12 @@ import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
 import { makeStyles, Paper, Tab, Tabs } from "@material-ui/core";
-import { TabContainer } from "react-bootstrap";
+import { Carousel, TabContainer } from "react-bootstrap";
 import InfoTwoToneIcon from "@material-ui/icons/InfoTwoTone";
 import CommentIcon from "@material-ui/icons/Comment";
 import RoomIcon from "@material-ui/icons/Room";
 import ShowRating from "../../../../components/ShowRating";
+import Loading from "../../../../components/Loading";
 
 const useStyles = makeStyles({
   root: {
@@ -197,13 +198,49 @@ export default function ProductDetails(props) {
                 className="col-4"
                 style={{ paddingLeft: "0px", paddingRight: "0px" }}
               >
-                <img
+                {productDetails ? (
+                  productDetails.images && productDetails.images.length === 1 ? (
+                    <img
+                      className="ml-lg-5"
+                      style={{
+                        width: "400px",
+                        height: "300px",
+                        borderRadius: "10%",
+                      }}
+                      src={productDetails.images[0]}
+                      alt=""
+                    />
+                  ) : (
+                    productDetails.images && (
+                      <div>
+                        <Carousel interval={1000}>
+                          {productDetails.images.map((img, index) => {
+                            return (
+                              <Carousel.Item>
+                                <img
+                                  key={index}
+                                  className="d-block"
+                                  style={{ height: "300px", width: "350px" }}
+                                  src={img}
+                                  alt="Slide"
+                                />
+                              </Carousel.Item>
+                            );
+                          })}
+                        </Carousel>
+                      </div>
+                    )
+                  )
+                ) : (
+                  <Loading />
+                )}
+                {/* <img
                   src={productDetails && productDetails.image}
                   // width="100%"
                   // height="100%"
                   style={{ height: "300px", width: "350px" }}
                   alt=""
-                />
+                /> */}
               </div>
               <div className="col-8">
                 <div className="row">
@@ -250,7 +287,9 @@ export default function ProductDetails(props) {
                         rating={productRate && productRate[0].avgRate}
                       />
                     ) : (
-                      <span style={{fontWeight:"700",fontSize:"20px"}}>Not Rated</span>
+                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        Not Rated
+                      </span>
                     )}
                     {/* ----------------------------------------PRICE--------------------- */}
                     <div className="mt-3">

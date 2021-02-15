@@ -36,7 +36,7 @@ export default function MyItems(props) {
   const [inputValue, setInputValue] = useState({
     name: "",
     description: "",
-    image: "",
+    images: [],
     carBrand: "",
     carModel: "",
     price: 0,
@@ -60,11 +60,11 @@ export default function MyItems(props) {
     });
   };
   const handleImageChange = (event) => {
-    console.log(event.target.files[0]);
+    console.log(event.target.files);
     setInputValue((previous) => {
       return {
         ...previous,
-        image: event.target.files[0],
+        images: event.target.files,
         // loaded: 0,
       };
     });
@@ -73,7 +73,9 @@ export default function MyItems(props) {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    formData.append("image", inputValue.image);
+    for (var x = 0; x < inputValue.images.length; x++) {
+      formData.append("images", inputValue.images[x]);
+    }
     formData.append("name", inputValue.name);
     formData.append("description", inputValue.description);
     formData.append("carBrand", inputValue.carBrand);
@@ -115,7 +117,7 @@ export default function MyItems(props) {
       <ItemEntry
         key={item._id}
         id={item._id}
-        image={item.image}
+        images={item.images}
         name={item.name}
         description={item.description}
         price={item.price}
@@ -214,6 +216,7 @@ export default function MyItems(props) {
                   name="image"
                   id="image"
                   onChange={handleImageChange}
+                  multiple
                 />
               </Form.Group>
               <Form.Group>

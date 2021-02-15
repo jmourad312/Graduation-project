@@ -81,7 +81,7 @@ export default function BlogPosts(props) {
                         <div className="card mb-3" key={index} style={{marginTop:"0px",width:"100%"}}>
                           <div className="row" style={{marginTop:"0px"}}>
                             <div className="col-4">
-                              <img className="d-block w-100" src={post.image} style={{ height: "100%" }} alt="No supported image" />
+                              <img className="d-block w-100" src={post.images[0]} style={{ height: "100%" }} alt="No supported image" />
                             </div>
                             <div className="col-8">
                               <div className="card-block">
