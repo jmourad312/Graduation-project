@@ -108,8 +108,8 @@ export default function BlogEntry(props) {
             <span class="card__by"style={{fontWeight:"700"}}>By <span class="card__author" style={{fontWeight:"900",fontSize:"15px"}} title="author">{props.userName}</span></span>
             <br/>
             <strong>
-              <i className="badge badge-dark">{props.cardBrand}</i>
-              <i className="badge badge-dark ml-1">{props.cardModel}</i>
+              <i className="badge badge-dark" style={{fontSize:"20px",padding:"5px"}}>{props.cardBrand}</i>
+              <i className="badge badge-dark ml-1" style={{fontSize:"20px",padding:"5px"}}>{props.cardModel}</i>
             </strong>
           </div>
         </article>
