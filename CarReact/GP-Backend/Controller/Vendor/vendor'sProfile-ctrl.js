@@ -91,7 +91,7 @@ showVendorProfile = (req, res) => {
             });
         }
         
-        const feedback = await Feedback.find({_id:{$in:data.vendorFeedBack}},{__v:0,car:0}).populate({path:"user",select:"firstName"})
+        const feedback = await Feedback.find({_id:{$in:data.vendorFeedBack}},{__v:0,car:0}).populate({path:"user",select:"firstName workshopName"})
 
         return res.json({
             Data: data,feedback,

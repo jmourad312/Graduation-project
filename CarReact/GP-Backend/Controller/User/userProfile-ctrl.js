@@ -26,8 +26,8 @@ showUserProfile = (req, res) => {
 
     {
       path: "favouriteItems",
-      populate: { path: "person", select: "firstName" },
-      select: "-__v -comment -updatedPosts",
+      populate: { path: "person", select: "firstName workshopName" },
+      select: "-__v ",
     },
 
     {
