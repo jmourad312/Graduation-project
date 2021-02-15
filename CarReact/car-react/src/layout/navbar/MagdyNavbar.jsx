@@ -4,12 +4,6 @@ import i18n from "i18next";
 // import GaussianBlur from "react-gaussian-blur";
 // import ColorMatrix from "react-color-matrix";
 
-const changeLanguage = (ln) => {
-  return () => {
-    i18n.changeLanguage(ln);
-  };
-};
-
 export default function MagdyNavbar() {
   const [checked, setchecked] = useState(false);
   const handleClick = () => {
