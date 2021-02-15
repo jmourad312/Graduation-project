@@ -24,6 +24,13 @@ export default function MagdyNavbar() {
     handleClick();
   };
 
+  const changeLanguage = (ln) => {
+    return () => {
+      i18n.changeLanguage(ln);
+      handleClick();
+    };
+  };
+  
   return (
     <div className="magdyNav">
       <nav className="menu" id="anything">
