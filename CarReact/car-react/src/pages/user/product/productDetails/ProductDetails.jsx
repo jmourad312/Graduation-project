@@ -266,7 +266,10 @@ export default function ProductDetails(props) {
         {/* <!-- start Location ,reviews,PRODUCT INFORMATION --> */}
         <div className="container mt-3">
           <div className="row">
-            <div className="col-4 content">
+            <div className="col-7 content">
+            <div className="row">
+
+            </div>
               <h3>
                 <strong
                   className="pl-3"
@@ -371,7 +374,7 @@ export default function ProductDetails(props) {
               {/* </div> */}
             </div>
 
-            <div className="col-4 text-center">
+            {/* <div className="col-4 text-center">
               {" "}
               {productDetails ? (
                 productDetails.feedback.length === 0 ? (
@@ -442,7 +445,7 @@ export default function ProductDetails(props) {
               ) : (
                 "Loading"
               )}
-            </div>
+            </div> */}
 
             {/* {localStorage.getItem("Authorization") !== null ? (
               <div className="col-4 text-center">
@@ -478,7 +481,7 @@ export default function ProductDetails(props) {
             )} */}
 
             {localStorage.getItem("UserID") !== null ? (
-              <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
+              <div className="col-5 shadow-sm p-2 mb-4 rounded-lg">
                 <h3>
                   <span
                     className="pl-3"
