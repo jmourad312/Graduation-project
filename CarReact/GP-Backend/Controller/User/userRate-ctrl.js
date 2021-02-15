@@ -3,11 +3,7 @@ const carItem = require("../../models/CarDetails/sparePartCar");
 const Vendor = require("../../models/Person/Vendor/vendor");
 
 writeFeedback = async (req, res) => {
-  // {
-  //     comment:String,
-  //     rating:Number,
-  //     car:IDitem,
-  // }
+ 
   const body = req.body;
   const IdUser = req.user._id;
 
