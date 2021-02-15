@@ -8,8 +8,30 @@ import Review from "../../../../components/Review";
 import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductDetails } from "../../../../store/actions";
+import { makeStyles, Paper, Tab, Tabs } from "@material-ui/core";
+import { TabContainer } from "react-bootstrap";
+import InfoTwoToneIcon from "@material-ui/icons/InfoTwoTone";
+import CommentIcon from "@material-ui/icons/Comment";
+import RoomIcon from "@material-ui/icons/Room";
 
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    maxWidth: 1200,
+    height:500,
+  },
+});
 export default function ProductDetails(props) {
+
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
+
   const productID = useSelector((state) => state.productID);
   const productDetails = useSelector((state) => state.productDetails.Data);
   const dispatch = useDispatch();
@@ -161,7 +183,7 @@ export default function ProductDetails(props) {
             message={toastMessage}
           />
           <div style={{ paddingTop: "15px" }}>
-            <div className="row bg-white" style={{ borderRadius: "3%" }}>
+            <div className="row bg-light" style={{ borderRadius: "3%" }}>
               {/* <!-- image of produce --> */}
               <div
                 className="col-4"
@@ -175,100 +197,8 @@ export default function ProductDetails(props) {
                   alt=""
                 />
               </div>
-
               <div className="col-8">
-                <h2>
-                  {productDetails && productDetails.name}
-                  <br /> By:{" "}
-                  <Link
-                    style={{
-                      color: "rgb(21, 34, 214)",
-                      textDecoration: "underline ",
-                    }}
-                    to={`/VendorProfileUser/${
-                      productDetails
-                        ? productDetails.person
-                          ? productDetails.person._id
-                          : null
-                        : null
-                    }`}
-                  >
-                    {productDetails
-                      ? productDetails.person
-                        ? productDetails.person.firstName
-                        : "(LOADING)"
-                      : "LOADING"}
-                  </Link>
-                </h2>
-                {/* <!-- avalible or not --> */}
-                {/* {productDetails &&
-                (productDetails.available ? (
-                  <span className="badge badge-pill badge-success">
-                    Avalible
-                  </span>
-                ) : (
-                  <span
-                    className="badge badge-pill badge-danger"
-                    style={{ fontSize: "15px" }}
-                  >
-                    Not Avalible
-                  </span>
-                ))} */}
-
-                {/* <!-- number of stars --> */}
-                {/* <div className="mt-3 star" style={{ fontSize: "20px" }}>
-                <span className="fa fa-star"></span>
-                <span className="fa fa-star"></span>
-                <span className="fa fa-star"></span>
-                <span className="fa fa-star"></span>
-                <span className="fa fa-star"> No review</span>
-              </div> */}
-                {/* <!-- description --> */}
-                <div className="mt-3" style={{ fontSize: "30px" }}>
-                  {productDetails && productDetails.description}
-                </div>
-                {/* <!-- Add to favorate and compare product --> */}
-                {/* <!-- price --> */}
-                <div className="mt-3">
-                  <span className="" style={{ fontSize: "40px" }}>
-                    <li className="fas fa-coins pr-2 text-warning">
-                      {productDetails && productDetails.price} LE
-                    </li>
-                  </span>
-                  {localStorage.getItem("UserID") !== null && (
-                    <span
-                      className="fa-lg button fill fa-pull-right"
-                      style={{ padding: "10px", marginTop: "80px" }}
-                      title="Add to favorate"
-                      onClick={handleAddFavourite}
-                    >
-                      <i
-                        className="far fa-heart"
-                        style={{ fontSize: "30px", cursor: "pointer" }}
-                      ></i>
-                    </span>
-                  )}
-                  {/* <span
-                  className="fa-lg"
-                  data-toggle="tooltip"
-                  title="compare product"
-                  data-placement="bottom"
-                >
-                  <i className="fas fa-sliders-h  text-primary"></i>
-                </span> */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- end product details --> */}
-
-        {/* <!-- start Location ,reviews,PRODUCT INFORMATION --> */}
-        <div className="container mt-3">
-          <div className="row">
-            <div className="col-8 content">
-              <div className="row">
-                <div className="col-6">
+                <div className="row">
                   <h3>
                     <strong
                       className="pl-3"
@@ -281,49 +211,171 @@ export default function ProductDetails(props) {
                       Product Information
                     </strong>
                   </h3>
-                  <br />
-                  {/* <p>
-                <b style={{fontSize:"20px"}}>Manufacturer: </b>{" "}
-                {productDetails
-                  ? productDetails.case
-                    ? productDetails.case
-                    : "Loading"
-                  : "Loading"}
-              </p> */}
-                  <p style={{ fontSize: "1.5rem" }}>
-                    <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
-                    {productDetails
-                      ? productDetails.carBrand
-                        ? productDetails.carBrand
-                        : "Loading"
-                      : "Loading"}
-                  </p>
-                  <p style={{ fontSize: "1.5rem" }}>
-                    <b style={{ fontSize: "1.5rem" }}>Model: </b>
-                    {productDetails
-                      ? productDetails.carModel
-                        ? productDetails.carModel
-                        : "Loading"
-                      : "Loading"}
-                  </p>
                 </div>
-                <div className="col-6">
-                  {localStorage.getItem("UserID") ? (
-                    <>
-                      {" "}
-                      <h3>
+                <div className="row">
+                  <div className="col-6">
+                    <h2>
+                      {productDetails && productDetails.name}
+                      <br /> By:{" "}
+                      <Link
+                        style={{
+                          color: "rgb(21, 34, 214)",
+                          textDecoration: "underline ",
+                        }}
+                        to={`/VendorProfileUser/${
+                          productDetails
+                            ? productDetails.person
+                              ? productDetails.person._id
+                              : null
+                            : null
+                        }`}
+                      >
+                        {productDetails
+                          ? productDetails.person
+                            ? productDetails.person.firstName
+                            : "(LOADING)"
+                          : "LOADING"}
+                      </Link>
+                    </h2>
+
+                    <div className="mt-3">
+                      <span className="" style={{ fontSize: "40px" }}>
+                        <li className="fas fa-coins pr-2 text-warning">
+                          {productDetails && productDetails.price} LE
+                        </li>
+                      </span>
+                      {localStorage.getItem("UserID") !== null && (
                         <span
-                          className="pl-3"
-                          style={{
-                            borderLeft: "3px solid red",
-                            height: "100%",
-                          }}
-                        ></span>
-                        Write your Feedback
-                      </h3>
-                      <br />
-                      <Review />
-                      {/* <form>
+                          className="fa-lg button fill fa-pull-right"
+                          style={{ padding: "10px", marginTop: "80px" }}
+                          title="Add to favorate"
+                          onClick={handleAddFavourite}
+                        >
+                          <i
+                            className="far fa-heart"
+                            style={{ fontSize: "30px", cursor: "pointer" }}
+                          ></i>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="col-6">
+                    <p style={{ fontSize: "1.5rem" }}>
+                      <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
+                      {productDetails
+                        ? productDetails.carBrand
+                          ? productDetails.carBrand
+                          : "Loading"
+                        : "Loading"}
+                    </p>
+                    <p style={{ fontSize: "1.5rem" }}>
+                      <b style={{ fontSize: "1.5rem" }}>Model: </b>
+                      {productDetails
+                        ? productDetails.carModel
+                          ? productDetails.carModel
+                          : "Loading"
+                        : "Loading"}
+                    </p>
+                    <br />
+                    {/* <p>
+                  <b style={{fontSize:"20px"}}>Manufacturer: </b>{" "}
+                  {productDetails
+                    ? productDetails.case
+                      ? productDetails.case
+                      : "Loading"
+                    : "Loading"}
+                </p> */}
+
+                    {/* <!-- avalible or not --> */}
+                    {/* {productDetails &&
+                  (productDetails.available ? (
+                    <span className="badge badge-pill badge-success">
+                      Avalible
+                    </span>
+                  ) : (
+                    <span
+                      className="badge badge-pill badge-danger"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Not Avalible
+                    </span>
+                  ))} */}
+
+                    {/* <!-- number of stars --> */}
+
+                    {/* <div className="mt-3 star" style={{ fontSize: "20px" }}>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"> No review</span>
+                </div> */}
+                    {/* <!-- description --> */}
+                    {/* <div className="mt-3" style={{ fontSize: "30px" }}>
+                    {productDetails && productDetails.description}
+                  </div> */}
+                    {/* <!-- Add to favorate and compare product --> */}
+                    {/* <!-- price --> */}
+
+                    {/* <span
+                    className="fa-lg"
+                    data-toggle="tooltip"
+                    title="compare product"
+                    data-placement="bottom"
+                  >
+                    <i className="fas fa-sliders-h  text-primary"></i>
+                  </span> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <!-- end product details --> */}
+
+        {/* <!-- start Location ,reviews,PRODUCT INFORMATION --> */}
+        <div className="container mt-3">
+          <Paper square className={classes.root}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              indicatorColor="secondary"
+              textColor="secondary"
+              aria-label="icon label tabs example"
+            >
+              <Tab icon={<InfoTwoToneIcon />} label="Description" />
+              <Tab icon={<CommentIcon />} label="Reviews" />
+              <Tab icon={<RoomIcon />} label="Location" />
+            </Tabs>
+            {value === 0 && (
+              <TabContainer>
+                <div className="mt-3" style={{ fontSize: "30px" }}>
+                  {productDetails && productDetails.description}
+                </div>
+              </TabContainer>
+            )}
+            {value === 1 && (
+              <TabContainer>
+                <div className="row">
+                  <div className="col-3">
+                    {localStorage.getItem("UserID") ? (
+                      <>
+                        {" "}
+                        <h3>
+                          <span
+                            className="pl-3"
+                            style={{
+                              borderLeft: "3px solid red",
+                              height: "100%",
+                            }}
+                          ></span>
+                          Write your Feedback
+                        </h3>
+                        <br />
+                        <Review />
+                        {/* <form>
                     <div className="form-group">
                       <label style={{ fontSize: "1.5rem" }} for="comment">
                         Review:
@@ -347,106 +399,171 @@ export default function ProductDetails(props) {
                       Submit
                     </button>
                   </form>{" "} */}
-                    </>
-                  ) : (
-                    <div
-                      style={{
-                        height: "600px",
-                        width: "300px",
-                        position: "absolute",
-                        left: "0%",
-                        top: "0%",
-                      }}
-                    >
-                      <h2
-                        style={{
-                          position: "relative",
-                          top: "40%",
-                          left: "0%",
-                          textAlign: "center",
-                        }}
-                      >
-                        Only registered car owners can submit a review
-                      </h2>
-                    </div>
-                  )}
-                  {/* </div> */}
-                </div>
-              </div>
-              <div className="row">
-                <div className="text-center w-100">
-                  {" "}
-                  {productDetails ? (
-                    productDetails.feedback.length === 0 ? (
-                      <div>be the first to rate this item</div>
+                      </>
                     ) : (
                       <div
-                        className="text-center"
                         style={{
-                          maxHeight: "400px",
-                          overflowX: "hidden",
-                          overflowY: "scroll",
+                          height: "600px",
+                          width: "300px",
+                          position: "absolute",
+                          left: "0%",
+                          top: "0%",
                         }}
                       >
-                        {productDetails
-                          ? productDetails.feedback
-                            ? productDetails.feedback.map((item) => {
-                                let postTime = item.createdAt.split("T");
-                                return (
-                                  <>
-                                    <p
-                                      className="text-left"
-                                      style={{
-                                        fontWeight: "700",
-                                        fontSize: "20px",
-                                        marginBottom: "0px",
-                                      }}
-                                    >
-                                      User: {item.user.firstName}
-                                    </p>
-                                    <p
-                                      className="text-left"
-                                      style={{
-                                        fontWeight: "700",
-                                        fontSize: "20px",
-                                      }}
-                                    >
-                                      Posted at: {postTime[0]}
-                                    </p>
-                                    <hr
-                                      style={{
-                                        border: "0.1px solid grey",
-                                        marginBottom: "5px",
-                                        marginTop: "0px",
-                                      }}
-                                    />
-                                    <p
-                                      style={{
-                                        fontWeight: "700",
-                                        fontSize: "20px",
-                                        marginBottom: "0px",
-                                      }}
-                                    >
-                                      {item.comment}
-                                    </p>
-                                    <hr
-                                      style={{
-                                        border: "2px solid",
-                                        marginBottom: "0px",
-                                      }}
-                                    />
-                                  </>
-                                );
-                              })
-                            : "loading"
-                          : "loading"}
+                        <h2
+                          style={{
+                            position: "relative",
+                            top: "40%",
+                            left: "0%",
+                            textAlign: "center",
+                          }}
+                        >
+                          Only registered car owners can submit a review
+                        </h2>
                       </div>
-                    )
-                  ) : (
-                    "Loading"
-                  )}
+                    )}
+                  </div>
+                  <div className="col-9">
+                    <div className="text-center w-100">
+                      {" "}
+                      {productDetails ? (
+                        productDetails.feedback.length === 0 ? (
+                          <div>be the first to rate this item</div>
+                        ) : (
+                          <div
+                            className="text-center"
+                            style={{
+                              maxHeight: "400px",
+                              overflowX: "hidden",
+                              overflowY: "scroll",
+                            }}
+                          >
+                            {productDetails
+                              ? productDetails.feedback
+                                ? productDetails.feedback.map((item) => {
+                                    let postTime = item.createdAt.split("T");
+                                    return (
+                                      <>
+                                        <p
+                                          className="text-left"
+                                          style={{
+                                            fontWeight: "700",
+                                            fontSize: "20px",
+                                            marginBottom: "0px",
+                                          }}
+                                        >
+                                          User: {item.user.firstName}
+                                        </p>
+                                        <p
+                                          className="text-left"
+                                          style={{
+                                            fontWeight: "700",
+                                            fontSize: "20px",
+                                          }}
+                                        >
+                                          Posted at: {postTime[0]}
+                                        </p>
+                                        <hr
+                                          style={{
+                                            border: "0.1px solid grey",
+                                            marginBottom: "5px",
+                                            marginTop: "0px",
+                                          }}
+                                        />
+                                        <p
+                                          style={{
+                                            fontWeight: "700",
+                                            fontSize: "20px",
+                                            marginBottom: "0px",
+                                          }}
+                                        >
+                                          {item.comment}
+                                        </p>
+                                        <hr
+                                          style={{
+                                            border: "2px solid",
+                                            marginBottom: "0px",
+                                          }}
+                                        />
+                                      </>
+                                    );
+                                  })
+                                : "loading"
+                              : "loading"}
+                          </div>
+                        )
+                      ) : (
+                        "Loading"
+                      )}
+                    </div>
+                  </div>
                 </div>
+              </TabContainer>
+            )}
+            {value === 2 && (
+              <TabContainer>
+                {localStorage.getItem("UserID") !== null ? (
+                  <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
+                    <div className="row"></div>
+
+                    <div className="row">
+                      <h3>
+                        <span
+                          className="pl-3"
+                          style={{
+                            borderLeft: "3px solid red",
+                            height: "100%",
+                          }}
+                        ></span>
+                        Location
+                      </h3>
+                      <br />
+                      <div className="d-flex flex-wrap">
+                        <iframe
+                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                          width="350px"
+                          height="200px"
+                          frameborder="0"
+                          style={{
+                            border: "rgb(0, 0, 0) solid",
+                            borderRadius: "1%",
+                          }}
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                    style={{
+                      height: "300px",
+                      width: "300px",
+                      border: "solid white 3px",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: "#737373",
+                        position: "relative",
+                        top: "35%",
+                        textAlign: "center",
+                      }}
+                    >
+                      Only registered car owners can view this Item's Location
+                    </h3>
+                  </div>
+                )}
+              </TabContainer>
+            )}
+          </Paper>
+          <div className="row">
+            <div className="col-8 content">
+              <div className="row">
+                <div className="col-6"></div>
+                <div className="col-6">{/* </div> */}</div>
               </div>
+              <div className="row"></div>
             </div>
 
             {/* </div> */}
@@ -488,48 +605,6 @@ export default function ProductDetails(props) {
               </div>
             )} */}
 
-            {localStorage.getItem("UserID") !== null ? (
-              <div className="col-4 shadow-sm p-2 mb-4 rounded-lg">
-                <h3>
-                  <span
-                    className="pl-3"
-                    style={{ borderLeft: "3px solid red", height: "100%" }}
-                  ></span>
-                  Location
-                </h3>
-                <br />
-                <div className="d-flex flex-wrap">
-                  <iframe
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                    width="100%"
-                    height="300"
-                    frameborder="0"
-                    style={{ border: "rgb(0, 0, 0) solid", borderRadius: "1%" }}
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            ) : (
-              <div
-                className="col-4 shadow-sm p-2 mb-4 rounded-lg"
-                style={{
-                  height: "300px",
-                  width: "300px",
-                  border: "solid white 3px",
-                }}
-              >
-                <h3
-                  style={{
-                    color: "#737373",
-                    position: "relative",
-                    top: "35%",
-                    textAlign: "center",
-                  }}
-                >
-                  Only registered car owners can view this Item's Location
-                </h3>
-              </div>
-            )}
             {/* <div className="pl-3">
                 <img
                   src="https://docs.mapbox.com/ios/assets/maps-examples-user-location-annotation-960-52e38dd2f7dc18e02b816fffb4fded73.webp"
