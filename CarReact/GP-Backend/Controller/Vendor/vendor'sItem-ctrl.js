@@ -5,11 +5,16 @@ const vendor = require('../../models/Person/Vendor/vendor')
 addItem = (req, res) => {
 
   console.log(req.body);
-  console.log(req.file);
 
   const body = JSON.parse(JSON.stringify(req.body));
-  const Postinput ={}
-  if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
+
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
+  }
 
   const IdVendor = req.user._id;
   console.log("adddittem")
@@ -21,7 +26,7 @@ addItem = (req, res) => {
     });
   }
 
-  const car = new carItem({...body,...Postinput});
+  const car = new carItem({...body,images});
   car.person = IdVendor;
 
   if (!car) {
@@ -151,12 +156,16 @@ updateItem = (req, res) => {
 
   const body = JSON.parse(JSON.stringify(req.body));
 
-  const Postinput ={}
-
-  if(req.file){Postinput.image = "http://localhost:3000/images/"+req.file.filename}
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
+  }
 
   carItem.updateOne({ _id: req.params.id, person: IdVendor },
-    {...body,...Postinput}, { upsert: true, new: true }, (err, result) => {
+    {...body,images}, { upsert: true, new: true }, (err, result) => {
       if (err) {
         return res.status(400).json({
           Data: null,

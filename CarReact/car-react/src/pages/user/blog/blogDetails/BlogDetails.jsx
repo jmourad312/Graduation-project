@@ -547,7 +547,7 @@ export default function BlogDetails(props) {
                         fontWeight:"700"
                       }}
                     >
-                      {item.vote.numberOfVoting}
+                      {item.vote.upVoting-item.vote.downVoting}
                     </span>
                     <button
                       className="btn"

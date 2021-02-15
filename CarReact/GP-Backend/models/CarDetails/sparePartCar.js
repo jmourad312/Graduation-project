@@ -7,11 +7,17 @@ var car = new schema({
   description: { type: String, required: true },
   available: Boolean,
   case: String,
-  image: String,
+  images: [String],
   feedback: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Feedback",
+    },
+  ],
+  rate: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rate",
     },
   ],
   carBrand: String,

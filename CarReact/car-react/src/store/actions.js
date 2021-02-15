@@ -84,7 +84,7 @@ export const getBlogDetails = (params) => async (dispatch) => {
 export const addVoteComment = (params) => async (dispatch) => {
   try {
     const res = await axios.post(
-      `http://localhost:3000/user/voteToComment/${params}`,"s",
+      `http://localhost:3000/user/upVoteToComment/${params}`,"s",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     // console.log(res);
@@ -99,8 +99,8 @@ export const addVoteComment = (params) => async (dispatch) => {
 
 export const removeVoteComment = (params) => async (dispatch) => {
   try {
-    const res = await axios.delete(
-      `http://localhost:3000/user/removeVoteFromComment/${params}`,
+    const res = await axios.post(
+      `http://localhost:3000/user/downVoteToComment/${params}`,"j",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     // console.log(res);

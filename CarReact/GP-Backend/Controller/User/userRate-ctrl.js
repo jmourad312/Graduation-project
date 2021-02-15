@@ -9,10 +9,9 @@ writeFeedback = (req, res) => {
   //     car:IDitem,
   // }
   const body = req.body;
-
   const IdUser = req.user._id;
 
-  if (!(body.car && (body.comment || body.rating))) {
+  if (!(body.car && body.rating)) {
     return res.json({
       Data: null,
       Message: "You must provide a feedback ",
@@ -20,65 +19,51 @@ writeFeedback = (req, res) => {
     });
   }
 
-  const feedback = new FeedBack({ ...body });
-  feedback.user = IdUser;
+  const findUserFeedback = FeedBack.findOne({ user: IdUser, car: body.car });
 
-  if (!feedback) {
-    return res.json({
-      Data: err, //null insteat
-      Message: "You must provide a feedback",
-      Success: false,
-    });
+  if (findUserFeedback.length > 0) {
+
+    FeedBack.updateOne({ user: IdUser, car: body.car }, { ...body })
+      .then((data) => {
+        return res.json({
+          Data: data.n,
+          Message: "Update your feedback",
+          Success: true,
+        });
+      })
+      .catch((error) => {
+        return res.json({
+          Data: error.message,
+          Message: "Can't Rate",
+          Success: false,
+        });
+      });
+
+  } else {
+    const feedback = new FeedBack({ ...body });
+    feedback.user = IdUser;
+
+    feedback
+      .save()
+      .then((data) => {
+        carItem
+          .updateOne({ _id: req.body.car }, { $push: { feedback: data._id } })
+          .then(console.log("Done"));
+
+        return res.json({
+          Data: data._id,
+          Message: "Thank you very much",
+          Success: true,
+        });
+      })
+      .catch((error) => {
+        return res.json({
+          Data: error.message,
+          Message: "You must provide a feedback",
+          Success: false,
+        });
+      });
   }
-
-  feedback
-    .save()
-    .then((data) => {
-      carItem
-        .updateOne(
-          { _id: req.body.car },
-          { $push: { feedback: data._id} }
-        )
-        .then(console.log("Done"));
-
-      return res.json({
-        Data: data._id,
-        Message: "Thank you very much",
-        Success: true,
-      });
-    })
-    .catch((error) => {
-      return res.json({
-        Data: error.message,
-        Message: "You must provide a feedback",
-        Success: false,
-      });
-    });
 };
 
-removeFeedback = async (req, res) => {
- const IdUser = req.user._id;
-
-  FeedBack.findOneAndDelete({ _id: req.params.id,user : IdUser}, (err, data) => {
-    if (err || !data) {
-      return res.json({
-        Data: err,
-        Message: "Can't delete item from database",
-        Success: false,
-      });
-    }
-
-
-    carItem
-      .updateOne({ _id: data.car }, { $pull: { feedback: data._id } })
-      .then("Done");
-
-    return res.json({
-      Data: {},
-      Message: "Done delete",
-      Success: true,
-    });
-  });
-};
-
-module.exports = { writeFeedback, removeFeedback };
+module.exports = { writeFeedback };

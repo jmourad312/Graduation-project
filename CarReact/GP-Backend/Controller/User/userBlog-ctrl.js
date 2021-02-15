@@ -14,21 +14,17 @@ const Vote = require("../../models/Blog/votingPost");
 // add post to bookmarks
 // show posts in bookmarks
 
-
 //add post
 addNewPost = (req, res) => {
-  console.log(req.file);
+  
   const body = JSON.parse(JSON.stringify(req.body));
 
-  // const images = [];
-  // req.files.map((file) => {
-  //   images.push("http://localhost:3000/images/" + file.filename);
-  //   console.log(images)
-  // });
-
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
   }
 
   const IdPerson = req.user._id;
@@ -40,7 +36,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post({ ...body, ...Postinput });
+  const post = new Post({ ...body, images });
   post.person = IdPerson;
 
   if (!post) {
@@ -51,12 +47,13 @@ addNewPost = (req, res) => {
     });
   }
 
-
-
   post
     .save()
     .then((data) => {
-      user.updateOne({ person:  req.user._id }, { $push: { postsUser: data._id } }).then(console.log("Done")).catch(console.log("error"))
+      user
+        .updateOne({ person: req.user._id }, { $push: { postsUser: data._id } })
+        .then(console.log("Done"))
+        .catch(console.log("error"));
       return res.json({
         Data: post._id,
         Message: "New post is created successfully",
@@ -77,18 +74,20 @@ addNewPost = (req, res) => {
 deletePost = (req, res) => {
   let IdPerson = req.user._id;
 
-  if(req.params.idperson){
+  if (req.params.idperson) {
     IdPerson = req.params.idperson;
- }
+  }
 
-  Post.deleteOne({ _id: req.params.id, person: IdPerson },async  (err, data) => {
-    if (err) {
-      return res.json({
-        Data: {},
-        Message: "Can't delete Post from database",
-        Success: false,
-      });
-    }
+  Post.deleteOne(
+    { _id: req.params.id, person: IdPerson },
+    async (err, data) => {
+      if (err) {
+        return res.json({
+          Data: {},
+          Message: "Can't delete Post from database",
+          Success: false,
+        });
+      }
       if (data.n == 0) {
         return res.json({
           Data: {},
@@ -97,32 +96,41 @@ deletePost = (req, res) => {
         });
       }
 
-     await user.updateOne({person:IdPerson},{
-        $pull:{postsUser:req.params.id}
-      }).then("Done").catch("error")
+      await user
+        .updateOne(
+          { person: IdPerson },
+          {
+            $pull: { postsUser: req.params.id },
+          }
+        )
+        .then("Done")
+        .catch("error");
 
-       return res.json({
-          Data: {},
-          Message: "Your Post is deleted successfully ",
-          Success: true,
-        });
-  });
+      return res.json({
+        Data: {},
+        Message: "Your Post is deleted successfully ",
+        Success: true,
+      });
+    }
+  );
 };
 
 //update post
 updatePost = (req, res) => {
   let IdPerson = req.user._id;
 
-  if(req.params.idperson){
+  if (req.params.idperson) {
     IdPerson = req.params.idperson;
- }
+  }
 
-  console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));
 
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
   }
 
   if (!body) {
@@ -135,7 +143,7 @@ updatePost = (req, res) => {
 
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    {...body,...Postinput},
+    { ...body, images },
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
@@ -311,7 +319,10 @@ showDetailsPost = (req, res) => {
     { path: "person", select: "firstName" },
     {
       path: "comment",
-      populate: [{ path: "person", select: "firstName" }, { path: "vote", select: "numberOfVoting" }],
+      populate: [
+        { path: "person", select: "firstName" },
+        { path: "vote", select: "upVoting downVoting" },
+      ],
       select: "-post ",
     },
   ];
@@ -348,7 +359,7 @@ showFilterPosts = (req, res) => {
   }
   console.log(queryCond);
   const populateQuery = [{ path: "person", select: "firstName" }];
-//comment
+  //comment
   Post.find(queryCond, { updatedPosts: 0, comment: 0, __V: 0 })
     .sort({ _id: -1 })
     .populate(populateQuery)
@@ -362,10 +373,12 @@ showFilterPosts = (req, res) => {
           Success: false,
         });
       }
-      const TotalItem = await Post.countDocuments(queryCond).then("Done").catch("Error")
+      const TotalItem = await Post.countDocuments(queryCond)
+        .then("Done")
+        .catch("Error");
       return res.json({
         Data: data,
-        TotalItem:TotalItem,
+        TotalItem: TotalItem,
         Message: "posts: filter",
         Success: true,
       });
@@ -373,11 +386,10 @@ showFilterPosts = (req, res) => {
 };
 
 showPostsOfUser = (req, res) => {
-
   var IdPerson = req.user._id;
 
-  if(req.params.id){
-     IdPerson = req.params.id;
+  if (req.params.id) {
+    IdPerson = req.params.id;
   }
 
   const populateQuery = [{ path: "person", select: "firstName" }];
@@ -402,44 +414,14 @@ showPostsOfUser = (req, res) => {
 };
 
 // remove voting on comment
-removeVoteFromComment = async (req, res) => {
+downVoteToComment = async (req, res) => {
+  const personDownVote = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personDownVote);
 
-  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
-  console.log(personVote)
-  if (personVote.length == 0) {
-    return res.json({
-      Data: null,
-      Message: "You already don't vote before",
-      Success: false,
-    });
-  }
-
-  Vote.findOneAndUpdate(
-    { comment: req.params.id },
-    { $pull: { person: req.user._id }, $inc: { numberOfVoting: -1 } },
-    (error, data) => {
-      if (error || !data) {
-        return res.json({
-          Data: error,
-          Message: "can't vote",
-          Success: false,
-        });
-      }
-      return res.json({
-        Data: data.numberOfVoting,
-        Message: "Done remove voting",
-        Success: true,
-      });
-    }
-  );
-};
-
-voteToComment = async (req, res) => {
-
-  const personVote = await Vote.find({ person: { $in: req.user._id }, comment: req.params.id })
-  console.log(personVote)
-
-  if (personVote.length > 0) {
+  if (personDownVote.length > 0) {
     return res.json({
       Data: null,
       Message: "You already vote before",
@@ -447,24 +429,111 @@ voteToComment = async (req, res) => {
     });
   }
 
-  Vote.findOneAndUpdate(
-    { comment: req.params.id },
-    { $push: { person: req.user._id }, $inc: { numberOfVoting: 1 } },
-    (error, data) => {
-      if (error || !data) {
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVoteUp);
+  if (personVoteUp.length > 0) {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $pull: { personUpVoting: req.user._id }, $inc: { upVoting: -1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
         return res.json({
-          Data: error,
-          Message: "can't vote",
-          Success: false,
+          Data: data.upVoting - data.downVoting,
+          Message: "Done remove voting",
+          Success: true,
         });
       }
-      return res.status(200).json({
-        Data: data.numberOfVoting,
-        Message: "Done add Voting",
-        Success: true,
-      });
-    }
-  );
+    );
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
+        });
+      }
+    );
+  }
+};
+
+upVoteToComment = async (req, res) => {
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVoteUp);
+
+  if (personVoteUp.length > 0) {
+    return res.json({
+      Data: null,
+      Message: "You already vote before",
+      Success: false,
+    });
+  }
+
+  const personVoteDown = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+
+  if (personVoteDown.length > 0) {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $pull: { personDownVoting: req.user._id }, $inc: { downVoting: -1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done remove voting",
+          Success: true,
+        });
+      }
+    );
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
+        });
+      }
+    );
+  }
 };
 
 // add posts to bookmark
@@ -548,7 +617,6 @@ getBookmarksList = async (req, res) => {
   });
 };
 
-
 module.exports = {
   addNewPost,
   deletePost,
@@ -559,8 +627,8 @@ module.exports = {
   showPostsOfUser,
   showDetailsPost,
   showFilterPosts,
-  voteToComment,
-  removeVoteFromComment,
+  downVoteToComment,
+  upVoteToComment,
   addBookmarks,
   getBookmarksList,
 };
