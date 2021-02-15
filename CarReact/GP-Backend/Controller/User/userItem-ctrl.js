@@ -65,7 +65,7 @@ showDetailsItem = async (req, res) => {
       }
 
   const stars = await Feedback.aggregate([
-    { $match: { car : idItem} },
+    { $match: { car :} },
     { $group : {_id : null, avgRate : {  $avg : "$rating" } } }
   ]).then ("done")
       //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
