@@ -2,14 +2,17 @@ import axios from "axios";
 import React, { useState } from "react";
 
 export default function Review() {
+  
   const [reviewValue, setReviewValue] = useState({
     comment:"",
     rating:1,
   });
+
   const [state, setState] = useState({
     over:"hidden",
     height:"0"
   })
+
   const handleCommentChange = (event) => {
   const { value, name } = event.target;
   console.log(reviewValue);
@@ -22,7 +25,14 @@ export default function Review() {
   });
   console.log(reviewValue);
   };
-
+const Cancelreview = () => {
+  setReviewValue({
+    comment: "",
+    rating: "",
+  });
+  console.log(reviewValue);
+  setState({ over: "hidden", height: "0" });
+};
   const handleAddReview = (event) => {
     event.preventDefault();
     const config = {
@@ -51,19 +61,12 @@ export default function Review() {
       });
       setReviewValue({
         comment:"",
-        rating:null
+        rating:0,
       })
-    };
-    const Cancelreview = (event)=>{
-    event.preventDefault();
 
-      setReviewValue({
-        comment: "",
-        rating: "",
-      });
-      console.log(reviewValue);
-      setState({over:"hidden",height:"0"})
-    }
+      Cancelreview();
+    };
+    
 
 
 
@@ -74,7 +77,7 @@ export default function Review() {
         <div class="stars">
           <form>
             <input
-              onClick={() => setState({ over: "visible", height: "100px" })}
+              onClick={() => setState({ over: "visible", height: "330px" })}
               class="star star-5"
               id="star-5-2"
               type="radio"
@@ -84,7 +87,7 @@ export default function Review() {
             />
             <label class="star star-5" for="star-5-2"></label>
             <input
-              onClick={() => setState({ over: "visible", height: "100px" })}
+              onClick={() => setState({ over: "visible", height: "330px" })}
               class="star star-4"
               id="star-4-2"
               type="radio"
@@ -94,7 +97,7 @@ export default function Review() {
             />
             <label class="star star-4" for="star-4-2"></label>
             <input
-              onClick={() => setState({ over: "visible", height: "100px" })}
+              onClick={() => setState({ over: "visible", height: "330px" })}
               class="star star-3"
               id="star-3-2"
               type="radio"
@@ -104,7 +107,7 @@ export default function Review() {
             />
             <label class="star star-3" for="star-3-2"></label>
             <input
-              onClick={() => setState({ over: "visible", height: "100px" })}
+              onClick={() => setState({ over: "visible", height: "330px" })}
               class="star star-2"
               id="star-2-2"
               type="radio"
@@ -114,7 +117,7 @@ export default function Review() {
             />
             <label class="star star-2" for="star-2-2"></label>
             <input
-              onClick={() => setState({ over: "visible", height: "100px" })}
+              onClick={() => setState({ over: "visible", height: "330px" })}
               class="star star-1"
               id="star-1-2"
               type="radio"
@@ -139,12 +142,6 @@ export default function Review() {
                 onClick={handleAddReview}
               >
                 Add review
-              </button>
-              <button
-                className="btn btn-light btn-outline-danger mb-5 mt-2"
-                onClick={Cancelreview}
-              >
-                Cancel
               </button>
             </div>
           </form>
