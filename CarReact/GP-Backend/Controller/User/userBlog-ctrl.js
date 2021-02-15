@@ -16,18 +16,15 @@ const Vote = require("../../models/Blog/votingPost");
 
 //add post
 addNewPost = (req, res) => {
-  console.log(req.file);
+  
   const body = JSON.parse(JSON.stringify(req.body));
 
-  // const images = [];
-  // req.files.map((file) => {
-  //   images.push("http://localhost:3000/images/" + file.filename);
-  //   console.log(images)
-  // });
-
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
   }
 
   const IdPerson = req.user._id;
@@ -39,7 +36,7 @@ addNewPost = (req, res) => {
     });
   }
 
-  const post = new Post({ ...body, ...Postinput });
+  const post = new Post({ ...body, images });
   post.person = IdPerson;
 
   if (!post) {
@@ -126,12 +123,14 @@ updatePost = (req, res) => {
     IdPerson = req.params.idperson;
   }
 
-  console.log(req.file);
   const body = JSON.parse(JSON.stringify(req.body));
 
-  const Postinput = {};
-  if (req.file) {
-    Postinput.image = "http://localhost:3000/images/" + req.file.filename;
+  const images = [];
+  if (req.files) {
+    req.files.map((file) => {
+      images.push("http://localhost:3000/images/" + file.filename);
+      // console.log(images);
+    });
   }
 
   if (!body) {
@@ -144,7 +143,7 @@ updatePost = (req, res) => {
 
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    { ...body, ...Postinput },
+    { ...body, images },
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
@@ -416,8 +415,10 @@ showPostsOfUser = (req, res) => {
 
 // remove voting on comment
 downVoteToComment = async (req, res) => {
-
-  const personDownVote = await Vote.find({ personDownVoting: { $in: req.user._id }, comment: req.params.id});
+  const personDownVote = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
   console.log(personDownVote);
 
   if (personDownVote.length > 0) {
@@ -428,10 +429,12 @@ downVoteToComment = async (req, res) => {
     });
   }
 
-  const personVoteUp = await Vote.find({ personUpVoting: { $in: req.user._id }, comment: req.params.id});
-  console.log(personVoteUp)
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVoteUp);
   if (personVoteUp.length > 0) {
-
     Vote.findOneAndUpdate(
       { comment: req.params.id },
       { $pull: { personUpVoting: req.user._id }, $inc: { upVoting: -1 } },
@@ -444,38 +447,39 @@ downVoteToComment = async (req, res) => {
           });
         }
         return res.json({
-          Data: data.upVoting-data.downVoting,
+          Data: data.upVoting - data.downVoting,
           Message: "Done remove voting",
           Success: true,
         });
       }
     );
-  }
-else{
-  Vote.findOneAndUpdate(
-    { comment: req.params.id },
-    { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
-    (error, data) => {
-      if (error || !data) {
-        return res.json({
-          Data: error,
-          Message: "can't vote",
-          Success: false,
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
         });
       }
-      return res.status(200).json({
-        Data: data.upVoting-data.downVoting,
-        Message: "Done add Voting",
-        Success: true,
-      });
-    }
-  );
-}
-
+    );
+  }
 };
 
 upVoteToComment = async (req, res) => {
-  const personVoteUp = await Vote.find({ personUpVoting: { $in: req.user._id }, comment: req.params.id});
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
   console.log(personVoteUp);
 
   if (personVoteUp.length > 0) {
@@ -486,10 +490,12 @@ upVoteToComment = async (req, res) => {
     });
   }
 
-  const personVoteDown = await Vote.find({ personDownVoting: { $in: req.user._id }, comment: req.params.id});
-  
-  if (personVoteDown.length > 0) {
+  const personVoteDown = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
 
+  if (personVoteDown.length > 0) {
     Vote.findOneAndUpdate(
       { comment: req.params.id },
       { $pull: { personDownVoting: req.user._id }, $inc: { downVoting: -1 } },
@@ -502,33 +508,32 @@ upVoteToComment = async (req, res) => {
           });
         }
         return res.json({
-          Data: data.upVoting-data.downVoting,
+          Data: data.upVoting - data.downVoting,
           Message: "Done remove voting",
           Success: true,
         });
       }
     );
-  }
-else{
-  Vote.findOneAndUpdate(
-    { comment: req.params.id },
-    { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
-    (error, data) => {
-      if (error || !data) {
-        return res.json({
-          Data: error,
-          Message: "can't vote",
-          Success: false,
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
         });
       }
-      return res.status(200).json({
-        Data: data.upVoting-data.downVoting,
-        Message: "Done add Voting",
-        Success: true,
-      });
-    }
-  );
-}
+    );
+  }
 };
 
 // add posts to bookmark

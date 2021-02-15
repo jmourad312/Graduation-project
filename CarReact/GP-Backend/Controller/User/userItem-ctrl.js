@@ -1,7 +1,6 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
 const Feedback = require('../../models/Feedback/feedback')
 const Vendor = require('../../models/Person/Vendor/vendor')
-const Rating = require ('../../models/Feedback/rate');
 // favourite item
 // last seen item
 // click item show items details
@@ -65,7 +64,7 @@ showDetailsItem = async (req, res) => {
         });
       }
 
-  const stars = await Rating.aggregate([
+  const stars = await Feedback.aggregate([
     { $match: { car : idItem} },
     { $group : {_id : null, avgRate : {  $avg : "$rating" } } }
   ]).then ("done")

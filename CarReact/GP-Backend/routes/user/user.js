@@ -62,11 +62,11 @@ router.put("/updateUserPassword/:id", passport.authenticate("jwt", { session: fa
 router.put("/updateUserProfile/:id", passport.authenticate("jwt", { session: false }), validateUser, upload.single("image"), userProfileCtrl.updateUserProfile);
 
 // user routes on Blog
-router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.single("image"), userBlogCtrl.addNewPost);
+router.post("/addPost", passport.authenticate("jwt", { session: false }), canView, upload.array("images", 5), userBlogCtrl.addNewPost);
 
 router.delete("/deletePost/:id/:idperson?", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deletePost);
 
-router.put("/updatePost/:id/:idperson?", passport.authenticate("jwt", { session: false }), upload.single("image") ,canView, userBlogCtrl.updatePost);
+router.put("/updatePost/:id/:idperson?", passport.authenticate("jwt", { session: false }) ,upload.array("images", 5),canView, userBlogCtrl.updatePost);
 
 router.get("/showPostsOfUser/:id?", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.showPostsOfUser);
 
@@ -123,11 +123,6 @@ router.post("/writeFeedback", passport.authenticate("jwt", { session: false }), 
 //     rating:Number,
 //     car:IDitem,
 // }
-router.post("/rateItem", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.rateItem);
-
-router.delete("/removeFeedback/:id", passport.authenticate("jwt", { session: false }), canView, userRateCtrl.removeFeedback);
-// params => idfeedback
-
 
 module.exports = router;
 
