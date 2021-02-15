@@ -45,8 +45,8 @@ showDetailsItem = async (req, res) => {
 
   const idItem = req.params.id;
   const populateQuery = [
-    { path: "person", select: "firstName" },
-    { path: "feedback" , populate:{ path: "user", select: "firstName workshopName location" } }
+    { path: "person", select: "firstName workshopName location" },
+    { path: "feedback" , populate:{ path: "user", select: "firstName" } }
   ];
 
   carItem
