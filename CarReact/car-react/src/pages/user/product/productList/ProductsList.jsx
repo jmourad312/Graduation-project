@@ -40,6 +40,7 @@ export default function ProductsList() {
         title={prod.name}
         brand={prod.carBrand}
         model={prod.carModel}
+        rating={prod}
         // category={prod.category}
       />
     );

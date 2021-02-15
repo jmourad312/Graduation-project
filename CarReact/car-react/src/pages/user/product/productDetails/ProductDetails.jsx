@@ -218,9 +218,9 @@ export default function ProductDetails(props) {
                   productDetails.images &&
                   productDetails.images.length === 1 ? (
                     <img
-                      className="ml-lg-5"
+                      className=""
                       style={{
-                        width: "400px",
+                        width: "350px",
                         height: "300px",
                         borderRadius: "10%",
                       }}
