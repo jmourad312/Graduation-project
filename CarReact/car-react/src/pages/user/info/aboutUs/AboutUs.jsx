@@ -10,7 +10,7 @@ export default function AboutUs() {
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="team-section">
         <h1
-          style={{ fontWeight: "700", fontSize: "50px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 70%)", color: "transparent", WebkitBackgroundClip: "text" }}
+          style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}
         >
           Our Team
         </h1>
@@ -105,15 +105,15 @@ export default function AboutUs() {
         <div className="inner-container">
           <h1 style={{
             fontWeight: "800", fontSize: "30px",
-            fontFamily: "cursive",
+            
             backgroundImage:
               "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
           }}>About Us</h1>
           <p className="text" style={{
-            fontWeight: "600",
-            fontFamily: "cursive",
+            fontWeight: "800",
+          
             backgroundImage:
               "linear-gradient(to top, #08091d 70%, #a2a5a8 100%)",
             color: "transparent",
@@ -123,8 +123,8 @@ export default function AboutUs() {
             enjoy coding and bringing new concepts and projects to life.
           </p>
           <div className="skills" style={{
-            fontWeight: "600",
-            fontFamily: "cursive",
+            fontWeight: "800",
+           
             backgroundImage:
               "linear-gradient(to top, #08091d 80%, #a2a5a8 100%)",
             color: "transparent",

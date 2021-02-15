@@ -49,7 +49,7 @@ export default function FavouriteItems(props) {
                 style={{
                   fontWeight: "700",
                   fontSize: "30px",
-                  fontFamily: "cursive",
+                  
                   position: "absolute",
                   left: "30%",
                 }}

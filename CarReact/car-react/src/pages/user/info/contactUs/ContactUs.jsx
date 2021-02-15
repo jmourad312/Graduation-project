@@ -97,7 +97,7 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "45px",
-                fontFamily: "cursive",
+               
                 backgroundImage:
                   "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",
                 color: "transparent",
@@ -108,9 +108,9 @@ export default function ContactUs() {
             </h1>
             <p
               style={{
-                fontWeight: "600",
-                fontSize: "35px",
-                fontFamily: "cursive",
+                fontWeight: "700",
+                fontSize: "36px",
+               
                 backgroundImage:
                   "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",
                 color: "transparent",
@@ -127,9 +127,9 @@ export default function ContactUs() {
                     <label
                       for="Email2"
                       style={{
-                        fontWeight: "600",
+                        fontWeight: "800",
                         fontSize: "30px",
-                        fontFamily: "cursive",
+                       
                         backgroundImage:
                           "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
                         color: "transparent",
@@ -152,9 +152,9 @@ export default function ContactUs() {
                     <label
                       for="exampleInputText"
                       style={{
-                        fontWeight: "600",
-                        fontSize: "25px",
-                        fontFamily: "cursive",
+                        fontWeight: "800",
+                        fontSize: "30px",
+                        
                         backgroundImage:
                           "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",
                         color: "transparent",
@@ -165,6 +165,7 @@ export default function ContactUs() {
                     </label>
                     <textarea
                       className="form-control inputheight"
+                      style={{height:"80px"}}
                       placeholder="Description"
                       onChange={handleChange}
                       name="content"
@@ -175,7 +176,7 @@ export default function ContactUs() {
                     type="button"
                     className="btn contrastclass"
                     onClick={handleSubmit}
-                    style={{ fontWeight: "600", fontSize: "25px" }}
+                    style={{ fontWeight: "700", fontSize: "25px" }}
                   >
                     Send Message
                   </button>
@@ -189,8 +190,8 @@ export default function ContactUs() {
 
         <h3
           style={{
-            fontWeight: "600",
-            fontFamily: "cursive",
+            fontWeight: "800",
+            
             backgroundImage:
               "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
             color: "transparent",

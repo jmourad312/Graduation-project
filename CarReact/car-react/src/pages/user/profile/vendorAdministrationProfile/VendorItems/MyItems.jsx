@@ -161,16 +161,15 @@ export default function MyItems(props) {
                 style={{
                   fontWeight: "700",
                   fontSize: "30px",
-                  fontFamily: "cursive",
                   position: "absolute",
-                  left: "40%",
+                  left: "50%",
                   top:"30%"
                 }}
               >
                 No Items yet{" "}
                 <p
                   className="text-center"
-                  style={{ fontSize: "20px", fontWeight: "200" }}
+                  style={{ fontSize: "20px", fontWeight: "500" }}
                 >
                   to add a new product{" "}
                 </p>

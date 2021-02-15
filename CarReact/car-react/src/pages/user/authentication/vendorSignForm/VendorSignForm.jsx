@@ -491,9 +491,9 @@ export default function VendorSignForm(props) {
                           >
                             Last Name{" "}
                             <small
-                              style={{ fontWeight: "700", fontSize: "8px" }}
+                              style={{ fontWeight: "500", fontSize: "15px" }}
                             >
-                              -optional
+                              - optional
                             </small>
                           </label>
                           <input
@@ -538,7 +538,7 @@ export default function VendorSignForm(props) {
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
                         Phone Number -{" "}
-                        <small style={{ fontSize: "20px" }}>Optional</small>
+                        <small style={{ fontSize: "15px" }}>optional</small>
                       </label>
                       <input
                         type="text"
@@ -590,8 +590,31 @@ export default function VendorSignForm(props) {
                         style={{ fontSize: "15px" }}
                       ></span>
                     </div>
-                    {/* <p>asdasdsak sajdsakd sjdskjd skksksskks </p> */}
-                    <p style={{ fontWeight: "600" }}>
+                   <div className="CTA" style={{paddingLeft:"0px"}}>
+                      <div className="row">
+                      
+                        <div className="col-8" style={{paddingRight:"0px",paddingLeft:"160px"}}>
+                          <input
+                            style={{fontWeight: "600", fontSize: "20px"}}
+                            type="submit"
+                            value="Signup Now"
+                            id="submit"
+                          />
+                        </div>
+                        <div className="col-4" style={{paddingRight:"0px",paddingLeft:"0px"}}>
+                          <a
+                            href="#"
+                            className="switch text-center"
+                            style={{ fontSize: "20px",paddingTop:"12px",width:"100%",paddingRight:"0px",paddingLeft:"0px",paddingBottom:"40px" }}
+                          >
+                            Already Registered
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <p style={{ fontWeight: "600",marginLeft:"70px",marginTop:"0px"  }}>
                       By signing up you agree to our{" "}
                       <span
                         style={{
@@ -629,27 +652,7 @@ export default function VendorSignForm(props) {
                         Privacy Policy
                       </span>
                     </p>
-                    <div className="CTA">
-                      <div className="row">
-                        <div className="col-6" style={{ marginLeft: "-100px" }}>
-                          <input
-                            style={{ fontWeight: "600", fontSize: "15px" }}
-                            type="submit"
-                            value="Signup Now"
-                            id="submit"
-                          />
-                        </div>
-                        <div className="col-6">
-                          <a
-                            href="#"
-                            className="switch"
-                            style={{ fontSize: "20px", paddingLeft: "3px" }}
-                          >
-                            I have an account
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </form>
                 </div>
                 <VerticalModal

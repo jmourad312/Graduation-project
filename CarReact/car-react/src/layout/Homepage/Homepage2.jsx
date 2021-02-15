@@ -348,14 +348,17 @@ export default function Homepage2() {
           top: "300px",
           zIndex: "10",
           color: "silver",
-          width: "100px",
+          width: "150px",
           border: "2px solid silver",
           padding: "10px",
           borderRadius: "20px",
+          fontWeight:"700",
+          fontSize:"25px"
         }}
+        className="text-center"
       >
-        <i class="fas fa-3x fa-long-arrow-alt-up ml-4"></i><br/>
-        Click here to start navigation
+        <i class="fas fa-3x fa-long-arrow-alt-up mr-1"></i><br/>
+        Start Navigation From Here
       </div>
       <div
         className="slider"
@@ -406,7 +409,7 @@ export default function Homepage2() {
               <div className="slider__text-item-head">
                 <h3>Car parts</h3>
               </div>
-              <div className="slider__text-item-info">
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>“Find the right car part with ease”</p>
               </div>
             </div>
@@ -414,7 +417,7 @@ export default function Homepage2() {
               <div className="slider__text-item-head">
                 <h3>Quality</h3>
               </div>
-              <div className="slider__text-item-info">
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>“We value quality above all else”</p>
               </div>
             </div>
@@ -422,7 +425,7 @@ export default function Homepage2() {
               <div className="slider__text-item-head">
                 <h3>Variety</h3>
               </div>
-              <div className="slider__text-item-info">
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>“We have a variety of options for you to explore”</p>
               </div>
             </div>
@@ -430,7 +433,7 @@ export default function Homepage2() {
               <div className="slider__text-item-head">
                 <h3>Technology</h3>
               </div>
-              <div className="slider__text-item-info">
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>“Futuristic features to enjoy”</p>
               </div>
             </div>
@@ -438,7 +441,7 @@ export default function Homepage2() {
               <div className="slider__text-item-head">
                 <h3>Design</h3>
               </div>
-              <div className="slider__text-item-info">
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>“Modern design to make you feel at home”</p>
               </div>
             </div>
