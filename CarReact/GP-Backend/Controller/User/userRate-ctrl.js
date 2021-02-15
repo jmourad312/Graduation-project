@@ -2,7 +2,7 @@ const FeedBack = require("../../models/Feedback/feedback");
 const carItem = require("../../models/CarDetails/sparePartCar");
 const Vendor = require("../../models/Person/Vendor/vendor");
 
-writeFeedback = (req, res) => {
+writeFeedback = async (req, res) => {
   // {
   //     comment:String,
   //     rating:Number,
@@ -19,8 +19,8 @@ writeFeedback = (req, res) => {
     });
   }
 
-  const findUserFeedback = FeedBack.findOne({ user: IdUser, car: body.car });
-
+  const findUserFeedback = await FeedBack.find({ user: IdUser, car: body.car });
+  console.log(findUserFeedback)
   if (findUserFeedback.length > 0) {
 
     FeedBack.updateOne({ user: IdUser, car: body.car }, { ...body })
