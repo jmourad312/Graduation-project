@@ -521,7 +521,7 @@ export default function BlogDetails(props) {
           {/* <!-- Single Comment --> */}
           {blogDetails
             ? blogDetails.comment.length === 0 ? (<div className="text-center mt-5"  
-            style={{ fontWeight: "700", fontSize: "30px", fontFamily: "cursive",color:"black"}}>No Comments Yet</div>) : 
+            style={{ fontWeight: "700", fontSize: "30px",color:"black"}}>No Comments Yet</div>) : 
             <div style={{maxHeight:"300px",overflowY:"scroll",overflowX:"hidden"}}>
             {blogDetails.comment.map((item, index) => {
               return (

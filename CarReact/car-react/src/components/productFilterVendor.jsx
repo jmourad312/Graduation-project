@@ -128,7 +128,7 @@ export default function ProductFilterVendor(props) {
       </div>
 
       <div className="ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center" style={{fontFamily:"cursive"}}>Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
       </div>
       <hr style={{borderColor:"grey",border:"1px solid"}}/>
       <div className="" style={{marginTop:"70px",width:"300px"}}>
@@ -142,7 +142,7 @@ export default function ProductFilterVendor(props) {
           max="999"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700",fontFamily:"cursive"}}>
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           Form: {state.priceLessThan}
         </label>
       </div>
@@ -158,7 +158,7 @@ export default function ProductFilterVendor(props) {
           max="5000"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700",fontFamily:"cursive"}}>
+        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
           To: {state.priceMoreThan}{" "}
         </label>
       </div>
