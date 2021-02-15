@@ -80,7 +80,7 @@ export default function ProfileRight(props) {
                 />
               </Route>
               <Route exact path={`/MyProfile/Settings/`}>
-                <Settings variants={pageVariants} transition={pageTransitions} />
+                <Settings person={props.person} variants={pageVariants} transition={pageTransitions} />
               </Route>
             </div>
           </Switch>

@@ -1,20 +1,26 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button2 from "../../../../../components/Button2";
 import Input from "../../../../../components/Input";
 import Label from "../../../../../components/Label";
 
 export default function Settings(props) {
-
+  console.log(props.person.firstName);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
-    middleName: "",
-    lastName: "",
-    phoneNumber: 0,
+    middleName:"",
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
+  useEffect(() => {
+    setUserInfo({
+      firstName: props.person.firstName,
+      middleName: props.person.middleName,
+      phoneNumber: props.person.phoneNumber,
+    });
+  }, [])
   const handleChange = (event) => {
     const { value, name } = event.target;
     setUserInfo((previous) => {
@@ -63,7 +69,7 @@ export default function Settings(props) {
       variants={props.variants}
       transition={props.transition}
     >
-      <form className="ml-5" style={{fontSize:"1.5rem"}}>
+      <form className="ml-5" style={{ fontSize: "1.5rem" }}>
         <div className="row">
           <div className="form-group col-4">
             <Label
@@ -97,22 +103,7 @@ export default function Settings(props) {
               type="text"
             />
           </div>
-          <div className="form-group col-4">
-            <Label
-              id="lastName"
-              class="text-light"
-              value="Last Name"
-            />
-            <Input
-              id="lastName"
-              class="form-control w-75"
-              value={userInfo.lastName}
-              name="lastName"
-              onChange={handleChange}
-              placeHolder="Last Name"
-              type="text"
-            />
-          </div>
+
         </div>
 
         <div className="form-group">
@@ -164,13 +155,11 @@ export default function Settings(props) {
           />
         </div>
 
-        <Button2
-          onClick={handleSubmit}
-          //   type="submit"
-          class="btn btn-dark"
-          value="Submit"
-        />
       </form>
+        <button
+          onClick={handleSubmit}class="btn btn-dark"
+          value="Submit"style={{fontSize:"25px",left:"47px",position:"absolute"}}
+        >Submit</button>
     </motion.div>
   );
 }
