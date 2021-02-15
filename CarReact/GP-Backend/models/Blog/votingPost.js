@@ -9,12 +9,14 @@ var voting = new schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Person",
+        unquie:true
       },
     ],
     personDownVoting: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Person",
+        unquie:true
       },
     ],
     comment: {

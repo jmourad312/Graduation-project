@@ -27,6 +27,7 @@ addNewPost = (req, res) => {
     });
   }
 
+console.log(images)
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
