@@ -84,9 +84,9 @@ router.get("/showAllPosts", userBlogCtrl.showAllPosts)
 
 
 //vote 
-router.post("/voteToComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.voteToComment);
+router.post("/upVoteToComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.upVoteToComment);
 
-router.delete("/removeVoteFromComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.removeVoteFromComment);
+router.post("/downVoteToComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.downVoteToComment);
 
 //bookmarks 
 router.post("/addPostToBookmarks", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.addBookmarks);
