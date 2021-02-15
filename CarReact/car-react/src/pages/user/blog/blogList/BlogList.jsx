@@ -20,9 +20,10 @@ export default function BlogList() {
 
   useEffect(() => {
     dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
-  });
+  },[]);
 
   const handleClick = (params) => {};
+
   function createItem(blog) {
     return (
       <BlogEntry
