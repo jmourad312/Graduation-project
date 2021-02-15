@@ -207,7 +207,7 @@ export default function BlogFilter(props) {
         <div class="search__close" ></div>
       </div>
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center" style={{ fontFamily: "cursive" }}>Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
       </div>
       <hr style={{ borderColor: "grey", border: "1px solid" }} />
       <div className="mb-5 mt-5">
@@ -295,12 +295,12 @@ export default function BlogFilter(props) {
       <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
         {localStorage.getItem("UserID") !== null ? (
           <div>
-            <label for="add" style={{ fontSize: "30px", fontWeight: "700", fontFamily: "cursive" }}>Add new post</label>
+            <label for="add" style={{ fontSize: "35px", fontWeight: "700"}}>Add new post</label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>
             </p>
           </div>
-        ) : (<div style={{ fontSize: "1.5rem", fontWeight: "600", fontFamily: "cursive", color: "black", backgroundColor: "rgba(0, 0, 0, 0.294)", borderRadius: "25px", border: "1px solid black" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-20px"}} >car owners can add new blog posts<div onClick={() => history.push("/SignForm")} style={{ fontSize: "2rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>Register Here</div></div>)}
+        ) : (<div style={{ fontSize: "1.7rem", fontWeight: "700", color: "black", backgroundColor: "rgba(0, 0, 0, 0.2)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}} >car owners can add new blog posts<div onClick={() => history.push("/SignForm")} style={{ fontSize: "1.8rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>Register Here</div></div>)}
       </div>
       <div className="pagination" style={{
         zIndex: "100", position: "absolute", left: "350px",

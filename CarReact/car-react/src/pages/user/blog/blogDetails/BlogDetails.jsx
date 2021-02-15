@@ -330,7 +330,7 @@ export default function BlogDetails(props) {
               </p>
               <hr />
               <p>
-                <span style={{ fontWeight: "700" }}>
+                <span style={{ fontWeight: "700",fontSize:"20px" }}>
                   Date :
                   {blogDetails && blogTime ? " " + blogTime[0] : "Loading"}
                 </span>
@@ -503,6 +503,7 @@ export default function BlogDetails(props) {
             variant="primary"
             type="button"
             onClick={() => handleEditSubmit(localStorage.getItem("BlogID"))}
+            
           >
             Submit
           </Button>
@@ -512,7 +513,7 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <h3 className="text-center mb-4" style={{ fontWeight: "700", fontSize: "40px", fontFamily: "cursive", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
+      <h3 className="text-center mb-4" style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)", color: "transparent", WebkitBackgroundClip: "text" }}>Comment Section</h3>
       <div className="row">
 
         <div className="col-8" >
@@ -625,7 +626,7 @@ export default function BlogDetails(props) {
         <div className="col-4">
           {localStorage.getItem("Authorization") ? (
             <div className="card bgforleavecomment text-center">
-              <h5 className="card-header">Leave a Comment:</h5>
+              <h5 className="card-header" style={{fontSize:"25px",fontWeight:"700"}}>Leave a Comment:</h5>
               <div className="card-body">
                 <form method="post" onSubmit={handleSubmit}>
                   <div className="form-group">
@@ -637,7 +638,7 @@ export default function BlogDetails(props) {
                       onChange={handleChange}
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn btn-dark">
+                  <button type="submit" className="btn btn-dark" style={{fontWeight:"700",fontSize:"20px"}}>
                     Submit
                   </button>
                 </form>

@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function Logo() {
     return (
-      <div className="logo">
-        <div>DREKSYONY</div>
+      <div className="logo" style={{marginLeft:"50px"}}>
+        <div style={{fontWeight:"700"}}>DREKSYONY</div>
         <div>
-          <span>All your needs</span>
+          <span style={{fontWeight:"500"}}>All your needs</span>
         </div>
       </div>
     );
