@@ -137,7 +137,7 @@ export default function FavouriteItems(props) {
                     </div>
                   );
                 })}
-                <div style={{ position: "absolute", top: "610px",left:"160px" }}>
+                <div style={{ position: "absolute", top: "-25px",left:"140px" }}>
                   <PaginationReact
                     NumberOfItemsInDB={items.length}
                     NumberToShow={postsPerPage}

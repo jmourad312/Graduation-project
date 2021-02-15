@@ -6,11 +6,17 @@ export default function ShowRating(props) {
 
     return (
       <div>
-        <span className={(props.rating >= 1) ? checked : notChecked}></span>
-        <span className={(props.rating >= 2) ? checked : notChecked}></span>
-        <span className={(props.rating >= 3) ? checked : notChecked}></span>
-        <span className={(props.rating >= 4) ? checked : notChecked}></span>
-        <span className={props.rating === 5 ? checked : notChecked}></span>
+        {props.rating === 0 ? (
+          <span> Not rated Yet</span>
+        ) : (
+          <>
+            <span className={props.rating >= 1 ? checked : notChecked}></span>
+            <span className={props.rating >= 2 ? checked : notChecked}></span>
+            <span className={props.rating >= 3 ? checked : notChecked}></span>
+            <span className={props.rating >= 4 ? checked : notChecked}></span>
+            <span className={props.rating === 5 ? checked : notChecked}></span>
+          </>
+        )}
       </div>
     );
 }

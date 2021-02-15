@@ -474,12 +474,7 @@ export default function Homepage2() {
           </div>
         </div>
       </div>
-      <Ads
-        class="pater"
-        link="http://go.thoughtleaders.io/SenchaCodrops141117"
-        imgSrc="../../assets/Images/logo.svg"
-        hoverImgSrc="../../assets/Images/sencha.png"
-      />
+      
     </section>
   );
 }

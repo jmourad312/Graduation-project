@@ -78,13 +78,14 @@
   position: absolute;
   width: 100%;
   height: 100%;
-//   right: -70%;
+  right: -40%;
   background-color: rgb(238, 238, 238);
   color: #222;
   transform: translateZ(-1px) rotateX(180deg);
   overflow: hidden;
   transition: box-shadow 0.8s ease;
-  border-radius: 2%;
+  border-radius: 1%;
+  margin-right: 19px;
 }
 
 // .btn-back p {
@@ -115,6 +116,7 @@
 }
 .btn-back button.yes:hover {
   background-color: #eb3d37;
+  width: 50%;
 
   
 }
