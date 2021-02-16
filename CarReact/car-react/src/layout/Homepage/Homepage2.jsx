@@ -413,6 +413,7 @@ export default function Homepage2() {
             >
               <div className="slider__text-item-head">
                 <h3>{t('slider.carparts')}</h3>
+    
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>{t('slider.slogen')}</p>

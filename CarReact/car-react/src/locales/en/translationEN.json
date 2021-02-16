@@ -1,21 +1,46 @@
 {
-    "navigation" : "Start Navigation From Here",
     
-    "slider" :{
-        "carparts":"Car parts",
-        "slogen":"“Find the right car part with ease”",
-        "Quality":"Quality",
-        "slogen1":"We value quality above all else",
-        "Variety":"Variety",
-        "slogen2":"We value quality above all else",
-        "Technology":"Technology",
-        "slogen3":"“Futuristic features to enjoy”",
-        "Design":"Design",
-        "slogen4":"“Modern design to make you feel at home”"
+  "navigation": "Start Navigation From Here",
+  "logo": "DREKSYONY",
+  "slogan": "All your needs",
 
-    },
+  "slider": {
+    "carparts": "Car parts",
+    "slogen": "“Find the right car part with ease”",
+    "Quality": "Quality",
+    "slogen1": "We value quality above all else",
+    "Variety": "Variety",
+    "slogen2": "We value quality above all else",
+    "Technology": "Technology",
+    "slogen3": "“Futuristic features to enjoy”",
+    "Design": "Design",
+    "slogen4": "“Modern design to make you feel at home”"
+  },
+  
+  "Navbar": {
+    "product list": "Products List",
+    "sign": "Sign Here",
+    "Logout": "Logout",
+    "Blog List": " Blog List",
+    "About Us": "About Us",
+    "Contact Us": "Contact Us",
+    "Homepage": "Homepage"
+  }
 
-    "logo":"DREKSYONY",
-    "slogan":"All your needs"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
