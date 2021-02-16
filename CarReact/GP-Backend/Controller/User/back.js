@@ -1,139 +1,123 @@
-const FeedBack = require("../../models/Feedback/feedback");
-const Rate = require("../../models/Feedback/rate");
-const carItem = require("../../models/CarDetails/sparePartCar");
-const Vendor = require("../../models/Person/Vendor/vendor");
 
-writeFeedback = (req, res) => {
-  // {
-  //     comment:String,
-  //     car:IDitem,
-  // }
+// remove voting on comment
+downVoteToComment = async (req, res) => {
+  const personDownVote = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personDownVote); 
 
-  const body = req.body;
-
-  if (!(body.car && body.comment)) {
+  if (personDownVote.length > 0) {
     return res.json({
       Data: null,
-      Message: "You must provide a feedback ",
+      Message: "You already vote before",
       Success: false,
     });
   }
 
-  const IdUser = req.user._id;
-  const findUserFeedback = FeedBack.findOne({ user: IdUser, car: body.car });
-
-  if (findUserFeedback.length > 0) {
-    return res.json({
-      Data: null,
-      Message: "can't write feedback again",
-      Success: false,
-    });
-  } else {
-    const feedback = new FeedBack({ ...body });
-    feedback.user = IdUser;
-    feedback
-      .save()
-      .then((data) => {
-        carItem
-          .updateOne({ _id: req.body.car }, { $push: { feedback: data._id } })
-          .then(console.log("Done"));
-
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVoteUp);
+  if (personVoteUp.length > 0) {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $pull: { personUpVoting: req.user._id }, $inc: { upVoting: -1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
         return res.json({
-          Data: data._id,
-          Message: "Thank you very much",
+          Data: data.upVoting - data.downVoting,
+          Message: "Done remove voting",
           Success: true,
-        });
-      })
-      .catch((error) => {
-        return res.json({
-          Data: error.message,
-          Message: "You must provide a feedback",
-          Success: false,
-        });
-      });
-  }
-};
-
-removeFeedback = async (req, res) => {
-  const IdUser = req.user._id;
-
-  FeedBack.findOneAndDelete(
-    { _id: req.params.id, user: IdUser },
-    (err, data) => {
-      if (err || !data) {
-        return res.json({
-          Data: err,
-          Message: "Can't delete item from database",
-          Success: false,
         });
       }
-
-      carItem
-        .updateOne({ _id: data.car }, { $pull: { feedback: data._id } })
-        .then("Done");
-
-      return res.json({
-        Data: {},
-        Message: "Done delete",
-        Success: true,
-      });
-    }
-  );
+    );
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
+        });
+      }
+    );
+  }
 };
 
-rateItem = (req, res) => {
-  
-  const body = req.body;
-  if (!(body.car && body.rating)) {
+upVoteToComment = async (req, res) => {
+  const personVoteUp = await Vote.find({
+    personUpVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
+  console.log(personVoteUp);
+
+  if (personVoteUp.length > 0) {
     return res.json({
       Data: null,
-      Message: "You must provide a rate ",
+      Message: "You already vote before",
       Success: false,
     });
   }
 
-  const IdUser = req.user._id;
-  const findUserRate = Rate.findOne({ user: IdUser, car: body.car });
-  if (findUserRate.length > 0) {
-    Rate.updateOne({ user: IdUser, car: body.car }, { rating: req.body.rating })
-      .then((data) => {
-        return res.json({
-          Data: data.n,
-          Message: "Update your Rate",
-          Success: true,
-        });
-      })
-      .catch((error) => {
-        return res.json({
-          Data: error.message,
-          Message: "Can't Rate",
-          Success: false,
-        });
-      });
-  } else {
-    const rate = new Rate({ ...body });
-    rate.user = IdUser;
-    rate
-      .save()
-      .then((data) => {
-        carItem
-          .updateOne({ _id: req.body.car }, { $push: { rate: data._id } })
-          .then(console.log("Done"));
+  const personVoteDown = await Vote.find({
+    personDownVoting: { $in: req.user._id },
+    comment: req.params.id,
+  });
 
+  if (personVoteDown.length > 0) {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $pull: { personDownVoting: req.user._id }, $inc: { downVoting: -1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
         return res.json({
-          Data: data._id,
-          Message: "Thank you very much",
+          Data: data.upVoting - data.downVoting,
+          Message: "Done remove voting",
           Success: true,
         });
-      })
-      .catch((error) => {
-        return res.json({
-          Data: error.message,
-          Message: "You must provide a feedback",
-          Success: false,
+      }
+    );
+  } else {
+    Vote.findOneAndUpdate(
+      { comment: req.params.id },
+      { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
+      (error, data) => {
+        if (error || !data) {
+          return res.json({
+            Data: error,
+            Message: "can't vote",
+            Success: false,
+          });
+        }
+        return res.status(200).json({
+          Data: data.upVoting - data.downVoting,
+          Message: "Done add Voting",
+          Success: true,
         });
-      });
+      }
+    );
   }
 };
-
-module.exports = { writeFeedback, removeFeedback, rateItem };

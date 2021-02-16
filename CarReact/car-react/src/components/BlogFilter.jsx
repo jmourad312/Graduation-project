@@ -312,7 +312,7 @@ export default function BlogFilter(props) {
         height: "50px"
       }}
       >
-        {blogs && (
+        {blogs && itemsInDB > 6 && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}

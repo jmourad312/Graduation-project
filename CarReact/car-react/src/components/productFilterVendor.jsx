@@ -237,7 +237,7 @@ export default function ProductFilterVendor(props) {
           height:"80px"
         }}
       >
-        {productsVendor && (
+        {productsVendor && itemsInDB > 3 && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={3}
