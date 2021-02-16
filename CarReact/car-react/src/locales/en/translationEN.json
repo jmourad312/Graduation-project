@@ -91,4 +91,55 @@
             "limitation2": "Only registered car owners can view this Item's Location"
         }
     }
+,
+
+
+
+
+  "SignChoice":{
+      "Register":"Register or Login as",
+      "Vendor":"Vendor",
+      "CarOwner":"Car Owner"
+  },
+
+  "VendorSign":{
+      "DREKSYONY":"DREKSYONY",
+      "YourChoice":"Your Right Choice",
+      "Great":"Great! You are one of our members now",
+      "YourProfile":"Your Profile",
+      "Email":"Email Adderss",
+      "Password":"Password",
+      "Login":"Login",
+      "New":"I'm New",
+      "FirstName":"First Name",
+      "ShopName":"Shop Name",
+      "Optional":"-Optional",
+      "Required":"Required",
+      "PhoneNumber":"Phone Number",
+      "ConfirmPassword":"Confirm Password",
+      "Already":"Already Registered",
+      "BySigning":"By signing up you agree to our",
+      "TERMS":"TERMS",
+      "and":"and",
+      "Privacy":"Privacy Policy",
+      "SignUp":"SignUp"
+      
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
