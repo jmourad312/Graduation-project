@@ -8,7 +8,7 @@ import ProductComp from "../../../../components/ProductComp";
 import ProductFilter from "../../../../components/ProductFilter";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductsAction, getUsersAction } from "../../../../store/actions";
-
+import {useTranslation} from "react-i18next";
 export default function ProductsList() {
   const products = useSelector((state) => state.products);
   const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
@@ -62,6 +62,8 @@ export default function ProductsList() {
     type: "tween",
     ease: "anticipate",
   };
+  const {t, i18n} = useTranslation();
+
   return (
     <motion.div
       className="productList"
@@ -103,7 +105,7 @@ export default function ProductsList() {
                         textAlign: "center",
                       }}
                     >
-                      Sorry, No Items match your search
+                    {t("product.products list.search")}
                     </h2>
                   </div>
                 )
