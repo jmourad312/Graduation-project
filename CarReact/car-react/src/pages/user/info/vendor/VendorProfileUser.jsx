@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SlickSlider from "../../../../components/SlickSlider";
 import { useTranslation } from "react-i18next";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 
 export default function VendorProfileUser(props) {
   const [vendor, setVendor] = useState({
@@ -68,6 +69,7 @@ export default function VendorProfileUser(props) {
   });
 
   const { t, i18n } = useTranslation();
+  const [show, setShow] = useState(false);
 
   return (
     <section className="vendor-profile">
@@ -76,7 +78,7 @@ export default function VendorProfileUser(props) {
           {/* <!-- vendor info --> */}
           <h2 className="text-center">{t("vendor profile.info")}</h2>
           <section className="row mt-5">
-            <div className="media">
+            <div className="media w-100">
               <div className="col-3">
                 <img
                   className="rounded-circle"
@@ -107,19 +109,21 @@ export default function VendorProfileUser(props) {
                 </div>
               </div>
               {vendor &&
-                vendor.location &&
-                vendor.location[0] !== undefined &&
-                vendor.location[1] !== undefined && (
-                  <div className="col-4">
-                    <iframe
-                      title="map"
-                      id="myiframe"
-                      src={loc}
-                      width="300"
-                      height="200"
-                    ></iframe>
-                  </div>
-                )}
+              vendor.location &&
+              vendor.location[0] !== undefined &&
+              vendor.location[1] !== undefined ? (
+                <div className="col-4">
+                  <iframe
+                    title="map"
+                    id="myiframe"
+                    src={loc}
+                    width="300"
+                    height="200"
+                  ></iframe>
+                </div>
+              ) : (
+                <div className="col-4">Location not provided</div>
+              )}
             </div>
           </section>
           {/* <hr className="hr " /> */}
@@ -142,6 +146,78 @@ export default function VendorProfileUser(props) {
           <SlickSlider items={vendor.vendorItems} />
         </div>
       </div>
+      <Button variant="primary" onClick={() => setShow(true)}>
+        Custom Width Modal
+      </Button>
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        // dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+        size="xl"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-custom-modal-styling-title">
+            Custom Modal Styling
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Container>
+            <Row>
+              {vendor.vendorItems.map((item, index) => {
+                return (
+                  <Col>
+                    <div className="productList2">
+                      <section className="cards">
+                        <article
+                          className="card card--1"
+                          // onClick={() => handleClick(item._id)}
+                        >
+                          <div
+                            className="card__img"
+                            style={{ background: `url(${item.image})` }}
+                          ></div>
+                          <p className="card_link">
+                            <div
+                              className="card__img--hover"
+                              style={{ background: `url(${item.image})` }}
+                            ></div>
+                          </p>
+                          <div className="card__info">
+                            <h4 className="card__title text-truncate">
+                              {item.name}
+                            </h4>
+                            <span
+                              className="price"
+                              style={{
+                                fontWeight: "600",
+                                color: "goldenrod",
+                                fontSize: "25px",
+                              }}
+                            >
+                              {item.price} LE
+                            </span>{" "}
+                            <p className="text-truncate">{item.description}</p>
+                            <strong>
+                              <i className="badge badge-dark">
+                                {item.carBrand}
+                              </i>
+                              {"  "}
+                              <i className="badge badge-dark">
+                                {item.carModel}
+                              </i>
+                            </strong>
+                          </div>
+                        </article>
+                      </section>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+          </Container>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 }
