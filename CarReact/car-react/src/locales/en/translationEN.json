@@ -16,6 +16,20 @@
     },
 
     "logo":"DREKSYONY",
-    "slogan":"All your needs"
+    "slogan":"All your needs",
 
+
+    "Contact Us":{
+    "ContactUs":"Contact Us",
+    "Feel Free":"Feel free to contact us anytime",
+    "Email":"Email",
+    "Message":"Your Message",
+    "SendMessage":"Send",
+    "SocialSites":"Our Social Sites",
+    "Twitter":"Twitter",
+    "Facebook":"Facebook",
+    "Youtube":"Youtube",
+    "CallUs":"Call Us",
+    "OurEmail":"Email"
+    }
 }

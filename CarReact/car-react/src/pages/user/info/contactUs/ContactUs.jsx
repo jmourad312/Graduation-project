@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import LoginButton from "../../../../components/LoginButton";
 import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
+import {useTranslation} from "react-i18next";
+
 
 export default function ContactUs() {
   
@@ -71,6 +73,9 @@ export default function ContactUs() {
       })
   };
 
+
+  const {t, i18n} = useTranslation();
+
   return (
     <section className="contact-us">
       {localStorage.getItem("Authorization") === null && <LoginButton />}
@@ -104,7 +109,7 @@ export default function ContactUs() {
                 WebkitBackgroundClip: "text",
               }}
             >
-              Contact Us
+             {t("Contact Us.ContactUs")}
             </h1>
             <p
               style={{
@@ -117,7 +122,7 @@ export default function ContactUs() {
                 WebkitBackgroundClip: "text",
               }}
             >
-              Feel free to contact us anytime
+              {t("Contact Us.Feel Free")}
             </p>
             <div className="row">
               <div className="col-2"></div>
@@ -136,7 +141,7 @@ export default function ContactUs() {
                         WebkitBackgroundClip: "text",
                       }}
                     >
-                      Email
+                      {t("Contact Us.Email")}
                     </label>
                     <input
                       type="email"
@@ -161,7 +166,7 @@ export default function ContactUs() {
                         WebkitBackgroundClip: "text",
                       }}
                     >
-                      Your Message
+                      {t("Contact Us.Message")}
                     </label>
                     <textarea
                       className="form-control inputheight"
@@ -178,7 +183,7 @@ export default function ContactUs() {
                     onClick={handleSubmit}
                     style={{ fontWeight: "700", fontSize: "25px" }}
                   >
-                    Send Message
+                    {t("Contact Us.SendMessage")}
                   </button>
                 </form>
               </div>
@@ -191,14 +196,13 @@ export default function ContactUs() {
         <h3
           style={{
             fontWeight: "800",
-            
             backgroundImage:
               "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
           }}
         >
-          Our Social Sites
+          {t("Contact Us.SocialSites")}
         </h3>
         <div className="list-inline banner-social-buttons">
           <a
@@ -207,7 +211,7 @@ export default function ContactUs() {
             style={{ fontSize: "30px" }}
           >
             <i className="fa fa-twitter text-dark"> </i>
-            <span className="network-name ml-1">Twitter</span>
+            <span className="network-name ml-1">{t("Contact Us.Twitter")}</span>
           </a>
 
           <a
@@ -216,7 +220,7 @@ export default function ContactUs() {
             style={{ fontSize: "30px" }}
           >
             <i className="fa fa-facebook text-dark"> </i>
-            <span className="network-name ml-1">Facebook</span>
+            <span className="network-name ml-1">{t("Contact Us.Facebook")}</span>
           </a>
 
           <a
@@ -225,7 +229,7 @@ export default function ContactUs() {
             style={{ fontSize: "30px" }}
           >
             <i className="fa fa-youtube-play"> </i>
-            <span className="network-name ml-1">Youtube</span>
+            <span className="network-name ml-1">{t("Contact Us.Youtube")}</span>
           </a>
         </div>
       </section>
@@ -233,41 +237,42 @@ export default function ContactUs() {
       <section className="contactinfo">
         <div className="container">
           <div className="row">
-            <div className="col-4">
+            <div className="col-6">
               <div className="card contrastclass pb-1">
                 <div className="card-body text-center">
                   <i className="fa fa-phone fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase" style={{ fontWeight: "700" }}>
-                    call us
+                  {t("Contact Us.CallUs")}
                   </h4>
-                  <p style={{ fontWeight: "700" }}>
-                    +8801683615582,+8801750603409
+                  <p style={{ fontWeight: "700",fontSize:"25px" }}>
+                    +20 101 828 6018 / +20 101 907 7144
+                    +20 100 246 1335 / +20 106 614 8699
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-4">
+            {/* <div className="col-4">
               <div className="card contrastclass pb-3">
                 <div className="card-body text-center">
                   <i className="fa fa-map-marker fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase" style={{ fontWeight: "700" }}>
-                    office loaction
+                  {t("Contact Us.OfficeLocation")}
                   </h4>
                   <address style={{ fontWeight: "600" }}>
                     Suite 02, Level 12, Sahera Tropical Center
                   </address>
                 </div>
               </div>
-            </div>
-            <div className="col-4">
+            </div> */}
+            <div className="col-6">
               <div className="card contrastclass">
                 <div className="card-body text-center">
                   <i className="fa fa-globe fa-2x" aria-hidden="true"></i>
                   <h4 className="text-uppercase" style={{ fontWeight: "700" }}>
-                    email
+                  {t("Contact Us.OurEmail")}
                   </h4>
-                  <p style={{ fontWeight: "700" }}>
-                    http://al.a.noman1416@gmail.com
+                  <p style={{ fontWeight: "700",fontSize:"25px",marginBottom:"50px",paddingTop:"20px" }}>
+                    www.dreksyonyteam@gmail.com
                   </p>
                 </div>
               </div>
