@@ -7,7 +7,7 @@ import { getUsersAction } from "../../../../../store/actions";
 import { useHistory } from "react-router-dom";
 import SimpleDelete from "../../../../../components/SimpleDelete";
 import { PaginationReact } from "../../../../../components/PaginationReact";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function BookmarkedPosts(props) {
   const history = useHistory();
@@ -27,7 +27,7 @@ export default function BookmarkedPosts(props) {
 
   const handleClick = (pageNumber) => setCurrentPage(pageNumber.selected + 1);
   // const date = new Date ()
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <motion.div
       className="BookmarkedPosts"
@@ -65,16 +65,16 @@ export default function BookmarkedPosts(props) {
               </div>
             </div>
           ) : (
-              <>
-                {currentPosts.map((post, index) => {
-                  let time = post.createdAt.split("T");
-                  console.log(time);
-                  return (
-                    <div
-                      style={{ paddingBottom: "15px", paddingTop: "15px" }}
-                      key={index}
-                    >
-                      {/* <div className="media border-rounded p-3" key={post._id}>
+            <>
+              {currentPosts.map((post, index) => {
+                let time = post.createdAt.split("T");
+                console.log(time);
+                return (
+                  <div
+                    style={{ paddingBottom: "15px", paddingTop: "15px" }}
+                    key={index}
+                  >
+                    {/* <div className="media border-rounded p-3" key={post._id}>
                   <img src={post.image} alt="John Doe" className="mr-3 rounded-circle" />
                   <div className="media-body">
                     <h2 className="text-truncate" style={{ maxWidth: "500px" }}>{post.title}</h2>
@@ -88,51 +88,86 @@ export default function BookmarkedPosts(props) {
                   </div>
                 </div> */}
 
-                      <div className="card m-auto" key={post._id}>
-                        <div className="row">
-                          <div className="col-4">
-                            <img className="d-block w-100" src={post.images[0]} style={{ height: "100%" }} alt="No supported image"/>
-                          </div>
-                          <div className="col-8">
-                            <div className="card-block">
-                              <h2 className="card-title text-truncate"style={{maxWidth: "500px",marginBottom: "0px",paddingBottom: "5px",}}>
-                                {post.title}
-                              </h2>
-                              <strong style={{}}>
-                                <i> Posted on </i>
-                                {time[0]}
-                              </strong>
-                              <h4 className="text-truncate"style={{maxWidth: "500px",marginBottom: "0px",paddingBottom: "5px",}}>
-                                {post.body}
-                              </h4>
-                              <br />
-                              <strong>
-                                <i className="badge badge-dark"style={{fontSize: "16px",marginBottom: "0px"}}>
-                                  {post.brand}
-                                </i>{" "}
-                                <i className="badge badge-dark"style={{fontSize: "16px",marginBottom: "0px",}}>
-                                  {post.model}
-                                </i>
-                              </strong>
-                            </div>
+                    <div className="card m-auto" key={post._id}>
+                      <div className="row">
+                        <div className="col-4">
+                          <img
+                            className="d-block w-100"
+                            src={post.images[0]}
+                            style={{ height: "100%" }}
+                            alt="No supported image"
+                          />
+                        </div>
+                        <div className="col-8">
+                          <div className="card-block">
+                            <h2
+                              className="card-title text-truncate"
+                              style={{
+                                maxWidth: "500px",
+                                marginBottom: "0px",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              {post.title}
+                            </h2>
+                            <strong style={{}}>
+                              <i> Posted on </i>
+                              {time[0]}
+                            </strong>
+                            <h4
+                              className="text-truncate"
+                              style={{
+                                maxWidth: "500px",
+                                marginBottom: "0px",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              {post.body}
+                            </h4>
+                            <br />
+                            <strong>
+                              <i
+                                className="badge badge-dark"
+                                style={{
+                                  fontSize: "16px",
+                                  marginBottom: "0px",
+                                }}
+                              >
+                                {post.brand}
+                              </i>{" "}
+                              <i
+                                className="badge badge-dark"
+                                style={{
+                                  fontSize: "16px",
+                                  marginBottom: "0px",
+                                }}
+                              >
+                                {post.model}
+                              </i>
+                            </strong>
                           </div>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-                <div style={{ position: "absolute", top: "-40px", left: "140px" }}>
+                  </div>
+                );
+              })}
+              {posts.length > 3 && (
+                <div
+                  style={{ position: "absolute", top: "-40px", left: "140px" }}
+                >
                   <PaginationReact
                     NumberOfItemsInDB={posts.length}
                     NumberToShow={postsPerPage}
                     handleClick={handleClick}
                   />
                 </div>
-              </>
-            )
+              )}
+            </>
+          )
         ) : (
-            "Loading"
-          )}
+          "Loading"
+        )}
       </div>
     </motion.div>
   );

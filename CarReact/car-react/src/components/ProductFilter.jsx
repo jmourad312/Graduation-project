@@ -264,7 +264,7 @@ export default function ProductFilter(props) {
           height:"50px"
         }}
       >
-        {products && (
+        {products && itemsInDB > 6  && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}

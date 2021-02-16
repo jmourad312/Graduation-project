@@ -6,8 +6,7 @@ import Loading from "../../../../../components/Loading";
 import { PaginationReact } from "../../../../../components/PaginationReact";
 import { getUsersAction, setProductId } from "../../../../../store/actions";
 // import Review from '../../../../../components/Review';
-import {useTranslation} from "react-i18next";
-
+import { useTranslation } from "react-i18next";
 
 export default function FavouriteItems(props) {
   const user = useSelector((state) => state.user.Data);
@@ -26,13 +25,12 @@ export default function FavouriteItems(props) {
 
   const handleClick = (pageNumber) => setCurrentPage(pageNumber.selected + 1);
 
-
   const handleItemClick = (params) => {
     dispatch(setProductId(params));
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
   };
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <motion.div
       className="FavouriteItems"
@@ -51,7 +49,7 @@ export default function FavouriteItems(props) {
                 style={{
                   fontWeight: "700",
                   fontSize: "30px",
-                  
+
                   position: "absolute",
                   left: "30%",
                 }}
@@ -74,7 +72,10 @@ export default function FavouriteItems(props) {
               <>
                 {currentPosts.map((item) => {
                   return (
-                    <div className="col-4 h-25 w-25" style={{marginTop:"50px"}}>
+                    <div
+                      className="col-4 h-25 w-25"
+                      style={{ marginTop: "50px" }}
+                    >
                       {/* <div className="card">
                 <img className="card-img-top"src={item.image}alt="Card"style={{ maxHeight: "100px" }}/>
                 <div className="card-body">
@@ -139,13 +140,21 @@ export default function FavouriteItems(props) {
                     </div>
                   );
                 })}
-                <div style={{ position: "absolute", top: "-25px",left:"140px" }}>
-                  <PaginationReact
-                    NumberOfItemsInDB={items.length}
-                    NumberToShow={postsPerPage}
-                    handleClick={handleClick}
-                  />
-                </div>
+                {items.length > 6 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "-25px",
+                      left: "140px",
+                    }}
+                  >
+                    <PaginationReact
+                      NumberOfItemsInDB={items.length}
+                      NumberToShow={postsPerPage}
+                      handleClick={handleClick}
+                    />
+                  </div>
+                )}
               </>
             )
           ) : (
