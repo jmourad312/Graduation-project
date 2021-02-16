@@ -615,7 +615,14 @@ export default function BlogDetails(props) {
                             <i class="fas fa-chevron-up"></i>
                           </button>
                         ) : (
-                          <Spinner animation="grow" />
+                          <Spinner
+                            animation="grow"
+                            style={{
+                              position: "relative",
+                              left: "80.7px",
+                              fontSize: "20px",
+                            }}
+                          />
                         )}
                         <span
                           className="btn badge-pill"
@@ -643,7 +650,14 @@ export default function BlogDetails(props) {
                             <i class="fas fa-chevron-down"></i>
                           </button>
                         ) : (
-                          <Spinner animation="grow" />
+                          <Spinner
+                            animation="grow"
+                            style={{
+                              position: "relative",
+                              left: "80.7px",
+                              fontSize: "20px",
+                            }}
+                          />
                         )}
                       </div>
 
