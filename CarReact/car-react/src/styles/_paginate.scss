@@ -6,6 +6,7 @@
     font-size: 23px;
     left: 205px;
     position: absolute;
+    margin-bottom: -20px;
   }
   .pagination > .active > a{
     background-color: #525455 ;
@@ -27,7 +28,8 @@
     color: #ffffff
   }
   .pagination > li:first-child  > a, .pagination 
-  > li:first-child {border-radius: 25px 0px 0px 25px;}
+  > li:first-child {border-radius: 25px 0px 0px 25px;
+  }
 
   .pagination > li:last-child > a, .pagination 
   > li:last-child {border-radius: 0px 25px 25px 0px;}

@@ -7,6 +7,7 @@ import { getUsersAction } from "../../../../../store/actions";
 import { useHistory } from "react-router-dom";
 import SimpleDelete from "../../../../../components/SimpleDelete";
 import { PaginationReact } from "../../../../../components/PaginationReact";
+import {useTranslation} from "react-i18next";
 
 export default function BookmarkedPosts(props) {
   const history = useHistory();
@@ -26,6 +27,7 @@ export default function BookmarkedPosts(props) {
 
   const handleClick = (pageNumber) => setCurrentPage(pageNumber.selected + 1);
   // const date = new Date ()
+  const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="BookmarkedPosts"
@@ -48,7 +50,7 @@ export default function BookmarkedPosts(props) {
                 left: "30%",
               }}
             >
-              No Bookmarked Posts yet
+              {t("BookmarkedItems.NoBookmarked")}
               <div
                 className="text-center"
                 onClick={() => history.push("/BlogList")}
@@ -59,7 +61,7 @@ export default function BookmarkedPosts(props) {
                   cursor: "pointer",
                 }}
               >
-                Go to Blogs List
+                {t("MyBlogs.GoToBlogsList")}
               </div>
             </div>
           ) : (

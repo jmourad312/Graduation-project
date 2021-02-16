@@ -8,6 +8,7 @@ import { getUsersAction } from "../../../../../store/actions";
 import { useHistory } from "react-router-dom";
 import { PaginationReact } from "../../../../../components/PaginationReact";
 import Loading from "../../../../../components/Loading";
+import {useTranslation} from "react-i18next";
 
 export default function BlogPosts(props) {
   const history = useHistory();
@@ -30,7 +31,7 @@ export default function BlogPosts(props) {
   // Get current posts
 
   const handleClick = pageNumber => setCurrentPage(pageNumber.selected + 1);
-
+  const {t, i18n} = useTranslation();
   return (
     <AnimatePresence exitBeforeEnter>
       <motion.div
@@ -54,12 +55,12 @@ export default function BlogPosts(props) {
                   left: "40%",
                 }}
               >
-                No blogs yet{" "}
+                {t("MyBlogs.Noblogsyet")}{" "}
                 <p
                   className="text-center"
-                  style={{ fontSize: "20px", fontWeight: "200" }}
+                  style={{ fontSize: "25px", fontWeight: "500" }}
                 >
-                  to add blog{" "}
+                  {t("MyBlogs.ToAddBlog")}{" "}
                 </p>
                 <div
                   className="text-center"
@@ -71,7 +72,7 @@ export default function BlogPosts(props) {
                     cursor: "pointer",
                   }}
                 >
-                  Go to Blogs List
+                  {t("MyBlogs.GoToBlogsList")}
                 </div>
               </div>
             ) : (

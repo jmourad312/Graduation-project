@@ -37,7 +37,7 @@ function App() {
           <div
             style={{ position: "absolute", right: "310px", bottom: "150px" }}
           >
-            <Ads2 />
+            {/* <Ads2 /> */}
           </div>
         </div>
       </Router>

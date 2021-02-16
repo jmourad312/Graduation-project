@@ -18,6 +18,7 @@ import {useTranslation} from "react-i18next";
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
+  const {t, i18n} = useTranslation();
   const history = useHistory();
   const [filterState, setFilterState] = useState({
     model: "",
@@ -28,7 +29,7 @@ export default function BlogFilter(props) {
   const blogs = useSelector((state) => state.blogs.TotalItem);
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(filterCarBrand());
     // dispatch(resultFromFilter({}, 0));
@@ -198,7 +199,6 @@ export default function BlogFilter(props) {
       setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 3000);
     
   };
-  const {t, i18n} = useTranslation();
   return (
     <div className={props.class}>
 

@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function LoginButton() {
+  const {t, i18n} = useTranslation();
   return (
     <div className="loginButton">
       <div class="wrapper">
         <Link class="cta" to="/SignChoice">
-          <span>LOGIN</span>
+          <span>{t("LoginButton")}</span>
           <span>
             <svg
               width="30px"

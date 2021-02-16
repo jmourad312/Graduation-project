@@ -214,5 +214,22 @@
     "UserIcon":{
         "MyProfile":"My Profile",
         "Logout1":"Log Out"
+    },
+    "LoginButton":"Login",
+    "Pagination":{
+        "Prev":"Prev",
+        "Next":"Next"
+    },
+    "MyBlogs":{
+        "Noblogsyet":"No blogs yet",
+        "ToAddBlog":"to add blog",
+        "GoToBlogsList":"Go to Blogs List"
+    },
+    "FavouriteItems":{
+        "NoItems":"No Favourite Items yet",
+        "GoList":"Go to Products List"
+    },
+    "BookmarkedItems":{
+        "NoBookmarked":"No Bookmarked Posts yet"
     }
 }

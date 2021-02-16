@@ -56,7 +56,7 @@ export default function FavouriteItems(props) {
                   left: "30%",
                 }}
               >
-                No Favourite Items yet
+                {t("FavouriteItems.NoItems")}
                 <div
                   className="text-center"
                   onClick={() => history.push("/ProductsList")}
@@ -67,7 +67,7 @@ export default function FavouriteItems(props) {
                     cursor: "pointer",
                   }}
                 >
-                  Go to Products List
+                  {t("FavouriteItems.GoList")}
                 </div>
               </div>
             ) : (
