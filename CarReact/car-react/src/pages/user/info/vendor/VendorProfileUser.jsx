@@ -146,9 +146,9 @@ export default function VendorProfileUser(props) {
           <SlickSlider items={vendor.vendorItems} />
         </div>
       </div>
-      <Button variant="primary" onClick={() => setShow(true)}>
+      {/* <Button variant="primary" onClick={() => setShow(true)}>
         Custom Width Modal
-      </Button>
+      </Button> */}
       <Modal
         show={show}
         onHide={() => setShow(false)}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Button, Carousel, Col, Form, Modal } from "react-bootstrap";
+import { Button, Carousel, Col, Form, Modal, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
@@ -253,9 +253,17 @@ export default function BlogDetails(props) {
 
   const addVote = (id) => {
     dispatch(addVoteComment(id));
+    setVoted(true);
+    setTimeout(() => {
+      setVoted(false);
+    }, 2000);
   };
   const removeVote = (id) => {
     dispatch(removeVoteComment(id));
+    setVoted(true);
+    setTimeout(() => {
+      setVoted(false);
+    }, 2000);
   };
 
   // useEffect(() => {
@@ -263,6 +271,8 @@ export default function BlogDetails(props) {
   // console.log(blogDetails);
   // console.log(blogID);
   // }, []);
+  const [voted, setVoted] = useState(false)
+
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
     if (blogDetails) {
@@ -592,17 +602,21 @@ export default function BlogDetails(props) {
                   return (
                     <div className="media mb-1" key={index}>
                       <div className="mr-2">
-                        <button
-                          className="btn"
-                          style={{
-                            position: "relative",
-                            left: "80.7px",
-                            fontSize: "20px",
-                          }}
-                          onClick={() => addVote(item._id)}
-                        >
-                          <i class="fas fa-chevron-up"></i>
-                        </button>
+                        {!voted ? (
+                          <button
+                            className="btn"
+                            style={{
+                              position: "relative",
+                              left: "80.7px",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => addVote(item._id)}
+                          >
+                            <i class="fas fa-chevron-up"></i>
+                          </button>
+                        ) : (
+                          <Spinner animation="grow" />
+                        )}
                         <span
                           className="btn badge-pill"
                           style={{
@@ -615,18 +629,22 @@ export default function BlogDetails(props) {
                         >
                           {item.vote.upVoting - item.vote.downVoting}
                         </span>
-                        <button
-                          className="btn"
-                          style={{
-                            position: "relative",
-                            left: "0px",
-                            top: "80px",
-                            fontSize: "20px",
-                          }}
-                          onClick={() => removeVote(item._id)}
-                        >
-                          <i class="fas fa-chevron-down"></i>
-                        </button>
+                        {!voted ? (
+                          <button
+                            className="btn"
+                            style={{
+                              position: "relative",
+                              left: "0px",
+                              top: "80px",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => removeVote(item._id)}
+                          >
+                            <i class="fas fa-chevron-down"></i>
+                          </button>
+                        ) : (
+                          <Spinner animation="grow" />
+                        )}
                       </div>
 
                       {/* <img
