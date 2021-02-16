@@ -2,8 +2,10 @@ import React from "react";
 import ContactUsPic from "../../../../components/ContactUsPic";
 import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
+import {useTranslation} from "react-i18next";
 
 export default function AboutUs() {
+  const {t, i18n} = useTranslation();
   return (
     <section className="about-us">
       {/* {localStorage.getItem("Authorization") === null && <LoginButton />} */}
@@ -12,7 +14,7 @@ export default function AboutUs() {
         <h1
           style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)", color: "transparent", WebkitBackgroundClip: "text" }}
         >
-          Our Team
+          {t('aboutUs.Team')}
         </h1>
         {/* <span className="border"></span>
         <div className="ps">
@@ -110,7 +112,8 @@ export default function AboutUs() {
               "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
-          }}>About Us</h1>
+          }}> {t('aboutUs.aboutUs')}
+          </h1>
           <p className="text" style={{
             fontWeight: "800",
           
@@ -119,8 +122,7 @@ export default function AboutUs() {
             color: "transparent",
             WebkitBackgroundClip: "text",
           }}>
-            We are a highly skilled group of MEARN Full Stack Developers, we
-            enjoy coding and bringing new concepts and projects to life.
+           {t('aboutUs.descriptionPart1')}
           </p>
           <div className="skills" style={{
             fontWeight: "800",
@@ -131,11 +133,7 @@ export default function AboutUs() {
             WebkitBackgroundClip: "text",
           }}>
             <span>
-              We are highly trained graduates from the Information and
-              Technology Institute or "ITI" for short, and we are ready for any
-              project, we are a perfect asset to any company or team, please
-              feel free to reach out to us so that we can assist you with any
-              project you'd want.
+            {t('aboutUs.descriptionPart2')}
             </span>
           </div>
         </div>
