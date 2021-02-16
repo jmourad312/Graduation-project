@@ -1,71 +1,66 @@
 {
-    
-    "slider" :{
-        "carparts":"Car parts",
-        "slogen":"“Find the right car part with ease”",
-        "Quality":"Quality",
-        "slogen1":"We value quality above all else",
-        "Variety":"Variety",
-        "slogen2":"We value quality above all else",
-        "Technology":"Technology",
-        "slogen3":"“Futuristic features to enjoy”",
-        "Design":"Design",
-        "slogen4":"“Modern design to make you feel at home”"
-
+    "slider": {
+        "carparts": "Car parts",
+        "slogen": "“Find the right car part with ease”",
+        "Quality": "Quality",
+        "slogen1": "We value quality above all else",
+        "Variety": "Variety",
+        "slogen2": "We value quality above all else",
+        "Technology": "Technology",
+        "slogen3": "“Futuristic features to enjoy”",
+        "Design": "Design",
+        "slogen4": "“Modern design to make you feel at home”"
     },
-
-    "logo":"DREKSYONY",
-    "slogan":"All your needs",
-
-    "aboutUs":{
-        "aboutUs":"About Us",
-        "descriptionPart1":"We are a highly skilled group of MEARN Full Stack Developers, we enjoy coding and bringing new concepts and projects to life.",
-        "descriptionPart2":"We are highly trained graduates from the Information and Technology Institute or 'ITI' for short, and we are ready for any project, we are a perfect asset to any company or team, please feel free to reach out to us so that we can assist you with any project you'd want.",
-        "Team":"Our Team"
+    "logo": "DREKSYONY",
+    "slogan": "All your needs",
+    "aboutUs": {
+        "aboutUs": "About Us",
+        "descriptionPart1": "We are a highly skilled group of MEARN Full Stack Developers, we enjoy coding and bringing new concepts and projects to life.",
+        "descriptionPart2": "We are highly trained graduates from the Information and Technology Institute or 'ITI' for short, and we are ready for any project, we are a perfect asset to any company or team, please feel free to reach out to us so that we can assist you with any project you'd want.",
+        "Team": "Our Team"
     },
-
-
-    "Contact Us":{
-    "ContactUs":"Contact Us",
-    "Feel Free":"Feel free to contact us anytime",
-    "Email":"Email",
-    "Message":"Your Message",
-    "SendMessage":"Send",
-    "SocialSites":"Our Social Sites",
-    "Twitter":"Twitter",
-    "Facebook":"Facebook",
-    "Youtube":"Youtube",
-    "CallUs":"Call Us",
-    "OurEmail":"Email"
+    "Contact Us": {
+        "ContactUs": "Contact Us",
+        "Feel Free": "Feel free to contact us anytime",
+        "Email": "Email",
+        "Message": "Your Message",
+        "SendMessage": "Send",
+        "SocialSites": "Our Social Sites",
+        "Twitter": "Twitter",
+        "Facebook": "Facebook",
+        "Youtube": "Youtube",
+        "CallUs": "Call Us",
+        "OurEmail": "Email"
     },
-    
-  "navigation": "Start Navigation From Here",
-  
-  
-  "Navbar": {
-    "product list": "Products List",
-    "sign": "Sign Here",
-    "Logout": "Logout",
-    "Blog List": " Blog List",
-    "About Us": "About Us",
-    "Contact Us": "Contact Us",
-    "Homepage": "Homepage"
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    "navigation": "Start Navigation From Here",
+    "Navbar": {
+        "product list": "Products List",
+        "sign": "Sign Here",
+        "Logout": "Logout",
+        "Blog List": " Blog List",
+        "About Us": "About Us",
+        "Contact Us": "Contact Us",
+        "Homepage": "Homepage"
+    },
+    "userSign": {
+        "createAccount": "Create Account",
+        "Name": "Name",
+        "Email": "Email",
+        "Password": "Password",
+        "SignUp": "Sign Up",
+        "agree": "By signing up you agree to our",
+        "TERMS": "TERMS",
+        "and": "and",
+        "PP": "Privacy Policy",
+        "SignIn": "Sign in",
+        "fypassword": "Forgot your password?",
+        "rightPlace": "The right place for all your car needs",
+        "reset": "Rest Your Password",
+        "enterMail": "Enter your Email here",
+        "sendMail": "send mail",
+        "Submit": "Submit",
+        "code":"Enter your code here",
+        "newp":"New password",
+        "confirmp":"Confirm new password"
+    }
 }

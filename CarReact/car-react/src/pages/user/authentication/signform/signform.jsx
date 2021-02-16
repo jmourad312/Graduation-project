@@ -13,6 +13,8 @@ import Modal from "react-bootstrap/Modal";
 import VerticalModal from "../../../../components/VerticalModal";
 import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
 import { motion } from "framer-motion";
+import {useTranslation} from "react-i18next";
+
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
   // const [changeClassBack, setChangeClassBack] = useState("forgotpass");
@@ -236,6 +238,9 @@ export default function Signform(props) {
     type: "tween",
     ease: "anticipate",
   };
+
+  const {t, i18n} = useTranslation();
+
   return (
     <motion.div
       className="signform "
@@ -248,7 +253,7 @@ export default function Signform(props) {
       <div className="container " id="container">
         <div className="form-container sign-up-container ">
           <form className="form1" onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+            <h1>{t('userSign.createAccount')}</h1>
             {/* <div className="social-container">
               <Link onClick={handlefacebook} className="social">
                 <i className="fab fa-facebook-f"></i>
@@ -261,21 +266,21 @@ export default function Signform(props) {
             {/* <span>or use your email for registration</span> */}
             <input
               type="text"
-              placeholder="Name"
+              placeholder={t('userSign.Name')}
               name="firstName"
               value={userSignUpInfo.firstName}
               onChange={changeUserSignUpInfo}
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t('userSign.Email')}
               name="email"
               value={userSignUpInfo.email}
               onChange={changeUserSignUpInfo}
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t('userSign.Password')}
               name="password"
               value={userSignUpInfo.password}
               onChange={changeUserSignUpInfo}
@@ -285,10 +290,10 @@ export default function Signform(props) {
               type="submit"
               style={{ height: "70px", fontSize: "20px" }}
             >
-              Sign Up
+              {t('userSign.SignUp')}
             </button>
             <p style={{ fontWeight: "600" }}>
-              By signing up you agree to our{" "}
+            {t('userSign.agree')}{" "}
               <span
                 style={{
                   color: "#4d8ba8",
@@ -304,9 +309,9 @@ export default function Signform(props) {
                   });
                 }}
               >
-                TERMS
+                {t('userSign.TERMS')}
               </span>{" "}
-              and{" "}
+              {t('userSign.and')}{" "}
               <span
                 style={{
                   color: "#4d8ba8",
@@ -322,7 +327,7 @@ export default function Signform(props) {
                   });
                 }}
               >
-                Privacy Policy
+                {t('userSign.PP')}
               </span>
             </p>
             {/* <button className="button" onClick={switchPayment}>
@@ -340,7 +345,7 @@ export default function Signform(props) {
 
         <div className="form-container sign-in-container ">
           <form className="form1" onSubmit={handleSignInSubmit}>
-            <h1>Sign in</h1>
+            <h1>{t('userSign.SignIn')}</h1>
             {/* <div className="social-container">
               <Link
                 to="http://localhost:3000/user/auth/facebook"
@@ -360,7 +365,7 @@ export default function Signform(props) {
             <br />
             <input
               type="email"
-              placeholder="Email"
+              placeholder={t('userSign.Email')}
               name="email"
               value={userSignInInfo.email}
               onChange={changeUserSignInInfo}
@@ -368,7 +373,7 @@ export default function Signform(props) {
             <br />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={t('userSign.Password')}
               name="password"
               value={userSignInInfo.password}
               onChange={changeUserSignInInfo}
@@ -382,14 +387,14 @@ export default function Signform(props) {
                 color: "black",
               }}
             >
-              Forgot your password?
+              {t('userSign.fypassword')}
             </p>
             <br />
             <button
               className="button"
               style={{ height: "70px", fontSize: "20px" }}
             >
-              Sign In
+              {t('userSign.SignIn')}
             </button>
           </form>
         </div>
@@ -405,9 +410,9 @@ export default function Signform(props) {
         <div className="overlay-container ">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>DREKSYONY</h1>
+              <h1>{t('logo')}</h1>
               <p style={{ fontSize: "20px" }}>
-                The right place for all your car needs
+              {t('userSign.rightPlace')}
               </p>
               <button
                 className="button ghost"
@@ -420,13 +425,13 @@ export default function Signform(props) {
                 }}
                 style={{ height: "70px", fontSize: "20px" }}
               >
-                Sign In
+                {t('userSign.SignIn')}
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>DREKSYONY</h1>
+              <h1>{t('logo')}</h1>
               <p style={{ fontSize: "20px" }}>
-                The right place for all your car needs
+              {t('userSign.rightPlace')}
               </p>
               <button
                 className="button ghost"
@@ -439,7 +444,7 @@ export default function Signform(props) {
                 id="signUp"
                 style={{ height: "70px", fontSize: "20px" }}
               >
-                Sign Up
+                {t('userSign.SignUp')}
               </button>
             </div>
             {/* <div className="overlay-panel overlay-bottom">
@@ -465,12 +470,12 @@ export default function Signform(props) {
             }}
             onClick={switchBack}
           ></i>
-          <h2 className="text-center">Rest Your Password</h2>
+          <h2 className="text-center">{t('userSign.reset')}</h2>
           <form className="text-center">
             <input
               type="email"
               className="w-75 text-center"
-              placeholder="Enter your Email here"
+              placeholder={t('userSign.enterMail')}
               name="email"
               value={forgotState.email}
               onChange={newEmail}
@@ -488,7 +493,7 @@ export default function Signform(props) {
               onClick={handleForgetSubmit}
               type="button"
             >
-              Send email
+              {t('userSign.sendMail')}
             </button>
           </form>
           <br />
@@ -499,7 +504,7 @@ export default function Signform(props) {
               name="code"
               value={forgotState.code}
               onChange={newEmail}
-              placeholder="Enter your code here"
+              placeholder={t('userSign.code')}
             />
             <input
               type="password"
@@ -507,15 +512,15 @@ export default function Signform(props) {
               value={forgotState.password}
               onChange={newEmail}
               className="w-75 text-center"
-              placeholder="New password"
+              placeholder={t('userSign.newp')}
             />
             <input
               type="password"
               name="confirmPassword"
-              value={forgotState.confirmPassword}
+              value={forgotState.confirmp}
               onChange={newEmail}
               className="w-75 text-center"
-              placeholder="Confirm new password"
+              placeholder={t('userSign.enterMail')}
             />
             <div className="text-center">
               <button
@@ -530,7 +535,7 @@ export default function Signform(props) {
                 value="submit"
                 onClick={handleNewPassSubmit}
               >
-                Submit
+                {t('userSign.Submit')}
               </button>
             </div>
           </form>
