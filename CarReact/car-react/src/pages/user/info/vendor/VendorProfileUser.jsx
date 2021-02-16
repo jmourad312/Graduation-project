@@ -60,7 +60,7 @@ export default function VendorProfileUser(props) {
         if (vendor.location[0] !== undefined) {
           if (vendor.location[1] !== undefined) {
             setLoc(
-              `https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=es&z=14&amp;&output=embed`
+              `https://maps.google.com/maps?q=${vendor.location[1]},${vendor.location[0]}&hl=en&z=14&amp;&output=embed`
             );
           }
         }
@@ -146,13 +146,13 @@ export default function VendorProfileUser(props) {
           <SlickSlider items={vendor.vendorItems} />
         </div>
       </div>
-      {/* <Button variant="primary" onClick={() => setShow(true)}>
+      <Button variant="primary" onClick={() => setShow(true)}>
         Custom Width Modal
-      </Button> */}
+      </Button>
       <Modal
         show={show}
         onHide={() => setShow(false)}
-        // dialogClassName="modal-90w"
+        dialogClassName={"productList2"}
         aria-labelledby="example-custom-modal-styling-title"
         size="xl"
       >
@@ -166,51 +166,45 @@ export default function VendorProfileUser(props) {
             <Row>
               {vendor.vendorItems.map((item, index) => {
                 return (
-                  <Col>
-                    <div className="productList2">
-                      <section className="cards">
-                        <article
-                          className="card card--1"
-                          // onClick={() => handleClick(item._id)}
-                        >
+                  <Col key={index}>
+                    <section className="cards">
+                      <article
+                        className="card card--1"
+                        // onClick={() => handleClick(item._id)}
+                      >
+                        <div
+                          className="card__img"
+                          style={{ background: `url(${item.image})` }}
+                        ></div>
+                        <p className="card_link">
                           <div
-                            className="card__img"
+                            className="card__img--hover"
                             style={{ background: `url(${item.image})` }}
                           ></div>
-                          <p className="card_link">
-                            <div
-                              className="card__img--hover"
-                              style={{ background: `url(${item.image})` }}
-                            ></div>
-                          </p>
-                          <div className="card__info">
-                            <h4 className="card__title text-truncate">
-                              {item.name}
-                            </h4>
-                            <span
-                              className="price"
-                              style={{
-                                fontWeight: "600",
-                                color: "goldenrod",
-                                fontSize: "25px",
-                              }}
-                            >
-                              {item.price} LE
-                            </span>{" "}
-                            <p className="text-truncate">{item.description}</p>
-                            <strong>
-                              <i className="badge badge-dark">
-                                {item.carBrand}
-                              </i>
-                              {"  "}
-                              <i className="badge badge-dark">
-                                {item.carModel}
-                              </i>
-                            </strong>
-                          </div>
-                        </article>
-                      </section>
-                    </div>
+                        </p>
+                        <div className="card__info">
+                          <h4 className="card__title text-truncate">
+                            {item.name}
+                          </h4>
+                          <span
+                            className="price"
+                            style={{
+                              fontWeight: "600",
+                              color: "goldenrod",
+                              fontSize: "25px",
+                            }}
+                          >
+                            {item.price} LE
+                          </span>{" "}
+                          <p className="text-truncate">{item.description}</p>
+                          <strong>
+                            <i className="badge badge-dark">{item.carBrand}</i>
+                            {"  "}
+                            <i className="badge badge-dark">{item.carModel}</i>
+                          </strong>
+                        </div>
+                      </article>
+                    </section>
                   </Col>
                 );
               })}
