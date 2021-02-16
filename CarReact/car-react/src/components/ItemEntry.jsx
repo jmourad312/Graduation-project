@@ -190,14 +190,14 @@ export default function ItemEntry(props) {
             </div>
             <div className="row">
               <div className="col-6">
-          <button className="btn btn-danger" style={{padding:"2px",width:"90%",height:"45px",marginLeft:"5px",marginBottom:"5px"}} onClick={() => handleDelete(props.id)}>
+          <button className="btn btn-danger" style={{padding:"2px",width:"90%",height:"40px",marginLeft:"5px",marginBottom:"5px"}} onClick={() => handleDelete(props.id)}>
             <i class="fas fa-trash-alt"></i>
           </button>
               </div>
               <div className="col-6">
           <Button 
           variant="dark" 
-          style={{padding:"2px",width:"90%",height:"45px",marginLeft:"5px"}} onClick={openModal}>
+          style={{padding:"2px",width:"90%",height:"40px",marginLeft:"5px"}} onClick={openModal}>
             <i class="fas fa-pen"></i>
           </Button>
 

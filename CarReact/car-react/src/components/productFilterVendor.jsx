@@ -233,8 +233,8 @@ export default function ProductFilterVendor(props) {
           zIndex: "100",
           position: "absolute",
           left: "350px",
-          bottom: "-3.5%",
-          height:"50px"
+          bottom: "-4%",
+          height:"80px"
         }}
       >
         {productsVendor && (

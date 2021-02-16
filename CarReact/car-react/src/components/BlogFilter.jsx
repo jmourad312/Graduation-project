@@ -308,7 +308,7 @@ export default function BlogFilter(props) {
       </div>
       <div className="pagination" style={{
         zIndex: "100", position: "absolute", left: "350px",
-        bottom: "-54.5%",
+        bottom: "-56%",
         height: "50px"
       }}
       >
