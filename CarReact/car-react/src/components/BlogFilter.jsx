@@ -13,6 +13,7 @@ import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
 import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
+import {useTranslation} from "react-i18next";
 
 import Loading from "./Loading";
 
@@ -197,6 +198,7 @@ export default function BlogFilter(props) {
       setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 3000);
     
   };
+  const {t, i18n} = useTranslation();
   return (
     <div className={props.class}>
 
@@ -209,7 +211,7 @@ export default function BlogFilter(props) {
         <div class="search__close" ></div>
       </div>
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">{t("Filter.FilterOptions")}</h4>
       </div>
       <hr style={{ borderColor: "grey", border: "1px solid" }} />
       <div className="mb-5 mt-5">
@@ -248,7 +250,7 @@ export default function BlogFilter(props) {
           className="custom-select custom-select-lg mb-3"
         >
           <option value="" key="no-value" style={{ fontWeight: "700" }}>
-            choose Brand
+            {t("Filter.ChooseBrand")}
           </option>
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index} style={{ fontWeight: "700" }}>
@@ -267,7 +269,7 @@ export default function BlogFilter(props) {
           className="custom-select custom-select-lg mb-3" style={{ fontWeight: "700" }}
         >
           <option value="" key="no-value" style={{ fontWeight: "700" }}>
-            choose Model
+          {t("Filter.ChooseModel")}
           </option>
           {stateRedux.model.map((item, index) => (
             <option value={item.model} key={index} style={{ fontWeight: "700" }}>
@@ -278,7 +280,7 @@ export default function BlogFilter(props) {
       </div>
       <div>
         <Button variant="dark" onClick={handleSearchClick} style={{ fontWeight: "700", height: "60px" }}>
-          Apply Filter
+        {t("Filter.ApplyFilter")}
         </Button>
         <button
           type="button"
@@ -290,19 +292,19 @@ export default function BlogFilter(props) {
           // }}
           onClick={handleClear}
         >
-          Clear Filter
+          {t("Filter.ClearFilter")}
         </button>
       </div>
 
       <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
         {localStorage.getItem("UserID") !== null ? (
           <div>
-            <label for="add" style={{ fontSize: "35px", fontWeight: "700"}}>Add new post</label>
+            <label for="add" style={{ fontSize: "35px", fontWeight: "700"}}>{t("Filter.AddPost")}</label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>
             </p>
           </div>
-        ) : (<div style={{ fontSize: "1.7rem", fontWeight: "700", color: "black", backgroundColor: "rgba(0, 0, 0, 0.2)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}} >car owners can add new blog posts<div onClick={() => history.push("/SignForm")} style={{ fontSize: "1.8rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>Register Here</div></div>)}
+        ) : (<div style={{ fontSize: "1.7rem", fontWeight: "700", color: "black", backgroundColor: "rgba(0, 0, 0, 0.2)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}} >{t("Filter.only")}<div onClick={() => history.push("/SignForm")} style={{ fontSize: "1.8rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>{t("Filter.RegHere")}</div></div>)}
       </div>
       <div className="pagination" style={{
         zIndex: "100", position: "absolute", left: "350px",
@@ -320,15 +322,15 @@ export default function BlogFilter(props) {
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title>Add a blog post</Modal.Title>
+          <Modal.Title>{t("Filter.AddPost")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Blog title</Form.Label>
+              <Form.Label>{t("AddBlogModal.BlogTitle")}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Title"
+                placeholder={t("AddBlogModal.EnterTitle")}
                 name="title"
                 id="title"
                 value={inputValue.title}
@@ -338,7 +340,7 @@ export default function BlogFilter(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog Image</Form.Label>
+              <Form.Label>{t("AddBlogModal.BlogImage")}</Form.Label>
               <Form.Control
                 type="file"
                 name="images"
@@ -349,11 +351,11 @@ export default function BlogFilter(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog Content</Form.Label>
+              <Form.Label>{t("AddBlogModal.BlogContent")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter Blog description"
+                placeholder={t("AddBlogModal.BlogDescription")}
                 name="body"
                 id="body"
                 value={inputValue.body}
@@ -365,7 +367,7 @@ export default function BlogFilter(props) {
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Brand</Form.Label>
+                <Form.Label>{t("repeated.Brand")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -385,7 +387,7 @@ export default function BlogFilter(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Model</Form.Label>
+                <Form.Label>{t("repeated.Model")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -409,12 +411,12 @@ export default function BlogFilter(props) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="button" onClick={handleSubmit}>
-            Submit
+          <Button variant="dark" type="button" onClick={handleSubmit}>
+          {t("repeated.Submit")}
           </Button>
 
           <Button variant="danger" onClick={closeModal}>
-            Cancel
+          {t("repeated.Cancel")}
           </Button>
         </Modal.Footer>
       </Modal>

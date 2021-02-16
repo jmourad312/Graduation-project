@@ -11,6 +11,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import axios from "axios";
+import {useTranslation} from "react-i18next";
 
 export default function MyItems(props) {
   const vendorItems = useSelector((state) => state.vendorItems.Data);
@@ -124,7 +125,7 @@ export default function MyItems(props) {
       />
     );
   };
-
+  const {t, i18n} = useTranslation();
   return (
     <AnimatePresence exitBeforeEnter>
       <motion.div
@@ -145,13 +146,13 @@ export default function MyItems(props) {
                 height: "50px",
                 position: "absolute",
                 top: "85%",
-                right: "82.5%",
+                right: "80.5%",
                 background: "linear-gradient(-45deg, #110f11, #424c53)",
               }}
               onClick={() => openModal()}
             >
               <i class="far fa-plus-square"></i>
-              {" Add"}
+              {" "}{t("repeated.Add")}
             </Button>
             {vendorItems ? (
               vendorItems.map(createItem)
@@ -166,12 +167,12 @@ export default function MyItems(props) {
                   top:"30%"
                 }}
               >
-                No Items yet{" "}
+                {t("VendorMyItems.NoItems")}{" "}
                 <p
                   className="text-center"
                   style={{ fontSize: "20px", fontWeight: "500" }}
                 >
-                  to add a new product{" "}
+                  {t("VendorMyItems.ToAddProduct")}{" "}
                 </p>
                 <div
                   className="text-center"
@@ -183,7 +184,7 @@ export default function MyItems(props) {
                     cursor: "pointer",
                   }}
                 >
-                  Click here
+                  {t("VendorMyItems.ClickHere")}
                 </div>
               </div>
             )}
@@ -192,15 +193,15 @@ export default function MyItems(props) {
 
         <Modal show={isOpen} onHide={!isOpen}>
           <Modal.Header>
-            <Modal.Title>Add your product</Modal.Title>
+            <Modal.Title>{t("VendorAddItemModal.Addproduct")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
               <Form.Group>
-                <Form.Label>Product Name</Form.Label>
+                <Form.Label>{t("VendorAddItemModal.ProductName")}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter product Name"
+                  placeholder={t("VendorAddItemModal.ProductNameHolder")}
                   name="name"
                   id="name"
                   value={inputValue.name}
@@ -208,7 +209,7 @@ export default function MyItems(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Enter Product Image</Form.Label>
+                <Form.Label>{t("VendorAddItemModal.EnterImage")}</Form.Label>
                 <Form.Control
                   type="file"
                   name="image"
@@ -218,11 +219,11 @@ export default function MyItems(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Product Description</Form.Label>
+                <Form.Label>{t("VendorAddItemModal.ProductDescription")}</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  placeholder="Enter product description"
+                  placeholder={t("VendorAddItemModal.DescriptionHolder")}
                   name="description"
                   id="description"
                   value={inputValue.description}
@@ -231,7 +232,7 @@ export default function MyItems(props) {
               </Form.Group>
               <Form.Row>
                 <Form.Group as={Col}>
-                  <Form.Label>Price</Form.Label>
+                  <Form.Label>{t("VendorAddItemModal.ItemPrice")}</Form.Label>
                   <Form.Control
                     type="number"
                     name="price"
@@ -241,7 +242,7 @@ export default function MyItems(props) {
                   />
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label>Brand</Form.Label>
+                  <Form.Label>{t("repeated.Brand")}</Form.Label>
                   <Form.Control
                     defaultValue="Choose..."
                     as="select"
@@ -251,7 +252,7 @@ export default function MyItems(props) {
                     onChange={handleChange}
                   >
                     <option key={"no-value"} value="">
-                      Choose brand
+                    {t("Filter.ChooseBrand")}
                     </option>
                     ;
                     {stateRedux.brand.map((item, index) => {
@@ -264,7 +265,7 @@ export default function MyItems(props) {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label>Model</Form.Label>
+                  <Form.Label>{t("repeated.Model")}</Form.Label>
                   <Form.Control
                     defaultValue="Choose..."
                     as="select"
@@ -275,7 +276,7 @@ export default function MyItems(props) {
                     disabled={!stateDisabled}
                   >
                     <option key={"no-value"} value="">
-                      Choose model
+                    {t("Filter.ChooseModel")}
                     </option>
                     {stateRedux.model.map((item, index) => {
                       return (
@@ -291,10 +292,10 @@ export default function MyItems(props) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="dark" type="button" onClick={handleSubmit}>
-              Submit
+              {t("repeated.Submit")}
             </Button>
             <Button variant="danger" onClick={closeModal}>
-              Cancel
+              {t("repeated.Cancel")}
             </Button>
           </Modal.Footer>
         </Modal>

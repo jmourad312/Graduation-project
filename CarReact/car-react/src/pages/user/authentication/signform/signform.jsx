@@ -535,7 +535,7 @@ export default function Signform(props) {
                 value="submit"
                 onClick={handleNewPassSubmit}
               >
-                {t('userSign.Submit')}
+                {t('repeated.Submit')}
               </button>
             </div>
           </form>

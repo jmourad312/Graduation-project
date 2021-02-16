@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function UserIcon() {
   const user = useSelector((state) => state.user.Data);
@@ -24,6 +25,7 @@ export default function UserIcon() {
       localStorage.removeItem("Authorization");
       localStorage.removeItem("ProfileImage");
     };
+    const {t, i18n} = useTranslation();
   return (
     <div className="userIcon" onMouseLeave={handleHoverLeave}>
       <div className={imageState} onMouseEnter={handleHoverEnter}>
@@ -37,10 +39,10 @@ export default function UserIcon() {
               : "/VendorAdministration"
           }
         >
-          My profile
+          {t("UserIcon.MyProfile")}
         </Link>
         <Link className="nav-link waves-effect" to={"/"} onClick={logout}>
-          Logout
+        {t("UserIcon.Logout1")}
         </Link>
       </div>
     </div>

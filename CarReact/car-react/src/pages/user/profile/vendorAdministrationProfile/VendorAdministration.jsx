@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getVendorsAction } from '../../../../store/actions';
 import { motion } from 'framer-motion';
 import UserIcon from '../../../../components/UserIcon';
+import {useTranslation} from "react-i18next";
 
 export default function VendorAdministration() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const pageTransitions = {
   type: "tween",
   ease: "anticipate",
 };
+const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="vendorAdmin"
@@ -87,7 +89,7 @@ const pageTransitions = {
                   </div> */}
                     <p className="w-75 button raise m-auto">
                       <Link to="/VendorAdministration/MyItems" style={{fontSize:"19.9px",fontWeight:"700"}} onClick={handleClick}>
-                        My Items
+                        {t("ProfileLeft.MyItems")}
                       </Link>
                     </p>
                 </div>
@@ -98,7 +100,7 @@ const pageTransitions = {
                         to="/VendorAdministration/VendorSettings"
                         onClick={handleClick} style={{fontSize:"19.9px",fontWeight:"700"}}
                       >
-                        Settings
+                        {t("ProfileLeft.Settings")}
                       </Link>
                     </p>
                 </div>

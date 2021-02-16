@@ -15,6 +15,8 @@ import {
   removeVoteComment,
 } from "../../../../store/actions";
 import Loading from "../../../../components/Loading";
+import {useTranslation} from "react-i18next";
+
 
 export default function BlogDetails(props) {
 
@@ -289,7 +291,7 @@ export default function BlogDetails(props) {
     var blogTime = blogDetails.createdAt.split("T");
   }
   const history = useHistory();
-  
+  const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="container"
@@ -322,7 +324,7 @@ export default function BlogDetails(props) {
                 {blogDetails ? blogDetails.title : "LOADING"}{" "}
               </p>
               <p style={{ fontWeight: "600", fontSize: "20px" }}>
-                By{" "}
+                {t("repeated.By")}{" "}
                 <span>
                   {" "}
                   {blogDetails
@@ -335,7 +337,7 @@ export default function BlogDetails(props) {
               <hr />
               <p>
                 <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                  Date :
+                {t("repeated.Date")} 
                   {blogDetails && blogTime ? " " + blogTime[0] : "Loading"}
                 </span>
                 {/* <span style={{ color: "gray" }}> Viewed </span> 3 */}
@@ -350,7 +352,7 @@ export default function BlogDetails(props) {
                 className="mt-0"
                 style={{ fontWeight: "700", fontSize: "25px" }}
               >
-                Post Details
+                {t("BlogDetails.PostDetails")} 
               </h5>
               <p
                 className="truncate"
@@ -417,10 +419,10 @@ export default function BlogDetails(props) {
               {localStorage.getItem("UserID") !== null && (
                 <button
                   className="bookmarkbtn fourth"
-                  style={{ marginLeft: "30px", height: "65%" }}
+                  style={{ marginLeft: "30px", height: "50px",fontSize:"20px",paddingTop:"15px" }}
                   onClick={handleAddBookmark}
                 >
-                  Bookmark
+                  {t("repeated.Bookmark")} 
                 </button>
               )}
               {checkOwner && (
@@ -429,7 +431,7 @@ export default function BlogDetails(props) {
                   style={{ margin: "10px" }}
                   onClick={() => openModal(props.id)}
                 >
-                  Edit
+                  {t("repeated.Edit")}
                 </Button>
               )}
             </div>
@@ -462,15 +464,15 @@ export default function BlogDetails(props) {
       </p> */}
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title>Edit your product</Modal.Title>
+          <Modal.Title>{t("EditBlogModal.EditBlog")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Blog title</Form.Label>
+              <Form.Label>{t("EditBlogModal.BlogTitle")}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Title"
+                placeholder={t("EditBlogModal.EnterTitle")}
                 name="title"
                 id="title"
                 value={editValue.title}
@@ -478,7 +480,7 @@ export default function BlogDetails(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog image</Form.Label>
+              <Form.Label>{t("EditBlogModal.BlogImage")}</Form.Label>
               <Form.Control
                 type="file"
                 name="image"
@@ -487,11 +489,11 @@ export default function BlogDetails(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Blog Content</Form.Label>
+              <Form.Label>{t("EditBlogModal.BlogContent")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter Blog description"
+                placeholder={t("EditBlogModal.BlogDescription")}
                 name="body"
                 id="body"
                 value={editValue.body}
@@ -500,7 +502,7 @@ export default function BlogDetails(props) {
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Brand</Form.Label>
+                <Form.Label>{t("repeated.Brand")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -519,7 +521,7 @@ export default function BlogDetails(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Model</Form.Label>
+                <Form.Label>{t("repeated.Model")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -543,14 +545,14 @@ export default function BlogDetails(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            variant="primary"
+            variant="dark"
             type="button"
             onClick={() => handleEditSubmit(localStorage.getItem("BlogID"))}
           >
-            Submit
+            {t("repeated.Submit")}
           </Button>
           <Button variant="danger" onClick={closeModal}>
-            Cancel
+          {t("repeated.Cancel")}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -565,7 +567,7 @@ export default function BlogDetails(props) {
           WebkitBackgroundClip: "text",
         }}
       >
-        Comment Section
+        {t("BlogDetails.CommentSection")} 
       </h3>
       <div className="row">
         <div className="col-8">
@@ -576,7 +578,7 @@ export default function BlogDetails(props) {
                 className="text-center mt-5"
                 style={{ fontWeight: "700", fontSize: "30px", color: "black" }}
               >
-                No Comments Yet
+                {t("BlogDetails.NoCommentsYet")} 
               </div>
             ) : (
               <div
@@ -696,7 +698,7 @@ export default function BlogDetails(props) {
                 className="card-header"
                 style={{ fontSize: "25px", fontWeight: "700" }}
               >
-                Leave a Comment:
+                {t("BlogDetails.LeaveComment")}
               </h5>
               <div className="card-body">
                 <form method="post" onSubmit={handleSubmit}>
@@ -714,7 +716,7 @@ export default function BlogDetails(props) {
                     className="btn btn-dark"
                     style={{ fontWeight: "700", fontSize: "20px" }}
                   >
-                    Submit
+                    {t("repeated.Submit")}
                   </button>
                 </form>
               </div>
@@ -739,7 +741,7 @@ export default function BlogDetails(props) {
                   textAlign: "center",
                 }}
               >
-                Only registered users can add comments
+                {t("BlogDetails.OnlyRegistered")}
               </h3>
             </div>
           )}

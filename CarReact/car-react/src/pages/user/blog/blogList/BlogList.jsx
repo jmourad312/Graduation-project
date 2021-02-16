@@ -12,6 +12,7 @@ import LoginButton from "../../../../components/LoginButton";
 import UserIcon from "../../../../components/UserIcon";
 import { Pagination } from "../../../../components/Pagination";
 import Logo from "../../../../components/Logo";
+import {useTranslation} from "react-i18next";
 
 
 export default function BlogList() {
@@ -62,6 +63,7 @@ export default function BlogList() {
     type: "tween",
     ease: "anticipate",
   };
+  const {t, i18n} = useTranslation();
   return (
     <motion.section
       className="blog"
@@ -98,7 +100,7 @@ export default function BlogList() {
                       }}
                     >
                     <h2 style={{position:"relative",top:"40%",left:"0%",textAlign:"center"}}>
-                      Sorry, No posts match your search
+                      {t("BlogList.NoPosts")}
                     </h2>
                     </div>
                   )

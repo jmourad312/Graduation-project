@@ -5,7 +5,8 @@ import { useHistory } from "react-router";
 import Loading from "../../../../../components/Loading";
 import { PaginationReact } from "../../../../../components/PaginationReact";
 import { getUsersAction, setProductId } from "../../../../../store/actions";
-// import Review from '../../../../../components/Review'
+// import Review from '../../../../../components/Review';
+import {useTranslation} from "react-i18next";
 
 
 export default function FavouriteItems(props) {
@@ -31,6 +32,7 @@ export default function FavouriteItems(props) {
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
   };
+  const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="FavouriteItems"
@@ -72,7 +74,7 @@ export default function FavouriteItems(props) {
               <>
                 {currentPosts.map((item) => {
                   return (
-                    <div className="col-4 mb-3 h-25 w-25">
+                    <div className="col-4 h-25 w-25" style={{marginTop:"50px"}}>
                       {/* <div className="card">
                 <img className="card-img-top"src={item.image}alt="Card"style={{ maxHeight: "100px" }}/>
                 <div className="card-body">
@@ -130,7 +132,7 @@ export default function FavouriteItems(props) {
                             style={{ fontSize: "1.5rem" }}
                             onClick={() => handleItemClick(item._id)}
                           >
-                            Go to product
+                            {t("repeated.GotoProductDetails")}
                           </button>
                         </article>
                       </section>

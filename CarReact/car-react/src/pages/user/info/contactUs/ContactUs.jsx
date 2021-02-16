@@ -150,7 +150,7 @@ export default function ContactUs() {
                       name="email"
                       onChange={handleChange}
                       value={contactInput.email}
-                      placeholder="email@example.com"
+                      placeholder={t("Contact Us.Email")}
                     />
                   </div>
                   <div className="form-group ">

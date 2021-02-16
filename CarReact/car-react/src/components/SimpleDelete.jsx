@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
+import {useTranslation} from "react-i18next";
 
 export default function SimpleDelete(props) {
   const [classState, setclassState] = useState("box");
@@ -77,6 +78,7 @@ export default function SimpleDelete(props) {
       return Math.sqrt(dx * dx + dy * dy);
     }
   }, []);
+  const {t, i18n} = useTranslation();
   return (
     <div className="simpleDelete">
       {/* <div
@@ -99,7 +101,7 @@ export default function SimpleDelete(props) {
 
       <div className="btn" id={props.num}>
         <div className="btn-back">
-          <p>Sure ?</p>
+          <p>{t("SimpleDelete.Sure?")}</p>
           <div className="row" style={{marginLeft:"5px",marginRight:"15px"}}>
             <div
               type="button"
@@ -114,13 +116,13 @@ export default function SimpleDelete(props) {
                 style={{paddingRight: "0px",width:"60px",paddingLeft: "0px",marginLeft: "30px",
                 }}
               >
-                Yes
+                {t("repeated.Yes")}
               </button>
             </div>
-            <button className="no" style={{height:"42px",paddingTop:"10px",width:"60px",paddingBottom:"10px"}}>No</button>
+            <button className="no" style={{height:"42px",paddingTop:"10px",width:"60px",paddingBottom:"10px"}}>{t("repeated.No")}</button>
           </div>
         </div>
-        <div className="btn-front">Delete</div>
+        <div className="btn-front">{t("SimpleDelete.Delete")}</div>
       </div>
     </div>
   );

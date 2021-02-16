@@ -1,11 +1,21 @@
 {
     "repeated": {
-        "By": "By",
+        "By": "By :",
         "Brand": "Brand",
         "Model": "Model",
         "feedback": " Write your Feedback",
         "Date": "Posted at",
-        "LE": "LE"
+        "LE": "LE",
+        "Submit": "Submit",
+        "Cancel":"Cancel",
+        "Bookmark":"Bookmark",
+        "Edit":"Edit",
+        "From":"From :",
+        "To":"To :",
+        "Yes":"Yes",
+        "No":"No",
+        "GotoProductDetails":"Product Details",
+        "Add":"Add Product"
     },
     "logo": "DREKSYONY",
     "slogan": "All your needs",
@@ -47,8 +57,8 @@
         "rightPlace": "The right place for all your car needs",
         "reset": "Rest Your Password",
         "enterMail": "Enter your Email here",
-        "sendMail": "send mail",
-        "Submit": "Submit",
+        "sendMail": "send Code",
+        
         "code": "Enter your code here",
         "newp": "New password",
         "confirmp": "Confirm new password"
@@ -87,59 +97,122 @@
             "Not Rated": "Not Rated",
             "rate": "be the first to rate this item",
             "limitation1": "Only registered car owners can submit a review",
+            "limitation2": "Only registered car owners can view this Item's Location",
             "User": "User",
-            "limitation2": "Only registered car owners can view this Item's Location"
+            "Description":"Description",
+            "Reviews":"Reviews",
+            "Location":"Location"
         }
+    },
+    "SignChoice": {
+        "Register": "Register or Login as",
+        "Vendor": "Vendor",
+        "CarOwner": "Car Owner"
+    },
+    "VendorSign": {
+        "DREKSYONY": "DREKSYONY",
+        "YourChoice": "Your Right Choice",
+        "Great": "Great! You are one of our members now",
+        "YourProfile": "Your Profile",
+        "Email": "Email Adderss",
+        "Password": "Password",
+        "Login": "Login",
+        "New": "I'm New",
+        "FirstName": "First Name",
+        "ShopName": "Shop Name",
+        "Optional": "-Optional",
+        "Required": "Required",
+        "PhoneNumber": "Phone Number",
+        "ConfirmPassword": "Confirm Password",
+        "Already": "Already Registered",
+        "BySigning": "By signing up you agree to our",
+        "TERMS": "TERMS",
+        "and": "and",
+        "Privacy": "Privacy Policy",
+        "SignUp": "SignUp"
+    },
+    "Filter":{
+        "FilterOptions":"Filter Options",
+        "ChooseBrand":"Choose Brand",
+        "ChooseModel":"Choose Model",
+        "ApplyFilter":"Apply Filter",
+        "ClearFilter":"Clear Filter",
+        "AddPost":"Add New Post",
+        "only":"Registered car owners can add new blog posts",
+        "RegHere":"Register Here"
+    },
+    "AddBlogModal":{
+        "BlogTitle":"Blog Title",
+        "EnterTitle":"Enter Title",
+        "BlogImage":"Blog Image",
+        "BlogContent":"Blog Content",
+        "BlogDescription":"Enter Blog Description"
+    },
+    "BlogList":{
+        "NoPosts":"Sorry, No posts match your search"
+    },
+    "BlogDetails":{
+        "PostDetails":"Post Details",
+        "CommentSection":"Comment Section",
+        "NoCommentsYet":"NoCommentsYet",
+        "LeaveComment":"Leave a Comment",
+        "OnlyRegistered":"Only registered users can add comments"
+    },
+    "EditBlogModal":{
+        "EditBlog":"Edit blog",
+        "BlogTitle":"Blog Title",
+        "EnterTitle":"Enter Title",
+        "BlogImage":"Blog Image",
+        "BlogContent":"Blog Content",
+        "BlogDescription":"Enter Blog Description"
+    },
+    "ProfileLeft":{
+        "RecentlyViewed":"Recently Viewed",
+        "Myblogposts":"My Blogs",
+        "FavouriteItems":"Favourite Items",
+        "BookmarkedBlogs":"Bookmarked Blogs",
+        "Settings":"Settings",
+        "MyItems":"My Items"
+    },
+    "RecentViews":{
+        "NoItems":"No Items Viewed yet",
+        "GotoProductsList":"Go To Products List"
+        
+    },
+    "SimpleDelete":{
+        "Sure?":"Sure ?",
+        "Delete":"Delete"
+    },
+    "ProfileSettings":{
+        "FirstName":"First Name",
+        "FirstNameHolder":"Enter First Name",
+        "FamilyName":"Family Name",
+        "FamilyNameHolder":"Enter Family Name",
+        "PhoneNumber":"Phone Number",
+        "PhoneHolder":"Enter Phone Number",
+        "NewPassword":"New Password",
+        "PassPlaceHolder":"New Password",
+        "ConfirmPassword":"Confirm New Password",
+        "ConfirmPlaceHolder":"Confirm Password",
+        "ShopName":"Work Shop Name",
+        "ShopNameHolder":"Enter Shop Name"
+    },
+    "VendorMyItems":{
+        "NoItems":"No Items yet",
+        "ToAddProduct":"to add a new product",
+        "ClickHere":"Click here"
+    },
+    "VendorAddItemModal":{
+        "Addproduct":"Add your product",
+        "ProductName":"Product Name",
+        "ProductNameHolder":"Enter Product Name",
+        "EnterImage":"Enter Product Image",
+        "ProductDescription":"Product Description",
+        "DescriptionHolder":"Enter Product Description",
+        "ItemPrice":"Price"
+    },
+    "UserIcon":{
+        "MyProfile":"My Profile",
+        "Logout1":"Log Out"
     }
-,
-
-
-
-
-  "SignChoice":{
-      "Register":"Register or Login as",
-      "Vendor":"Vendor",
-      "CarOwner":"Car Owner"
-  },
-
-  "VendorSign":{
-      "DREKSYONY":"DREKSYONY",
-      "YourChoice":"Your Right Choice",
-      "Great":"Great! You are one of our members now",
-      "YourProfile":"Your Profile",
-      "Email":"Email Adderss",
-      "Password":"Password",
-      "Login":"Login",
-      "New":"I'm New",
-      "FirstName":"First Name",
-      "ShopName":"Shop Name",
-      "Optional":"-Optional",
-      "Required":"Required",
-      "PhoneNumber":"Phone Number",
-      "ConfirmPassword":"Confirm Password",
-      "Already":"Already Registered",
-      "BySigning":"By signing up you agree to our",
-      "TERMS":"TERMS",
-      "and":"and",
-      "Privacy":"Privacy Policy",
-      "SignUp":"SignUp"
-      
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

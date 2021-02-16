@@ -277,7 +277,7 @@ export default function ProductDetails(props) {
                   <div className="col-6">
                     <h2>
                       {productDetails && productDetails.name}
-                      <br /> {t("repeated.By")}:{" "}
+                      <br /> {t("repeated.By")}{" "}
                       <Link
                         style={{
                           color: "rgb(21, 34, 214)",
@@ -377,9 +377,9 @@ export default function ProductDetails(props) {
               textColor="secondary"
               aria-label="icon label tabs example"
             >
-              <Tab icon={<InfoTwoToneIcon />} label="Description" />
-              <Tab icon={<CommentIcon />} label="Reviews" />
-              <Tab icon={<RoomIcon />} label="Location" />
+              <Tab icon={<InfoTwoToneIcon />} label={t("product.products Details.Description")} />
+              <Tab icon={<CommentIcon />} label={t("product.products Details.Reviews")} />
+              <Tab icon={<RoomIcon />} label={t("product.products Details.Location")} />
             </Tabs>
             <div className="p-5">
               {value === 0 && (
@@ -472,7 +472,7 @@ export default function ProductDetails(props) {
                                               fontSize: "20px",
                                             }}
                                           >
-                                            {t("repeated.Date")}: {postTime[0]}
+                                            {t("repeated.Date")} {postTime[0]}
                                           </p>
                                           <hr
                                             style={{
