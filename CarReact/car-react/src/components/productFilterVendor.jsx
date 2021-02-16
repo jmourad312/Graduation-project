@@ -234,7 +234,7 @@ export default function ProductFilterVendor(props) {
           position: "absolute",
           left: "350px",
           bottom: "-3.5%",
-          height:"50px"
+          height:"80px"
         }}
       >
         {productsVendor && (
