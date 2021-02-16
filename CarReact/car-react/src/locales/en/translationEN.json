@@ -1,5 +1,4 @@
 {
-    "navigation" : "Start Navigation From Here",
     
     "slider" :{
         "carparts":"Car parts",
@@ -23,6 +22,50 @@
         "descriptionPart1":"We are a highly skilled group of MEARN Full Stack Developers, we enjoy coding and bringing new concepts and projects to life.",
         "descriptionPart2":"We are highly trained graduates from the Information and Technology Institute or 'ITI' for short, and we are ready for any project, we are a perfect asset to any company or team, please feel free to reach out to us so that we can assist you with any project you'd want.",
         "Team":"Our Team"
-    }
+    },
+
+
+    "Contact Us":{
+    "ContactUs":"Contact Us",
+    "Feel Free":"Feel free to contact us anytime",
+    "Email":"Email",
+    "Message":"Your Message",
+    "SendMessage":"Send",
+    "SocialSites":"Our Social Sites",
+    "Twitter":"Twitter",
+    "Facebook":"Facebook",
+    "Youtube":"Youtube",
+    "CallUs":"Call Us",
+    "OurEmail":"Email"
+    },
+    
+  "navigation": "Start Navigation From Here",
+  
+  
+  "Navbar": {
+    "product list": "Products List",
+    "sign": "Sign Here",
+    "Logout": "Logout",
+    "Blog List": " Blog List",
+    "About Us": "About Us",
+    "Contact Us": "Contact Us",
+    "Homepage": "Homepage"
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
