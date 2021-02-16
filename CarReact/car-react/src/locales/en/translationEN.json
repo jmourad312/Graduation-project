@@ -23,6 +23,7 @@
         "CallUs": "Call Us",
         "OurEmail": "Email"
     },
+<<<<<<< Updated upstream
     "Navbar": {
         "product list": "Products List",
         "sign": "Sign Here",
@@ -92,3 +93,83 @@
         }
     }
 }
+=======
+
+
+    "Contact Us":{
+    "ContactUs":"Contact Us",
+    "Feel Free":"Feel free to contact us anytime",
+    "Email":"Email",
+    "Message":"Your Message",
+    "SendMessage":"Send",
+    "SocialSites":"Our Social Sites",
+    "Twitter":"Twitter",
+    "Facebook":"Facebook",
+    "Youtube":"Youtube",
+    "CallUs":"Call Us",
+    "OurEmail":"Email"
+    
+    },
+
+  "navigation": "Start Navigation From Here",
+  
+  
+  "Navbar": {
+    "product list": "Products List",
+    "sign": "Sign Here",
+    "Logout": "Logout",
+    "Blog List": " Blog List",
+    "About Us": "About Us",
+    "Contact Us": "Contact Us",
+    "Homepage": "Homepage"
+  },
+
+
+  "SignChoice":{
+      "Register":"Register or Login as",
+      "Vendor":"Vendor",
+      "CarOwner":"Car Owner"
+  },
+
+  "VendorSign":{
+      "DREKSYONY":"DREKSYONY",
+      "YourChoice":"Your Right Choice",
+      "Great":"Great! You are one of our members now",
+      "YourProfile":"Your Profile",
+      "Email":"Email Adderss",
+      "Password":"Password",
+      "Login":"Login",
+      "New":"I'm New",
+      "FirstName":"First Name",
+      "ShopName":"Shop Name",
+      "Optional":"-Optional",
+      "Required":"Required",
+      "PhoneNumber":"Phone Number",
+      "ConfirmPassword":"Confirm Password",
+      "Already":"Already Registered",
+      "BySigning":"By signing up you agree to our",
+      "TERMS":"TERMS",
+      "and":"and",
+      "Privacy":"Privacy Policy",
+      "SignUp":"SignUp"
+      
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+>>>>>>> Stashed changes

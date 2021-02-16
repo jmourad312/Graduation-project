@@ -3,8 +3,10 @@ import vendorImage from "../../../../assets/Images/car-vendor.jpg";
 import ownerImage from "../../../../assets/Images/car-owner.jpg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import {useTranslation} from "react-i18next";
 
 export default function SignChoice() {
+  const {t, i18n} = useTranslation();
   const pageVariants = {
     in: {
       opacity: 10,
@@ -22,6 +24,7 @@ export default function SignChoice() {
     type: "tween",
     ease: "anticipate",
   };
+  
   return (
     <motion.div
       className="signChoice"
@@ -31,7 +34,7 @@ export default function SignChoice() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",color:"transparent",WebkitBackgroundClip:"text"}}>Register or Login as</h1>
+      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",color:"transparent",WebkitBackgroundClip:"text"}}>{t("SignChoice.Register")}</h1>
       <div className="container" style={{height:"650px"}}>
         <div className="row">
           <Link className="col-6" to="/VendorSignForm">
@@ -60,7 +63,7 @@ export default function SignChoice() {
                 />
               </svg>
               <div className="card__content">
-                <h4 className="card__title" style={{fontSize:"60px"}} >Vendor</h4>
+                <h4 className="card__title" style={{fontSize:"60px"}} >{t("SignChoice.Vendor")}</h4>
                 {/* <h3 >Vendor</h3> */}
               </div>
             </div>
@@ -93,7 +96,7 @@ export default function SignChoice() {
               </svg>
 
               <div className="card__content">
-                <h4 className="card__title" style={{fontSize:"60px"}} >Car Owner</h4>
+                <h4 className="card__title" style={{fontSize:"60px"}} >{t("SignChoice.CarOwner")}</h4>
                 {/* <h3 >Car Owner</h3> */}
               </div>
             </div>

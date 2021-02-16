@@ -7,6 +7,8 @@ import icon from "../../../../assets/Images/icon.png";
 import { motion } from "framer-motion";
 import VerticalModal from "../../../../components/VerticalModal";
 import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
+import {useTranslation} from "react-i18next";
+
 export default function VendorSignForm(props) {
   const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
@@ -329,6 +331,7 @@ export default function VendorSignForm(props) {
   };
     console.log(vendorSignUpInfo);
 
+    const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="vendorSignForm"
@@ -352,16 +355,16 @@ export default function VendorSignForm(props) {
                   />
                 </Link>
                 <div className="heading">
-                  <h2>DREKSYONY</h2>
+                  <h2>{t("VendorSign.DREKSYONY")}</h2>
                   <p style={{ fontWeight: "700", fontSize: "20px" }}>
-                    Your Right Choice
+                  {t("VendorSign.YourChoice")}
                   </p>
                 </div>
 
                 <div className="success-msg">
-                  <p>Great! You are one of our members now</p>
+                  <p>{t("VendorSign.Great")}</p>
                   <Link to="" className="profile">
-                    Your Profile
+                  {t("VendorSign.YourProfile")}
                   </Link>
                 </div>
               </div>
@@ -376,7 +379,7 @@ export default function VendorSignForm(props) {
                         for="email"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Email Adderss
+                        {t("VendorSign.Email")}
                       </label>
                       <input
                         type="email"
@@ -393,7 +396,7 @@ export default function VendorSignForm(props) {
                         for="password"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Password
+                        {t("VendorSign.Password")}
                       </label>
                       <input
                         type="password"
@@ -409,14 +412,14 @@ export default function VendorSignForm(props) {
                       <input
                         type="submit"
                         style={{ fontWeight: "600", fontSize: "15px" }}
-                        value="Login"
+                        value={t("VendorSign.Login")}
                       />
                       <a
                         href="#"
                         className="switch"
                         style={{ fontSize: "20px" }}
                       >
-                        I'm New
+                        {t("VendorSign.New")}
                       </a>
                     </div>
                   </form>
@@ -433,7 +436,7 @@ export default function VendorSignForm(props) {
                             for="firstName"
                             style={{ fontWeight: "600", fontSize: "20px" }}
                           >
-                            First Name
+                            {t("VendorSign.FirstName")}
                           </label>
                           <input
                             type="text"
@@ -489,11 +492,11 @@ export default function VendorSignForm(props) {
                             for="lastName"
                             style={{ fontWeight: "600", fontSize: "20px" }}
                           >
-                            Last Name{" "}
+                            {t("VendorSign.ShopName")}{" "}
                             <small
                               style={{ fontWeight: "500", fontSize: "15px" }}
                             >
-                              - optional
+                              {t("VendorSign.Optional")}
                             </small>
                           </label>
                           <input
@@ -516,7 +519,7 @@ export default function VendorSignForm(props) {
                         for="email"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Email Adderss
+                        {t("VendorSign.Email")}
                       </label>
                       <input
                         type="email"
@@ -537,8 +540,8 @@ export default function VendorSignForm(props) {
                         for="phoneNumber"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Phone Number -{" "}
-                        <small style={{ fontSize: "15px" }}>optional</small>
+                        {t("VendorSign.PhoneNumber")} -{" "}
+                        <small style={{ fontSize: "15px" }}>{t("VendorSign.Optional")}</small>
                       </label>
                       <input
                         type="text"
@@ -554,7 +557,7 @@ export default function VendorSignForm(props) {
                         for="password"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Password
+                        {t("VendorSign.Password")}
                       </label>
                       <input
                         type="password"
@@ -575,7 +578,7 @@ export default function VendorSignForm(props) {
                         for="confirmPassword"
                         style={{ fontWeight: "600", fontSize: "20px" }}
                       >
-                        Confirm Password
+                        {t("VendorSign.ConfirmPassword")}
                       </label>
                       <input
                         type="password"
@@ -597,7 +600,7 @@ export default function VendorSignForm(props) {
                           <input
                             style={{fontWeight: "600", fontSize: "20px"}}
                             type="submit"
-                            value="Signup Now"
+                            value={t("VendorSign.SignUp")}
                             id="submit"
                           />
                         </div>
@@ -607,7 +610,7 @@ export default function VendorSignForm(props) {
                             className="switch text-center"
                             style={{ fontSize: "20px",paddingTop:"12px",width:"100%",paddingRight:"0px",paddingLeft:"0px",paddingBottom:"40px" }}
                           >
-                            Already Registered
+                            {t("VendorSign.Already")}
                           </a>
                         </div>
                       </div>
@@ -615,7 +618,7 @@ export default function VendorSignForm(props) {
 
 
                     <p style={{ fontWeight: "600",marginLeft:"70px",marginTop:"0px"  }}>
-                      By signing up you agree to our{" "}
+                    {t("VendorSign.BySigning")}{" "}
                       <span
                         style={{
                           color: "#4d8ba8",
@@ -631,9 +634,9 @@ export default function VendorSignForm(props) {
                           });
                         }}
                       >
-                        TERMS
+                        {t("VendorSign.TERMS")}
                       </span>{" "}
-                      and{" "}
+                      {t("VendorSign.and")}{" "}
                       <span
                         style={{
                           color: "#4d8ba8",
@@ -649,7 +652,7 @@ export default function VendorSignForm(props) {
                           });
                         }}
                       >
-                        Privacy Policy
+                        {t("VendorSign.Privacy")}
                       </span>
                     </p>
                     

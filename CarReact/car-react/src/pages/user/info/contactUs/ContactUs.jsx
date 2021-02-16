@@ -171,7 +171,7 @@ export default function ContactUs() {
                     <textarea
                       className="form-control inputheight"
                       style={{height:"80px"}}
-                      placeholder="Description"
+                      placeholder="..."
                       onChange={handleChange}
                       name="content"
                       value={contactInput.content}
