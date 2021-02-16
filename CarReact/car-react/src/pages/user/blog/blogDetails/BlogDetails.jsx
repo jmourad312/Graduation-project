@@ -289,6 +289,7 @@ export default function BlogDetails(props) {
     var blogTime = blogDetails.createdAt.split("T");
   }
   const history = useHistory();
+  
   return (
     <motion.div
       className="container"

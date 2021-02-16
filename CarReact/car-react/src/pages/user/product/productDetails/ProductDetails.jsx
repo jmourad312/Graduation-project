@@ -16,6 +16,8 @@ import RoomIcon from "@material-ui/icons/Room";
 import ShowRating from "../../../../components/ShowRating";
 import Loading from "../../../../components/Loading";
 
+import { useTranslation } from "react-i18next";
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -29,15 +31,12 @@ const useStyles = makeStyles({
 });
 
 export default function ProductDetails(props) {
-
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-
 
   const productID = useSelector((state) => state.productID);
   const productDetails = useSelector((state) => state.productDetails.Data);
@@ -47,8 +46,6 @@ export default function ProductDetails(props) {
   const getProducts = (params) => {
     dispatch(getProductDetails(params));
   };
-
-  
 
   const [toastStatus, setToastStatus] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -154,7 +151,6 @@ export default function ProductDetails(props) {
       });
   };
   const [loc, setLoc] = useState("");
-  
 
   useEffect(() => {
     getProducts(localStorage.getItem("ProductID"));
@@ -163,14 +159,14 @@ export default function ProductDetails(props) {
   useEffect(() => {
     if (productDetails) {
       if (productDetails.person) {
-        if(productDetails.person.location){
+        if (productDetails.person.location) {
           setLoc(
             `https://maps.google.com/maps?q=${productDetails.person.location.coordinates[1]},${productDetails.person.location.coordinates[0]}&hl=es&z=14&amp;&output=embed`
-            );
-          }
+          );
+        }
       }
     }
-  })
+  });
 
   const pageVariants = {
     in: {
@@ -189,6 +185,9 @@ export default function ProductDetails(props) {
     type: "tween",
     ease: "easeIn",
   };
+
+  const { t, i18n } = useTranslation();
+
   return (
     <motion.div
       initial="out"
@@ -270,7 +269,7 @@ export default function ProductDetails(props) {
                         fontSize: "30px",
                       }}
                     >
-                      Product Information
+                      {t("product.products Details.info")}
                     </strong>
                   </h3>
                 </div>
@@ -278,7 +277,7 @@ export default function ProductDetails(props) {
                   <div className="col-6">
                     <h2>
                       {productDetails && productDetails.name}
-                      <br /> By:{" "}
+                      <br /> {t("repeated.By")}:{" "}
                       <Link
                         style={{
                           color: "rgb(21, 34, 214)",
@@ -305,14 +304,15 @@ export default function ProductDetails(props) {
                       />
                     ) : (
                       <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        Not Rated
+                        {t("product.products Details.Not Rated")}
                       </span>
                     )}
                     {/* ----------------------------------------PRICE--------------------- */}
                     <div className="mt-3">
                       <span className="" style={{ fontSize: "40px" }}>
                         <li className="fas fa-coins pr-2 text-warning">
-                          {productDetails && productDetails.price} LE
+                          {productDetails && productDetails.price}{" "}
+                          {t("repeated.LE")}
                         </li>
                       </span>
                     </div>
@@ -320,7 +320,10 @@ export default function ProductDetails(props) {
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
                     <p style={{ fontSize: "1.5rem" }}>
-                      <b style={{ fontSize: "1.5rem" }}>Brand: </b>{" "}
+                      <b style={{ fontSize: "1.5rem" }}>
+                        {" "}
+                        {t("repeated.Brand")}:{" "}
+                      </b>{" "}
                       {productDetails
                         ? productDetails.carBrand
                           ? productDetails.carBrand
@@ -328,7 +331,9 @@ export default function ProductDetails(props) {
                         : "Loading"}
                     </p>
                     <p style={{ fontSize: "1.5rem" }}>
-                      <b style={{ fontSize: "1.5rem" }}>Model: </b>
+                      <b style={{ fontSize: "1.5rem" }}>
+                        {t("repeated.Model")}:{" "}
+                      </b>
                       {productDetails
                         ? productDetails.carModel
                           ? productDetails.carModel
@@ -398,7 +403,7 @@ export default function ProductDetails(props) {
                                 height: "100%",
                               }}
                             ></span>
-                            Write your Feedback
+                            {t("repeated.feedback")}
                           </h3>
                           <br />
                           <Review />
@@ -421,7 +426,7 @@ export default function ProductDetails(props) {
                               textAlign: "center",
                             }}
                           >
-                            Only registered car owners can submit a review
+                            {t("product.products Details.limitation1")}
                           </h2>
                         </div>
                       )}
@@ -431,7 +436,7 @@ export default function ProductDetails(props) {
                         {" "}
                         {productDetails ? (
                           productDetails.feedback.length === 0 ? (
-                            <div>be the first to rate this item</div>
+                            <div>{t("product.products Details.rate")}</div>
                           ) : (
                             <div
                               className="text-center"
@@ -455,7 +460,8 @@ export default function ProductDetails(props) {
                                               marginBottom: "0px",
                                             }}
                                           >
-                                            User: {item.user.firstName}
+                                            {t("product.products Details.User")}
+                                            : {item.user.firstName}
                                           </p>
                                           <ShowRating rating={item.rating} />
 
@@ -466,7 +472,7 @@ export default function ProductDetails(props) {
                                               fontSize: "20px",
                                             }}
                                           >
-                                            Posted at: {postTime[0]}
+                                            {t("repeated.Date")}: {postTime[0]}
                                           </p>
                                           <hr
                                             style={{
@@ -513,19 +519,19 @@ export default function ProductDetails(props) {
                         {productDetails &&
                           productDetails.person &&
                           productDetails.person.location && (
-                              <iframe
-                                title="map"
-                                id="myiframe"
-                                src={loc}
-                                width="1010px"
-                                height="350px"
-                                frameborder="0"
-                                style={{
-                                  border: "1px solid black",
-                                  borderRadius: "2%",
-                                }}
-                                allowfullscreen
-                              ></iframe>
+                            <iframe
+                              title="map"
+                              id="myiframe"
+                              src={loc}
+                              width="1010px"
+                              height="350px"
+                              frameborder="0"
+                              style={{
+                                border: "1px solid black",
+                                borderRadius: "2%",
+                              }}
+                              allowfullscreen
+                            ></iframe>
                           )}
                         {/* <iframe
                           title="Product Map"
@@ -558,7 +564,7 @@ export default function ProductDetails(props) {
                           textAlign: "center",
                         }}
                       >
-                        Only registered car owners can view this Item's Location
+                        {t("product.products Details.limitation2")}
                       </h3>
                     </div>
                   )}
