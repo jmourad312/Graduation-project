@@ -16,7 +16,8 @@ import {
 } from "../../../../store/actions";
 import Loading from "../../../../components/Loading";
 import {useTranslation} from "react-i18next";
-
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
 export default function BlogDetails(props) {
 
@@ -607,19 +608,19 @@ export default function BlogDetails(props) {
                             className="btn"
                             style={{
                               position: "relative",
-                              left: "80.7px",
+                              left: "95.7px",
                               fontSize: "20px",
                             }}
                             onClick={() => addVote(item._id)}
                           >
-                            <i class="fas fa-chevron-up"></i>
+                            <ThumbUpIcon />
                           </button>
                         ) : (
                           <Spinner
                             animation="grow"
                             style={{
                               position: "relative",
-                              left: "80.7px",
+                              left: "70.7px",
                               fontSize: "20px",
                             }}
                           />
@@ -629,8 +630,9 @@ export default function BlogDetails(props) {
                           style={{
                             position: "relative",
                             left: "40px",
-                            top: "40px",
+                            top: "45px",
                             fontSize: "20px",
+                            width: "30px !important",
                             fontWeight: "700",
                           }}
                         >
@@ -642,19 +644,20 @@ export default function BlogDetails(props) {
                             style={{
                               position: "relative",
                               left: "0px",
-                              top: "80px",
+                              top: "85px",
                               fontSize: "20px",
                             }}
                             onClick={() => removeVote(item._id)}
                           >
-                            <i class="fas fa-chevron-down"></i>
+                            <ThumbDownIcon />
                           </button>
                         ) : (
                           <Spinner
                             animation="grow"
                             style={{
                               position: "relative",
-                              left: "80.7px",
+                              left: "0px",
+                              top: "80px",
                               fontSize: "20px",
                             }}
                           />
