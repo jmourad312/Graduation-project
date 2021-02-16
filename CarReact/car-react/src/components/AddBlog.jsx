@@ -109,7 +109,6 @@ export default function AddBlog() {
     // setInputValue("");
   };
   
-
   return (
     <div className="addBlog">
       <input type="checkbox" id="modal" />
