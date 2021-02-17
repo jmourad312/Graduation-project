@@ -400,7 +400,7 @@ export default function Admin(props) {
                       options={{
                         title: {
                           display: true,
-                          text: "Average Rainfall per month",
+                          text: "Relations Between Data",
                           fontSize: 20,
                         },
                         legend: {
@@ -414,10 +414,11 @@ export default function Admin(props) {
                 </div>
               </div>
             </div>
-
+            <hr style={{ border: "1px solid" }} />
             {/* User List */}
             {stateRedux.users.length != 0 && (
               <>
+                <h3>Users</h3>
                 <Tabel
                   id="userTabel"
                   data={stateRedux.users.Data}
