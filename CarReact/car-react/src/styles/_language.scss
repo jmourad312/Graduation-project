@@ -46,7 +46,7 @@ svg {
     // filter: blur(.25rem);
     
     &:hover {
-      transform: scale(1.15);
+    //   transform: scale(1.15);
       // filter: blur(0px);
     }
   }
@@ -66,25 +66,25 @@ svg {
     // animated
     &#t1:checked {
       
-    //   ~ .blob {
-    //     //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
-    //       opacity: 75%;
-    //     background: rgba(100, 100, 100, 0.651);
-    //     animation-name: stretchyRev;
-    //   }
+      ~ .blob {
+        //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
+          opacity: 75%;
+        background: rgba(100, 100, 100, 0.651);
+        animation-name: stretchyRev;
+      }
     }
     
     &#t2:checked {
       
-    //   ~ .blob {
-    //     // background-color: rgba(189, 188, 188, 0.651);
-    //     background: rgba(100, 100, 100, 0.651);
+      ~ .blob {
+        // background-color: rgba(189, 188, 188, 0.651);
+        background: rgba(100, 100, 100, 0.651);
 
-    //     //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
-    //       opacity: 75%;
+        //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
+          opacity: 75%;
 
-    //     animation-name: stretchy;
-    //   }
+        animation-name: stretchy;
+      }
     }
   }
   

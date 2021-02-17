@@ -117,7 +117,7 @@ export default function MagdyNavbar() {
 
           {/* /will removed from navbar */}
           
-          <li className="menu__item" id="item13">
+          {/* <li className="menu__item" id="item13">
             <Link className="menu__link" onClick={changeLanguage("en")}>
               LanguageEn
             </Link>
@@ -126,7 +126,7 @@ export default function MagdyNavbar() {
             <Link className="menu__link" onClick={changeLanguage("ar")}>
               LanguageAr
             </Link>
-          </li>
+          </li> */}
 
           {/* <li className="menu__item" id="item12"><Link className="menu__link" onClick={handleClick} to="/VendorProfileUser">VendorProfileUser</Link></li> */}
           {/* <li className="menu__item" id="item14"><Link className="menu__link" onClick={handleClick} to="/MyProfile">My Profile</Link></li> */}

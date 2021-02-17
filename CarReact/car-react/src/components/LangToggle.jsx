@@ -17,9 +17,9 @@ export default function LangToggle() {
     <div className="language">
       <form class="tabber">
         <label for="t1">English</label>
-        <input id="t1" name="lang" type="radio" checked={state==="en"?true:false} onClick={changeLanguage("en")} />
+        <input id="t1" name="lang" type="radio" checked={localStorage.getItem("i18nextLng")==="en"?true:false} onClick={changeLanguage("en")} />
         <label for="t2">العربية</label>
-        <input id="t2" name="lang" type="radio" checked={state==="ar"?true:false} onClick={changeLanguage("ar")}/>
+        <input id="t2" name="lang" type="radio" checked={localStorage.getItem("i18nextLng")==="ar"?true:false} onClick={changeLanguage("ar")}/>
         <div class="blob"></div>
       </form>
     </div>

@@ -18,7 +18,7 @@ function App() {
       <Router>
         <MagdyNavbar />
         <Routes />
-        <div style={{ position: "absolute", right: "180px", top: "10px" }}>
+        <div style={{ position: "absolute", left: "10px", top: "120px" }}>
           <LangToggle />
         </div>
 
