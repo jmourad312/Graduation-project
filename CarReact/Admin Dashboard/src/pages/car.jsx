@@ -54,6 +54,7 @@ export default function AddPartCar(props) {
     } catch (error) {
       console.log(error);
     }
+    getBrand();
   };
 
   const getModel = async (parameter) => {
@@ -82,6 +83,7 @@ export default function AddPartCar(props) {
     } catch (error) {
       console.log(error);
     }
+    getModel();
   };
 
   const getCollection = async (parameter) => {
