@@ -72,8 +72,8 @@ export default function ProductComp(props) {
               <span className="card__by"style={{fontWeight:"700"}}>By <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}}  title="author">{props.name}</span></span>
               <br />
               <small>
-                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>
-                <i className="badge badge-dark ml-1" style={{fontSize:"15px"}}>{props.model}</i>
+                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>{" "}
+                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.model}</i>
               </small>
             </div>
           </article>

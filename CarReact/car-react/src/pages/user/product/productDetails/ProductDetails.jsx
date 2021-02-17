@@ -516,7 +516,7 @@ export default function ProductDetails(props) {
               )}
               {value === 2 && (
                 <TabContainer>
-                  {localStorage.getItem("UserID") !== null ? (
+                  {localStorage.getItem("Authorization") !== null ? (
                     <div className="row">
                       <div className="d-flex flex-wrap">
                         {productDetails &&
