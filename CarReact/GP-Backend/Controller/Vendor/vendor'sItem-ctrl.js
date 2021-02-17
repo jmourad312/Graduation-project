@@ -155,7 +155,7 @@ updateItem = (req, res) => {
  }
 
   const body = JSON.parse(JSON.stringify(req.body));
-
+console.log(body)
   const images = [];
   if (req.files) {
     req.files.map((file) => {

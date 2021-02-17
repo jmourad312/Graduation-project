@@ -14,7 +14,7 @@ export default function Blogs(props) {
 
     useEffect(() => {
         dispatch(getBlogsUser(data._id))
-    }, [])
+    }, [stateRedux.blogs])
 
     const handelClickDetails = (parameter) => {
         props.history.push({

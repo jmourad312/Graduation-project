@@ -7,6 +7,8 @@ import { PaginationReact } from "../../../../../components/PaginationReact";
 import { getUsersAction, setProductId } from "../../../../../store/actions";
 // import Review from '../../../../../components/Review';
 import { useTranslation } from "react-i18next";
+import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 export default function FavouriteItems(props) {
   const user = useSelector((state) => state.user.Data);
@@ -30,6 +32,28 @@ export default function FavouriteItems(props) {
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
   };
+
+  const handleRemoveFavourite = (params) => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const body = {
+      id: params,
+    };
+    const URL = "http://localhost:3000/user/removeFavouriteItems";
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   const { t, i18n } = useTranslation();
   return (
     <motion.div
@@ -134,6 +158,13 @@ export default function FavouriteItems(props) {
                             onClick={() => handleItemClick(item._id)}
                           >
                             {t("repeated.GotoProductDetails")}
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            style={{ position:"absolute",top:"3px",left:"174px",zIndex:"50",width:"50px" }}
+                            onClick={() => handleRemoveFavourite(item._id)}
+                          >
+                          <DeleteIcon />
                           </button>
                         </article>
                       </section>

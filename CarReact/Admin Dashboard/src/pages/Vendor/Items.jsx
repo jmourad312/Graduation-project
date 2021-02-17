@@ -15,7 +15,7 @@ export default function Items(props) {
 
     useEffect(() => {
         dispatch(getItemsVendor(data._id))
-    }, [])
+    }, [stateRedux.products])
 
     const handelClickDetails = (parameter)=>{
         props.history.push({
