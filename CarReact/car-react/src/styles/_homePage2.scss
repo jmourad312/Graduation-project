@@ -415,11 +415,11 @@
     }
   }
   @keyframes moveUpAndDown {
-    0%   {top: 200px;}
-    25%  {top: 150px;}
+    0%   {top: 180px;}
+    25%  {top: 140px;}
     50%  {top: 100px;}
-    75%  {top: 150px}
-    100% {top: 200px;}
+    75%  {top: 140px}
+    100% {top: 180px;}
   }
   #myDiv{
     animation: moveUpAndDown 2s linear infinite;

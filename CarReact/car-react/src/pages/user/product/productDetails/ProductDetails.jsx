@@ -400,7 +400,7 @@ export default function ProductDetails(props) {
                             <span
                               className="pl-3"
                               style={{
-                                height: "100%",
+                              height: "100%",
                               }}
                             ></span>
                             {t("repeated.feedback")}
@@ -421,9 +421,10 @@ export default function ProductDetails(props) {
                           <h2
                             style={{
                               position: "relative",
-                              top: "40%",
+                              top: "10%",
                               left: "0%",
-                              textAlign: "center",
+                              textAlign: "center",border: "1px solid black",
+                              borderRadius: "2%",paddingTop:"5px",paddingBottom:"15px",paddingLeft:"3px",paddingRight:"3px"
                             }}
                           >
                             {t("product.products Details.limitation1")}
@@ -436,7 +437,7 @@ export default function ProductDetails(props) {
                         {" "}
                         {productDetails ? (
                           productDetails.feedback.length === 0 ? (
-                            <div>{t("product.products Details.rate")}</div>
+                            <div style={{fontSize:"30px",fontWeight:"500"}}>{t("product.products Details.rate")}</div>
                           ) : (
                             <div
                               className="text-center"
@@ -549,16 +550,16 @@ export default function ProductDetails(props) {
                     </div>
                   ) : (
                     <div
-                      className="col-4 shadow-sm p-2 mb-4 rounded-lg"
+                      className="shadow-sm p-2 mb-4 rounded-lg"
                       style={{
                         height: "300px",
-                        width: "300px",
-                        border: "solid white 3px",
+                        width: "1010px",
+                        border: "1px solid black",
+                        borderRadius: "2%"
                       }}
                     >
                       <h3
                         style={{
-                          color: "#737373",
                           position: "relative",
                           top: "35%",
                           textAlign: "center",

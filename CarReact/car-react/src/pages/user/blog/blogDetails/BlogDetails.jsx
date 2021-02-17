@@ -1,7 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { Button, Carousel, Col, Form, Modal } from "react-bootstrap";
+import { Button, Carousel, Col, Form, Modal, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import cars2 from "../../../../assets/js/cars2";
 import cars3 from "../../../../assets/js/cars3";
@@ -16,7 +16,8 @@ import {
 } from "../../../../store/actions";
 import Loading from "../../../../components/Loading";
 import {useTranslation} from "react-i18next";
-
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
 export default function BlogDetails(props) {
 
@@ -253,9 +254,17 @@ export default function BlogDetails(props) {
 
   const addVote = (id) => {
     dispatch(addVoteComment(id));
+    setVoted(true);
+    setTimeout(() => {
+      setVoted(false);
+    }, 2000);
   };
   const removeVote = (id) => {
     dispatch(removeVoteComment(id));
+    setVoted(true);
+    setTimeout(() => {
+      setVoted(false);
+    }, 2000);
   };
 
   // useEffect(() => {
@@ -263,6 +272,8 @@ export default function BlogDetails(props) {
   // console.log(blogDetails);
   // console.log(blogID);
   // }, []);
+  const [voted, setVoted] = useState(false)
+
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
     if (blogDetails) {
@@ -592,41 +603,65 @@ export default function BlogDetails(props) {
                   return (
                     <div className="media mb-1" key={index}>
                       <div className="mr-2">
-                        <button
-                          className="btn"
-                          style={{
-                            position: "relative",
-                            left: "80.7px",
-                            fontSize: "20px",
-                          }}
-                          onClick={() => addVote(item._id)}
-                        >
-                          <i class="fas fa-chevron-up"></i>
-                        </button>
+                        {!voted ? (
+                          <button
+                            className="btn"
+                            style={{
+                              position: "relative",
+                              left: "95.7px",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => addVote(item._id)}
+                          >
+                            <ThumbUpIcon />
+                          </button>
+                        ) : (
+                          <Spinner
+                            animation="grow"
+                            style={{
+                              position: "relative",
+                              left: "70.7px",
+                              fontSize: "20px",
+                            }}
+                          />
+                        )}
                         <span
                           className="btn badge-pill"
                           style={{
                             position: "relative",
                             left: "40px",
-                            top: "40px",
+                            top: "45px",
                             fontSize: "20px",
+                            width: "30px !important",
                             fontWeight: "700",
                           }}
                         >
                           {item.vote.upVoting - item.vote.downVoting}
                         </span>
-                        <button
-                          className="btn"
-                          style={{
-                            position: "relative",
-                            left: "0px",
-                            top: "80px",
-                            fontSize: "20px",
-                          }}
-                          onClick={() => removeVote(item._id)}
-                        >
-                          <i class="fas fa-chevron-down"></i>
-                        </button>
+                        {!voted ? (
+                          <button
+                            className="btn"
+                            style={{
+                              position: "relative",
+                              left: "0px",
+                              top: "85px",
+                              fontSize: "20px",
+                            }}
+                            onClick={() => removeVote(item._id)}
+                          >
+                            <ThumbDownIcon />
+                          </button>
+                        ) : (
+                          <Spinner
+                            animation="grow"
+                            style={{
+                              position: "relative",
+                              left: "0px",
+                              top: "80px",
+                              fontSize: "20px",
+                            }}
+                          />
+                        )}
                       </div>
 
                       {/* <img

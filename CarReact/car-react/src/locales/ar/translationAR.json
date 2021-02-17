@@ -177,7 +177,7 @@
     },
     "RecentViews":{
         "NoItems":"لا توجد مشاهدات سابقة",
-        "GotoProductsList":"الذهاب إلي المنتجات"
+        "GotoProductsList":"اذهب إلي المنتجات"
         
     },
     "SimpleDelete":{
@@ -215,6 +215,23 @@
     "UserIcon":{
         "MyProfile":"حسابي",
         "Logout1":"خروج"
+    },
+    "LoginButton":"دخول",
+    "Pagination":{
+        "Prev":"السابق",
+        "Next":"التالي"
+    },
+    "MyBlogs":{
+        "Noblogsyet":"لا توجد مدونات حتي الآن",
+        "ToAddBlog":"لإضافة مدونة",
+        "GoToBlogsList":"اذهب إلي المدونات"
+    },
+    "FavouriteItems":{
+        "NoItems":"لا توجد منتجات مفضلة حتي الآن",
+        "GoList":"اذهب إلي المنتجات"
+    },
+    "BookmarkedItems":{
+        "NoBookmarked":"لا توجد منتجات محفوظة حتي الآن"
     }
 
 }

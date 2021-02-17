@@ -26,6 +26,7 @@ export default function MagdyNavbar() {
       handleClick();
     };
   };
+  
 
   const {t, i18n} = useTranslation();
   return (

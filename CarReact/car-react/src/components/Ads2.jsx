@@ -25,7 +25,7 @@ export default function Ads2() {
               alt="ea"
             />
             <img
-              src="https://psmedia.playstation.com/is/image/psmedia/psn-icon-new-to-ps4-product-grid-02-eu-14jun18?$Icon$"
+              src="https://e7.pngegg.com/pngimages/24/817/png-clipart-playstation-4-raiders-of-the-broken-planet-playstation-network-playstation-plus-playstation-electronics-text.png"
               className="ps"
               alt="ps4"
             />
