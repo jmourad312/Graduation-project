@@ -61,9 +61,9 @@ export default function ProductComp(props) {
       <div className="productList">
         <section className="cards">
           <article className="card card--1" onClick={() => handleClick(props.id)}>
-            <div className="card__img" style={{ background: `url(${props.image})` }}></div>
+            <div className="card__img" style={{ background: `url(${props.images[0]})` }}></div>
             <p className="card_link">
-              <div className="card__img--hover" style={{ background: `url(${props.image})` }} ></div>
+              <div className="card__img--hover" style={{ background: `url(${props.images[0]})` }} ></div>
             </p>
             <div className="card__info">
               <h4 className="card__title text-truncate" style={{fontWeight:"600"}}>{props.title}</h4>
