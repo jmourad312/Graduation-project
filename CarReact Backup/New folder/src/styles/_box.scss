@@ -1,0 +1,73 @@
+.simpleDelete {
+  position: relative;
+  margin-right: 30px;
+  .box {
+    .box-left {
+      position: relative;
+      height: 50px;
+      width: 40px;
+      background-color: #e74c3c;
+      // top: 0;
+      // bottom: 0;
+      // left: 0;
+      // right: 50px;
+      // margin: auto;
+      cursor: pointer;
+      border-top-left-radius: 13px;
+      border-bottom-left-radius: 13px;
+    }
+
+    .fa-times {
+      position: relative;
+      top: 15px;
+      left: 15px;
+      font-size: 30px ;
+      // margin: 23px;
+      color: #fff;
+    }
+
+    // .box-right {
+    //   position: relative;
+    //   height: 50px;
+    //   width: 20px;
+    //   background-color: #e74c3c;
+    //   // top: 0;
+    //   bottom: 50px;
+    //   left: 40px;
+    //   right: 0;
+    //   // margin: auto;
+    //   transition: 0.5s;
+    //   cursor: pointer;
+    //   border-top-right-radius: 13px;
+    //   border-bottom-right-radius: 13px;
+    // }
+
+    .fa-check {
+      font-size: 35px ;
+      margin-left: 4px;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 40px;
+      width: 0px;
+      background-color: lightgray;
+      position: relative;
+      // top: 10px;
+      bottom: 20px;
+      left: 40px;
+      right: 0;
+      transition: 0.5s;
+      overflow: hidden;
+    }
+
+    .cl-bar2 {
+      width: 40px;
+    }
+
+    .cl-box2 {
+      left: 210px !important;
+      transition: 0.5s;
+    }
+  }
+}

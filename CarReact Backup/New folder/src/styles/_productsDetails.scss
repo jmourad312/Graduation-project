@@ -1,0 +1,20 @@
+.products-details{
+   
+    .accordion ul{
+    list-style: none;
+    cursor: pointer;
+    }
+  
+    .accordion ul li{
+    cursor: pointer;
+    
+    }
+  
+    .accordion ul li.active{
+    color:red;
+    }
+  
+    .clearfix{
+    clear: both;
+    }
+}

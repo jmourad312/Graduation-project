@@ -1,0 +1,179 @@
+.productFilterVendor {
+    border: 3px solid grey;
+    padding: 20px;
+    width: 276px;
+    border-radius: 30px;
+    position: relative;
+    right: 50px;
+    background-color: rgba(128, 128, 128, 0.397);
+    height: 540px;
+    .btncenter{
+        margin: auto 50px;
+    }
+    
+  
+  //   *,
+  // *:before,
+  // *:after {
+  //   box-sizing: border-box;
+  //   margin: 0;
+  //   padding: 0;
+  // }
+  
+  // html,
+  // body {
+  //   font-size: 62.5%;
+  //   height: 100%;
+  // }
+  
+  // body {
+  //   background: #e62878;
+  // }
+  
+  .search {
+    position: absolute;
+    top: 28%;
+    left: 53%;
+    width: 15rem;
+    height: 3rem;
+    margin-left: -8rem;
+    margin-top: -4rem;
+    // background-color: rgba(0, 0, 0, 0.479);
+  }
+  .search__border {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3rem;
+    height: 100%;
+    border: 0.2rem solid rgb(0, 0, 0);
+    border-radius: 10rem;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s 0.4s;
+  }
+  #trigger:checked ~ .search__border {
+    transition: width 0.4s 0.2s;
+    width: 100%;
+  }
+  #trigger:checked ~ .search__border:after {
+    width: 0;
+    transition: width 0.2s cubic-bezier(0.42, -0.7, 0.62, 1.25);
+  }
+  .search__border:after {
+    content: "";
+    position: absolute;
+    bottom: -1.8rem;
+    right: -1.8rem;
+    width: 1rem;
+    height: 0.2rem;
+    background: rgb(0, 0, 0);
+    border-radius: 0.6rem;
+    transform-origin: 100% 50%;
+    transform: rotate(225deg) translateX(3rem);
+    transition: width 0.2s 0.8s;
+  }
+  .search__input {
+    position: relative;
+    width: 12.5rem;
+    right: 0rem;
+    height: 3rem;
+    padding: 0.9rem 0 1.2rem .6rem;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
+    color: rgb(7, 7, 7);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s;
+    // background-color: rgba(0, 0, 0, 0.472);
+  }
+  #trigger:checked ~ .search__input {
+    opacity: 1;
+    z-index: auto;
+    transition: opacity 0.2s 0.6s;
+  }
+  .search__checkbox {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+    z-index: -10;
+  }
+  .search__label-init {
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 6.1rem;
+    width: 2.8rem;
+    height: 3rem;
+    cursor: pointer;
+    // background-color: rgba(0, 0, 0, 0.472);
+  
+  }
+  #trigger:checked ~ .search__label-init {
+    transform: scale(0);
+  }
+  .search__label-active {
+    z-index: 3;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    transform: scale(0);
+    // background-color: rgba(0, 0, 0, 0.472);
+  
+  }
+  #trigger:checked ~ .search__label-active {
+    tranition: transform 0 0.6s;
+    transform: scale(1);
+  }
+  .search__close {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    z-index: -1;
+    // background-color: rgba(0, 0, 0, 0.472);
+  
+  }
+  #trigger:checked ~ .search__close {
+    z-index: auto;
+  }
+  #trigger:checked ~ .search__close:before {
+    transform: rotate(-45deg);
+    opacity: 1;
+  
+    transition: transform 0.2s 0.6s cubic-bezier(0.73, 0.14, 0.4, 1.58), opacity 0.1s 0.6s;
+  }
+  #trigger:checked ~ .search__close:after {
+    transform: rotate(45deg);
+    opacity: 1;
+    transition: transform 0.2s 0.8s cubic-bezier(0.73, 0.14, 0.4, 1.58), opacity 0.1s 0.8s;
+  }
+  .search__close:before, .search__close:after {
+    content: "";
+    position: absolute;
+    top: 1.35rem;
+    left: 0.4rem;
+    width: 70%;
+    height: 0.3rem;
+    background: rgb(0, 0, 0);
+    border-radius: 0.5rem;
+    opacity: 0;
+  }
+  .search__close:before {
+    transform: rotate(-45deg) translateX(2rem);
+    transition: transform 0.2s, opacity 0.1s 0.1s;
+  }
+  .search__close:after {
+    transform: rotate(45deg) translateX(2rem);
+    transition: transform 0.2s 0.2s, opacity 0.1s 0.3s;
+  }
+  
+  }
+  

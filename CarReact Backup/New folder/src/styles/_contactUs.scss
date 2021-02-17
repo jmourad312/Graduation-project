@@ -1,0 +1,60 @@
+.contact-us{
+    h1,
+  h2,
+  h3 {
+    margin: 0px 0 35px 0;
+    letter-spacing: 1px;
+  }
+
+  p {
+    margin: 0 0 25px;
+    font-size: 18px;
+    line-height: 1.6em;
+  }
+
+  .inputheight {
+    height: 15rem;
+  }
+
+  .form-control:focus {
+    border-color: #181818;
+    transition: all .2s ease-in-out;
+    transform: scale(1.18);
+  }
+
+  #contact .card:hover i,#contact .card:hover h4{
+    color: #494444;
+  }
+
+  ul{
+    padding-top: 40px;
+  }
+
+  li{
+    margin-right:3rem;
+  }
+
+  li a {
+    background-color: #f7f7f7;
+    color: #181616;
+  }
+
+
+  .contactinfo {
+    margin-top: 30px;
+    }
+
+  textarea.form-control {
+    height: 100px;
+    resize: none;
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+
+  }
+  input{
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+  }
+  .contrastclass{
+    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+
+  }
+}

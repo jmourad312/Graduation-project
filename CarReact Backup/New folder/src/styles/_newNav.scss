@@ -1,0 +1,169 @@
+.newNav{
+  /***************************
+  *	Project Main Styles
+  **************************/
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    margin:     0;
+    padding:    0;
+  }
+
+  body {
+    font-family:      $font-family;
+    font-size:        $font-size;
+    background-color: $color-body;
+  }
+
+  /***************************
+  *	Application Main Styles
+  **************************/
+  #menu--toggle[type="checkbox"]:not(:checked),
+  #menu--toggle[type="checkbox"]:checked {
+    display: none;
+  }
+
+  .menu--toggle__trigger,
+  .menu--toggle__burger,
+  .menu--toggle__burger:before,
+  .menu--toggle__burger:after {
+    position: absolute;
+    top: 1.6em;
+    left: 1.6em;
+    width: 2em;
+    height: 5px;
+    background-color: $color-text;
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 100;
+    transition: $variable-burger-animation-time $variable-menu-animation-function;
+  }
+
+  .menu--toggle__trigger {
+    height: 2em;
+    background: none;
+  }
+
+  .menu--toggle__burger {
+    
+    &:before {
+      content: "";
+      top: 10px;
+      left: 0;
+    }
+    &:after {
+      content: "";
+      top: 20px;
+      left: 0;
+    }
+  }
+
+  .menu__body {
+    text-align: center;
+    position: absolute;
+    width: 7em;
+    height: 7em;
+    margin: 0;
+    padding: 0;
+    background-color: $color-menu;
+    border-bottom-right-radius: 100%;
+    box-shadow: 3px 3px 7px rgba($color-text, .2);
+    z-index: 10;
+    animation: checkboxUncheckedAnimation $variable-burger-animation-time both;
+  }
+
+  .menu__body-element,
+  .menu__body-link {
+    display: none;
+    margin: 4.4em 0 -3.3em -.1em;
+    font-weight: normal;
+    color: $color-text;
+    text-decoration: none;
+    text-transform: none;
+    list-style: none;
+    outline: 0;
+  }
+
+  .menu__body-element {
+    font-size: 1.5rem;
+    text-indent: 2em;
+  }
+
+  .menu__body-link:hover {
+    display: block;
+    // width: 0;
+    color: $color-text;
+    background-color: $color-body;
+    // animation: changeWidthOfElementAnimation $variable-burger-animation-time both;
+  }
+
+  #menu--toggle:checked + .menu--toggle__trigger {
+    
+    & + .menu--toggle__burger {
+      top: 35px;
+      transform: rotate(405deg);
+      transition: transform $variable-burger-animation-time $variable-burger-animation-function;
+    
+      &:before {
+        top: 0;
+        transform: rotate(-90deg);
+        transition: transform $variable-burger-animation-time $variable-burger-animation-function;
+      }
+      &:after {
+        top: 0;
+        transform: rotate(90deg);
+        transition: transform $variable-burger-animation-time $variable-burger-animation-function;
+      }
+    }
+    
+    & + .menu--toggle__burger + .menu__body {
+      animation: checkboxCheckedAnimation $variable-menu-animation-time $variable-menu-animation-function both;
+    }
+    
+    & ~ .menu__body .menu__body-element,
+    & ~ .menu__body .menu__body-link {
+      display: block;
+    }
+  }
+
+  // .promotion {
+  //   width: 100vw;
+  //   height: 100vh;
+  //   background-image: url('http://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Gooseberry-spring.jpg/1280px-Gooseberry-spring.jpg');
+  //   background-size: cover;
+  // }
+
+  /**
+  *	Animations
+  *
+  *  @note checkboxCheckedAnimation - added fix for Microsoft Edge
+  */
+  @keyframes checkboxCheckedAnimation {
+    50% {
+      width: 100vw;
+      height: 100vh;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+    }
+  }
+
+  @keyframes checkboxUncheckedAnimation {
+    0% {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+
+  @keyframes changeWidthOfElementAnimation {
+    50% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
