@@ -382,9 +382,9 @@ export default function Signform(props) {
             <p
               onClick={switchClass}
               style={{
+                color: "#4d8ba8",
                 cursor: "pointer",
-                textDecoration: "underline",
-                color: "black",
+                textDecoration: "underline",fontWeight:"600"
               }}
             >
               {t('userSign.fypassword')}

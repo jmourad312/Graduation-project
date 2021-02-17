@@ -18,6 +18,8 @@ import Loading from "../../../../components/Loading";
 import {useTranslation} from "react-i18next";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SimpleDelete from "../../../../components/SimpleDelete";
 
 export default function BlogDetails(props) {
 
@@ -478,6 +480,9 @@ export default function BlogDetails(props) {
                   {t("repeated.Edit")}
                 </Button>
               )}
+              {checkOwner && (
+                <SimpleDelete id={localStorage.getItem("BlogID")} num={0}/>
+              )}
             </div>
 
             <hr
@@ -711,12 +716,17 @@ export default function BlogDetails(props) {
                     /> */}
                       <hr />
                       <br />
-                      <div className="media-body" >
+                      <div className="media-body">
                         <h5 className="mt-0">
                           {item.person.firstName ? item.person.firstName : null}
                         </h5>
                         <hr />
-                        <p className="truncate" style={{ fontSize: "1.5rem",maxWidth:"500px" }}>{item.content}</p>
+                        <p
+                          className="truncate"
+                          style={{ fontSize: "1.5rem", maxWidth: "500px" }}
+                        >
+                          {item.content}
+                        </p>
                         <hr style={{ border: "1px solid" }} />
                       </div>
 
