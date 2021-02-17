@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import $ from "jquery";
 import axios from "axios";
 import {useTranslation} from "react-i18next";
+import { useHistory } from "react-router";
 
 export default function SimpleDelete(props) {
   const [classState, setclassState] = useState("box");
@@ -15,6 +16,8 @@ export default function SimpleDelete(props) {
     setclassState2("bar");
   };
 
+  let history = useHistory();
+
   const handleDelete = (params) => {
     axios
       .delete(`http://localhost:3000/user/deletePost/${params}`, {
@@ -24,6 +27,9 @@ export default function SimpleDelete(props) {
         console.log(req);
         if (req.data.Success === true) {
           console.log("success");
+          if (history.pathname !== "/MyProfile/BlogPosts") {
+            history.push("/BlogList");
+          }
         } else {
           console.log("fail");
           console.log(req.data);
