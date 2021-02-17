@@ -8,6 +8,9 @@ import { useHistory } from "react-router-dom";
 import SimpleDelete from "../../../../../components/SimpleDelete";
 import { PaginationReact } from "../../../../../components/PaginationReact";
 import { useTranslation } from "react-i18next";
+import InfoIcon from "@material-ui/icons/Info";
+import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 export default function BookmarkedPosts(props) {
   const history = useHistory();
@@ -24,6 +27,32 @@ export default function BookmarkedPosts(props) {
   useEffect(() => {
     setPosts(user ? user.bookmarkPosts : []);
   });
+
+  const handleBlogClick = (params) => {
+    localStorage.setItem("BlogID", params);
+    history.push(`/BlogDetails/${params}`);
+  };
+
+
+  const handleRemoveBookmark = (params) => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const body = {
+      id: params,
+    };
+    const URL = "http://localhost:3000/user/removeBookmarkPosts";
+    axios
+      .put(URL, body, config)
+      .then((req) => {
+        console.log(req);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleClick = (pageNumber) => setCurrentPage(pageNumber.selected + 1);
   // const date = new Date ()
@@ -145,6 +174,28 @@ export default function BookmarkedPosts(props) {
                                 {post.model}
                               </i>
                             </strong>
+                            <div
+                                style={{
+                                  top: "20px",
+                                  left: "425px",
+                                  position: "absolute",
+                                }}
+                              >
+                                <button className="btn btn-danger" onClick={() => handleRemoveBookmark(post._id)}>
+                                 <DeleteIcon />
+                                </button>
+                              </div>
+                            <div
+                                style={{
+                                  top: "120px",
+                                  left: "425px",
+                                  position: "absolute",
+                                }}
+                              >
+                                <button className="btn btn-light" onClick={() => handleBlogClick(post._id)}>
+                                 <InfoIcon />
+                                </button>
+                              </div>
                           </div>
                         </div>
                       </div>

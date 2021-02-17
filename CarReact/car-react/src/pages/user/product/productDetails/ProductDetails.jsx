@@ -201,11 +201,13 @@ export default function ProductDetails(props) {
       <section className="products-details container">
         {/* <!-- start product details --> */}
         <div className="container">
+        <div style={{position:"absolute",top:"250px",left:"1700px",width:"300px"}}>
           <ToastMessage
             showFunction={toggleStatus}
             status={toastStatus}
             message={toastMessage}
           />
+        </div>
           <div style={{ paddingTop: "15px" }}>
             <div className="row bg-light" style={{ borderRadius: "3%" }}>
               {/* <!-- image of produce --> */}

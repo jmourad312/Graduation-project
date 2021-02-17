@@ -132,7 +132,7 @@ export default function BlogDetails(props) {
       },
     };
     const body = {
-      id: blogID,
+      id: localStorage.getItem("BlogID"),
     };
     const URL = "http://localhost:3000/user/removeBookmarkPosts";
     axios
@@ -155,7 +155,7 @@ export default function BlogDetails(props) {
     };
 
     const body = {
-      id: blogID,
+      id: localStorage.getItem("BlogID"),
     };
 
     const URL = "http://localhost:3000/user/addBookmarkPosts";
@@ -280,6 +280,27 @@ export default function BlogDetails(props) {
       checkOwnerDetails();
     }
   }, [blogDetails]);
+
+  const handleDelete = (params) => {
+    axios
+      .delete(`http://localhost:3000/user/deletePost/${params}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      })
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("success");
+        } else {
+          console.log("fail");
+          console.log(req.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("adsa");
+      });
+  };
+
   const pageVariants = {
     in: {
       opacity: 10,
@@ -312,7 +333,14 @@ export default function BlogDetails(props) {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <div style={{ position: "absolute", top: "200px", right: "-150px" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: "350px",
+          right: "-500px",
+          width: "350px",
+        }}
+      >
         <ToastMessage
           showFunction={toggleStatus}
           status={toastStatus}
@@ -348,7 +376,7 @@ export default function BlogDetails(props) {
               <hr />
               <p>
                 <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                {t("repeated.Date")} 
+                  {t("repeated.Date")}
                   {blogDetails && blogTime ? " " + blogTime[0] : "Loading"}
                 </span>
                 {/* <span style={{ color: "gray" }}> Viewed </span> 3 */}
@@ -363,7 +391,7 @@ export default function BlogDetails(props) {
                 className="mt-0"
                 style={{ fontWeight: "700", fontSize: "25px" }}
               >
-                {t("BlogDetails.PostDetails")} 
+                {t("BlogDetails.PostDetails")}
               </h5>
               <p
                 className="truncate"
@@ -427,13 +455,18 @@ export default function BlogDetails(props) {
               )}
             </div>
             <div className="row" style={{ marginLeft: "710px" }}>
-              {localStorage.getItem("UserID") !== null && (
+              {localStorage.getItem("UserID") !== null && !checkOwner && (
                 <button
                   className="bookmarkbtn fourth"
-                  style={{ marginLeft: "30px", height: "50px",fontSize:"20px",paddingTop:"15px" }}
+                  style={{
+                    marginLeft: "30px",
+                    height: "50px",
+                    fontSize: "20px",
+                    paddingTop: "15px",
+                  }}
                   onClick={handleAddBookmark}
                 >
-                  {t("repeated.Bookmark")} 
+                  {t("repeated.Bookmark")}
                 </button>
               )}
               {checkOwner && (
@@ -488,6 +521,7 @@ export default function BlogDetails(props) {
                 id="title"
                 value={editValue.title}
                 onChange={handleEditChange}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -497,6 +531,8 @@ export default function BlogDetails(props) {
                 name="image"
                 id="image"
                 onChange={handleImageChange}
+                multiple
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -509,6 +545,7 @@ export default function BlogDetails(props) {
                 id="body"
                 value={editValue.body}
                 onChange={handleEditChange}
+                required
               />
             </Form.Group>
             <Form.Row>
@@ -521,6 +558,7 @@ export default function BlogDetails(props) {
                   id="brand"
                   value={editValue.brand}
                   onChange={handleEditChange}
+                  required
                 >
                   {cars2.map((item, index) => {
                     return (
@@ -541,6 +579,7 @@ export default function BlogDetails(props) {
                   value={editValue.model}
                   onChange={handleEditChange}
                   disabled={!stateDisabled}
+                  required
                 >
                   {cars3.map((item, index) => {
                     return (
@@ -563,7 +602,7 @@ export default function BlogDetails(props) {
             {t("repeated.Submit")}
           </Button>
           <Button variant="danger" onClick={closeModal}>
-          {t("repeated.Cancel")}
+            {t("repeated.Cancel")}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -578,7 +617,7 @@ export default function BlogDetails(props) {
           WebkitBackgroundClip: "text",
         }}
       >
-        {t("BlogDetails.CommentSection")} 
+        {t("BlogDetails.CommentSection")}
       </h3>
       <div className="row">
         <div className="col-8">
@@ -589,7 +628,7 @@ export default function BlogDetails(props) {
                 className="text-center mt-5"
                 style={{ fontWeight: "700", fontSize: "30px", color: "black" }}
               >
-                {t("BlogDetails.NoCommentsYet")} 
+                {t("BlogDetails.NoCommentsYet")}
               </div>
             ) : (
               <div

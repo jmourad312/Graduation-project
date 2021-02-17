@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { PaginationReact } from "../../../../../components/PaginationReact";
 import Loading from "../../../../../components/Loading";
 import { useTranslation } from "react-i18next";
+import InfoIcon from "@material-ui/icons/Info";
 
 export default function BlogPosts(props) {
   const history = useHistory();
@@ -23,6 +24,12 @@ export default function BlogPosts(props) {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+
+  const handleBlogClick = (params) => {
+    localStorage.setItem("BlogID", params);
+    history.push(`/BlogDetails/${params}`);
+  };
 
   useEffect(() => {
     setPosts(user ? user.postsUser : []);
@@ -84,6 +91,7 @@ export default function BlogPosts(props) {
                       key={index}
                       style={{ marginTop: "0px", width: "100%" }}
                     >
+                      
                       <div className="row" style={{ marginTop: "0px" }}>
                         <div className="col-4">
                           <img
@@ -141,6 +149,17 @@ export default function BlogPosts(props) {
                                   {post.model}
                                 </i>
                               </strong>
+                              <div
+                                style={{
+                                  top: "120px",
+                                  left: "425px",
+                                  position: "absolute",
+                                }}
+                              >
+                                <button className="btn btn-light" onClick={() => handleBlogClick(post._id)}>
+                                 <InfoIcon />
+                                </button>
+                              </div>
                               <div
                                 style={{
                                   top: "0px",
