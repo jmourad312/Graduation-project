@@ -342,48 +342,7 @@ export default function Admin(props) {
               <div className="col-md-7 mb-4">
                 <div className="card">
                   <div className="card-body">
-                    <Bar
-                      data={BarData}
-                      options={{
-                        title: {
-                          display: true,
-                          text: "Average Rainfall per month",
-                          fontSize: 20,
-                        },
-                        legend: { display: true, labels: { fontSize: 30 } },
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-5 mb-4">
-                <div className="card mb-4">
-                  <div className="card-header text-center">Pie chart</div>
-                  <div className="card-body">
-                    <Pie
-                      data={PieData}
-                      options={{
-                        title: {
-                          display: true,
-                          text: "Average Rainfall per month",
-                          fontSize: 20,
-                        },
-                        legend: {
-                          display: true,
-                          position: "right",
-                          labels: { fontSize: 15 },
-                        },
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Card */}
-                <div className="card mb-4">
-                  <div className="card-body">
-                    {/*List group links*/}
-                    <div className="list-group list-group-flush">
+                  <div className="list-group list-group-flush">
                       <a
                         className="list-group-item list-group-item-action waves-effect"
                         style={{ fontSize: "20px" }}
@@ -428,6 +387,29 @@ export default function Admin(props) {
                         </span>
                       </a>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-5 mb-4">
+                <div className="card mb-4">
+                  <div className="card-header text-center">Pie chart</div>
+                  <div className="card-body">
+                    <Pie
+                      data={PieData}
+                      options={{
+                        title: {
+                          display: true,
+                          text: "Average Rainfall per month",
+                          fontSize: 20,
+                        },
+                        legend: {
+                          display: true,
+                          position: "right",
+                          labels: { fontSize: 15 },
+                        },
+                      }}
+                    />
                   </div>
                 </div>
               </div>
