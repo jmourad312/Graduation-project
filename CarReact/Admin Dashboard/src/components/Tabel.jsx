@@ -29,11 +29,11 @@ export function Tabel(props) {
 
                                         return (
                                             <tr >
-                                                <td>{index + 1}</td>
+                                                <td>{props.index+index + 1}</td>
                                                 {/* <td>{item.person._id}</td> */}
                                                 <td>{item.person.firstName}</td>
                                                 <td>{item.person.email}</td>
-                                                <td>{String(item.banned)}</td>
+                                                <td>{item.banned==true ? "Yes" : "No" }</td>
 
                                                 <td >
                                                     <Button2 className="page-link" parameter={item} key={index + 1} handelClick={props.handelClickEdit} 
