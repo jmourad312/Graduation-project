@@ -71,7 +71,7 @@ export default function Items(props) {
 
                 <div className="col-12" style={{ marginTop: "2%" }}>
                     <div className="row">
-                        {stateRedux.products.length !=0 && stateRedux.products.Data.map(createProducts)}
+                        {stateRedux.products.Data != null && stateRedux.products.Data.map(createProducts)}
                     </div>
                 </div>
             </div>
