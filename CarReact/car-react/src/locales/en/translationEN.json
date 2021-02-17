@@ -139,7 +139,8 @@
         "ClearFilter":"Clear Filter",
         "AddPost":"Add New Post",
         "only":"Registered car owners can add new blog posts",
-        "RegHere":"Register Here"
+        "RegHere":"Register Here",
+        "PriceRange":"Price range"
     },
     "AddBlogModal":{
         "BlogTitle":"Blog Title",

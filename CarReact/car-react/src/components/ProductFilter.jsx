@@ -236,7 +236,7 @@ export default function ProductFilter(props) {
       </div> */}
       <div className={classes.root}>
         <Typography id="range-slider" gutterBottom style={{ fontSize: "20px", fontWeight: "700" }}>
-          Price range
+          {t("Filter.PriceRange")}
         </Typography>
         <Slider
           value={state.price}
