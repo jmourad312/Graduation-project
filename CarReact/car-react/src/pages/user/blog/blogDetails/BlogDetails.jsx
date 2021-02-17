@@ -78,7 +78,7 @@ export default function BlogDetails(props) {
     setEditValue((previous) => {
       return {
         ...previous,
-        image: event.target.files,
+        images: event.target.files,
       };
     });
   };
@@ -711,12 +711,12 @@ export default function BlogDetails(props) {
                     /> */}
                       <hr />
                       <br />
-                      <div className="media-body">
+                      <div className="media-body" >
                         <h5 className="mt-0">
                           {item.person.firstName ? item.person.firstName : null}
                         </h5>
                         <hr />
-                        <p style={{ fontSize: "1.5rem" }}>{item.content}</p>
+                        <p className="truncate" style={{ fontSize: "1.5rem",maxWidth:"500px" }}>{item.content}</p>
                         <hr style={{ border: "1px solid" }} />
                       </div>
 

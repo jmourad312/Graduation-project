@@ -87,7 +87,7 @@ export const addVoteComment = (params) => async (dispatch) => {
       `http://localhost:3000/user/upVoteToComment/${params}`,"s",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
-    // console.log(res);
+    console.log(res);
     dispatch({
       type: TYPES.ADD_VOTE,
       payload: res.data,
@@ -103,7 +103,7 @@ export const removeVoteComment = (params) => async (dispatch) => {
       `http://localhost:3000/user/downVoteToComment/${params}`,"j",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
-    // console.log(res);
+    console.log(res);
     dispatch({
       type: TYPES.REMOVE_VOTE,
       payload: res.data,
