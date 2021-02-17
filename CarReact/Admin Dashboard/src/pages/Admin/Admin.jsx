@@ -312,8 +312,8 @@ export default function Admin(props) {
                 href="#contactTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-product-hunt mr-1">
-                  message from contact
+                <i className="fa fa-envelope mr-1">
+                  Message from contact
                 </i>
               </a>
             </div>
