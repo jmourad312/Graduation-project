@@ -39,6 +39,7 @@ svg {
     will-change: transform;
     font-weight: 800;
     font-size: larger;
+    color: rgb(85, 76, 76);
     transform: translateZ(0px);
     transition:
       transform 125ms ease-in-out,
@@ -68,7 +69,7 @@ svg {
       
       ~ .blob {
         //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
-          opacity: 75%;
+        opacity: 75%;
         background: rgba(100, 100, 100, 0.651);
         animation-name: stretchyRev;
       }
@@ -79,10 +80,8 @@ svg {
       ~ .blob {
         // background-color: rgba(189, 188, 188, 0.651);
         background: rgba(100, 100, 100, 0.651);
-
         //   background: linear-gradient(to right, #000000,  rgb(44, 44, 44));
-          opacity: 75%;
-
+        opacity: 75%;
         animation-name: stretchy;
       }
     }
