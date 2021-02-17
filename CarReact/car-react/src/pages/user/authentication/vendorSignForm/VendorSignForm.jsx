@@ -20,8 +20,7 @@ export default function VendorSignForm(props) {
 
   const [vendorSignUpInfo, setVendorSignUpInfo] = useState({
     firstName: "",
-    middleName: "",
-    lastName: "",
+    workshopName: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -489,7 +488,7 @@ export default function VendorSignForm(props) {
                       <div className="col-6">
                         <div className="form-group">
                           <label
-                            for="lastName"
+                            for="workshopName"
                             style={{ fontWeight: "600", fontSize: "20px" }}
                           >
                             {t("VendorSign.ShopName")}{" "}
@@ -501,10 +500,10 @@ export default function VendorSignForm(props) {
                           </label>
                           <input
                             type="text"
-                            name="lastName"
-                            id="lastName"
+                            name="workshopName"
+                            id="workshopName"
                             className=""
-                            value={vendorSignUpInfo.lastName}
+                            value={vendorSignUpInfo.workshopName}
                             onChange={changeVendorSignUpInfo}
                           />
                           <span
