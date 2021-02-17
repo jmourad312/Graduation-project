@@ -114,7 +114,7 @@ export default function AddPartCar(props) {
     } catch (error) {
       console.log(error);
     }
-    getModel();
+    getModel(state.brandForModel);
 
   };
 
@@ -156,8 +156,7 @@ export default function AddPartCar(props) {
     } catch (error) {
       console.log(error);
     }
-    getModel();
-
+    getModel(state.brandForModel);
   };
   const handelClickDeleteModel = async (parameter) => {
     try {
@@ -169,7 +168,7 @@ export default function AddPartCar(props) {
     } catch (error) {
       console.log(error);
     }
-    getModel();
+    getModel(state.brandForModel);
   };
 
   const handelClickEditBrand = async () => {

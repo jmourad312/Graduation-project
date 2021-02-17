@@ -182,7 +182,7 @@ export default function AddPerson(props) {
                     className="btn text-white"
                     handelClick={getSignUp}
                     parameter={state}
-                    name="SignUp"
+                    name="Done"
                   />
                 </div>
               </div>
