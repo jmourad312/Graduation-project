@@ -29,14 +29,13 @@ export default function Admin(props) {
     contacts: [],
   });
 
-
   const [skipState, setSkipState] = useState({
     user: 0,
     vendor: 0,
     blog: 0,
     product: 0,
     contact: 0,
-    ad:0
+    ad: 0,
   });
 
   const stateRedux = useSelector((state) => state);
@@ -112,7 +111,6 @@ export default function Admin(props) {
         );
         console.log(res);
       }
-      
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +138,6 @@ export default function Admin(props) {
       console.log(error);
     }
     dispatch(getUserAction(skipState.vendor));
-
   };
 
   const goToEditUser = async (parameter) => {
@@ -179,7 +176,6 @@ export default function Admin(props) {
       console.log(error);
     }
     dispatch(getUserAction(skipState.vendor));
-
   };
 
   const ProductsVendor = (parameter) => {
@@ -198,46 +194,46 @@ export default function Admin(props) {
 
   const getPartUser = (skip) => {
     console.log(skip);
-    setSkipState({...skipState,user:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, user: skip.selected * numberItemPerPage });
     dispatch(getUserAction(skip.selected * numberItemPerPage));
   };
 
   const getPartVendor = (skip) => {
-    setSkipState({...skipState,vendor:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, vendor: skip.selected * numberItemPerPage });
     dispatch(getVendorAction(skip.selected * numberItemPerPage));
   };
 
   const getPartBlog = (skip) => {
-    setSkipState({...skipState,blog:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, blog: skip.selected * numberItemPerPage });
     dispatch(getBlogAction(skip.selected * numberItemPerPage));
   };
 
   const getPartProduct = (skip) => {
-    setSkipState({...skipState,product:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, product: skip.selected * numberItemPerPage });
     dispatch(getProductAction(skip.selected * numberItemPerPage));
   };
 
   const getPartContant = (skip) => {
-    setSkipState({...skipState,contact:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, contact: skip.selected * numberItemPerPage });
     dispatch(getContactAction(skip.selected * numberItemPerPage));
   };
 
   const getPartAds = (skip) => {
-    setSkipState({...skipState,ad:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, ad: skip.selected * numberItemPerPage });
     dispatch(getAdsAction(skip.selected * numberItemPerPage));
   };
 
   const deleteAds = async (id) => {
     try {
-        const res = await instance.delete(`admin/deleteAds/${id}`,
-        {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
-
+      const res = await instance.delete(`admin/deleteAds/${id}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      });
+      console.log(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     dispatch(getAdsAction(skipState.ad));
-  }
+  };
 
   const [BarData, setBarData] = useState({
     labels: ["Users", "Vendors", "Products", "Blogs"],
@@ -496,7 +492,7 @@ export default function Admin(props) {
                           {stateRedux.nblog.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.blog+index+1}</td>
+                                <td>{skipState.blog + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
                                 <td>{item.person.firstName}</td>
                                 <td>{item.postsUser.length}</td>
@@ -553,7 +549,7 @@ export default function Admin(props) {
                           {stateRedux.nproduct.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.product+index+1}</td>
+                                <td>{skipState.product + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
                                 <td>{item.person.firstName}</td>
                                 <td>{item.vendorItems.length}</td>
@@ -611,7 +607,7 @@ export default function Admin(props) {
                           {stateRedux.contacts.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.contact+index+1}</td>
+                                <td>{skipState.contact + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
                                 <td>{item.email}</td>
                                 <td>{item.message}</td>
@@ -657,7 +653,7 @@ export default function Admin(props) {
                           {stateRedux.ads.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.ad+index+1}</td>
+                                <td>{skipState.ad + index + 1}</td>
                                 <td>{item.ownerName}</td>
                                 <td>{item.ownerPhone}</td>
                                 <td>{item.ownerEmail}</td>
@@ -684,14 +680,17 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <PaginationReact
-                    NumberOfItemsInDB={stateRedux.ads.count}
-                    NumberToShow={numberItemPerPage}
-                    handelClick={getPartAds}
-                  />
+                  {stateRedux.ads.count > numberItemPerPage && (
+                    <PaginationReact
+                      NumberOfItemsInDB={stateRedux.ads.count}
+                      NumberToShow={numberItemPerPage}
+                      handelClick={getPartAds}
+                    />
+                  )}
                 </div>
               </div>
             )}
+            
           </div>
         </main>
       </div>
