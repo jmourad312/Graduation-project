@@ -44,7 +44,7 @@ export default function Blogs(props) {
                 key={blog._id}
                 id={blog._id}
                 idperson={blog.person._id}
-                imgSrc={blog.image}
+                imgSrc={blog.images[0]}
                 cardTitle={blog.title}
                 userName={blog.person.firstName ? blog.person.firstName : "User"}
                 dataItem={blog}

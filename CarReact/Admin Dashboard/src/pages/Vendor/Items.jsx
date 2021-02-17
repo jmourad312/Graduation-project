@@ -46,7 +46,7 @@ export default function Items(props) {
             key={prod._id}
             id={prod._id}
             idperson={data._id}
-            image={prod.image}
+            image={prod.images[0]}
             description={prod.description}
             price={prod.price}
             name={data.firstName ? data.firstName : "vendor" }
