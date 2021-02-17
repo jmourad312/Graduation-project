@@ -83,11 +83,10 @@ showFilterItems = (req, res) => {
   const criteriaSearch = { $regex: req.body.search, $options: "i" };
   const queryCond = {};
  ///////      0
-  if (req.body.priceMoreThan) {
-    console.log(req.body.priceMoreThan);
+  if (req.body.price) {
     queryCond.$and = [
-      { price: { $gte: +req.body.priceLessThan } },
-      { price: { $lte: +req.body.priceMoreThan } },
+      { price: { $gte: req.body.price[0] } },
+      { price: { $lte: req.body.price[1] } },
     ];
   }
 
