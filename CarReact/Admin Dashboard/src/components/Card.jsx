@@ -64,12 +64,12 @@ export function Card(props) {
     setShow(false);
 
     const formData = new FormData();
-    formData.append("image", props.image);
-    formData.append("name", props.name);
-    formData.append("description", props.description);
-    formData.append("carBrand", props.carBrand);
-    formData.append("carModel", props.carModel);
-    formData.append("price", props.price);
+    formData.append("image", state.image);
+    formData.append("name", state.name);
+    formData.append("description", state.description);
+    formData.append("carBrand", state.carBrand);
+    formData.append("carModel", state.carModel);
+    formData.append("price", state.price);
 
     const config = {
       headers: { Authorization: localStorage.getItem("Authorization") },

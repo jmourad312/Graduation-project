@@ -14,7 +14,7 @@ export default function Blogs(props) {
 
     useEffect(() => {
         dispatch(getBlogsUser(data._id))
-    }, [])
+    }, [stateRedux.blogs])
 
     const handelClickDetails = (parameter) => {
         props.history.push({
@@ -69,7 +69,7 @@ export default function Blogs(props) {
                 <div className="col-9 blog-contents">
                     <section>
                         <div className="row">
-                            {stateRedux.blogs.length !=0 && stateRedux.blogs.Data.map(createBlog)}
+                            {stateRedux.blogs.length !=0 ? stateRedux.blogs.Data.map(createBlog) : <p>No blogs yet</p>}
                         </div>
                     </section>
                 </div>
