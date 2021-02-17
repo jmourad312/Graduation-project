@@ -1,1 +1,0 @@
-// show all posts of all users
