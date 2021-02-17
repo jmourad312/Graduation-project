@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Loading from "../../../../../components/Loading";
 import { getUsersAction, setProductId } from "../../../../../store/actions";
+import {useTranslation} from "react-i18next";
 
 export default function RecentViews(props) {
   const user = useSelector((state) => state.user.Data);
@@ -20,6 +21,7 @@ export default function RecentViews(props) {
     dispatch(setProductId(params));
     history.push(`/ProductDetails/${params}`);
   };
+  const {t, i18n} = useTranslation();
   return (
     <motion.div
       className="RecentViews"
@@ -34,9 +36,9 @@ export default function RecentViews(props) {
           {user ? (
             user.recentlyViewed.length === 0 ? (
               <div className="text-center" style={{ fontWeight: "700", fontSize: "30px",position:"absolute",left:"30%" }}
-          >No Items Viewed yet
+          >{t("RecentViews.NoItems")}
           <div className="text-center" onClick={() => history.push("/ProductsList")} style={{fontSize:"30px",borderRadius:"25px",textDecoration:"underline",cursor:"pointer"}}>
-            Go to Products List 
+             {t("RecentViews.GotoProductsList")}
           </div>
           </div>
             ) : (
@@ -97,7 +99,7 @@ export default function RecentViews(props) {
                           style={{ fontSize: "1.5rem" }}
                           onClick={() => handleClick(item._id)}
                         >
-                          Go to product
+                          {t("repeated.GotoProductDetails")}
                         </button>
                       </article>
                     </section>

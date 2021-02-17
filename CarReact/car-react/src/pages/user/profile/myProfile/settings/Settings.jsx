@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Button2 from "../../../../../components/Button2";
 import Input from "../../../../../components/Input";
 import Label from "../../../../../components/Label";
+import {useTranslation} from "react-i18next";
 
 export default function Settings(props) {
   console.log(props.person.firstName);
@@ -60,7 +61,7 @@ export default function Settings(props) {
       alert("Please check your password");
     }
   };
-
+  const {t, i18n} = useTranslation();
   return (
     <motion.div
       initial="out"
@@ -75,7 +76,7 @@ export default function Settings(props) {
             <Label
               id="firstName"
               class="text-light"
-              value="First Name"
+              value={t("ProfileSettings.FirstName")}
             />
             <Input
               id="firstName"
@@ -83,7 +84,7 @@ export default function Settings(props) {
               value={userInfo.firstName}
               name="firstName"
               onChange={handleChange}
-              placeHolder="First Name"
+              placeHolder={t("ProfileSettings.FirstNameHolder")}
               type="text"
             />
           </div>
@@ -91,7 +92,7 @@ export default function Settings(props) {
             <Label
               id="middleName"
               class="text-light"
-              value="Middle Name"
+              value={t("ProfileSettings.FamilyName")}
             />
             <Input
               id="middleName"
@@ -99,7 +100,7 @@ export default function Settings(props) {
               value={userInfo.middleName}
               name="middleName"
               onChange={handleChange}
-              placeHolder="Middle Name"
+              placeHolder={t("ProfileSettings.FamilyNameHolder")}
               type="text"
             />
           </div>
@@ -110,7 +111,7 @@ export default function Settings(props) {
           <Label
             id="phoneNumber"
             class="text-light"
-            value="Phone Number"
+            value={t("ProfileSettings.PhoneNumber")}
           />
           <Input
             id="phoneNumber"
@@ -118,7 +119,7 @@ export default function Settings(props) {
             value={userInfo.phoneNumber}
             name="phoneNumber"
             onChange={handleChange}
-            placeHolder="Phone number"
+            placeHolder={t("ProfileSettings.PhoneHolder")}
             type=""
           />
         </div>
@@ -126,7 +127,7 @@ export default function Settings(props) {
           <Label
             id="password"
             class="text-light"
-            value="New Password"
+            value={t("ProfileSettings.NewPassword")}
           />
           <Input
             id="password"
@@ -134,7 +135,7 @@ export default function Settings(props) {
             value={userInfo.password}
             name="password"
             onChange={handleChange}
-            placeHolder="Password"
+            placeHolder={t("ProfileSettings.PassPlaceHolder")}
             type="password"
           />
         </div>
@@ -142,7 +143,7 @@ export default function Settings(props) {
           <Label
             id="confirmPassword"
             class="text-light"
-            value="Confirm New Password"
+            value={t("ProfileSettings.ConfirmPassword")}
           />
           <Input
             id="confirmPassword"
@@ -150,7 +151,7 @@ export default function Settings(props) {
             value={userInfo.confirmPassword}
             name="confirmPassword"
             onChange={handleChange}
-            placeHolder="Confirm New Password"
+            placeHolder={t("ProfileSettings.ConfirmPlaceHolder")}
             type="password"
           />
         </div>
@@ -159,7 +160,7 @@ export default function Settings(props) {
         <button
           onClick={handleSubmit}class="btn btn-dark"
           value="Submit"style={{fontSize:"25px",left:"47px",position:"absolute"}}
-        >Submit</button>
+        >{t("repeated.Submit")}</button>
     </motion.div>
   );
 }

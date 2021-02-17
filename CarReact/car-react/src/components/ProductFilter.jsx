@@ -11,6 +11,7 @@ import {
 import SimpleSearch from "./SimpleSearch";
 import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
+import {useTranslation} from "react-i18next";
 
 export default function ProductFilter(props) {
   const products = useSelector((state) => state.products.TotalItem);
@@ -117,7 +118,7 @@ export default function ProductFilter(props) {
     dispatch(resultFromFilterProduct({}, 0));
 
   };
-
+  const {t, i18n} = useTranslation();
   return (
     <div className={props.className}>
       {/* <SimpleSearch /> */}
@@ -155,7 +156,7 @@ export default function ProductFilter(props) {
       </div>
 
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center">Filter Options</h4>
+        <h4 className="font-weight-bold mb-3 text-center">{t("Filter.FilterOptions")}</h4>
       </div>
       <hr style={{borderColor:"grey",border:"1px solid"}}/>
       <div className="mb-5" style={{marginTop:"120px"}}>
@@ -170,7 +171,7 @@ export default function ProductFilter(props) {
           step="10"
         />
         <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
-          Form: {state.priceLessThan}
+          {t("repeated.From")} {state.priceLessThan}
         </label>
       </div>
 
@@ -186,7 +187,7 @@ export default function ProductFilter(props) {
           step="10"
         />
         <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
-          To: {state.priceMoreThan}{" "}
+        {t("repeated.To")}  {state.priceMoreThan}{" "}
         </label>
       </div>
 
@@ -199,7 +200,7 @@ export default function ProductFilter(props) {
           style={{fontWeight:"700"}}
         >
           <option value="" key="no-value" style={{fontWeight:"700"}}>
-            choose Brand
+          {t("Filter.ChooseBrand")}
           </option>
           {stateRedux.brand.map((item, index) => (
             <option value={item.name} key={index} style={{fontWeight:"700"}}>
@@ -219,7 +220,7 @@ export default function ProductFilter(props) {
           style={{fontWeight:"700"}}
         >
           <option value="" key="no-value" style={{fontWeight:"700"}}> 
-            choose Model
+          {t("Filter.ChooseModel")}
           </option>
 
           {stateRedux.model.map((item, index) => (
@@ -239,7 +240,7 @@ export default function ProductFilter(props) {
       //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
       // }}
       >
-        Apply Filter
+        {t("Filter.ApplyFilter")}
       </button>
       <button
         type="button"
@@ -251,7 +252,7 @@ export default function ProductFilter(props) {
         // }}
         onClick={handleClear}
       >
-        Clear Filter
+        {t("Filter.ClearFilter")}
       </button>
       <div
         className="pagination"

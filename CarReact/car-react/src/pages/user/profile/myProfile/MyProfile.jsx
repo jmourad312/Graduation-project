@@ -8,6 +8,7 @@ import ProfileRight from "../../../../components/ProfileRight";
 import UserIcon from "../../../../components/UserIcon";
 import { getUsersAction } from "../../../../store/actions";
 
+
 export default function MyProfile() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.Data);
@@ -38,6 +39,7 @@ export default function MyProfile() {
     type: "tween",
     ease: "anticipate",
   };
+  
   return (
     <motion.div
       initial="out"

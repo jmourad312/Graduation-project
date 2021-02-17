@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Button2 from '../../../../../components/Button2';
 import Input from '../../../../../components/Input';
 import Label from '../../../../../components/Label';
+import {useTranslation} from "react-i18next";
 
 export default function VendorSettings(props) {
 
@@ -55,7 +56,7 @@ export default function VendorSettings(props) {
         alert("Please check your password");
       }
     };
-
+    const {t, i18n} = useTranslation();
     return (
       <AnimatePresence exitBeforeEnter>
         <motion.div
@@ -71,7 +72,7 @@ export default function VendorSettings(props) {
                 <Label
                   id="firstName"
                   class="text-light"
-                  value="First Name"
+                  value={t("ProfileSettings.FirstName")}
                 />
                 <Input
                   id="firstName"
@@ -79,23 +80,7 @@ export default function VendorSettings(props) {
                   value={vendorInfo.firstName}
                   name="firstName"
                   onChange={handleChange}
-                  placeHolder="First Name"
-                  type="text"
-                />
-              </div>
-              <div className="form-group col-4">
-                <Label
-                  id="middleName"
-                  class="text-light"
-                  value="Middle Name"
-                />
-                <Input
-                  id="middleName"
-                  class="form-control w-75"
-                  value={vendorInfo.middleName}
-                  name="middleName"
-                  onChange={handleChange}
-                  placeHolder="Middle Name"
+                  placeHolder={t("ProfileSettings.FirstNameHolder")}
                   type="text"
                 />
               </div>
@@ -103,7 +88,7 @@ export default function VendorSettings(props) {
                 <Label
                   id="lastName"
                   class="text-light"
-                  value="Last Name"
+                  value={t("ProfileSettings.ShopName")}
                 />
                 <Input
                   id="lastName"
@@ -111,7 +96,7 @@ export default function VendorSettings(props) {
                   value={vendorInfo.lastName}
                   name="lastName"
                   onChange={handleChange}
-                  placeHolder="Last Name"
+                  placeHolder={t("ProfileSettings.ShopNameHolder")}
                   type="text"
                 />
               </div>
@@ -121,7 +106,7 @@ export default function VendorSettings(props) {
               <Label
                 id="phoneNumber"
                 class="text-light"
-                value="Phone Number"
+                value={t("ProfileSettings.PhoneNumber")}
               />
               <Input
                 id="phoneNumber"
@@ -129,7 +114,7 @@ export default function VendorSettings(props) {
                 value={vendorInfo.phoneNumber}
                 name="phoneNumber"
                 onChange={handleChange}
-                placeHolder="Phone number"
+                placeHolder={t("ProfileSettings.PhoneHolder")}
                 type=""
               />
             </div>
@@ -138,7 +123,7 @@ export default function VendorSettings(props) {
                   <Label
                     id="password"
                     class="text-light"
-                    value="New Password"
+                    value={t("ProfileSettings.NewPassword")}
                   />
                   <Input
                     id="password"
@@ -146,7 +131,7 @@ export default function VendorSettings(props) {
                     value={vendorInfo.password}
                     name="password"
                     onChange={handleChange}
-                    placeHolder="Password"
+                    placeHolder={t("ProfileSettings.PassPlaceHolder")}
                     type="password"
                   />
                 </div>
@@ -155,7 +140,7 @@ export default function VendorSettings(props) {
                   <Label
                     id="confirmPassword"
                     class="text-light"
-                    value="Confirm New password"
+                    value={t("ProfileSettings.ConfirmPassword")}
                   />
                   <Input
                     id="confirmPassword"
@@ -163,7 +148,7 @@ export default function VendorSettings(props) {
                     value={vendorInfo.confirmPassword}
                     name="confirmPassword"
                     onChange={handleChange}
-                    placeHolder="Confirm New Password"
+                    placeHolder={t("ProfileSettings.ConfirmPlaceHolder")}
                     type="password"
                   />
                 </div>
@@ -173,7 +158,7 @@ export default function VendorSettings(props) {
               onClick={handleSubmit}
               //   type="submit"
               class="btn btn-dark"
-              value="Submit"
+              value={t("repeated.Submit")}
             />
           </form>
         </motion.div>
