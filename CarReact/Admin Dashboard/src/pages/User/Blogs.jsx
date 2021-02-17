@@ -69,7 +69,7 @@ export default function Blogs(props) {
                 <div className="col-9 blog-contents">
                     <section>
                         <div className="row">
-                            {stateRedux.blogs.length !=0 && stateRedux.blogs.Data.map(createBlog)}
+                            {stateRedux.blogs.Data !=null && stateRedux.blogs.Data.map(createBlog)}
                         </div>
                     </section>
                 </div>
