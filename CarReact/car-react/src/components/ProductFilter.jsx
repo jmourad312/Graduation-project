@@ -243,7 +243,6 @@ export default function ProductFilter(props) {
           max={5000}
           min={0}
           name="price"
-          style={{width:"100px"}}
           onChange={handlePriceChange}
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
