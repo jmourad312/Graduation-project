@@ -28,11 +28,13 @@
 
     .card__img {
       visibility: hidden;
-      background-size: cover;
-      background-position: center;
+      // background-size: contain;
+      background-size: 10% 10%;
+
+      background-position: top;
       background-repeat: no-repeat;
       width: 100%;
-      height: 235px;
+      height: 535px;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
     }
@@ -47,7 +49,8 @@
 
     .card__img--hover {
       transition: 0.2s all ease-out;
-      background-size: cover;
+      background-size: contain;
+      // background-size: 10% 10%;
       background-position: top !important;
       background-repeat: no-repeat;
       width: 100%;

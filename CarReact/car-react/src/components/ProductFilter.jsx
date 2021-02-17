@@ -12,8 +12,37 @@ import SimpleSearch from "./SimpleSearch";
 import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
 import {useTranslation} from "react-i18next";
+import { Slider, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  root: {
+    width: 210,
+    marginTop: "150px",
+    marginLeft: "10px",
+    marginBottom: "100px",
+    fontSize: "20px",
+    fontWeight:"700"
+  },
+});
+
+function valuetext(value) {
+  return `${value}°C`;
+}
 export default function ProductFilter(props) {
+
+  const classes = useStyles();
+
+
+  const [value, setValue] = useState([0, 5000]);
+
+  const handlePriceChange1 = (event, newValue) => {
+    setValue(newValue);
+    console.log(value);
+  };
+
+
+
   const products = useSelector((state) => state.products.TotalItem);
   const [itemsInDB, setItemsInDB] = useState(0);
 
@@ -23,6 +52,7 @@ export default function ProductFilter(props) {
     search: "",
     priceMoreThan: 0,
     priceLessThan: 0,
+    price: [0,5000],
   });
 
 
@@ -60,26 +90,39 @@ export default function ProductFilter(props) {
         [name]: value,
       };
     });
-    handleSearchClick();
+    // handleSearchClick();
   }
-  const handlePriceChange = (event) => {
-
-    switch (event.target.name) {
-      case "priceLess":
-        setState({
-          ...state,
-          priceLessThan: +event.target.value,
-        });
-        break;
-      case "priceMore":
-        setState({
-          ...state,
-          priceMoreThan: +event.target.value,
-        });
-        break;
-      default:
-        break;
-    }
+  const handleSearchChange = (event) => {
+    const { value, name } = event.target;
+    setState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+    handleSearchClick();
+  };
+  const handlePriceChange = (event,newValue) => {
+    setState({
+      price:newValue
+    });
+    console.log(state.price);
+    // switch (event.target.name) {
+    //   case "priceLess":
+    //     setState({
+    //       ...state,
+    //       priceLessThan: +event.target.value,
+    //     });
+    //     break;
+    //   case "priceMore":
+    //     setState({
+    //       ...state,
+    //       priceMoreThan: +event.target.value,
+    //     });
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 
   const handleFocus=()=>{
@@ -102,6 +145,7 @@ export default function ProductFilter(props) {
       search: "",
       priceLessThan: 0,
       priceMoreThan: 0,
+      price:[0,5000],
     });
     
     dispatch(resultFromFilterProduct({}, 0));
@@ -111,13 +155,7 @@ export default function ProductFilter(props) {
     //   handleSearchClick();
     // }, 5000);
   }
-  const handleClear2 = () => {
-    setState({
-      search: "",
-    });
-    dispatch(resultFromFilterProduct({}, 0));
-
-  };
+  
   const {t, i18n} = useTranslation();
   return (
     <div className={props.className}>
@@ -147,19 +185,37 @@ export default function ProductFilter(props) {
       </div> */}
 
       <div class="search">
-        <input type="checkbox" id="trigger" onClick={handleFocus} class="search__checkbox" />
+        <input
+          type="checkbox"
+          id="trigger"
+          onClick={handleFocus}
+          class="search__checkbox"
+        />
         <label class="search__label-init" for="trigger"></label>
-        <label class="search__label-active" onClick={handleClear2} for="trigger"></label>
+        <label
+          class="search__label-active"
+          onClick={handleClear}
+          for="trigger"
+        ></label>
         <div class="search__border"></div>
-        <input type="text" class="search__input" id="focus" name="search" onChange={handleChange} value={state.search}/>
+        <input
+          type="text"
+          class="search__input"
+          id="focus"
+          name="search"
+          onChange={handleSearchChange}
+          value={state.search}
+        />
         <div class="search__close"></div>
       </div>
 
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center">{t("Filter.FilterOptions")}</h4>
+        <h4 className="font-weight-bold mb-3 text-center">
+          {t("Filter.FilterOptions")}
+        </h4>
       </div>
-      <hr style={{borderColor:"grey",border:"1px solid"}}/>
-      <div className="mb-5" style={{marginTop:"120px"}}>
+      <hr style={{ borderColor: "grey", border: "1px solid" }} />
+      {/* <div className="mb-5" style={{ marginTop: "120px" }}>
         <input
           type="range"
           name="priceLess"
@@ -170,12 +226,31 @@ export default function ProductFilter(props) {
           max="999"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
+        <label
+          htmlFor="customRange"
+          className="form-label ml-2"
+          style={{ fontSize: "20px", fontWeight: "700" }}
+        >
           {t("repeated.From")} {state.priceLessThan}
         </label>
+      </div> */}
+      <div className={classes.root}>
+        <Typography id="range-slider" gutterBottom style={{ fontSize: "20px", fontWeight: "700" }}>
+          Price range
+        </Typography>
+        <Slider
+          value={state.price}
+          max={5000}
+          min={0}
+          name="price"
+          style={{width:"100px"}}
+          onChange={handlePriceChange}
+          valueLabelDisplay="auto"
+          aria-labelledby="range-slider"
+          getAriaValueText={valuetext}
+        />
       </div>
-
-      <div className="mb-5">
+      {/* <div className="mb-5">
         <input
           type="range"
           name="priceMore"
@@ -186,10 +261,14 @@ export default function ProductFilter(props) {
           max="5000"
           step="10"
         />
-        <label htmlFor="customRange" className="form-label ml-2" style={{fontSize:"20px",fontWeight:"700"}}>
-        {t("repeated.To")}  {state.priceMoreThan}{" "}
+        <label
+          htmlFor="customRange"
+          className="form-label ml-2"
+          style={{ fontSize: "20px", fontWeight: "700" }}
+        >
+          {t("repeated.To")} {state.priceMoreThan}{" "}
         </label>
-      </div>
+      </div> */}
 
       <div className="mb-5">
         <select
@@ -197,13 +276,13 @@ export default function ProductFilter(props) {
           name="brand"
           onChange={handleChange}
           className="custom-select custom-select-lg mb-3"
-          style={{fontWeight:"700"}}
+          style={{ fontWeight: "700" }}
         >
-          <option value="" key="no-value" style={{fontWeight:"700"}}>
-          {t("Filter.ChooseBrand")}
+          <option value="" key="no-value" style={{ fontWeight: "700" }}>
+            {t("Filter.ChooseBrand")}
           </option>
           {stateRedux.brand.map((item, index) => (
-            <option value={item.name} key={index} style={{fontWeight:"700"}}>
+            <option value={item.name} key={index} style={{ fontWeight: "700" }}>
               {item.name}
             </option>
           ))}
@@ -217,14 +296,18 @@ export default function ProductFilter(props) {
           name="model"
           onChange={handleChange}
           className="custom-select custom-select-lg mb-3"
-          style={{fontWeight:"700"}}
+          style={{ fontWeight: "700" }}
         >
-          <option value="" key="no-value" style={{fontWeight:"700"}}> 
-          {t("Filter.ChooseModel")}
+          <option value="" key="no-value" style={{ fontWeight: "700" }}>
+            {t("Filter.ChooseModel")}
           </option>
 
           {stateRedux.model.map((item, index) => (
-            <option value={item.model} key={index} style={{fontWeight:"700"}}>
+            <option
+              value={item.model}
+              key={index}
+              style={{ fontWeight: "700" }}
+            >
               {item.model}
             </option>
           ))}
@@ -234,18 +317,18 @@ export default function ProductFilter(props) {
         type="button"
         onClick={handleSearchClick}
         className="btn btn-dark mr-2"
-        style={{fontWeight:"700",height:"60px"}}
-      // style={{
-      //   background:
-      //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
-      // }}
+        style={{ fontWeight: "700", height: "60px" }}
+        // style={{
+        //   background:
+        //     "linear-gradient(to right, rgb(197, 191, 191),  green )",
+        // }}
       >
         {t("Filter.ApplyFilter")}
       </button>
       <button
         type="button"
         className="btn btn-danger "
-        style={{fontWeight:"700",height:"60px"}}
+        style={{ fontWeight: "700", height: "60px" }}
         // style={{
         //   background:
         //     "linear-gradient(to right, rgb(197, 191, 191),  red )",
@@ -261,10 +344,10 @@ export default function ProductFilter(props) {
           position: "absolute",
           left: "350px",
           bottom: "-15.5%",
-          height:"50px"
+          height: "50px",
         }}
       >
-        {products && itemsInDB > 6  && (
+        {products && itemsInDB > 6 && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={6}
