@@ -1,0 +1,344 @@
+.Ads2{
+    body {
+    background: #222;
+    font-family: sans-serif;
+}
+
+#base {
+  position: absolute;
+  margin: auto;
+  width: 300px;
+  height: 250px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background: #FFF;
+  border-radius: 0px;
+  box-shadow: 10px 10px 10px;
+}
+
+.gtr {
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: -25%;
+    animation: gtr 10s ease-in-out infinite;
+    z-index: 1;
+
+}
+
+.title {
+    position: absolute;
+    height: 40%;
+    top: 20px;
+    left: 40px;
+    filter: drop-shadow(0px 0px 9px #654747);
+    z-index: 2;
+    animation: t 10s ease-in-out infinite;
+}
+
+.fh {
+    position: absolute;
+    background: linear-gradient(90deg, #a6075b, #fe0034, #fe0034);
+    height: 140px;
+    width: 300px;
+    top: 350px;
+    z-index: 3;
+    animation: fh 10s ease-in-out infinite;
+}
+
+.fh2 {
+    position: absolute;
+    background: white;
+    height: 140px;
+    width: 300px;
+    top: 150px;
+    z-index: 3;
+    animation: fh2 10s ease-in-out infinite;
+}
+
+.but {
+    color: white;
+    position: absolute;
+    top: -350px;
+    left: 20px;
+    height: 70px;
+    width: 260px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    background: linear-gradient(45deg, #a6075b, #fe0034, #fe0034);
+    box-shadow: 0px 0px 20px 0.5px #000;
+    cursor: pointer;
+    font-size: 26px;
+    font-family: "Raleway";
+    letter-spacing: 0px;
+    font-weight: 400;
+    animation: b 10s ease-in-out infinite;
+    z-index: 4;
+}
+
+.butd {
+    position: absolute;
+    animation: butd 10s ease-in-out infinite;
+}
+
+a:link,
+a:visited {
+    color: azure;
+    text-decoration: none;
+}
+
+.ea {
+    position: absolute;
+    height: 20%;
+    top: 192px;
+    left: 30px;
+    z-index: 5;
+    animation: ea 10s ease-in-out infinite;
+}
+
+.ps {
+    position: absolute;
+    height: 30%;
+    top: 192px;
+    left: 115px;
+    z-index: 5;
+    animation: ps 10s ease-in-out infinite;
+}
+
+.x {
+    position: absolute;
+    height: 19%;
+    top: 192px;
+    left: 220px;
+    z-index: 5;
+    animation: x 10s ease-in-out infinite;
+}
+
+
+h {
+    color: #fe0034;
+    position: absolute;
+    text-align: center;
+    top: 160px;
+    left: 19px;
+    height: 22px;
+    width: 260px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-family: "Raleway";
+    font-weight: 500;
+    animation: h 10s ease-in-out infinite;
+    z-index: 6;
+}
+
+@keyframes t {
+    0% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+    67% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: scale(1)
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+}
+
+@keyframes b {
+    0% {
+        top: -350px;
+    }
+    5% {
+        top: 35px;
+    }
+    7% {
+        top: 30px;
+    }
+    35% {
+        top: 30px;
+    }
+    37% {
+        top: 35px;
+    }
+    45% {
+        top: -350px;
+    }
+    60% {
+        top: -350px
+    }
+}
+
+@keyframes gtr {
+    10% {
+        transform: scale(1)
+    }
+    15% {
+        transform: scale(1.1)
+    }
+    20% {
+        transform: scale(1)
+    }
+    25% {
+        transform: scale(1.1)
+    }
+    30% {
+        transform: scale(1)
+    }
+}
+
+@keyframes fh {
+    0% {
+        top: 350px
+    }
+    38% {
+        top: 350px
+    }
+    43% {
+        top: 130px
+    }
+    47% {
+        top: 140px;
+    }
+    88% {
+        top: 140px
+    }
+    90% {
+        top: 130px
+    }
+    100% {
+        top: 350px;
+    }
+}
+
+@keyframes fh2 {
+    0% {
+        top: 350px
+    }
+    40% {
+        top: 350px
+    }
+    45% {
+        top: 140px
+    }
+    47% {
+        top: 150px;
+    }
+    90% {
+        top: 150px
+    }
+    92% {
+        top: 140px
+    }
+    100% {
+        top: 350px;
+    }
+}
+
+@keyframes h {
+    0% {
+        top: 350px
+    }
+    40% {
+        top: 350px
+    }
+    50% {
+        top: 155px
+    }
+    52% {
+        top: 160px;
+    }
+    90% {
+        top: 160px
+    }
+    92% {
+        top: 155px
+    }
+    100% {
+        top: 350px;
+    }
+}
+
+@keyframes ea {
+    0% {
+        top: 350px
+    }
+    40% {
+        top: 350px
+    }
+    53% {
+        top: 190px
+    }
+    55% {
+        top: 192px;
+    }
+    90% {
+        top: 192px
+    }
+    92% {
+        top: 190px
+    }
+    100% {
+        top: 350px;
+    }
+}
+
+@keyframes ps {
+    0% {
+        top: 350px
+    }
+    40% {
+        top: 350px
+    }
+    55% {
+        top: 175px
+    }
+    57% {
+        top: 180px
+    }
+    90% {
+        top: 180px
+    }
+    92% {
+        top: 190px
+    }
+    100% {
+        top: 350px
+    }
+}
+
+@keyframes x {
+    0% {
+        top: 350px
+    }
+    40% {
+        top: 350px
+    }
+    57% {
+        top: 190px
+    }
+    59% {
+        top: 192px;
+    }
+    90% {
+        top: 192px
+    }
+    92% {
+        top: 190px
+    }
+    100% {
+        top: 350px;
+    }
+}
+
+}
