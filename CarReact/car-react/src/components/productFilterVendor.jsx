@@ -27,12 +27,12 @@ export default function ProductFilterVendor(props) {
 
   useEffect(() => {
     dispatch(filterCarBrand());
-    dispatch(getVendorsItemsAction({}, 0));
+    // dispatch(getVendorsItemsAction({}, 0));
   }, []);
 
   useEffect(() => {
     localStorage.setItem("TotalProductsvendor", productsVendor);
-    setItemsInDB(productsVendor ? productsVendor.TotalItem : 0);
+    setItemsInDB(localStorage.getItem("TotalProductsvendor"));
   }, [productsVendor]);
 
 
