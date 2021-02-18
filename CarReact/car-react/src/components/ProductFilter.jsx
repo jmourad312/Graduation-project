@@ -13,7 +13,7 @@ import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
 import {useTranslation} from "react-i18next";
 import { Slider, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider ,makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}`;
 }
 export default function ProductFilter(props) {
 
@@ -155,6 +155,19 @@ export default function ProductFilter(props) {
     //   handleSearchClick();
     // }, 5000);
   }
+  const theme = createMuiTheme({
+    overrides: {
+      // Style sheet name ⚛️
+      Slider: {
+        // Name of the rule
+       text:{
+        color:"secondary"
+
+       }
+        },
+      
+    },
+  });
   
   const {t, i18n} = useTranslation();
   return (
@@ -235,9 +248,10 @@ export default function ProductFilter(props) {
         </label>
       </div> */}
       <div className={classes.root}>
-        <Typography id="range-slider" gutterBottom style={{ fontSize: "20px", fontWeight: "700" }}>
+        <Typography id="range-slider" className="text-center" gutterBottom style={{ fontSize:"25px",fontWeight:"600" }}>
           {t("Filter.PriceRange")}
         </Typography>
+        <ThemeProvider theme={theme}>
         <Slider
           value={state.price}
           max={5000}
@@ -247,7 +261,9 @@ export default function ProductFilter(props) {
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
           getAriaValueText={valuetext}
+          style={{color:"black",fontWeight:"600"}}
         />
+       </ThemeProvider>
       </div>
       {/* <div className="mb-5">
         <input
