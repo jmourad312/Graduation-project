@@ -16,7 +16,6 @@ const Vote = require("../../models/Blog/votingPost");
 
 //add post
 addNewPost = (req, res) => {
-  
   const body = JSON.parse(JSON.stringify(req.body));
 
   const images = [];
@@ -27,7 +26,7 @@ addNewPost = (req, res) => {
     });
   }
 
-console.log(images)
+  console.log(images);
   const IdPerson = req.user._id;
   if (!body) {
     return res.json({
@@ -132,7 +131,10 @@ updatePost = (req, res) => {
       images.push("http://localhost:3000/images/" + file.filename);
       // console.log(images);
     });
+    body.images = images;
   }
+
+  Object.keys(body).forEach((k) => body[k].length == 0 && delete body[k]);
 
   if (!body) {
     return res.json({
@@ -144,7 +146,7 @@ updatePost = (req, res) => {
 
   Post.updateOne(
     { _id: req.params.id, person: IdPerson },
-    { ...body, images },
+    { ...body },
     { upsert: true, new: true },
     (err, result) => {
       if (err) {

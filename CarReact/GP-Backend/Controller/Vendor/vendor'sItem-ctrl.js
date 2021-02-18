@@ -155,17 +155,19 @@ updateItem = (req, res) => {
  }
 
   const body = JSON.parse(JSON.stringify(req.body));
-console.log(body)
   const images = [];
   if (req.files) {
     req.files.map((file) => {
       images.push("http://localhost:3000/images/" + file.filename);
       // console.log(images);
     });
+    body.images = images;
   }
 
+  Object.keys(body).forEach((k) => body[k].length == 0 && delete body[k]);
+
   carItem.updateOne({ _id: req.params.id, person: IdVendor },
-    {...body,images}, { upsert: true, new: true }, (err, result) => {
+    {...body}, { upsert: true, new: true }, (err, result) => {
       if (err) {
         return res.status(400).json({
           Data: null,
