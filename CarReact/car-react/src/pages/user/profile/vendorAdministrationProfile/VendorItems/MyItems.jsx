@@ -104,7 +104,14 @@ export default function MyItems(props) {
       .catch((error) => {
         console.log(error);
       });
-    setInputValue("");
+    setInputValue({
+      name: "",
+      description: "",
+      images: [],
+      carBrand: "",
+      carModel: "",
+      price: 0,
+    });
     closeModal();
   };
 
