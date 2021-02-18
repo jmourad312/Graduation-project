@@ -27,7 +27,7 @@ export default function SimpleDelete(props) {
         console.log(req);
         if (req.data.Success === true) {
           console.log("success");
-          if (history.pathname === "/BlogDetails/:id?") {
+          if (history.pathname.contains("/BlogDetails")) {
             history.push("/BlogList");
           }
         } else {
