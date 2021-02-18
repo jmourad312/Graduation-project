@@ -33,7 +33,7 @@ export default function ProductFilterVendor(props) {
   useEffect(() => {
     localStorage.setItem("TotalProductsvendor", productsVendor);
     setItemsInDB(localStorage.getItem("TotalProductsvendor"));
-  }, [productsVendor]);
+  });
 
 
   const handleChange = (event) => {
@@ -101,7 +101,6 @@ export default function ProductFilterVendor(props) {
     });
     
     dispatch(getVendorsItemsAction({}, 0));
-
     // handleSearchClick();
     // setTimeout(() => {
     //   handleSearchClick();
@@ -112,7 +111,6 @@ export default function ProductFilterVendor(props) {
       search: "",
     });
     dispatch(getVendorsItemsAction({}, 0));
-
   };
   const {t, i18n} = useTranslation();
   return (
