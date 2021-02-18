@@ -33,7 +33,7 @@ export default function ProductFilterVendor(props) {
   useEffect(() => {
     localStorage.setItem("TotalProductsvendor", productsVendor);
     setItemsInDB(localStorage.getItem("TotalProductsvendor"));
-  });
+  }, [productsVendor]);
 
 
   const handleChange = (event) => {
