@@ -17,6 +17,7 @@ export function PaginationReact(props) {
       containerClassName={"pagination"}
       subContainerClassName={"pages pagination"}
       activeClassName={"active"}
+      // forcePage={0}
     />
   );
 }

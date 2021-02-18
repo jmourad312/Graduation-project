@@ -96,6 +96,7 @@
         "products Details": {
             "info": "Product Information",
             "Not Rated": "Not Rated",
+            "Rating":"Rating: ",
             "rate": "be the first to rate this item",
             "limitation1": "Only registered car owners can submit a review",
             "limitation2": "Only registered car owners can view this Item's Location",

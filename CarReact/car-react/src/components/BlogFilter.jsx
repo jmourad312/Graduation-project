@@ -204,7 +204,7 @@ export default function BlogFilter(props) {
         brand: "",
         model: "",
       });
-      setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 3000);
+      setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 1000);
   };
   return (
     <div className={props.class}>

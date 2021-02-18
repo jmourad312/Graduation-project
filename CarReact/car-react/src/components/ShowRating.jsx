@@ -5,7 +5,7 @@ export default function ShowRating(props) {
     const [notChecked] = useState("fa fa-star");
 
     return (
-      <div>
+      <>
         {props.rating === 0 ? (
           <span> Not rated Yet</span>
         ) : (
@@ -17,6 +17,6 @@ export default function ShowRating(props) {
             <span className={props.rating === 5 ? checked : notChecked}></span>
           </>
         )}
-      </div>
+      </>
     );
 }
