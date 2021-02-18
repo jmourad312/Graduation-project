@@ -27,7 +27,7 @@ export default function SimpleDelete(props) {
         console.log(req);
         if (req.data.Success === true) {
           console.log("success");
-          if (window.location.pathname.contains("/BlogDetails")) {
+          if (window.location.pathname !== "/MyProfile/BlogPosts") {
             history.push("/BlogList");
           }
         } else {
