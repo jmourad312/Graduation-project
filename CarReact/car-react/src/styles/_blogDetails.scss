@@ -4,13 +4,21 @@
     // margin-top: 10%;
     padding-top: 50px;
     .header {
+      // background-color:rgb(255, 213, 184);
       background-color:#fff;
+
       // padding: 10px;
-      // border-radius: 25% 25% 0% 0%;
+      border-radius: 25px 0% 0% 25px;
       .row{
 
       }
     }
+  }
+  .comments{
+    margin-top: 3%;
+    padding-top: 5%;
+    background-color: #ffffff7e;
+    height: 460px;
   }
   .bookmarkbtn {
     box-sizing: border-box;
@@ -51,10 +59,16 @@
   }
 
   .bgforleavecomment{
-    background-color: rgba(163, 160, 160, 0.575);
+    background-color: rgba(204, 196, 186, 0.863);
+    // background-color: rgba(94, 94, 94, 0.863);
+    height: 365px;
+    margin-right: 15px;
   }
   .bgforleavecomment2{
     background-color: rgba(128, 128, 128, 0.123);
-    color: black;
+    color: rgb(0, 0, 0);
+    font-size: 1.5rem;
+    resize: none;
+    height: 210px;
   }
 }

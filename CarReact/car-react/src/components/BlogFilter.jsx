@@ -298,7 +298,7 @@ export default function BlogFilter(props) {
 
       <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
         {localStorage.getItem("UserID") !== null ? (
-          <div>
+          <div  style={{ fontWeight: "700", backgroundColor: "rgba(128, 128, 128, 0.397)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}}>
             <label for="add" style={{ fontSize: "35px", fontWeight: "700"}}>{t("Filter.AddPost")}</label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>

@@ -209,9 +209,9 @@ export default function BlogDetails(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
-    console.log(blogID);
+    // console.log(blogID);
     axios
-      .post(`http://localhost:3000/user/addComment/${blogID}`, inputValue, {
+      .post(`http://localhost:3000/user/addComment/${localStorage.getItem("BlogID")}`, inputValue, {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
@@ -356,7 +356,7 @@ export default function BlogDetails(props) {
             {localStorage.getItem("Authorization") !== null && <UserIcon />}
           </div>
           <div className="row">
-            <div className="col-8 p-3">
+            <div className="col-8 px-5">
               <p
                 className="font-weight-bold truncate"
                 style={{ fontSize: "26px", marginBottom: "0" }}
@@ -456,45 +456,51 @@ export default function BlogDetails(props) {
                 <Loading />
               )}
             </div>
-            <div className="row" style={{ marginLeft: "710px" }}>
-              {localStorage.getItem("UserID") !== null && !checkOwner && (
-                <button
-                  className="bookmarkbtn fourth"
-                  style={{
-                    marginLeft: "30px",
-                    height: "50px",
-                    fontSize: "20px",
-                    paddingTop: "15px",
-                  }}
-                  onClick={handleAddBookmark}
-                >
-                  {t("repeated.Bookmark")}
-                </button>
-              )}
-              {checkOwner && (
-                <Button
-                  variant="dark"
-                  style={{ margin: "10px" }}
-                  onClick={() => openModal(props.id)}
-                >
-                  {t("repeated.Edit")}
-                </Button>
-              )}
-              {checkOwner && (
-                <SimpleDelete id={localStorage.getItem("BlogID")} num={0}/>
-              )}
-            </div>
 
-            <hr
+            {/* <hr
               style={{
                 border: "2px solid black",
                 width: "100%",
                 marginBottom: "8px",
                 marginTop: "0px",
               }}
-            />
+            /> */}
           </div>
         </div>
+        {/* <div className="row" style={{ marginLeft: "710px" }}> */}
+        {localStorage.getItem("UserID") !== null && !checkOwner && (
+          <button
+            className="bookmarkbtn fourth"
+            style={{
+              position: "absolute",
+              // marginLeft: "300px",
+              left: "850px",
+              height: "50px",
+              fontSize: "20px",
+              paddingTop: "15px",
+            }}
+            onClick={handleAddBookmark}
+          >
+            {t("repeated.Bookmark")}
+          </button>
+        )}
+        {checkOwner && (
+          <div style={{ position: "absolute", left: "800px" }}>
+            <Button
+              variant="light"
+              style={{ margin: "7px",height:"50px",width:"70px" }}
+              onClick={() => openModal(props.id)}
+            >
+              {t("repeated.Edit")}
+            </Button>
+          </div>
+        )}
+        {checkOwner && (
+          <div style={{ position: "absolute", left: "1000px" }}>
+            <SimpleDelete id={localStorage.getItem("BlogID")} num={0} />
+          </div>
+        )}
+        {/* </div> */}
       </div>
       {/* --------------------- EDIT SECTION--------------- */}
       {/* <p
@@ -613,17 +619,19 @@ export default function BlogDetails(props) {
       </Modal>
       {/* <!-- Comments Form --> */}
       <h3
-        className="text-center mb-4"
+        className="text-center"
         style={{
           fontWeight: "700",
           fontSize: "40px",
-          backgroundImage: "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
+          backgroundImage: "linear-gradient(to top, #a2a5a8 0%,  #08091d 100%)",
           color: "transparent",
           WebkitBackgroundClip: "text",
         }}
       >
         {t("BlogDetails.CommentSection")}
       </h3>
+      <div className="comments">
+
       <div className="row">
         <div className="col-8">
           {/* <!-- Single Comment --> */}
@@ -638,21 +646,22 @@ export default function BlogDetails(props) {
             ) : (
               <div
                 style={{
-                  maxHeight: "300px",
+                  maxHeight: "380px",
                   overflowY: "scroll",
                   overflowX: "hidden",
                 }}
               >
                 {blogDetails.comment.map((item, index) => {
                   return (
-                    <div className="media mb-1" key={index}>
+                    <div className="media mb-1 mr-3" key={index}>
                       <div className="mr-2">
                         {!voted ? (
                           <button
                             className="btn"
                             style={{
                               position: "relative",
-                              left: "95.7px",
+                              left: "55.7px",
+                              top:"-10px",
                               fontSize: "20px",
                             }}
                             onClick={() => addVote(item._id)}
@@ -664,7 +673,7 @@ export default function BlogDetails(props) {
                             animation="grow"
                             style={{
                               position: "relative",
-                              left: "70.7px",
+                              left: "40.7px",
                               fontSize: "20px",
                             }}
                           />
@@ -673,8 +682,8 @@ export default function BlogDetails(props) {
                           className="btn badge-pill"
                           style={{
                             position: "relative",
-                            left: "40px",
-                            top: "45px",
+                            left: "10px",
+                            top: "25px",
                             fontSize: "20px",
                             width: "30px !important",
                             fontWeight: "700",
@@ -687,8 +696,8 @@ export default function BlogDetails(props) {
                             className="btn"
                             style={{
                               position: "relative",
-                              left: "0px",
-                              top: "85px",
+                              left: "-35px",
+                              top: "55px",
                               fontSize: "20px",
                             }}
                             onClick={() => removeVote(item._id)}
@@ -700,8 +709,8 @@ export default function BlogDetails(props) {
                             animation="grow"
                             style={{
                               position: "relative",
-                              left: "0px",
-                              top: "80px",
+                              left: "-40px",
+                              top: "50px",
                               fontSize: "20px",
                             }}
                           />
@@ -830,6 +839,7 @@ export default function BlogDetails(props) {
             </div>
           )}
         </div>
+      </div>
       </div>
 
       {/* <!-- Comment with nested comments --> */}
