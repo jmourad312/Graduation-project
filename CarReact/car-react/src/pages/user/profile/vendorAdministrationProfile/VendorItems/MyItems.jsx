@@ -119,9 +119,13 @@ export default function MyItems(props) {
 
   useEffect(() => {
     dispatch(filterCarBrand());
+    // dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("TotalProducts", vendorItems);
     dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
-  }, [dispatch, vendorItems]);
-  // 
+  }, [localStorage.getItem("TotalProducts")]);
 
 
 
