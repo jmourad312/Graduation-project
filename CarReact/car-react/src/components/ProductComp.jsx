@@ -7,6 +7,7 @@ import { setProductId } from "../store/actions";
 export default function ProductComp(props) {
   var history = useHistory();
   const productID = useSelector((state) => state.productID);
+  // const productDetails = useSelector(state => state.productDetails);
   const dispatch = useDispatch();
 
   const handleClick = (params) => {

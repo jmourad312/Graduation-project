@@ -68,7 +68,7 @@ export default function BookmarkedPosts(props) {
     >
       <div className="container mt-3">
         {user ? (
-          currentPosts.length === 0 ? (
+          posts.length === 0 ? (
             <div
               className="text-center"
               style={{

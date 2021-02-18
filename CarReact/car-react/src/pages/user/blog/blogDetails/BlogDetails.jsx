@@ -519,12 +519,12 @@ export default function BlogDetails(props) {
       </p> */}
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title>{t("EditBlogModal.EditBlog")}</Modal.Title>
+          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.EditBlog")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>{t("EditBlogModal.BlogTitle")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogTitle")}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder={t("EditBlogModal.EnterTitle")}
@@ -533,10 +533,11 @@ export default function BlogDetails(props) {
                 value={editValue.title}
                 onChange={handleEditChange}
                 required
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>{t("EditBlogModal.BlogImage")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogImage")}</Form.Label>
               <Form.Control
                 type="file"
                 name="image"
@@ -544,10 +545,11 @@ export default function BlogDetails(props) {
                 onChange={handleImageChange}
                 multiple
                 required
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>{t("EditBlogModal.BlogContent")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogContent")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -557,11 +559,12 @@ export default function BlogDetails(props) {
                 value={editValue.body}
                 onChange={handleEditChange}
                 required
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>{t("repeated.Brand")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -570,6 +573,7 @@ export default function BlogDetails(props) {
                   value={editValue.brand}
                   onChange={handleEditChange}
                   required
+                  style={{fontWeight:"500"}}
                 >
                   {cars2.map((item, index) => {
                     return (
@@ -581,7 +585,7 @@ export default function BlogDetails(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>{t("repeated.Model")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -591,6 +595,7 @@ export default function BlogDetails(props) {
                   onChange={handleEditChange}
                   disabled={!stateDisabled}
                   required
+                  style={{fontWeight:"500"}}
                 >
                   {cars3.map((item, index) => {
                     return (

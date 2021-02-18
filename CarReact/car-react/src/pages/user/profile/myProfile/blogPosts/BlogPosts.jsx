@@ -51,7 +51,7 @@ export default function BlogPosts(props) {
       >
         <div className="container mt-3" style={{ width: "100%" }}>
           {user ? (
-            currentPosts.length === 0 ? (
+            posts.length === 0 ? (
               <div
                 className="text-center"
                 style={{
@@ -91,7 +91,6 @@ export default function BlogPosts(props) {
                       key={index}
                       style={{ marginTop: "0px", width: "100%" }}
                     >
-                      
                       <div className="row" style={{ marginTop: "0px" }}>
                         <div className="col-4">
                           <img
@@ -151,13 +150,16 @@ export default function BlogPosts(props) {
                               </strong>
                               <div
                                 style={{
-                                  top: "120px",
-                                  left: "425px",
+                                  top: "110px",
+                                  left: "430px",
                                   position: "absolute",
                                 }}
                               >
-                                <button className="btn btn-light" onClick={() => handleBlogClick(post._id)}>
-                                 <InfoIcon />
+                                <button
+                                  className="btn btn-light"
+                                  onClick={() => handleBlogClick(post._id)}
+                                >
+                                  <InfoIcon />
                                 </button>
                               </div>
                               <div

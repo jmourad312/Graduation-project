@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getProductDetails, setProductId,  filterCarModel,filterCarBrand } from "../store/actions";
+import { getProductDetails, setProductId,  filterCarModel,filterCarBrand, getVendorsItemsAction } from "../store/actions";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
@@ -92,6 +92,7 @@ export default function ItemEntry(props) {
       .catch((error) => {
         console.log(error);
       });
+    setTimeout(() => {dispatch(getVendorsItemsAction({},0))}, 1000);
   };
 
   const handleSubmit = (params) => {
@@ -132,6 +133,8 @@ export default function ItemEntry(props) {
       .catch((error) => {
         console.log(error);
       });
+    setTimeout(() => {dispatch(getVendorsItemsAction({},0))}, 1000);
+
   };
   useEffect(() => {
     dispatch(filterCarBrand());

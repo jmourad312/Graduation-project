@@ -67,7 +67,7 @@ export default function FavouriteItems(props) {
       <div className="container" style={{ fontSize: "1.5rem" }}>
         <div className="row">
           {user ? (
-            currentPosts.length === 0 ? (
+            items.length === 0 ? (
               <div
                 className="text-center"
                 style={{
@@ -161,10 +161,16 @@ export default function FavouriteItems(props) {
                           </button>
                           <button
                             className="btn btn-danger"
-                            style={{ position:"absolute",top:"3px",left:"174px",zIndex:"50",width:"50px" }}
+                            style={{
+                              position: "absolute",
+                              top: "3px",
+                              left: "174px",
+                              zIndex: "50",
+                              width: "50px",
+                            }}
                             onClick={() => handleRemoveFavourite(item._id)}
                           >
-                          <DeleteIcon />
+                            <DeleteIcon />
                           </button>
                         </article>
                       </section>

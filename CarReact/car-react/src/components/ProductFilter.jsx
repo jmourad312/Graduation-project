@@ -357,7 +357,7 @@ export default function ProductFilter(props) {
         style={{
           zIndex: "100",
           position: "absolute",
-          left: "350px",
+          left: "420px",
           bottom: "-6.5%",
           height: "50px",
         }}

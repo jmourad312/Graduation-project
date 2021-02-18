@@ -318,31 +318,29 @@ export default function ProductDetails(props) {
                         productDetails.person.workshopName}
                     </h2>
                     {/* ---------------------------------------AVG RATE----------------------------------- */}
+                    {/* <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        {t("product.products Details.Rating")}
+                      </span> */}
                     {productRate && productRate[0] !== undefined ? (
                       <>
+
                       <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        {t("product.products Details.Not Rated")}
+                        {t("product.products Details.Rating")}
                       </span>
                       <ShowRating
                         rating={productRate && productRate[0].avgRate}
                       />
                       </>
-
                     ) : (
-                      <>
                       <span style={{ fontWeight: "700", fontSize: "20px" }}>
                         {t("product.products Details.Not Rated")}
                       </span>
-                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        {t("product.products Details.Not Rated")}
-                      </span>
-                      </>
                     )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
-                    <p style={{ fontSize: "1.5rem" }}>
-                      <b style={{ fontSize: "1.5rem" }}>
+                    <p style={{ fontSize: "1.4rem" }}>
+                      <b style={{ fontSize: "1.4rem" }}>
                         {" "}
                         {t("repeated.Brand")}:{" "}
                       </b>{" "}
@@ -352,8 +350,8 @@ export default function ProductDetails(props) {
                           : "Loading"
                         : "Loading"}
                     </p>
-                    <p style={{ fontSize: "1.5rem" }}>
-                      <b style={{ fontSize: "1.5rem" }}>
+                    <p style={{ fontSize: "1.4rem" }}>
+                      <b style={{ fontSize: "1.4rem" }}>
                         {t("repeated.Model")}:{" "}
                       </b>
                       {productDetails

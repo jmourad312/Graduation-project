@@ -15,6 +15,9 @@ import {useTranslation} from "react-i18next";
 
 export default function MyItems(props) {
   const vendorItems = useSelector((state) => state.vendorItems.Data);
+
+  const vendor = useSelector((state) => state.vendor.Data);
+
   const stateRedux = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -113,12 +116,23 @@ export default function MyItems(props) {
       price: 0,
     });
     closeModal();
+    setTimeout(() => {dispatch(getVendorsItemsAction({},localStorage.getItem("TEST2")))}, 1000);
+
   };
 
   useEffect(() => {
     dispatch(filterCarBrand());
     dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
-  }, [vendorItems]);
+  }, []);
+
+  // useEffect(() => {
+    // dispatch(filterCarBrand());
+    // dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
+    // getItems();
+  // });
+
+
+
 
   const createItem = (item) => {
     return (
@@ -160,10 +174,10 @@ export default function MyItems(props) {
               }}
               onClick={() => openModal()}
             >
-              <i class="far fa-plus-square"></i>
-              {" "}{t("repeated.Add")}
+              <i class="far fa-plus-square"></i> {t("repeated.Add")}
             </Button>
-            {vendorItems ? (
+            {vendor && vendor.vendorItems.length !== 0 ? (
+              vendorItems && 
               vendorItems.map(createItem)
             ) : (
               <div
@@ -173,7 +187,7 @@ export default function MyItems(props) {
                   fontSize: "30px",
                   position: "absolute",
                   left: "50%",
-                  top:"30%"
+                  top: "30%",
                 }}
               >
                 {t("VendorMyItems.NoItems")}{" "}
@@ -228,7 +242,9 @@ export default function MyItems(props) {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>{t("VendorAddItemModal.ProductDescription")}</Form.Label>
+                <Form.Label>
+                  {t("VendorAddItemModal.ProductDescription")}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
@@ -261,7 +277,7 @@ export default function MyItems(props) {
                     onChange={handleChange}
                   >
                     <option key={"no-value"} value="">
-                    {t("Filter.ChooseBrand")}
+                      {t("Filter.ChooseBrand")}
                     </option>
                     ;
                     {stateRedux.brand.map((item, index) => {
@@ -285,7 +301,7 @@ export default function MyItems(props) {
                     disabled={!stateDisabled}
                   >
                     <option key={"no-value"} value="">
-                    {t("Filter.ChooseModel")}
+                      {t("Filter.ChooseModel")}
                     </option>
                     {stateRedux.model.map((item, index) => {
                       return (

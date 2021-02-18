@@ -10,7 +10,13 @@ import { PaginationReact } from "./PaginationReact";
 import {useTranslation} from "react-i18next";
 
 export default function ProductFilterVendor(props) {
+  
   const productsVendor = useSelector((state) => state.vendorItems);
+  const vendor = useSelector((state) => state.vendor.Data);
+
+
+  const productsVendorItemsNum = useSelector((state) => state.vendorItems.TotalItem);
+
   const [itemsInDB, setItemsInDB] = useState(0);
 
   const [state, setState] = useState({
@@ -31,9 +37,13 @@ export default function ProductFilterVendor(props) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("TotalProductsvendor", productsVendor);
+    if (vendor) {
+      if (vendor.vendorItems) {
+        localStorage.setItem("TotalProductsvendor", vendor.vendorItems.length);
+      }
+    }
     setItemsInDB(localStorage.getItem("TotalProductsvendor"));
-  }, [productsVendor]);
+  }, [productsVendorItemsNum]);
 
 
   const handleChange = (event) => {
@@ -101,7 +111,6 @@ export default function ProductFilterVendor(props) {
     });
     
     dispatch(getVendorsItemsAction({}, 0));
-
     // handleSearchClick();
     // setTimeout(() => {
     //   handleSearchClick();
@@ -112,9 +121,9 @@ export default function ProductFilterVendor(props) {
       search: "",
     });
     dispatch(getVendorsItemsAction({}, 0));
-
   };
   const {t, i18n} = useTranslation();
+
   return (
     <div className="col-3" style={{paddingLeft:"0px"}}>
     <div className="productFilterVendor" style={{left:"15px",marginRight:"20px"}}>
@@ -237,7 +246,7 @@ export default function ProductFilterVendor(props) {
           height:"80px"
         }}
       >
-        {productsVendor && itemsInDB > 3 && (
+        {itemsInDB >= 3 && (
           <PaginationReact
             NumberOfItemsInDB={itemsInDB}
             NumberToShow={3}
