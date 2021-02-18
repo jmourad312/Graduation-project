@@ -115,10 +115,14 @@ export default function MyItems(props) {
     closeModal();
   };
 
+
+
   useEffect(() => {
     dispatch(filterCarBrand());
     dispatch(getVendorsItemsAction({}, localStorage.getItem("TEST2")));
-  }, [vendorItems]);
+  }, [dispatch, vendorItems]);
+
+
 
   const createItem = (item) => {
     return (
