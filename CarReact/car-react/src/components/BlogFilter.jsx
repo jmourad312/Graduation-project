@@ -329,12 +329,12 @@ export default function BlogFilter(props) {
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title>{t("Filter.AddPost")}</Modal.Title>
+          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("Filter.AddPost")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>{t("AddBlogModal.BlogTitle")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogTitle")}</Form.Label>
               <Form.Control
                 type="text"
                 placeholder={t("AddBlogModal.EnterTitle")}
@@ -344,10 +344,11 @@ export default function BlogFilter(props) {
                 onChange={handleInputChange}
                 required
                 maxLength="50"
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>{t("AddBlogModal.BlogImage")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogImage")} </Form.Label>
               <Form.Control
                 type="file"
                 name="images"
@@ -355,10 +356,11 @@ export default function BlogFilter(props) {
                 onChange={handleImageChange}
                 multiple
                 required
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>{t("AddBlogModal.BlogContent")}</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogContent")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -369,12 +371,12 @@ export default function BlogFilter(props) {
                 onChange={handleInputChange}
                 required
                 maxLength="150"
-                style={{ resize: "none" }}
+                style={{ resize: "none",fontWeight:"500" }}
               />
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>{t("repeated.Brand")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -383,6 +385,7 @@ export default function BlogFilter(props) {
                   value={inputValue.brand}
                   onChange={handleInputChange}
                   required
+                  style={{fontWeight:"500"}}
                 >
                   {cars2.map((item, index) => {
                     return (
@@ -394,7 +397,7 @@ export default function BlogFilter(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>{t("repeated.Model")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -404,6 +407,7 @@ export default function BlogFilter(props) {
                   onChange={handleInputChange}
                   disabled={!stateDisabled}
                   required
+                  style={{fontWeight:"500"}}
                 >
                   {cars3.map((item, index) => {
                     return (

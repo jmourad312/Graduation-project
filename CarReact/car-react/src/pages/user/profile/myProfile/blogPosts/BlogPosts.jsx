@@ -49,7 +49,7 @@ export default function BlogPosts(props) {
         variants={props.variants}
         transition={props.transition}
       >
-        <div className="container mt-3" style={{ width: "100%" }}>
+        <div className="container mt-3" style={{ width: "100%"}}>
           {user ? (
             currentPosts.length === 0 ? (
               <div
@@ -151,8 +151,8 @@ export default function BlogPosts(props) {
                               </strong>
                               <div
                                 style={{
-                                  top: "120px",
-                                  left: "425px",
+                                  top: "110px",
+                                  left: "430px",
                                   position: "absolute",
                                 }}
                               >
