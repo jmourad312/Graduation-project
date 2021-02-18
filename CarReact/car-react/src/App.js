@@ -17,6 +17,7 @@ function App() {
     <div className="App">
       <Router>
         <MagdyNavbar />
+        <div className="backgroundImage"></div>
         <Routes />
         <div style={{ position: "absolute", left: "140px", top: "10px" }}>
           <LangToggle />

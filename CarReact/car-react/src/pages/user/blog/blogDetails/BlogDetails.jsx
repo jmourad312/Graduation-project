@@ -356,7 +356,7 @@ export default function BlogDetails(props) {
             {localStorage.getItem("Authorization") !== null && <UserIcon />}
           </div>
           <div className="row">
-            <div className="col-6">
+            <div className="col-8 p-3">
               <p
                 className="font-weight-bold truncate"
                 style={{ fontSize: "26px", marginBottom: "0" }}
@@ -418,14 +418,14 @@ export default function BlogDetails(props) {
                 </span>
               </p> */}
             </div>
-            <div className="col-6">
+            <div className="col-4">
               {blogDetails ? (
                 blogDetails.images && blogDetails.images.length === 1 ? (
                   <img
-                    className="ml-lg-5"
+                    className="py-0"
                     style={{
-                      width: "400px",
-                      height: "300px",
+                      width: "350px",
+                      height: "310px",
                       borderRadius: "10%",
                     }}
                     src={blogDetails.images[0]}
@@ -441,7 +441,7 @@ export default function BlogDetails(props) {
                               <img
                                 key={index}
                                 className="d-block"
-                                style={{ height: "300px", width: "500px" }}
+                                style={{ height: "310px", width: "350px" }}
                                 src={img}
                                 alt="Slide"
                               />

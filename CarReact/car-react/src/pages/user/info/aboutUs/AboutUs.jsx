@@ -103,10 +103,10 @@ export default function AboutUs() {
         </div> */}
       </div>
 
-      <div className="about-section position-absolute" style={{ top: "53%" }}>
+      <div className="about-section position-absolute" style={{ top: "53%",width:"100%",height:"43%" }}>
         <div className="inner-container">
           <h1 style={{
-            fontWeight: "800", fontSize: "30px",
+            fontWeight: "800", fontSize: "35px",
             
             backgroundImage:
               "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
@@ -116,11 +116,11 @@ export default function AboutUs() {
           </h1>
           <p className="text" style={{
             fontWeight: "800",
-          
             backgroundImage:
               "linear-gradient(to top, #08091d 70%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
+            fontSize:"20px"
           }}>
            {t('aboutUs.descriptionPart1')}
           </p>
@@ -131,6 +131,8 @@ export default function AboutUs() {
               "linear-gradient(to top, #08091d 80%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
+            fontSize:"20px"
+
           }}>
             <span>
             {t('aboutUs.descriptionPart2')}

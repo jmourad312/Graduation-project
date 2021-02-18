@@ -20,12 +20,12 @@ export default function MagdyNavbar() {
     handleClick();
   };
 
-  const changeLanguage = (ln) => {
-    return () => {
-      i18n.changeLanguage(ln);
-      handleClick();
-    };
-  };
+  // const changeLanguage = (ln) => {
+  //   return () => {
+  //     i18n.changeLanguage(ln);
+  //     handleClick();
+  //   };
+  // };
   
 
   const {t, i18n} = useTranslation();
