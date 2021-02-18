@@ -72,8 +72,10 @@ export default function MyItems(props) {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    for (var x = 0; x < inputValue.images.length; x++) {
-      formData.append("images", inputValue.images[x]);
+    if (inputValue.images) {
+      for (var x = 0; x < inputValue.images.length; x++) {
+        formData.append("images", inputValue.images[x]);
+      }
     }
     formData.append("name", inputValue.name);
     formData.append("description", inputValue.description);
