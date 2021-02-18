@@ -201,15 +201,22 @@ export default function ProductDetails(props) {
       <section className="products-details container">
         {/* <!-- start product details --> */}
         <div className="container">
-        <div style={{position:"absolute",top:"250px",left:"1700px",width:"300px"}}>
-          <ToastMessage
-            showFunction={toggleStatus}
-            status={toastStatus}
-            message={toastMessage}
-          />
-        </div>
+          <div
+            style={{
+              position: "absolute",
+              top: "200px",
+              left: "1700px",
+              width: "300px",
+            }}
+          >
+            <ToastMessage
+              showFunction={toggleStatus}
+              status={toastStatus}
+              message={toastMessage}
+            />
+          </div>
           <div style={{ paddingTop: "15px" }}>
-            <div className="row bg-light" style={{ borderRadius: "3%" }}>
+            <div className="row bg-light" style={{borderRadius:"0 25px 25px 0"}}>
               {/* <!-- image of produce --> */}
               <div
                 className="col-4"
@@ -222,8 +229,9 @@ export default function ProductDetails(props) {
                       className=""
                       style={{
                         width: "350px",
-                        height: "300px",
-                        borderRadius: "10%",
+                        height: "250px",
+                        // maxHeight:"350px"
+                        // borderRadius: "10%",
                       }}
                       src={productDetails.images[0]}
                       alt=""
@@ -264,17 +272,19 @@ export default function ProductDetails(props) {
                 <div className="row">
                   <h3>
                     <strong
-                      className="pl-3"
+                      // className="pl-3"
                       style={{
-                        borderLeft: "3px solid red",
+                        // borderLeft: "3px solid red",
                         height: "100%",
-                        fontSize: "30px",
+                        fontSize: "35px",
+                        marginLeft: "170px",
                       }}
                     >
                       {t("product.products Details.info")}
                     </strong>
                   </h3>
                 </div>
+                <hr />
                 <div className="row">
                   <div className="col-6">
                     <h2>
@@ -283,7 +293,7 @@ export default function ProductDetails(props) {
                       <Link
                         style={{
                           color: "rgb(21, 34, 214)",
-                          textDecoration: "underline ",
+                          // textDecoration: "underline ",
                         }}
                         to={`/VendorProfileUser/${
                           productDetails
@@ -300,24 +310,34 @@ export default function ProductDetails(props) {
                           : "LOADING"}
                       </Link>
                     </h2>
-                    {productRate && productRate[0] != undefined ? (
-                      <ShowRating
-                        rating={productRate && productRate[0].avgRate}
-                      />
-                    ) : (
+                    {/* -------------------------------------SHOP NAME------------------------------------- */}
+                    <h2>
+                      {t("repeated.Shop")}{" "}
+                      {productDetails &&
+                        productDetails.person &&
+                        productDetails.person.workshopName}
+                    </h2>
+                    {/* ---------------------------------------AVG RATE----------------------------------- */}
+                    {productRate && productRate[0] !== undefined ? (
+                      <>
                       <span style={{ fontWeight: "700", fontSize: "20px" }}>
                         {t("product.products Details.Not Rated")}
                       </span>
-                    )}
-                    {/* ----------------------------------------PRICE--------------------- */}
-                    <div className="mt-3">
-                      <span className="" style={{ fontSize: "40px" }}>
-                        <li className="fas fa-coins pr-2 text-warning">
-                          {productDetails && productDetails.price}{" "}
-                          {t("repeated.LE")}
-                        </li>
+                      <ShowRating
+                        rating={productRate && productRate[0].avgRate}
+                      />
+                      </>
+
+                    ) : (
+                      <>
+                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        {t("product.products Details.Not Rated")}
                       </span>
-                    </div>
+                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        {t("product.products Details.Not Rated")}
+                      </span>
+                      </>
+                    )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
@@ -342,13 +362,21 @@ export default function ProductDetails(props) {
                           : "Loading"
                         : "Loading"}
                     </p>
-                    <br />
+                    {/* ----------------------------------------PRICE--------------------- */}
+                    <div className="mt-3">
+                      <span className="" style={{ fontSize: "40px" }}>
+                        <li className="fas fa-coins pr-2 text-warning">
+                          {productDetails && productDetails.price}{" "}
+                          {t("repeated.LE")}
+                        </li>
+                      </span>
+                    </div>
 
                     {/* --------------------------------------------FAVOURITE ICON--------------------- */}
                     {localStorage.getItem("UserID") !== null && (
                       <span
                         className="fa-lg button fill fa-pull-right"
-                        style={{ padding: "10px", marginTop: "80px" }}
+                        style={{ padding: "10px", position:"absolute",top:"90px",left:"290px" }}
                         title="Add to favorate"
                         onClick={handleAddFavourite}
                       >
@@ -379,9 +407,18 @@ export default function ProductDetails(props) {
               textColor="secondary"
               aria-label="icon label tabs example"
             >
-              <Tab icon={<InfoTwoToneIcon />} label={t("product.products Details.Description")} />
-              <Tab icon={<CommentIcon />} label={t("product.products Details.Reviews")} />
-              <Tab icon={<RoomIcon />} label={t("product.products Details.Location")} />
+              <Tab
+                icon={<InfoTwoToneIcon />}
+                label={t("product.products Details.Description")}
+              />
+              <Tab
+                icon={<CommentIcon />}
+                label={t("product.products Details.Reviews")}
+              />
+              <Tab
+                icon={<RoomIcon />}
+                label={t("product.products Details.Location")}
+              />
             </Tabs>
             <div className="p-5">
               {value === 0 && (
@@ -402,7 +439,7 @@ export default function ProductDetails(props) {
                             <span
                               className="pl-3"
                               style={{
-                              height: "100%",
+                                height: "100%",
                               }}
                             ></span>
                             {t("repeated.feedback")}
@@ -425,8 +462,13 @@ export default function ProductDetails(props) {
                               position: "relative",
                               top: "10%",
                               left: "0%",
-                              textAlign: "center",border: "1px solid black",
-                              borderRadius: "2%",paddingTop:"5px",paddingBottom:"15px",paddingLeft:"3px",paddingRight:"3px"
+                              textAlign: "center",
+                              border: "1px solid black",
+                              borderRadius: "2%",
+                              paddingTop: "5px",
+                              paddingBottom: "15px",
+                              paddingLeft: "3px",
+                              paddingRight: "3px",
                             }}
                           >
                             {t("product.products Details.limitation1")}
@@ -439,7 +481,11 @@ export default function ProductDetails(props) {
                         {" "}
                         {productDetails ? (
                           productDetails.feedback.length === 0 ? (
-                            <div style={{fontSize:"30px",fontWeight:"500"}}>{t("product.products Details.rate")}</div>
+                            <div
+                              style={{ fontSize: "30px", fontWeight: "500" }}
+                            >
+                              {t("product.products Details.rate")}
+                            </div>
                           ) : (
                             <div
                               className="text-center"
@@ -557,7 +603,7 @@ export default function ProductDetails(props) {
                         height: "300px",
                         width: "1010px",
                         border: "1px solid black",
-                        borderRadius: "2%"
+                        borderRadius: "2%",
                       }}
                     >
                       <h3

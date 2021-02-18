@@ -163,8 +163,10 @@ export default function BlogFilter(props) {
     event.preventDefault();
     console.log(inputValue);
     const formData = new FormData();
-    for (var x = 0; x < inputValue.images.length; x++) {
-      formData.append("images", inputValue.images[x]);
+    if (inputValue.images) {
+      for (var x = 0; x < inputValue.images.length; x++) {
+        formData.append("images", inputValue.images[x]);
+      }
     }
     // formData.append("images", inputValue.images);
     formData.append("title", inputValue.title);
@@ -195,7 +197,13 @@ export default function BlogFilter(props) {
       });
       console.log(inputValue);
       closeModal();
-      setInputValue("");
+      setInputValue({
+        title: "",
+        body: "",
+        images: [],
+        brand: "",
+        model: "",
+      });
       setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 3000);
     
   };
