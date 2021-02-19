@@ -234,5 +234,21 @@
     },
     "BookmarkedItems":{
         "NoBookmarked":"No Bookmarked Posts yet"
+    },
+    "ChatBot":{
+        "Summary":"Summary",
+        "YourMeters":"Your Meters",
+        "ChangeOil":"Change Oil",
+        "ChangeOilFilter":"Change Oil Filter",
+        "ChangeAirFilter":"Change Air Filter",
+        "ChangeFuelFilter":"Change Fuel Filter",
+        "ChangeSparkPlugs":"Change Spark Plugs",
+        "ChangeTires":"Change Tires",
+        "CheckBrakePads":"Check Brake Pads",
+        "CheckBelts":"Check Belts",
+        "at":"at: ",
+        "From":"From: ",
+        "To":"To ",
+        "km":"Km"
     }
 }

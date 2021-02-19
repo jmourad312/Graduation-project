@@ -252,7 +252,14 @@ deleteCollection = (req, res) => {
 //show all users
 showAllUsers = (req, res) => {
   const populateQuery = [
-    { path: "person", select: "firstName middleName email" },
+    { path: "person",populate: [{ path: "reportPosts" }  ] ,select: "firstName middleName email" },
+    // {
+    //   path: "reportPosts",
+    //   populate: [
+    //     { path: "idBlog" },
+    //     { path: "person", select: "firstName email" },
+    //   ],
+    // },
   ];
 
   User.find({})

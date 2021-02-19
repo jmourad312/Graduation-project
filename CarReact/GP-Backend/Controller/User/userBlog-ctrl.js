@@ -1,9 +1,10 @@
-const person = require("../../models/Person/person");
+const Person = require("../../models/Person/person");
 const user = require("../../models/Person/User/user");
 
 const Post = require("../../models/Blog/post");
 const Comment = require("../../models/Blog/reply");
 const Vote = require("../../models/Blog/votingPost");
+const Report = require("../../models/Report/report");
 
 // add post
 // delete post
@@ -235,6 +236,73 @@ addComment = (req, res) => {
         });
       }
     });
+};
+
+
+//delete comment
+deleteComment = (req, res) => {
+  let IdPerson = req.user._id;
+
+  Comment.deleteOne(
+    { _id: req.params.id, person: IdPerson },
+    async (err, data) => {
+      if (err) {
+        return res.json({
+          Data: {},
+          Message: "Can't delete comment from database",
+          Success: false,
+        });
+      }
+      if (data.n == 0) {
+        return res.json({
+          Data: {},
+          Message: "Data with that id: " + req.params.id + " don't exist",
+          Success: false,
+        });
+      }
+
+      await Post
+        .updateOne(
+          { _id: data.post },
+          {
+            $pull: { comment: data._id },
+          }
+        )
+        .then("Done")
+        .catch("error");
+
+      return res.json({
+        Data: {},
+        Message: "Your comment is deleted successfully ",
+        Success: true,
+      });
+    }
+  );
+};
+
+//update Comment
+updateComment = (req, res) => {
+  let IdPerson = req.user._id;
+
+  Comment.updateOne(
+    { _id: req.params.id, person: IdPerson },
+    { ...body },
+    { upsert: true, new: true },
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't update this comment",
+          Success: false,
+        });
+      }
+      return res.status(200).json({
+        Data: result,
+        Message: "Your Comment is updated successfully",
+        Success: true,
+      });
+    }
+  );
 };
 
 //add comment
@@ -620,11 +688,63 @@ getBookmarksList = async (req, res) => {
   });
 };
 
+sendReport = (req, res) => {
+  // {
+  //   idBlog: id
+  //   reportToUser: id
+  //   message:String
+  // }
+  const body = req.body
+  const IdPerson = req.user._id;
+  if (!(body.reportToUser && body.idBlog && body.message)) {
+    return res.json({
+      Data: null,
+      Message: "You must Type any words",
+      Success: false,
+    });
+  }
+
+  const report = new Report(body);
+  report.user = IdPerson;
+
+  report
+    .save()
+    .then((dataReport) => {
+      Person.updateOne(
+        { _id: reporttouser },
+        { $push: { reportPosts: dataReport._id } }
+      ).then( done => {
+        return res.json({
+          Data: null,
+          Message: "Done",
+          Success: true,
+        });
+      }
+
+      ).catch(error => {
+        return res.json({
+          Data: error,
+          Message: "Try again",
+          Success: false,
+        });
+      })
+    })
+    .catch((error) => {
+      return res.json({
+        Data: error,
+        Message: "Try again",
+        Success: false,
+      });
+    });
+};
+
 module.exports = {
   addNewPost,
   deletePost,
   updatePost,
   addComment,
+  deleteComment,
+  updateComment,
   addCommentReply,
   showAllPosts,
   showPostsOfUser,
@@ -634,4 +754,5 @@ module.exports = {
   upVoteToComment,
   addBookmarks,
   getBookmarksList,
+  sendReport
 };

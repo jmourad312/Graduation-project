@@ -236,6 +236,22 @@
     },
     "BookmarkedItems":{
         "NoBookmarked":"لا توجد منتجات محفوظة حتي الآن"
+    },
+    "ChatBot":{
+        "Summary":"ملخص",
+        "YourMeters":"مسافتك",
+        "ChangeOil":"تغيير الزيت",
+        "ChangeOilFilter":"تغيير فلتر الزيت",
+        "ChangeAirFilter":"تغيير فلتر الهواء",
+        "ChangeFuelFilter":"تغيير فلتر البنزين",
+        "ChangeSparkPlugs":"تغيير البوجيهات",
+        "ChangeTires":"تغيير الإطارات",
+        "CheckBrakePads":"فحص دواسات الفرامل",
+        "CheckBelts":"فحص السيور",
+        "at":"عند :",
+        "From":"من :",
+        "To":"إلي ",
+        "km":"  كم  "
     }
 
 }
