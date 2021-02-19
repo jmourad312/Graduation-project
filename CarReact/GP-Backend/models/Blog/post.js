@@ -13,6 +13,12 @@ var post = new schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Person",
     },
+    reportPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Report",
+      },
+    ],
     updatedPosts: [
       {
         type: mongoose.Schema.Types.ObjectId,

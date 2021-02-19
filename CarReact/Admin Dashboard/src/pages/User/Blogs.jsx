@@ -17,10 +17,7 @@ export default function Blogs(props) {
     }, [stateRedux.blogs])
 
     const handelClickDetails = (parameter) => {
-        props.history.push({
-            pathname: '/DetailsBlog',
-            state: { data: parameter }
-        })
+
     }
 
     const handelClickEdit = (parameter) => {
@@ -52,7 +49,7 @@ export default function Blogs(props) {
                 cardContent={blog.body}
                 cardBrand={blog.brand}
                 cardModel={blog.model}
-                //details={handelClickDetails}
+                details={handelClickDetails}
                 edit={handelClickEdit}
                 delete={handelClickDelete}
             />

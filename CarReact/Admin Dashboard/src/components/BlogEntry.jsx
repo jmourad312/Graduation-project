@@ -6,12 +6,14 @@ import { InputField } from "../components/InputField";
 
 export default function BlogEntry(props) {
   const [show, setShow] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [state, setState] = useState({
     title: props.cardTitle,
     body: props.cardContent,
     brand: props.cardBrand,
     model: props.cardModel,
-    image:props.imgSrc
+    image: props.imgSrc,
+    message: props.dataItem.reportPosts,
   });
 
   const [id, setId] = useState({
@@ -90,6 +92,12 @@ export default function BlogEntry(props) {
 
   const handleShow = () => setShow(true);
 
+  const handleShowMessage = () => setShowMessage(true);
+
+  const handleCloseMessage = () => {
+    setShowMessage(false);
+  };
+
   const tiggreValue = (e) => {
     const { value, name } = e.target;
     if (name == "brand") {
@@ -158,7 +166,14 @@ export default function BlogEntry(props) {
               >
                 <i style={{ fontSize: "20px" }} className="fas fa-pen"></i>
               </Button>
-
+              <Button
+                variant="primary"
+                className="btn btn-warning mx-auto m-2"
+                style={{ zIndex: "100", width: "100%" }}
+                onClick={handleShowMessage}
+              >
+                {props.dataItem.reportPosts.length}
+              </Button>
               <Button2
                 className="btn btn-danger mx-auto m-2 "
                 parameter={props.dataItem}
@@ -253,6 +268,22 @@ export default function BlogEntry(props) {
           </Button>
           <Button variant="primary" onClick={editProduct}>
             Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showMessage} onHide={handleCloseMessage}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reports message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {state.message.map((item, index) => {
+            return <p>{item.message}</p>;
+          })}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseMessage}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
