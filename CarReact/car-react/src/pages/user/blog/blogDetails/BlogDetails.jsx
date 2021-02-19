@@ -19,7 +19,8 @@ import Loading from "../../../../components/Loading";
 import { useTranslation } from "react-i18next";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteForeverIcon from "@material-ui/icons/Delete";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import SimpleDelete from "../../../../components/SimpleDelete";
 import EditIcon from "@material-ui/icons/Edit";
 import {
@@ -900,17 +901,19 @@ export default function BlogDetails(props) {
                                   <EditIcon />
                                 </Fab>
                               </Zoom> */}
-                              
+                              {item.person._id === localStorage.getItem("UserID") &&
                               <Zoom in={true}>
                                 <Fab
-                                  color="secondary"
+                                  // color="secondary"
                                   size="small"
+                                  style={{width:"35px", height:"10px"}}
                                   aria-label="delete"
                                   onClick={()=>handleDeleteComment(item._id)}
                                 >
-                                  <DeleteIcon />
+                                  <DeleteForeverIcon style={{fontSize:"25px"}} />
                                 </Fab>
                               </Zoom>
+                              }
                             </div>
                           </h5>
                           <hr />
