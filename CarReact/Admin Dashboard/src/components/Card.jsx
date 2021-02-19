@@ -12,7 +12,7 @@ export function Card(props) {
     price: Number(props.price),
     carBrand: props.brand,
     carModel: props.model,
-    image: props.imgSrc,
+    images: props.images,
   });
   const [id, setId] = useState({
     idperson: props.idperson,
@@ -64,7 +64,9 @@ export function Card(props) {
     setShow(false);
 
     const formData = new FormData();
-    formData.append("image", state.image);
+    for (var x = 0; x < state.images.length; x++) {
+      formData.append("images", state.images[x]);
+    }
     formData.append("name", state.name);
     formData.append("description", state.description);
     formData.append("carBrand", state.carBrand);
@@ -108,11 +110,9 @@ export function Card(props) {
   };
 
   const handleImageChange = (event) => {
-    setState((previous) => {
-      return {
-        ...previous,
-        image: event.target.files[0],
-      };
+    setState({
+      ...state,
+      images: event.target.files,
     });
   };
 
@@ -123,12 +123,12 @@ export function Card(props) {
           <article className="card card--1">
             <div
               className="card__img"
-              style={{ background: `url(${props.image})` }}
+              style={{ background: `url(${props.images})` }}
             ></div>
             <p className="card_link">
               <div
                 className="card__img--hover"
-                style={{ background: `url(${props.image})` }}
+                style={{ background: `url(${props.images})` }}
               ></div>
             </p>
             <div className="card__info">
@@ -208,11 +208,13 @@ export function Card(props) {
             className="form-control"
             name="description"
           />
-          <InputField
+          <input
             type="file"
-            name="image"
+            name="images"
             id="image"
-            onChange={handleImageChange}
+            className="form-control"
+            onChange={(e) => handleImageChange(e)}
+            multiple
           />
           <InputField
             disabled={true}
