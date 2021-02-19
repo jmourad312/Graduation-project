@@ -98,14 +98,13 @@ export default function ChatBotComp() {
           if (isNaN(value)) {
             value = "";
             return "value should be a number";
-          }
-          else{
+          } else {
             // setuserKMM(value);
             // console.log(userKMM);
-            localStorage.setItem("UserKiloMeters",value)
+            localStorage.setItem("UserKiloMeters", value);
             setUserInfo((previous) => {
-            console.log(userInfo);
-  
+              console.log(userInfo);
+
               return {
                 ...previous,
                 userKM: value,
@@ -152,7 +151,7 @@ export default function ChatBotComp() {
       },
       {
         id: "Final",
-        component: (<Review />),
+        component: <Review />,
         end: true,
       },
     ];
@@ -177,14 +176,23 @@ export default function ChatBotComp() {
 
 function Review(props) {
   const [userCarInfo, setUserCarInfo] = useState({
-    kilo:0,
-    oilType:0
-  })
+    fullAnswerOptionsChoices: 0,
+    fullUserAnswer: 0,
+  });
   useEffect(() => {
     const { steps } = props;
     const { fullAnswerOptionsChoices, fullUserAnswer } = steps;
     setUserCarInfo({ fullAnswerOptionsChoices, fullUserAnswer });
     // this.setState({ name, gender, age });
+    console.log(props);
+    console.log(steps);
+    console.log(fullAnswerOptionsChoices);
+    console.log(fullAnswerOptionsChoices.value);
+    console.log(fullUserAnswer);
+    console.log(fullUserAnswer.value);
+    console.log(userCarInfo);
+
+
   }, [])
   const { fullAnswerOptionsChoices, fullUserAnswer } = userCarInfo;
   return (
@@ -193,41 +201,49 @@ function Review(props) {
       <table>
         <tbody>
           <tr>
-            <td>Your Km</td>
-            <td>{userCarInfo.kilo}</td>
+            <td>Your Meters</td>
+            <td>{parseInt(fullUserAnswer.value) + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Change Oil at</td>
-            <td>{userCarInfo.oilType}</td>
+            <td>Change Oil</td>
+            <td>at: {parseInt(fullUserAnswer.value) + (parseInt(fullAnswerOptionsChoices.value) * 1000) + "m"}</td>
           </tr>
-          {/* <tr>
-            <td>Change Oil Filter at</td>
-            <td>{+10000}</td>
-          </tr>
+          <br />
           <tr>
-            <td>Change Air Filter at</td>
-            <td>{+20000}</td>
+            <td>Change Oil Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 10000 + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Change Fuel Filter at</td>
-            <td>{+20000}</td>
+            <td>Change Air Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Change Spark Plugs at</td>
-            <td>{+20000}</td>
+            <td>Change Fuel Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Change Tires at</td>
-            <td>{+50000}</td>
+            <td>Change Spark Plugs</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Check Brake Pads at</td>
-            <td>{+20000}</td>
+            <td>Change Tires</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 50000 + "m"}</td>
           </tr>
+          <br />
           <tr>
-            <td>Check Belts from</td>
-            <td>{+60000 + " To " + +100000}</td>
-          </tr> */}
+            <td>Check Brake Pads</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Check Belts</td>
+            <td>From: {(parseInt(fullUserAnswer.value) + 60000) + "m" + " \nTo " + (parseInt(fullUserAnswer.value) + 100000) + "m"}</td>
+          </tr>
         </tbody>
       </table>
     </div>
