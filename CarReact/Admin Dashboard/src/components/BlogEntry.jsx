@@ -12,7 +12,7 @@ export default function BlogEntry(props) {
     body: props.cardContent,
     brand: props.cardBrand,
     model: props.cardModel,
-    image: props.imgSrc,
+    images: props.imgSrc,
     message: props.dataItem.reportPosts,
   });
 
@@ -66,7 +66,9 @@ export default function BlogEntry(props) {
     setShow(false);
 
     const formData = new FormData();
-    formData.append("image", state.image);
+    for (var x = 0; x < state.images.length; x++) {
+      formData.append("images", state.images[x]);
+    }
     formData.append("title", state.title);
     formData.append("body", state.body);
     formData.append("brand", state.brand);
@@ -112,11 +114,9 @@ export default function BlogEntry(props) {
   };
 
   const handleImageChange = (event) => {
-    setState((previous) => {
-      return {
-        ...previous,
-        image: event.target.files[0],
-      };
+    setState({
+      ...state,
+      images: event.target.files,
     });
   };
 
@@ -156,6 +156,13 @@ export default function BlogEntry(props) {
                 <i className="badge badge-dark">{props.cardBrand}</i>
                 <i className="badge badge-dark">{props.cardModel}</i>
               </small>
+              <Button
+                variant="primary"
+                className="badge badge-pill badge-danger"
+                onClick={handleShowMessage}
+              >
+                {props.dataItem.reportPosts.length}
+              </Button>
             </div>
             <div className="d-flex">
               <Button
@@ -165,14 +172,6 @@ export default function BlogEntry(props) {
                 onClick={handleShow}
               >
                 <i style={{ fontSize: "20px" }} className="fas fa-pen"></i>
-              </Button>
-              <Button
-                variant="primary"
-                className="btn btn-warning mx-auto m-2"
-                style={{ zIndex: "100", width: "100%" }}
-                onClick={handleShowMessage}
-              >
-                {props.dataItem.reportPosts.length}
               </Button>
               <Button2
                 className="btn btn-danger mx-auto m-2 "
@@ -207,11 +206,13 @@ export default function BlogEntry(props) {
             className="form-control"
             name="body"
           />
-          <InputField
+          <input
             type="file"
-            name="image"
+            name="images"
             id="image"
-            onChange={handleImageChange}
+            className="form-control"
+            onChange={(e) => handleImageChange(e)}
+            multiple
           />
           <InputField
             disabled={true}
@@ -278,7 +279,11 @@ export default function BlogEntry(props) {
         </Modal.Header>
         <Modal.Body>
           {state.message.map((item, index) => {
-            return <p>{item.message}</p>;
+            return (
+              <p>
+                {index + 1}: {item.message}
+              </p>
+            );
           })}
         </Modal.Body>
         <Modal.Footer>

@@ -68,10 +68,11 @@ showVAds = (req, res) => {
         Success: false,
       });
     } else {
-      const length = await Ads.find({});
+      const number = await Ads.countDocuments({});
+
       return res.status(200).json({
         Data: data,
-        count:length,
+        count:number,
         Message: "هيييييه وصل وصل عبده موته وصال يا حارة ",
         Success: true,
       });

@@ -62,6 +62,10 @@ export default function Admin(props) {
     getCountData();
   }, []);
 
+  useEffect(() => {
+    getCountData();
+  },[stateRedux])
+
   const getCountData = async () => {
     try {
       const res = await instance.get("admin/countAll", {
@@ -147,7 +151,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.vendor));
+    dispatch(getVendorAction(skipState.vendor));
 
   };
 
@@ -186,7 +190,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.vendor));
+    dispatch(getVendorAction(skipState.vendor));
 
   };
 
@@ -456,6 +460,7 @@ export default function Admin(props) {
                   handelClickEdit={goToEditVendor}
                   handelClickDelete={goToDeleteVendor}
                 ></Tabel>
+                
                 <PaginationReact
                   NumberOfItemsInDB={stateRedux.countData.Data.vendor}
                   NumberToShow={numberItemPerPage}

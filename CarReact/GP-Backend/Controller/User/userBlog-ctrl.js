@@ -238,7 +238,6 @@ addComment = (req, res) => {
     });
 };
 
-
 //delete comment
 deleteComment = (req, res) => {
   let IdPerson = req.user._id;
@@ -261,13 +260,12 @@ deleteComment = (req, res) => {
         });
       }
 
-      await Post
-        .updateOne(
-          { _id: data.post },
-          {
-            $pull: { comment: data._id },
-          }
-        )
+      await Post.updateOne(
+        { _id: data.post },
+        {
+          $pull: { comment: data._id },
+        }
+      )
         .then("Done")
         .catch("error");
 
@@ -463,7 +461,10 @@ showPostsOfUser = (req, res) => {
     IdPerson = req.params.id;
   }
 
-  const populateQuery = [{ path: "person", select: "firstName" }];
+  const populateQuery = [
+    { path: "person", select: "firstName" },
+    { path: "reportPosts" },
+  ];
 
   Post.find({ person: IdPerson })
     .sort({ _id: -1 })
@@ -690,10 +691,10 @@ getBookmarksList = async (req, res) => {
 
 sendReport = (req, res) => {
   // {
-  //   idBlog: id 
+  //   idBlog: id
   //   message:String
   // }
-  const body = req.body
+  const body = req.body;
 
   const IdPerson = req.user._id;
 
@@ -714,21 +715,21 @@ sendReport = (req, res) => {
       Post.updateOne(
         { _id: dataReport.idBlog },
         { $push: { reportPosts: dataReport._id } }
-      ).then( done => {
-        return res.json({
-          Data: null,
-          Message: "Done",
-          Success: true,
+      )
+        .then((done) => {
+          return res.json({
+            Data: null,
+            Message: "Done",
+            Success: true,
+          });
+        })
+        .catch((error) => {
+          return res.json({
+            Data: error,
+            Message: "Try again",
+            Success: false,
+          });
         });
-      }
-
-      ).catch(error => {
-        return res.json({
-          Data: error,
-          Message: "Try again",
-          Success: false,
-        });
-      })
     })
     .catch((error) => {
       return res.json({
@@ -755,5 +756,5 @@ module.exports = {
   upVoteToComment,
   addBookmarks,
   getBookmarksList,
-  sendReport
+  sendReport,
 };
