@@ -99,7 +99,14 @@ export default function BlogList() {
                         top:"25%"
                       }}
                     >
-                    <h2 style={{position:"relative",top:"40%",left:"0%",textAlign:"center"}}>
+                    <h2 style={{
+                          position: "relative",
+                          top: "20%",
+                          left: "20%",
+                          textAlign: "center",
+                          fontWeight:"700",
+                          fontSize:"32px"
+                        }}>
                       {t("BlogList.NoPosts")}
                     </h2>
                     </div>
