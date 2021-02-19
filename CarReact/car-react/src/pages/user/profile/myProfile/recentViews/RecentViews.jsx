@@ -71,12 +71,12 @@ export default function RecentViews(props) {
                       <article class="card card--1">
                         <div
                           class="card__img"
-                          style={{ background: `url(${item.image})` }}
+                          style={{ background: `url(${item.images[0]})top left 100%` }}
                         ></div>
                         <p class="card_link">
                           <div
                             class="card__img--hover"
-                            style={{ background: `url(${item.image})` }}
+                            style={{ background: `url(${item.images[0]})top left 100%` }}
                           ></div>
                         </p>
                         <div class="card__info">
@@ -84,8 +84,8 @@ export default function RecentViews(props) {
                           <h6 className="card-text text-truncate">
                             {item.description}
                           </h6>
-                          <h5 className="card-text" style={{ color: "yellow" }}>
-                            <i class="fas fa-coins"></i> {item.price}
+                          <h5 className="card-text" style={{ color: "#e6ac00" }}>
+                            <i class="fas fa-coins"></i> {item.price} {t("repeated.LE")}
                           </h5>
                           {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}

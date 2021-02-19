@@ -652,18 +652,19 @@ export default function BlogDetails(props) {
         </Modal.Footer>
       </Modal>
       {/* <!-- Comments Form --> */}
-      <h3
+      {/* <h3
         className="text-center"
         style={{
           fontWeight: "700",
           fontSize: "40px",
-          backgroundImage: "linear-gradient(to top, #a2a5a8 0%,  #08091d 100%)",
+          backgroundImage: "linear-gradient(210deg,#2e3547 30%,#D7DDE8 70%)",
           color: "transparent",
           WebkitBackgroundClip: "text",
         }}
       >
         {t("BlogDetails.CommentSection")}
-      </h3>
+      </h3> */}
+      
       <div className="comments">
         <div className="row">
           <div className="col-8">

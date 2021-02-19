@@ -95,6 +95,8 @@ export default function ContactUs() {
           message={toastMessage}
         />
       </div>
+     
+      <div className="container2 container pt-3">
       <section className="content-section text-center">
         <div className="contact-section">
           <div className="container">
@@ -102,7 +104,7 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "45px",
-                backgroundImage: "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
+                backgroundImage: "linear-gradient(to right,#1f2127,#D7DDE8 45%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -114,7 +116,7 @@ export default function ContactUs() {
                 fontWeight: "700",
                 fontSize: "36px",
                
-                backgroundImage: "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
+                backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -133,7 +135,7 @@ export default function ContactUs() {
                         fontSize: "30px",
                        
                         backgroundImage:
-                          "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
+                          "linear-gradient(to top,#757F9A,#D7DDE8 50%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}
@@ -158,7 +160,7 @@ export default function ContactUs() {
                         fontSize: "30px",
                         
                         backgroundImage:
-                          "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
+                          "linear-gradient(to top,#757F9A,#D7DDE8 30%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}
@@ -188,13 +190,13 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <hr />
+        {/* <hr />
 
         <h3
           style={{
             fontWeight: "800",
             backgroundImage:
-              "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
+              "linear-gradient(to top,#C6FFDD,#FBD786,#f64f59)",
             color: "transparent",
             WebkitBackgroundClip: "text",
           }}
@@ -228,9 +230,9 @@ export default function ContactUs() {
             <i className="fa fa-youtube-play"> </i>
             <span className="network-name ml-1">{t("Contact Us.Youtube")}</span>
           </a>
-        </div>
+        </div> */}
       </section>
-
+      </div>
       <section className="contactinfo">
         <div className="container">
           <div className="row">
