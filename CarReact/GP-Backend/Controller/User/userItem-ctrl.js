@@ -102,7 +102,9 @@ showFilterItems = (req, res) => {
   }
 
   console.log(queryCond);
-  const populateQuery = [{ path: "person", select: "firstName workshopName" }];
+  const populateQuery = [
+    { path: "person", select: "firstName workshopName" },
+    { path: "feedback"}];
 
   carItem
     .find(queryCond, { __v: 0 })
@@ -119,8 +121,12 @@ showFilterItems = (req, res) => {
         });
       }
       const TotalItem = await carItem.countDocuments(queryCond).then("Done").catch("Error")
+      const stars = await Feedback.aggregate([
+        { $group : {_id : "$car", avgRate : {  $avg : "$rating" } } }
+      ]).then("done")
+
       return res.json({
-        Data: data,
+        Data: data,stars,
         TotalItem:TotalItem,
         Message: `posts: filter ${data.length}`,
         Success: true,
