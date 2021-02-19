@@ -103,6 +103,14 @@ export default function ChatBotComp() {
           if (isNaN(value)) {
             value = "";
             return "value should be a number";
+          } if (value > 999999) {
+            return "value shouldn't be greater than 1 million";
+          }
+          if (value < 0) {
+            return "dude?? come on";
+          }
+          if (value == 0) {
+            return "congrats on the new car";
           }
           return true;
         },
@@ -144,8 +152,8 @@ export default function ChatBotComp() {
             steps={steps}
             floating={true}
             headerTitle="Dreksyony chat bot"
-            userAvatar={localStorage.getItem("ProfileImage")}
-            // botAvatar={localStorage.getItem("ProfileImage")}
+            // userAvatar={localStorage.getItem("Authorization") && localStorage.getItem("ProfileImage")}
+            // botAvatar={"../assets/Images/icon.png"}
           />
           ;
         </ThemeProvider>

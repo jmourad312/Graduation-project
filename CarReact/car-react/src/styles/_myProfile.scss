@@ -3,7 +3,9 @@
     overflow: hidden;
     .profileLeft{
         // background-image: url("../"+$dark-pattern);
-        background-color: rgb(27, 34, 43);
+        // background-color: rgb(27, 34, 43);
+    background-color: #012035e3;
+
         margin-top: 5%;
         padding: 15px;
         height: 90vh;
@@ -19,7 +21,9 @@
     }
     
     .profileright{
-        background-image: url("../"+$dark-pattern);
+        // background-image: url("../"+$dark-pattern);
+    background-color: #ffffff7e;
+
         border-radius: 0px 50px 50px 0px;
         // background-color: #010003;
         // background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
@@ -42,7 +46,9 @@
         
     }
     .profileright2{
-        background-image: url("../"+$dark-pattern);
+    background-color: #ffffff7e;
+
+        // background-image: url("../"+$dark-pattern);
         border-radius: 0px 50px 50px 0px;
         max-width: 0;
         margin-top: 10%;

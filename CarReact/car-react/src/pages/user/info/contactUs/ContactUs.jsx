@@ -102,7 +102,7 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "45px",
-                backgroundImage: "linear-gradient(to top, #f8f8f8 0%, #a2a5a8 85%)",
+                backgroundImage: "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -114,7 +114,7 @@ export default function ContactUs() {
                 fontWeight: "700",
                 fontSize: "36px",
                
-                backgroundImage: "linear-gradient(to top, #08091d 0%, #fff 40%)",
+                backgroundImage: "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -133,7 +133,7 @@ export default function ContactUs() {
                         fontSize: "30px",
                        
                         backgroundImage:
-                          "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
+                          "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}
@@ -158,7 +158,7 @@ export default function ContactUs() {
                         fontSize: "30px",
                         
                         backgroundImage:
-                          "linear-gradient(to top, #08091d 0%, #a2a5a8 90%)",
+                          "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}
@@ -194,7 +194,7 @@ export default function ContactUs() {
           style={{
             fontWeight: "800",
             backgroundImage:
-              "linear-gradient(to top, #08091d 0%, #a2a5a8 100%)",
+              "linear-gradient(to top, #16a9bd 0%, #ffffff 50%)",
             color: "transparent",
             WebkitBackgroundClip: "text",
           }}

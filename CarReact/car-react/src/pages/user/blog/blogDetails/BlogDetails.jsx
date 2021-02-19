@@ -21,6 +21,7 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SimpleDelete from "../../../../components/SimpleDelete";
+import ReportIcon from "@material-ui/icons/Report";
 
 export default function BlogDetails(props) {
 
@@ -375,7 +376,6 @@ export default function BlogDetails(props) {
                       : "User"
                     : "LOADING"}
                 </span>
-                
               </p>
               <hr />
               <p>
@@ -428,7 +428,6 @@ export default function BlogDetails(props) {
                     style={{
                       width: "350px",
                       height: "310px",
-                      borderRadius: "10%",
                     }}
                     src={blogDetails.images[0]}
                     alt=""
@@ -471,26 +470,42 @@ export default function BlogDetails(props) {
         </div>
         {/* <div className="row" style={{ marginLeft: "710px" }}> */}
         {localStorage.getItem("UserID") !== null && !checkOwner && (
-          <button
-            className="bookmarkbtn fourth"
-            style={{
-              position: "absolute",
-              // marginLeft: "300px",
-              left: "850px",
-              height: "50px",
-              fontSize: "20px",
-              paddingTop: "15px",
-            }}
-            onClick={handleAddBookmark}
-          >
-            {t("repeated.Bookmark")}
-          </button>
+          <>
+            <button
+              className="bookmarkbtn fourth"
+              style={{
+                position: "absolute",
+                // marginLeft: "300px",
+                left: "800px",
+                height: "50px",
+                fontSize: "20px",
+                paddingTop: "15px",
+              }}
+              onClick={handleAddBookmark}
+            >
+              {t("repeated.Bookmark")}
+            </button>
+            <button
+              className="bookmarkbtn first"
+              style={{
+                position: "absolute",
+                // marginLeft: "300px",
+                right: "20px",
+                height: "50px",
+                fontSize: "20px",
+                paddingTop: "15px",
+              }}
+              onClick={handleAddBookmark}
+            >
+              Report
+            </button>
+          </>
         )}
         {checkOwner && (
           <div style={{ position: "absolute", left: "800px" }}>
             <Button
               variant="light"
-              style={{ margin: "7px",height:"50px",width:"70px" }}
+              style={{ margin: "7px", height: "50px", width: "70px" }}
               onClick={() => openModal(props.id)}
             >
               {t("repeated.Edit")}
@@ -521,12 +536,16 @@ export default function BlogDetails(props) {
       </p> */}
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.EditBlog")}</Modal.Title>
+          <Modal.Title style={{ fontWeight: "700", fontSize: "25px" }}>
+            {t("EditBlogModal.EditBlog")}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogTitle")}</Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("EditBlogModal.BlogTitle")}
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder={t("EditBlogModal.EnterTitle")}
@@ -535,11 +554,13 @@ export default function BlogDetails(props) {
                 value={editValue.title}
                 onChange={handleEditChange}
                 required
-                style={{fontWeight:"500"}}
+                style={{ fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogImage")}</Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("EditBlogModal.BlogImage")}
+              </Form.Label>
               <Form.Control
                 type="file"
                 name="image"
@@ -547,11 +568,13 @@ export default function BlogDetails(props) {
                 onChange={handleImageChange}
                 multiple
                 required
-                style={{fontWeight:"500"}}
+                style={{ fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("EditBlogModal.BlogContent")}</Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("EditBlogModal.BlogContent")}
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -561,12 +584,14 @@ export default function BlogDetails(props) {
                 value={editValue.body}
                 onChange={handleEditChange}
                 required
-                style={{fontWeight:"500"}}
+                style={{ fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("repeated.Brand")}
+                </Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -575,7 +600,7 @@ export default function BlogDetails(props) {
                   value={editValue.brand}
                   onChange={handleEditChange}
                   required
-                  style={{fontWeight:"500"}}
+                  style={{ fontWeight: "500" }}
                 >
                   {cars2.map((item, index) => {
                     return (
@@ -587,7 +612,9 @@ export default function BlogDetails(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("repeated.Model")}
+                </Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -597,7 +624,7 @@ export default function BlogDetails(props) {
                   onChange={handleEditChange}
                   disabled={!stateDisabled}
                   required
-                  style={{fontWeight:"500"}}
+                  style={{ fontWeight: "500" }}
                 >
                   {cars3.map((item, index) => {
                     return (
@@ -638,121 +665,126 @@ export default function BlogDetails(props) {
         {t("BlogDetails.CommentSection")}
       </h3>
       <div className="comments">
-
-      <div className="row">
-        <div className="col-8">
-          {/* <!-- Single Comment --> */}
-          {blogDetails ? (
-            blogDetails.comment.length === 0 ? (
-              <div
-                className="text-center mt-5"
-                style={{ fontWeight: "700", fontSize: "30px", color: "black" }}
-              >
-                {t("BlogDetails.NoCommentsYet")}
-              </div>
-            ) : (
-              <div
-                style={{
-                  maxHeight: "380px",
-                  overflowY: "scroll",
-                  overflowX: "hidden",
-                }}
-              >
-                {blogDetails.comment.map((item, index) => {
-                  return (
-                    <div className="media mb-1 mr-3" key={index}>
-                      <div className="mr-2">
-                        {!voted ? (
-                          <button
-                            className="btn"
+        <div className="row">
+          <div className="col-8">
+            {/* <!-- Single Comment --> */}
+            {blogDetails ? (
+              blogDetails.comment.length === 0 ? (
+                <div
+                  className="text-center mt-5"
+                  style={{
+                    fontWeight: "700",
+                    fontSize: "30px",
+                    color: "black",
+                  }}
+                >
+                  {t("BlogDetails.NoCommentsYet")}
+                </div>
+              ) : (
+                <div
+                  style={{
+                    maxHeight: "380px",
+                    overflowY: "scroll",
+                    overflowX: "hidden",
+                  }}
+                >
+                  {blogDetails.comment.map((item, index) => {
+                    return (
+                      <div className="media mb-1 mr-3" key={index}>
+                        <div className="mr-2">
+                          {!voted ? (
+                            <button
+                              className="btn"
+                              style={{
+                                position: "relative",
+                                left: "55.7px",
+                                top: "-10px",
+                                fontSize: "20px",
+                              }}
+                              onClick={() => addVote(item._id)}
+                            >
+                              <ThumbUpIcon />
+                            </button>
+                          ) : (
+                            <Spinner
+                              animation="grow"
+                              style={{
+                                position: "relative",
+                                left: "40.7px",
+                                fontSize: "20px",
+                              }}
+                            />
+                          )}
+                          <span
+                            className="btn badge-pill"
                             style={{
                               position: "relative",
-                              left: "55.7px",
-                              top: "-10px",
+                              left: "10px",
+                              top: "25px",
                               fontSize: "20px",
+                              width: "30px !important",
+                              fontWeight: "700",
                             }}
-                            onClick={() => addVote(item._id)}
                           >
-                            <ThumbUpIcon />
-                          </button>
-                        ) : (
-                          <Spinner
-                            animation="grow"
-                            style={{
-                              position: "relative",
-                              left: "40.7px",
-                              fontSize: "20px",
-                            }}
-                          />
-                        )}
-                        <span
-                          className="btn badge-pill"
-                          style={{
-                            position: "relative",
-                            left: "10px",
-                            top: "25px",
-                            fontSize: "20px",
-                            width: "30px !important",
-                            fontWeight: "700",
-                          }}
-                        >
-                          {item.vote.upVoting - item.vote.downVoting}
-                        </span>
-                        {!voted ? (
-                          <button
-                            className="btn"
-                            style={{
-                              position: "relative",
-                              left: "-35px",
-                              top: "55px",
-                              fontSize: "20px",
-                            }}
-                            onClick={() => removeVote(item._id)}
-                          >
-                            <ThumbDownIcon />
-                          </button>
-                        ) : (
-                          <Spinner
-                            animation="grow"
-                            style={{
-                              position: "relative",
-                              left: "-40px",
-                              top: "50px",
-                              fontSize: "20px",
-                            }}
-                          />
-                        )}
-                      </div>
+                            {item.vote.upVoting - item.vote.downVoting}
+                          </span>
+                          {!voted ? (
+                            <button
+                              className="btn"
+                              style={{
+                                position: "relative",
+                                left: "-35px",
+                                top: "55px",
+                                fontSize: "20px",
+                              }}
+                              onClick={() => removeVote(item._id)}
+                            >
+                              <ThumbDownIcon />
+                            </button>
+                          ) : (
+                            <Spinner
+                              animation="grow"
+                              style={{
+                                position: "relative",
+                                left: "-40px",
+                                top: "50px",
+                                fontSize: "20px",
+                              }}
+                            />
+                          )}
+                        </div>
 
-                      {/* <img
+                        {/* <img
                       className="d-flex mr-3 rounded-circle"
                       src={item.image}
                       alt=""
                       style={{ maxHeight: "300px", maxWidth: "300px" }}
                     /> */}
-                      <hr />
-                      <br />
-                      <div className="media-body">
-                        <h5 className="mt-0">
-                          {item.person.firstName ? item.person.firstName : null}
-                          <div className="dots">
-                            <MoreHorizIcon fontSize="large" />
-                            {/* <div>
+                        <hr />
+                        <br />
+                        <div className="media-body">
+                          <h5 className="mt-0">
+                            {item.person.firstName
+                              ? item.person.firstName
+                              : null}
+                            <div className="dots">
+                              <MoreHorizIcon fontSize="large" />
+                              {/* <div>
                               
                             </div> */}
-                          </div>
-                        </h5>
-                        <hr />
-                        <p
-                          className="truncate"
-                          style={{ fontSize: "1.5rem", maxWidth: "500px" }}
-                        >
-                          {item.content}
-                        </p>
-                        <hr style={{ border: "1px solid" }} />
-                      </div>
+                            </div>
+                          </h5>
+                          <hr />
+                          <p
+                            className="truncate"
+                            style={{ fontSize: "1.5rem", maxWidth: "500px" }}
+                          >
+                            {item.content}
+                          </p>
+                          <hr style={{ border: "1px solid" }} />
+                        </div>
 
-                      {/* <form
+                        {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -768,7 +800,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                      {/* {item
+                        {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -788,71 +820,72 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
+                      </div>
+                    );
+                  })}
+                </div>
+              )
+            ) : (
+              "LOADING"
+            )}
+          </div>
+          <div className="col-4">
+            {localStorage.getItem("Authorization") ? (
+              <div className="card bgforleavecomment text-center">
+                <h5
+                  className="card-header"
+                  style={{ fontSize: "25px", fontWeight: "700" }}
+                >
+                  {t("BlogDetails.LeaveComment")}
+                </h5>
+                <div className="card-body">
+                  <form method="post" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <textarea
+                        className="form-control bgforleavecomment2"
+                        rows="3"
+                        name="content"
+                        value={inputValue.content}
+                        onChange={handleChange}
+                      ></textarea>
                     </div>
-                  );
-                })}
+                    <button
+                      type="submit"
+                      className="btn btn-dark"
+                      style={{ fontWeight: "700", fontSize: "20px" }}
+                    >
+                      {t("repeated.Submit")}
+                    </button>
+                  </form>
+                </div>
               </div>
-            )
-          ) : (
-            "LOADING"
-          )}
-        </div>
-        <div className="col-4">
-          {localStorage.getItem("Authorization") ? (
-            <div className="card bgforleavecomment text-center">
-              <h5
-                className="card-header"
-                style={{ fontSize: "25px", fontWeight: "700" }}
-              >
-                {t("BlogDetails.LeaveComment")}
-              </h5>
-              <div className="card-body">
-                <form method="post" onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <textarea
-                      className="form-control bgforleavecomment2"
-                      rows="3"
-                      name="content"
-                      value={inputValue.content}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-dark"
-                    style={{ fontWeight: "700", fontSize: "20px" }}
-                  >
-                    {t("repeated.Submit")}
-                  </button>
-                </form>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="shadow-sm p-2 mb-4 rounded-lg"
-              onClick={() => history.push(`/SignChoice`)}
-              style={{
-                height: "300px",
-                width: "500px",
-                border: "solid white 3px",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            >
-              <h3
+            ) : (
+              <div
+                className="shadow-sm p-2 mb-4 rounded-lg"
+                onClick={() => history.push(`/SignChoice`)}
                 style={{
-                  color: "#737373",
-                  position: "relative",
-                  top: "35%",
-                  textAlign: "center",
+                  height: "300px",
+                  width: "300px",
+                  color: "#000",
+                  border: "solid white 3px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
                 }}
               >
-                {t("BlogDetails.OnlyRegistered")}
-              </h3>
-            </div>
-          )}
+                <h3
+                  style={{
+                    color: "#000",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
+                  }}
+                >
+                  {t("BlogDetails.OnlyRegistered")}
+                </h3>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </div>
 
       {/* <!-- Comment with nested comments --> */}
