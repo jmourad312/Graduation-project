@@ -521,7 +521,7 @@ export default function Signform(props) {
               value={forgotState.confirmp}
               onChange={newEmail}
               className="w-75 text-center"
-              placeholder={t('userSign.enterMail')}
+              placeholder={t('userSign.confirmp')}
             />
             <div className="text-center">
               <button

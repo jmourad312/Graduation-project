@@ -12,7 +12,7 @@ export default function AboutUs() {
       {localStorage.getItem("Authorization") !== null && <UserIcon />}
       <div className="team-section">
         <h1
-          style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top, #16a9bd 0%, #ffffff 30%)", color: "transparent", WebkitBackgroundClip: "text" }}
+          style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}
         >
           {t('aboutUs.Team')}
         </h1>

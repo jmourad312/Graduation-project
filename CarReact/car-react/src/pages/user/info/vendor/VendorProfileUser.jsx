@@ -12,6 +12,7 @@ export default function VendorProfileUser(props) {
     phoneNumber: 0,
     vendorItems: [],
     location: [],
+    workshopName:""
   });
   const [loc, setLoc] = useState("");
   // const [vendorItems, setVendorItems] = useState([])
@@ -37,6 +38,7 @@ export default function VendorProfileUser(props) {
             phoneNumber: res.data.Data.person.phoneNumber,
             vendorItems: res.data.Data.vendorItems,
             location: res.data.Data.person.location.coordinates,
+            workshopName: res.data.Data.person.workshopName
           });
         } else {
           console.log("fail");
@@ -76,7 +78,7 @@ export default function VendorProfileUser(props) {
       <div className="bg">
         <div className="container">
           {/* <!-- vendor info --> */}
-          <h2 className="text-center">{t("vendor profile.info")}</h2>
+          <h2 style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }} className="text-center" >{t("vendor profile.info")}</h2>
           <section className="row mt-5">
             <div className="media w-100">
               <div className="col-3">
@@ -90,18 +92,25 @@ export default function VendorProfileUser(props) {
               <div className="col-5">
                 <div className="media-body">
                   <div className="">
-                    <h3>
+                    <h3 style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}
+                    >
                       <i
                         className="fa fa-envelope fa-1x mr-2"
                         aria-hidden="true"
                       ></i>
                       {t("vendor profile.contact")}
                     </h3>
-                    <h2>
+                    <h2
+                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("vendor profile.name")}: {vendor.firstName}{" "}
                       {vendor.lastName}
                     </h2>
-                    <h4>
+                    <h2
+                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}>
+                      {t("repeated.Shop")} {vendor.workshopName}{" "}
+                    </h2>
+                    <h4
+                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("vendor profile.phone")}:{" "}
                       {vendor.phoneNumber ? vendor.phoneNumber : "Not Provided"}
                     </h4>
@@ -109,21 +118,22 @@ export default function VendorProfileUser(props) {
                 </div>
               </div>
               {vendor &&
-              vendor.location &&
-              vendor.location[0] !== undefined &&
-              vendor.location[1] !== undefined ? (
-                <div className="col-4">
-                  <iframe
-                    title="map"
-                    id="myiframe"
-                    src={loc}
-                    width="300"
-                    height="200"
-                  ></iframe>
-                </div>
-              ) : (
-                <div className="col-4">Location not provided</div>
-              )}
+                vendor.location &&
+                vendor.location[0] !== undefined &&
+                vendor.location[1] !== undefined ? (
+                  <div className="col-4">
+                    <iframe
+                      title="map"
+                      id="myiframe"
+                      src={loc}
+                      width="300"
+                      height="200"
+                      style={{ borderRadius: "10px" }}
+                    ></iframe>
+                  </div>
+                ) : (
+                  <div className="col-4">Location not provided</div>
+                )}
             </div>
           </section>
           {/* <hr className="hr " /> */}
@@ -142,7 +152,7 @@ export default function VendorProfileUser(props) {
           </div> */}
           <hr className="hr " />
           {/* <!-- items --> */}
-          <h2 className="text-center mb-3"> {t("vendor profile.items")}</h2>
+          <h2 className="text-center mb-3"  style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}> {t("vendor profile.items")}</h2>
           <SlickSlider items={vendor.vendorItems} />
         </div>
       </div>
@@ -168,32 +178,16 @@ export default function VendorProfileUser(props) {
                 return (
                   <Col key={index}>
                     <section className="cards">
-                      <article
-                        className="card card--1"
-                        // onClick={() => handleClick(item._id)}
+                      <article className="card card--1"
+                      // onClick={() => handleClick(item._id)} 
                       >
-                        <div
-                          className="card__img"
-                          style={{ background: `url(${item.image})` }}
-                        ></div>
+                        <div className="card__img" style={{ background: `url(${item.image})` }}></div>
                         <p className="card_link">
-                          <div
-                            className="card__img--hover"
-                            style={{ background: `url(${item.image})` }}
-                          ></div>
+                          <div className="card__img--hover" style={{ background: `url(${item.image})` }}></div>
                         </p>
                         <div className="card__info">
-                          <h4 className="card__title text-truncate">
-                            {item.name}
-                          </h4>
-                          <span
-                            className="price"
-                            style={{
-                              fontWeight: "600",
-                              color: "goldenrod",
-                              fontSize: "25px",
-                            }}
-                          >
+                          <h4 className="card__title text-truncate">{item.name}</h4>
+                          <span className="price" style={{ fontWeight: "600", color: "goldenrod", fontSize: "25px", }}>
                             {item.price} LE
                           </span>{" "}
                           <p className="text-truncate">{item.description}</p>
