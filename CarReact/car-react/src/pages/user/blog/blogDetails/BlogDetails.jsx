@@ -865,7 +865,8 @@ export default function BlogDetails(props) {
                 onClick={() => history.push(`/SignChoice`)}
                 style={{
                   height: "300px",
-                  width: "500px",
+                  width: "300px",
+                  color: "#000",
                   border: "solid white 3px",
                   borderRadius: "10px",
                   cursor: "pointer",
@@ -873,7 +874,7 @@ export default function BlogDetails(props) {
               >
                 <h3
                   style={{
-                    color: "#737373",
+                    color: "#000",
                     position: "relative",
                     top: "35%",
                     textAlign: "center",
