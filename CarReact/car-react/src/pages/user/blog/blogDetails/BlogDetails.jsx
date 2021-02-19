@@ -14,6 +14,7 @@ import {
   addVoteComment,
   removeVoteComment,
 } from "../../../../store/actions";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Loading from "../../../../components/Loading";
 import {useTranslation} from "react-i18next";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
@@ -734,7 +735,12 @@ export default function BlogDetails(props) {
                       <div className="media-body">
                         <h5 className="mt-0">
                           {item.person.firstName ? item.person.firstName : null}
-                          <span>. . .</span>
+                          <div className="dots">
+                            <MoreHorizIcon fontSize="large" />
+                            {/* <div>
+                              
+                            </div> */}
+                          </div>
                         </h5>
                         <hr />
                         <p
