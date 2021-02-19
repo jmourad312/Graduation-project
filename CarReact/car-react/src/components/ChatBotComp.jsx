@@ -7,6 +7,31 @@ import {useTranslation} from "react-i18next";
 
 
 export default function ChatBotComp() {
+  
+  const [userInfo, setUserInfo] = useState({
+    userKM:0,
+    userOilType:0,
+  })
+
+  useEffect(() => {
+    // const { fullUserAnswer,fullAnswerOptions } = steps;
+    // setUserInfo({ fullUserAnswer, fullAnswerOptions });
+    // console.log(steps.fullAnswerOptions);
+    // console.log(steps[7].options.value);
+    console.log(userInfo);
+  });
+
+
+  // const [userKMM, setuserKMM] = useState(5);
+  // const [userOIL, setuserOIL] = useState(5);
+
+    Review.propTypes = {
+      steps: PropTypes.object,
+    };
+
+    Review.defaultProps = {
+      steps: undefined,
+    };
 
     const theme = {
       background: "#f5f8fb",
@@ -35,7 +60,8 @@ export default function ChatBotComp() {
         id: "3",
         options: [
           { value: 1, label: "Contact Us", trigger: "4" },
-          { value: 2, label: "Other Questions", trigger: "5" },
+          // { value: 2, label: "Specific Maintenance", trigger: "5" },
+          { value: 3, label: "Full Maintenance", trigger: "full" },
         ],
       },
       {
@@ -47,21 +73,78 @@ export default function ChatBotComp() {
         ),
         trigger: "2",
       },
+      // {
+      //   id: "5",
+      //   options: [
+      //     { value: 1, label: "Oil", trigger: "Oil" },
+      //     { value: 2, label: "Spark Plugs", trigger: "Spark" },
+      //     { value: 3, label: "Belts", trigger: "Belts" },
+      //     { value: 4, label: "Oil Filter", trigger: "OilFilter" },
+      //     { value: 5, label: "Air Filter", trigger: "AirFilter" },
+      //     { value: 6, label: "Fuel Filter", trigger: "FuelFilter" },
+      //     { value: 7, label: "Brake Pad", trigger: "Brake" },
+      //     { value: 8, label: "Tires", trigger: "Tires" },
+      //   ],
+      // },
+      // {
+      //   id: "Oil",
+      //   message: "How can we help you?",
+      //   trigger: "3",
+      // },
+
       {
-        id: "5",
+        id: "full",
+        message: "How many kilometres are on the odometer?",
+        trigger: "fullUserAnswer",
+      },
+      {
+        id: "fullUserAnswer",
+        user: true,
+        validator: (value) => {
+          if (isNaN(value)) {
+            value = "";
+            return "value should be a number";
+          }
+          return true;
+        },
+        trigger: "fullAnswerOptions",
+      },
+      {
+        id: "fullAnswerOptions",
+        message: "What type of Oil do you purchase ?",
+        trigger: "fullAnswerOptionsChoices",
+      },
+      {
+        id: "fullAnswerOptionsChoices",
         options: [
-          { value: 1, label: "Contact Us", trigger: "4" },
-          { value: 2, label: "Other Questions", trigger: "5" },
+          { value: 3, label: "3 Km", trigger: "Check" },
+          { value: 5, label: "5 Km", trigger: "Check" },
+          { value: 7, label: "7 Km", trigger: "Check" },
+          { value: 10, label: "10 Km", trigger: "Check" },
+          { value: 15, label: "15 Km", trigger: "Check" },
         ],
-        // trigger: "2",
+      },
+      {
+        id: "Check",
+        message: "Calculating your maintenance...",
+        trigger: "Final",
+      },
+      {
+        id: "Final",
+        component: <Review />,
+        trigger: "3",
       },
     ];
+    // const { name, gender, age } = steps;
+
+    
     return (
       <>
         <ThemeProvider theme={theme}>
           <ChatBot
             steps={steps}
             floating={true}
+            headerTitle="Dreksyony chat bot"
             userAvatar={localStorage.getItem("ProfileImage")}
             // botAvatar={localStorage.getItem("ProfileImage")}
           />
@@ -92,7 +175,6 @@ function Review(props) {
   }, [])
   const { fullAnswerOptionsChoices, fullUserAnswer } = userCarInfo;
   const {t, i18n} = useTranslation();
-
   return (
     <div style={{ width: "100%" }}>
       <h3>{t("ChatBot.Summary")}</h3>
@@ -100,51 +182,50 @@ function Review(props) {
         <tbody>
           <tr>
             <td>{t("ChatBot.YourMeters")}</td>
-            <td>{parseInt(fullUserAnswer.value) + "m"}</td>
+            <td>{ t("ChatBot.km") + parseInt(fullUserAnswer.value)}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeOil")}</td>
-            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + (parseInt(fullAnswerOptionsChoices.value) * 1000) + "m"}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + (parseInt(fullAnswerOptionsChoices.value)) + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeOilFilter")}</td>
-            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 10000 + "m"}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 10 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeAirFilter")}</td>
-            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeFuelFilter")}</td>
-            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeSparkPlugs")}</td>
-            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.ChangeTires")}</td>
-            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 50000 + "m"}</td>
+            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 50 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.CheckBrakePads")}</td>
-            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 20 + t("ChatBot.km")}</td>
           </tr>
           <br />
           <tr>
             <td>{t("ChatBot.CheckBelts")}</td>
-            <td>{t("ChatBot.From")} {(parseInt(fullUserAnswer.value) + 60000) + "m" + " \nTo " + (parseInt(fullUserAnswer.value) + 100000) + "m"}</td>
+            <td>{t("ChatBot.From")} {(parseInt(fullUserAnswer.value) + 60) + t("ChatBot.km") + t("ChatBot.To") + (parseInt(fullUserAnswer.value) + 100) + t("ChatBot.km")}</td>
           </tr>
         </tbody>
       </table>
     </div>
   );
 }
-

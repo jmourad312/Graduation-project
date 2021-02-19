@@ -248,6 +248,7 @@
         "CheckBelts":"Check Belts",
         "at":"at: ",
         "From":"From: ",
-        "To":"To "
+        "To":"To ",
+        "km":"Km"
     }
 }
