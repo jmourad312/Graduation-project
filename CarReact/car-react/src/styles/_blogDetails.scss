@@ -71,4 +71,17 @@
     resize: none;
     height: 210px;
   }
+  .dots{
+    position: relative;
+    display: inline-block;
+    left: 80%;
+    :hover{
+      transform: rotateZ(180deg);
+      transition: all 1s;
+
+    }
+  }
+  // .dots:hover{
+  //   transform: rotateZ(180deg);
+  // }
 }
