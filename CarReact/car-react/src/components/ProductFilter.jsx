@@ -103,8 +103,11 @@ export default function ProductFilter(props) {
     handleSearchClick();
   };
   const handlePriceChange = (event,newValue) => {
-    setState({
-      price:newValue
+    setState((previous) => {
+      return {
+        ...previous,
+        price: newValue,
+      };
     });
     console.log(state.price);
     // switch (event.target.name) {
