@@ -59,7 +59,7 @@ export default function ChatBotComp() {
         id: "3",
         options: [
           { value: 1, label: "Contact Us", trigger: "4" },
-          { value: 2, label: "Specific Maintenance", trigger: "5" },
+          // { value: 2, label: "Specific Maintenance", trigger: "5" },
           { value: 3, label: "Full Maintenance", trigger: "full" },
         ],
       },
@@ -72,20 +72,25 @@ export default function ChatBotComp() {
         ),
         trigger: "2",
       },
-      {
-        id: "5",
-        options: [
-          { value: 1, label: "Oil", trigger: "4" },
-          { value: 2, label: "Spark Plugs", trigger: "5" },
-          { value: 2, label: "Belts", trigger: "5" },
-          { value: 2, label: "Oil Filter", trigger: "5" },
-          { value: 2, label: "Air Filter", trigger: "5" },
-          { value: 2, label: "Fuel Filter", trigger: "5" },
-          { value: 2, label: "Brake Pad", trigger: "5" },
-          { value: 2, label: "Tires", trigger: "5" },
-        ],
-        // trigger: "2",
-      },
+      // {
+      //   id: "5",
+      //   options: [
+      //     { value: 1, label: "Oil", trigger: "Oil" },
+      //     { value: 2, label: "Spark Plugs", trigger: "Spark" },
+      //     { value: 3, label: "Belts", trigger: "Belts" },
+      //     { value: 4, label: "Oil Filter", trigger: "OilFilter" },
+      //     { value: 5, label: "Air Filter", trigger: "AirFilter" },
+      //     { value: 6, label: "Fuel Filter", trigger: "FuelFilter" },
+      //     { value: 7, label: "Brake Pad", trigger: "Brake" },
+      //     { value: 8, label: "Tires", trigger: "Tires" },
+      //   ],
+      // },
+      // {
+      //   id: "Oil",
+      //   message: "How can we help you?",
+      //   trigger: "3",
+      // },
+
       {
         id: "full",
         message: "How many kilometres are on the odometer?",
@@ -98,19 +103,6 @@ export default function ChatBotComp() {
           if (isNaN(value)) {
             value = "";
             return "value should be a number";
-          } else {
-            // setuserKMM(value);
-            // console.log(userKMM);
-            localStorage.setItem("UserKiloMeters", value);
-            setUserInfo((previous) => {
-              console.log(userInfo);
-
-              return {
-                ...previous,
-                userKM: value,
-              };
-            });
-            console.log(userInfo);
           }
           return true;
         },
@@ -133,26 +125,13 @@ export default function ChatBotComp() {
       },
       {
         id: "Check",
-        // message: `hhweaj {previousValue}`,
-        message: ({ previousValue, steps }) => {
-          setUserInfo((previous) => {
-            console.log(userInfo);
-            return {
-              ...previous,
-              userOilType: previousValue,
-            };
-          });
-          // setuserOIL(previousValue);
-          // console.log(userOIL);
-          // console.log(userInfo);
-          return "Calculating your maintenance...";
-        },
+        message: "Calculating your maintenance...",
         trigger: "Final",
       },
       {
         id: "Final",
         component: <Review />,
-        end: true,
+        trigger: "3",
       },
     ];
     // const { name, gender, age } = steps;
@@ -164,6 +143,7 @@ export default function ChatBotComp() {
           <ChatBot
             steps={steps}
             floating={true}
+            headerTitle="Dreksyony chat bot"
             userAvatar={localStorage.getItem("ProfileImage")}
             // botAvatar={localStorage.getItem("ProfileImage")}
           />
@@ -184,15 +164,13 @@ function Review(props) {
     const { fullAnswerOptionsChoices, fullUserAnswer } = steps;
     setUserCarInfo({ fullAnswerOptionsChoices, fullUserAnswer });
     // this.setState({ name, gender, age });
-    console.log(props);
-    console.log(steps);
-    console.log(fullAnswerOptionsChoices);
-    console.log(fullAnswerOptionsChoices.value);
-    console.log(fullUserAnswer);
-    console.log(fullUserAnswer.value);
-    console.log(userCarInfo);
-
-
+    // console.log(props);
+    // console.log(steps);
+    // console.log(fullAnswerOptionsChoices);
+    // console.log(fullAnswerOptionsChoices.value);
+    // console.log(fullUserAnswer);
+    // console.log(fullUserAnswer.value);
+    // console.log(userCarInfo);
   }, [])
   const { fullAnswerOptionsChoices, fullUserAnswer } = userCarInfo;
   return (
@@ -243,6 +221,93 @@ function Review(props) {
           <tr>
             <td>Check Belts</td>
             <td>From: {(parseInt(fullUserAnswer.value) + 60000) + "m" + " \nTo " + (parseInt(fullUserAnswer.value) + 100000) + "m"}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Review2(props) {
+  const [userCarInfo, setUserCarInfo] = useState({
+    fullAnswerOptionsChoices: 0,
+    fullUserAnswer: 0,
+  });
+  useEffect(() => {
+    const { steps } = props;
+    const { fullAnswerOptionsChoices, fullUserAnswer } = steps;
+    setUserCarInfo({ fullAnswerOptionsChoices, fullUserAnswer });
+    // this.setState({ name, gender, age });
+    // console.log(props);
+    // console.log(steps);
+    // console.log(fullAnswerOptionsChoices);
+    // console.log(fullAnswerOptionsChoices.value);
+    // console.log(fullUserAnswer);
+    // console.log(fullUserAnswer.value);
+    // console.log(userCarInfo);
+  }, []);
+  const { fullAnswerOptionsChoices, fullUserAnswer } = userCarInfo;
+  return (
+    <div style={{ width: "100%" }}>
+      <h3>Summary</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Your Meters</td>
+            <td>{parseInt(fullUserAnswer.value) + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Oil</td>
+            <td>
+              at:{" "}
+              {parseInt(fullUserAnswer.value) +
+                parseInt(fullAnswerOptionsChoices.value) * 1000 +
+                "m"}
+            </td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Oil Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 10000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Air Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Fuel Filter</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Spark Plugs</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Change Tires</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 50000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Check Brake Pads</td>
+            <td>at: {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>Check Belts</td>
+            <td>
+              From:{" "}
+              {parseInt(fullUserAnswer.value) +
+                60000 +
+                "m" +
+                " \nTo " +
+                (parseInt(fullUserAnswer.value) + 100000) +
+                "m"}
+            </td>
           </tr>
         </tbody>
       </table>
