@@ -20,6 +20,9 @@
     border-color: #181818;
     transition: all .2s ease-in-out;
     transform: scale(1.18);
+    background:  rgba(156, 154, 154, 0.472); 
+    color: white;
+    
   }
 
   #contact .card:hover i,#contact .card:hover h4{
@@ -47,14 +50,30 @@
   textarea.form-control {
     height: 100px;
     resize: none;
-    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
-
+    background:  rgba(100, 99, 99, 0.801); 
+    color: white;
+    color: #1f2127;
+   
   }
   input{
-    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+    background:  rgba(100, 99, 99, 0.801); 
+    color: white;
   }
+  ::placeholder{
+    color: white;
+  }  
   .contrastclass{
-    background: linear-gradient(to right, #ffffff,  rgb(156, 154, 154));    
+    background: linear-gradient(to right, #ffffff,  rgba(156, 154, 154, 0.5));    
 
+  }
+  .container2{
+    
+    width: 1000px;
+    
+    .content-section{
+      background-color:rgba(156, 154, 154, 0.5);
+      border-radius: 25px;
+      padding-bottom: 25px;
+    }
   }
 }

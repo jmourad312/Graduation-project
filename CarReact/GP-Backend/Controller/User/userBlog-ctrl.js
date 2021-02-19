@@ -690,13 +690,14 @@ getBookmarksList = async (req, res) => {
 
 sendReport = (req, res) => {
   // {
-  //   idBlog: id
-  //   reportToUser: id
+  //   idBlog: id 
   //   message:String
   // }
   const body = req.body
+
   const IdPerson = req.user._id;
-  if (!(body.reportToUser && body.idBlog && body.message)) {
+
+  if (!(body.message && body.idBlog)) {
     return res.json({
       Data: null,
       Message: "You must Type any words",
@@ -710,8 +711,8 @@ sendReport = (req, res) => {
   report
     .save()
     .then((dataReport) => {
-      Person.updateOne(
-        { _id: reporttouser },
+      Post.updateOne(
+        { _id: dataReport.idBlog },
         { $push: { reportPosts: dataReport._id } }
       ).then( done => {
         return res.json({
