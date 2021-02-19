@@ -78,7 +78,7 @@ export default function SlickSlider(props) {
         {props.items.map((item, index) => {
           return (
             <div className="SliderStyle">
-              <div className="productList">
+              <div className="productList" style={{paddingLeft:"50px",paddingTop:"20px"}}>
                 <section className="cards">
                   <article
                     className="card card--1"
