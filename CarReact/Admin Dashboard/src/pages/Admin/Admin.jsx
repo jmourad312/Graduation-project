@@ -29,6 +29,14 @@ export default function Admin(props) {
     contacts: [],
   });
 
+  const countReport = (itemPost)=> {
+    let counter = 0;
+
+    itemPost.map((item,intex)=>{ 
+      counter = counter + item.reportPosts.length
+     })
+     return counter
+  }
 
   const [skipState, setSkipState] = useState({
     user: 0,
@@ -481,7 +489,7 @@ export default function Admin(props) {
                               <tr>
                                 <td>{skipState.blog+index+1}</td>
                                 <td>{item.person.firstName}</td>
-                                <td>{item.person.reportPosts.length}</td>
+                                <td>{countReport(item.postsUser)}</td>
                                 <td>{item.postsUser.length}</td>
                                 <td>
                                   <Button2
