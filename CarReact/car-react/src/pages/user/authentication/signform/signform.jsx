@@ -101,6 +101,7 @@ export default function Signform(props) {
       })
       .catch((error) => {
         console.log(error);
+        alert('Please double check your username or password');
       });
   };
 
