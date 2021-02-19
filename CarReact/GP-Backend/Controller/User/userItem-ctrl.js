@@ -125,6 +125,14 @@ showFilterItems = (req, res) => {
         { $group : {_id : "$car", avgRate : {  $avg : "$rating" } } }
       ]).then("done")
 
+      // stars.map(star => {
+      //   data.map(item => {
+      //     if(Number(item._id) === Number(star._id)){
+      //       console.log(item,star)
+      //     } 
+      //   })
+      // })
+
       return res.json({
         Data: data,stars,
         TotalItem:TotalItem,

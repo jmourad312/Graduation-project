@@ -62,8 +62,7 @@ export default function Signform(props) {
         }
       })
       .catch((error) => {
-        console.log(error.status);
-        
+        console.log(error);
       });
   };
 
