@@ -58,9 +58,11 @@ const {t, i18n} = useTranslation();
       variants={pageVariants}
       transition={pageTransitions}
     >
+      <div style={{position:"absolute",zIndex:"15",right:"10px",top:"30px"}}>
+        {localStorage.getItem("Authorization") !== null && <UserIcon />}
+      </div>
 
       <section className="container">
-      {localStorage.getItem("Authorization") !== null && <UserIcon />}
         <div className="vendorTop">
           <div style={{ marginTop: "9.5%" }}>
             <div className="row newCont">
