@@ -16,15 +16,25 @@ import {
 } from "../../../../store/actions";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Loading from "../../../../components/Loading";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteForeverIcon from "@material-ui/icons/Delete";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import SimpleDelete from "../../../../components/SimpleDelete";
-import ReportIcon from "@material-ui/icons/Report";
+import EditIcon from "@material-ui/icons/Edit";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fab,
+  TextField,
+  Zoom,
+} from "@material-ui/core";
 
 export default function BlogDetails(props) {
-
   // const blogs = useSelector((state) => state.blogs);
   const blogID = useSelector((state) => state.blogID);
   const blogDetails = useSelector((state) => state.blogDetails.Data);
@@ -149,7 +159,6 @@ export default function BlogDetails(props) {
       });
   };
 
-
   const handleAddBookmark = () => {
     console.log(blogID);
     const config = {
@@ -213,9 +222,15 @@ export default function BlogDetails(props) {
     console.log(inputValue);
     // console.log(blogID);
     axios
-      .post(`http://localhost:3000/user/addComment/${localStorage.getItem("BlogID")}`, inputValue, {
-        headers: { Authorization: localStorage.getItem("Authorization") },
-      })
+      .post(
+        `http://localhost:3000/user/addComment/${localStorage.getItem(
+          "BlogID"
+        )}`,
+        inputValue,
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
       .then((req) => {
         console.log(req);
         if (req.data.Success === true) {
@@ -276,7 +291,7 @@ export default function BlogDetails(props) {
   // console.log(blogDetails);
   // console.log(blogID);
   // }, []);
-  const [voted, setVoted] = useState(false)
+  const [voted, setVoted] = useState(false);
 
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
@@ -305,6 +320,84 @@ export default function BlogDetails(props) {
       });
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [reportState, setReportState] = useState({
+    message: "",
+    idBlog: localStorage.getItem("BlogID"),
+  });
+
+  const handleReportChange = (event) => {
+    const { value, name } = event.target;
+    setReportState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleReport = () => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+
+    const body = {
+      message: reportState.message,
+      idBlog: reportState.idBlog,
+    };
+
+    const URL = "http://localhost:3000/user/sendReport";
+
+    axios
+      .post(URL, body, config)
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          toggleStatus();
+          setToastMessage("Thank you for your report");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    handleClose();
+    setReportState((previous) => {
+      return {
+        ...previous,
+        message: "",
+      };
+    });
+  };
+
+  const handleDeleteComment = (params) => {
+   axios
+     .delete(`http://localhost:3000/user/deleteComment/${params}`, {
+       headers: { Authorization: localStorage.getItem("Authorization") },
+     })
+     .then((req) => {
+       console.log(req);
+       if (req.data.Success === true) {
+         console.log("success");
+       } else {
+         console.log("fail");
+         console.log(req.data);
+       }
+     })
+     .catch((error) => {
+       console.log(error);
+       console.log("adsa");
+     });
+  };
+
   const pageVariants = {
     in: {
       opacity: 10,
@@ -327,7 +420,7 @@ export default function BlogDetails(props) {
     var blogTime = blogDetails.createdAt.split("T");
   }
   const history = useHistory();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <motion.div
       className="container"
@@ -350,6 +443,37 @@ export default function BlogDetails(props) {
           status={toastStatus}
           message={toastMessage}
         />
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Report</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To Report this blog, please enter your reason for reporting. We will take your report into consideration.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="message"
+              name="message"
+              label="Report Details"
+              type="text"
+              onChange={handleReportChange}
+              value={reportState.message}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} variant="dark">
+              Cancel
+            </Button>
+            <Button onClick={handleReport} variant="primary">
+              Send
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
       <div className="blogDetails">
         <div className="header" style={{ paddingBottom: "0px" }}>
@@ -495,7 +619,7 @@ export default function BlogDetails(props) {
                 fontSize: "20px",
                 paddingTop: "15px",
               }}
-              onClick={handleAddBookmark}
+              onClick={handleClickOpen}
             >
               Report
             </button>
@@ -664,7 +788,7 @@ export default function BlogDetails(props) {
       >
         {t("BlogDetails.CommentSection")}
       </h3> */}
-      
+
       <div className="comments">
         <div className="row">
           <div className="col-8">
@@ -768,11 +892,28 @@ export default function BlogDetails(props) {
                             {item.person.firstName
                               ? item.person.firstName
                               : null}
-                            <div className="dots">
-                              <MoreHorizIcon fontSize="large" />
-                              {/* <div>
-                              
-                            </div> */}
+                            <div className="handleComment">
+                              {/* <Zoom in={true}>
+                                <Fab
+                                  size="small"
+                                  aria-label="edit"
+                                >
+                                  <EditIcon />
+                                </Fab>
+                              </Zoom> */}
+                              {item.person._id === localStorage.getItem("UserID") &&
+                              <Zoom in={true}>
+                                <Fab
+                                  // color="secondary"
+                                  size="small"
+                                  style={{width:"35px", height:"10px"}}
+                                  aria-label="delete"
+                                  onClick={()=>handleDeleteComment(item._id)}
+                                >
+                                  <DeleteForeverIcon style={{fontSize:"25px"}} />
+                                </Fab>
+                              </Zoom>
+                              }
                             </div>
                           </h5>
                           <hr />

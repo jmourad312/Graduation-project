@@ -86,15 +86,13 @@
     resize: none;
     height: 210px;
   }
-  .dots{
+  
+  .handleComment{
     position: relative;
-    display: inline-block;
-    left: 80%;
-    :hover{
-      transform: rotateZ(180deg);
-      transition: all 1s;
-
-    }
+    display: inline;
+    left: 70%;
+    top: 5%;
+    
   }
   // .dots:hover{
   //   transform: rotateZ(180deg);
