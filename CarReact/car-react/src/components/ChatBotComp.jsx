@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
+import PropTypes from "prop-types";
+import {useTranslation} from "react-i18next";
+
 
 export default function ChatBotComp() {
 
@@ -67,3 +70,81 @@ export default function ChatBotComp() {
       </>
     );
 }
+
+
+function Review(props) {
+  const [userCarInfo, setUserCarInfo] = useState({
+    fullAnswerOptionsChoices: 0,
+    fullUserAnswer: 0,
+  });
+  useEffect(() => {
+    const { steps } = props;
+    const { fullAnswerOptionsChoices, fullUserAnswer } = steps;
+    setUserCarInfo({ fullAnswerOptionsChoices, fullUserAnswer });
+    // this.setState({ name, gender, age });
+    // console.log(props);
+    // console.log(steps);
+    // console.log(fullAnswerOptionsChoices);
+    // console.log(fullAnswerOptionsChoices.value);
+    // console.log(fullUserAnswer);
+    // console.log(fullUserAnswer.value);
+    // console.log(userCarInfo);
+  }, [])
+  const { fullAnswerOptionsChoices, fullUserAnswer } = userCarInfo;
+  const {t, i18n} = useTranslation();
+
+  return (
+    <div style={{ width: "100%" }}>
+      <h3>{t("ChatBot.Summary")}</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>{t("ChatBot.YourMeters")}</td>
+            <td>{parseInt(fullUserAnswer.value) + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeOil")}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + (parseInt(fullAnswerOptionsChoices.value) * 1000) + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeOilFilter")}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 10000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeAirFilter")}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeFuelFilter")}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeSparkPlugs")}</td>
+            <td>{t("ChatBot.at")}{parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.ChangeTires")}</td>
+            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 50000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.CheckBrakePads")}</td>
+            <td>{t("ChatBot.at")} {parseInt(fullUserAnswer.value) + 20000 + "m"}</td>
+          </tr>
+          <br />
+          <tr>
+            <td>{t("ChatBot.CheckBelts")}</td>
+            <td>{t("ChatBot.From")} {(parseInt(fullUserAnswer.value) + 60000) + "m" + " \nTo " + (parseInt(fullUserAnswer.value) + 100000) + "m"}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
