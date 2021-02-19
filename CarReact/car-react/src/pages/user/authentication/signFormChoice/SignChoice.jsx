@@ -63,7 +63,7 @@ export default function SignChoice() {
                 />
               </svg>
               <div className="card__content">
-                <h4 className="card__title" style={{fontSize:"60px"}} >{t("SignChoice.Vendor")}</h4>
+                <h4 className="card__title" style={{fontSize:"60px",backgroundImage: "linear-gradient(to top,#ffffff 50%,#dfdda3 60%)", color: "transparent", WebkitBackgroundClip: "text" }} >{t("SignChoice.Vendor")}</h4>
                 {/* <h3 >Vendor</h3> */}
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function SignChoice() {
               </svg>
 
               <div className="card__content">
-                <h4 className="card__title" style={{fontSize:"60px"}} >{t("SignChoice.CarOwner")}</h4>
+                <h4 className="card__title" style={{fontSize:"60px",backgroundImage: "linear-gradient(to top,#ffffff 50%,#dfdda3 60%)", color: "transparent", WebkitBackgroundClip: "text" }} >{t("SignChoice.CarOwner")}</h4>
                 {/* <h3 >Car Owner</h3> */}
               </div>
             </div>
