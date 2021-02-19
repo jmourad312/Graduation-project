@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: 210,
     marginTop: "150px",
     marginLeft: "10px",
-    marginBottom: "100px",
+    marginBottom: "60px",
     fontSize: "20px",
     fontWeight:"700"
   },
@@ -103,8 +103,11 @@ export default function ProductFilter(props) {
     handleSearchClick();
   };
   const handlePriceChange = (event,newValue) => {
-    setState({
-      price:newValue
+    setState((previous) => {
+      return {
+        ...previous,
+        price: newValue,
+      };
     });
     console.log(state.price);
     // switch (event.target.name) {
@@ -358,7 +361,7 @@ export default function ProductFilter(props) {
           zIndex: "100",
           position: "absolute",
           left: "420px",
-          bottom: "-6.5%",
+          bottom: "-11.5%",
           height: "50px",
         }}
       >
