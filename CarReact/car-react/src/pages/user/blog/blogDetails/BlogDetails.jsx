@@ -374,6 +374,7 @@ export default function BlogDetails(props) {
                       : "User"
                     : "LOADING"}
                 </span>
+                
               </p>
               <hr />
               <p>
@@ -666,7 +667,7 @@ export default function BlogDetails(props) {
                             style={{
                               position: "relative",
                               left: "55.7px",
-                              top:"-10px",
+                              top: "-10px",
                               fontSize: "20px",
                             }}
                             onClick={() => addVote(item._id)}
@@ -733,6 +734,7 @@ export default function BlogDetails(props) {
                       <div className="media-body">
                         <h5 className="mt-0">
                           {item.person.firstName ? item.person.firstName : null}
+                          <span>. . .</span>
                         </h5>
                         <hr />
                         <p

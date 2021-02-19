@@ -7,18 +7,21 @@ import image2 from "./assets/Images/sencha.png";
 import i18next from "i18next";
 import { useState } from "react";
 import LangToggle from "./components/LangToggle";
+import ChatBotComp from "./components/ChatBotComp";
 
+// import 'styled-components';
 
 function App() {
-
-  
-
   return (
     <div className="App">
       <Router>
         <MagdyNavbar />
         <div className="backgroundImage"></div>
         <Routes />
+        <div style={{ position: "absolute", right: "40px", bottom: "50px" }}>
+          <ChatBotComp />
+        </div>
+
         <div style={{ position: "absolute", left: "140px", top: "10px" }}>
           <LangToggle />
         </div>
