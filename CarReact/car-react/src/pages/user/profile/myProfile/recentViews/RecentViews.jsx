@@ -71,12 +71,12 @@ export default function RecentViews(props) {
                       <article class="card card--1">
                         <div
                           class="card__img"
-                          style={{ background: `url(${item.image})` }}
+                          style={{ background: `url(${item.images[0]})top left 100%` }}
                         ></div>
                         <p class="card_link">
                           <div
                             class="card__img--hover"
-                            style={{ background: `url(${item.image})` }}
+                            style={{ background: `url(${item.images[0]})top left 100%` }}
                           ></div>
                         </p>
                         <div class="card__info">

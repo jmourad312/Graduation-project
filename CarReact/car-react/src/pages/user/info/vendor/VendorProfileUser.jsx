@@ -3,8 +3,13 @@ import React, { useEffect, useState } from "react";
 import SlickSlider from "../../../../components/SlickSlider";
 import { useTranslation } from "react-i18next";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { setProductId } from "../../../../store/actions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function VendorProfileUser(props) {
+  const dispatch = useDispatch();
+  var history = useHistory();
   const [vendor, setVendor] = useState({
     firstName: "",
     lastName: "",
@@ -12,7 +17,7 @@ export default function VendorProfileUser(props) {
     phoneNumber: 0,
     vendorItems: [],
     location: [],
-    workshopName:""
+    workshopName: ""
   });
   const [loc, setLoc] = useState("");
   // const [vendorItems, setVendorItems] = useState([])
@@ -69,6 +74,32 @@ export default function VendorProfileUser(props) {
       }
     }
   });
+
+  const handleClick = (params) => {
+    dispatch(setProductId(params));
+    localStorage.setItem("ProductID", params);
+    history.push(`/ProductDetails/${params}`);
+    axios
+      .put(
+        `http://localhost:3000/user/recentlyViewed`,
+        { id: props.id },
+        {
+          headers: { Authorization: localStorage.getItem("Authorization") },
+        }
+      )
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("Success");
+          // props.history.push("/MyProfile");
+        } else {
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const { t, i18n } = useTranslation();
   const [show, setShow] = useState(false);
@@ -152,13 +183,17 @@ export default function VendorProfileUser(props) {
           </div> */}
           <hr className="hr " />
           {/* <!-- items --> */}
-          <h2 className="text-center mb-3"  style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}> {t("vendor profile.items")}</h2>
-          <SlickSlider items={vendor.vendorItems} />
+          <h2 className="text-center mb-3" style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)", color: "transparent", WebkitBackgroundClip: "text" }}> {t("vendor profile.items")}</h2>
+          <div style={{ marginLeft: "100px" }}>
+            <SlickSlider items={vendor.vendorItems} />
+          </div>
         </div>
       </div>
       <Button variant="primary" onClick={() => setShow(true)}>
         Custom Width Modal
       </Button>
+
+
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -172,23 +207,65 @@ export default function VendorProfileUser(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+
           <Container>
             <Row>
               {vendor.vendorItems.map((item, index) => {
                 return (
-                  <Col key={index}>
+                  <Col lg="4" key={index}>
                     <section className="cards">
-                      <article className="card card--1"
+                      <article className="card card--1" onClick={() => handleClick(item._id)} style={{
+                        marginRight: "15px",
+                        transition: "all 0.4s cubic-bezier(0.175, 0.885, 0, 1)",
+                        backgroundColor: "#fff",
+                        width: "100%",
+                        position: "relative",
+                        borderRadius: "12px",
+                        overFlow: "hidden",
+                        boxShadow: "0px 13px 10px -7px rgba(0, 0, 0, 0.1)",
+                        height: "370px",
+                        marginBottom: "20px",
+                        cursor:"pointer"
+                        
+                      }}
                       // onClick={() => handleClick(item._id)} 
                       >
-                        <div className="card__img" style={{ background: `url(${item.image})` }}></div>
+                        <div className="card__img" style={{
+                          background: `url(${item.images[0]})top left 100%`, visibility: "hidden",
+                          backgroundSize: "cover",
+                          backgroundPosition: "top",
+                          backgroundRepeat: "no-repeat",
+                          width: "100%",
+                          height: "235px", borderTopLeftRadius: "12px", borderTopRightRadius: "12px"
+                        }}></div>
                         <p className="card_link">
-                          <div className="card__img--hover" style={{ background: `url(${item.image})` }}></div>
+                          <div className="card__img--hover" style={{
+                            background: `url(${item.images[0]})top left 100%`,
+                            transition: "0.2s all ease-out",
+                            backgroundSize: "cover",
+                            backgroundPosition: "top",
+                            backgroundRepeat: "no-repeat",
+                            width: "100%",
+                            position: "absolute",
+                            height: "235px",
+                            borderTopLeftRadius: "12px",
+                            borderTopRightRadius: "12px",
+                            top: "0"
+                          }}></div>
                         </p>
-                        <div className="card__info">
-                          <h4 className="card__title text-truncate">{item.name}</h4>
+                        <div className="card__info" style={{
+                          zIndex: "2",
+                          backgroundColor: "#fff",
+                          borderTopLeftRadius: "12px",
+                          borderTopRightRadius: "12px",
+                          padding: "16px 24px 24px 24px"
+                        }}>
+                          <h4 className="card__title text-truncate" style={{
+                            marginTop: "5px",
+                            marginBottom: "10px",
+                          }}>{item.name}</h4>
                           <span className="price" style={{ fontWeight: "600", color: "goldenrod", fontSize: "25px", }}>
-                            {item.price} LE
+                            {item.price} {t("repeated.LE")}
                           </span>{" "}
                           <p className="text-truncate">{item.description}</p>
                           <strong>
