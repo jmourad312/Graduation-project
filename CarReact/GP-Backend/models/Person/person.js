@@ -25,6 +25,12 @@ var person = new schema(
       coordinates: [Number],
     },
     codeToResetPassword: Number,
+    reportPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Report",
+      },
+    ],
   },
   { timestamps: true }
 );

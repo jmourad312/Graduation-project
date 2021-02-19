@@ -468,8 +468,8 @@ export default function Admin(props) {
                         <thead className="blue-grey lighten-4">
                           <tr>
                             <th>Index</th>
-                            {/* <th>User ID</th> */}
                             <th>User name</th>
+                            <th># reports</th>
                             <th>Number of blogs</th>
                             <th>Details</th>
                           </tr>
@@ -480,8 +480,8 @@ export default function Admin(props) {
                             return (
                               <tr>
                                 <td>{skipState.blog+index+1}</td>
-                                {/* <td>{item.person._id}</td> */}
                                 <td>{item.person.firstName}</td>
+                                <td>{item.person.reportPosts.length}</td>
                                 <td>{item.postsUser.length}</td>
                                 <td>
                                   <Button2
