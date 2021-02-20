@@ -109,7 +109,7 @@
   }
   .menu__content:after {
     // background: hsl(var(--hue, 0), 50%, 50%);
-    background: linear-gradient(to right, rgb(255, 255, 255), #131212 );    content: "";
+    background: linear-gradient(-45deg, #334d50, #cbcaa5);    content: "";
     border-radius: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
@@ -122,7 +122,7 @@
   
   .menu__item {
     // background: hsl(var(--hue, 0), 50%, 50%);
-    background: linear-gradient(to right, rgb(255, 255, 255), #131212 );    
+    background: linear-gradient(-45deg, #334d50, #cbcaa5);   
     border-radius: 50%;
     cursor: pointer;
     display: flex;

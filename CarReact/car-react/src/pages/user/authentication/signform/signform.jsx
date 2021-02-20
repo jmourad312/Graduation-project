@@ -14,6 +14,8 @@ import VerticalModal from "../../../../components/VerticalModal";
 import termsAndPrivacy from "../../../../assets/js/termsAndPrivacy";
 import { motion } from "framer-motion";
 import {useTranslation} from "react-i18next";
+import icon from "../../../../assets/Images/icon.png";
+
 
 export default function Signform(props) {
   const [changeClass, setChangeClass] = useState("forgotpass");
@@ -412,6 +414,13 @@ export default function Signform(props) {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>{t('logo')}</h1>
+              <Link to="" className="logo">
+                  <img
+                    src={icon}
+                    alt=""
+                    style={{ width: "50px", height: "50px",position:"absolute",top:"10px",left:"10px" }}
+                  />
+                </Link>
               <p style={{ fontSize: "20px" }}>
               {t('userSign.rightPlace')}
               </p>
@@ -431,6 +440,13 @@ export default function Signform(props) {
             </div>
             <div className="overlay-panel overlay-right">
               <h1>{t('logo')}</h1>
+              <Link to="" className="logo">
+                  <img
+                    src={icon}
+                    alt=""
+                    style={{ width: "50px", height: "50px",position:"absolute",top:"10px",right:"10px" }}
+                  />
+                </Link>
               <p style={{ fontSize: "20px" }}>
               {t('userSign.rightPlace')}
               </p>
@@ -489,6 +505,10 @@ export default function Signform(props) {
                 height: "70px",
                 fontSize: "25px",
                 borderRadius: "20px",
+                borderTopWidth:"0px",
+                borderRightWidth:"0px",
+                borderBottomWidth:"0px",
+                borderLeftWidth:"0px",
               }}
               value="Send email"
               onClick={handleForgetSubmit}
@@ -531,6 +551,10 @@ export default function Signform(props) {
                   height: "70px",
                   fontSize: "25px",
                   borderRadius: "20px",
+                  borderTopWidth:"0px",
+                  borderRightWidth:"0px",
+                  borderBottomWidth:"0px",
+                  borderLeftWidth:"0px",
                 }}
                 type="button"
                 value="submit"
