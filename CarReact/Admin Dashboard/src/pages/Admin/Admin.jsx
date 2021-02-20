@@ -544,7 +544,7 @@ export default function Admin(props) {
                                   <Button2
                                     disabled={item.userId.postsUser.length == 0}
                                     className="page-link"
-                                    parameter={item.person}
+                                    parameter={item}
                                     key={index + 1}
                                     handelClick={BlogsUser}
                                     name={
