@@ -379,13 +379,13 @@ export default function Homepage2() {
               data-id="1"
             >
               <img
-                src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=889&q=80"
+                src="https://www.kingnice.com.tw/storage/application/mechanical-parts/mechanical-parts.jpg"
                 alt=""
               />
             </div>
             <div className="slider__images-item" data-id="2">
               <img
-                src="https://image.freepik.com/free-photo/modern-cars-are-studio-room_37416-77.jpg"
+                src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
                 alt=""
               />
             </div>
@@ -397,16 +397,16 @@ export default function Homepage2() {
             </div>
             <div className="slider__images-item" data-id="4">
               <img
-                src="https://carinsider.co/wp-content/uploads/2020/03/5-Best-Used-Car-Buying-Websites-730x412.jpg"
-                alt=""
-              />
-            </div>
-            <div className="slider__images-item" data-id="5">
-              <img
                 src="https://images.unsplash.com/photo-1577380777497-55be8529ef15?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80"
                 alt=""
               />
             </div>
+            {/* <div className="slider__images-item" data-id="5">
+              <img
+                src="https://images.unsplash.com/photo-1577380777497-55be8529ef15?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80"
+                alt=""
+              />
+            </div> */}
           </div>
           <div className="slider__text">
             <div
@@ -423,7 +423,7 @@ export default function Homepage2() {
             </div>
             <div className="slider__text-item" data-id="2">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Quality')}</h3>
+                <h3>{t('slider.Blog')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>{t('slider.slogen1')}</p>
@@ -431,7 +431,7 @@ export default function Homepage2() {
             </div>
             <div className="slider__text-item" data-id="3">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Variety')}</h3>
+                <h3>{t('slider.Products')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>{t('slider.slogen2')}</p>
@@ -439,20 +439,20 @@ export default function Homepage2() {
             </div>
             <div className="slider__text-item" data-id="4">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Technology')}</h3>
-              </div>
-              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>{t('slider.slogen3')}</p>
-              </div>
-            </div>
-            <div className="slider__text-item" data-id="5">
-              <div className="slider__text-item-head">
                 <h3>{t('slider.Design')}</h3>
               </div>
               <div className="slider__text-item-info" style={{fontSize:"25px"}}>
                 <p>{t('slider.slogen4')}</p>
               </div>
             </div>
+            {/* <div className="slider__text-item" data-id="5">
+              <div className="slider__text-item-head">
+                <h3>{t('slider.Design')}</h3>
+              </div>
+              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
+                <p>{t('slider.slogen4')}</p>
+              </div>
+            </div> */}
           </div>
         </div>
         <div className="slider__nav">
