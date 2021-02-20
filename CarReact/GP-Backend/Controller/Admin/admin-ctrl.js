@@ -251,32 +251,34 @@ deleteCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
+
   const criteriaSearch = { $regex: req.body.search, $options: "i" };
   const queryCond = {};
   if (req.body.search) {
-    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }];
+    queryCond.$or = [{ email: criteriaSearch }, { firstName: criteriaSearch }];
   }
+
   const populateQuery = [
-    { path: "person", select: "firstName middleName email" },
+    { path: "person",select: "firstName middleName email"  },
     {
       path: "postsUser",
       populate: [{ path: "reportPosts" }],
     },
   ];
 
-  User.find(queryCond)
+  User.find({})
     .populate(populateQuery)
     .skip(+req.params.skip)
     .limit(5)
     .exec((err, users) => {
       if (err) {
-        return res.status(400).json({
+        return res.json({
           Data: null,
           Message: "You can't count the number of users",
           Success: false,
         });
       }
-      return res.status(200).json({
+      return res.json({
         Data: users,
         Message: "this is the full number of users",
         Success: true,

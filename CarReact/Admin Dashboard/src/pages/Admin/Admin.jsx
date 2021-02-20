@@ -22,14 +22,23 @@ export default function Admin(props) {
   const numberItemPerPage = 5;
 
   const [state, setState] = useState({
-    user: [],
-    vendor: [],
-    blogs: [],
-    products: [],
-    contacts: [],
+    searchUser: "",
+    searchVendor: "",
+    searchBlog: "",
+    searchProduct: "",
+    searchContact: "",
+    searchAds: "",
   });
 
-  const [color, setColor] = useState("red");
+  const searchTabel = (event) => {
+    const { value, name } = event.target;
+    setState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
 
   const countReport = (itemPost) => {
     let counter = 0;
@@ -428,6 +437,16 @@ export default function Admin(props) {
             {stateRedux.users.length != 0 && (
               <>
                 <h3>Users</h3>
+                <input
+                  type="text"
+                  name="searchUser"
+                  value={state.searchUser}
+                  onChange={searchTabel}
+                  onKeyPress={(e) => {
+                    if (e.which == 13) dispatch(getUserAction(0));
+;
+                  }}
+                />
                 <Tabel
                   id="userTabel"
                   data={stateRedux.users.Data}
@@ -449,6 +468,12 @@ export default function Admin(props) {
             {stateRedux.vendors.length != 0 && (
               <>
                 <h3>Vendors</h3>
+                <input
+                  type="text"
+                  name="searchVendor"
+                  value={state.searchVendor}
+                  onChange={searchTabel}
+                />
                 <Tabel
                   id="vendorTabel"
                   data={stateRedux.vendors.Data}
@@ -472,6 +497,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
+                  <input
+                      type="text"
+                      name="searchBlog"
+                      value={state.searchBlog}
+                      onChange={searchTabel}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -539,6 +570,12 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
+                  <input
+                      type="text"
+                      name="searchProduct"
+                      value={state.searchProduct}
+                      onChange={searchTabel}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -598,6 +635,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Messages from ContactUs</h3>
+                  <input
+                      type="text"
+                      name="searchContact"
+                      value={state.searchContact}
+                      onChange={searchTabel}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -639,6 +682,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>ADS</h3>
+                  <input
+                      type="text"
+                      name="searchAds"
+                      value={state.searchAds}
+                      onChange={searchTabel}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
