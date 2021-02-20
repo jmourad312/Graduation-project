@@ -13,85 +13,44 @@ const {
 
 //signup
 router.post("/signup", async (req, res) => {
-  
   // const { error } = registerValidation(req.body);
   // if (error) {
   //   return res.json({ error: error.details[0].message });
   // }
   const saltRounds = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, saltRounds);
+  const body = req.body;
+  const location = {
+    coordinates: [
+      req.body.longitude ? req.body.longitude : 0,
+      req.body.latitude ? req.body.latitude : 0,
+    ],
+  };
 
-  Person.create(
-    {
-      firstName: req.body.firstName,
-      middleName: req.body.middleName,
-      workshopName: req.body.workshopName,
-      email: req.body.email,
-      image: req.body.image,
-      phoneNumber: req.body.phoneNumber,
-      subscribe: req.body.subscribe,
-      role: "vendor",
-      password: password,
-      location:{
-        coordinates:[req.body.longitude ? req.body.longitude : 0 ,req.body.latitude ? req.body.latitude : 0]
-      }
-    },
-    (errorPerson, dataOfPerson) => {
-      if (errorPerson) {
-        res.json({
-          Data: errorPerson,
-          Message: "Can't add user to database,  " + errorPerson,
-          Success: false,
-        });
-      } else {
-        Subscription.create(
-          {
-            type: req.body.type,
-            createdAt: req.body.createdAt,
-            endAt: req.body.endAt,
-          },
-          (errorSubscription, dataOfSubscription) => {
-            if (errorSubscription) {
-              res.json({
-                Data: {},
-                Message: "Can't add user to database,  " + errorSubscription,
-                Success: false,
-              });
-            } else {
-              Vendor.create(
-                {
-                  person: dataOfPerson._id,
-                  workshopSchedule: {
-                    openingTime: "f",
-                    closingTime: "k",
-                    closingDays: req.body.closingDays,
-                  },
-                  vendorSubscription: dataOfSubscription._id,
-                },
-                (errorVendor) => {
-                  if (errorVendor) {
-                    console.log(err);
-                    res.json({
-                      Data: {},
-                      Message: "Can't add user to database,  " + errorVendor,
-                      Success: false,
-                    });
-                  } else {
-                    const token = gettoken.token(dataOfPerson);
-                    res.header("Authorization", "Bearer " + token).json({
-                      Data: dataOfPerson._id,
-                      Message: "Done Sign up ",
-                      Success: true,
-                    });
-                  }
-                }
-              );
-            }
-          }
-        );
-      }
-    }
-  );
+  const person = new Person({ ...body, location, password, role: "vendor" });
+  const vendor = new Vendor();
+
+  person.save().then((dataOfPerson)=>{
+    vendor.person = dataOfPerson._id;
+    vendor.save().then((dataOfvendor)=>{
+      person.vendorId = dataOfvendor._id;
+      person.save()
+    })
+    const token = gettoken.token(dataOfPerson);
+    res.header("Authorization", "Bearer " + token).json({
+      Data: dataOfPerson._id,
+      Message: "Done Sign up ",
+      Success: true,
+    });
+
+  }).catch((error)=>{
+    res.json({
+      Data: error,
+      Message: "Can't add vendor",
+      Success: false,
+    });
+  })
+
 });
 
 //signin

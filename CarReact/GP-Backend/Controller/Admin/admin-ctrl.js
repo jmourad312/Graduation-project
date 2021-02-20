@@ -260,14 +260,12 @@ showAllUsers = (req, res) => {
   queryCond.role = "user";
 
   const populateQuery = [
-    { path: "person",select: "firstName middleName email"},
-    {
-      path: "postsUser",
-      populate: [{ path: "reportPosts" }],
-    },
+    { path: "userId", populate:{path:"postsUser", populate: [{ path: "reportPosts" }]}},
   ];
-console.log()
+
   Person.find(queryCond)
+  .populate(populateQuery
+  )
     .skip(+req.params.skip)
     .limit(5)
     .exec(async (err, users) => {
@@ -410,8 +408,9 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
+
   const populateQuery = [
-    { path: "person", select: "firstName workshopName middleName email" },
+    { path: "vendorId"},
   ];
 
   const criteriaSearch = { $regex: req.body.search, $options: "i" };
@@ -422,6 +421,7 @@ showAllVendors = (req, res) => {
   queryCond.role = "vendor";
 
   Person.find(queryCond)
+  .populate(populateQuery)
     .skip(+req.params.skip)
     .limit(5)
     .exec(async(err, vendors) => {

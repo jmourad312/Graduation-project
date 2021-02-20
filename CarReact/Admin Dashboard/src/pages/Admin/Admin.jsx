@@ -500,12 +500,15 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
-                  {/* <input
+                  <input
                       type="text"
                       name="searchBlog"
                       value={state.searchBlog}
                       onChange={searchTabel}
-                    /> */}
+                      onKeyPress={(e) => {
+                        if (e.which == 13) dispatch(getBlogAction(0,state.searchBlog));
+                      }}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -525,21 +528,21 @@ export default function Admin(props) {
                               <tr
                                 style={{
                                   backgroundColor:
-                                    countReport(item.postsUser) >= 1 &&
-                                    countReport(item.postsUser) <= 4
+                                    countReport(item.userId.postsUser) >= 1 &&
+                                    countReport(item.userId.postsUser) <= 4
                                       ? "yellow"
-                                      : countReport(item.postsUser) >= 5
+                                      : countReport(item.userId.postsUser) >= 5
                                       ? "red"
                                       : "",
                                 }}
                               >
                                 <td>{skipState.blog + index + 1}</td>
-                                <td>{item.person.firstName}</td>
-                                <td>{countReport(item.postsUser)}</td>
-                                <td>{item.postsUser.length}</td>
+                                <td>{item.firstName}</td>
+                                <td>{countReport(item.userId.postsUser)}</td>
+                                <td>{item.userId.postsUser.length}</td>
                                 <td>
                                   <Button2
-                                    disabled={item.postsUser.length == 0}
+                                    disabled={item.userId.postsUser.length == 0}
                                     className="page-link"
                                     parameter={item.person}
                                     key={index + 1}
@@ -573,12 +576,15 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
-                  {/* <input
+                  <input
                       type="text"
                       name="searchProduct"
                       value={state.searchProduct}
                       onChange={searchTabel}
-                    /> */}
+                      onKeyPress={(e) => {
+                        if (e.which == 13) dispatch(getProductAction(0,state.searchProduct));
+                      }}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -598,14 +604,14 @@ export default function Admin(props) {
                               <tr>
                                 <td>{skipState.product + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td>{item.person.firstName}</td>
-                                <td>{item.vendorItems.length}</td>
+                                <td>{item.firstName}</td>
+                                <td>{item.vendorId.vendorItems.length}</td>
 
                                 <td>
                                   <Button2
-                                    disabled={item.vendorItems.length == 0}
+                                    disabled={item.vendorId.vendorItems.length == 0}
                                     className="page-link"
-                                    parameter={item.person}
+                                    parameter={item}
                                     key={index + 1}
                                     handelClick={ProductsVendor}
                                     name={

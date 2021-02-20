@@ -99,10 +99,10 @@ export const getContactAction = (skip) => async (dispatch) => {
   }
 }
 
-export const getBlogAction = (skip) => async (dispatch) => {
+export const getBlogAction = (skip,search) => async (dispatch) => {
 
     try {
-        const res = await instance.get(`admin/showAllUsersPosts/${skip}`,
+        const res = await instance.post(`admin/showAllUsers/${skip}`,{search:search},
         {headers: { Authorization: localStorage.getItem("Authorization")}});
         dispatch({
             type: TYPES.GET_N_BLOGS,
@@ -113,10 +113,10 @@ export const getBlogAction = (skip) => async (dispatch) => {
     }
   }
 
-  export const getProductAction = (skip) => async (dispatch) => {
+  export const getProductAction = (skip,search) => async (dispatch) => {
 
     try {
-        const res = await instance.get(`admin/showAllVendorsProducts/${skip}`,
+        const res = await instance.post(`admin/showAllVendors/${skip}`,{search:search},
         {headers: { Authorization: localStorage.getItem("Authorization")}});
         dispatch({
             type: TYPES.GET_N_PRODUCTS,

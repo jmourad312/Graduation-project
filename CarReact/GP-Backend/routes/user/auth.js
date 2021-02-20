@@ -50,82 +50,43 @@ router.get(
 router.post("/signup", async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) {
-    return res.status(400).json({ error: error.details[0].message });
+    return res.json({ error: error.details[0].message });
   }
+
   const saltRounds = await bcrypt.genSalt(10);
-  bcrypt.hash(req.body.password, saltRounds, function (errorHash, hash) {
+  bcrypt.hash(req.body.password, saltRounds, function async (errorHash, hash) {
     if (errorHash) {
-      res.json({
+      return res.json({
         Data: {},
         Message: "Can't add user to database,  " + errorHash,
         Success: false,
       });
     }
-    // Store hash in your password DB.
-    else {
-      Person.create(
-        {
-          firstName: req.body.firstName,
-          middleName: req.body.middleName,
-          email: req.body.email,
-          image: req.body.image,
-          phoneNumber: req.body.phoneNumber,
-          subscribe: req.body.subscribe,
-          role: "user",
-          password: hash,
-        },
-        (errorPerson, dataOfPerson) => {
-          if (errorPerson) {
-            res.json({
-              Data: {},
-              Message: "Can't add user to database,  " + errorPerson,
-              Success: false,
-            });
-          } else {
-            Subscription.create(
-              {
-                type: req.body.type,
-                createdAt: req.body.createdAt,
-                endAt: req.body.endAt,
-              },
-              (errorSubscription, dataOfSubscription) => {
-                if (errorSubscription) {
-                  res.json({
-                    Data: {},
-                    Message:
-                      "Can't add user to database,  " + errorSubscription,
-                    Success: false,
-                  });
-                } else {
-                  User.create(
-                    {
-                      person: dataOfPerson._id,
-                      userSubscription: dataOfSubscription._id,
-                    },
-                    (errorUser, dataOfUser) => {
-                      if (errorUser) {
-                        res.json({
-                          Data: {},
-                          Message: "Can't add user to database,  " + errorUser,
-                          Success: false,
-                        });
-                      } else {
-                        const token = gettoken.token(dataOfPerson);
-                        res.header("Authorization", "Bearer " + token).json({
-                          Data: dataOfPerson._id,
-                          Message: "Done Sign in ",
-                          Success: true,
-                        });
-                      }
-                    }
-                  );
-                }
-              }
-            );
-          }
-        }
-      );
-    }
+
+    const person = new Person({ ...req.body,password:hash , role: "user" });
+    const user = new User();
+
+    person.save().then((dataOfPerson)=>{
+      user.person = dataOfPerson._id;
+      user.save().then((dataOfuser)=>{
+        person.userId = dataOfuser._id;
+        person.save()
+        const token = gettoken.token(dataOfPerson);
+        return res.header("Authorization", "Bearer " + token).json({
+          Data: dataOfPerson._id,
+          Message: "Done Sign up ",
+          Success: true,
+        });
+      })
+
+  
+    }).catch((error)=>{
+     return res.json({
+        Data: error,
+        Message: "Can't add vendor",
+        Success: false,
+      });
+    })
   });
 });
 
@@ -134,7 +95,7 @@ router.post("/signin", (req, res) => {
   const { error } = loginValidation(req.body);
   // throw validation errors
   if (error) return res.status(400).json({ error: error.details[0].message });
-  
+
   Person.findOne({ email: req.body.email }, (err, data) => {
     if (err) {
       res.json({
