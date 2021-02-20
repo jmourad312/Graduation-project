@@ -49,7 +49,7 @@ export default function SignChoice() {
                 />
               </div>
 
-              <svg className="card__svg" viewBox="0 0 800 500">
+              {/* <svg className="card__svg" viewBox="0 0 800 500">
                 <path
                   d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500"
                   stroke="transparent"
@@ -62,10 +62,10 @@ export default function SignChoice() {
                   stroke-width="3"
                   fill="transparent"
                 />
-              </svg>
+              </svg> */}
               <div className="card__content">
                 <h4 className="card__title" style={{fontSize:"60px",backgroundImage:
-              "linear-gradient(to top, #08091d 0%, #ffffff 30%)",
+              "linear-gradient(to top, #08091d 50%, #a2a5a8 100%)",
             color: "transparent",
             WebkitBackgroundClip: "text", }} >{t("SignChoice.Vendor")}</h4>
                 {/* <h3 >Vendor</h3> */}
@@ -85,7 +85,7 @@ export default function SignChoice() {
                 />
               </div>
 
-              <svg className="card__svg" viewBox="0 0 800 500">
+              {/* <svg className="card__svg" viewBox="0 0 800 500">
                 <path
                   d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500"
                   stroke="transparent"
@@ -98,11 +98,11 @@ export default function SignChoice() {
                   stroke-width="3"
                   fill="transparent"
                 />
-              </svg>
+              </svg> */}
 
               <div className="card__content">
                 <h4 className="card__title" style={{fontSize:"60px",backgroundImage:
-              "linear-gradient(to top, #08091d 0%, #ffffff 30%)", color: "transparent", WebkitBackgroundClip: "text" }} >{t("SignChoice.CarOwner")}</h4>
+              "linear-gradient(to top, #08091d 50%, #a2a5a8 100%)", color: "transparent", WebkitBackgroundClip: "text" }} >{t("SignChoice.CarOwner")}</h4>
                 {/* <h3 >Car Owner</h3> */}
               </div>
             </div>
