@@ -319,6 +319,12 @@ export default function BlogDetails(props) {
     }
   }, [blogDetails]);
 
+  const sortComment = (data) => {
+    var dataAsc = []
+   dataAsc =  data.sort(function(a, b){return b.vote.resultVoting-a.vote.resultVoting});
+    return(dataAsc)
+  }
+
   const handleDelete = (params) => {
     axios
       .delete(`http://localhost:3000/user/deletePost/${params}`, {
@@ -850,7 +856,7 @@ export default function BlogDetails(props) {
                     overflowX: "hidden",
                   }}
                 >
-                  {blogDetails.comment.map((item, index) => {
+                  {sortComment(blogDetails.comment).map((item, index) => {
                     return (
                       <div className="media mb-1 mr-3" key={index}>
                         <div className="mr-2">
