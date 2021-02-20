@@ -89,7 +89,8 @@
         "contact": "تواصل مع البائع",
         "items": "المنتجات",
         "name": "الإسم",
-        "phone": "رقم الهاتف "
+        "phone": "رقم الهاتف ",
+        "Locationnotprovided":"المكان غير متوفر"
     },
     "product": {
         "products list": {

@@ -22,21 +22,32 @@ export default function Admin(props) {
   const numberItemPerPage = 5;
 
   const [state, setState] = useState({
-    user: [],
-    vendor: [],
-    blogs: [],
-    products: [],
-    contacts: [],
+    searchUser: "",
+    searchVendor: "",
+    searchBlog: "",
+    searchProduct: "",
+    searchContact: "",
+    searchAds: "",
   });
 
-  const countReport = (itemPost)=> {
+  const searchTabel = (event) => {
+    const { value, name } = event.target;
+    setState((previous) => {
+      return {
+        ...previous,
+        [name]: value,
+      };
+    });
+  };
+
+  const countReport = (itemPost) => {
     let counter = 0;
 
-    itemPost.map((item,intex)=>{ 
-      counter = counter + item.reportPosts.length
-     })
-     return counter
-  }
+    itemPost.map((item, intex) => {
+      counter = counter + item.reportPosts.length;
+    });
+    return counter;
+  };
 
   const [skipState, setSkipState] = useState({
     user: 0,
@@ -44,7 +55,7 @@ export default function Admin(props) {
     blog: 0,
     product: 0,
     contact: 0,
-    ad:0
+    ad: 0,
   });
 
   const stateRedux = useSelector((state) => state);
@@ -64,7 +75,8 @@ export default function Admin(props) {
 
   useEffect(() => {
     getCountData();
-  },[stateRedux])
+    dispatch(getCountDataAction);
+  }, [stateRedux]);
 
   const getCountData = async () => {
     try {
@@ -112,23 +124,22 @@ export default function Admin(props) {
       if (parameter.banned == false) {
         const res = await instance.post(
           "admin/addUserBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
       } else {
         const res = await instance.post(
           "admin/removeUserBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
       }
-      
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user));
+    dispatch(getUserAction(skipState.user,state.searchUser));
   };
 
   const bannedvendor = async (parameter) => {
@@ -136,14 +147,14 @@ export default function Admin(props) {
       if (parameter.banned == false) {
         const res = await instance.post(
           "admin/addVendorBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
       } else {
         const res = await instance.post(
           "admin/removeVendorBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
@@ -151,8 +162,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor));
-
+    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
   };
 
   const goToEditUser = async (parameter) => {
@@ -178,7 +188,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user));
+    dispatch(getUserAction(skipState.user,state.searchUser));
   };
 
   const goToDeleteVendor = async (parameter) => {
@@ -190,8 +200,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor));
-
+    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
   };
 
   const ProductsVendor = (parameter) => {
@@ -210,46 +219,46 @@ export default function Admin(props) {
 
   const getPartUser = (skip) => {
     console.log(skip);
-    setSkipState({...skipState,user:skip.selected * numberItemPerPage})
-    dispatch(getUserAction(skip.selected * numberItemPerPage));
+    setSkipState({ ...skipState, user: skip.selected * numberItemPerPage });
+    dispatch(getUserAction(skip.selected * numberItemPerPage,state.searchUser));
   };
 
   const getPartVendor = (skip) => {
-    setSkipState({...skipState,vendor:skip.selected * numberItemPerPage})
-    dispatch(getVendorAction(skip.selected * numberItemPerPage));
+    setSkipState({ ...skipState, vendor: skip.selected * numberItemPerPage });
+    dispatch(getVendorAction(skip.selected * numberItemPerPage,state.searchVendor));
   };
 
   const getPartBlog = (skip) => {
-    setSkipState({...skipState,blog:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, blog: skip.selected * numberItemPerPage });
     dispatch(getBlogAction(skip.selected * numberItemPerPage));
   };
 
   const getPartProduct = (skip) => {
-    setSkipState({...skipState,product:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, product: skip.selected * numberItemPerPage });
     dispatch(getProductAction(skip.selected * numberItemPerPage));
   };
 
   const getPartContant = (skip) => {
-    setSkipState({...skipState,contact:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, contact: skip.selected * numberItemPerPage });
     dispatch(getContactAction(skip.selected * numberItemPerPage));
   };
 
   const getPartAds = (skip) => {
-    setSkipState({...skipState,ad:skip.selected * numberItemPerPage})
+    setSkipState({ ...skipState, ad: skip.selected * numberItemPerPage });
     dispatch(getAdsAction(skip.selected * numberItemPerPage));
   };
 
   const deleteAds = async (id) => {
     try {
-        const res = await instance.delete(`admin/deleteAds/${id}`,
-        {headers: { Authorization: localStorage.getItem("Authorization")}});
-        console.log(res);
-
+      const res = await instance.delete(`admin/deleteAds/${id}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      });
+      console.log(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     dispatch(getAdsAction(skipState.ad));
-  }
+  };
 
   const [BarData, setBarData] = useState({
     labels: ["Users", "Vendors", "Products", "Blogs"],
@@ -304,33 +313,31 @@ export default function Admin(props) {
                 href="#userTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fa fa-lg fa-user mr-4">User </i>
+                <i className="fa fa-lg fa-user mr-4"> User </i>
               </a>
               <a
                 href="#vendorTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i class="fas fa-lg fa-hard-hat mr-2">Vendor</i>
+                <i class="fas fa-lg fa-hard-hat mr-2"> Vendor</i>
               </a>
               <a
                 href="#blogTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-blogger mr-4">Blog</i>
+                <i className="fab fa-lg fa-blogger mr-4"> Blog</i>
               </a>
               <a
                 href="#productTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-product-hunt mr-1">Product</i>
+                <i className="fab fa-lg fa-product-hunt mr-1"> Product</i>
               </a>
               <a
                 href="#contactTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fa fa-envelope mr-1">
-                  Message from contact
-                </i>
+                <i className="fa fa-envelope mr-1"> Message from contact</i>
               </a>
             </div>
           </div>
@@ -354,7 +361,7 @@ export default function Admin(props) {
               <div className="col-md-7 mb-4">
                 <div className="card">
                   <div className="card-body">
-                  <div className="list-group list-group-flush">
+                    <div className="list-group list-group-flush">
                       <a
                         className="list-group-item list-group-item-action waves-effect"
                         style={{ fontSize: "20px" }}
@@ -431,6 +438,15 @@ export default function Admin(props) {
             {stateRedux.users.length != 0 && (
               <>
                 <h3>Users</h3>
+                <input
+                  type="text"
+                  name="searchUser"
+                  value={state.searchUser}
+                  onChange={searchTabel}
+                  onKeyPress={(e) => {
+                    if (e.which == 13) dispatch(getUserAction(0,state.searchUser));
+                  }}
+                />
                 <Tabel
                   id="userTabel"
                   data={stateRedux.users.Data}
@@ -440,7 +456,7 @@ export default function Admin(props) {
                   handelClickDelete={goToDeleteUser}
                 ></Tabel>
                 <PaginationReact
-                  NumberOfItemsInDB={stateRedux.countData.Data.user}
+                  NumberOfItemsInDB={stateRedux.users.count.length}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartUser}
                 />
@@ -452,6 +468,15 @@ export default function Admin(props) {
             {stateRedux.vendors.length != 0 && (
               <>
                 <h3>Vendors</h3>
+                <input
+                  type="text"
+                  name="searchVendor"
+                  value={state.searchVendor}
+                  onChange={searchTabel}
+                  onKeyPress={(e) => {
+                    if (e.which == 13) dispatch(getVendorAction(0,state.searchVendor));
+                  }}
+                />
                 <Tabel
                   id="vendorTabel"
                   data={stateRedux.vendors.Data}
@@ -460,9 +485,9 @@ export default function Admin(props) {
                   handelClickEdit={goToEditVendor}
                   handelClickDelete={goToDeleteVendor}
                 ></Tabel>
-                
+
                 <PaginationReact
-                  NumberOfItemsInDB={stateRedux.countData.Data.vendor}
+                  NumberOfItemsInDB={stateRedux.vendors.count.length}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartVendor}
                 />
@@ -475,6 +500,15 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
+                  <input
+                      type="text"
+                      name="searchBlog"
+                      value={state.searchBlog}
+                      onChange={searchTabel}
+                      onKeyPress={(e) => {
+                        if (e.which == 13) dispatch(getBlogAction(0,state.searchBlog));
+                      }}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -491,16 +525,26 @@ export default function Admin(props) {
                         <tbody>
                           {stateRedux.nblog.Data.map((item, index) => {
                             return (
-                              <tr>
-                                <td>{skipState.blog+index+1}</td>
-                                <td>{item.person.firstName}</td>
-                                <td>{countReport(item.postsUser)}</td>
-                                <td>{item.postsUser.length}</td>
+                              <tr
+                                style={{
+                                  backgroundColor:
+                                    countReport(item.userId.postsUser) >= 1 &&
+                                    countReport(item.userId.postsUser) <= 4
+                                      ? "yellow"
+                                      : countReport(item.userId.postsUser) >= 5
+                                      ? "red"
+                                      : "",
+                                }}
+                              >
+                                <td>{skipState.blog + index + 1}</td>
+                                <td>{item.firstName}</td>
+                                <td>{countReport(item.userId.postsUser)}</td>
+                                <td>{item.userId.postsUser.length}</td>
                                 <td>
                                   <Button2
-                                    disabled={item.postsUser.length == 0}
+                                    disabled={item.userId.postsUser.length == 0}
                                     className="page-link"
-                                    parameter={item.person}
+                                    parameter={item}
                                     key={index + 1}
                                     handelClick={BlogsUser}
                                     name={
@@ -519,7 +563,7 @@ export default function Admin(props) {
                     </div>
                   </div>
                   <PaginationReact
-                    NumberOfItemsInDB={stateRedux.countData.Data.user}
+                    NumberOfItemsInDB={stateRedux.nblog.count.length}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartBlog}
                   />
@@ -532,6 +576,15 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
+                  <input
+                      type="text"
+                      name="searchProduct"
+                      value={state.searchProduct}
+                      onChange={searchTabel}
+                      onKeyPress={(e) => {
+                        if (e.which == 13) dispatch(getProductAction(0,state.searchProduct));
+                      }}
+                    />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -549,16 +602,16 @@ export default function Admin(props) {
                           {stateRedux.nproduct.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.product+index+1}</td>
+                                <td>{skipState.product + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td>{item.person.firstName}</td>
-                                <td>{item.vendorItems.length}</td>
+                                <td>{item.firstName}</td>
+                                <td>{item.vendorId.vendorItems.length}</td>
 
                                 <td>
                                   <Button2
-                                    disabled={item.vendorItems.length == 0}
+                                    disabled={item.vendorId.vendorItems.length == 0}
                                     className="page-link"
-                                    parameter={item.person}
+                                    parameter={item}
                                     key={index + 1}
                                     handelClick={ProductsVendor}
                                     name={
@@ -577,7 +630,7 @@ export default function Admin(props) {
                     </div>
                   </div>
                   <PaginationReact
-                    NumberOfItemsInDB={stateRedux.countData.Data.vendor}
+                    NumberOfItemsInDB={stateRedux.nproduct.count.length}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartProduct}
                   />
@@ -591,6 +644,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Messages from ContactUs</h3>
+                  {/* <input
+                      type="text"
+                      name="searchContact"
+                      value={state.searchContact}
+                      onChange={searchTabel}
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -607,7 +666,7 @@ export default function Admin(props) {
                           {stateRedux.contacts.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.contact+index+1}</td>
+                                <td>{skipState.contact + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
                                 <td>{item.email}</td>
                                 <td>{item.message}</td>
@@ -632,6 +691,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>ADS</h3>
+                  {/* <input
+                      type="text"
+                      name="searchAds"
+                      value={state.searchAds}
+                      onChange={searchTabel}
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -653,7 +718,7 @@ export default function Admin(props) {
                           {stateRedux.ads.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.ad+index+1}</td>
+                                <td>{skipState.ad + index + 1}</td>
                                 <td>{item.ownerName}</td>
                                 <td>{item.ownerPhone}</td>
                                 <td>{item.ownerEmail}</td>

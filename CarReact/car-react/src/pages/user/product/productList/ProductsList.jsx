@@ -8,24 +8,24 @@ import ProductComp from "../../../../components/ProductComp";
 import ProductFilter from "../../../../components/ProductFilter";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductsAction, getUsersAction } from "../../../../store/actions";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 export default function ProductsList() {
   const products = useSelector((state) => state.products);
   const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
   const isVendorLoggedIn = useSelector((state) => state.isVendorLoggedIn);
   const dispatch = useDispatch();
-  
-  
+
+
   // console.log(products);
   // const getProducts = () => {
   //   dispatch(getProductsAction());
   // };
-  
+
   useEffect(() => {
     // getProducts();
     dispatch(getUsersAction(localStorage.getItem("UserID")));
   }, []);
-  
+
 
 
   const createProducts = (prod) => {
@@ -41,7 +41,7 @@ export default function ProductsList() {
         brand={prod.carBrand}
         model={prod.carModel}
         rating={prod}
-        // category={prod.category}
+      // category={prod.category}
       />
     );
   };
@@ -62,7 +62,7 @@ export default function ProductsList() {
     type: "tween",
     ease: "anticipate",
   };
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <motion.div
@@ -88,34 +88,36 @@ export default function ProductsList() {
                 products.Success ? (
                   products.Data.map(createProducts)
                 ) : (
-                  <div
-                    style={{
-                      height: "600px",
-                      width: "600px",
-                      position: "absolute",
-                      left: "15%",
-                      top: "25%",
-                    }}
-                  >
-                    <h2
+                    <div
                       style={{
-                        position: "relative",
-                        top: "40%",
-                        left: "0%",
-                        textAlign: "center",
+                        height: "600px",
+                        width: "600px",
+                        position: "absolute",
+                        left: "15%",
+                        top: "25%",
                       }}
                     >
-                    {t("product.products list.search")}
-                    </h2>
-                  </div>
-                )
+                      <h2
+                        style={{
+                          position: "relative",
+                          top: "20%",
+                          left: "20%",
+                          textAlign: "center",
+                          fontWeight:"700",
+                          fontSize:"32px"
+                        }}
+                      >
+                        {t("product.products list.search")}
+                      </h2>
+                    </div>
+                  )
               ) : (
-                <Loading />
-              )}
+                  <Loading />
+                )}
             </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.div >
   );
 }

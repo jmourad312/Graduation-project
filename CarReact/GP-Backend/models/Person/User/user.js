@@ -39,9 +39,6 @@ var user = new schema({
       ref: "Post",
     },
   ],
-
-  banned: { type: Boolean, default: false },
-
   //authentication
   facebookId: {
     type: Number,

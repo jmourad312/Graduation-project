@@ -251,8 +251,47 @@ deleteCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
+
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  let queryCond = {};
+  if (req.body.search) {
+    queryCond.$or = [{ email: criteriaSearch }, { firstName: criteriaSearch }];
+  }
+  queryCond.role = "user";
+
   const populateQuery = [
-    { path: "person", select: "firstName middleName email" },
+    { path: "userId", populate:{path:"postsUser", populate: [{ path: "reportPosts" }]}},
+  ];
+
+  Person.find(queryCond)
+  .populate(populateQuery
+  )
+    .skip(+req.params.skip)
+    .limit(5)
+    .exec(async (err, users) => {
+      if (err) {
+        return res.json({
+          Data: null,
+          Message: "You can't count the number of users",
+          Success: false,
+        });
+      }
+      let number = 0;
+      number = await Person.find(queryCond)
+      return res.json({
+        Data: users,
+        count:number,
+        Message: "this is the full number of users",
+        Success: true,
+      });
+    });
+};
+
+
+showAllUsersPosts = (req, res) => {
+
+  const populateQuery = [
+    { path: "person",select: "firstName middleName email"},
     {
       path: "postsUser",
       populate: [{ path: "reportPosts" }],
@@ -260,19 +299,22 @@ showAllUsers = (req, res) => {
   ];
 
   User.find({})
-    .populate(populateQuery)
+  .populate(populateQuery)
     .skip(+req.params.skip)
     .limit(5)
-    .exec((err, users) => {
+    .exec(async (err, users) => {
       if (err) {
-        return res.status(400).json({
+        return res.json({
           Data: null,
           Message: "You can't count the number of users",
           Success: false,
         });
       }
-      return res.status(200).json({
+      let number = 0;
+      number = await User.find()
+      return res.json({
         Data: users,
+        count:number,
         Message: "this is the full number of users",
         Success: true,
       });
@@ -300,8 +342,8 @@ usersNumber = (req, res) => {
 //add ban
 addUserBan = (req, res) => {
   const IdPerson = req.body.id;
-  User.updateOne(
-    { person: IdPerson },
+  Person.updateOne(
+    { _id: IdPerson },
     { $set: { banned: true } },
 
     (err, result) => {
@@ -342,8 +384,8 @@ deleteUser = (req, res) => {
 // remove ban
 removeUserBan = (req, res) => {
   const IdPerson = req.body.id;
-  User.updateOne(
-    { person: IdPerson },
+  Person.updateOne(
+    { _id: IdPerson },
     { $set: { banned: false } },
 
     (err, result) => {
@@ -366,15 +408,23 @@ removeUserBan = (req, res) => {
 
 // show all vendors
 showAllVendors = (req, res) => {
+
   const populateQuery = [
-    { path: "person", select: "firstName workshopName middleName email" },
+    { path: "vendorId"},
   ];
 
-  Vendor.find({})
-    .populate(populateQuery)
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  let queryCond = {};
+  if (req.body.search) {
+    queryCond.$or = [{ email: criteriaSearch }, { firstName: criteriaSearch }];
+  }
+  queryCond.role = "vendor";
+
+  Person.find(queryCond)
+  .populate(populateQuery)
     .skip(+req.params.skip)
     .limit(5)
-    .exec((err, vendors) => {
+    .exec(async(err, vendors) => {
       if (err) {
         return res.status(400).json({
           Data: null,
@@ -382,8 +432,42 @@ showAllVendors = (req, res) => {
           Success: false,
         });
       }
+      let number = 0;
+      number = await Person.find(queryCond)
+
       return res.status(200).json({
         Data: vendors,
+        count:number,
+        Message: "this is the full number of users",
+        Success: true,
+      });
+    });
+};
+
+showAllVendorsProducts = (req, res) => {
+
+  const populateQuery = [
+    { path: "person", select: "firstName workshopName middleName email" },
+  ];
+
+  Vendor.find({})
+  .populate(populateQuery)
+    .skip(+req.params.skip)
+    .limit(5)
+    .exec(async(err, vendors) => {
+      if (err) {
+        return res.status(400).json({
+          Data: null,
+          Message: "You can't count the number of users",
+          Success: false,
+        });
+      }
+      let number = 0;
+      number = await Vendor.find()
+
+      return res.status(200).json({
+        Data: vendors,
+        count:number,
         Message: "this is the full number of users",
         Success: true,
       });
@@ -465,8 +549,8 @@ numberOfBlogs = (req, res) => {
 // addBan
 addVendorBan = (req, res) => {
   const IdPerson = req.body.id;
-  Vendor.updateOne(
-    { person: IdPerson },
+  Person.updateOne(
+    { _id: IdPerson },
     { $set: { banned: true } },
 
     (err, result) => {
@@ -490,8 +574,8 @@ addVendorBan = (req, res) => {
 removeVendorBan = (req, res) => {
   const IdPerson = req.body.id;
 
-  Vendor.updateOne(
-    { person: IdPerson },
+  Person.updateOne(
+    { _id: IdPerson },
     { $set: { banned: false } },
 
     (err, result) => {
@@ -697,4 +781,6 @@ module.exports = {
   deleteModel,
   updateCollection,
   deleteCollection,
+  showAllUsersPosts,
+  showAllVendorsProducts
 };

@@ -73,9 +73,10 @@ export default function FavouriteItems(props) {
                 style={{
                   fontWeight: "700",
                   fontSize: "30px",
-
-                  position: "absolute",
-                  left: "30%",
+                  color:"black", 
+                  position: "absolute", 
+                  left: "34%",
+                  top:"240px" 
                 }}
               >
                 {t("FavouriteItems.NoItems")}

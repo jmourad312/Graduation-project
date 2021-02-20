@@ -14,7 +14,7 @@
   // margin: -20px 0 50px;
   
   .forgotpass {
-    background: linear-gradient(-10deg,#383535, rgb(255, 255, 255));    content: "";
+    background: white;
     height: 100%;
     width: 100%;
     margin-left: 0;
@@ -24,13 +24,13 @@
     transition: all 1s;
     
     .buttoncolor{
-      background: linear-gradient(-45deg, #110f11, #424c53);
+      background: linear-gradient(-45deg, #cbcaa5 ,#334d50 );
 
     }
     
   }
   .open {
-    background-color: #c2929a;
+    background-color: #ffffff;
     top: 0%;
     z-index: 100;
     transition: all 1s;
@@ -311,14 +311,14 @@
   .button {   
     border-radius: 20px;
     // border: 1px solid rgb(44, 44, 44);
-    background-color: #f95959;
-    color: #ffffff;
+    background: linear-gradient(-45deg, #cbcaa5,#334d50);
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    color: white;
   }
 
   button:active {
@@ -413,8 +413,8 @@
 
   .overlay {
     background: #ff416c;
-    background: -webkit-linear-gradient(to right,  #242222,  rgb(44, 44, 44));
-    background: linear-gradient(to right, #242222,  rgb(44, 44, 44));
+    background: -webkit-linear-gradient(-45deg, #cbcaa5,#334d50);
+    background: linear-gradient(-45deg, #cbcaa5,#334d50);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

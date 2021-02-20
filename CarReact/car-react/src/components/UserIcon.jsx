@@ -38,10 +38,12 @@ export default function UserIcon() {
               ? "/MyProfile/RecentViews"
               : "/VendorAdministration"
           }
+          className="nav-link waves-effect"
+          style={{fontWeight:"500"}}
         >
           {t("UserIcon.MyProfile")}
         </Link>
-        <Link className="nav-link waves-effect" to={"/"} onClick={logout}>
+        <Link className="nav-link waves-effect" style={{fontWeight:"500"}} to={"/"} onClick={logout}>
         {t("UserIcon.Logout1")}
         </Link>
       </div>

@@ -1,68 +1,64 @@
-.myProfile{
-    // background-color: $body-pattern;
-    overflow: hidden;
-    .profileLeft{
-        // background-image: url("../"+$dark-pattern);
-        // background-color: rgb(27, 34, 43);
-    background-color: #012035e3;
+.myProfile {
+  // background-color: $body-pattern;
+  overflow: hidden;
+  .profileLeft {
+    // background-image: url("../"+$dark-pattern);
+    // background-color: rgb(27, 34, 43);
+    // background-color: #012035e3;
+    background: linear-gradient(-45deg,#334d50 70%,#cbcaa5 );
+    margin-top: 5%;
+    padding: 15px;
+    height: 90vh;
+    max-height: 90vh;
+    border-radius: 50px 15px 15px 50px;
+    // border: 2px solid saddlebrown;
+    text-align: center;
+    z-index: 5;
+    //         -webkit-background-size: cover;
+    //   -moz-background-size: cover;
+    //   -o-background-size: cover;
+    //   background-size: cover;
+  }
 
-        margin-top: 5%;
-        padding: 15px;
-        height: 90vh;
-        max-height: 90vh;
-        border-radius: 50px 15px 15px 50px;
-        // border: 2px solid saddlebrown;
-        text-align: center;
-        z-index: 5;
-//         -webkit-background-size: cover;
-//   -moz-background-size: cover;
-//   -o-background-size: cover;
-//   background-size: cover;
-    }
-    
-    .profileright{
-        // background-image: url("../"+$dark-pattern);
+  .profileright {
+    // background-image: url("../"+$dark-pattern);
     background-color: #ffffff7e;
 
-        border-radius: 0px 50px 50px 0px;
-        // background-color: #010003;
-        // background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
-        margin-top: 10%;
-        height: 80vh;
-        padding: 5px;
-        width: 0;
-        // -webkit-background-size: cover;
-        // -moz-background-size: cover;
-        // -o-background-size: cover;
-        // background-size: cover;
-        // border: 2px solid saddlebrown;
-        transition: all 0.55s;
-        .profileRightContent{
-            color: aliceblue;
-            margin: 2% 0 10% 0;
-            transition: all .9s;
-
-        }
-        
+    border-radius: 0px 50px 50px 0px;
+    // background-color: #010003;
+    // background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
+    margin-top: 10%;
+    height: 80vh;
+    padding: 5px;
+    width: 0;
+    // -webkit-background-size: cover;
+    // -moz-background-size: cover;
+    // -o-background-size: cover;
+    // background-size: cover;
+    // border: 2px solid saddlebrown;
+    transition: all 0.55s;
+    .profileRightContent {
+      color: aliceblue;
+      margin: 2% 0 10% 0;
+      transition: all 0.9s;
     }
-    .profileright2{
+  }
+  .profileright2 {
     background-color: #ffffff7e;
 
-        // background-image: url("../"+$dark-pattern);
-        border-radius: 0px 50px 50px 0px;
-        max-width: 0;
-        margin-top: 10%;
-        height: 80vh;
-        padding: 5px;
-        // border: 2px solid saddlebrown;
-        transition: all 0.55s;
-        .profileRightContent{
-            color: aliceblue;
-            margin: 2% 0 10% 0;
-            opacity: -10;
-            transition: all 0.1s;
-            
-        }
-        
+    // background-image: url("../"+$dark-pattern);
+    border-radius: 0px 50px 50px 0px;
+    max-width: 0;
+    margin-top: 10%;
+    height: 80vh;
+    padding: 5px;
+    // border: 2px solid saddlebrown;
+    transition: all 0.55s;
+    .profileRightContent {
+      color: aliceblue;
+      margin: 2% 0 10% 0;
+      opacity: -10;
+      transition: all 0.1s;
     }
+  }
 }

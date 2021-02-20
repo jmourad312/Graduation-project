@@ -9,12 +9,14 @@ const userRateCtrl = require('../../Controller/User/userRate-ctrl');
 const upload = require('../../middleware/upload').upload;
 const User = require("../../models/Person/User/user");
 const Vendor = require("../../models/Person/Vendor/vendor");
+const Person = require("../../models/Person/person");
+
 
 
 async function canView(req, resp, next) {
   const { role, _id } = req.user;
 
-  const data =  await User.findOne({person:_id},{banned:1})
+  const data =  await Person.findOne({_id:_id},{banned:1})
 
   if (!( (role == "user" && data.banned==false ) || role == "admin")) {
     resp.json({
@@ -28,10 +30,9 @@ async function canView(req, resp, next) {
 async function canViewall(req, resp, next) {
   const { role, _id } = req.user;
 
-  const dataUser =  await User.findOne({person:_id},{banned:1})
-  const dataVendor =  await Vendor.findOne({person:_id},{banned:1})
+  const data =  await Person.findOne({_id:_id},{banned:1})
 
-  if (! ( (role == "user"  &&  dataUser.banned==false ) || role == "admin" || (role == "vendor"  && dataVendor.banned==false ))) {
+  if (! ( (role == "user"  &&  data.banned==false ) || role == "admin" || (role == "vendor"  && data.banned==false ))) {
     resp.json({
       Data: null,
       Message: "can't access",
@@ -43,7 +44,8 @@ async function canViewall(req, resp, next) {
 async function validateUser(req, resp, next) {
   console.log(req.user)
   const { role, _id } = req.user;
-  const data =  await User.findOne({person:_id},{banned:1})
+
+  const data =  await Person.findOne({_id:_id},{banned:1})
 
   if (!( (role == "user" && (_id == req.params.id || _id == req.body.id) && data.banned==false ) || (role == "admin"))) {
     resp.json({
