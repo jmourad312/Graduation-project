@@ -390,11 +390,12 @@ showDetailsPost = (req, res) => {
       path: "comment",
       populate: [
         { path: "person", select: "firstName" },
-        { path: "vote", select: "upVoting downVoting" },
+        { path: "vote", select: "upVoting downVoting"},
       ],
       select: "-post ",
     },
   ];
+  // { sort: { 'created_at': -1 } }
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 })
     .populate(populateQuery)
     .exec((error, data) => {

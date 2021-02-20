@@ -89,8 +89,7 @@ getItems = async (req, res) => {
   console.log(queryCond);
 
    carItem
-    .find({ person: IdVendor,...queryCond }).sort({ _id: -1 }).skip(+req.params.skip)
-    .limit(3).exec( async (error, items) => {
+    .find({ person: IdVendor,...queryCond }).sort({ _id: -1 }).exec( async (error, items) => {
       if (error || items.length == 0) {
         return res.json({
           Data: error,
