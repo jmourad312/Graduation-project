@@ -217,12 +217,12 @@ export default function MyItems(props) {
 
         <Modal show={isOpen} onHide={!isOpen}>
           <Modal.Header>
-            <Modal.Title>{t("VendorAddItemModal.Addproduct")}</Modal.Title>
+            <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.Addproduct")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
               <Form.Group>
-                <Form.Label>{t("VendorAddItemModal.ProductName")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ProductName")}</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder={t("VendorAddItemModal.ProductNameHolder")}
@@ -230,20 +230,22 @@ export default function MyItems(props) {
                   id="name"
                   value={inputValue.name}
                   onChange={handleChange}
+                  style={{fontWeight:"500"}}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>{t("VendorAddItemModal.EnterImage")}</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.EnterImage")}</Form.Label>
                 <Form.Control
                   type="file"
                   name="image"
                   id="image"
                   onChange={handleImageChange}
                   multiple
+                  style={{fontWeight:"500"}}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>
                   {t("VendorAddItemModal.ProductDescription")}
                 </Form.Label>
                 <Form.Control
@@ -254,21 +256,23 @@ export default function MyItems(props) {
                   id="description"
                   value={inputValue.description}
                   onChange={handleChange}
+                  style={{fontWeight:"500"}}
                 />
               </Form.Group>
               <Form.Row>
                 <Form.Group as={Col}>
-                  <Form.Label>{t("VendorAddItemModal.ItemPrice")}</Form.Label>
+                  <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ItemPrice")}</Form.Label>
                   <Form.Control
                     type="number"
                     name="price"
                     id="price"
                     value={inputValue.price}
                     onChange={handleChange}
+                    style={{fontWeight:"500"}}
                   />
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label>{t("repeated.Brand")}</Form.Label>
+                  <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
                   <Form.Control
                     defaultValue="Choose..."
                     as="select"
@@ -276,6 +280,7 @@ export default function MyItems(props) {
                     id="carBrand"
                     value={inputValue.carBrand}
                     onChange={handleChange}
+                    style={{fontWeight:"500"}}
                   >
                     <option key={"no-value"} value="">
                       {t("Filter.ChooseBrand")}
@@ -291,7 +296,7 @@ export default function MyItems(props) {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label>{t("repeated.Model")}</Form.Label>
+                  <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
                   <Form.Control
                     defaultValue="Choose..."
                     as="select"
@@ -300,6 +305,7 @@ export default function MyItems(props) {
                     value={inputValue.carModel}
                     onChange={handleChange}
                     disabled={!stateDisabled}
+                    style={{fontWeight:"500"}}
                   >
                     <option key={"no-value"} value="">
                       {t("Filter.ChooseModel")}
@@ -317,10 +323,10 @@ export default function MyItems(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="dark" type="button" onClick={handleSubmit}>
+            <Button style={{fontWeight:"700",fontSize:"20px"}} variant="dark" type="button" onClick={handleSubmit}>
               {t("repeated.Submit")}
             </Button>
-            <Button variant="danger" onClick={closeModal}>
+            <Button  style={{fontWeight:"700",fontSize:"20px"}}variant="danger" onClick={closeModal}>
               {t("repeated.Cancel")}
             </Button>
           </Modal.Footer>

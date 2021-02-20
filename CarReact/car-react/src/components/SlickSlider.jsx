@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Slider from "react-slick";
 import { setProductId } from '../store/actions';
+import { useTranslation } from "react-i18next";
 
 
 function SampleNextArrow(props) {
@@ -11,7 +12,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style,  transform:"scale(3)",paddingLeft:"0.5px",borderRadius:"100%",fontSize:"3rem" }}
+      style={{ ...style,  transform:"scale(3)",paddingLeft:"10px",fontSize:"3rem" }}
       onClick={onClick}
     />
   );
@@ -22,7 +23,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style,transform:"scale(3)",paddingRight:"60px",fontSize:"3rem" }}
+      style={{ ...style,transform:"scale(3)",paddingRight:"50px",fontSize:"3rem" }}
       onClick={onClick}
     />
   );
@@ -72,6 +73,8 @@ export default function SlickSlider(props) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+
+  const { t, i18n } = useTranslation();
   return (
     <div>
       <Slider {...settings}>
@@ -104,7 +107,7 @@ export default function SlickSlider(props) {
                           fontSize: "25px",
                         }}
                       >
-                        {item.price} LE
+                        {item.price} {t("repeated.LE")}
                       </span>{" "}
                       <p className="text-truncate">{item.description}</p>
                       <strong>

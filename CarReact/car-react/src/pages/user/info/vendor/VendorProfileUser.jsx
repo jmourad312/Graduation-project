@@ -109,7 +109,7 @@ export default function VendorProfileUser(props) {
       <div className="bg">
         <div className="container">
           {/* <!-- vendor info --> */}
-          <h2 style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",color: "transparent",WebkitBackgroundClip: "text" }} className="text-center" >{t("vendor profile.info")}</h2>
+          <h2 style={{ fontWeight: "700", fontSize: "50px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text",paddingBottom:"3.5px" }} className="text-center" >{t("vendor profile.info")}</h2>
           <section className="row mt-5">
             <div className="media w-100">
               <div className="col-3">
@@ -123,7 +123,7 @@ export default function VendorProfileUser(props) {
               <div className="col-5">
                 <div className="media-body">
                   <div className="">
-                    <h3 style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}
+                    <h3 style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}
                     >
                       <i
                         className="fa fa-envelope fa-1x mr-2"
@@ -132,19 +132,22 @@ export default function VendorProfileUser(props) {
                       {t("vendor profile.contact")}
                     </h3>
                     <h2
-                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
+                      style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("vendor profile.name")}: {vendor.firstName}{" "}
                       {vendor.lastName}
                     </h2>
                     <h2
-                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
+                      style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("repeated.Shop")} {vendor.workshopName}{" "}
                     </h2>
                     <h4
-                      style={{ fontWeight: "700", fontSize: "30px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
+                      style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("vendor profile.phone")}:{" "}
                       {vendor.phoneNumber ? vendor.phoneNumber : "Not Provided"}
                     </h4>
+                    <Button variant="light" onClick={() => setShow(true)}>
+                      {t("VendorProfile.AllItems")}
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -184,14 +187,12 @@ export default function VendorProfileUser(props) {
           <hr className="hr " />
           {/* <!-- items --> */}
           <h2 className="text-center mb-3" style={{ fontWeight: "700", fontSize: "40px", backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}> {t("vendor profile.items")}</h2>
-          <div style={{ marginLeft: "100px" }}>
+          <div style={{}}>
             <SlickSlider items={vendor.vendorItems} />
           </div>
         </div>
       </div>
-      <Button variant="primary" onClick={() => setShow(true)}>
-        Custom Width Modal
-      </Button>
+
 
 
       <Modal
@@ -203,7 +204,7 @@ export default function VendorProfileUser(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            Custom Modal Styling
+            {t("VendorProfile.AllItems")}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -225,8 +226,8 @@ export default function VendorProfileUser(props) {
                         boxShadow: "0px 13px 10px -7px rgba(0, 0, 0, 0.1)",
                         height: "370px",
                         marginBottom: "20px",
-                        cursor:"pointer"
-                        
+                        cursor: "pointer"
+
                       }}
                       // onClick={() => handleClick(item._id)} 
                       >

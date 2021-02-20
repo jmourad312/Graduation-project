@@ -251,5 +251,16 @@
         "From":"From: ",
         "To":"To ",
         "km":"Km"
+    },
+    "Report":{
+        "reporttitle":"Report",
+        "ToReport":"To Report this blog, please enter your reason for reporting. We will take your report into consideration.",
+        "ReportDetails":"Report Details"
+    },
+    "VendorProfile":{
+        "AllItems":"All Products"
+    },
+    "EditProductModal":{
+        "EditTitle":"Edit your product"
     }
 }

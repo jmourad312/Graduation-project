@@ -6,6 +6,7 @@ import { getProductDetails, setProductId,  filterCarModel,filterCarBrand, getVen
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
+import {useTranslation} from "react-i18next";
 
 export default function ItemEntry(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -139,6 +140,7 @@ export default function ItemEntry(props) {
   useEffect(() => {
     dispatch(filterCarBrand());
   }, []);
+  const {t, i18n} = useTranslation();
   return (
     <div className="col-3">
       <div className="itemEntry">
@@ -182,7 +184,7 @@ export default function ItemEntry(props) {
               {props.description}
               </h6>
               <h5 className="card-text" style={{ color: "yellow" }}>
-                <i class="fas fa-coins"></i> {props.price}
+                <i class="fas fa-coins"></i> {props.price}{t("repeated.LE")}
               </h5>
               {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}
@@ -214,56 +216,60 @@ export default function ItemEntry(props) {
 
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title>Edit your product</Modal.Title>
+          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("EditProductModal.EditTitle")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Product Name</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ProductName")}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter product Name"
+                placeholder={t("VendorAddItemModal.ProductNameHolder")}
                 name="name"
                 id="name"
                 value={editValue.name}
                 onChange={handleChange}
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Product Name</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.EnterImage")}</Form.Label>
               <Form.Control
                 type="file"
                 name="images"
                 id="image"
                 onChange={handleImageChange}
                 multiple
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Product Name</Form.Label>
+              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ProductDescription")}</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter product description"
+                placeholder={t("VendorAddItemModal.DescriptionHolder")}
                 name="description"
                 id="description"
                 value={editValue.description}
                 onChange={handleChange}
+                style={{fontWeight:"500"}}
               />
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label>Price</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ItemPrice")}</Form.Label>
                 <Form.Control
                   type="number"
                   name="price"
                   id="price"
                   value={editValue.price}
                   onChange={handleChange}
+                  style={{fontWeight:"500"}}
                 />
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Brand</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -271,6 +277,7 @@ export default function ItemEntry(props) {
                   id="carBrand"
                   value={editValue.carBrand}
                   onChange={handleChange}
+                  style={{fontWeight:"500"}}
                 >
                   {stateRedux.brand.map((item, index) => {
                     return (
@@ -282,7 +289,7 @@ export default function ItemEntry(props) {
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label>Brand</Form.Label>
+                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -291,6 +298,7 @@ export default function ItemEntry(props) {
                   value={editValue.carModel}
                   onChange={handleChange}
                   disabled={!stateDisabled}
+                  style={{fontWeight:"500"}}
                 >
                   {stateRedux.model.map((item, index) => {
                     return (
@@ -310,11 +318,12 @@ export default function ItemEntry(props) {
             variant="dark"
             type="button"
             onClick={() => handleSubmit(props.id)}
+            style={{fontWeight:"700",fontSize:"20px"}}
           >
-            Submit
+            {t("repeated.Submit")}
                 </Button>
-          <Button variant="danger" onClick={closeModal}>
-            Cancel
+          <Button  style={{fontWeight:"700",fontSize:"20px"}} variant="danger" onClick={closeModal}>
+          {t("repeated.Cancel")}
               </Button>
         </Modal.Footer>
       </Modal>

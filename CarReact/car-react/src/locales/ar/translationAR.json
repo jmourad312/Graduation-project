@@ -253,6 +253,16 @@
         "From":"من :",
         "To":"إلي ",
         "km":"  كم  "
+    },
+    "Report":{
+        "reporttitle":"إبلاغ",
+        "ToReport":".للإبلاغ عن هذه المدونة، من فضلك ادخل سبب البلاغ، سوف نأخذ بلاغك بعين الاعتبار",
+        "ReportDetails":"تفاصيل البلاغ"
+    },
+    "VendorProfile":{
+    "AllItems":"جميع المنتجات"
+    },
+    "EditProductModal":{
+        "EditTitle":"تعديل المنتج"
     }
-
 }
