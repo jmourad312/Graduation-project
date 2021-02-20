@@ -236,7 +236,7 @@ export default function ProductFilterVendor(props) {
       >
         {t("Filter.ClearFilter")}
       </button>
-      <div
+      {/* <div
         className="pagination"
         style={{
           zIndex: "100",
@@ -253,7 +253,7 @@ export default function ProductFilterVendor(props) {
             handleClick={handleClick}
           />
         )}
-      </div>
+      </div> */}
     </div>
     </div>
   );

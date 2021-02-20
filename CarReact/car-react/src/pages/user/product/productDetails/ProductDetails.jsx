@@ -161,7 +161,7 @@ export default function ProductDetails(props) {
       if (productDetails.person) {
         if (productDetails.person.location) {
           setLoc(
-            `https://maps.google.com/maps?q=${productDetails.person.location.coordinates[1]},${productDetails.person.location.coordinates[0]}&hl=es&z=14&amp;&output=embed`
+            `https://maps.google.com/maps?q=${productDetails.person.location.coordinates[1]},${productDetails.person.location.coordinates[0]}&hl=en&z=14&amp;&output=embed`
           );
         }
       }
@@ -364,7 +364,7 @@ export default function ProductDetails(props) {
                     <div className="mt-3">
                       <span className="" style={{ fontSize: "40px" }}>
                         <li className="fas fa-coins pr-2 text-warning">
-                          {productDetails && productDetails.price}{" "}
+                          {" "}{productDetails && productDetails.price}{" "}
                           {t("repeated.LE")}
                         </li>
                       </span>
@@ -575,7 +575,7 @@ export default function ProductDetails(props) {
                               frameborder="0"
                               style={{
                                 border: "1px solid black",
-                                borderRadius: "2%",
+                                borderRadius: "15px",
                               }}
                               allowfullscreen
                             ></iframe>

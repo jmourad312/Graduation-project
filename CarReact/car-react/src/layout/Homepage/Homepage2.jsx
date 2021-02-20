@@ -478,7 +478,7 @@ export default function Homepage2() {
             <div className="slider__nav-dot" data-id="2"></div>
             <div className="slider__nav-dot" data-id="3"></div>
             <div className="slider__nav-dot" data-id="4"></div>
-            <div className="slider__nav-dot" data-id="5"></div>
+            {/* <div className="slider__nav-dot" data-id="5"></div> */}
           </div>
         </div>
       </div>

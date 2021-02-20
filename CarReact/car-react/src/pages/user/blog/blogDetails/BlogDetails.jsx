@@ -905,7 +905,7 @@ export default function BlogDetails(props) {
                             </button>
                           ) : (
                             <Spinner
-                              animation="grow"
+                              // animation="grow"
                               style={{
                                 position: "relative",
                                 left: "-40px",
@@ -939,7 +939,8 @@ export default function BlogDetails(props) {
                                 </Fab>
                               </Zoom> */}
                               {item.person._id ===
-                                localStorage.getItem("UserID") && (
+                                localStorage.getItem("UserID") || item.person._id ===
+                                localStorage.getItem("VendorID")&&(
                                 <Zoom in={true}>
                                   <Fab
                                     // color="secondary"

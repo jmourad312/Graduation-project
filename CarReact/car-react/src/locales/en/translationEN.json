@@ -262,5 +262,6 @@
     },
     "EditProductModal":{
         "EditTitle":"Edit your product"
-    }
+    },
+    "AddReview":"Add Review"
 }

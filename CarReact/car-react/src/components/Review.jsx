@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import {useTranslation} from "react-i18next";
 
 export default function Review() {
   
@@ -70,7 +71,8 @@ const Cancelreview = () => {
 
 
 
-  
+    const {t, i18n} = useTranslation();
+
   return (
     <div className="review">
       <div class="cont">
@@ -140,8 +142,9 @@ const Cancelreview = () => {
               <button
                 className="btn btn-light btn-outline-dark mb-5 mt-2"
                 onClick={handleAddReview}
+                style={{fontSize:"20px",fontWeight:"500"}}
               >
-                Add review
+                {t("AddReview")}
               </button>
             </div>
           </form>

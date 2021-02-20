@@ -162,6 +162,8 @@ export default function MyItems(props) {
         <div className="container">
           {/* <AddItem /> */}
           <div className="row">
+          <div className="col-3">
+
             <ProductFilterVendor className="ProductFilter" />
             <Button
               variant="dark"
@@ -169,13 +171,21 @@ export default function MyItems(props) {
                 height: "50px",
                 position: "absolute",
                 top: "85%",
-                right: "80.5%",
+                right: "15.5%",
                 background: "linear-gradient(-45deg, #110f11, #424c53)",
+                fontWeight:"700"
               }}
               onClick={() => openModal()}
             >
               <i class="far fa-plus-square"></i> {t("repeated.Add")}
             </Button>
+            </div>
+          
+            <div className="col-9 w-100" style={{maxHeight:"510px",overflowY:"auto",overflowX:"hidden"}}>
+              <div className="row ml-2 mt-3">
+
+             
+           
             {vendor && vendor.vendorItems.length !== 0 ? (
               vendorItems && 
               vendorItems.map(createItem)
@@ -212,6 +222,9 @@ export default function MyItems(props) {
                 </div>
               </div>
             )}
+             </div>
+             </div>
+            
           </div>
         </div>
 
