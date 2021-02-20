@@ -528,10 +528,10 @@ export default function Admin(props) {
                               <tr
                                 style={{
                                   backgroundColor:
-                                    countReport(item.userId.postsUser) >= 1 &&
-                                    countReport(item.userId.postsUser) <= 4
+                                    countReport(item.userId.postsUser) >= 3 &&
+                                    countReport(item.userId.postsUser) <= 6
                                       ? "yellow"
-                                      : countReport(item.userId.postsUser) >= 5
+                                      : countReport(item.userId.postsUser) >= 7
                                       ? "red"
                                       : "",
                                 }}
