@@ -54,7 +54,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: rgb(44, 44, 44);
+    background:linear-gradient(-45deg, #cbcaa5 ,#334d50 );
     z-index: -1;
   }
   .brand a.logo {
@@ -227,7 +227,7 @@
     font-size: 12px;
     text-transform: uppercase;
     padding: 15px 40px;
-    background: linear-gradient(-45deg, #110f11, #424c53);
+    background: linear-gradient(-45deg, #cbcaa5 ,#334d50 );
     color: #fff;
     border-radius: 30px;
     border: none;

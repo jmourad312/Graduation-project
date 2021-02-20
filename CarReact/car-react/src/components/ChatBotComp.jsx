@@ -36,13 +36,13 @@ export default function ChatBotComp() {
     const theme = {
       background: "#f5f8fb",
       fontFamily: "Helvetica Neue",
-      headerBgColor: "#EF6C00",
-      headerFontColor: "#fff",
+      headerBgColor: "linear-gradient(-45deg, #334d50, #cbcaa5)",
+      headerFontColor: "black",
       headerFontSize: "15px",
-      botBubbleColor: "#EF6C00",
-      botFontColor: "#fff",
+      botBubbleColor: "linear-gradient(-45deg, #334d50, #cbcaa5)",
+      botFontColor: "black",
       userBubbleColor: "#fff",
-      userFontColor: "#4a4a4a",
+      userFontColor: "black",
     };
 
     const steps = [

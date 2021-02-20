@@ -188,6 +188,7 @@ export default function MyItems(props) {
                   position: "absolute",
                   left: "50%",
                   top: "30%",
+                  color:"black"
                 }}
               >
                 {t("VendorMyItems.NoItems")}{" "}
