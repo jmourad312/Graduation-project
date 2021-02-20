@@ -123,14 +123,6 @@ export default function VendorProfileUser(props) {
               <div className="col-5">
                 <div className="media-body">
                   <div className="">
-                    <h3 style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}
-                    >
-                      <i
-                        className="fa fa-envelope fa-1x mr-2"
-                        aria-hidden="true"
-                      ></i>
-                      {t("vendor profile.contact")}
-                    </h3>
                     <h2
                       style={{ fontWeight: "700", fontSize: "30px",paddingBottom:"3.5px" , backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)", color: "transparent", WebkitBackgroundClip: "text" }}>
                       {t("vendor profile.name")}: {vendor.firstName}{" "}
