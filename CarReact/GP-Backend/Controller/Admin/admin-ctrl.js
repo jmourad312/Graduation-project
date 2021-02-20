@@ -342,8 +342,8 @@ usersNumber = (req, res) => {
 //add ban
 addUserBan = (req, res) => {
   const IdPerson = req.body.id;
-  Person.updateOne(
-    { _id: IdPerson },
+  User.updateOne(
+    { person: IdPerson },
     { $set: { banned: true } },
 
     (err, result) => {
@@ -384,8 +384,8 @@ deleteUser = (req, res) => {
 // remove ban
 removeUserBan = (req, res) => {
   const IdPerson = req.body.id;
-  Person.updateOne(
-    { _id: IdPerson },
+  User.updateOne(
+    { person: IdPerson },
     { $set: { banned: false } },
 
     (err, result) => {
@@ -549,8 +549,8 @@ numberOfBlogs = (req, res) => {
 // addBan
 addVendorBan = (req, res) => {
   const IdPerson = req.body.id;
-  Person.updateOne(
-    { _id: IdPerson },
+  Vendor.updateOne(
+    { person: IdPerson },
     { $set: { banned: true } },
 
     (err, result) => {
@@ -574,8 +574,8 @@ addVendorBan = (req, res) => {
 removeVendorBan = (req, res) => {
   const IdPerson = req.body.id;
 
-  Person.updateOne(
-    { _id: IdPerson },
+  Vendor.updateOne(
+    { person: IdPerson },
     { $set: { banned: false } },
 
     (err, result) => {
