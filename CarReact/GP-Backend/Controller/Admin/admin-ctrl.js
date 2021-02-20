@@ -251,6 +251,11 @@ deleteCollection = (req, res) => {
 
 //show all users
 showAllUsers = (req, res) => {
+  const criteriaSearch = { $regex: req.body.search, $options: "i" };
+  const queryCond = {};
+  if (req.body.search) {
+    queryCond.$or = [{ body: criteriaSearch }, { title: criteriaSearch }];
+  }
   const populateQuery = [
     { path: "person", select: "firstName middleName email" },
     {
@@ -259,7 +264,7 @@ showAllUsers = (req, res) => {
     },
   ];
 
-  User.find({})
+  User.find(queryCond)
     .populate(populateQuery)
     .skip(+req.params.skip)
     .limit(5)
