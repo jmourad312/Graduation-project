@@ -5,6 +5,7 @@ var voting = new schema(
   {
     upVoting: { type: Number, default: 0 },
     downVoting: { type: Number, default: 0 },
+    resultVoting:{ type: Number, default: 0 },
     personUpVoting: [
       {
         type: mongoose.Schema.Types.ObjectId,

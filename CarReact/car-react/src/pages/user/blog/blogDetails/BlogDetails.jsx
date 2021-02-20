@@ -888,7 +888,7 @@ export default function BlogDetails(props) {
                               fontWeight: "700",
                             }}
                           >
-                            {item.vote.upVoting - item.vote.downVoting}
+                            {item.vote.resultVoting}
                           </span>
                           {!voted ? (
                             <button
