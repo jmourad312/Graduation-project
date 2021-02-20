@@ -16,10 +16,10 @@ export default function Model(props) {
 
     useEffect(() => {
         setEditValue({
-            firstName: data.person.firstName,
-            middleName: data.person.middleName,
+            firstName: data.firstName,
+            middleName: data.middleName,
             password: "",
-            email: data.person.email,
+            email: data.email,
             image:""
         });
     }, [])
@@ -58,7 +58,7 @@ export default function Model(props) {
             },
         };
         try {
-            const res = await instance.put(`user/updateUserProfile/${data.person._id}`, formData, config);
+            const res = await instance.put(`user/updateUserProfile/${data._id}`, formData, config);
             console.log(res)
 
         } catch (error) {

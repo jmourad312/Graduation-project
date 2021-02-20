@@ -33,13 +33,13 @@ router.post("/signup", async (req, res) => {
       role: "vendor",
       password: password,
       location:{
-        coordinates:[req.body.longitude,req.body.latitude]
+        coordinates:[req.body.longitude ? req.body.longitude : 0 ,req.body.latitude ? req.body.latitude : 0]
       }
     },
     (errorPerson, dataOfPerson) => {
       if (errorPerson) {
         res.json({
-          Data: {},
+          Data: errorPerson,
           Message: "Can't add user to database,  " + errorPerson,
           Success: false,
         });

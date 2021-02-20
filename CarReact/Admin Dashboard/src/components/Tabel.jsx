@@ -12,7 +12,7 @@ export function Tabel(props) {
                   <tr>
                     <th>Index</th>
                     {/* <th>ID</th> */}
-                    <th>firstName</th>
+                    <th>User name</th>
                     <th>Email</th>
                     <th>Banned</th>
                     <th>Edit</th>
@@ -34,8 +34,8 @@ export function Tabel(props) {
                       >
                         <td>{props.index + index + 1}</td>
                         {/* <td>{item.person._id}</td> */}
-                        <td>{item.person.firstName}</td>
-                        <td>{item.person.email}</td>
+                        <td>{item.firstName}</td>
+                        <td>{item.email}</td>
                         <td>{item.banned == true ? "Yes" : "No"}</td>
 
                         <td>
@@ -56,7 +56,7 @@ export function Tabel(props) {
                         <td>
                           <Button2
                             className="page-link"
-                            parameter={item.person._id}
+                            parameter={item._id}
                             key={index + 1}
                             handelClick={props.handelClickDelete}
                             name={

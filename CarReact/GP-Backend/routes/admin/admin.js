@@ -168,18 +168,34 @@ router.get(
 );
 
 // show all
-router.get(
+router.post(
   "/showAllUsers/:skip",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
   Admin.showAllUsers
 );
+
 router.get(
+  "/showAllUsersPosts/:skip",
+  passport.authenticate("jwt", { session: false }),
+  validateAdmin,
+  Admin.showAllUsersPosts
+);
+
+router.post(
   "/showAllVendors/:skip",
   passport.authenticate("jwt", { session: false }),
   validateAdmin,
   Admin.showAllVendors
 );
+
+router.get(
+  "/showAllVendorsProducts/:skip",
+  passport.authenticate("jwt", { session: false }),
+  validateAdmin,
+  Admin.showAllVendorsProducts
+);
+
 router.get(
   "/getItemsVendor/:id",
   passport.authenticate("jwt", { session: false }),

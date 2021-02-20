@@ -17,11 +17,11 @@ export default function EditVendor(props) {
 
     useEffect(() => {
         setEditValue({
-            firstName: data.person.firstName,
-            workshopName: data.person.workshopName,
-            middleName: data.person.middleName,
+            firstName: data.firstName,
+            workshopName: data.workshopName,
+            middleName: data.middleName,
             password: "",
-            email: data.person.email,
+            email: data.email,
         });
     }, [])
 
@@ -62,7 +62,7 @@ export default function EditVendor(props) {
             },
         };
         try {
-            const res = await instance.put(`vendor/updateProfile/${data.person._id}`, formData, config);
+            const res = await instance.put(`vendor/updateProfile/${data._id}`, formData, config);
             console.log(res)
 
         } catch (error) {

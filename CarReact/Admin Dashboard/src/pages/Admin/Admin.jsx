@@ -75,6 +75,7 @@ export default function Admin(props) {
 
   useEffect(() => {
     getCountData();
+    dispatch(getCountDataAction);
   }, [stateRedux]);
 
   const getCountData = async () => {
@@ -123,14 +124,14 @@ export default function Admin(props) {
       if (parameter.banned == false) {
         const res = await instance.post(
           "admin/addUserBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
       } else {
         const res = await instance.post(
           "admin/removeUserBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
@@ -138,7 +139,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user));
+    dispatch(getUserAction(skipState.user,state.searchUser));
   };
 
   const bannedvendor = async (parameter) => {
@@ -146,14 +147,14 @@ export default function Admin(props) {
       if (parameter.banned == false) {
         const res = await instance.post(
           "admin/addVendorBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
       } else {
         const res = await instance.post(
           "admin/removeVendorBan",
-          { id: parameter.person._id },
+          { id: parameter._id },
           { headers: { Authorization: localStorage.getItem("Authorization") } }
         );
         console.log(res);
@@ -161,7 +162,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor));
+    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
   };
 
   const goToEditUser = async (parameter) => {
@@ -187,7 +188,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user));
+    dispatch(getUserAction(skipState.user,state.searchUser));
   };
 
   const goToDeleteVendor = async (parameter) => {
@@ -199,7 +200,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor));
+    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
   };
 
   const ProductsVendor = (parameter) => {
@@ -219,12 +220,12 @@ export default function Admin(props) {
   const getPartUser = (skip) => {
     console.log(skip);
     setSkipState({ ...skipState, user: skip.selected * numberItemPerPage });
-    dispatch(getUserAction(skip.selected * numberItemPerPage));
+    dispatch(getUserAction(skip.selected * numberItemPerPage,state.searchUser));
   };
 
   const getPartVendor = (skip) => {
     setSkipState({ ...skipState, vendor: skip.selected * numberItemPerPage });
-    dispatch(getVendorAction(skip.selected * numberItemPerPage));
+    dispatch(getVendorAction(skip.selected * numberItemPerPage,state.searchVendor));
   };
 
   const getPartBlog = (skip) => {
@@ -443,8 +444,7 @@ export default function Admin(props) {
                   value={state.searchUser}
                   onChange={searchTabel}
                   onKeyPress={(e) => {
-                    if (e.which == 13) dispatch(getUserAction(0));
-;
+                    if (e.which == 13) dispatch(getUserAction(0,state.searchUser));
                   }}
                 />
                 <Tabel
@@ -456,7 +456,7 @@ export default function Admin(props) {
                   handelClickDelete={goToDeleteUser}
                 ></Tabel>
                 <PaginationReact
-                  NumberOfItemsInDB={stateRedux.countData.Data.user}
+                  NumberOfItemsInDB={stateRedux.users.count.length}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartUser}
                 />
@@ -473,6 +473,9 @@ export default function Admin(props) {
                   name="searchVendor"
                   value={state.searchVendor}
                   onChange={searchTabel}
+                  onKeyPress={(e) => {
+                    if (e.which == 13) dispatch(getVendorAction(0,state.searchVendor));
+                  }}
                 />
                 <Tabel
                   id="vendorTabel"
@@ -484,7 +487,7 @@ export default function Admin(props) {
                 ></Tabel>
 
                 <PaginationReact
-                  NumberOfItemsInDB={stateRedux.countData.Data.vendor}
+                  NumberOfItemsInDB={stateRedux.vendors.count.length}
                   NumberToShow={numberItemPerPage}
                   handelClick={getPartVendor}
                 />
@@ -497,12 +500,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
-                  <input
+                  {/* <input
                       type="text"
                       name="searchBlog"
                       value={state.searchBlog}
                       onChange={searchTabel}
-                    />
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -557,7 +560,7 @@ export default function Admin(props) {
                     </div>
                   </div>
                   <PaginationReact
-                    NumberOfItemsInDB={stateRedux.countData.Data.user}
+                    NumberOfItemsInDB={stateRedux.nblog.count.length}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartBlog}
                   />
@@ -570,12 +573,12 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
-                  <input
+                  {/* <input
                       type="text"
                       name="searchProduct"
                       value={state.searchProduct}
                       onChange={searchTabel}
-                    />
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -621,7 +624,7 @@ export default function Admin(props) {
                     </div>
                   </div>
                   <PaginationReact
-                    NumberOfItemsInDB={stateRedux.countData.Data.vendor}
+                    NumberOfItemsInDB={stateRedux.nproduct.count.length}
                     NumberToShow={numberItemPerPage}
                     handelClick={getPartProduct}
                   />
@@ -635,12 +638,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Messages from ContactUs</h3>
-                  <input
+                  {/* <input
                       type="text"
                       name="searchContact"
                       value={state.searchContact}
                       onChange={searchTabel}
-                    />
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -682,12 +685,12 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
                   <h3>ADS</h3>
-                  <input
+                  {/* <input
                       type="text"
                       name="searchAds"
                       value={state.searchAds}
                       onChange={searchTabel}
-                    />
+                    /> */}
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
