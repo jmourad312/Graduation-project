@@ -21,7 +21,8 @@
 
   .card {
     position: relative;
-    background: #333;
+    // background: #333;
+    background: linear-gradient(-45deg, #cbcaa5,#334d50);
     width: 400px;
     height: 55vh;
     border-radius: 6px;

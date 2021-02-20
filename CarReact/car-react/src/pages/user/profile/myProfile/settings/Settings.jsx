@@ -72,10 +72,9 @@ export default function Settings(props) {
     >
       <form className="ml-5" style={{ fontSize: "1.5rem" }}>
         <div className="row">
-          <div className="form-group col-4">
+          <div className="form-group col-4" style={{color:"black"}}>
             <Label
               id="firstName"
-              class="text-light"
               value={t("ProfileSettings.FirstName")}
             />
             <Input
@@ -88,10 +87,10 @@ export default function Settings(props) {
               type="text"
             />
           </div>
-          <div className="form-group col-4">
+          <div className="form-group col-4" style={{color:"black"}}>
             <Label
               id="middleName"
-              class="text-light"
+              
               value={t("ProfileSettings.FamilyName")}
             />
             <Input
@@ -107,10 +106,10 @@ export default function Settings(props) {
 
         </div>
 
-        <div className="form-group">
+        <div className="form-group" style={{color:"black"}}>
           <Label
             id="phoneNumber"
-            class="text-light"
+            
             value={t("ProfileSettings.PhoneNumber")}
           />
           <Input
@@ -123,10 +122,10 @@ export default function Settings(props) {
             type=""
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{color:"black"}}>
           <Label
             id="password"
-            class="text-light"
+            
             value={t("ProfileSettings.NewPassword")}
           />
           <Input
@@ -139,10 +138,10 @@ export default function Settings(props) {
             type="password"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{color:"black"}}>
           <Label
             id="confirmPassword"
-            class="text-light"
+            
             value={t("ProfileSettings.ConfirmPassword")}
           />
           <Input

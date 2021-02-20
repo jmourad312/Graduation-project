@@ -74,9 +74,10 @@ export default function BookmarkedPosts(props) {
               style={{
                 fontWeight: "700",
                 fontSize: "30px",
-                color:"black",
-                position: "absolute",
-                left: "30%",
+                color:"black", 
+                position: "absolute", 
+                left: "31%",
+                top:"240px" 
               }}
             >
               {t("BookmarkedItems.NoBookmarked")}

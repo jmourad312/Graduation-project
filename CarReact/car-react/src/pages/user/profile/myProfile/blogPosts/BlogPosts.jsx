@@ -57,9 +57,10 @@ export default function BlogPosts(props) {
                 style={{
                   fontWeight: "700",
                   fontSize: "30px",
-                  color:"black",
-                  position: "absolute",
-                  left: "40%",
+                  color:"black", 
+                  position: "absolute", 
+                  left: "35%",
+                  top:"200px" 
                 }}
               >
                 {t("MyBlogs.Noblogsyet")}{" "}

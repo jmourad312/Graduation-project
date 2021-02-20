@@ -104,7 +104,7 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "45px",
-                backgroundImage: "linear-gradient(to right,#1f2127,#D7DDE8 45%)",
+                backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -116,7 +116,7 @@ export default function ContactUs() {
                 fontWeight: "700",
                 fontSize: "36px",
                
-                backgroundImage: "linear-gradient(to top,#757F9A,#D7DDE8 50%)",
+                backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
                 color: "transparent",
                 WebkitBackgroundClip: "text",
               }}
@@ -134,8 +134,7 @@ export default function ContactUs() {
                         fontWeight: "800",
                         fontSize: "30px",
                        
-                        backgroundImage:
-                          "linear-gradient(to top,#757F9A,#D7DDE8 50%)",
+                        backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}
@@ -159,8 +158,7 @@ export default function ContactUs() {
                         fontWeight: "800",
                         fontSize: "30px",
                         
-                        backgroundImage:
-                          "linear-gradient(to top,#757F9A,#D7DDE8 30%)",
+                        backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
                         color: "transparent",
                         WebkitBackgroundClip: "text",
                       }}

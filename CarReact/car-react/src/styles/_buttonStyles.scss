@@ -52,13 +52,20 @@
   }
 }
 $colors: (
-  fill: #c9336c,
-  pulse: #efa26e,
-  raise: #60d2ff,
-  up: #aa953f,
-  close1: #cac0c0,
-  slide1: #6699c8,
-  offset: #205545,
+    // fill: #c9336c,
+    // pulse: #efa26e,
+    // raise: #60d2ff,
+    // up: #aa953f,
+    // close1: #cac0c0,
+    // slide1: #6699c8,
+    // offset: #205545,
+    raise: #a4ebf3,
+    fill: #f875aa,
+    pulse: #efa26e,
+    up: #da723c,
+    close1: #cac0c0,
+    slide1: #6699c8,
+    offset: #205545
 );
 
 // Sass variables compile to a static string; CSS variables are dynamic and inherited
@@ -74,7 +81,6 @@ $colors: (
 .button {
   color: var(--color);
   transition: 0.45s;
-  
 
   &:hover,
   &:focus {
