@@ -20,7 +20,6 @@ var vendor = new schema({
     ref: "Car",
   }],
 
-  banned: {type:Boolean,default:false},
 });
 
 module.exports = mongoose.model("Vendor", vendor);

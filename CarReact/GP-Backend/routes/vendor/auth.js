@@ -22,12 +22,12 @@ router.post("/signup", async (req, res) => {
   const body = req.body;
   const location = {
     coordinates: [
-      req.body.latitude ? req.body.latitude : 0,
-      req.body.longitude ? req.body.longitude : 0,
+      req.body.longitude,
+      req.body.latitude
     ],
   };
 
-  const person = new Person({ ...body, location, password, role: "vendor" });
+  const person = new Person({ ...body, location:location , password, role: "vendor" });
   const vendor = new Vendor();
 
   person.save().then((dataOfPerson)=>{

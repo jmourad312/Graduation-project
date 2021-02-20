@@ -25,6 +25,7 @@ var person = new schema(
     },
     phoneNumber: Number,
     subscribe: Boolean,
+    banned: { type: Boolean, default: false },
     role: { type: String, enum: ["user", "admin", "vendor"], default: "user" },
     location: {
       type: {
