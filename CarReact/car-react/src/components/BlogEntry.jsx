@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setBlogId } from "../store/actions";
 import { useHistory } from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function BlogEntry(props) {
   var history = useHistory();
@@ -18,7 +19,7 @@ export default function BlogEntry(props) {
     var blogTime = props.date.split("T");
   }
 
-
+  const {t, i18n} = useTranslation();
   return (
     <div className="col-md-6 col-lg-6 col-xl-4 mb-4 blog-post">
       {/* <div className="card blog-post" onClick={() => handleClick(props.id)}>
@@ -109,7 +110,7 @@ export default function BlogEntry(props) {
           </p>
           <div class="card__info">
             <h3 class="card__title text-truncate">{props.cardTitle}</h3>
-            <span class="card__by"style={{fontWeight:"700"}}>By <span class="card__author" style={{fontWeight:"900",fontSize:"15px"}} title="author">{props.userName}</span></span>
+            <span class="card__by"style={{fontWeight:"700"}}>{t("repeated.By")} <span class="card__author" style={{fontWeight:"900",fontSize:"15px"}} title="author">{props.userName}</span></span>
             <br/>
             <strong>
               <i className="badge badge-dark" style={{fontSize:"20px",padding:"5px"}}>{props.cardBrand}</i>{" "}

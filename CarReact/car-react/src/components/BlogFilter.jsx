@@ -13,23 +13,24 @@ import cars3 from "../assets/js/cars3";
 import cars2 from "../assets/js/cars2";
 import { Pagination } from "./Pagination";
 import { PaginationReact } from "./PaginationReact";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import Loading from "./Loading";
 
 export default function BlogFilter(props) {
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const [filterState, setFilterState] = useState({
     model: "",
     brand: "",
     search: "",
   });
+
   const [itemsInDB, setItemsInDB] = useState(0);
   const blogs = useSelector((state) => state.blogs.TotalItem);
   const stateRedux = useSelector((state) => state);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(filterCarBrand());
     // dispatch(resultFromFilter({}, 0));
@@ -50,43 +51,49 @@ export default function BlogFilter(props) {
           model: "",
         };
       });
+      setInputValue((previous) => {
+        return {
+          ...previous,
+          brand:"",
+          model: "",
+        };
+      });
     }
     setFilterState((previous) => {
       return {
         ...previous,
         [name]: value,
       };
-
     });
     handleSearchClick();
   };
-    //   switch (event.target.name) {
-    //     case "brand":
-    //       setState({
-    //         ...state,
-    //         brand: event.target.value,
-    //       });
-    //       // dispatch(resultFromFilter({ brand: event.target.value }));
-    //       // dispatch(filterCarModel(event.target.value));
-    //       console.log(state);
+  //   switch (event.target.name) {
+  //     case "brand":
+  //       setState({
+  //         ...state,
+  //         brand: event.target.value,
+  //       });
+  //       // dispatch(resultFromFilter({ brand: event.target.value }));
+  //       // dispatch(filterCarModel(event.target.value));
+  //       console.log(state);
 
-    //       break;
-    //     case "model":
-    //       setState({
-    //         ...state,
-    //         model: event.target.value,
-    //       });
-    //       // dispatch(
-    //       //   resultFromFilter({ brand: state.brand, model: event.target.value })
-    //       // );
-    //       console.log(state);
+  //       break;
+  //     case "model":
+  //       setState({
+  //         ...state,
+  //         model: event.target.value,
+  //       });
+  //       // dispatch(
+  //       //   resultFromFilter({ brand: state.brand, model: event.target.value })
+  //       // );
+  //       console.log(state);
 
-    //       break;
-    //   }
+  //       break;
+  //   }
   const handleClick = (params) => {
     console.log(params);
-    dispatch(resultFromFilter(filterState, params.selected*6));
-    localStorage.setItem("TEST", params.selected*6);
+    dispatch(resultFromFilter(filterState, params.selected * 6));
+    localStorage.setItem("TEST", params.selected * 6);
     // dispatch(filterCarModel(event.target.value));
   };
   const handleSearchClick = () => {
@@ -112,7 +119,6 @@ export default function BlogFilter(props) {
       search: "",
     });
     dispatch(resultFromFilter({}, 0));
-
   };
 
   //-------------ADD BLOG ----------------------------------------
@@ -142,12 +148,25 @@ export default function BlogFilter(props) {
     });
   };
 
-  
   const handleInputChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
-      setStateDisabled(true);
+      dispatch(filterCarModel(value));
+      setInputValue((previous) => {
+        return {
+          ...previous,
+          model: "",
+        };
+      });
+      setFilterState((previous) => {
+        return {
+          ...previous,
+          brand:"",
+          model: "",
+        };
+      });
     }
+    handleSearchClick();
     setInputValue((previous) => {
       return {
         ...previous,
@@ -155,10 +174,10 @@ export default function BlogFilter(props) {
       };
     });
   };
-  
+
   const handleFocus = () => {
     document.getElementById("focus").focus();
-  }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
@@ -195,30 +214,49 @@ export default function BlogFilter(props) {
       .catch((error) => {
         console.log(error);
       });
-      console.log(inputValue);
-      closeModal();
-      setInputValue({
-        title: "",
-        body: "",
-        images: [],
-        brand: "",
-        model: "",
-      });
-      setTimeout(() => {dispatch(resultFromFilter({},localStorage.getItem("TEST")))}, 1000);
+    console.log(inputValue);
+    closeModal();
+    setInputValue({
+      title: "",
+      body: "",
+      images: [],
+      brand: "",
+      model: "",
+    });
+    setTimeout(() => {
+      dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
+    }, 1000);
   };
   return (
     <div className={props.class}>
-
       <div class="search">
-        <input type="checkbox" id="trigger" onClick={handleFocus} class="search__checkbox" />
+        <input
+          type="checkbox"
+          id="trigger"
+          onClick={handleFocus}
+          class="search__checkbox"
+        />
         <label class="search__label-init" for="trigger"></label>
-        <label class="search__label-active" onClick={handleClear2} for="trigger"></label>
+        <label
+          class="search__label-active"
+          onClick={handleClear2}
+          for="trigger"
+        ></label>
         <div class="search__border"></div>
-        <input type="text" class="search__input" id="focus" name="search" onChange={handleChange} value={filterState.search} />
-        <div class="search__close" ></div>
+        <input
+          type="text"
+          class="search__input"
+          id="focus"
+          name="search"
+          onChange={handleChange}
+          value={filterState.search}
+        />
+        <div class="search__close"></div>
       </div>
       <div className="mb-4 ml-2" filter="price">
-        <h4 className="font-weight-bold mb-3 text-center">{t("Filter.FilterOptions")}</h4>
+        <h4 className="font-weight-bold mb-3 text-center">
+          {t("Filter.FilterOptions")}
+        </h4>
       </div>
       <hr style={{ borderColor: "grey", border: "1px solid" }} />
       <div className="mb-5 mt-5">
@@ -247,7 +285,6 @@ export default function BlogFilter(props) {
           </div>
         </div> */}
 
-
         <select
           style={{ marginTop: "70px", fontWeight: "700" }}
           value={filterState.brand}
@@ -273,21 +310,30 @@ export default function BlogFilter(props) {
           name="model"
           onChange={handleChange}
           // onSelect={handleChange}
-          className="custom-select custom-select-lg mb-3" style={{ fontWeight: "700" }}
+          className="custom-select custom-select-lg mb-3"
+          style={{ fontWeight: "700" }}
         >
           <option value="" key="no-value" style={{ fontWeight: "700" }}>
-          {t("Filter.ChooseModel")}
+            {t("Filter.ChooseModel")}
           </option>
           {stateRedux.model.map((item, index) => (
-            <option value={item.model} key={index} style={{ fontWeight: "700" }}>
+            <option
+              value={item.model}
+              key={index}
+              style={{ fontWeight: "700" }}
+            >
               {item.model}
             </option>
           ))}
         </select>
       </div>
       <div>
-        <Button variant="dark" onClick={handleSearchClick} style={{ fontWeight: "700", height: "60px" }}>
-        {t("Filter.ApplyFilter")}
+        <Button
+          variant="dark"
+          onClick={handleSearchClick}
+          style={{ fontWeight: "700", height: "60px" }}
+        >
+          {t("Filter.ApplyFilter")}
         </Button>
         <button
           type="button"
@@ -303,21 +349,71 @@ export default function BlogFilter(props) {
         </button>
       </div>
 
-      <div style={{ position: "relative", top: "80px", right: "10px", textAlign: "center" }}>
+      <div
+        style={{
+          position: "relative",
+          top: "80px",
+          right: "10px",
+          textAlign: "center",
+        }}
+      >
         {localStorage.getItem("UserID") !== null ? (
-          <div  style={{ fontWeight: "700", backgroundColor: "rgba(128, 128, 128, 0.397)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}}>
-            <label for="add" style={{ fontSize: "35px", fontWeight: "700"}}>{t("Filter.AddPost")}</label>
+          <div
+            style={{
+              fontWeight: "700",
+              backgroundColor: "rgba(128, 128, 128, 0.397)",
+              borderRadius: "25px",
+              border: "3px solid gray",
+              paddingTop: "10px",
+              paddingBottom: "25px",
+              marginRight: "-30px",
+            }}
+          >
+            <label for="add" style={{ fontSize: "35px", fontWeight: "700" }}>
+              {t("Filter.AddPost")}
+            </label>
             <p onClick={openModal} id="add" style={{ cursor: "pointer" }}>
               <i class="fas fa-4x fa-plus-circle"></i>
             </p>
           </div>
-        ) : (<div style={{ fontSize: "1.7rem", fontWeight: "700", color: "black", backgroundColor: "rgba(0, 0, 0, 0.2)", borderRadius: "25px", border: "3px solid gray" ,paddingTop: "10px",paddingBottom:"25px",marginRight:"-30px"}} >{t("Filter.only")}<div onClick={() => history.push("/SignForm")} style={{ fontSize: "1.8rem", cursor: "pointer", borderRadius: "15px", textDecoration: "underline" }}>{t("Filter.RegHere")}</div></div>)}
+        ) : (
+          <div
+            style={{
+              fontSize: "1.7rem",
+              fontWeight: "700",
+              color: "black",
+              backgroundColor: "rgba(0, 0, 0, 0.2)",
+              borderRadius: "25px",
+              border: "3px solid gray",
+              paddingTop: "10px",
+              paddingBottom: "25px",
+              marginRight: "-30px",
+            }}
+          >
+            {t("Filter.only")}
+            <div
+              onClick={() => history.push("/SignForm")}
+              style={{
+                fontSize: "1.8rem",
+                cursor: "pointer",
+                borderRadius: "15px",
+                textDecoration: "underline",
+              }}
+            >
+              {t("Filter.RegHere")}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="pagination" style={{
-        zIndex: "100", position: "absolute", left: "350px",
-        bottom: "-56%",
-        height: "50px"
-      }}
+      <div
+        className="pagination"
+        style={{
+          zIndex: "100",
+          position: "absolute",
+          left: "350px",
+          bottom: "-56%",
+          height: "50px",
+        }}
       >
         {blogs && itemsInDB > 6 && (
           <PaginationReact
@@ -329,12 +425,16 @@ export default function BlogFilter(props) {
       </div>
       <Modal show={isOpen} onHide={!isOpen}>
         <Modal.Header>
-          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("Filter.AddPost")}</Modal.Title>
+          <Modal.Title style={{ fontWeight: "700", fontSize: "25px" }}>
+            {t("Filter.AddPost")}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogTitle")}</Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("AddBlogModal.BlogTitle")}
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder={t("AddBlogModal.EnterTitle")}
@@ -344,11 +444,13 @@ export default function BlogFilter(props) {
                 onChange={handleInputChange}
                 required
                 maxLength="50"
-                style={{fontWeight:"500"}}
+                style={{ fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogImage")} </Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("AddBlogModal.BlogImage")}{" "}
+              </Form.Label>
               <Form.Control
                 type="file"
                 name="images"
@@ -356,11 +458,13 @@ export default function BlogFilter(props) {
                 onChange={handleImageChange}
                 multiple
                 required
-                style={{fontWeight:"500"}}
+                style={{ fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("AddBlogModal.BlogContent")}</Form.Label>
+              <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                {t("AddBlogModal.BlogContent")}
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -371,12 +475,14 @@ export default function BlogFilter(props) {
                 onChange={handleInputChange}
                 required
                 maxLength="150"
-                style={{ resize: "none",fontWeight:"500" }}
+                style={{ resize: "none", fontWeight: "500" }}
               />
             </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("repeated.Brand")}
+                </Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -385,19 +491,24 @@ export default function BlogFilter(props) {
                   value={inputValue.brand}
                   onChange={handleInputChange}
                   required
-                  style={{fontWeight:"500"}}
+                  style={{ fontWeight: "500" }}
                 >
-                  {cars2.map((item, index) => {
+                  <option key={"no-value"} value="">
+                    {t("Filter.ChooseBrand")}
+                  </option>
+                  {stateRedux.brand.map((item, index) => {
                     return (
-                      <option key={index} value={item.make}>
-                        {item.make}
+                      <option key={index} value={item.name}>
+                        {item.name}
                       </option>
                     );
                   })}
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("repeated.Model")}
+                </Form.Label>
                 <Form.Control
                   defaultValue="Choose..."
                   as="select"
@@ -405,11 +516,14 @@ export default function BlogFilter(props) {
                   id="model"
                   value={inputValue.model}
                   onChange={handleInputChange}
-                  disabled={!stateDisabled}
+                  disabled={!inputValue.brand}
                   required
-                  style={{fontWeight:"500"}}
+                  style={{ fontWeight: "500" }}
                 >
-                  {cars3.map((item, index) => {
+                  <option value="" key="no-value" style={{ fontWeight: "700" }}>
+                    {t("Filter.ChooseModel")}
+                  </option>
+                  {stateRedux.model.map((item, index) => {
                     return (
                       <option key={index} value={item.model}>
                         {item.model}
@@ -423,11 +537,11 @@ export default function BlogFilter(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" type="button" onClick={handleSubmit}>
-          {t("repeated.Submit")}
+            {t("repeated.Submit")}
           </Button>
 
           <Button variant="danger" onClick={closeModal}>
-          {t("repeated.Cancel")}
+            {t("repeated.Cancel")}
           </Button>
         </Modal.Footer>
       </Modal>

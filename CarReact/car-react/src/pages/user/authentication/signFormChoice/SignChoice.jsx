@@ -42,7 +42,8 @@ export default function SignChoice() {
               <div className="card__image-container">
                 <img
                   className="card__image"
-                  src={vendorImage}
+                  // src={vendorImage}
+                  src={"https://res.cloudinary.com/sonax-gmbh/image/fetch/c_fill,h_823,q_auto:best,w_1920/c_crop,h_823,q_auto:best,w_1646,x_232,y_0/ar_2:1,c_scale,h_280,q_auto:eco,w_560/dpr_2,f_auto/https://sonax.de/var/site/storage/images/5/6/9/1/41965-3-eng-ROW/Image20191104143740.png"}
                   alt=""
                   height="350px"
                 />
@@ -74,7 +75,8 @@ export default function SignChoice() {
               <div className="card__image-container">
                 <img
                   className="card__image"
-                  src={ownerImage}
+                  // src={ownerImage}
+                  src={"https://media.gettyimages.com/photos/confident-businessman-driving-his-car-picture-id510502761?k=6&m=510502761&s=612x612&w=0&h=i-AGd-9O-FMtnjXva2WLmyq1-Srr-60QjmOa8bH_MHw="}
                   alt=""
                   height="350px"
                 />

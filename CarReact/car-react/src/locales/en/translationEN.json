@@ -67,10 +67,10 @@
     "slider": {
         "carparts": "Car parts",
         "slogen": "“Find the right car part with ease”",
-        "Blog": "Blog",
+        "Blog": "Blogs",
         "slogen1": "Feel free to add any question in Dreksyony Blog",
-        "Variety": "Variety",
-        "slogen2": "We value quality above all else",
+        "Products": "Products",
+        "slogen2": "Serving you variety of best products",
         "Technology": "Technology",
         "slogen3": "“Futuristic features to enjoy”",
         "Design": "Design",
@@ -251,5 +251,17 @@
         "From":"From: ",
         "To":"To ",
         "km":"Km"
-    }
+    },
+    "Report":{
+        "reporttitle":"Report",
+        "ToReport":"To Report this blog, please enter your reason for reporting. We will take your report into consideration.",
+        "ReportDetails":"Report Details"
+    },
+    "VendorProfile":{
+        "AllItems":"All Products"
+    },
+    "EditProductModal":{
+        "EditTitle":"Edit your product"
+    },
+    "AddReview":"Add Review"
 }

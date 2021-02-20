@@ -390,11 +390,12 @@ showDetailsPost = (req, res) => {
       path: "comment",
       populate: [
         { path: "person", select: "firstName" },
-        { path: "vote", select: "upVoting downVoting" },
+        { path: "vote", select: "resultVoting" ,options: { sort: { resultVoting: -1 }}},
       ],
-      select: "-post ",
+      select: "-post",
     },
   ];
+
   Post.findOne({ _id: req.params.id }, { updatedPosts: 0, __V: 0 })
     .populate(populateQuery)
     .exec((error, data) => {
@@ -509,7 +510,7 @@ downVoteToComment = async (req, res) => {
   if (personVoteUp.length > 0) {
     Vote.findOneAndUpdate(
       { comment: req.params.id },
-      { $pull: { personUpVoting: req.user._id }, $inc: { upVoting: -1 } },
+      { $pull: { personUpVoting: req.user._id }, $inc: { resultVoting: -1 } },
       (error, data) => {
         if (error || !data) {
           return res.json({
@@ -519,7 +520,7 @@ downVoteToComment = async (req, res) => {
           });
         }
         return res.json({
-          Data: data.upVoting - data.downVoting,
+          Data: data.resultVoting,
           Message: "Done remove voting",
           Success: true,
         });
@@ -528,7 +529,7 @@ downVoteToComment = async (req, res) => {
   } else {
     Vote.findOneAndUpdate(
       { comment: req.params.id },
-      { $push: { personDownVoting: req.user._id }, $inc: { downVoting: 1 } },
+      { $push: { personDownVoting: req.user._id }, $inc: { resultVoting: -1 } },
       (error, data) => {
         if (error || !data) {
           return res.json({
@@ -538,7 +539,7 @@ downVoteToComment = async (req, res) => {
           });
         }
         return res.status(200).json({
-          Data: data.upVoting - data.downVoting,
+          Data: data.resultVoting,
           Message: "Done add Voting",
           Success: true,
         });
@@ -570,7 +571,8 @@ upVoteToComment = async (req, res) => {
   if (personVoteDown.length > 0) {
     Vote.findOneAndUpdate(
       { comment: req.params.id },
-      { $pull: { personDownVoting: req.user._id }, $inc: { downVoting: -1 } },
+      { $pull: { personDownVoting: req.user._id }, $inc: { resultVoting: 1 } },
+
       (error, data) => {
         if (error || !data) {
           return res.json({
@@ -580,7 +582,7 @@ upVoteToComment = async (req, res) => {
           });
         }
         return res.json({
-          Data: data.upVoting - data.downVoting,
+          Data: data.resultVoting,
           Message: "Done remove voting",
           Success: true,
         });
@@ -589,7 +591,7 @@ upVoteToComment = async (req, res) => {
   } else {
     Vote.findOneAndUpdate(
       { comment: req.params.id },
-      { $push: { personUpVoting: req.user._id }, $inc: { upVoting: 1 } },
+      { $push: { personUpVoting: req.user._id }, $inc: { resultVoting: 1 } },
       (error, data) => {
         if (error || !data) {
           return res.json({
@@ -599,7 +601,7 @@ upVoteToComment = async (req, res) => {
           });
         }
         return res.status(200).json({
-          Data: data.upVoting - data.downVoting,
+          Data: data.resultVoting,
           Message: "Done add Voting",
           Success: true,
         });

@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import {
   getBlogDetails,
   addVoteComment,
+  filterCarModel,
+  filterCarBrand,
   removeVoteComment,
 } from "../../../../store/actions";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -50,11 +52,13 @@ export default function BlogDetails(props) {
       setCheckOwner(false);
     }
   };
+  const stateRedux = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
+    dispatch(filterCarBrand());
     // console.log(blogDetails);
   };
 
@@ -63,6 +67,15 @@ export default function BlogDetails(props) {
   const openModal = () => {
     console.log(blogDetails);
     setIsOpen(true);
+    if (blogDetails) {
+      setEditValue({
+        title:blogDetails.title ,
+        body: blogDetails.body,
+        images:[],
+        brand: blogDetails.brand,
+        model: blogDetails.model,
+      })
+    }
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -79,7 +92,13 @@ export default function BlogDetails(props) {
   const handleEditChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
-      setStateDisabled(true);
+      dispatch(filterCarModel(value));
+      setEditValue((previous) => {
+        return {
+          ...previous,
+          model: "",
+        };
+      });
     }
     setEditValue((previous) => {
       return {
@@ -300,6 +319,12 @@ export default function BlogDetails(props) {
     }
   }, [blogDetails]);
 
+  const sortComment = (data) => {
+    var dataAsc = []
+   dataAsc =  data.sort(function(a, b){return b.vote.resultVoting-a.vote.resultVoting});
+    return(dataAsc)
+  }
+
   const handleDelete = (params) => {
     axios
       .delete(`http://localhost:3000/user/deletePost/${params}`, {
@@ -379,23 +404,23 @@ export default function BlogDetails(props) {
   };
 
   const handleDeleteComment = (params) => {
-   axios
-     .delete(`http://localhost:3000/user/deleteComment/${params}`, {
-       headers: { Authorization: localStorage.getItem("Authorization") },
-     })
-     .then((req) => {
-       console.log(req);
-       if (req.data.Success === true) {
-         console.log("success");
-       } else {
-         console.log("fail");
-         console.log(req.data);
-       }
-     })
-     .catch((error) => {
-       console.log(error);
-       console.log("adsa");
-     });
+    axios
+      .delete(`http://localhost:3000/user/deleteComment/${params}`, {
+        headers: { Authorization: localStorage.getItem("Authorization") },
+      })
+      .then((req) => {
+        console.log(req);
+        if (req.data.Success === true) {
+          console.log("success");
+        } else {
+          console.log("fail");
+          console.log(req.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("adsa");
+      });
   };
 
   const pageVariants = {
@@ -448,17 +473,21 @@ export default function BlogDetails(props) {
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Report</DialogTitle>
+          <DialogTitle id="form-dialog-title">
+            <div style={{ fontSize: "25px" }}>{t("Report.reporttitle")}</div>
+          </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              To Report this blog, please enter your reason for reporting. We will take your report into consideration.
+            <DialogContentText
+              style={{ fontSize: "20px", fontWeight: "500", width: "570px" }}
+            >
+              {t("Report.ToReport")}
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="message"
               name="message"
-              label="Report Details"
+              label={t("Report.ReportDetails")}
               type="text"
               onChange={handleReportChange}
               value={reportState.message}
@@ -466,11 +495,19 @@ export default function BlogDetails(props) {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} variant="dark">
-              Cancel
+            <Button
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              onClick={handleReport}
+              variant="dark"
+            >
+              {t("repeated.Submit")}
             </Button>
-            <Button onClick={handleReport} variant="primary">
-              Send
+            <Button
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              onClick={handleClose}
+              variant="danger"
+            >
+              {t("repeated.Cancel")}
             </Button>
           </DialogActions>
         </Dialog>
@@ -621,7 +658,7 @@ export default function BlogDetails(props) {
               }}
               onClick={handleClickOpen}
             >
-              Report
+              {t("Report.reporttitle")}
             </button>
           </>
         )}
@@ -726,10 +763,13 @@ export default function BlogDetails(props) {
                   required
                   style={{ fontWeight: "500" }}
                 >
-                  {cars2.map((item, index) => {
+                  <option key={"no-value"} value="">
+                    {t("Filter.ChooseBrand")}
+                  </option>
+                  {stateRedux.brand.map((item, index) => {
                     return (
-                      <option key={index} value={item.make}>
-                        {item.make}
+                      <option key={index} value={item.name}>
+                        {item.name}
                       </option>
                     );
                   })}
@@ -746,11 +786,14 @@ export default function BlogDetails(props) {
                   id="model"
                   value={editValue.model}
                   onChange={handleEditChange}
-                  disabled={!stateDisabled}
+                  disabled={!editValue.brand}
                   required
                   style={{ fontWeight: "500" }}
                 >
-                  {cars3.map((item, index) => {
+                  <option key={"no-value"} value="">
+                    {t("Filter.ChooseModel")}
+                  </option>
+                  {stateRedux.model.map((item, index) => {
                     return (
                       <option key={index} value={item.model}>
                         {item.model}
@@ -813,7 +856,7 @@ export default function BlogDetails(props) {
                     overflowX: "hidden",
                   }}
                 >
-                  {blogDetails.comment.map((item, index) => {
+                  {sortComment(blogDetails.comment).map((item, index) => {
                     return (
                       <div className="media mb-1 mr-3" key={index}>
                         <div className="mr-2">
@@ -851,7 +894,7 @@ export default function BlogDetails(props) {
                               fontWeight: "700",
                             }}
                           >
-                            {item.vote.upVoting - item.vote.downVoting}
+                            {item.vote.resultVoting}
                           </span>
                           {!voted ? (
                             <button
@@ -868,7 +911,7 @@ export default function BlogDetails(props) {
                             </button>
                           ) : (
                             <Spinner
-                              animation="grow"
+                              // animation="grow"
                               style={{
                                 position: "relative",
                                 left: "-40px",
@@ -901,19 +944,25 @@ export default function BlogDetails(props) {
                                   <EditIcon />
                                 </Fab>
                               </Zoom> */}
-                              {item.person._id === localStorage.getItem("UserID") &&
-                              <Zoom in={true}>
-                                <Fab
-                                  // color="secondary"
-                                  size="small"
-                                  style={{width:"35px", height:"10px"}}
-                                  aria-label="delete"
-                                  onClick={()=>handleDeleteComment(item._id)}
-                                >
-                                  <DeleteForeverIcon style={{fontSize:"25px"}} />
-                                </Fab>
-                              </Zoom>
-                              }
+                              {item.person._id ===
+                                localStorage.getItem("UserID") || item.person._id ===
+                                localStorage.getItem("VendorID")&&(
+                                <Zoom in={true}>
+                                  <Fab
+                                    // color="secondary"
+                                    size="small"
+                                    style={{ width: "35px", height: "10px" }}
+                                    aria-label="delete"
+                                    onClick={() =>
+                                      handleDeleteComment(item._id)
+                                    }
+                                  >
+                                    <DeleteForeverIcon
+                                      style={{ fontSize: "25px" }}
+                                    />
+                                  </Fab>
+                                </Zoom>
+                              )}
                             </div>
                           </h5>
                           <hr />

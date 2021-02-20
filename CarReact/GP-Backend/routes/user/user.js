@@ -77,9 +77,9 @@ router.post("/addComment/:idpost", passport.authenticate("jwt", { session: false
 
 router.post("/addCommentReply/:idcomment", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.addCommentReply);
 
-router.delete("/deleteComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.deleteComment);
+router.delete("/deleteComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.deleteComment);
 
-router.put("/updateComment/:id", passport.authenticate("jwt", { session: false }), canView, userBlogCtrl.updateComment);
+router.put("/updateComment/:id", passport.authenticate("jwt", { session: false }), canViewall, userBlogCtrl.updateComment);
 
 // show posts
 router.post("/showFilterPosts/:skip", userBlogCtrl.showFilterPosts)

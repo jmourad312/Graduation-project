@@ -104,9 +104,7 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "45px",
-                backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
-                color: "transparent",
-                WebkitBackgroundClip: "text",paddingBottom:"3px"
+                paddingBottom:"3px"
               }}
             >
              {t("Contact Us.ContactUs")}
@@ -115,10 +113,6 @@ export default function ContactUs() {
               style={{
                 fontWeight: "700",
                 fontSize: "36px",
-               
-                backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
-                color: "transparent",
-                WebkitBackgroundClip: "text",
               }}
             >
               {t("Contact Us.Feel Free")}
@@ -133,10 +127,6 @@ export default function ContactUs() {
                       style={{
                         fontWeight: "800",
                         fontSize: "30px",
-                       
-                        backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
-                        color: "transparent",
-                        WebkitBackgroundClip: "text",
                       }}
                     >
                       {t("Contact Us.Email")}
@@ -157,10 +147,6 @@ export default function ContactUs() {
                       style={{
                         fontWeight: "800",
                         fontSize: "30px",
-                        
-                        backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
-                        color: "transparent",
-                        WebkitBackgroundClip: "text",
                       }}
                     >
                       {t("Contact Us.Message")}

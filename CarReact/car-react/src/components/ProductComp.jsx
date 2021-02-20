@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setProductId } from "../store/actions";
+import {useTranslation} from "react-i18next";
 
 export default function ProductComp(props) {
   var history = useHistory();
@@ -35,7 +36,7 @@ export default function ProductComp(props) {
         console.log(error);
       });
   };
-
+  const {t, i18n} = useTranslation();
   return ( 
     
     <div className="col-4 productComp">
@@ -68,9 +69,9 @@ export default function ProductComp(props) {
             </p>
             <div className="card__info">
               <h4 className="card__title text-truncate" style={{fontWeight:"600"}}>{props.title}</h4>
-              <span className="price" style={{fontWeight:"700",color:"goldenrod",fontSize:"25px"}}>{props.price} LE</span> <br/>
+              <span className="price" style={{fontWeight:"700",color:"goldenrod",fontSize:"25px"}}>{props.price} {t("repeated.LE")}</span> <br/>
               <p className="text-truncate" style={{fontSize:"20px",fontWeight:"700"}}>{props.description}</p>
-              <span className="card__by"style={{fontWeight:"700"}}>By <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}}  title="author">{props.name}</span></span>
+              <span className="card__by"style={{fontWeight:"700"}}>{t("repeated.By")} <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}}  title="author">{props.name}</span></span>
               <br />
               <small>
                 <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>{" "}
