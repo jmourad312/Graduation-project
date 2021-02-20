@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import {
   getBlogDetails,
   addVoteComment,
+  filterCarModel,
+  filterCarBrand,
   removeVoteComment,
 } from "../../../../store/actions";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -50,11 +52,13 @@ export default function BlogDetails(props) {
       setCheckOwner(false);
     }
   };
+  const stateRedux = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
+    dispatch(filterCarBrand());
     // console.log(blogDetails);
   };
 
@@ -63,6 +67,15 @@ export default function BlogDetails(props) {
   const openModal = () => {
     console.log(blogDetails);
     setIsOpen(true);
+    if (blogDetails) {
+      setEditValue({
+        title:blogDetails.title ,
+        body: blogDetails.body,
+        images:[],
+        brand: blogDetails.brand,
+        model: blogDetails.model,
+      })
+    }
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -79,7 +92,13 @@ export default function BlogDetails(props) {
   const handleEditChange = (event) => {
     const { value, name } = event.target;
     if (name === "brand") {
-      setStateDisabled(true);
+      dispatch(filterCarModel(value));
+      setEditValue((previous) => {
+        return {
+          ...previous,
+          model: "",
+        };
+      });
     }
     setEditValue((previous) => {
       return {
@@ -449,12 +468,12 @@ export default function BlogDetails(props) {
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">
-            <div style={{ fontSize: "25px" }}>
-              {t("Report.reporttitle")}
-            </div>
+            <div style={{ fontSize: "25px" }}>{t("Report.reporttitle")}</div>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText style={{ fontSize: "20px", fontWeight: "500", width: "570px" }}>
+            <DialogContentText
+              style={{ fontSize: "20px", fontWeight: "500", width: "570px" }}
+            >
               {t("Report.ToReport")}
             </DialogContentText>
             <TextField
@@ -470,10 +489,18 @@ export default function BlogDetails(props) {
             />
           </DialogContent>
           <DialogActions>
-            <Button style={{ fontSize: "20px", fontWeight: "500" }} onClick={handleReport} variant="dark">
+            <Button
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              onClick={handleReport}
+              variant="dark"
+            >
               {t("repeated.Submit")}
             </Button>
-            <Button style={{ fontSize: "20px", fontWeight: "500" }} onClick={handleClose} variant="danger">
+            <Button
+              style={{ fontSize: "20px", fontWeight: "500" }}
+              onClick={handleClose}
+              variant="danger"
+            >
               {t("repeated.Cancel")}
             </Button>
           </DialogActions>
@@ -561,29 +588,29 @@ export default function BlogDetails(props) {
                     alt=""
                   />
                 ) : (
-                    blogDetails.images && (
-                      <div>
-                        <Carousel interval={1000}>
-                          {blogDetails.images.map((img, index) => {
-                            return (
-                              <Carousel.Item>
-                                <img
-                                  key={index}
-                                  className="d-block"
-                                  style={{ height: "310px", width: "350px" }}
-                                  src={img}
-                                  alt="Slide"
-                                />
-                              </Carousel.Item>
-                            );
-                          })}
-                        </Carousel>
-                      </div>
-                    )
+                  blogDetails.images && (
+                    <div>
+                      <Carousel interval={1000}>
+                        {blogDetails.images.map((img, index) => {
+                          return (
+                            <Carousel.Item>
+                              <img
+                                key={index}
+                                className="d-block"
+                                style={{ height: "310px", width: "350px" }}
+                                src={img}
+                                alt="Slide"
+                              />
+                            </Carousel.Item>
+                          );
+                        })}
+                      </Carousel>
+                    </div>
                   )
+                )
               ) : (
-                  <Loading />
-                )}
+                <Loading />
+              )}
             </div>
 
             {/* <hr
@@ -730,10 +757,13 @@ export default function BlogDetails(props) {
                   required
                   style={{ fontWeight: "500" }}
                 >
-                  {cars2.map((item, index) => {
+                  <option key={"no-value"} value="">
+                    {t("Filter.ChooseBrand")}
+                  </option>
+                  {stateRedux.brand.map((item, index) => {
                     return (
-                      <option key={index} value={item.make}>
-                        {item.make}
+                      <option key={index} value={item.name}>
+                        {item.name}
                       </option>
                     );
                   })}
@@ -750,11 +780,14 @@ export default function BlogDetails(props) {
                   id="model"
                   value={editValue.model}
                   onChange={handleEditChange}
-                  disabled={!stateDisabled}
+                  disabled={!editValue.brand}
                   required
                   style={{ fontWeight: "500" }}
                 >
-                  {cars3.map((item, index) => {
+                  <option key={"no-value"} value="">
+                    {t("Filter.ChooseModel")}
+                  </option>
+                  {stateRedux.model.map((item, index) => {
                     return (
                       <option key={index} value={item.model}>
                         {item.model}
@@ -810,94 +843,94 @@ export default function BlogDetails(props) {
                   {t("BlogDetails.NoCommentsYet")}
                 </div>
               ) : (
-                  <div
-                    style={{
-                      maxHeight: "380px",
-                      overflowY: "scroll",
-                      overflowX: "hidden",
-                    }}
-                  >
-                    {blogDetails.comment.map((item, index) => {
-                      return (
-                        <div className="media mb-1 mr-3" key={index}>
-                          <div className="mr-2">
-                            {!voted ? (
-                              <button
-                                className="btn"
-                                style={{
-                                  position: "relative",
-                                  left: "55.7px",
-                                  top: "-10px",
-                                  fontSize: "20px",
-                                }}
-                                onClick={() => addVote(item._id)}
-                              >
-                                <ThumbUpIcon />
-                              </button>
-                            ) : (
-                                <Spinner
-                                  animation="grow"
-                                  style={{
-                                    position: "relative",
-                                    left: "40.7px",
-                                    fontSize: "20px",
-                                  }}
-                                />
-                              )}
-                            <span
-                              className="btn badge-pill"
+                <div
+                  style={{
+                    maxHeight: "380px",
+                    overflowY: "scroll",
+                    overflowX: "hidden",
+                  }}
+                >
+                  {blogDetails.comment.map((item, index) => {
+                    return (
+                      <div className="media mb-1 mr-3" key={index}>
+                        <div className="mr-2">
+                          {!voted ? (
+                            <button
+                              className="btn"
                               style={{
                                 position: "relative",
-                                left: "10px",
-                                top: "25px",
+                                left: "55.7px",
+                                top: "-10px",
                                 fontSize: "20px",
-                                width: "30px !important",
-                                fontWeight: "700",
                               }}
+                              onClick={() => addVote(item._id)}
                             >
-                              {item.vote.upVoting - item.vote.downVoting}
-                            </span>
-                            {!voted ? (
-                              <button
-                                className="btn"
-                                style={{
-                                  position: "relative",
-                                  left: "-35px",
-                                  top: "55px",
-                                  fontSize: "20px",
-                                }}
-                                onClick={() => removeVote(item._id)}
-                              >
-                                <ThumbDownIcon />
-                              </button>
-                            ) : (
-                                <Spinner
-                                  animation="grow"
-                                  style={{
-                                    position: "relative",
-                                    left: "-40px",
-                                    top: "50px",
-                                    fontSize: "20px",
-                                  }}
-                                />
-                              )}
-                          </div>
+                              <ThumbUpIcon />
+                            </button>
+                          ) : (
+                            <Spinner
+                              animation="grow"
+                              style={{
+                                position: "relative",
+                                left: "40.7px",
+                                fontSize: "20px",
+                              }}
+                            />
+                          )}
+                          <span
+                            className="btn badge-pill"
+                            style={{
+                              position: "relative",
+                              left: "10px",
+                              top: "25px",
+                              fontSize: "20px",
+                              width: "30px !important",
+                              fontWeight: "700",
+                            }}
+                          >
+                            {item.vote.upVoting - item.vote.downVoting}
+                          </span>
+                          {!voted ? (
+                            <button
+                              className="btn"
+                              style={{
+                                position: "relative",
+                                left: "-35px",
+                                top: "55px",
+                                fontSize: "20px",
+                              }}
+                              onClick={() => removeVote(item._id)}
+                            >
+                              <ThumbDownIcon />
+                            </button>
+                          ) : (
+                            <Spinner
+                              animation="grow"
+                              style={{
+                                position: "relative",
+                                left: "-40px",
+                                top: "50px",
+                                fontSize: "20px",
+                              }}
+                            />
+                          )}
+                        </div>
 
-                          {/* <img
+                        {/* <img
                       className="d-flex mr-3 rounded-circle"
                       src={item.image}
                       alt=""
                       style={{ maxHeight: "300px", maxWidth: "300px" }}
                     /> */}
-                          <hr />
-                          <br />
-                          <div className="media-body">
-                            <h5 className="mt-0">
-                              {item.person.firstName
-                                ? item.person.firstName
-                                : null}
-                              <div className="handleComment">
-                                {/* <Zoom in={true}>
+                        <hr />
+                        <br />
+                        <div className="media-body">
+                          <h5 className="mt-0">
+                            {item.person.firstName
+                              ? item.person.firstName
+                              : null}
+                            <div className="handleComment">
+                              {/* <Zoom in={true}>
                                 <Fab
                                   size="small"
                                   aria-label="edit"
@@ -905,32 +938,37 @@ export default function BlogDetails(props) {
                                   <EditIcon />
                                 </Fab>
                               </Zoom> */}
-                                {item.person._id === localStorage.getItem("UserID") &&
-                                  <Zoom in={true}>
-                                    <Fab
-                                      // color="secondary"
-                                      size="small"
-                                      style={{ width: "35px", height: "10px" }}
-                                      aria-label="delete"
-                                      onClick={() => handleDeleteComment(item._id)}
-                                    >
-                                      <DeleteForeverIcon style={{ fontSize: "25px" }} />
-                                    </Fab>
-                                  </Zoom>
-                                }
-                              </div>
-                            </h5>
-                            <hr />
-                            <p
-                              className="truncate"
-                              style={{ fontSize: "1.5rem", maxWidth: "500px" }}
-                            >
-                              {item.content}
-                            </p>
-                            <hr style={{ border: "1px solid" }} />
-                          </div>
+                              {item.person._id ===
+                                localStorage.getItem("UserID") && (
+                                <Zoom in={true}>
+                                  <Fab
+                                    // color="secondary"
+                                    size="small"
+                                    style={{ width: "35px", height: "10px" }}
+                                    aria-label="delete"
+                                    onClick={() =>
+                                      handleDeleteComment(item._id)
+                                    }
+                                  >
+                                    <DeleteForeverIcon
+                                      style={{ fontSize: "25px" }}
+                                    />
+                                  </Fab>
+                                </Zoom>
+                              )}
+                            </div>
+                          </h5>
+                          <hr />
+                          <p
+                            className="truncate"
+                            style={{ fontSize: "1.5rem", maxWidth: "500px" }}
+                          >
+                            {item.content}
+                          </p>
+                          <hr style={{ border: "1px solid" }} />
+                        </div>
 
-                          {/* <form
+                        {/* <form
                   method="post"
                   onSubmit={() => handleReplySubmit(item._id)}
                 >
@@ -946,7 +984,7 @@ export default function BlogDetails(props) {
                     Submit
                   </button>
                 </form> */}
-                          {/* {item
+                        {/* {item
                   ? item.commentReply.map((rep) => {
                       return (
                         <div className="media mt-4">
@@ -966,14 +1004,14 @@ export default function BlogDetails(props) {
                       );
                     })
                   : "LOADING"} */}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )
+                      </div>
+                    );
+                  })}
+                </div>
+              )
             ) : (
-                "LOADING"
-              )}
+              "LOADING"
+            )}
           </div>
           <div className="col-4">
             {localStorage.getItem("Authorization") ? (
@@ -1006,30 +1044,30 @@ export default function BlogDetails(props) {
                 </div>
               </div>
             ) : (
-                <div
-                  className="shadow-sm p-2 mb-4 rounded-lg"
-                  onClick={() => history.push(`/SignChoice`)}
+              <div
+                className="shadow-sm p-2 mb-4 rounded-lg"
+                onClick={() => history.push(`/SignChoice`)}
+                style={{
+                  height: "300px",
+                  width: "300px",
+                  color: "#000",
+                  border: "solid white 3px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <h3
                   style={{
-                    height: "300px",
-                    width: "300px",
                     color: "#000",
-                    border: "solid white 3px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
+                    position: "relative",
+                    top: "35%",
+                    textAlign: "center",
                   }}
                 >
-                  <h3
-                    style={{
-                      color: "#000",
-                      position: "relative",
-                      top: "35%",
-                      textAlign: "center",
-                    }}
-                  >
-                    {t("BlogDetails.OnlyRegistered")}
-                  </h3>
-                </div>
-              )}
+                  {t("BlogDetails.OnlyRegistered")}
+                </h3>
+              </div>
+            )}
           </div>
         </div>
       </div>
