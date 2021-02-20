@@ -106,7 +106,7 @@ export default function ContactUs() {
                 fontSize: "45px",
                 backgroundImage: "linear-gradient(to top,#ffffff 10%,#dfdda3 90%)",
                 color: "transparent",
-                WebkitBackgroundClip: "text",
+                WebkitBackgroundClip: "text",paddingBottom:"3px"
               }}
             >
              {t("Contact Us.ContactUs")}
