@@ -34,7 +34,10 @@ export default function SignChoice() {
       variants={pageVariants}
       transition={pageTransitions}
     >
-      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",color:"transparent",WebkitBackgroundClip:"text"}}>{t("SignChoice.Register")}</h1>
+      <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",backgroundImage:
+          "linear-gradient(to top, #08091d 0%, #ffffff 30%)",
+        color: "transparent",
+        WebkitBackgroundClip: "text",}}>{t("SignChoice.Register")}</h1>
       <div className="container" style={{height:"650px"}}>
         <div className="row">
           <Link className="col-6" to="/VendorSignForm">
@@ -102,7 +105,9 @@ export default function SignChoice() {
 
               <div className="card__content">
                 <h4 className="card__title" style={{fontSize:"60px",backgroundImage:
-              "linear-gradient(to top, #08091d 50%, #a2a5a8 100%)", color: "transparent", WebkitBackgroundClip: "text" }} >{t("SignChoice.CarOwner")}</h4>
+              "linear-gradient(to top, #08091d 50%, #a2a5a8 100%)",
+            color: "transparent",
+            WebkitBackgroundClip: "text",}} >{t("SignChoice.CarOwner")}</h4>
                 {/* <h3 >Car Owner</h3> */}
               </div>
             </div>
