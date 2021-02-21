@@ -5,6 +5,7 @@ var car = new schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   description: { type: String, required: true },
+  avgRate:{ type: Number,default:0},
   available: Boolean,
   case: String,
   images: [String],

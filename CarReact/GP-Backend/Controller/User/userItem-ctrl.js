@@ -1,14 +1,13 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
-const Feedback = require('../../models/Feedback/feedback')
-const Vendor = require('../../models/Person/Vendor/vendor')
+const Feedback = require("../../models/Feedback/feedback");
+const Vendor = require("../../models/Person/Vendor/vendor");
 // favourite item
 // last seen item
 // click item show items details
 // click vendor name show profile vendor
 // rate item
 // write feedback item
-//show all item search 
-
+//show all item search
 
 // get part of product
 partOfItem = (req, res) => {
@@ -42,18 +41,14 @@ partOfItem = (req, res) => {
 
 // show all posts of all users
 showDetailsItem = async (req, res) => {
-
   const idItem = req.params.id;
   const populateQuery = [
     { path: "person", select: "firstName workshopName location" },
-    { path: "feedback" , populate:{ path: "user", select: "firstName" } }
+    { path: "feedback", populate: { path: "user", select: "firstName" } },
   ];
 
   carItem
-    .findOne(
-      { _id: idItem },
-      { __v: 0 }
-    )
+    .findOne({ _id: idItem }, { __v: 0 })
     .populate(populateQuery)
     .exec(async (error, data) => {
       if (error || data.length == 0) {
@@ -64,13 +59,14 @@ showDetailsItem = async (req, res) => {
         });
       }
 
-  const stars = await Feedback.aggregate([
-    { $match: { car : data._id} },
-    { $group : {_id : null, avgRate : {  $avg : "$rating" } } }
-  ]).then("done")
+      const stars = await Feedback.aggregate([
+        { $match: { car: data._id } },
+        { $group: { _id: null, avgRate: { $avg: "$rating" } } },
+      ]).then("done");
       //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
       return res.json({
-        Data: data,stars,
+        Data: data,
+        stars,
         Message: "Details product",
         Success: true,
       });
@@ -82,7 +78,7 @@ showFilterItems = (req, res) => {
 
   const criteriaSearch = { $regex: req.body.search, $options: "i" };
   const queryCond = {};
- ///////      0
+  ///////      0
   if (req.body.price) {
     queryCond.$and = [
       { price: { $gte: req.body.price[0] } },
@@ -104,7 +100,8 @@ showFilterItems = (req, res) => {
   console.log(queryCond);
   const populateQuery = [
     { path: "person", select: "firstName workshopName" },
-    { path: "feedback"}];
+    { path: "feedback" },
+  ];
 
   carItem
     .find(queryCond, { __v: 0 })
@@ -120,22 +117,27 @@ showFilterItems = (req, res) => {
           Success: false,
         });
       }
-      const TotalItem = await carItem.countDocuments(queryCond).then("Done").catch("Error")
-      const stars = await Feedback.aggregate([
-        { $group : {_id : "$car", avgRate : {  $avg : "$rating" } } }
-      ]).then("done")
+      const TotalItem = await carItem
+        .countDocuments(queryCond)
+        .then("Done")
+        .catch("Error");
 
-      // stars.map(star => {
-      //   data.map(item => {
-      //     if(Number(item._id) === Number(star._id)){
-      //       console.log(item,star)
-      //     } 
-      //   })
-      // })
+      const stars = await Feedback.aggregate([
+        { $group: { _id: "$car", avgRate: { $avg: "$rating" } } },
+      ]).then("done");
+
+      for await (const AvgStar of stars) {
+        data.map((dataCar,index) => {
+          if (String(dataCar._id) === String(AvgStar._id)){
+            console.log(dataCar._id,AvgStar._id)
+            data[index].avgRate = AvgStar.avgRate
+          }
+        })
+      }
 
       return res.json({
-        Data: data,stars,
-        TotalItem:TotalItem,
+        Data: data,
+        TotalItem: TotalItem,
         Message: `posts: filter ${data.length}`,
         Success: true,
       });
@@ -144,29 +146,37 @@ showFilterItems = (req, res) => {
 
 showVendorProfile = (req, res) => {
   const populateQuery = [
-    { path: "person", select: "-password -email -role -codeToResetPassword -subscribe" },
-    { path: "vendorItems"}
-  ]
+    {
+      path: "person",
+      select: "-password -email -role -codeToResetPassword -subscribe",
+    },
+    { path: "vendorItems" },
+  ];
 
-  Vendor.findOne({ person: req.params.id }, { __v: 0, banned: 0, workshopSchedule: 0 }).populate(populateQuery).exec((error, data) => {
-    if (error || data.length == 0) {
+  Vendor.findOne(
+    { person: req.params.id },
+    { __v: 0, banned: 0, workshopSchedule: 0 }
+  )
+    .populate(populateQuery)
+    .exec((error, data) => {
+      if (error || data.length == 0) {
+        return res.json({
+          Data: error,
+          Message: "No Data found in DB",
+          Success: false,
+        });
+      }
       return res.json({
-        "Data": error,
-        "Message": "No Data found in DB",
-        "Success": false
-      })
-    }
-    return res.json({
-      "Data": data,
-      "Message": "Done Get Vendor Profile",
-      "Success": true
-    })
-  })
-
-
-}
+        Data: data,
+        Message: "Done Get Vendor Profile",
+        Success: true,
+      });
+    });
+};
 
 module.exports = {
-  partOfItem, showFilterItems,
-  showDetailsItem, showVendorProfile
-}
+  partOfItem,
+  showFilterItems,
+  showDetailsItem,
+  showVendorProfile,
+};

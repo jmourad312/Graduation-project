@@ -3,7 +3,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { setProductId } from "../store/actions";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import ShowRating from "../components/ShowRating";
 
 export default function ProductComp(props) {
   var history = useHistory();
@@ -13,7 +14,7 @@ export default function ProductComp(props) {
 
   const handleClick = (params) => {
     dispatch(setProductId(params));
-    localStorage.setItem("ProductID", params)
+    localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${props.id}`);
     axios
       .put(
@@ -36,9 +37,8 @@ export default function ProductComp(props) {
         console.log(error);
       });
   };
-  const {t, i18n} = useTranslation();
-  return ( 
-    
+  const { t, i18n } = useTranslation();
+  return (
     <div className="col-4 productComp">
       {/* <article className="card" style={{ background: `url(${props.image}) no-repeat`, backgroundSize: "100% 70%"}} */}
       {/* onClick={() => handleClick(props.id)}> */}
@@ -62,20 +62,63 @@ export default function ProductComp(props) {
 
       <div className="productList">
         <section className="cards">
-          <article className="card card--1" onClick={() => handleClick(props.id)}>
-            <div className="card__img" style={{ background: `url(${props.images[0]}) top left 100%` }}></div>
+          <article
+            className="card card--1"
+            onClick={() => handleClick(props.id)}
+          >
+            <div
+              className="card__img"
+              style={{ background: `url(${props.images[0]}) top left 100%` }}
+            ></div>
             <p className="card_link">
-              <div className="card__img--hover" style={{ background: `url(${props.images[0]})top left 100% ` }} ></div>
+              <div
+                className="card__img--hover"
+                style={{ background: `url(${props.images[0]})top left 100% ` }}
+              ></div>
             </p>
             <div className="card__info">
-              <h4 className="card__title text-truncate" style={{fontWeight:"600"}}>{props.title}</h4>
-              <span className="price" style={{fontWeight:"700",color:"goldenrod",fontSize:"25px"}}>{props.price} {t("repeated.LE")}</span> <br/>
-              <p className="text-truncate" style={{fontSize:"20px",fontWeight:"700"}}>{props.description}</p>
-              <span className="card__by"style={{fontWeight:"700"}}>{t("repeated.By")} <span className="card__author" style={{fontWeight:"900",fontSize:"15px"}}  title="author">{props.name}</span></span>
+              <h4
+                className="card__title text-truncate"
+                style={{ fontWeight: "600" }}
+              >
+                {props.title}
+              </h4>
+              <span
+                className="price"
+                style={{
+                  fontWeight: "700",
+                  color: "goldenrod",
+                  fontSize: "25px",
+                }}
+              >
+                {props.price} {t("repeated.LE")}
+              </span>{" "}
+              <br />
+              <p
+                className="text-truncate"
+                style={{ fontSize: "20px", fontWeight: "700" }}
+              >
+                {props.description}
+              </p>
+              <span className="card__by" style={{ fontWeight: "700" }}>
+                {t("repeated.By")}{" "}
+                <span
+                  className="card__author"
+                  style={{ fontWeight: "900", fontSize: "15px" }}
+                  title="author"
+                >
+                  {props.name}
+                </span>
+              </span>
               <br />
               <small>
-                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.brand}</i>{" "}
-                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.model}</i>
+                <i className="badge badge-dark" style={{ fontSize: "15px" }}>
+                  {props.brand}
+                </i>{" "}
+                <i className="badge badge-dark" style={{ fontSize: "15px" }}>
+                  {props.model}
+                </i>
+                <ShowRating rating={props.avgRate} />
               </small>
             </div>
           </article>
