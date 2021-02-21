@@ -64,6 +64,9 @@ export default function EditVendor(props) {
         try {
             const res = await instance.put(`vendor/updateProfile/${data._id}`, formData, config);
             console.log(res)
+            if (res.data.Success == true) {
+                alert("Done");
+              } else alert("Try Again");
 
         } catch (error) {
             console.log(error);

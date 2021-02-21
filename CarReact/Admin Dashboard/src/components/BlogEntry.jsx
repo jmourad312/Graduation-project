@@ -12,7 +12,7 @@ export default function BlogEntry(props) {
     body: props.cardContent,
     brand: props.cardBrand,
     model: props.cardModel,
-    images: props.imgSrc,
+    images: [],
     message: props.dataItem.reportPosts,
   });
 

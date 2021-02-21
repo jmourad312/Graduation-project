@@ -22,8 +22,8 @@ router.post("/signup", async (req, res) => {
   const body = req.body;
   const location = {
     coordinates: [
-      req.body.longitude,
-      req.body.latitude
+      req.body.longitude ? req.body.longitude : 0,
+      req.body.latitude ? req.body.latitude : 0
     ],
   };
 
