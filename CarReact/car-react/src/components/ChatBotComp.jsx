@@ -55,20 +55,20 @@ export default function ChatBotComp() {
     const steps = [
       {
         id: "1",
-        message: "Hi I am Dreksyony Bot \u{1F64B}",
+        message: "Hi \u{1F64B}, I am Dreksyony Bot  أهلا ،أنا المساعد الآلي لدركسيوني",
         trigger: "2",
       },
       {
         id: "2",
-        message: "How can we help you?",
+        message: "How can I help you? كيف يمكنني مساعدتك؟",
         trigger: "3",
       },
       {
         id: "3",
         options: [
-          { value: 1, label: "Contact Us", trigger: "4" },
-          { value: 2, label: "Did you know ?", trigger: "fact" },
-          { value: 3, label: "Full Maintenance", trigger: "full" },
+          { value: 1, label: "Contact Us تواصل معنا", trigger: "4" },
+          { value: 2, label: "Did you know ? هل كنت تعلم؟", trigger: "fact" },
+          { value: 3, label: "Full Maintenance فحص كامل", trigger: "full" },
         ],
       },
       {
