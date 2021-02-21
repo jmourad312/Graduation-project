@@ -361,9 +361,34 @@ export default function Admin(props) {
 
             {/* Bar Chart */}
             <div className="row wow fadeIn">
-              <div className="col-md-7 mb-4">
-                <div className="card">
+              
+
+              <div className="col-7 mb-4">
+                <div className="card mb-4">
+                  <div className="card-header text-center" style={{fontSize:"20px",fontWeight:"700",color:"#495057"}}>Pie chart</div>
                   <div className="card-body">
+                    <Pie
+                      data={PieData}
+                      options={{
+                        title: {
+                          display: true,
+                          text: "Relations Between Data",
+                          fontSize: 20,
+                        },
+                        legend: {
+                          display: true,
+                          position: "right",
+                          labels: { fontSize: 15 },
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            
+              <div className="col-5 mb-4">
+                <div className="card">
+                  <div className="card-body" style={{paddingTop:"100px",height:"445px"}}>
                     <div className="list-group list-group-flush">
                       <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize:"20px",fontWeight:"700" }}>
                         No.Users
@@ -397,29 +422,6 @@ export default function Admin(props) {
                         </span>
                       </a>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-5 mb-4">
-                <div className="card mb-4">
-                  <div className="card-header text-center" style={{fontSize:"20px",fontWeight:"700",color:"#495057"}}>Pie chart</div>
-                  <div className="card-body">
-                    <Pie
-                      data={PieData}
-                      options={{
-                        title: {
-                          display: true,
-                          text: "Relations Between Data",
-                          fontSize: 20,
-                        },
-                        legend: {
-                          display: true,
-                          position: "right",
-                          labels: { fontSize: 15 },
-                        },
-                      }}
-                    />
                   </div>
                 </div>
               </div>
