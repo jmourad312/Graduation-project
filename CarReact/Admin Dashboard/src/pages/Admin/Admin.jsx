@@ -365,45 +365,33 @@ export default function Admin(props) {
                 <div className="card">
                   <div className="card-body">
                     <div className="list-group list-group-flush">
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize:"20px",fontWeight:"700" }}
-                      >
+                      <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize:"20px",fontWeight:"700" }}>
                         No.Users
-                        <span className="badge badge-info badge-pill pull-right ml-2">
+                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.user}
                         </span>
                       </a>
 
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize:"20px",fontWeight:"700"}}
-                      >
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700"}}>
                         No.Vendors
-                        <span className="badge badge-info badge-pill pull-right ml-2">
+                        <span className="badge badge-info badge-pill pull-right ml-4" style={{fontSize:"20px"}}>
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.vendor}
                         </span>
                       </a>
 
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize:"20px",fontWeight:"700" }}
-                      >
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
                         No.Products
-                        <span className="badge badge-info badge-pill pull-right ml-2">
+                        <span className="badge badge-info badge-pill pull-right ml-3" style={{fontSize:"20px"}}>
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.product}
                         </span>
                       </a>
 
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize:"20px",fontWeight:"700" }}
-                      >
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
                         No.Blogs
-                        <span className="badge badge-info badge-pill pull-right ml-2">
+                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.blogs}
                         </span>
