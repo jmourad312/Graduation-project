@@ -364,7 +364,7 @@ addUserBan = (req, res) => {
 };
 
 deleteUser = (req, res) => {
-  Person.deleteOne({ _id: req.params.id }, (err, data) => {
+  Person.deleteOne({ _id: req.params.id }, async (err, data) => {
     if (err) {
       return res.json({
         Data: err,
@@ -372,7 +372,10 @@ deleteUser = (req, res) => {
         Success: false,
       });
     }
-    User.deleteOne({ person: req.params.id }).then("Done");
+   await User.deleteOne({ person: req.params.id }).then("Done");
+    await Post.deleteMany({ person: req.params.id }).then('Done');
+
+
     return res.json({
       Data: data.n,
       Message: "Done deletes",
