@@ -8,26 +8,24 @@ import Facts from '../assets/js/carFacts';
 
 
 export default function ChatBotComp() {
-  const [fact1, setFact] = useState();
+
+  // const [fact, setFact] = useState([Facts]);
   
-  // const getFact=()=>{
-  //   setFact(fact)
-  // }
-  const [userInfo, setUserInfo] = useState({
-    userKM:0,
-    userOilType:0,
-  })
+  // const [userInfo, setUserInfo] = useState({
+  //   userKM:0,
+  //   userOilType:0,
+  // })
   
   useEffect(() => {
-    var fact = Facts[Math.floor(Math.random() * Facts.length)];
-    // getFact()
+    // console.log(Fact);
+
     // var fact = Facts[Math.floor(Math.random() * Facts.length)];
     // const { fullUserAnswer,fullAnswerOptions } = steps;
     // setUserInfo({ fullUserAnswer, fullAnswerOptions });
     // console.log(steps.fullAnswerOptions);
     // console.log(steps[7].options.value);
-    console.log(userInfo);
-    console.log(fact);
+    // console.log(userInfo);
+    // console.log(fact);
   });
 
 
@@ -75,12 +73,7 @@ export default function ChatBotComp() {
       },
       {
         id: "fact",
-        component: (
-          <div>
-            {/* <p>{fact1.title}</p> */}
-            {/* <p>{fact1.content}</p> */}
-          </div>
-        ),
+        component: (<Trivia />),
         trigger:"2"
       },
       {
@@ -184,6 +177,31 @@ export default function ChatBotComp() {
       </>
     );
 }
+
+function Trivia() {
+  let fact;
+  const [Fact, setFact] = useState({
+    factTitle: "",
+    factContent: "",
+  });
+
+  const getFact = () => {
+    fact = Facts[Math.floor(Math.random() * Facts.length)];
+    setFact({ factTitle: fact.title, factContent: fact.content });
+    // console.log(Fact);
+  };
+  // getFact();
+  useEffect(() => {
+    getFact()
+  }, [])
+  return(
+    <div>
+      <h3>{Fact.factTitle}</h3>
+      <h5>{Fact.factContent}</h5>
+    </div>
+  );
+}
+
 
 
 function Review(props) {
