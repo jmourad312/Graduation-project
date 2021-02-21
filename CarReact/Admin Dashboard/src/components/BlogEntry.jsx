@@ -145,7 +145,7 @@ export default function BlogEntry(props) {
             </p>
             <div className="card__info">
               <h3 className="card__title text-truncate">{props.cardTitle}</h3>
-              <span className="card__by">
+              <span className="card__by" style={{fontSize:"20px"}}>
                 by{" "}
                 <span className="card__author" title="author">
                   {props.userName}
@@ -153,35 +153,43 @@ export default function BlogEntry(props) {
               </span>
               <br />
               <small>
-                <i className="badge badge-dark">{props.cardBrand}</i>
-                <i className="badge badge-dark">{props.cardModel}</i>
+                <i className="badge badge-dark" style={{fontSize:"15px"}}>{props.cardBrand}</i>
+                <i className="badge badge-dark ml-1" style={{fontSize:"15px"}}>{props.cardModel}</i>
               </small>
+              <br/>
               <Button
-                variant="primary"
-                className="badge badge-pill badge-danger"
+                variant="danger"
+                className="mt-1"
+                style={{fontSize:"20px"}}
                 onClick={handleShowMessage}
               >
-                {props.dataItem.reportPosts.length}
+                {props.dataItem.reportPosts.length} Reports 
               </Button>
             </div>
-            <div className="d-flex">
+            <div className="row">
+              <div className="col-6">
+
               <Button
                 variant="primary"
-                className="btn btn-info mx-auto m-2"
-                style={{ zIndex: "100", width: "100%" }}
+                className="btn btn-info"
+                style={{ zIndex: "100",width:"120px",marginBottom:"5px",marginLeft:"5px"}}
                 onClick={handleShow}
               >
                 <i style={{ fontSize: "20px" }} className="fas fa-pen"></i>
               </Button>
+              </div>
+              <div className="col-6">
               <Button2
-                className="btn btn-danger mx-auto m-2 "
+                className="btn btn-danger"
+                style={{marginRight:"10px" }}
                 parameter={props.dataItem}
                 key={props.id}
                 handelClick={props.delete}
                 name={
-                  <i style={{ fontSize: "20px" }} className="fas fa-trash"></i>
+                  <i style={{ fontSize: "20px"}} className="fas fa-trash"></i>
                 }
               ></Button2>
+              </div>
             </div>
           </article>
         </section>
@@ -264,11 +272,11 @@ export default function BlogEntry(props) {
           </select>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button variant="primary" onClick={editProduct}>
             Save Changes
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

@@ -65,7 +65,7 @@ export default function Items(props) {
     return (
 
         <div className="admin">
-            <div className="container-for-admin">
+            <div className="container-for-admin pt-3 mt-2">
                 <Navbar />
                 <h1 className="m-5">Products By {data.firstName}</h1>
 

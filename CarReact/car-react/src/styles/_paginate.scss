@@ -32,13 +32,13 @@
 
   }
   .pagination > li:first-child  > a, .pagination 
-  > li:first-child {border-radius: 25px 0px 0px 25px;
+  > li:first-child {border-radius: 10px 0px 0px 10px;
     // background-color: rgba(128, 128, 128, 0.397);
 
   }
 
   .pagination > li:last-child > a, .pagination 
-  > li:last-child {border-radius: 0px 25px 25px 0px;
+  > li:last-child {border-radius: 0px 10px 10px 0px;
     // background-color: rgba(128, 128, 128, 0.397);
   }
   

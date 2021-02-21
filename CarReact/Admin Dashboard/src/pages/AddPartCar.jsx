@@ -19,7 +19,7 @@ export default function AddPartCar(props) {
     setShow(false);
   };
 
-  const handleShow = (name,id, edit) => {
+  const handleShow = (name, id, edit) => {
     setShow(true);
     setEdit({
       name: name,
@@ -148,7 +148,7 @@ export default function AddPartCar(props) {
     setShow(false);
 
     try {
-      const res = await instance.put(`admin/updateModel/${edit.id}`, {model:edit.name},{
+      const res = await instance.put(`admin/updateModel/${edit.id}`, { model: edit.name }, {
         headers: { Authorization: localStorage.getItem("Authorization") },
       });
 
@@ -286,7 +286,7 @@ export default function AddPartCar(props) {
           <Navbar />
           {/* BRAND  */}
           <div className="container tabel mt-5 pt-5">
-          <h3>Brand In Database</h3>
+            <h3>Brand In Database</h3>
             <input
               type="text"
               className="form-control mb-2"
@@ -306,26 +306,26 @@ export default function AddPartCar(props) {
             />
 
             <table id="myTable" className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Index</th>
-                  <th>Brand</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+              <thead >
+                <tr >
+                  <th className="text-center">Index</th>
+                  <th className="text-center">Brand</th>
+                  <th className="pl-5">Edit</th>
+                  <th className="pl-5">Delete</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody >
                 {stateAxios.Brand.map((item, index) => {
                   return (
-                    <tr key={index + 1}>
-                      <td>{index + 1}</td>
-                      <td>{item.name}</td>
+                    <tr key={index + 1} >
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center w-50">{item.name}</td>
                       <td>
                         <Button
                           className="page-link"
-                          style={{width:"100%"}}
+                          style={{ width: "70%", height: "40px" }}
                           onClick={() => {
-                            handleShow(item.name,item._id, "Brand");
+                            handleShow(item.name, item._id, "Brand");
                           }}
                         >
                           <i
@@ -336,18 +336,13 @@ export default function AddPartCar(props) {
                       </td>
 
                       <td>
-                        <Button2
+                        <Button
                           className="page-link"
-                          parameter={item}
+                          style={{ width: "65%" }}
                           key={index + 1}
-                          handelClick={handelClickDeleteBrand}
-                          name={
-                            <i
-                              style={{ fontSize: "20px" }}
-                              className="fas fa-trash "
-                            ></i>
-                          }
-                        ></Button2>
+                          onClick={() => handelClickDeleteBrand(item)}>
+                          <i style={{ fontSize: "20px" }} className="fas fa-trash "></i>
+                        </Button>
                       </td>
                     </tr>
                   );
@@ -360,7 +355,7 @@ export default function AddPartCar(props) {
 
           {/* Model */}
           <div className="container tabel mt-5 pt-5">
-          <h3>Model In Database</h3>
+            <h3>Model In Database</h3>
             <select
               value={state.brandForModel}
               name="brandForModel"
@@ -387,7 +382,7 @@ export default function AddPartCar(props) {
                   if (e.which == 13) sentModelData();
                 }}
                 placeholder="Write a model and click enter to save it in the database"
-                />
+              />
 
               <input
                 type="text"
@@ -398,11 +393,11 @@ export default function AddPartCar(props) {
 
               <table id="myTable2" className="table table-hover">
                 <thead>
-                  <tr>
-                    <th>Index</th>
-                    <th>Model</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                  <tr >
+                    <th className="text-center">Index</th>
+                    <th className="text-center">Model</th>
+                    <th className="pl-5">Edit</th>
+                    <th className="pl-5">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -410,36 +405,31 @@ export default function AddPartCar(props) {
                     stateAxios.Model.map((item, index) => {
                       return (
                         <tr key={index + 1}>
-                          <td>{index + 1}</td>
-                          <td>{item.model}</td>
+                          <td className="text-center">{index + 1}</td>
+                          <td className="text-center w-50">{item.model}</td>
                           <td>
-                              <Button
-                                className="page-link"
-                                style={{width:"100%"}}
-                                onClick={() => {
-                                  handleShow(item.model,item._id, "Model");
-                                }}
-                              >
-                                <i
-                                  style={{ fontSize: "20px" }}
-                                  className="fas fa-pen"
-                                ></i>
-                              </Button>
+                            <Button
+                              className="page-link"
+                              style={{ width: "75%" }}
+                              onClick={() => {
+                                handleShow(item.model, item._id, "Model");
+                              }}
+                            >
+                              <i
+                                style={{ fontSize: "20px" }}
+                                className="fas fa-pen"
+                              ></i>
+                            </Button>
                           </td>
 
                           <td>
-                            <Button2
+                            <Button
                               className="page-link"
-                              parameter={item}
+                              style={{ width: "65%" }}
                               key={index + 1}
-                              handelClick={handelClickDeleteModel}
-                              name={
-                                <i
-                                  style={{ fontSize: "20px" }}
-                                  className="fas fa-trash "
-                                ></i>
-                              }
-                            ></Button2>
+                              onClick={() => handelClickDeleteModel(item)}>
+                              <i style={{ fontSize: "20px" }} className="fas fa-trash "></i>
+                            </Button>
                           </td>
                         </tr>
                       );

@@ -118,7 +118,7 @@ export function Card(props) {
 
   return (
     <>
-      <div className="col-4 productComp mb-2 blog-post">
+      <div className="col-3 productComp mb-2 blog-post">
         <section className="cards">
           <article className="card card--1">
             <div
@@ -162,7 +162,7 @@ export function Card(props) {
               <Button
                 variant="primary"
                 className="btn btn-info mx-auto m-2"
-                style={{ zIndex: "100", width: "100%" }}
+                style={{ zIndex: "100", width: "40%" }}
                 onClick={handleShow}
               >
                 <i style={{ fontSize: "20px" }} className="fas fa-pen"></i>

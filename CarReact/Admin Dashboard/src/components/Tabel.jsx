@@ -1,4 +1,4 @@
-import { Button2 } from "./Button";
+import { Button } from "react-bootstrap";
 
 export function Tabel(props) {
   return (
@@ -15,9 +15,9 @@ export function Tabel(props) {
                     <th>User name</th>
                     <th>Email</th>
                     <th>Banned</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Ban</th>
+                    <th className="pl-5">Edit</th>
+                    <th className="pl-5">Delete</th>
+                    <th className="pl-5">Ban</th>
                   </tr>
                 </thead>
 
@@ -27,60 +27,45 @@ export function Tabel(props) {
                       <tr
                         style={{
                           backgroundColor:
-                          item.banned == true 
+                            item.banned == true
                               ? "gray"
                               : "",
                         }}
                       >
-                        <td>{props.index + index + 1}</td>
+                        <td style={{fontWeight:"600"}}>{props.index + index + 1}</td>
                         {/* <td>{item.person._id}</td> */}
-                        <td>{item.firstName}</td>
-                        <td>{item.email}</td>
-                        <td>{item.banned == true ? "Yes" : "No"}</td>
+                        <td style={{fontWeight:"600"}}>{item.firstName}</td>
+                        <td style={{fontWeight:"600"}}>{item.email}</td>
+                        <td style={{fontWeight:"600"}}>{item.banned == true ? "Yes" : "No"}</td>
 
                         <td>
-                          <Button2
+                          <Button
                             className="page-link"
-                            parameter={item}
+                            style={{ width: "80%",marginLeft:"30px" }}
                             key={index + 1}
-                            handelClick={props.handelClickEdit}
-                            name={
-                              <i
-                                style={{ fontSize: "20px" }}
-                                className="fas fa-pen"
-                              ></i>
-                            }
-                          ></Button2>
+                            onClick={() => props.handelClickEdit(item)}>
+                            <i style={{ fontSize: "20px"}} className="fas fa-pen"></i>
+                          </Button>
                         </td>
 
                         <td>
-                          <Button2
+                          <Button
                             className="page-link"
-                            parameter={item._id}
+                            style={{ width: "80%",marginLeft:"30px"  }}
                             key={index + 1}
-                            handelClick={props.handelClickDelete}
-                            name={
-                              <i
-                                style={{ fontSize: "20px" }}
-                                className="fas fa-trash "
-                              ></i>
-                            }
-                          ></Button2>
+                            onClick={() => props.handelClickDelete(item._id)}>
+                            <i style={{ fontSize: "20px" }} className="fas fa-trash "></i>
+                          </Button>
                         </td>
 
                         <td>
-                          <Button2
+                          <Button
                             className="page-link"
-                            parameter={item}
+                            style={{ width: "80%",marginLeft:"30px" }}
                             key={index + 1}
-                            handelClick={props.handelClick}
-                            name={
-                              <i
-                                style={{ fontSize: "20px" }}
-                                className="fas fa-ban"
-                              ></i>
-                            }
-                          ></Button2>
+                            onClick={() => props.handelClick(item)}>
+                            <i style={{ fontSize: "20px" }} className="fas fa-ban"></i>
+                          </Button>
                         </td>
                       </tr>
                     );

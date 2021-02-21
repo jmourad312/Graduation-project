@@ -12,7 +12,7 @@ export default function EditVendor(props) {
         middleName: "",
         password: "",
         email: "",
-        image:""
+        image: ""
     });
 
     useEffect(() => {
@@ -47,12 +47,12 @@ export default function EditVendor(props) {
     const handleEditSubmit = async () => {
 
         const formData = new FormData();
-        editValue.image !="" && formData.append("image", editValue.image);
+        editValue.image != "" && formData.append("image", editValue.image);
         formData.append("firstName", editValue.firstName);
         formData.append("workshopName", editValue.workshopName);
         formData.append("middleName", editValue.middleName);
         formData.append("email", editValue.email);
-        editValue.password.length !=0 && formData.append("password", editValue.password);
+        editValue.password.length != 0 && formData.append("password", editValue.password);
 
         const config = {
             headers: {
@@ -74,38 +74,31 @@ export default function EditVendor(props) {
     return (
         <div className="admin">
             <div className="container-for-admin">
-                
                 <Navbar />
-
-                <div className="container mt-2 pt-1">
+                <div className="container mt-4 pt-1 w-50">
                     <h2 className="mt-5">Edit your Profile</h2>
                     <div className="form-group">
-                        <label >firstName:</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>First Name</label>
                         <input type="text" className="form-control" value={editValue.firstName} name="firstName" onChange={handleEditChange} />
                     </div>
-
-
                     <div className="form-group">
-                        <label >middleName</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>Middle Name</label>
                         <input type="text" className="form-control" value={editValue.middleName} name="middleName" onChange={handleEditChange} />
                     </div>
-
                     <div className="form-group">
-                        <label >workshopName</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>Workshop Name</label>
                         <input type="text" className="form-control" value={editValue.workshopName} name="workshopName" onChange={handleEditChange} />
                     </div>
-
                     <div className="form-group">
-                        <label>image</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>Image</label>
                         <input type="file" name="image" className="form-control" onChange={handleImageChange} />
                     </div>
-
                     <div className="form-group">
-                        <label >Email address:</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>Email address</label>
                         <input type="email" className="form-control" value={editValue.email} name="email" onChange={handleEditChange} />
                     </div>
                     <div className="form-group">
-                        <label>Password:</label>
+                        <label style={{ fontSize: "25px", fontWeight: "500" }}>Password</label>
                         <input type="password" className="form-control" value={editValue.password} name="password" onChange={handleEditChange} />
                     </div>
                     <button type="submit" className="btn btn-primary" onClick={handleEditSubmit}>Submit</button>
