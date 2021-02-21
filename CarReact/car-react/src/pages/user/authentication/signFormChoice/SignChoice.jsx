@@ -35,7 +35,7 @@ export default function SignChoice() {
       transition={pageTransitions}
     >
       <h1 className="text-center" style={{fontWeight:"700",paddingTop:"50px",fontSize:"60px",backgroundImage:
-              "linear-gradient(to right, #08091d 40%, #a2a5a8 50%)",
+              "linear-gradient(to top, #08091d 40%, #a2a5a8 50%)",
             color: "transparent",
             WebkitBackgroundClip: "text",}}>{t("SignChoice.Register")}</h1>
       <div className="container" style={{height:"650px"}}>
