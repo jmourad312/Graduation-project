@@ -100,6 +100,8 @@ export default function ProductComp(props) {
               >
                 {props.description}
               </p>
+                <ShowRating rating={props.avgRate} />
+                <br/>
               <span className="card__by" style={{ fontWeight: "700" }}>
                 {t("repeated.By")}{" "}
                 <span
@@ -118,7 +120,6 @@ export default function ProductComp(props) {
                 <i className="badge badge-dark" style={{ fontSize: "15px" }}>
                   {props.model}
                 </i>
-                <ShowRating rating={props.avgRate} />
               </small>
             </div>
           </article>
