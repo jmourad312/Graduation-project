@@ -17,14 +17,18 @@ const VendorRoute = require("./routes/vendor/vendor");
 const AdminRoute = require("./routes/admin/admin");
 
 const blogRoute = require("./routes/blog/blog");
-const AdsRoute = require('./routes/Ads/ads')
-const passRoute = require('./routes/Forgetpassword')
+const AdsRoute = require("./routes/Ads/ads");
+const passRoute = require("./routes/Forgetpassword");
+const ChatRoute = require("./routes/chat/chat");
 
 const upload = require("./middleware/upload").upload;
 
 //server
 const app = express();
 const apiPort = 3000;
+
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 
 app.use(bodyparser.json({ extended: false }));
 app.use(
@@ -46,15 +50,22 @@ app.use("/user", UserRoute);
 app.use("/vendor", VendorRoute);
 app.use("/vendor/auth", AuthVendorRoute);
 
-app.use("/admin/auth",AuthAdminRoute);
+app.use("/admin/auth", AuthAdminRoute);
 app.use("/admin", AdminRoute);
 
 app.use("/blog", blogRoute);
 app.use("/auth", passRoute);
+app.use("/chat", ChatRoute);
+
 app.use("/", AdsRoute);
+
+//Socket
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
 
 //Images
 app.use(express.static("uploads"));
 app.use("/images", express.static(__dirname + "/uploads"));
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+http.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

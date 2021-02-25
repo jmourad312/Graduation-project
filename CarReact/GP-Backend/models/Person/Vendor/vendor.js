@@ -15,11 +15,18 @@ var vendor = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "VendorSubscription",
   },
-  vendorItems: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Car",
-  }],
-
+  vendorItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Car",
+    },
+  ],
+  chat: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ChatRoom",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Vendor", vendor);
