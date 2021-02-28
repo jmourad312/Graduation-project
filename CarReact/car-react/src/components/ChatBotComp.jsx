@@ -108,7 +108,7 @@ export default function ChatBotComp() {
       {
         id: "full",
         message:
-          "How many kilometres were on the odometer during your last maintenance ? كم كيلومتراً في عداد المسافات أثناء فحصك الآخير ؟",
+          "How many kilometres were on the odometer during your last maintenance ? \n  كم كيلومتراً في عداد المسافات أثناء فحصك الآخير ؟",
         trigger: "fullUserAnswer",
       },
       {
@@ -117,16 +117,16 @@ export default function ChatBotComp() {
         validator: (value) => {
           if (isNaN(value)) {
             value = "";
-            return "value should be a number برجاء إدخال قيمة رقمية";
+            return "value should be a number \n  برجاء إدخال قيمة رقمية";
           }
           if (value > 999999) {
-            return "Please enter correct value برجاء إدخال رقم صحيح";
+            return "Please enter correct value \n  برجاء إدخال رقم صحيح";
           }
           if (value < 0) {
-            return "Please enter correct value برجاء إدخال رقم صحيح";
+            return "Please enter correct value \n برجاء إدخال رقم صحيح";
           }
           if (value == 0) {
-            return "congrats on the new car مبارك لك للسيارة الجديدة";
+            return "congrats on the new car \n  مبارك لك للسيارة الجديدة";
           }
           return true;
         },
@@ -134,7 +134,7 @@ export default function ChatBotComp() {
       },
       {
         id: "fullAnswerOptions",
-        message: "What type of Oil do you purchase ? ما نوع الزيت المستخدم ؟",
+        message: "What type of Oil do you purchase ? \n ما نوع الزيت المستخدم ؟",
         trigger: "fullAnswerOptionsChoices",
       },
       {
@@ -149,7 +149,7 @@ export default function ChatBotComp() {
       },
       {
         id: "Check",
-        message: "Calculating your maintenance...  جاري حساب فحصك...",
+        message: "Calculating your maintenance... \n  جاري حساب فحصك...",
         trigger: "Final",
       },
       {
