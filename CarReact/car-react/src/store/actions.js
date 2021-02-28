@@ -43,6 +43,24 @@ export const getProductDetails = (params) => async (dispatch) => {
     console.log(error);
   }
 };
+export const getRelatedProducts = (id,name,brand,model) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:3000/user/showRelatedItems`,
+      { id,name, brand, model },
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    console.log(res);
+    dispatch({
+      type: TYPES.GET_RELATED_PRODUCTS,
+      payload: res.data,
+    });
+    console.log(res);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const setProductId = (payload) => {
   return {
     type: TYPES.GET_PRODUCT_ID,

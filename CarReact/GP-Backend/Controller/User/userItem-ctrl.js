@@ -98,7 +98,7 @@ showRelatedItems = (req, res) => {
     .sort({ _id: -1 })
     .populate(populateQuery)
     .skip(0)
-    .limit(4)
+    .limit(3)
     .exec(async (error, data) => {
       if (error || data.length == 0) {
         return res.json({

@@ -18,8 +18,9 @@ import CommentIcon from "@material-ui/icons/Comment";
 import RoomIcon from "@material-ui/icons/Room";
 import ShowRating from "../../../../components/ShowRating";
 import Loading from "../../../../components/Loading";
-
+import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import { useTranslation } from "react-i18next";
+import ProductComp from "../../../../components/ProductComp";
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +46,7 @@ export default function ProductDetails(props) {
   const productDetails = useSelector((state) => state.productDetails.Data);
   const productRate = useSelector((state) => state.productDetails.stars);
   const userDetails = useSelector((state) => state.UserBookAndFavo.Data);
+  const relatedProducts = useSelector(state => state.relatedProducts.Data)
 
   const dispatch = useDispatch();
   const getProducts = (params) => {
@@ -180,6 +182,24 @@ export default function ProductDetails(props) {
   };
 
   const { t, i18n } = useTranslation();
+  const createProducts = (prod) => {
+    return (
+      <ProductComp
+        key={prod._id}
+        id={prod._id}
+        images={prod.images}
+        description={prod.description}
+        price={prod.price}
+        name={prod.person.firstName}
+        title={prod.name}
+        brand={prod.carBrand}
+        model={prod.carModel}
+        rating={prod}
+        avgRate={prod.avgRate}
+      // category={prod.category}
+      />
+    );
+  };
 
   return (
     <motion.div
@@ -424,7 +444,7 @@ export default function ProductDetails(props) {
                   />
                 }
                 label={t("product.products Details.Description")}
-                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
+                style={{ fontSize: "20px", fontWeight: "600", color: "black" }}
               />
               <Tab
                 icon={
@@ -433,21 +453,23 @@ export default function ProductDetails(props) {
                   />
                 }
                 label={t("product.products Details.Reviews")}
-                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
+                style={{ fontSize: "20px", fontWeight: "600", color: "black" }}
               />
               <Tab
                 icon={
                   <RoomIcon style={{ fontSize: "30px", paddingLeft: "5px" }} />
                 }
                 label={t("product.products Details.Location")}
-                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
+                style={{ fontSize: "20px", fontWeight: "600", color: "black" }}
               />
               <Tab
                 icon={
-                  <RoomIcon style={{ fontSize: "30px", paddingLeft: "5px" }} />
+                  <ViewModuleIcon
+                    style={{ fontSize: "30px", paddingLeft: "5px" }}
+                  />
                 }
-                label={t("product.products Details.Location")}
-                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
+                label="Related Products"
+                style={{ fontSize: "20px", fontWeight: "600", color: "black" }}
               />
             </Tabs>
             <div className="p-5">
@@ -651,60 +673,13 @@ export default function ProductDetails(props) {
               )}
               {value === 3 && (
                 <TabContainer>
-                  {localStorage.getItem("Authorization") !== null ? (
-                    <div className="row">
+                  {localStorage.getItem("Authorization") !== null && 
+                  relatedProducts &&
+                  (
                       <div className="d-flex flex-wrap">
-                        {productDetails &&
-                          productDetails.person &&
-                          productDetails.person.location && (
-                            <iframe
-                              title="map"
-                              id="myiframe"
-                              src={loc}
-                              width="1010px"
-                              height="350px"
-                              frameborder="0"
-                              style={{
-                                border: "1px solid black",
-                                borderRadius: "15px",
-                              }}
-                              allowfullscreen
-                            ></iframe>
-                          )}
-                        {/* <iframe
-                          title="Product Map"
-                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
-                          width="1010px"
-                          height="350px"
-                          frameborder="0"
-                          style={{
-                            border: "1px solid black",
-                            borderRadius: "2%",
-                          }}
-                          allowfullscreen
-                        ></iframe> */}
+                        {relatedProducts.map(createProducts)}
+                        
                       </div>
-                    </div>
-                  ) : (
-                    <div
-                      className="shadow-sm p-2 mb-4 rounded-lg"
-                      style={{
-                        height: "300px",
-                        width: "1010px",
-                        border: "1px solid black",
-                        borderRadius: "2%",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          position: "relative",
-                          top: "35%",
-                          textAlign: "center",
-                        }}
-                      >
-                        {t("product.products Details.limitation2")}
-                      </h3>
-                    </div>
                   )}
                 </TabContainer>
               )}

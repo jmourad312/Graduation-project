@@ -6,6 +6,7 @@ export default (
     //Products-------------
     products: [],
     productDetails: [],
+    relatedProducts: [],
     productID: "",
 
     //blog-----------
@@ -54,6 +55,11 @@ export default (
       return {
         ...state,
         productDetails: action.payload,
+      };
+    case TYPES.GET_RELATED_PRODUCTS:
+      return {
+        ...state,
+        relatedProducts: action.payload,
       };
     case TYPES.GET_PRODUCT_ID:
       return {

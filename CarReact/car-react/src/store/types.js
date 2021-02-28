@@ -35,6 +35,7 @@ export const ADD_BLOG = "ADD_BLOG";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
+export const GET_RELATED_PRODUCTS = "GET_RELATED_PRODUCTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 //--------------misc------------------
 export const GET_TOKEN = "GET_TOKEN";
