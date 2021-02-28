@@ -34,6 +34,32 @@ function App() {
             hoverImgSrc={image2}
           />
         </div>
+        <div
+          style={{
+            height: "200px",
+            width: "300px",
+            position: "absolute",
+            left: "30px",
+            bottom: "350px",
+            border: "1px solid grey",
+            borderRadius:"25px",
+            verticalAlign:"middle"
+          }}
+        >
+          <h2
+            style={{
+              // position: "relative",
+              // top: "20%",
+              // left: "20%",
+              // textAlign: "center",
+              fontWeight: "700",
+              fontSize: "32px",
+            }}
+          >
+            add ads here
+            {/* {t("BlogList.NoPosts")} */}
+          </h2>
+        </div>
       </Router>
     </div>
   );

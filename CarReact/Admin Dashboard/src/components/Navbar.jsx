@@ -33,7 +33,7 @@ export function Navbar(props) {
                         <Link className="nav-link waves-effect text-light" style={{fontSize:"20px"}} to={'AddPerson'}>Create-Account</Link>
                         </li>
                         <li className="nav-item">
-                        <Link className="nav-link waves-effect text-light" style={{fontSize:"20px"}} to={'AddPartCar'}>Customize-Item</Link>
+                        <Link className="nav-link waves-effect text-light" style={{fontSize:"20px"}} to={'AddPartCar'}>Customize-Data</Link>
                         </li>
                         <li className="nav-item">
                         <Link className="nav-link waves-effect text-light" style={{fontSize:"20px"}} to={'AddAds'}>Create-Ads</Link>

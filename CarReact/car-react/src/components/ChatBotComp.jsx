@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import {useTranslation} from "react-i18next";
 import Facts from '../assets/js/carFacts';
 
-
 export default function ChatBotComp() {
 
   // const [fact, setFact] = useState([Facts]);
@@ -51,36 +50,38 @@ export default function ChatBotComp() {
       userBubbleColor: "#fff",
       userFontColor: "black",
     };
-
+    const {t, i18n} = useTranslation();
     const steps = [
       {
         id: "1",
-        message: "Hi \u{1F64B}, I am Dreksyony Bot  أهلا ،أنا المساعد الآلي لدركسيوني",
+        message: "Hi \u{1F64B}, \n  I am Dreksyony Bot. \n  أهلا ،أنا المساعد الآلي لدركسيوني",
         trigger: "2",
       },
       {
         id: "2",
-        message: "How can I help you? كيف يمكنني مساعدتك؟",
+        message: "How can I help you? \n كيف يمكنني مساعدتك؟",
         trigger: "3",
       },
       {
         id: "3",
         options: [
-          { value: 1, label: "Contact Us تواصل معنا", trigger: "4" },
-          { value: 2, label: "Did you know ? هل كنت تعلم؟", trigger: "fact" },
-          { value: 3, label: "Full Maintenance فحص كامل", trigger: "full" },
+          { value: 1, label: "Contact Us \n  تواصل معنا", trigger: "4" },
+          { value: 2, label: "Did you know ? \n  هل كنت تعلم؟", trigger: "fact" },
+          { value: 3, label: "Full Maintenance \n  فحص كامل", trigger: "full" },
         ],
       },
       {
         id: "fact",
-        component: (<Trivia />),
-        trigger:"2"
+        component: <Trivia />,
+        trigger: "2",
       },
       {
         id: "4",
         component: (
           <Link to="/ContactUs">
-            <span style={{ color: "blue" }}>Click Here to contact us</span>
+            <span style={{ color: "blue" }}>
+              {t("ChatBot.ClickHereToContactUs")}
+            </span>
           </Link>
         ),
         trigger: "2",
@@ -100,14 +101,14 @@ export default function ChatBotComp() {
       // },
       // {
       //   id: "Oil",
-      //   message: "How can we help you?",
+      //   message: "How can we help you ?",
       //   trigger: "3",
       // },
 
       {
         id: "full",
         message:
-          "How many kilometres were on the odometer during your last maintenance?",
+          "How many kilometres were on the odometer during your last maintenance ? \n  كم كيلومتراً في عداد المسافات أثناء فحصك الآخير ؟",
         trigger: "fullUserAnswer",
       },
       {
@@ -116,16 +117,16 @@ export default function ChatBotComp() {
         validator: (value) => {
           if (isNaN(value)) {
             value = "";
-            return "value should be a number";
+            return "value should be a number \n  برجاء إدخال قيمة رقمية";
           }
           if (value > 999999) {
-            return "value shouldn't be greater than 1 million";
+            return "Please enter correct value \n  برجاء إدخال رقم صحيح";
           }
           if (value < 0) {
-            return "dude?? come on";
+            return "Please enter correct value \n برجاء إدخال رقم صحيح";
           }
           if (value == 0) {
-            return "congrats on the new car";
+            return "congrats on the new car \n  مبارك لك للسيارة الجديدة";
           }
           return true;
         },
@@ -133,7 +134,7 @@ export default function ChatBotComp() {
       },
       {
         id: "fullAnswerOptions",
-        message: "What type of Oil do you purchase ?",
+        message: "What type of Oil do you purchase ? \n ما نوع الزيت المستخدم ؟",
         trigger: "fullAnswerOptionsChoices",
       },
       {
@@ -148,7 +149,7 @@ export default function ChatBotComp() {
       },
       {
         id: "Check",
-        message: "Calculating your maintenance...",
+        message: "Calculating your maintenance... \n  جاري حساب فحصك...",
         trigger: "Final",
       },
       {
@@ -166,7 +167,7 @@ export default function ChatBotComp() {
           <ChatBot
             steps={steps}
             floating={true}
-            headerTitle="Dreksyony chat bot"
+            headerTitle={t("ChatBot.DreksyonyChatBot")}
             bubbleStyle={{ fontSize: "20px" }}
             bubbleOptionStyle={{ fontSize: "20px",padding:"15px",margin:"6px" }}
             // userAvatar={localStorage.getItem("Authorization") && localStorage.getItem("ProfileImage")}
