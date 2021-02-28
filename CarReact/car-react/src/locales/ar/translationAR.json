@@ -265,5 +265,14 @@
     "EditProductModal":{
         "EditTitle":"تعديل المنتج"
     },
-    "AddReview":"أضف تقييم"
+    "AddReview":"أضف تقييم",
+
+    "ToastMessages":{
+        "BlogAdded":"تم إضافة المدونة إلي المحفوظات",
+        "BlogRemoved":"تم إزالة المدونة من المحفوظات",
+        "Youcan'tsubmit":"برجاء التأكد من كتابة تعليق",
+        "ThankForReport":"شكراً لك علي الإبلاغ",
+        "Itemaddedtofavourite":"تم إضافة المنتج إلي المفضلة",
+        "Itemremovedfromfavourites":"تم إزالة المنتج من المفضلة"
+    }
 }

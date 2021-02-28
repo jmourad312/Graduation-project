@@ -187,11 +187,11 @@ export default function BlogDetails(props) {
       .then((req) => {
         if (req.data.Success === true) {
           toggleStatus();
-          setToastMessage("Blog added to bookmarks");
+          setToastMessage(t("ToastMessages.BlogAdded"));
         } else {
           handleRemoveBookmark();
           toggleStatus();
-          setToastMessage("Blog removed from bookmarks");
+          setToastMessage(t("ToastMessages.BlogRemoved"));
         }
       })
       .catch((error) => {
@@ -243,7 +243,7 @@ export default function BlogDetails(props) {
     event.preventDefault();
     if (inputValue.content.length === 0) {
       toggleStatus();
-      setToastMessage("You can't submit empty comment");
+      setToastMessage(t("ToastMessages.Youcan'tsubmit"));
     } else {
       if (!editing) {
         axios
@@ -404,7 +404,7 @@ export default function BlogDetails(props) {
       .then((req) => {
         if (req.data.Success === true) {
           toggleStatus();
-          setToastMessage("Thank you for your report");
+          setToastMessage(t("ToastMessages.ThankForReport"));
         }
       })
       .catch((error) => {

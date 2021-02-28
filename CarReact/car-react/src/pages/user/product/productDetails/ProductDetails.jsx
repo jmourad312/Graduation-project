@@ -91,13 +91,13 @@ export default function ProductDetails(props) {
       .put(URL, body, config)
       .then((req) => {
         if (req.data.Success === true) {
-          setToastMessage("Item added to favourite");
+          setToastMessage(t("ToastMessages.Itemaddedtofavourite"));
           toggleStatus();
           // props.history.push("/MyProfile");
         } else {
           handleRemoveFavourite();
           toggleStatus();
-          setToastMessage("Item removed from favourites");
+          setToastMessage(t("ToastMessages.Itemremovedfromfavourites"));
         }
       })
       .catch((error) => {

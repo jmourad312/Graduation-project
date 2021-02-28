@@ -263,5 +263,14 @@
     "EditProductModal":{
         "EditTitle":"Edit your product"
     },
-    "AddReview":"Add Review"
+    "AddReview":"Add Review",
+
+    "ToastMessages":{
+        "BlogAdded":"Blog added to bookmarks",
+        "BlogRemoved":"Blog removed to bookmarks",
+        "Youcan'tsubmit":"You can't submit empty comment",
+        "ThankForReport":"Thank you for your report",
+        "Itemaddedtofavourite":"Item added to favourite",
+        "Itemremovedfromfavourites":"Item removed from favourites"
+    }
 }
