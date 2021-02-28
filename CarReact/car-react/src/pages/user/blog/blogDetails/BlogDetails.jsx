@@ -69,12 +69,12 @@ export default function BlogDetails(props) {
     setIsOpen(true);
     if (blogDetails) {
       setEditValue({
-        title:blogDetails.title ,
+        title: blogDetails.title,
         body: blogDetails.body,
-        images:[],
+        images: [],
         brand: blogDetails.brand,
         model: blogDetails.model,
-      })
+      });
     }
   };
   const closeModal = () => {
@@ -236,32 +236,82 @@ export default function BlogDetails(props) {
       };
     });
   };
+  const [editing, setEditing] = useState(false);
+  const [editingID, setEditingID] = useState("");
+
+  const handleEditing = (paramId, paramContent) => {
+    setEditing(true);
+    setEditingID(paramId);
+    setInputValue((previous) => {
+      return {
+        ...previous,
+        content: paramContent,
+      };
+    });
+    console.log(paramContent);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputValue);
     // console.log(blogID);
-    axios
-      .post(
-        `http://localhost:3000/user/addComment/${localStorage.getItem(
-          "BlogID"
-        )}`,
-        inputValue,
-        {
-          headers: { Authorization: localStorage.getItem("Authorization") },
-        }
-      )
-      .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("success");
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setInputValue({ content: "" });
+    if (inputValue.content.length === 0) {
+      toggleStatus();
+      setToastMessage("You can't submit empty comment");
+    } else {
+      if (!editing) {
+        axios
+          .post(
+            `http://localhost:3000/user/addComment/${localStorage.getItem(
+              "BlogID"
+            )}`,
+            inputValue,
+            {
+              headers: {
+                Authorization: localStorage.getItem("Authorization"),
+              },
+            }
+          )
+          .then((req) => {
+            console.log(req);
+            if (req.data.Success === true) {
+              console.log("success");
+            } else {
+              console.log("fail");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setInputValue({ content: "" });
+      } else {
+        axios
+          .put(
+            `http://localhost:3000/user/updateComment/${editingID}`,
+            inputValue,
+            {
+              headers: {
+                Authorization: localStorage.getItem("Authorization"),
+              },
+            }
+          )
+          .then((req) => {
+            console.log(req);
+            if (req.data.Success === true) {
+              console.log("success");
+              setEditing(false);
+              setEditingID("");
+              setInputValue({ content: "" });
+            } else {
+              console.log("fail");
+              console.log(req.data);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
   };
 
   const handleReplySubmit = (event, params) => {
@@ -320,10 +370,12 @@ export default function BlogDetails(props) {
   }, [blogDetails]);
 
   const sortComment = (data) => {
-    var dataAsc = []
-   dataAsc =  data.sort(function(a, b){return b.vote.resultVoting-a.vote.resultVoting});
-    return(dataAsc)
-  }
+    var dataAsc = [];
+    dataAsc = data.sort(function(a, b) {
+      return b.vote.resultVoting - a.vote.resultVoting;
+    });
+    return dataAsc;
+  };
 
   const handleDelete = (params) => {
     axios
@@ -403,6 +455,8 @@ export default function BlogDetails(props) {
     });
   };
 
+  const handleEditComment = (params) => {};
+
   const handleDeleteComment = (params) => {
     axios
       .delete(`http://localhost:3000/user/deleteComment/${params}`, {
@@ -468,6 +522,7 @@ export default function BlogDetails(props) {
           status={toastStatus}
           message={toastMessage}
         />
+
         <Dialog
           open={open}
           onClose={handleClose}
@@ -936,32 +991,47 @@ export default function BlogDetails(props) {
                               ? item.person.firstName
                               : null}
                             <div className="handleComment">
-                              {/* <Zoom in={true}>
-                                <Fab
-                                  size="small"
-                                  aria-label="edit"
-                                >
-                                  <EditIcon />
-                                </Fab>
-                              </Zoom> */}
                               {item.person._id ===
-                                localStorage.getItem("UserID") || item.person._id ===
-                                localStorage.getItem("VendorID")&&(
-                                <Zoom in={true}>
-                                  <Fab
-                                    // color="secondary"
-                                    size="small"
-                                    style={{ width: "35px", height: "10px" }}
-                                    aria-label="delete"
-                                    onClick={() =>
-                                      handleDeleteComment(item._id)
-                                    }
-                                  >
-                                    <DeleteForeverIcon
-                                      style={{ fontSize: "25px" }}
-                                    />
-                                  </Fab>
-                                </Zoom>
+                                (localStorage.getItem("UserID") ||
+                                  localStorage.getItem("VendorID")) && (
+                                <>
+                                  <Zoom in={true}>
+                                    <Fab
+                                      size="small"
+                                      style={{
+                                        width: "35px",
+                                        height: "10px",
+                                        marginRight: "10px",
+                                      }}
+                                      aria-label="edit"
+                                      onClick={() =>
+                                        handleEditing(item._id, item.content)
+                                      }
+                                    >
+                                      <EditIcon style={{ fontSize: "25px" }} />
+                                    </Fab>
+                                  </Zoom>
+                                  <Zoom in={true}>
+                                    <Fab
+                                      // color="secondary"
+                                      size="small"
+                                      style={{
+                                        width: "35px",
+                                        height: "10px",
+                                      }}
+                                      aria-label="delete"
+                                      onClick={() => {
+                                        handleDeleteComment(item._id);
+                                        setEditing(false);
+                                        setInputValue({ content: "" });
+                                      }}
+                                    >
+                                      <DeleteForeverIcon
+                                        style={{ fontSize: "25px" }}
+                                      />
+                                    </Fab>
+                                  </Zoom>
+                                </>
                               )}
                             </div>
                           </h5>
@@ -1042,11 +1112,24 @@ export default function BlogDetails(props) {
                     </div>
                     <button
                       type="submit"
-                      className="btn btn-dark"
+                      className={editing ? "btn btn-dark mr-3" : "btn btn-dark"}
                       style={{ fontWeight: "700", fontSize: "20px" }}
                     >
-                      {t("repeated.Submit")}
+                      {editing ? "Edit" : t("repeated.Submit")}
                     </button>
+                    {editing && (
+                      <button
+                        type="buttom"
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setEditing(false);
+                          setInputValue({ content: "" });
+                        }}
+                        style={{ fontWeight: "700", fontSize: "20px" }}
+                      >
+                        {t("repeated.Cancel")}
+                      </button>
+                    )}
                   </form>
                 </div>
               </div>

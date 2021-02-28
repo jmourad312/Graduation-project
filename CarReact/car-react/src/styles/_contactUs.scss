@@ -1,5 +1,5 @@
-.contact-us{
-    h1,
+.contact-us {
+  h1,
   h2,
   h3 {
     margin: 0px 0 35px 0;
@@ -18,23 +18,23 @@
 
   .form-control:focus {
     border-color: #181818;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     transform: scale(1.18);
-    background:  rgba(156, 154, 154, 0.472); 
+    background: rgba(156, 154, 154, 0.472);
     color: white;
-    
   }
 
-  #contact .card:hover i,#contact .card:hover h4{
+  #contact .card:hover i,
+  #contact .card:hover h4 {
     color: #494444;
   }
 
-  ul{
+  ul {
     padding-top: 40px;
   }
 
-  li{
-    margin-right:3rem;
+  li {
+    margin-right: 3rem;
   }
 
   li a {
@@ -42,36 +42,31 @@
     color: #181616;
   }
 
-
   .contactinfo {
     margin-top: 30px;
-    }
+  }
 
   textarea.form-control {
     height: 100px;
     resize: none;
-    background:  rgba(100, 99, 99, 0.801); 
-    color: white;
-    color: #1f2127;
-   
-  }
-  input{
-    background:  rgba(100, 99, 99, 0.801); 
+    background: rgba(100, 99, 99, 0.801);
     color: white;
   }
-  ::placeholder{
+  input {
+    background: rgba(100, 99, 99, 0.801);
     color: white;
-  }  
-  .contrastclass{
-    background: linear-gradient(to right, #ffffff,  rgba(156, 154, 154, 0.5));    
-
   }
-  .container2{
-    
+  ::placeholder {
+    color: white;
+  }
+  .contrastclass {
+    background: linear-gradient(to right, #ffffff, rgba(156, 154, 154, 0.5));
+  }
+  .container2 {
     width: 1000px;
-    
-    .content-section{
-      background-color:rgba(156, 154, 154, 0.5);
+
+    .content-section {
+      background-color: rgba(156, 154, 154, 0.5);
       border-radius: 25px;
       padding-bottom: 25px;
     }

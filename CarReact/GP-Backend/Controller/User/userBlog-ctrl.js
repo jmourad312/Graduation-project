@@ -284,7 +284,7 @@ updateComment = (req, res) => {
 
   Comment.updateOne(
     { _id: req.params.id, person: IdPerson },
-    { ...body },
+    { content: req.body.content },
     { upsert: true, new: true },
     (err, result) => {
       if (err) {
@@ -390,7 +390,11 @@ showDetailsPost = (req, res) => {
       path: "comment",
       populate: [
         { path: "person", select: "firstName" },
-        { path: "vote", select: "resultVoting" ,options: { sort: { resultVoting: -1 }}},
+        {
+          path: "vote",
+          select: "resultVoting",
+          options: { sort: { resultVoting: -1 } },
+        },
       ],
       select: "-post",
     },
