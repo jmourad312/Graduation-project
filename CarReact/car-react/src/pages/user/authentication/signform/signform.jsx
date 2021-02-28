@@ -46,17 +46,13 @@ export default function Signform(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userSignUpInfo);
     axios
       .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
       .then((res) => {
-        console.log(res);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("UserID", res.data.Data);
 
-        console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
           localStorage.removeItem("VendorID");
@@ -83,18 +79,14 @@ export default function Signform(props) {
   };
   const handleSignInSubmit = (event) => {
     event.preventDefault();
-    console.log(userSignInInfo);
     axios
       .post("http://localhost:3000/user/auth/signin", userSignInInfo)
       .then((res) => {
-        console.log(res);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("UserID", res.data.Data);
-        console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
           dispatch(userSignInAction(true));
           dispatch(vendorSignInAction(false));
           localStorage.removeItem("VendorID");
@@ -185,13 +177,10 @@ export default function Signform(props) {
     axios
       .post("http://localhost:3000/auth/forgetPassword", forgotState)
       .then((res) => {
-        console.log(res);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization2", res.data.Data);
-        console.log(localStorage.getItem("Authorization2"));
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
         }
       })
       .catch((error) => {
@@ -204,17 +193,14 @@ export default function Signform(props) {
         Authorization: localStorage.getItem("Authorization2"),
       },
     };
-    console.log(forgotState);
 
     event.preventDefault();
     axios
       .post("http://localhost:3000/auth/resetPassword", forgotState)
       .then((res) => {
-        console.log(res);
         // savetoken(res.data.Data.token);
         // console.log(token);
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
           switchBack();
         }
       })
@@ -431,7 +417,6 @@ export default function Signform(props) {
                   document
                     .getElementById("container")
                     .classList.remove("right-panel-active");
-                  console.log("hello");
                 }}
                 style={{ height: "70px", fontSize: "20px" }}
               >
@@ -456,7 +441,6 @@ export default function Signform(props) {
                   document
                     .getElementById("container")
                     .classList.add("right-panel-active");
-                  console.log("hello");
                 }}
                 id="signUp"
                 style={{ height: "70px", fontSize: "20px" }}

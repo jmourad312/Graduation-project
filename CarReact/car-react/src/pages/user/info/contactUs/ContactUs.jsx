@@ -43,20 +43,16 @@ export default function ContactUs() {
       email:contactInput.email,
       message:contactInput.content,
     };
-    console.log(body);
     const URL = "http://localhost:3000/admin/sendContact";
 
     axios
       .post(URL, body)
       .then((req) => {
-        console.log(body);
-        console.log(req);
         if (req.data.Success === true) {
           setToastMessage(
             "Thank you for your message,\nWe will contact you as soon as possible"
           );
           toggleStatus();
-          // console.log("Success");
         } else {
           setToastMessage(
             "Sorry an error occured, please try again later"

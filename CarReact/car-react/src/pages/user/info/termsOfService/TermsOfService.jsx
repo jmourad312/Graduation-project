@@ -747,7 +747,7 @@ export default function TermsOfService() {
 
 
 
-    <button type="button" class="btn btn-success button">Back</button>
+    <button type="button" class="btn btn-dark button">Back</button>
 
 </div>
     )

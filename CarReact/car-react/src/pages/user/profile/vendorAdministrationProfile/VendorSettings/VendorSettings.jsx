@@ -28,7 +28,6 @@ export default function VendorSettings(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(vendorInfo);
     if (vendorInfo.password === vendorInfo.confirmPassword) {
       axios
         .put(
@@ -41,13 +40,6 @@ export default function VendorSettings(props) {
           }
         )
         .then((req) => {
-          console.log(req);
-          if (req.data.Success === true) {
-            console.log("Success");
-            // props.history.push("/MyProfile");
-          } else {
-            console.log("fail");
-          }
         })
         .catch((error) => {
           console.log(error);

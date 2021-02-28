@@ -68,7 +68,6 @@ export default function ProductDetails(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
       })
       .catch((error) => {
         console.log(error);
@@ -91,14 +90,11 @@ export default function ProductDetails(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
         if (req.data.Success === true) {
-          console.log("Success");
           setToastMessage("Item added to favourite");
           toggleStatus();
           // props.history.push("/MyProfile");
         } else {
-          console.log("fail");
           handleRemoveFavourite();
           toggleStatus();
           setToastMessage("Item removed from favourites");
@@ -139,12 +135,6 @@ export default function ProductDetails(props) {
     axios
       .post(URL, body, config)
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-        } else {
-          console.log("fail");
-        }
       })
       .catch((error) => {
         console.log(error);
@@ -216,7 +206,10 @@ export default function ProductDetails(props) {
             />
           </div>
           <div style={{ paddingTop: "15px" }}>
-            <div className="row bg-light" style={{borderRadius:"0 25px 25px 0"}}>
+            <div
+              className="row bg-light"
+              style={{ borderRadius: "0 25px 25px 0" }}
+            >
               {/* <!-- image of produce --> */}
               <div
                 className="col-4"
@@ -224,7 +217,8 @@ export default function ProductDetails(props) {
               >
                 {productDetails ? (
                   productDetails.images &&
-                  productDetails.images.length === 1 ? (
+                  (productDetails.images.length === 1 ||
+                    productDetails.images.length === 0) ? (
                     <img
                       className=""
                       style={{
@@ -323,13 +317,12 @@ export default function ProductDetails(props) {
                       </span> */}
                     {productRate && productRate[0] !== undefined ? (
                       <>
-
-                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        {t("product.products Details.Rating")}
-                      </span>
-                      <ShowRating
-                        rating={productRate && productRate[0].avgRate}
-                      />
+                        <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                          {t("product.products Details.Rating")}
+                        </span>
+                        <ShowRating
+                          rating={productRate && productRate[0].avgRate}
+                        />
                       </>
                     ) : (
                       <span style={{ fontWeight: "700", fontSize: "20px" }}>
@@ -364,7 +357,8 @@ export default function ProductDetails(props) {
                     <div className="mt-3">
                       <span className="" style={{ fontSize: "40px" }}>
                         <li className="fas fa-coins pr-2 text-warning">
-                          {" "}{productDetails && productDetails.price}{" "}
+                          {" "}
+                          {productDetails && productDetails.price}{" "}
                           {t("repeated.LE")}
                         </li>
                       </span>
@@ -374,7 +368,12 @@ export default function ProductDetails(props) {
                     {localStorage.getItem("UserID") !== null && (
                       <span
                         className="fa-lg button fill fa-pull-right"
-                        style={{ padding: "10px", position:"absolute",top:"90px",left:"290px" }}
+                        style={{
+                          padding: "10px",
+                          position: "absolute",
+                          top: "90px",
+                          left: "290px",
+                        }}
                         title="Add to favorate"
                         onClick={handleAddFavourite}
                       >

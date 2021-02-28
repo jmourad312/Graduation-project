@@ -12,8 +12,6 @@ export default function RecentViews(props) {
 
   useEffect(() => {
     dispatch(getUsersAction(localStorage.getItem("UserID")));
-    console.log(user ? user.person : "loading");
-    console.log(localStorage.getItem("UserID"));
   }, [localStorage.getItem("UserID")]);
   let history = useHistory();
 

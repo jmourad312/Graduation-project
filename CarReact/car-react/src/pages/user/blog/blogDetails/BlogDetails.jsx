@@ -59,13 +59,11 @@ export default function BlogDetails(props) {
   const getBlog = (params) => {
     dispatch(getBlogDetails(params));
     dispatch(filterCarBrand());
-    // console.log(blogDetails);
   };
 
   //---------------------------EDIT FUNCTIONS----------------------------------------
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
-    console.log(blogDetails);
     setIsOpen(true);
     if (blogDetails) {
       setEditValue({
@@ -135,14 +133,9 @@ export default function BlogDetails(props) {
     axios
       .put(`http://localhost:3000/user/updatePost/${params}`, formData, config)
       .then((req) => {
-        console.log(req);
         if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
           closeModal();
-        } else {
-          console.log("fail");
-        }
+        } 
       })
       .catch((error) => {
         console.log(error);
@@ -158,7 +151,6 @@ export default function BlogDetails(props) {
     }, 2000);
   };
   const handleRemoveBookmark = () => {
-    console.log(blogID);
     const config = {
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -171,7 +163,6 @@ export default function BlogDetails(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
       })
       .catch((error) => {
         console.log(error);
@@ -179,7 +170,6 @@ export default function BlogDetails(props) {
   };
 
   const handleAddBookmark = () => {
-    console.log(blogID);
     const config = {
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -195,7 +185,6 @@ export default function BlogDetails(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
         if (req.data.Success === true) {
           toggleStatus();
           setToastMessage("Blog added to bookmarks");
@@ -206,7 +195,6 @@ export default function BlogDetails(props) {
         }
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -253,8 +241,6 @@ export default function BlogDetails(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
-    // console.log(blogID);
     if (inputValue.content.length === 0) {
       toggleStatus();
       setToastMessage("You can't submit empty comment");
@@ -273,12 +259,7 @@ export default function BlogDetails(props) {
             }
           )
           .then((req) => {
-            console.log(req);
-            if (req.data.Success === true) {
-              console.log("success");
-            } else {
-              console.log("fail");
-            }
+            
           })
           .catch((error) => {
             console.log(error);
@@ -296,16 +277,11 @@ export default function BlogDetails(props) {
             }
           )
           .then((req) => {
-            console.log(req);
             if (req.data.Success === true) {
-              console.log("success");
               setEditing(false);
               setEditingID("");
               setInputValue({ content: "" });
-            } else {
-              console.log("fail");
-              console.log(req.data);
-            }
+            } 
           })
           .catch((error) => {
             console.log(error);
@@ -316,8 +292,6 @@ export default function BlogDetails(props) {
 
   const handleReplySubmit = (event, params) => {
     event.preventDefault();
-    console.log(params);
-    console.log(replyInput);
     // axios
     // .post(
     //   `http://localhost:3000/user/addCommentReply/${params}`,
@@ -357,8 +331,6 @@ export default function BlogDetails(props) {
 
   // useEffect(() => {
   // getBlog(blogID);
-  // console.log(blogDetails);
-  // console.log(blogID);
   // }, []);
   const [voted, setVoted] = useState(false);
 
@@ -383,17 +355,10 @@ export default function BlogDetails(props) {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("success");
-        } else {
-          console.log("fail");
-          console.log(req.data);
-        }
+        
       })
       .catch((error) => {
         console.log(error);
-        console.log("adsa");
       });
   };
 
@@ -437,7 +402,6 @@ export default function BlogDetails(props) {
     axios
       .post(URL, body, config)
       .then((req) => {
-        console.log(req);
         if (req.data.Success === true) {
           toggleStatus();
           setToastMessage("Thank you for your report");
@@ -463,17 +427,9 @@ export default function BlogDetails(props) {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("success");
-        } else {
-          console.log("fail");
-          console.log(req.data);
-        }
       })
       .catch((error) => {
         console.log(error);
-        console.log("adsa");
       });
   };
 
@@ -638,7 +594,9 @@ export default function BlogDetails(props) {
             </div>
             <div className="col-4">
               {blogDetails ? (
-                blogDetails.images && blogDetails.images.length === 1 ? (
+                blogDetails.images &&
+                (blogDetails.images.length === 1 ||
+                  blogDetails.images.length === 0) ? (
                   <img
                     className="py-0"
                     style={{

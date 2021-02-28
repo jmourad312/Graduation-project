@@ -24,20 +24,14 @@ export default function SimpleDelete(props) {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
-        console.log(req);
         if (req.data.Success === true) {
-          console.log("success");
           if (window.location.pathname !== "/MyProfile/BlogPosts") {
             history.push("/BlogList");
           }
-        } else {
-          console.log("fail");
-          console.log(req.data);
-        }
+        } 
       })
       .catch((error) => {
         console.log(error);
-        console.log("adsa");
       });
   };
 

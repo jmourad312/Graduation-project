@@ -46,7 +46,6 @@ export default function FavouriteItems(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
       })
       .catch((error) => {
         console.log(error);

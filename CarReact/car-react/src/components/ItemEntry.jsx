@@ -82,13 +82,7 @@ export default function ItemEntry(props) {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("success");
-        } else {
-          console.log("fail");
-          console.log(req.data);
-        }
+       
       })
       .catch((error) => {
         console.log(error);
@@ -122,14 +116,7 @@ export default function ItemEntry(props) {
         config
       )
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-          closeModal();
-        } else {
-          console.log("fail");
-        }
+        
       })
       .catch((error) => {
         console.log(error);

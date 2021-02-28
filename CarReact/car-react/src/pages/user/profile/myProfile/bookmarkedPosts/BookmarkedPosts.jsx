@@ -47,7 +47,6 @@ export default function BookmarkedPosts(props) {
     axios
       .put(URL, body, config)
       .then((req) => {
-        console.log(req);
       })
       .catch((error) => {
         console.log(error);
@@ -98,7 +97,6 @@ export default function BookmarkedPosts(props) {
             <>
               {currentPosts.map((post, index) => {
                 let time = post.createdAt.split("T");
-                console.log(time);
                 return (
                   <div
                     style={{ paddingBottom: "15px", paddingTop: "15px" }}

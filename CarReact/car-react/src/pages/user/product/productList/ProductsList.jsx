@@ -17,7 +17,6 @@ export default function ProductsList() {
   const dispatch = useDispatch();
 
 
-  // console.log(products);
   // const getProducts = () => {
   //   dispatch(getProductsAction());
   // };
