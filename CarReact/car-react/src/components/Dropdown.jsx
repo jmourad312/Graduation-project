@@ -16,7 +16,6 @@ export default function Dropdown(props) {
   const handleChange = (event) => {
     setstate(event.target.value);
     setSubmit(event.target.value);
-    console.log("change");
 
     changeInputState();
   };
@@ -26,9 +25,7 @@ export default function Dropdown(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("change");
 
-    console.log(submit);
     //   axios
     //     .post("http://localhost:3000/user/auth/signup", userSignUpInfo)
     //     .then((res) => {
@@ -49,7 +46,6 @@ export default function Dropdown(props) {
     const inputField = document.querySelector(".chosen-value");
     const dropdown = document.querySelector(".value-list");
     const dropdownArray = [...document.querySelectorAll("li")];
-    console.log(typeof dropdownArray);
     // dropdown.classList.add("open");
     // inputField.focus(); // Demo purposes only
     let valueArray = [];

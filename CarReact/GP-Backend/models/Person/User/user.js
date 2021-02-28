@@ -13,7 +13,12 @@ var user = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserSubscription",
   },
-
+  chat: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ChatRoom",
+    },
+  ],
   favouriteItems: [
     {
       type: mongoose.Schema.Types.ObjectId,

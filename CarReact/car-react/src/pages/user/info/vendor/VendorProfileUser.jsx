@@ -32,10 +32,7 @@ export default function VendorProfileUser(props) {
     axios
       .get(URL, config)
       .then((res) => {
-        console.log(res);
         if (res.data.Success === true) {
-          console.log("Success");
-          // console.log(res.data.Data.person);
           setVendor({
             firstName: res.data.Data.person.firstName,
             lastName: res.data.Data.person.lastName,
@@ -45,20 +42,15 @@ export default function VendorProfileUser(props) {
             location: res.data.Data.person.location.coordinates,
             workshopName: res.data.Data.person.workshopName
           });
-        } else {
-          console.log("fail");
-        }
+        } 
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(vendor);
   };
 
   useEffect(() => {
-    console.log(props.match.params.id);
     getVendor(props.match.params.id);
-    // console.log(document.getElementById("#myiframe").src());
   }, []);
 
   useEffect(() => {
@@ -88,13 +80,6 @@ export default function VendorProfileUser(props) {
         }
       )
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
       })
       .catch((error) => {
         console.log(error);

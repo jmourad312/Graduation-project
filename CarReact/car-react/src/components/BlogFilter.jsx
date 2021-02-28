@@ -26,6 +26,9 @@ export default function BlogFilter(props) {
     search: "",
   });
 
+  const [required, setRequired] = useState(false)
+  const [requiredImage, setRequiredImage] = useState(false);
+
   const [itemsInDB, setItemsInDB] = useState(0);
   const blogs = useSelector((state) => state.blogs.TotalItem);
   const stateRedux = useSelector((state) => state);
@@ -75,7 +78,6 @@ export default function BlogFilter(props) {
   //       });
   //       // dispatch(resultFromFilter({ brand: event.target.value }));
   //       // dispatch(filterCarModel(event.target.value));
-  //       console.log(state);
 
   //       break;
   //     case "model":
@@ -86,12 +88,10 @@ export default function BlogFilter(props) {
   //       // dispatch(
   //       //   resultFromFilter({ brand: state.brand, model: event.target.value })
   //       // );
-  //       console.log(state);
 
   //       break;
   //   }
   const handleClick = (params) => {
-    console.log(params);
     dispatch(resultFromFilter(filterState, params.selected * 6));
     localStorage.setItem("TEST", params.selected * 6);
     // dispatch(filterCarModel(event.target.value));
@@ -99,12 +99,7 @@ export default function BlogFilter(props) {
   const handleSearchClick = () => {
     dispatch(resultFromFilter(filterState, 0));
   };
-  const functionGdeda = (e) => {
-    console.log(filterState);
-    handleChange(e);
-    console.log(filterState);
-    // handleSearchClick();
-  };
+
   const handleClear = () => {
     setFilterState({
       model: "",
@@ -138,7 +133,6 @@ export default function BlogFilter(props) {
     model: "",
   });
   const handleImageChange = (event) => {
-    console.log(event.target.files);
     setInputValue((previous) => {
       return {
         ...previous,
@@ -146,6 +140,7 @@ export default function BlogFilter(props) {
         // loaded: 0,
       };
     });
+    setRequiredImage(true);
   };
 
   const handleInputChange = (event) => {
@@ -173,6 +168,7 @@ export default function BlogFilter(props) {
         [name]: value,
       };
     });
+    setRequired(true);
   };
 
   const handleFocus = () => {
@@ -180,7 +176,6 @@ export default function BlogFilter(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
     const formData = new FormData();
     if (inputValue.images) {
       for (var x = 0; x < inputValue.images.length; x++) {
@@ -199,35 +194,32 @@ export default function BlogFilter(props) {
         Authorization: localStorage.getItem("Authorization"),
       },
     };
-
-    axios
+    if (required && requiredImage) {     
+      axios
       .post("http://localhost:3000/user/addPost", formData, config)
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(inputValue);
-    closeModal();
-    setInputValue({
-      title: "",
-      body: "",
-      images: [],
-      brand: "",
-      model: "",
-    });
-    setTimeout(() => {
-      dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
-    }, 1000);
-  };
-  return (
+      closeModal();
+      setInputValue({
+        title: "",
+        body: "",
+        images: [],
+        brand: "",
+        model: "",
+      });
+      setTimeout(() => {
+        dispatch(resultFromFilter({}, localStorage.getItem("TEST")));
+      }, 1000);
+      setRequired(false);
+      setRequiredImage(false)
+    }else{
+      console.log("check your info");
+    }
+    };
+    return (
     <div className={props.class}>
       <div class="search">
         <input

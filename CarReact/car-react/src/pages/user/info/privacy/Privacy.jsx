@@ -133,7 +133,7 @@ export default function Privacy() {
         </li>
       </ul>
 
-      <button type="button" className="btn btn-success">
+      <button type="button" className="btn btn-dark">
         Back
       </button>
     </div>

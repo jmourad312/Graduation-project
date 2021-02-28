@@ -11,8 +11,7 @@ export default function VendorSettings(props) {
 
   const [vendorInfo, setUserInfo] = useState({
     firstName: "",
-    middleName: "",
-    lastName: "",
+    workshopName: "",
     phoneNumber: 0,
     password: "",
     confirmPassword: "",
@@ -28,7 +27,6 @@ export default function VendorSettings(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(vendorInfo);
     if (vendorInfo.password === vendorInfo.confirmPassword) {
       axios
         .put(
@@ -41,13 +39,6 @@ export default function VendorSettings(props) {
           }
         )
         .then((req) => {
-          console.log(req);
-          if (req.data.Success === true) {
-            console.log("Success");
-            // props.history.push("/MyProfile");
-          } else {
-            console.log("fail");
-          }
         })
         .catch((error) => {
           console.log(error);
@@ -66,34 +57,33 @@ export default function VendorSettings(props) {
         variants={props.variants}
         transition={props.transition}
       >
-        <form className="ml-5" style={{ fontSize: "1.5rem" }}>
+        <form
+          className="ml-5"
+          style={{ fontSize: "1.5rem" }}
+          onSubmit={handleSubmit}
+        >
           <div className="row">
             <div className="form-group col-4" style={{ color: "black" }}>
-              <Label
-                id="firstName"
-                value={t("ProfileSettings.FirstName")}
-              />
+              <Label id="firstName" value={t("ProfileSettings.FirstName")} />
               <Input
                 id="firstName"
                 class="form-control w-75"
                 value={vendorInfo.firstName}
                 name="firstName"
+                req={true}
                 onChange={handleChange}
                 placeHolder={t("ProfileSettings.FirstNameHolder")}
                 type="text"
               />
             </div>
             <div className="form-group col-4" style={{ color: "black" }}>
-              <Label
-                id="lastName"
-
-                value={t("ProfileSettings.ShopName")}
-              />
+              <Label id="workshopName" value={t("ProfileSettings.ShopName")} />
               <Input
-                id="lastName"
+                id="workshopName"
                 class="form-control w-75"
-                value={vendorInfo.lastName}
-                name="lastName"
+                value={vendorInfo.workshopName}
+                req={true}
+                name="workshopName"
                 onChange={handleChange}
                 placeHolder={t("ProfileSettings.ShopNameHolder")}
                 type="text"
@@ -102,13 +92,10 @@ export default function VendorSettings(props) {
           </div>
 
           <div className="form-group" style={{ color: "black" }}>
-            <Label
-              id="phoneNumber"
-
-              value={t("ProfileSettings.PhoneNumber")}
-            />
+            <Label id="phoneNumber" value={t("ProfileSettings.PhoneNumber")} />
             <Input
               id="phoneNumber"
+              req={true}
               class="form-control w-25"
               value={vendorInfo.phoneNumber}
               name="phoneNumber"
@@ -119,13 +106,10 @@ export default function VendorSettings(props) {
           </div>
 
           <div className="form-group" style={{ color: "black" }}>
-            <Label
-              id="password"
-
-              value={t("ProfileSettings.NewPassword")}
-            />
+            <Label id="password" value={t("ProfileSettings.NewPassword")} />
             <Input
               id="password"
+              req={true}
               class="form-control w-50"
               value={vendorInfo.password}
               name="password"
@@ -135,14 +119,14 @@ export default function VendorSettings(props) {
             />
           </div>
 
-          <div className="form-group" style={{color:"black"}}>
+          <div className="form-group" style={{ color: "black" }}>
             <Label
               id="confirmPassword"
-
               value={t("ProfileSettings.ConfirmPassword")}
             />
             <Input
               id="confirmPassword"
+              req={true}
               class="form-control w-50"
               value={vendorInfo.confirmPassword}
               name="confirmPassword"
@@ -152,13 +136,9 @@ export default function VendorSettings(props) {
             />
           </div>
 
-
-          <Button2
-            onClick={handleSubmit}
-            //   type="submit"
-            class="btn btn-dark"
-            value={t("repeated.Submit")}
-          />
+          <button type="submit" class="btn btn-dark">
+            {t("repeated.Submit")}
+          </button>
         </form>
       </motion.div>
     </AnimatePresence>

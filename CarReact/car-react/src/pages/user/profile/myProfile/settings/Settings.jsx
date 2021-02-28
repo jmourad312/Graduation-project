@@ -7,7 +7,6 @@ import Label from "../../../../../components/Label";
 import {useTranslation} from "react-i18next";
 
 export default function Settings(props) {
-  console.log(props.person.firstName);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     middleName:"",
@@ -33,7 +32,6 @@ export default function Settings(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userInfo);
     if (userInfo.password === userInfo.confirmPassword) {
       axios
         .put(
@@ -46,13 +44,6 @@ export default function Settings(props) {
           }
         )
         .then((req) => {
-          console.log(req);
-          if (req.data.Success === true) {
-            console.log("Success");
-            // props.history.push("/MyProfile");
-          } else {
-            console.log("fail");
-          }
         })
         .catch((error) => {
           console.log(error);

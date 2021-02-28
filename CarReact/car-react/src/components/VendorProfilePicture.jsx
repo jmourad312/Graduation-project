@@ -27,13 +27,6 @@ export default function ProfilePicture(props) {
       axios
         .put(URL, formData, config)
         .then((req) => {
-          console.log(req);
-          if (req.data.Success === true) {
-            console.log("Success");
-            // props.history.push("/MyProfile");
-          } else {
-            console.log("fail");
-          }
         })
         .catch((error) => {
           console.log(error);
@@ -43,7 +36,6 @@ export default function ProfilePicture(props) {
   }
   $("#imageUpload").change(function () {
     readURL(this);
-    console.log("hellloooooooooooooooooooooo");
   });
 
   return (

@@ -222,12 +222,16 @@ export default function Admin(props) {
   const getPartUser = (skip) => {
     console.log(skip);
     setSkipState({ ...skipState, user: skip.selected * numberItemPerPage });
-    dispatch(getUserAction(skip.selected * numberItemPerPage, state.searchUser));
+    dispatch(
+      getUserAction(skip.selected * numberItemPerPage, state.searchUser)
+    );
   };
 
   const getPartVendor = (skip) => {
     setSkipState({ ...skipState, vendor: skip.selected * numberItemPerPage });
-    dispatch(getVendorAction(skip.selected * numberItemPerPage, state.searchVendor));
+    dispatch(
+      getVendorAction(skip.selected * numberItemPerPage, state.searchVendor)
+    );
   };
 
   const getPartBlog = (skip) => {
@@ -328,19 +332,37 @@ export default function Admin(props) {
                 href="#blogTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-blogger mr-4" style={{ fontWeight: "600" }}> Blog</i>
+                <i
+                  className="fab fa-lg fa-blogger mr-4"
+                  style={{ fontWeight: "600" }}
+                >
+                  {" "}
+                  Blog
+                </i>
               </a>
               <a
                 href="#productTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-product-hunt mr-1" style={{ fontWeight: "600" }}> Product</i>
+                <i
+                  className="fab fa-lg fa-product-hunt mr-1"
+                  style={{ fontWeight: "600" }}
+                >
+                  {" "}
+                  Product
+                </i>
               </a>
               <a
                 href="#contactTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fa fa-envelope mr-1" style={{ fontSize: "20px", fontWeight: "600" }}> Message from contact</i>
+                <i
+                  className="fa fa-envelope mr-1"
+                  style={{ fontSize: "20px", fontWeight: "600" }}
+                >
+                  {" "}
+                  Message from contact
+                </i>
               </a>
             </div>
           </div>
@@ -354,18 +376,25 @@ export default function Admin(props) {
             <div className="card mb-4 wow fadeIn">
               <div className="card-body d-sm-flex justify-content-between">
                 <h4 className="mb-2 mb-sm-0 pt-1">
-                  <span style={{color:"#495057"}}>Dashboard</span>
+                  <span style={{ color: "#495057" }}>Dashboard</span>
                 </h4>
               </div>
             </div>
 
             {/* Bar Chart */}
             <div className="row wow fadeIn">
-              
-
               <div className="col-7 mb-4">
                 <div className="card mb-4">
-                  <div className="card-header text-center" style={{fontSize:"20px",fontWeight:"700",color:"#495057"}}>Pie chart</div>
+                  <div
+                    className="card-header text-center"
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "700",
+                      color: "#495057",
+                    }}
+                  >
+                    Pie chart
+                  </div>
                   <div className="card-body">
                     <Pie
                       data={PieData}
@@ -385,38 +414,65 @@ export default function Admin(props) {
                   </div>
                 </div>
               </div>
-            
+
               <div className="col-5 mb-4">
                 <div className="card">
-                  <div className="card-body" style={{paddingTop:"100px",height:"445px"}}>
+                  <div
+                    className="card-body"
+                    style={{ paddingTop: "100px", height: "445px" }}
+                  >
                     <div className="list-group list-group-flush">
-                      <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize:"20px",fontWeight:"700" }}>
+                      <a
+                        className="list-group-item list-group-item-action waves-effect"
+                        style={{ fontSize: "20px", fontWeight: "700" }}
+                      >
                         No.Users
-                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
+                        <span
+                          className="badge badge-info badge-pill pull-right ml-5"
+                          style={{ fontSize: "20px" }}
+                        >
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.user}
                         </span>
                       </a>
 
-                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700"}}>
+                      <a
+                        className="list-group-item list-group-item-action waves-effect"
+                        style={{ fontSize: "20px", fontWeight: "700" }}
+                      >
                         No.Vendors
-                        <span className="badge badge-info badge-pill pull-right ml-4" style={{fontSize:"20px"}}>
+                        <span
+                          className="badge badge-info badge-pill pull-right ml-4"
+                          style={{ fontSize: "20px" }}
+                        >
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.vendor}
                         </span>
                       </a>
 
-                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
+                      <a
+                        className="list-group-item list-group-item-action waves-effect"
+                        style={{ fontSize: "20px", fontWeight: "700" }}
+                      >
                         No.Products
-                        <span className="badge badge-info badge-pill pull-right ml-3" style={{fontSize:"20px"}}>
+                        <span
+                          className="badge badge-info badge-pill pull-right ml-3"
+                          style={{ fontSize: "20px" }}
+                        >
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.product}
                         </span>
                       </a>
 
-                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
+                      <a
+                        className="list-group-item list-group-item-action waves-effect"
+                        style={{ fontSize: "20px", fontWeight: "700" }}
+                      >
                         No.Blogs
-                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
+                        <span
+                          className="badge badge-info badge-pill pull-right ml-5"
+                          style={{ fontSize: "20px" }}
+                        >
                           {stateRedux.countData.Success == true &&
                             stateRedux.countData.Data.blogs}
                         </span>
@@ -431,15 +487,23 @@ export default function Admin(props) {
             {stateRedux.users.length != 0 && (
               <>
                 <h3>Users</h3>
-                <label style={{ fontWeight: "700" }}>Search by user name or email</label><br />
+                <label style={{ fontWeight: "700" }}>
+                  Search by user name or email
+                </label>
+                <br />
                 <input
                   type="text"
                   name="searchUser"
-                  style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                  style={{
+                    marginBottom: "10px",
+                    borderRadius: "10px",
+                    outline: "none",
+                  }}
                   value={state.searchUser}
                   onChange={searchTabel}
                   onKeyPress={(e) => {
-                    if (e.which == 13) dispatch(getUserAction(0, state.searchUser));
+                    if (e.which == 13)
+                      dispatch(getUserAction(0, state.searchUser));
                   }}
                 />
                 <Tabel
@@ -463,15 +527,23 @@ export default function Admin(props) {
             {stateRedux.vendors.length != 0 && (
               <>
                 <h3>Vendors</h3>
-                <label style={{ fontWeight: "700" }}>Search by user name or email</label><br />
+                <label style={{ fontWeight: "700" }}>
+                  Search by user name or email
+                </label>
+                <br />
                 <input
                   type="text"
                   name="searchVendor"
-                  style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                  style={{
+                    marginBottom: "10px",
+                    borderRadius: "10px",
+                    outline: "none",
+                  }}
                   value={state.searchVendor}
                   onChange={searchTabel}
                   onKeyPress={(e) => {
-                    if (e.which == 13) dispatch(getVendorAction(0, state.searchVendor));
+                    if (e.which == 13)
+                      dispatch(getVendorAction(0, state.searchVendor));
                   }}
                 />
                 <Tabel
@@ -497,15 +569,23 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
-                  <label style={{ fontWeight: "700" }}>Search by user name</label><br />
+                  <label style={{ fontWeight: "700" }}>
+                    Search by user name
+                  </label>
+                  <br />
                   <input
                     type="text"
                     name="searchBlog"
-                    style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                    style={{
+                      marginBottom: "10px",
+                      borderRadius: "10px",
+                      outline: "none",
+                    }}
                     value={state.searchBlog}
                     onChange={searchTabel}
                     onKeyPress={(e) => {
-                      if (e.which == 13) dispatch(getBlogAction(0, state.searchBlog));
+                      if (e.which == 13)
+                        dispatch(getBlogAction(0, state.searchBlog));
                     }}
                   />
                   <div className="card mb-4">
@@ -528,25 +608,37 @@ export default function Admin(props) {
                                 style={{
                                   backgroundColor:
                                     countReport(item.userId.postsUser) >= 3 &&
-                                      countReport(item.userId.postsUser) <= 6
-                                      ? "yellow"
+                                    countReport(item.userId.postsUser) <= 6
+                                      ? "#d4d06a"
                                       : countReport(item.userId.postsUser) >= 7
-                                        ? "red"
-                                        : "",
+                                      ? "#db6060"
+                                      : "",
                                 }}
                               >
-                                <td style={{fontWeight:"600"}}>{skipState.blog + index + 1}</td>
-                                <td style={{fontWeight:"600"}}>{item.firstName}</td>
-                                <td style={{fontWeight:"600"}}>{countReport(item.userId.postsUser)}</td>
-                                <td style={{fontWeight:"600"}}>{item.userId.postsUser.length}</td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {skipState.blog + index + 1}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.firstName}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {countReport(item.userId.postsUser)}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.userId.postsUser.length}
+                                </td>
                                 <td>
                                   <Button
                                     disabled={item.userId.postsUser.length == 0}
                                     className="page-link"
                                     style={{ width: "75%", marginLeft: "30px" }}
                                     key={index + 1}
-                                    onClick={() => BlogsUser(item)}>
-                                    <i style={{ fontSize: "20px" }} className="fas fa-pen ml-1"></i>
+                                    onClick={() => BlogsUser(item)}
+                                  >
+                                    <i
+                                      style={{ fontSize: "20px" }}
+                                      className="fas fa-pen ml-1"
+                                    ></i>
                                   </Button>
                                 </td>
                               </tr>
@@ -570,15 +662,23 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
-                  <label style={{ fontWeight: "700" }}>Search by vendor name</label><br />
+                  <label style={{ fontWeight: "700" }}>
+                    Search by vendor name
+                  </label>
+                  <br />
                   <input
                     type="text"
                     name="searchProduct"
                     value={state.searchProduct}
-                    style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                    style={{
+                      marginBottom: "10px",
+                      borderRadius: "10px",
+                      outline: "none",
+                    }}
                     onChange={searchTabel}
                     onKeyPress={(e) => {
-                      if (e.which == 13) dispatch(getProductAction(0, state.searchProduct));
+                      if (e.which == 13)
+                        dispatch(getProductAction(0, state.searchProduct));
                     }}
                   />
                   <div className="card mb-4">
@@ -598,18 +698,31 @@ export default function Admin(props) {
                           {stateRedux.nproduct.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td style={{fontWeight:"700"}}>{skipState.product + index + 1}</td>
+                                <td style={{ fontWeight: "700" }}>
+                                  {skipState.product + index + 1}
+                                </td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td style={{fontWeight:"700"}}>{item.firstName}</td>
-                                <td style={{fontWeight:"700"}}>{item.vendorId.vendorItems.length}</td>
+                                <td style={{ fontWeight: "700" }}>
+                                  {item.firstName}
+                                </td>
+                                <td style={{ fontWeight: "700" }}>
+                                  {item.vendorId.vendorItems.length}
+                                </td>
 
                                 <td>
                                   <Button
-                                    disabled={item.vendorId.vendorItems.length == 0}
+                                    disabled={
+                                      item.vendorId.vendorItems.length == 0
+                                    }
                                     className="page-link"
                                     style={{ width: "75%", marginLeft: "30px" }}
                                     key={index + 1}
-                                    onClick={() => ProductsVendor(item)}><i style={{ fontSize: "20px" }} className="fas fa-pen ml-1"></i>
+                                    onClick={() => ProductsVendor(item)}
+                                  >
+                                    <i
+                                      style={{ fontSize: "20px" }}
+                                      className="fas fa-pen ml-1"
+                                    ></i>
                                   </Button>
                                 </td>
                               </tr>
@@ -656,10 +769,16 @@ export default function Admin(props) {
                           {stateRedux.contacts.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td style={{fontWeight:"600"}}>{skipState.contact + index + 1}</td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {skipState.contact + index + 1}
+                                </td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td style={{fontWeight:"600"}}>{item.email}</td>
-                                <td style={{fontWeight:"600"}}>{item.message}</td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.email}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.message}
+                                </td>
                               </tr>
                             );
                           })}
@@ -708,20 +827,40 @@ export default function Admin(props) {
                           {stateRedux.ads.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td style={{fontWeight:"600"}}>{skipState.ad + index + 1}</td>
-                                <td style={{fontWeight:"600"}}>{item.ownerName}</td>
-                                <td style={{fontWeight:"600"}}>{item.ownerPhone}</td>
-                                <td style={{fontWeight:"600"}}>{item.ownerEmail}</td>
-                                <td style={{fontWeight:"600"}}>{item.title}</td>
-                                <td style={{fontWeight:"600"}}>{item.createdAT.split("T")[0]}</td>
-                                <td style={{fontWeight:"600"}}>{item.expired.split("T")[0]}</td>
-                                <td style={{fontWeight:"600"}}>{item.price} LE</td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {skipState.ad + index + 1}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.ownerName}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.ownerPhone}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.ownerEmail}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.title}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.createdAT.split("T")[0]}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.expired.split("T")[0]}
+                                </td>
+                                <td style={{ fontWeight: "600" }}>
+                                  {item.price} LE
+                                </td>
                                 <Button
                                   className="btn btn-danger"
-                                  style={{ width: "75%",marginTop:"5px" }}
+                                  style={{ width: "75%", marginTop: "5px" }}
                                   key={item._id}
-                                  onClick={() => deleteAds(item._id)}>
-                                  <i style={{ fontSize: "20px" }} className="fas fa-trash"></i>
+                                  onClick={() => deleteAds(item._id)}
+                                >
+                                  <i
+                                    style={{ fontSize: "20px" }}
+                                    className="fas fa-trash"
+                                  ></i>
                                 </Button>
                               </tr>
                             );

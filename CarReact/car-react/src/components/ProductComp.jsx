@@ -25,13 +25,7 @@ export default function ProductComp(props) {
         }
       )
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
+        
       })
       .catch((error) => {
         console.log(error);
@@ -100,6 +94,8 @@ export default function ProductComp(props) {
               >
                 {props.description}
               </p>
+                <ShowRating rating={props.avgRate} />
+                <br/>
               <span className="card__by" style={{ fontWeight: "700" }}>
                 {t("repeated.By")}{" "}
                 <span
@@ -118,7 +114,6 @@ export default function ProductComp(props) {
                 <i className="badge badge-dark" style={{ fontSize: "15px" }}>
                   {props.model}
                 </i>
-                <ShowRating rating={props.avgRate} />
               </small>
             </div>
           </article>

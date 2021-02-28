@@ -90,7 +90,6 @@ export default function ProductFilterVendor(props) {
   }
 
   const handleClick = (params) => {
-    console.log(params);
 
     dispatch(getVendorsItemsAction(state, params.selected*3));
     localStorage.setItem("TEST2", params.selected * 3);

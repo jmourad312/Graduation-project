@@ -22,7 +22,6 @@ export default function MyItems(props) {
 
   const dispatch = useDispatch();
   const getItems = () => {
-    // console.log(vendorItems);
     dispatch(getVendorsItemsAction());
   };
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +61,6 @@ export default function MyItems(props) {
     });
   };
   const handleImageChange = (event) => {
-    console.log(event.target.files);
     setInputValue((previous) => {
       return {
         ...previous,
@@ -73,7 +71,6 @@ export default function MyItems(props) {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
     const formData = new FormData();
     if (inputValue.images) {
       for (var x = 0; x < inputValue.images.length; x++) {
@@ -96,13 +93,6 @@ export default function MyItems(props) {
     axios
       .post("http://localhost:3000/vendor/add", formData, config)
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
       })
       .catch((error) => {
         console.log(error);

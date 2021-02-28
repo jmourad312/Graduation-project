@@ -40,19 +40,12 @@ export default function VendorSignForm(props) {
   };
   const handleVendorSignUp = (event) => {
     event.preventDefault();
-    console.log(vendorSignUpInfo);
     axios
       .post("http://localhost:3000/vendor/auth/signup", vendorSignUpInfo)
       .then((res) => {
-        console.log(res);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("VendorID", res.data.Data);
-        console.log(localStorage.getItem("Authorization"));
-        console.log(res.data);
-        console.log(vendorSignUpInfo);
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
-          console.log(vendorSignUpInfo);
           localStorage.removeItem("UserID");
 
           // dispatch(userSignInAction(false));
@@ -63,7 +56,6 @@ export default function VendorSignForm(props) {
         }
       })
       .catch((error) => {
-        console.log(vendorSignUpInfo);
 
         console.log(error);
       });
@@ -84,18 +76,14 @@ export default function VendorSignForm(props) {
   };
   const handleVendorSignIn = (event) => {
     event.preventDefault();
-    console.log(vendorSignInInfo);
     axios
       .post("http://localhost:3000/vendor/auth/signin", vendorSignInInfo)
       .then((res) => {
-        console.log(res);
         // savetoken(res.data.Data.token);
         // console.log(token);
         localStorage.setItem("Authorization", res.headers.authorization);
         localStorage.setItem("VendorID", res.data.Data);
-        console.log(localStorage.getItem("Authorization"));
         if (res.data.Success === true) {
-          console.log("hhkhkhkhk");
           // dispatch(userSignInAction(false));
           // dispatch(vendorSignInAction(true));
           localStorage.removeItem("UserID");
@@ -309,7 +297,6 @@ export default function VendorSignForm(props) {
       });
     }
     getLocation();
-    console.log(vendorSignUpInfo);
   }, []);
   const pageVariants = {
     in: {
@@ -328,7 +315,6 @@ export default function VendorSignForm(props) {
     type: "tween",
     ease: "anticipate",
   };
-    console.log(vendorSignUpInfo);
 
     const {t, i18n} = useTranslation();
   return (

@@ -31,6 +31,16 @@ showUserProfile = (req, res) => {
     },
 
     {
+      path: "chat",
+      populate: {
+        path: "messages",
+        populate: { path: "user", select: "firstName _id" },
+        select: "message user",
+      },
+      select: "messages",
+    },
+
+    {
       path: "bookmarkPosts",
       populate: { path: "person", select: "firstName" },
       select: "-__v -comment -updatedPosts",
@@ -179,7 +189,7 @@ addBookmarkPosts = async (req, res) => {
       },
     },
 
-   async (error, data) => {
+    async (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -187,7 +197,7 @@ addBookmarkPosts = async (req, res) => {
           Success: true,
         });
       }
-     await Post.updateOne(
+      await Post.updateOne(
         { _id: req.body.id },
         {
           $inc: { numOfBookmarkPost: 1 },
@@ -212,7 +222,7 @@ removeBookmarkPosts = (req, res) => {
       },
     },
 
-    async(error, data) => {
+    async (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -226,7 +236,7 @@ removeBookmarkPosts = (req, res) => {
           $inc: { numOfBookmarkPost: -1 },
         }
       );
-      
+
       return res.json({
         Data: data.n,
         Message: "Done add to Recent view",
@@ -258,7 +268,7 @@ addFavouriteItems = async (req, res) => {
       },
     },
 
-   async (error, data) => {
+    async (error, data) => {
       if (error) {
         return res.json({
           Data: error,
@@ -291,7 +301,7 @@ removeFavouriteItems = (req, res) => {
       },
     },
 
-    async(error, data) => {
+    async (error, data) => {
       if (error) {
         return res.json({
           Data: error,

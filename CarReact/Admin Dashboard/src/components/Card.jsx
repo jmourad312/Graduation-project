@@ -12,7 +12,7 @@ export function Card(props) {
     price: Number(props.price),
     carBrand: props.brand,
     carModel: props.model,
-    images: props.images,
+    images: [],
   });
   const [id, setId] = useState({
     idperson: props.idperson,

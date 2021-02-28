@@ -98,7 +98,7 @@
         },
         "products Details": {
             "info": "معلومات عن المنتج",
-            "Not Rated": "لا توجد تقييميات",
+            "Not Rated": "لا يوجد تقييم",
             "Rating":"التقيم: ",
             "rate": "كن أول من يضيف تقييم لهذا المنتج",
             "limitation1": "فقط مالكى السيارات الذين لديهم حساب على الموقع يستطيعوا تقييم المنتج",
@@ -239,7 +239,9 @@
         "NoBookmarked":"لا توجد منتجات محفوظة حتي الآن"
     },
     "ChatBot":{
+        "DreksyonyChatBot":"المساعد الآلي لدركسيوني",
         "Summary":"ملخص",
+        "ClickHereToContactUs":"اضغط هنا للتواصل معنا",
         "YourMeters":"مسافتك",
         "ChangeOil":"تغيير الزيت",
         "ChangeOilFilter":"تغيير فلتر الزيت",
@@ -265,5 +267,14 @@
     "EditProductModal":{
         "EditTitle":"تعديل المنتج"
     },
-    "AddReview":"أضف تقييم"
+    "AddReview":"أضف تقييم",
+
+    "ToastMessages":{
+        "BlogAdded":"تم إضافة المدونة إلي المحفوظات",
+        "BlogRemoved":"تم إزالة المدونة من المحفوظات",
+        "Youcan'tsubmit":"برجاء التأكد من كتابة تعليق",
+        "ThankForReport":"شكراً لك علي الإبلاغ",
+        "Itemaddedtofavourite":"تم إضافة المنتج إلي المفضلة",
+        "Itemremovedfromfavourites":"تم إزالة المنتج من المفضلة"
+    }
 }

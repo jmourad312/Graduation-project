@@ -16,7 +16,6 @@ export default function Review() {
 
   const handleCommentChange = (event) => {
   const { value, name } = event.target;
-  console.log(reviewValue);
 
   setReviewValue((previous) => {
     return {
@@ -24,14 +23,12 @@ export default function Review() {
       [name]: value,
     };
   });
-  console.log(reviewValue);
   };
 const Cancelreview = () => {
   setReviewValue({
     comment: "",
     rating: "",
   });
-  console.log(reviewValue);
   setState({ over: "hidden", height: "0" });
 };
   const handleAddReview = (event) => {
@@ -50,12 +47,7 @@ const Cancelreview = () => {
     axios
       .post(URL, body, config)
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-        } else {
-          console.log("fail");
-        }
+        
       })
       .catch((error) => {
         console.log(error);

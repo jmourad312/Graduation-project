@@ -38,7 +38,6 @@ export default function ProductFilter(props) {
 
   const handlePriceChange1 = (event, newValue) => {
     setValue(newValue);
-    console.log(value);
   };
 
 
@@ -109,7 +108,6 @@ export default function ProductFilter(props) {
         price: newValue,
       };
     });
-    console.log(state.price);
     // switch (event.target.name) {
     //   case "priceLess":
     //     setState({
@@ -133,7 +131,6 @@ export default function ProductFilter(props) {
   }
 
   const handleClick = (params) => {
-    console.log(params);
     dispatch(resultFromFilterProduct(state, params.selected*6));
     // dispatch(filterCarModel(event.target.value));
   };

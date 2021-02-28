@@ -48,13 +48,7 @@ export default function SlickSlider(props) {
         }
       )
       .then((req) => {
-        console.log(req);
-        if (req.data.Success === true) {
-          console.log("Success");
-          // props.history.push("/MyProfile");
-        } else {
-          console.log("fail");
-        }
+        
       })
       .catch((error) => {
         console.log(error);

@@ -15,11 +15,11 @@ var person = new schema(
       default:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS88rI7RXVX2mJ4tuynlW20f-wsl9lzNKhCHg&usqp=CAU",
     },
-    vendorId:{
+    vendorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vendor",
     },
-    userId:{
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

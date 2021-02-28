@@ -10,7 +10,7 @@ function validateAdmin(req, resp, next) {
     console.log(req.user);
     const { role, _id } = req.user;
     if (!(role == "admin")) {
-      resp.json({
+        resp.header("Authorization", null).json({
         Data: null,
         Message: "can't access",
         Success: false,
