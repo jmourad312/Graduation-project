@@ -78,16 +78,16 @@ showRelatedItems = (req, res) => {
   const criteriaSearch = { $regex: req.body.name, $options: "i" };
   const queryCond = {};
 
-  if (req.body.name) {
-    queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }];
+  if (req.body.name || req.body.brand || req.body.model) {
+    queryCond.carBrand = req.body.brand;
+    queryCond.$or = [
+      { name: criteriaSearch },
+      { description: criteriaSearch },
+      { carBrand: req.body.brand },
+      { carModel: req.body.model },
+    ];
   }
 
-  if (req.body.brand) {
-    queryCond.carBrand = req.body.brand;
-  }
-  if (req.body.model) {
-    queryCond.carModel = req.body.model;
-  }
   if (req.body.id) {
     queryCond._id = { $nin: [req.body.id] };
   }
