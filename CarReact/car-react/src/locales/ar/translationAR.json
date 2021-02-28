@@ -239,7 +239,9 @@
         "NoBookmarked":"لا توجد منتجات محفوظة حتي الآن"
     },
     "ChatBot":{
+        "DreksyonyChatBot":"المساعد الآلي لدركسيوني",
         "Summary":"ملخص",
+        "ClickHereToContactUs":"اضغط هنا للتواصل معنا",
         "YourMeters":"مسافتك",
         "ChangeOil":"تغيير الزيت",
         "ChangeOilFilter":"تغيير فلتر الزيت",

@@ -237,7 +237,9 @@
         "NoBookmarked":"No Bookmarked Posts yet"
     },
     "ChatBot":{
+        "DreksyonyChatBot":"Dreksyony chat bot",
         "Summary":"Summary",
+        "ClickHereToContactUs":"Click Here To Contact Us",
         "YourMeters":"Your Meters",
         "ChangeOil":"Change Oil",
         "ChangeOilFilter":"Change Oil Filter",

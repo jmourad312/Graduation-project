@@ -51,7 +51,7 @@ export default function ChatBotComp() {
       userBubbleColor: "#fff",
       userFontColor: "black",
     };
-
+    const {t, i18n} = useTranslation();
     const steps = [
       {
         id: "1",
@@ -60,14 +60,14 @@ export default function ChatBotComp() {
       },
       {
         id: "2",
-        message: "How can I help you? كيف يمكنني مساعدتك؟",
+        message: "How can I help you ? كيف يمكنني مساعدتك ؟",
         trigger: "3",
       },
       {
         id: "3",
         options: [
           { value: 1, label: "Contact Us تواصل معنا", trigger: "4" },
-          { value: 2, label: "Did you know ? هل كنت تعلم؟", trigger: "fact" },
+          { value: 2, label: "Did you know ? هل كنت تعلم ؟", trigger: "fact" },
           { value: 3, label: "Full Maintenance فحص كامل", trigger: "full" },
         ],
       },
@@ -80,7 +80,7 @@ export default function ChatBotComp() {
         id: "4",
         component: (
           <Link to="/ContactUs">
-            <span style={{ color: "blue" }}>Click Here to contact us</span>
+            <span style={{ color: "blue" }}>{t("ChatBot.ClickHereToContactUs")}</span>
           </Link>
         ),
         trigger: "2",
@@ -100,14 +100,14 @@ export default function ChatBotComp() {
       // },
       // {
       //   id: "Oil",
-      //   message: "How can we help you?",
+      //   message: "How can we help you ?",
       //   trigger: "3",
       // },
 
       {
         id: "full",
         message:
-          "How many kilometres were on the odometer during your last maintenance?",
+          "How many kilometres were on the odometer during your last maintenance ? كم كيلومتراً في عداد المسافات أثناء فحصك الآخير ؟",
         trigger: "fullUserAnswer",
       },
       {
@@ -116,16 +116,16 @@ export default function ChatBotComp() {
         validator: (value) => {
           if (isNaN(value)) {
             value = "";
-            return "value should be a number";
+            return "value should be a number برجاء إدخال قيمة رقمية";
           }
           if (value > 999999) {
-            return "value shouldn't be greater than 1 million";
+            return "Please enter correct value برجاء إدخال رقم صحيح";
           }
           if (value < 0) {
-            return "dude?? come on";
+            return "Please enter correct value برجاء إدخال رقم صحيح";
           }
           if (value == 0) {
-            return "congrats on the new car";
+            return "congrats on the new car مبارك لك للسيارة الجديدة";
           }
           return true;
         },
@@ -133,7 +133,7 @@ export default function ChatBotComp() {
       },
       {
         id: "fullAnswerOptions",
-        message: "What type of Oil do you purchase ?",
+        message: "What type of Oil do you purchase ? ما نوع الزيت المستخدم ؟",
         trigger: "fullAnswerOptionsChoices",
       },
       {
@@ -148,7 +148,7 @@ export default function ChatBotComp() {
       },
       {
         id: "Check",
-        message: "Calculating your maintenance...",
+        message: "Calculating your maintenance...  جاري حساب فحصك...",
         trigger: "Final",
       },
       {
@@ -166,7 +166,7 @@ export default function ChatBotComp() {
           <ChatBot
             steps={steps}
             floating={true}
-            headerTitle="Dreksyony chat bot"
+            headerTitle={t("ChatBot.DreksyonyChatBot")}
             bubbleStyle={{ fontSize: "20px" }}
             bubbleOptionStyle={{ fontSize: "20px",padding:"15px",margin:"6px" }}
             // userAvatar={localStorage.getItem("Authorization") && localStorage.getItem("ProfileImage")}
