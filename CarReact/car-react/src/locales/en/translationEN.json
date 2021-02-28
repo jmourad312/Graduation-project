@@ -5,18 +5,20 @@
         "Brand": "Brand",
         "Model": "Model",
         "feedback": " Write your Feedback",
-        "Date": "Posted at",
+        "Date": "Posted on",
         "LE": "LE",
         "Submit": "Submit",
         "Cancel":"Cancel",
         "Bookmark":"Bookmark",
+        "RemoveBookmark":"UnBookmark",
         "Edit":"Edit",
         "From":"From :",
         "To":"To :",
         "Yes":"Yes",
         "No":"No",
         "GotoProductDetails":"Product Details",
-        "Add":"Add Product"
+        "Add":"Add Product",
+        "AddAdsHere":"Add Ads \n Click Here"
     },
     "logo": "DREKSYONY",
     "slogan": "All your needs",
@@ -104,7 +106,8 @@
             "User": "User",
             "Description":"Description",
             "Reviews":"Reviews",
-            "Location":"Location"
+            "Location":"Location",
+            "RelatedProducts":"Related Products"
         }
     },
     "SignChoice": {

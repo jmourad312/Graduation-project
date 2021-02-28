@@ -73,7 +73,7 @@ export default function ProductDetails(props) {
     const URL = "http://localhost:3000/user/removeFavouriteItems";
     axios
       .put(URL, body, config)
-      .then((req) => {})
+      .then((req) => { })
       .catch((error) => {
         console.log(error);
       });
@@ -139,7 +139,7 @@ export default function ProductDetails(props) {
 
     axios
       .post(URL, body, config)
-      .then((req) => {})
+      .then((req) => { })
       .catch((error) => {
         console.log(error);
       });
@@ -240,43 +240,43 @@ export default function ProductDetails(props) {
               >
                 {productDetails ? (
                   productDetails.images &&
-                  (productDetails.images.length === 1 ||
-                    productDetails.images.length === 0) ? (
-                    <img
-                      className=""
-                      style={{
-                        width: "350px",
-                        height: "250px",
-                        // maxHeight:"350px"
-                        // borderRadius: "10%",
-                      }}
-                      src={productDetails.images[0]}
-                      alt=""
-                    />
-                  ) : (
-                    productDetails.images && (
-                      <div>
-                        <Carousel interval={1000}>
-                          {productDetails.images.map((img, index) => {
-                            return (
-                              <Carousel.Item>
-                                <img
-                                  key={index}
-                                  className="d-block"
-                                  style={{ height: "300px", width: "350px" }}
-                                  src={img}
-                                  alt="Slide"
-                                />
-                              </Carousel.Item>
-                            );
-                          })}
-                        </Carousel>
-                      </div>
+                    (productDetails.images.length === 1 ||
+                      productDetails.images.length === 0) ? (
+                      <img
+                        className=""
+                        style={{
+                          width: "350px",
+                          height: "250px",
+                          // maxHeight:"350px"
+                          // borderRadius: "10%",
+                        }}
+                        src={productDetails.images[0]}
+                        alt=""
+                      />
+                    ) : (
+                      productDetails.images && (
+                        <div>
+                          <Carousel interval={1000}>
+                            {productDetails.images.map((img, index) => {
+                              return (
+                                <Carousel.Item>
+                                  <img
+                                    key={index}
+                                    className="d-block"
+                                    style={{ height: "300px", width: "350px" }}
+                                    src={img}
+                                    alt="Slide"
+                                  />
+                                </Carousel.Item>
+                              );
+                            })}
+                          </Carousel>
+                        </div>
+                      )
                     )
-                  )
                 ) : (
-                  <Loading />
-                )}
+                    <Loading />
+                  )}
                 {/* <img
                   src={productDetails && productDetails.image}
                   // width="100%"
@@ -304,7 +304,7 @@ export default function ProductDetails(props) {
                 <hr />
                 <div className="row">
                   <div className="col-6">
-                    <h2>
+                    <h2 dir="rtl">
                       {productDetails && productDetails.name}
                       <br /> {t("repeated.By")}{" "}
                       <Link
@@ -312,13 +312,12 @@ export default function ProductDetails(props) {
                           color: "rgb(21, 34, 214)",
                           // textDecoration: "underline ",
                         }}
-                        to={`/VendorProfileUser/${
-                          productDetails
+                        to={`/VendorProfileUser/${productDetails
                             ? productDetails.person
                               ? productDetails.person._id
                               : null
                             : null
-                        }`}
+                          }`}
                       >
                         {productDetails
                           ? productDetails.person
@@ -328,7 +327,7 @@ export default function ProductDetails(props) {
                       </Link>
                     </h2>
                     {/* -------------------------------------SHOP NAME------------------------------------- */}
-                    <h2>
+                    <h2 dir="rtl">
                       {t("repeated.Shop")}{" "}
                       {productDetails &&
                         productDetails.person &&
@@ -340,7 +339,7 @@ export default function ProductDetails(props) {
                       </span> */}
                     {productRate && productRate[0] !== undefined ? (
                       <>
-                        <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        <span  style={{ fontWeight: "700", fontSize: "20px" }}>
                           {t("product.products Details.Rating")}
                         </span>
                         <ShowRating
@@ -348,14 +347,14 @@ export default function ProductDetails(props) {
                         />
                       </>
                     ) : (
-                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        {t("product.products Details.Not Rated")}
-                      </span>
-                    )}
+                        <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                          {t("product.products Details.Not Rated")}
+                        </span>
+                      )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
-                    <p style={{ fontSize: "1.4rem" }}>
+                    <p dir="rtl" style={{ fontSize: "1.4rem" }}>
                       <b style={{ fontSize: "1.4rem" }}>
                         {" "}
                         {t("repeated.Brand")}:{" "}
@@ -366,7 +365,7 @@ export default function ProductDetails(props) {
                           : "Loading"
                         : "Loading"}
                     </p>
-                    <p style={{ fontSize: "1.4rem" }}>
+                    <p dir="rtl" style={{ fontSize: "1.4rem" }}>
                       <b style={{ fontSize: "1.4rem" }}>
                         {t("repeated.Model")}:{" "}
                       </b>
@@ -401,20 +400,20 @@ export default function ProductDetails(props) {
                         onClick={handleAddFavourite}
                       >
                         {userDetails &&
-                        productDetails &&
-                        userDetails.favouriteItems.includes(
-                          productDetails._id
-                        ) ? (
-                          <i
-                            className="fa fa-heart"
-                            style={{ fontSize: "30px", cursor: "pointer" }}
-                          ></i>
-                        ) : (
-                          <i
-                            className="far fa-heart"
-                            style={{ fontSize: "30px", cursor: "pointer" }}
-                          ></i>
-                        )}
+                          productDetails &&
+                          userDetails.favouriteItems.includes(
+                            productDetails._id
+                          ) ? (
+                            <i
+                              className="fa fa-heart"
+                              style={{ fontSize: "30px", cursor: "pointer" }}
+                            ></i>
+                          ) : (
+                            <i
+                              className="far fa-heart"
+                              style={{ fontSize: "30px", cursor: "pointer" }}
+                            ></i>
+                          )}
                       </span>
                     )}
                   </div>
@@ -468,7 +467,7 @@ export default function ProductDetails(props) {
                     style={{ fontSize: "30px", paddingLeft: "5px" }}
                   />
                 }
-                label="Related Products"
+                label={t("product.products Details.RelatedProducts")}
                 style={{ fontSize: "20px", fontWeight: "600", color: "black" }}
               />
             </Tabs>
@@ -500,33 +499,33 @@ export default function ProductDetails(props) {
                           <Review />
                         </>
                       ) : (
-                        <div
-                          style={{
-                            height: "600px",
-                            width: "300px",
-                            position: "absolute",
-                            left: "0%",
-                            top: "0%",
-                          }}
-                        >
-                          <h2
+                          <div
                             style={{
-                              position: "relative",
-                              top: "10%",
+                              height: "600px",
+                              width: "300px",
+                              position: "absolute",
                               left: "0%",
-                              textAlign: "center",
-                              border: "1px solid black",
-                              borderRadius: "2%",
-                              paddingTop: "5px",
-                              paddingBottom: "15px",
-                              paddingLeft: "3px",
-                              paddingRight: "3px",
+                              top: "0%",
                             }}
                           >
-                            {t("product.products Details.limitation1")}
-                          </h2>
-                        </div>
-                      )}
+                            <h2
+                              style={{
+                                position: "relative",
+                                top: "10%",
+                                left: "0%",
+                                textAlign: "center",
+                                border: "1px solid black",
+                                borderRadius: "2%",
+                                paddingTop: "5px",
+                                paddingBottom: "15px",
+                                paddingLeft: "3px",
+                                paddingRight: "3px",
+                              }}
+                            >
+                              {t("product.products Details.limitation1")}
+                            </h2>
+                          </div>
+                        )}
                     </div>
                     <div className="col-8">
                       <div className="text-center">
@@ -539,17 +538,17 @@ export default function ProductDetails(props) {
                               {t("product.products Details.rate")}
                             </div>
                           ) : (
-                            <div
-                              className="text-center"
-                              style={{
-                                maxHeight: "400px",
-                                overflowX: "hidden",
-                                overflowY: "auto",
-                              }}
-                            >
-                              {productDetails
-                                ? productDetails.feedback
-                                  ? productDetails.feedback.map((item) => {
+                              <div
+                                className="text-center"
+                                style={{
+                                  maxHeight: "400px",
+                                  overflowX: "hidden",
+                                  overflowY: "auto",
+                                }}
+                              >
+                                {productDetails
+                                  ? productDetails.feedback
+                                    ? productDetails.feedback.map((item) => {
                                       let postTime = item.createdAt.split("T");
                                       return (
                                         <>
@@ -600,13 +599,13 @@ export default function ProductDetails(props) {
                                         </>
                                       );
                                     })
-                                  : "loading"
-                                : "loading"}
-                            </div>
-                          )
+                                    : "loading"
+                                  : "loading"}
+                              </div>
+                            )
                         ) : (
-                          "Loading"
-                        )}
+                            "Loading"
+                          )}
                       </div>
                     </div>
                   </div>
@@ -649,38 +648,38 @@ export default function ProductDetails(props) {
                       </div>
                     </div>
                   ) : (
-                    <div
-                      className="shadow-sm p-2 mb-4 rounded-lg"
-                      style={{
-                        height: "300px",
-                        width: "1010px",
-                        border: "1px solid black",
-                        borderRadius: "2%",
-                      }}
-                    >
-                      <h3
+                      <div
+                        className="shadow-sm p-2 mb-4 rounded-lg"
                         style={{
-                          position: "relative",
-                          top: "35%",
-                          textAlign: "center",
+                          height: "300px",
+                          width: "1010px",
+                          border: "1px solid black",
+                          borderRadius: "2%",
                         }}
                       >
-                        {t("product.products Details.limitation2")}
-                      </h3>
-                    </div>
-                  )}
+                        <h3
+                          style={{
+                            position: "relative",
+                            top: "35%",
+                            textAlign: "center",
+                          }}
+                        >
+                          {t("product.products Details.limitation2")}
+                        </h3>
+                      </div>
+                    )}
                 </TabContainer>
               )}
               {value === 3 && (
                 <TabContainer>
-                  {localStorage.getItem("Authorization") !== null && 
-                  relatedProducts &&
-                  (
+                  {localStorage.getItem("Authorization") !== null &&
+                    relatedProducts &&
+                    (
                       <div className="d-flex flex-wrap">
                         {relatedProducts.map(createProducts)}
-                        
+
                       </div>
-                  )}
+                    )}
                 </TabContainer>
               )}
             </div>

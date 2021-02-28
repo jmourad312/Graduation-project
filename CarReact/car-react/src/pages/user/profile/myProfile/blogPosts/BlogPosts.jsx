@@ -113,9 +113,9 @@ export default function BlogPosts(props) {
                             >
                               {post.title}
                             </h2>
-                            <strong style={{}}>
-                              <i> Posted on </i>
-                              {post.createdAt}
+                            <strong >
+                              <i> {t("repeated.Date")} </i>
+                              {post.createdAt.split("T")[0]}
                             </strong>
                             <h4
                               className="text-truncate"
@@ -151,13 +151,14 @@ export default function BlogPosts(props) {
                               </strong>
                               <div
                                 style={{
-                                  top: "110px",
-                                  left: "430px",
-                                  position: "absolute",
+                                  top: "8px",
+                                  left: "485px",
+                                  position: "absolute"
                                 }}
                               >
                                 <button
                                   className="btn btn-light"
+                                  style={{height:"47px"}}
                                   onClick={() => handleBlogClick(post._id)}
                                 >
                                   <InfoIcon />
@@ -166,7 +167,7 @@ export default function BlogPosts(props) {
                               <div
                                 style={{
                                   top: "0px",
-                                  left: "400px",
+                                  left: "390px",
                                   position: "absolute",
                                 }}
                               >

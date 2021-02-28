@@ -655,7 +655,7 @@ export default function BlogDetails(props) {
             >
               {blogDetails && userDetails
                 ? userDetails.bookmarkPosts.includes(blogDetails._id)
-                  ? "UnBookmark"
+                  ? t("repeated.RemoveBookmark")
                   : t("repeated.Bookmark")
                 : t("repeated.Bookmark")}
             </button>

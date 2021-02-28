@@ -2,16 +2,20 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/Routes";
 import MagdyNavbar from "./layout/navbar/MagdyNavbar.jsx";
 import Ads from "./components/Ads";
-import image1 from './assets/Images/logo.svg'
+import image1 from "./assets/Images/logo.svg";
 import image2 from "./assets/Images/sencha.png";
 import i18next from "i18next";
 import { useState } from "react";
 import LangToggle from "./components/LangToggle";
 import ChatBotComp from "./components/ChatBotComp";
-
+import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 // import 'styled-components';
 
 function App() {
+  let history = useHistory();
+  const { t, i18n } = useTranslation();
   return (
     <div className="App">
       <Router>
@@ -35,30 +39,32 @@ function App() {
           />
         </div>
         <div
+          className="text-center"
           style={{
-            height: "200px",
-            width: "300px",
+            border: "3px solid grey",
+            padding: "30px",
+            width: "250px",
+            borderRadius: "30px",
             position: "absolute",
-            left: "30px",
-            bottom: "350px",
-            border: "1px solid grey",
-            borderRadius:"25px",
-            verticalAlign:"middle"
+            right: "85%",
+            bottom: "300px",
+            backgroundColor: "rgba(128, 128, 128, 0.397)",
           }}
         >
-          <h2
+          <Link to="/ContactUs"
             style={{
               // position: "relative",
               // top: "20%",
               // left: "20%",
               // textAlign: "center",
               fontWeight: "700",
-              fontSize: "32px",
+              fontSize: "30px",
+              cursor: "pointer",
             }}
           >
-            add ads here
+            {t("repeated.AddAdsHere")}
             {/* {t("BlogList.NoPosts")} */}
-          </h2>
+          </Link>
         </div>
       </Router>
     </div>

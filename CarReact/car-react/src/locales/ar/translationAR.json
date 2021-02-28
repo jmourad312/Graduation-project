@@ -11,13 +11,15 @@
         "Submit": "إرسال",
         "Cancel":"إلغاء",
         "Bookmark":"حفظ",
+        "RemoveBookmark":"عدم الحفظ",
         "Edit":"تعديل",
         "From":"من :",
         "To":"إلي :",
         "Yes":"نعم",
         "No":"لا",
         "GotoProductDetails":"تفاصيل المنتج",
-        "Add":"أضف منتج"
+        "Add":"أضف منتج",
+        "AddAdsHere":"لإضافة إعلانك \n اضغط هنا"
 
 
     },
@@ -106,7 +108,8 @@
             "User": "إسم المستخدم",
             "Description":"الوصف",
             "Reviews":"التقييم",
-            "Location":"الموقع"
+            "Location":"الموقع",
+            "RelatedProducts":"منتجات ذات صلة"
         }
     },
     "SignChoice": {
