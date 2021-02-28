@@ -54,7 +54,7 @@ export default function ChatBotComp() {
     const steps = [
       {
         id: "1",
-        message: "Hi \u{1F64B}, I am Dreksyony Bot \n  أهلا ،أنا المساعد الآلي لدركسيوني",
+        message: "Hi \u{1F64B}, \n  I am Dreksyony Bot. \n  أهلا ،أنا المساعد الآلي لدركسيوني",
         trigger: "2",
       },
       {
