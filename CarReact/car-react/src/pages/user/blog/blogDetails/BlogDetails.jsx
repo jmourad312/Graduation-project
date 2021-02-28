@@ -248,7 +248,7 @@ export default function BlogDetails(props) {
         content: paramContent,
       };
     });
-    console.log(paramContent);
+    document.getElementById("commentTextArea").focus();
   };
 
   const handleSubmit = (event) => {
@@ -907,7 +907,7 @@ export default function BlogDetails(props) {
                 <div
                   style={{
                     maxHeight: "380px",
-                    overflowY: "scroll",
+                    overflowY: "auto",
                     overflowX: "hidden",
                   }}
                 >
@@ -1104,6 +1104,7 @@ export default function BlogDetails(props) {
                     <div className="form-group">
                       <textarea
                         className="form-control bgforleavecomment2"
+                        id="commentTextArea"
                         rows="3"
                         name="content"
                         value={inputValue.content}
@@ -1115,7 +1116,7 @@ export default function BlogDetails(props) {
                       className={editing ? "btn btn-dark mr-3" : "btn btn-dark"}
                       style={{ fontWeight: "700", fontSize: "20px" }}
                     >
-                      {editing ? "Edit" : t("repeated.Submit")}
+                      {editing ? t("repeated.Edit") : t("repeated.Submit")}
                     </button>
                     {editing && (
                       <button
