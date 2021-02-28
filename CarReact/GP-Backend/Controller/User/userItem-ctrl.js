@@ -74,10 +74,11 @@ showDetailsItem = async (req, res) => {
 };
 
 showRelatedItems = (req, res) => {
+  console.log(req);
   const criteriaSearch = { $regex: req.body.name, $options: "i" };
   const queryCond = {};
 
-  if (req.body.search) {
+  if (req.body.name) {
     queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }];
   }
 
