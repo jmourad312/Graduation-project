@@ -55,12 +55,13 @@ export default function ChatBotComp() {
     const steps = [
       {
         id: "1",
-        message: "Hi \u{1F64B}, I am Dreksyony Bot  أهلا ،أنا المساعد الآلي لدركسيوني",
+        message:
+          "Hi \u{1F64B}, I am Dreksyony Bot\nأهلا ،أنا المساعد الآلي لدركسيوني",
         trigger: "2",
       },
       {
         id: "2",
-        message: "How can I help you ? كيف يمكنني مساعدتك ؟",
+        component: `How can I help you ? كيف يمكنني مساعدتك ؟`,
         trigger: "3",
       },
       {
@@ -73,14 +74,16 @@ export default function ChatBotComp() {
       },
       {
         id: "fact",
-        component: (<Trivia />),
-        trigger:"2"
+        component: <Trivia />,
+        trigger: "2",
       },
       {
         id: "4",
         component: (
           <Link to="/ContactUs">
-            <span style={{ color: "blue" }}>{t("ChatBot.ClickHereToContactUs")}</span>
+            <span style={{ color: "blue" }}>
+              {t("ChatBot.ClickHereToContactUs")}
+            </span>
           </Link>
         ),
         trigger: "2",

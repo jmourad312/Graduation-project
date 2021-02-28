@@ -120,6 +120,6 @@ export default function ProductsList() {
           </div>
         </div>
       </div>
-    </motion.div >
+    </motion.div>
   );
 }
