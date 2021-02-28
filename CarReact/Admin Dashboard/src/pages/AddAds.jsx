@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { instance } from "../network/axiosConfig";
 import { Button2 } from "../components/Button";
 import { InputField } from "../components/InputField";
+import { Button } from "react-bootstrap";
 
 export default function AddAds(props) {
   const [state, setState] = useState({
@@ -30,16 +31,16 @@ export default function AddAds(props) {
 
   const handleImageChange = (event) => {
     setState({
-        ...state,
-        images:event.target.files
+      ...state,
+      images: event.target.files
     });
   };
 
   const sendAds = () => {
     const formData = new FormData();
-    for(var x = 0; x<state.images.length; x++) {
+    for (var x = 0; x < state.images.length; x++) {
       formData.append('images', state.images[x])
-  }
+    }
     formData.append("title", state.title);
     formData.append("description", state.description);
     formData.append("createdAT", state.createdAT);
@@ -51,12 +52,12 @@ export default function AddAds(props) {
     formData.append("ownerEmail", state.ownerEmail);
 
     const config = {
-        headers: {
-          "content-type":
-            "multipart/form-data; boundary=<calculated when request is sent>",
-          Authorization: localStorage.getItem("Authorization"),
-        },
-      };
+      headers: {
+        "content-type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
 
     instance
       .post(`/admin/addAds`, formData, config)
@@ -77,76 +78,86 @@ export default function AddAds(props) {
     <>
       <div className="">
         <div className="container-for-admin mb-5">
-          <div className="container pt-3 mt-5">
+          <div className="container pt-3 mt-5 w-50">
             <Navbar />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Title</label>
+            <input
               value={state.title}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="title"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Description</label>
+            <input
               value={state.description}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="description"
             />
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Image</label>
             <input
               type="file"
               onChange={(e) => handleImageChange(e)}
-              className="form-control"
+              className="form-control w-100"
               name="images"
               multiple
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Price</label>
+            <input
               value={state.price}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="price"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Create AT</label>
+            <input
               value={state.createdAT}
               type="date"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="createdAT"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Expired</label>
+            <input
               value={state.expired}
               type="date"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="expired"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Name</label>
+            <input
               value={state.ownerName}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="ownerName"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Phone</label>
+            <input
               value={state.ownerPhone}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
               name="ownerPhone"
             />
-            <InputField
+            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Email</label>
+            <input
               value={state.owneEmail}
               type="text"
-              handleChange={(e) => tiggreValue(e)}
+              onChange={(e) => tiggreValue(e)}
               className="form-control"
-              name="owneEmail"
+              name="ownerEmail"
             />
-            <Button2
-              className="btn  btn-success"
-              handelClick={sendAds}
+            <Button
+              className="btn  btn-success mt-3"
+              onClick={sendAds}
               name="Add Ads"
-            />
+              style={{fontSize:"25px"}}
+            >Add Ads</Button>
           </div>
         </div>
       </div>

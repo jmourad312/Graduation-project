@@ -9,6 +9,7 @@ import ProductFilter from "../../../../components/ProductFilter";
 import UserIcon from "../../../../components/UserIcon";
 import { getProductsAction, getUsersAction } from "../../../../store/actions";
 import { useTranslation } from "react-i18next";
+
 export default function ProductsList() {
   const products = useSelector((state) => state.products);
   const isUserLoggedIn = useSelector(state => state.isUserLoggedIn)
@@ -20,6 +21,7 @@ export default function ProductsList() {
   // const getProducts = () => {
   //   dispatch(getProductsAction());
   // };
+
 
   useEffect(() => {
     // getProducts();
@@ -41,6 +43,7 @@ export default function ProductsList() {
         brand={prod.carBrand}
         model={prod.carModel}
         rating={prod}
+        avgRate={prod.avgRate}
       // category={prod.category}
       />
     );

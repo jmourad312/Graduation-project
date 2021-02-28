@@ -119,10 +119,10 @@ export default function AddPerson(props) {
   return (
     <>
       <div className="">
-        <div className="container-for-admin mb-5">
+        <div className="container-for-admin mb-5" >
           <Navbar />
 
-          <div className="container mt-5 pt-5">
+          <div className="container mt-5 pt-5" style={{width:"930px"}}>
             <div
               className="card mb-2 shadow p-4 bg-white"
               style={{ width: "900px" }}
@@ -176,7 +176,7 @@ export default function AddPerson(props) {
                   error={error.password}
                 />
               </div>
-              <div className="card bg-danger text-white">
+              <div className="card bg-success text-white">
                 <div className="card-footer">
                   <Button2
                     className="btn text-white"

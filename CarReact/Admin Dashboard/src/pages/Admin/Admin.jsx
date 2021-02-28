@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Bar, Pie, Doughnut } from "react-chartjs-2";
 import { Tabel } from "../../components/Tabel";
-import { Button2 } from "../../components/Button";
 import { Pagination } from "../../components/Pagination";
 import { Navbar } from "../../components/Navbar";
 import { instance } from "../../network/axiosConfig";
@@ -17,6 +16,7 @@ import {
   getAdsAction,
 } from "../../store/action";
 import { useSelector, useDispatch } from "react-redux";
+import { Button } from "react-bootstrap";
 
 export default function Admin(props) {
   const numberItemPerPage = 5;
@@ -139,7 +139,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user,state.searchUser));
+    dispatch(getUserAction(skipState.user, state.searchUser));
   };
 
   const bannedvendor = async (parameter) => {
@@ -162,7 +162,7 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
+    dispatch(getVendorAction(skipState.vendor, state.searchVendor));
   };
 
   const goToEditUser = async (parameter) => {
@@ -188,7 +188,8 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getUserAction(skipState.user,state.searchUser));
+    dispatch(getUserAction(skipState.user, state.searchUser));
+    dispatch(getBlogAction(0, state.searchBlog));
   };
 
   const goToDeleteVendor = async (parameter) => {
@@ -200,7 +201,8 @@ export default function Admin(props) {
     } catch (error) {
       console.log(error);
     }
-    dispatch(getVendorAction(skipState.vendor,state.searchVendor));
+    dispatch(getVendorAction(skipState.vendor, state.searchVendor));
+    dispatch(getProductAction(0, state.searchProduct));
   };
 
   const ProductsVendor = (parameter) => {
@@ -220,12 +222,12 @@ export default function Admin(props) {
   const getPartUser = (skip) => {
     console.log(skip);
     setSkipState({ ...skipState, user: skip.selected * numberItemPerPage });
-    dispatch(getUserAction(skip.selected * numberItemPerPage,state.searchUser));
+    dispatch(getUserAction(skip.selected * numberItemPerPage, state.searchUser));
   };
 
   const getPartVendor = (skip) => {
     setSkipState({ ...skipState, vendor: skip.selected * numberItemPerPage });
-    dispatch(getVendorAction(skip.selected * numberItemPerPage,state.searchVendor));
+    dispatch(getVendorAction(skip.selected * numberItemPerPage, state.searchVendor));
   };
 
   const getPartBlog = (skip) => {
@@ -306,6 +308,7 @@ export default function Admin(props) {
               <a
                 href="#Dashboard"
                 className="list-group-item active waves-effect"
+                style={{ background: "#1687a7" }}
               >
                 <i className="fas fa-lg mr-3">Dashboard</i>
               </a>
@@ -325,19 +328,19 @@ export default function Admin(props) {
                 href="#blogTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-blogger mr-4"> Blog</i>
+                <i className="fab fa-lg fa-blogger mr-4" style={{ fontWeight: "600" }}> Blog</i>
               </a>
               <a
                 href="#productTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fab fa-lg fa-product-hunt mr-1"> Product</i>
+                <i className="fab fa-lg fa-product-hunt mr-1" style={{ fontWeight: "600" }}> Product</i>
               </a>
               <a
                 href="#contactTabel"
                 className="list-group-item list-group-item-action waves-effect"
               >
-                <i className="fa fa-envelope mr-1"> Message from contact</i>
+                <i className="fa fa-envelope mr-1" style={{ fontSize: "20px", fontWeight: "600" }}> Message from contact</i>
               </a>
             </div>
           </div>
@@ -351,68 +354,18 @@ export default function Admin(props) {
             <div className="card mb-4 wow fadeIn">
               <div className="card-body d-sm-flex justify-content-between">
                 <h4 className="mb-2 mb-sm-0 pt-1">
-                  <span>Dashboard</span>
+                  <span style={{color:"#495057"}}>Dashboard</span>
                 </h4>
               </div>
             </div>
 
             {/* Bar Chart */}
             <div className="row wow fadeIn">
-              <div className="col-md-7 mb-4">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="list-group list-group-flush">
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize: "20px" }}
-                      >
-                        No.Users
-                        <span className="badge badge-info badge-pill pull-right ml-2">
-                          {stateRedux.countData.Success == true &&
-                            stateRedux.countData.Data.user}
-                        </span>
-                      </a>
+              
 
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize: "20px" }}
-                      >
-                        No.Vendors
-                        <span className="badge badge-info badge-pill pull-right ml-2">
-                          {stateRedux.countData.Success == true &&
-                            stateRedux.countData.Data.vendor}
-                        </span>
-                      </a>
-
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize: "20px" }}
-                      >
-                        No.Products
-                        <span className="badge badge-info badge-pill pull-right ml-2">
-                          {stateRedux.countData.Success == true &&
-                            stateRedux.countData.Data.product}
-                        </span>
-                      </a>
-
-                      <a
-                        className="list-group-item list-group-item-action waves-effect"
-                        style={{ fontSize: "20px" }}
-                      >
-                        No.Blogs
-                        <span className="badge badge-info badge-pill pull-right ml-2">
-                          {stateRedux.countData.Success == true &&
-                            stateRedux.countData.Data.blogs}
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-5 mb-4">
+              <div className="col-7 mb-4">
                 <div className="card mb-4">
-                  <div className="card-header text-center">Pie chart</div>
+                  <div className="card-header text-center" style={{fontSize:"20px",fontWeight:"700",color:"#495057"}}>Pie chart</div>
                   <div className="card-body">
                     <Pie
                       data={PieData}
@@ -432,19 +385,61 @@ export default function Admin(props) {
                   </div>
                 </div>
               </div>
+            
+              <div className="col-5 mb-4">
+                <div className="card">
+                  <div className="card-body" style={{paddingTop:"100px",height:"445px"}}>
+                    <div className="list-group list-group-flush">
+                      <a className="list-group-item list-group-item-action waves-effect" style={{ fontSize:"20px",fontWeight:"700" }}>
+                        No.Users
+                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
+                          {stateRedux.countData.Success == true &&
+                            stateRedux.countData.Data.user}
+                        </span>
+                      </a>
+
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700"}}>
+                        No.Vendors
+                        <span className="badge badge-info badge-pill pull-right ml-4" style={{fontSize:"20px"}}>
+                          {stateRedux.countData.Success == true &&
+                            stateRedux.countData.Data.vendor}
+                        </span>
+                      </a>
+
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
+                        No.Products
+                        <span className="badge badge-info badge-pill pull-right ml-3" style={{fontSize:"20px"}}>
+                          {stateRedux.countData.Success == true &&
+                            stateRedux.countData.Data.product}
+                        </span>
+                      </a>
+
+                      <a className="list-group-item list-group-item-action waves-effect"style={{ fontSize:"20px",fontWeight:"700" }}>
+                        No.Blogs
+                        <span className="badge badge-info badge-pill pull-right ml-5" style={{fontSize:"20px"}}>
+                          {stateRedux.countData.Success == true &&
+                            stateRedux.countData.Data.blogs}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <hr style={{ border: "1px solid" }} />
             {/* User List */}
             {stateRedux.users.length != 0 && (
               <>
                 <h3>Users</h3>
+                <label style={{ fontWeight: "700" }}>Search by user name or email</label><br />
                 <input
                   type="text"
                   name="searchUser"
+                  style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
                   value={state.searchUser}
                   onChange={searchTabel}
                   onKeyPress={(e) => {
-                    if (e.which == 13) dispatch(getUserAction(0,state.searchUser));
+                    if (e.which == 13) dispatch(getUserAction(0, state.searchUser));
                   }}
                 />
                 <Tabel
@@ -468,13 +463,15 @@ export default function Admin(props) {
             {stateRedux.vendors.length != 0 && (
               <>
                 <h3>Vendors</h3>
+                <label style={{ fontWeight: "700" }}>Search by user name or email</label><br />
                 <input
                   type="text"
                   name="searchVendor"
+                  style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
                   value={state.searchVendor}
                   onChange={searchTabel}
                   onKeyPress={(e) => {
-                    if (e.which == 13) dispatch(getVendorAction(0,state.searchVendor));
+                    if (e.which == 13) dispatch(getVendorAction(0, state.searchVendor));
                   }}
                 />
                 <Tabel
@@ -500,15 +497,17 @@ export default function Admin(props) {
               <div className=" row wow fadeIn" id="blogTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Blogs</h3>
+                  <label style={{ fontWeight: "700" }}>Search by user name</label><br />
                   <input
-                      type="text"
-                      name="searchBlog"
-                      value={state.searchBlog}
-                      onChange={searchTabel}
-                      onKeyPress={(e) => {
-                        if (e.which == 13) dispatch(getBlogAction(0,state.searchBlog));
-                      }}
-                    />
+                    type="text"
+                    name="searchBlog"
+                    style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                    value={state.searchBlog}
+                    onChange={searchTabel}
+                    onKeyPress={(e) => {
+                      if (e.which == 13) dispatch(getBlogAction(0, state.searchBlog));
+                    }}
+                  />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -529,31 +528,26 @@ export default function Admin(props) {
                                 style={{
                                   backgroundColor:
                                     countReport(item.userId.postsUser) >= 3 &&
-                                    countReport(item.userId.postsUser) <= 6
+                                      countReport(item.userId.postsUser) <= 6
                                       ? "yellow"
                                       : countReport(item.userId.postsUser) >= 7
-                                      ? "red"
-                                      : "",
+                                        ? "red"
+                                        : "",
                                 }}
                               >
-                                <td>{skipState.blog + index + 1}</td>
-                                <td>{item.firstName}</td>
-                                <td>{countReport(item.userId.postsUser)}</td>
-                                <td>{item.userId.postsUser.length}</td>
+                                <td style={{fontWeight:"600"}}>{skipState.blog + index + 1}</td>
+                                <td style={{fontWeight:"600"}}>{item.firstName}</td>
+                                <td style={{fontWeight:"600"}}>{countReport(item.userId.postsUser)}</td>
+                                <td style={{fontWeight:"600"}}>{item.userId.postsUser.length}</td>
                                 <td>
-                                  <Button2
+                                  <Button
                                     disabled={item.userId.postsUser.length == 0}
                                     className="page-link"
-                                    parameter={item}
+                                    style={{ width: "75%", marginLeft: "30px" }}
                                     key={index + 1}
-                                    handelClick={BlogsUser}
-                                    name={
-                                      <i
-                                        style={{ fontSize: "20px" }}
-                                        className="fas fa-pen ml-1"
-                                      ></i>
-                                    }
-                                  ></Button2>
+                                    onClick={() => BlogsUser(item)}>
+                                    <i style={{ fontSize: "20px" }} className="fas fa-pen ml-1"></i>
+                                  </Button>
                                 </td>
                               </tr>
                             );
@@ -576,15 +570,17 @@ export default function Admin(props) {
               <div className="row wow fadeIn" id="productTabel">
                 <div className="col-md-12 mb-4">
                   <h3>Products</h3>
+                  <label style={{ fontWeight: "700" }}>Search by vendor name</label><br />
                   <input
-                      type="text"
-                      name="searchProduct"
-                      value={state.searchProduct}
-                      onChange={searchTabel}
-                      onKeyPress={(e) => {
-                        if (e.which == 13) dispatch(getProductAction(0,state.searchProduct));
-                      }}
-                    />
+                    type="text"
+                    name="searchProduct"
+                    value={state.searchProduct}
+                    style={{ marginBottom: "10px", borderRadius: "10px", outline: "none" }}
+                    onChange={searchTabel}
+                    onKeyPress={(e) => {
+                      if (e.which == 13) dispatch(getProductAction(0, state.searchProduct));
+                    }}
+                  />
                   <div className="card mb-4">
                     <div className="card-body">
                       <table className="table table-hover">
@@ -602,25 +598,19 @@ export default function Admin(props) {
                           {stateRedux.nproduct.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.product + index + 1}</td>
+                                <td style={{fontWeight:"700"}}>{skipState.product + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td>{item.firstName}</td>
-                                <td>{item.vendorId.vendorItems.length}</td>
+                                <td style={{fontWeight:"700"}}>{item.firstName}</td>
+                                <td style={{fontWeight:"700"}}>{item.vendorId.vendorItems.length}</td>
 
                                 <td>
-                                  <Button2
+                                  <Button
                                     disabled={item.vendorId.vendorItems.length == 0}
                                     className="page-link"
-                                    parameter={item}
+                                    style={{ width: "75%", marginLeft: "30px" }}
                                     key={index + 1}
-                                    handelClick={ProductsVendor}
-                                    name={
-                                      <i
-                                        style={{ fontSize: "20px" }}
-                                        className="fas fa-pen ml-1"
-                                      ></i>
-                                    }
-                                  ></Button2>
+                                    onClick={() => ProductsVendor(item)}><i style={{ fontSize: "20px" }} className="fas fa-pen ml-1"></i>
+                                  </Button>
                                 </td>
                               </tr>
                             );
@@ -643,7 +633,7 @@ export default function Admin(props) {
             {stateRedux.contacts.length != 0 && (
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
-                  <h3>Messages from ContactUs</h3>
+                  <h3>Messages from Contact Us</h3>
                   {/* <input
                       type="text"
                       name="searchContact"
@@ -666,10 +656,10 @@ export default function Admin(props) {
                           {stateRedux.contacts.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.contact + index + 1}</td>
+                                <td style={{fontWeight:"600"}}>{skipState.contact + index + 1}</td>
                                 {/* <td>{item.person._id}</td> */}
-                                <td>{item.email}</td>
-                                <td>{item.message}</td>
+                                <td style={{fontWeight:"600"}}>{item.email}</td>
+                                <td style={{fontWeight:"600"}}>{item.message}</td>
                               </tr>
                             );
                           })}
@@ -690,7 +680,7 @@ export default function Admin(props) {
             {stateRedux.ads.length != 0 && (
               <div className=" row wow fadeIn" id="contactTabel">
                 <div className="col-md-12 mb-4">
-                  <h3>ADS</h3>
+                  <h3>Ads</h3>
                   {/* <input
                       type="text"
                       name="searchAds"
@@ -718,26 +708,21 @@ export default function Admin(props) {
                           {stateRedux.ads.Data.map((item, index) => {
                             return (
                               <tr>
-                                <td>{skipState.ad + index + 1}</td>
-                                <td>{item.ownerName}</td>
-                                <td>{item.ownerPhone}</td>
-                                <td>{item.ownerEmail}</td>
-                                <td>{item.title}</td>
-                                <td>{item.createdAT}</td>
-                                <td>{item.expired}</td>
-                                <td>{item.price}</td>
-                                <Button2
-                                  className="btn btn-danger mx-auto m-2 "
-                                  parameter={item._id}
+                                <td style={{fontWeight:"600"}}>{skipState.ad + index + 1}</td>
+                                <td style={{fontWeight:"600"}}>{item.ownerName}</td>
+                                <td style={{fontWeight:"600"}}>{item.ownerPhone}</td>
+                                <td style={{fontWeight:"600"}}>{item.ownerEmail}</td>
+                                <td style={{fontWeight:"600"}}>{item.title}</td>
+                                <td style={{fontWeight:"600"}}>{item.createdAT.split("T")[0]}</td>
+                                <td style={{fontWeight:"600"}}>{item.expired.split("T")[0]}</td>
+                                <td style={{fontWeight:"600"}}>{item.price} LE</td>
+                                <Button
+                                  className="btn btn-danger"
+                                  style={{ width: "75%",marginTop:"5px" }}
                                   key={item._id}
-                                  handelClick={deleteAds}
-                                  name={
-                                    <i
-                                      style={{ fontSize: "20px" }}
-                                      className="fas fa-trash"
-                                    ></i>
-                                  }
-                                ></Button2>
+                                  onClick={() => deleteAds(item._id)}>
+                                  <i style={{ fontSize: "20px" }} className="fas fa-trash"></i>
+                                </Button>
                               </tr>
                             );
                           })}

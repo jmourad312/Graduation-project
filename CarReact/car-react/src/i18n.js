@@ -5,6 +5,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import translationEN from "./locales/en/translationEN.json";
 import translationAR from "./locales/ar/translationAR.json";
 
+// const whitespace = document.getElementById('root');
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -27,6 +29,13 @@ i18n
     useLocalStorage: true,
     useDataAttrOptions: true,
     debug: true,
+
+
+    react: {
+      transSupportBasicHtmlNodes: true,
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
+    },
   });
 
+ 
 export default i18n;

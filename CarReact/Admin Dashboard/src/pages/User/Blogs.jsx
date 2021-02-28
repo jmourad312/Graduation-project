@@ -57,12 +57,10 @@ export default function Blogs(props) {
     };
 
     return (
-
         <div className="admin">
             <div className="container-for-admin">
-                <Navbar />
-                <h1 className="m-5">Blogs By {data.firstName}</h1>
-
+                <Navbar/>
+                <h1 className="container mt-5 pt-4">Blogs By {data.firstName}</h1>
                 <div className="col-9 blog-contents">
                     <section>
                         <div className="row">
@@ -72,5 +70,6 @@ export default function Blogs(props) {
                 </div>
             </div>
         </div>
+  
     );
 }
