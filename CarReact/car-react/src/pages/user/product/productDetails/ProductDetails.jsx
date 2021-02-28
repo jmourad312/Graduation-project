@@ -404,19 +404,19 @@ export default function ProductDetails(props) {
             >
               <Tab
                
-              icon={<InfoTwoToneIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
+              icon={<InfoTwoToneIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Description")}
                 style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<CommentIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
+                icon={<CommentIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Reviews")}
-                style={{ fontSize: "30px", fontWeight: "600", color: "black" }}
+                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<RoomIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
+                icon={<RoomIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Location")}
-                style={{ fontSize: "30px", fontWeight: "600", color: "black" }}
+                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
             </Tabs>
             <div className="p-5">
