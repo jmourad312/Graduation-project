@@ -87,7 +87,9 @@ showRelatedItems = (req, res) => {
   if (req.body.model) {
     queryCond.carModel = req.body.model;
   }
-
+  if (req.body.id) {
+    queryCond._id = { $nin: [req.body.id] };
+  }
   const populateQuery = [
     { path: "person", select: "firstName workshopName" },
     { path: "feedback" },
