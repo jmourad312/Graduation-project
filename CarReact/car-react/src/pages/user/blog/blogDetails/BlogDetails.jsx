@@ -15,6 +15,7 @@ import {
   filterCarModel,
   filterCarBrand,
   removeVoteComment,
+  getUsersBookAndFavo,
 } from "../../../../store/actions";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Loading from "../../../../components/Loading";
@@ -42,6 +43,7 @@ export default function BlogDetails(props) {
   const blogDetails = useSelector((state) => state.blogDetails.Data);
   const userID = useSelector((state) => state.userID);
   const [checkOwner, setCheckOwner] = useState(false);
+  const userDetails = useSelector((state) => state.UserBookAndFavo.Data);
 
   const checkOwnerDetails = () => {
     if (blogDetails.person) {
@@ -135,7 +137,7 @@ export default function BlogDetails(props) {
       .then((req) => {
         if (req.data.Success === true) {
           closeModal();
-        } 
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -162,8 +164,7 @@ export default function BlogDetails(props) {
     const URL = "http://localhost:3000/user/removeBookmarkPosts";
     axios
       .put(URL, body, config)
-      .then((req) => {
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -194,8 +195,7 @@ export default function BlogDetails(props) {
           setToastMessage(t("ToastMessages.BlogRemoved"));
         }
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   };
 
   //---------------------------END EDIT FUNCTIONS----------------------------------------
@@ -258,9 +258,7 @@ export default function BlogDetails(props) {
               },
             }
           )
-          .then((req) => {
-            
-          })
+          .then((req) => {})
           .catch((error) => {
             console.log(error);
           });
@@ -281,7 +279,7 @@ export default function BlogDetails(props) {
               setEditing(false);
               setEditingID("");
               setInputValue({ content: "" });
-            } 
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -336,6 +334,7 @@ export default function BlogDetails(props) {
 
   useEffect(() => {
     getBlog(localStorage.getItem("BlogID"));
+    dispatch(getUsersBookAndFavo(localStorage.getItem("UserID")));
     if (blogDetails) {
       checkOwnerDetails();
     }
@@ -354,9 +353,7 @@ export default function BlogDetails(props) {
       .delete(`http://localhost:3000/user/deletePost/${params}`, {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
-      .then((req) => {
-        
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -426,8 +423,7 @@ export default function BlogDetails(props) {
       .delete(`http://localhost:3000/user/deleteComment/${params}`, {
         headers: { Authorization: localStorage.getItem("Authorization") },
       })
-      .then((req) => {
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -650,14 +646,18 @@ export default function BlogDetails(props) {
               style={{
                 position: "absolute",
                 // marginLeft: "300px",
-                left: "800px",
+                left: "750px",
                 height: "50px",
                 fontSize: "20px",
                 paddingTop: "15px",
               }}
               onClick={handleAddBookmark}
             >
-              {t("repeated.Bookmark")}
+              {blogDetails && userDetails
+                ? userDetails.bookmarkPosts.includes(blogDetails._id)
+                  ? "UnBookmark"
+                  : t("repeated.Bookmark")
+                : t("repeated.Bookmark")}
             </button>
             <button
               className="bookmarkbtn first"

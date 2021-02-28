@@ -1,6 +1,5 @@
-import * as TYPES from './types';
-import axios from 'axios';
-
+import * as TYPES from "./types";
+import axios from "axios";
 
 // export const setLanguage = (payload) => {
 //   return {
@@ -17,18 +16,19 @@ export const setClass = (payload) => {
 
 // products requests --------------------------
 
-export const getProductsAction = () => async (dispatch) =>{
-    try {
-        const res = await axios.get("http://localhost:3000/user/partOfItem",
-        {headers: { Authorization: localStorage.getItem("Authorization")}});
-        dispatch({
-            type: TYPES.GET_PRODUCTS,
-            payload: res.data
-        })
-    } catch (error) {
-        console.log(error);
-    }
-}
+export const getProductsAction = () => async (dispatch) => {
+  try {
+    const res = await axios.get("http://localhost:3000/user/partOfItem", {
+      headers: { Authorization: localStorage.getItem("Authorization") },
+    });
+    dispatch({
+      type: TYPES.GET_PRODUCTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const getProductDetails = (params) => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -49,10 +49,13 @@ export const setProductId = (payload) => {
     payload,
   };
 };
-export const resultFromFilterProduct = (data,params) => async (dispatch) => {
+export const resultFromFilterProduct = (data, params) => async (dispatch) => {
   try {
-    const res = await axios.post(`http://localhost:3000/user/showFilterItems/${params}`,data,
-    { headers: { Authorization: localStorage.getItem("Authorization") } });
+    const res = await axios.post(
+      `http://localhost:3000/user/showFilterItems/${params}`,
+      data,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
     dispatch({
       type: TYPES.GET_PRODUCTS,
       payload: res.data,
@@ -80,7 +83,8 @@ export const getBlogDetails = (params) => async (dispatch) => {
 export const addVoteComment = (params) => async (dispatch) => {
   try {
     const res = await axios.post(
-      `http://localhost:3000/user/upVoteToComment/${params}`,"s",
+      `http://localhost:3000/user/upVoteToComment/${params}`,
+      "s",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     dispatch({
@@ -95,7 +99,8 @@ export const addVoteComment = (params) => async (dispatch) => {
 export const removeVoteComment = (params) => async (dispatch) => {
   try {
     const res = await axios.post(
-      `http://localhost:3000/user/downVoteToComment/${params}`,"j",
+      `http://localhost:3000/user/downVoteToComment/${params}`,
+      "j",
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     dispatch({
@@ -178,7 +183,7 @@ export const getBlogsFilterSearch = () => async (dispatch) => {
 // filter blog
 export const filterCarBrand = () => async (dispatch) => {
   try {
-    const res = await axios.get('http://localhost:3000/admin/getBrand');
+    const res = await axios.get("http://localhost:3000/admin/getBrand");
     dispatch({
       type: TYPES.GET_BRAND,
       payload: res.data.Data,
@@ -189,7 +194,9 @@ export const filterCarBrand = () => async (dispatch) => {
 };
 export const filterCarModel = (namebrand) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:3000/admin/getModel/${namebrand}`);
+    const res = await axios.get(
+      `http://localhost:3000/admin/getModel/${namebrand}`
+    );
     dispatch({
       type: TYPES.GET_MODEL,
       payload: res.data.Data[0].carModel,
@@ -211,9 +218,12 @@ export const filterCarModel = (namebrand) => async (dispatch) => {
 //     console.log(error);
 //   }
 // };
-export const resultFromFilter = (data,params) => async (dispatch) => {
+export const resultFromFilter = (data, params) => async (dispatch) => {
   try {
-    const res = await axios.post(`http://localhost:3000/user/showFilterPosts/${params}`,data);
+    const res = await axios.post(
+      `http://localhost:3000/user/showFilterPosts/${params}`,
+      data
+    );
     dispatch({
       type: TYPES.GET_BLOGS,
       payload: res.data,
@@ -223,8 +233,6 @@ export const resultFromFilter = (data,params) => async (dispatch) => {
   }
 };
 //filter add blog
-
-
 
 //USER  ------------------------------------------------------------
 // get user -----------------------
@@ -246,7 +254,21 @@ export const getUsersAction = (params) => async (dispatch) => {
       payload: res.data,
     });
     localStorage.setItem("ProfileImage", res.data.Data.person.image);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+export const getUsersBookAndFavo = (params) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/user/showUserDetails/${params}`,
+      { headers: { Authorization: localStorage.getItem("Authorization") } }
+    );
+    dispatch({
+      type: TYPES.GET_USER_DATA,
+      payload: res.data,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -289,15 +311,16 @@ export const getVendorsAction = (params) => async (dispatch) => {
       type: TYPES.GET_VENDOR,
       payload: res.data,
     });
-    localStorage.setItem("ProfileImage",res.data.Data.person.image)
+    localStorage.setItem("ProfileImage", res.data.Data.person.image);
   } catch (error) {
     console.log(error);
   }
 };
-export const getVendorsItemsAction = (data,params) => async (dispatch) => {
+export const getVendorsItemsAction = (data, params) => async (dispatch) => {
   try {
     const res = await axios.post(
-      `http://localhost:3000/vendor/getItems/${params}`,data,
+      `http://localhost:3000/vendor/getItems/${params}`,
+      data,
       { headers: { Authorization: localStorage.getItem("Authorization") } }
     );
     dispatch({

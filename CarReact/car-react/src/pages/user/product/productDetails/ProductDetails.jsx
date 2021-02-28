@@ -7,7 +7,10 @@ import LoginButton from "../../../../components/LoginButton";
 import Review from "../../../../components/Review";
 import ToastMessage from "../../../../components/ToastMessage";
 import UserIcon from "../../../../components/UserIcon";
-import { getProductDetails } from "../../../../store/actions";
+import {
+  getProductDetails,
+  getUsersBookAndFavo,
+} from "../../../../store/actions";
 import { makeStyles, Paper, Tab, Tabs } from "@material-ui/core";
 import { Carousel, TabContainer } from "react-bootstrap";
 import InfoTwoToneIcon from "@material-ui/icons/InfoTwoTone";
@@ -41,6 +44,7 @@ export default function ProductDetails(props) {
   const productID = useSelector((state) => state.productID);
   const productDetails = useSelector((state) => state.productDetails.Data);
   const productRate = useSelector((state) => state.productDetails.stars);
+  const userDetails = useSelector((state) => state.UserBookAndFavo.Data);
 
   const dispatch = useDispatch();
   const getProducts = (params) => {
@@ -62,13 +66,12 @@ export default function ProductDetails(props) {
       },
     };
     const body = {
-      id: productID,
+      id: productDetails._id,
     };
     const URL = "http://localhost:3000/user/removeFavouriteItems";
     axios
       .put(URL, body, config)
-      .then((req) => {
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -82,7 +85,7 @@ export default function ProductDetails(props) {
     };
 
     const body = {
-      id: productID,
+      id: productDetails._id,
     };
 
     const URL = "http://localhost:3000/user/addFavouriteItems";
@@ -134,8 +137,7 @@ export default function ProductDetails(props) {
 
     axios
       .post(URL, body, config)
-      .then((req) => {
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -144,6 +146,7 @@ export default function ProductDetails(props) {
 
   useEffect(() => {
     getProducts(localStorage.getItem("ProductID"));
+    dispatch(getUsersBookAndFavo(localStorage.getItem("UserID")));
   }, [productDetails]);
 
   useEffect(() => {
@@ -217,43 +220,43 @@ export default function ProductDetails(props) {
               >
                 {productDetails ? (
                   productDetails.images &&
-                    (productDetails.images.length === 1 ||
-                      productDetails.images.length === 0) ? (
-                      <img
-                        className=""
-                        style={{
-                          width: "350px",
-                          height: "250px",
-                          // maxHeight:"350px"
-                          // borderRadius: "10%",
-                        }}
-                        src={productDetails.images[0]}
-                        alt=""
-                      />
-                    ) : (
-                      productDetails.images && (
-                        <div>
-                          <Carousel interval={1000}>
-                            {productDetails.images.map((img, index) => {
-                              return (
-                                <Carousel.Item>
-                                  <img
-                                    key={index}
-                                    className="d-block"
-                                    style={{ height: "300px", width: "350px" }}
-                                    src={img}
-                                    alt="Slide"
-                                  />
-                                </Carousel.Item>
-                              );
-                            })}
-                          </Carousel>
-                        </div>
-                      )
+                  (productDetails.images.length === 1 ||
+                    productDetails.images.length === 0) ? (
+                    <img
+                      className=""
+                      style={{
+                        width: "350px",
+                        height: "250px",
+                        // maxHeight:"350px"
+                        // borderRadius: "10%",
+                      }}
+                      src={productDetails.images[0]}
+                      alt=""
+                    />
+                  ) : (
+                    productDetails.images && (
+                      <div>
+                        <Carousel interval={1000}>
+                          {productDetails.images.map((img, index) => {
+                            return (
+                              <Carousel.Item>
+                                <img
+                                  key={index}
+                                  className="d-block"
+                                  style={{ height: "300px", width: "350px" }}
+                                  src={img}
+                                  alt="Slide"
+                                />
+                              </Carousel.Item>
+                            );
+                          })}
+                        </Carousel>
+                      </div>
                     )
+                  )
                 ) : (
-                    <Loading />
-                  )}
+                  <Loading />
+                )}
                 {/* <img
                   src={productDetails && productDetails.image}
                   // width="100%"
@@ -289,12 +292,13 @@ export default function ProductDetails(props) {
                           color: "rgb(21, 34, 214)",
                           // textDecoration: "underline ",
                         }}
-                        to={`/VendorProfileUser/${productDetails
+                        to={`/VendorProfileUser/${
+                          productDetails
                             ? productDetails.person
                               ? productDetails.person._id
                               : null
                             : null
-                          }`}
+                        }`}
                       >
                         {productDetails
                           ? productDetails.person
@@ -324,10 +328,10 @@ export default function ProductDetails(props) {
                         />
                       </>
                     ) : (
-                        <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                          {t("product.products Details.Not Rated")}
-                        </span>
-                      )}
+                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                        {t("product.products Details.Not Rated")}
+                      </span>
+                    )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
@@ -376,10 +380,21 @@ export default function ProductDetails(props) {
                         title="Add to favorate"
                         onClick={handleAddFavourite}
                       >
-                        <i
-                          className="far fa-heart"
-                          style={{ fontSize: "30px", cursor: "pointer" }}
-                        ></i>
+                        {userDetails &&
+                        productDetails &&
+                        userDetails.favouriteItems.includes(
+                          productDetails._id
+                        ) ? (
+                          <i
+                            className="fa fa-heart"
+                            style={{ fontSize: "30px", cursor: "pointer" }}
+                          ></i>
+                        ) : (
+                          <i
+                            className="far fa-heart"
+                            style={{ fontSize: "30px", cursor: "pointer" }}
+                          ></i>
+                        )}
                       </span>
                     )}
                   </div>
@@ -403,18 +418,34 @@ export default function ProductDetails(props) {
               aria-label="icon label tabs example"
             >
               <Tab
-               
-              icon={<InfoTwoToneIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
+                icon={
+                  <InfoTwoToneIcon
+                    style={{ fontSize: "30px", paddingLeft: "5px" }}
+                  />
+                }
                 label={t("product.products Details.Description")}
                 style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<CommentIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
+                icon={
+                  <CommentIcon
+                    style={{ fontSize: "30px", paddingLeft: "5px" }}
+                  />
+                }
                 label={t("product.products Details.Reviews")}
                 style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<RoomIcon style={{ fontSize: "30px",paddingLeft:"5px" }} />}
+                icon={
+                  <RoomIcon style={{ fontSize: "30px", paddingLeft: "5px" }} />
+                }
+                label={t("product.products Details.Location")}
+                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
+              />
+              <Tab
+                icon={
+                  <RoomIcon style={{ fontSize: "30px", paddingLeft: "5px" }} />
+                }
                 label={t("product.products Details.Location")}
                 style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
@@ -447,33 +478,33 @@ export default function ProductDetails(props) {
                           <Review />
                         </>
                       ) : (
-                          <div
+                        <div
+                          style={{
+                            height: "600px",
+                            width: "300px",
+                            position: "absolute",
+                            left: "0%",
+                            top: "0%",
+                          }}
+                        >
+                          <h2
                             style={{
-                              height: "600px",
-                              width: "300px",
-                              position: "absolute",
+                              position: "relative",
+                              top: "10%",
                               left: "0%",
-                              top: "0%",
+                              textAlign: "center",
+                              border: "1px solid black",
+                              borderRadius: "2%",
+                              paddingTop: "5px",
+                              paddingBottom: "15px",
+                              paddingLeft: "3px",
+                              paddingRight: "3px",
                             }}
                           >
-                            <h2
-                              style={{
-                                position: "relative",
-                                top: "10%",
-                                left: "0%",
-                                textAlign: "center",
-                                border: "1px solid black",
-                                borderRadius: "2%",
-                                paddingTop: "5px",
-                                paddingBottom: "15px",
-                                paddingLeft: "3px",
-                                paddingRight: "3px",
-                              }}
-                            >
-                              {t("product.products Details.limitation1")}
-                            </h2>
-                          </div>
-                        )}
+                            {t("product.products Details.limitation1")}
+                          </h2>
+                        </div>
+                      )}
                     </div>
                     <div className="col-8">
                       <div className="text-center">
@@ -486,17 +517,17 @@ export default function ProductDetails(props) {
                               {t("product.products Details.rate")}
                             </div>
                           ) : (
-                              <div
-                                className="text-center"
-                                style={{
-                                  maxHeight: "400px",
-                                  overflowX: "hidden",
-                                  overflowY: "scroll",
-                                }}
-                              >
-                                {productDetails
-                                  ? productDetails.feedback
-                                    ? productDetails.feedback.map((item) => {
+                            <div
+                              className="text-center"
+                              style={{
+                                maxHeight: "400px",
+                                overflowX: "hidden",
+                                overflowY: "auto",
+                              }}
+                            >
+                              {productDetails
+                                ? productDetails.feedback
+                                  ? productDetails.feedback.map((item) => {
                                       let postTime = item.createdAt.split("T");
                                       return (
                                         <>
@@ -547,13 +578,13 @@ export default function ProductDetails(props) {
                                         </>
                                       );
                                     })
-                                    : "loading"
-                                  : "loading"}
-                              </div>
-                            )
+                                  : "loading"
+                                : "loading"}
+                            </div>
+                          )
                         ) : (
-                            "Loading"
-                          )}
+                          "Loading"
+                        )}
                       </div>
                     </div>
                   </div>
@@ -596,26 +627,85 @@ export default function ProductDetails(props) {
                       </div>
                     </div>
                   ) : (
-                      <div
-                        className="shadow-sm p-2 mb-4 rounded-lg"
+                    <div
+                      className="shadow-sm p-2 mb-4 rounded-lg"
+                      style={{
+                        height: "300px",
+                        width: "1010px",
+                        border: "1px solid black",
+                        borderRadius: "2%",
+                      }}
+                    >
+                      <h3
                         style={{
-                          height: "300px",
-                          width: "1010px",
-                          border: "1px solid black",
-                          borderRadius: "2%",
+                          position: "relative",
+                          top: "35%",
+                          textAlign: "center",
                         }}
                       >
-                        <h3
+                        {t("product.products Details.limitation2")}
+                      </h3>
+                    </div>
+                  )}
+                </TabContainer>
+              )}
+              {value === 3 && (
+                <TabContainer>
+                  {localStorage.getItem("Authorization") !== null ? (
+                    <div className="row">
+                      <div className="d-flex flex-wrap">
+                        {productDetails &&
+                          productDetails.person &&
+                          productDetails.person.location && (
+                            <iframe
+                              title="map"
+                              id="myiframe"
+                              src={loc}
+                              width="1010px"
+                              height="350px"
+                              frameborder="0"
+                              style={{
+                                border: "1px solid black",
+                                borderRadius: "15px",
+                              }}
+                              allowfullscreen
+                            ></iframe>
+                          )}
+                        {/* <iframe
+                          title="Product Map"
+                          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Egypt+fayuim"
+                          width="1010px"
+                          height="350px"
+                          frameborder="0"
                           style={{
-                            position: "relative",
-                            top: "35%",
-                            textAlign: "center",
+                            border: "1px solid black",
+                            borderRadius: "2%",
                           }}
-                        >
-                          {t("product.products Details.limitation2")}
-                        </h3>
+                          allowfullscreen
+                        ></iframe> */}
                       </div>
-                    )}
+                    </div>
+                  ) : (
+                    <div
+                      className="shadow-sm p-2 mb-4 rounded-lg"
+                      style={{
+                        height: "300px",
+                        width: "1010px",
+                        border: "1px solid black",
+                        borderRadius: "2%",
+                      }}
+                    >
+                      <h3
+                        style={{
+                          position: "relative",
+                          top: "35%",
+                          textAlign: "center",
+                        }}
+                      >
+                        {t("product.products Details.limitation2")}
+                      </h3>
+                    </div>
+                  )}
                 </TabContainer>
               )}
             </div>

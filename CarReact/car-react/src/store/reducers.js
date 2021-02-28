@@ -30,6 +30,7 @@ export default (
     token: "",
     userBlogs: [],
     isUserLoggedIn: false,
+    UserBookAndFavo: [],
     //vendor------------------
     vendor: [],
     isVendorLoggedIn: false,
@@ -39,7 +40,7 @@ export default (
     vendorSignIn: {},
     vendorSignUp: {},
     //-------------------MISC-------------
-    classNAME:"profileright2"
+    classNAME: "profileright2",
   },
   action
 ) => {
@@ -164,6 +165,12 @@ export default (
       return {
         ...state,
         isUserLoggedIn: action.payload,
+      };
+
+    case TYPES.GET_USER_DATA:
+      return {
+        ...state,
+        UserBookAndFavo: action.payload,
       };
     //---------------Vendor------------
     case TYPES.GET_VENDOR:

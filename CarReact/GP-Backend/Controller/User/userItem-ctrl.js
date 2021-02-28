@@ -63,13 +63,72 @@ showDetailsItem = async (req, res) => {
         { $match: { car: data._id } },
         { $group: { _id: null, avgRate: { $avg: "$rating" } } },
       ]).then("done");
-      //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
+
+      const related = await showRelatedItems(
+        req.body.title,
+        req.body.brand,
+        req.body.model
+      );
+
       return res.json({
         Data: data,
         stars,
+        related,
         Message: "Details product",
         Success: true,
       });
+    });
+};
+
+showRelatedItems = (search, brand, model) => {
+  const criteriaSearch = { $regex: search, $options: "i" };
+  const queryCond = {};
+
+  if (search) {
+    queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }];
+  }
+
+  if (brand) {
+    queryCond.carBrand = brand;
+  }
+  if (model) {
+    queryCond.carModel = model;
+  }
+
+  const populateQuery = [
+    { path: "person", select: "firstName workshopName" },
+    { path: "feedback" },
+  ];
+
+  carItem
+    .find(queryCond, { __v: 0 })
+    .sort({ _id: -1 })
+    .populate(populateQuery)
+    .skip(0)
+    .limit(4)
+    .exec(async (error, data) => {
+      if (error || data.length == 0) {
+        return res.json({
+          Data: error,
+          Message: "no products found",
+          Success: false,
+        });
+      }
+
+      const stars = await Feedback.aggregate([
+        { $group: { _id: "$car", avgRate: { $avg: "$rating" } } },
+      ]).then("done");
+
+      for await (const AvgStar of stars) {
+        data.map((dataCar, index) => {
+          if (String(dataCar._id) === String(AvgStar._id)) {
+            console.log(dataCar._id, AvgStar._id);
+            data[index].avgRate = AvgStar.avgRate;
+          }
+        });
+      }
+
+      return data;
     });
 };
 
@@ -127,12 +186,12 @@ showFilterItems = (req, res) => {
       ]).then("done");
 
       for await (const AvgStar of stars) {
-        data.map((dataCar,index) => {
-          if (String(dataCar._id) === String(AvgStar._id)){
-            console.log(dataCar._id,AvgStar._id)
-            data[index].avgRate = AvgStar.avgRate
+        data.map((dataCar, index) => {
+          if (String(dataCar._id) === String(AvgStar._id)) {
+            console.log(dataCar._id, AvgStar._id);
+            data[index].avgRate = AvgStar.avgRate;
           }
-        })
+        });
       }
 
       return res.json({

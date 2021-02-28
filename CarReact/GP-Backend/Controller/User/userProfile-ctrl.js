@@ -251,7 +251,6 @@ addFavouriteItems = async (req, res) => {
     favouriteItems: { $in: req.body.id },
     person: req.user._id,
   });
-  console.log(ItemAddToFavourite);
   if (ItemAddToFavourite.length !== 0) {
     return res.json({
       Data: null,
@@ -326,6 +325,27 @@ removeFavouriteItems = (req, res) => {
   );
 };
 
+showUserDetails = (req, res) => {
+  const IdPerson = req.params.id;
+  user
+    .findOne({ person: IdPerson }, { bookmarkPosts: 1, favouriteItems: 1 })
+    .exec((err, data) => {
+      if (err) {
+        return res.json({
+          Data: err,
+          Message: "can't get data",
+          Success: false,
+        });
+      } else {
+        return res.json({
+          Data: data,
+          Message: ":D :D",
+          Success: true,
+        });
+      }
+    });
+};
+
 module.exports = {
   showUserProfile,
   updateUserProfile,
@@ -335,4 +355,5 @@ module.exports = {
   removeBookmarkPosts,
   addFavouriteItems,
   removeFavouriteItems,
+  showUserDetails,
 };
