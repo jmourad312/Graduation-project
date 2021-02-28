@@ -63,36 +63,29 @@ showDetailsItem = async (req, res) => {
         { $match: { car: data._id } },
         { $group: { _id: null, avgRate: { $avg: "$rating" } } },
       ]).then("done");
-
-      const related = await showRelatedItems(
-        req.body.title,
-        req.body.brand,
-        req.body.model
-      );
-
+      //const feedback = await Feedback.find({ _id: { $in: data.feedback } }, { __v: 0, car: 0 }).populate({ path: "user", select: "firstName" })
       return res.json({
         Data: data,
         stars,
-        related,
         Message: "Details product",
         Success: true,
       });
     });
 };
 
-showRelatedItems = (search, brand, model) => {
-  const criteriaSearch = { $regex: search, $options: "i" };
+showRelatedItems = (req, res) => {
+  const criteriaSearch = { $regex: req.body.name, $options: "i" };
   const queryCond = {};
 
-  if (search) {
+  if (req.body.search) {
     queryCond.$or = [{ name: criteriaSearch }, { description: criteriaSearch }];
   }
 
-  if (brand) {
-    queryCond.carBrand = brand;
+  if (req.body.brand) {
+    queryCond.carBrand = req.body.brand;
   }
-  if (model) {
-    queryCond.carModel = model;
+  if (req.body.model) {
+    queryCond.carModel = req.body.model;
   }
 
   const populateQuery = [
@@ -128,7 +121,10 @@ showRelatedItems = (search, brand, model) => {
         });
       }
 
-      return data;
+      return res.json({
+        Data: data,
+        Success: true,
+      });
     });
 };
 
@@ -237,5 +233,6 @@ module.exports = {
   partOfItem,
   showFilterItems,
   showDetailsItem,
+  showRelatedItems,
   showVendorProfile,
 };

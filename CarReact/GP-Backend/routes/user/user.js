@@ -212,6 +212,13 @@ router.get(
 );
 
 router.post(
+  "/showRelatedItems",
+  passport.authenticate("jwt", { session: false }),
+  canViewall,
+  userItemCtrl.showRelatedItems
+);
+
+router.post(
   "/showFilterItems/:skip",
   passport.authenticate("jwt", { session: false }),
   canViewall,
