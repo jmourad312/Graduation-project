@@ -217,43 +217,43 @@ export default function ProductDetails(props) {
               >
                 {productDetails ? (
                   productDetails.images &&
-                  (productDetails.images.length === 1 ||
-                    productDetails.images.length === 0) ? (
-                    <img
-                      className=""
-                      style={{
-                        width: "350px",
-                        height: "250px",
-                        // maxHeight:"350px"
-                        // borderRadius: "10%",
-                      }}
-                      src={productDetails.images[0]}
-                      alt=""
-                    />
-                  ) : (
-                    productDetails.images && (
-                      <div>
-                        <Carousel interval={1000}>
-                          {productDetails.images.map((img, index) => {
-                            return (
-                              <Carousel.Item>
-                                <img
-                                  key={index}
-                                  className="d-block"
-                                  style={{ height: "300px", width: "350px" }}
-                                  src={img}
-                                  alt="Slide"
-                                />
-                              </Carousel.Item>
-                            );
-                          })}
-                        </Carousel>
-                      </div>
+                    (productDetails.images.length === 1 ||
+                      productDetails.images.length === 0) ? (
+                      <img
+                        className=""
+                        style={{
+                          width: "350px",
+                          height: "250px",
+                          // maxHeight:"350px"
+                          // borderRadius: "10%",
+                        }}
+                        src={productDetails.images[0]}
+                        alt=""
+                      />
+                    ) : (
+                      productDetails.images && (
+                        <div>
+                          <Carousel interval={1000}>
+                            {productDetails.images.map((img, index) => {
+                              return (
+                                <Carousel.Item>
+                                  <img
+                                    key={index}
+                                    className="d-block"
+                                    style={{ height: "300px", width: "350px" }}
+                                    src={img}
+                                    alt="Slide"
+                                  />
+                                </Carousel.Item>
+                              );
+                            })}
+                          </Carousel>
+                        </div>
+                      )
                     )
-                  )
                 ) : (
-                  <Loading />
-                )}
+                    <Loading />
+                  )}
                 {/* <img
                   src={productDetails && productDetails.image}
                   // width="100%"
@@ -289,13 +289,12 @@ export default function ProductDetails(props) {
                           color: "rgb(21, 34, 214)",
                           // textDecoration: "underline ",
                         }}
-                        to={`/VendorProfileUser/${
-                          productDetails
+                        to={`/VendorProfileUser/${productDetails
                             ? productDetails.person
                               ? productDetails.person._id
                               : null
                             : null
-                        }`}
+                          }`}
                       >
                         {productDetails
                           ? productDetails.person
@@ -325,10 +324,10 @@ export default function ProductDetails(props) {
                         />
                       </>
                     ) : (
-                      <span style={{ fontWeight: "700", fontSize: "20px" }}>
-                        {t("product.products Details.Not Rated")}
-                      </span>
-                    )}
+                        <span style={{ fontWeight: "700", fontSize: "20px" }}>
+                          {t("product.products Details.Not Rated")}
+                        </span>
+                      )}
                   </div>
                   {/* ----------------------------------------PRODUCT INFO RIGHT--------------------- */}
                   <div className="col-6">
@@ -401,20 +400,23 @@ export default function ProductDetails(props) {
               classes={{ indicator: classes.indicator, text: classes.text }}
               variant="fullWidth"
               indicatorColor="primary"
-              textColor="secondary"
               aria-label="icon label tabs example"
             >
               <Tab
-                icon={<InfoTwoToneIcon />}
+               
+              icon={<InfoTwoToneIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Description")}
+                style={{ fontSize: "25px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<CommentIcon />}
+                icon={<CommentIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Reviews")}
+                style={{ fontSize: "30px", fontWeight: "600", color: "black" }}
               />
               <Tab
-                icon={<RoomIcon />}
+                icon={<RoomIcon style={{ fontSize: "50px",paddingLeft:"5px" }} />}
                 label={t("product.products Details.Location")}
+                style={{ fontSize: "30px", fontWeight: "600", color: "black" }}
               />
             </Tabs>
             <div className="p-5">
@@ -445,33 +447,33 @@ export default function ProductDetails(props) {
                           <Review />
                         </>
                       ) : (
-                        <div
-                          style={{
-                            height: "600px",
-                            width: "300px",
-                            position: "absolute",
-                            left: "0%",
-                            top: "0%",
-                          }}
-                        >
-                          <h2
+                          <div
                             style={{
-                              position: "relative",
-                              top: "10%",
+                              height: "600px",
+                              width: "300px",
+                              position: "absolute",
                               left: "0%",
-                              textAlign: "center",
-                              border: "1px solid black",
-                              borderRadius: "2%",
-                              paddingTop: "5px",
-                              paddingBottom: "15px",
-                              paddingLeft: "3px",
-                              paddingRight: "3px",
+                              top: "0%",
                             }}
                           >
-                            {t("product.products Details.limitation1")}
-                          </h2>
-                        </div>
-                      )}
+                            <h2
+                              style={{
+                                position: "relative",
+                                top: "10%",
+                                left: "0%",
+                                textAlign: "center",
+                                border: "1px solid black",
+                                borderRadius: "2%",
+                                paddingTop: "5px",
+                                paddingBottom: "15px",
+                                paddingLeft: "3px",
+                                paddingRight: "3px",
+                              }}
+                            >
+                              {t("product.products Details.limitation1")}
+                            </h2>
+                          </div>
+                        )}
                     </div>
                     <div className="col-8">
                       <div className="text-center">
@@ -484,17 +486,17 @@ export default function ProductDetails(props) {
                               {t("product.products Details.rate")}
                             </div>
                           ) : (
-                            <div
-                              className="text-center"
-                              style={{
-                                maxHeight: "400px",
-                                overflowX: "hidden",
-                                overflowY: "scroll",
-                              }}
-                            >
-                              {productDetails
-                                ? productDetails.feedback
-                                  ? productDetails.feedback.map((item) => {
+                              <div
+                                className="text-center"
+                                style={{
+                                  maxHeight: "400px",
+                                  overflowX: "hidden",
+                                  overflowY: "scroll",
+                                }}
+                              >
+                                {productDetails
+                                  ? productDetails.feedback
+                                    ? productDetails.feedback.map((item) => {
                                       let postTime = item.createdAt.split("T");
                                       return (
                                         <>
@@ -545,13 +547,13 @@ export default function ProductDetails(props) {
                                         </>
                                       );
                                     })
-                                  : "loading"
-                                : "loading"}
-                            </div>
-                          )
+                                    : "loading"
+                                  : "loading"}
+                              </div>
+                            )
                         ) : (
-                          "Loading"
-                        )}
+                            "Loading"
+                          )}
                       </div>
                     </div>
                   </div>
@@ -594,26 +596,26 @@ export default function ProductDetails(props) {
                       </div>
                     </div>
                   ) : (
-                    <div
-                      className="shadow-sm p-2 mb-4 rounded-lg"
-                      style={{
-                        height: "300px",
-                        width: "1010px",
-                        border: "1px solid black",
-                        borderRadius: "2%",
-                      }}
-                    >
-                      <h3
+                      <div
+                        className="shadow-sm p-2 mb-4 rounded-lg"
                         style={{
-                          position: "relative",
-                          top: "35%",
-                          textAlign: "center",
+                          height: "300px",
+                          width: "1010px",
+                          border: "1px solid black",
+                          borderRadius: "2%",
                         }}
                       >
-                        {t("product.products Details.limitation2")}
-                      </h3>
-                    </div>
-                  )}
+                        <h3
+                          style={{
+                            position: "relative",
+                            top: "35%",
+                            textAlign: "center",
+                          }}
+                        >
+                          {t("product.products Details.limitation2")}
+                        </h3>
+                      </div>
+                    )}
                 </TabContainer>
               )}
             </div>
