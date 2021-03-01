@@ -391,7 +391,7 @@ export default function Homepage2() {
             </div>
             <div className="slider__images-item" data-id="3">
               <img
-                src="https://image.freepik.com/free-vector/car-led-lights-realistic-composition-with-view-night-road-silhouettes-automobile-traffic-lights-illustration_1284-28531.jpg"
+                src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/cq8l59W/videoblocks-v8-motor-with-working-pistons-and-crankshafts-concept-of-automobile-engine_rdb6fr01sx_thumbnail-1080_01.png"
                 alt=""
               />
             </div>
