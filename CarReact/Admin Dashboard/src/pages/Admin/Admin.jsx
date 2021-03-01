@@ -514,11 +514,13 @@ export default function Admin(props) {
                   handelClickEdit={goToEditUser}
                   handelClickDelete={goToDeleteUser}
                 ></Tabel>
-                <PaginationReact
-                  NumberOfItemsInDB={stateRedux.users.count.length}
-                  NumberToShow={numberItemPerPage}
-                  handelClick={getPartUser}
-                />
+                {stateRedux.users.count.length > 5 && (
+                  <PaginationReact
+                    NumberOfItemsInDB={stateRedux.users.count.length}
+                    NumberToShow={numberItemPerPage}
+                    handelClick={getPartUser}
+                  />
+                )}
                 <hr style={{ border: "1px solid" }} />
               </>
             )}
@@ -555,11 +557,13 @@ export default function Admin(props) {
                   handelClickDelete={goToDeleteVendor}
                 ></Tabel>
 
-                <PaginationReact
-                  NumberOfItemsInDB={stateRedux.vendors.count.length}
-                  NumberToShow={numberItemPerPage}
-                  handelClick={getPartVendor}
-                />
+                {stateRedux.vendors.count.length > 5 && (
+                  <PaginationReact
+                    NumberOfItemsInDB={stateRedux.vendors.count.length}
+                    NumberToShow={numberItemPerPage}
+                    handelClick={getPartVendor}
+                  />
+                )}
                 <hr style={{ border: "1px solid" }} />
               </>
             )}
@@ -648,11 +652,13 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <PaginationReact
-                    NumberOfItemsInDB={stateRedux.nblog.count.length}
-                    NumberToShow={numberItemPerPage}
-                    handelClick={getPartBlog}
-                  />
+                  {stateRedux.users.count.length > 5 && (
+                    <PaginationReact
+                      NumberOfItemsInDB={stateRedux.nblog.count.length}
+                      NumberToShow={numberItemPerPage}
+                      handelClick={getPartBlog}
+                    />
+                  )}
                   <hr style={{ border: "1px solid" }} />
                 </div>
               </div>
@@ -732,11 +738,13 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <PaginationReact
-                    NumberOfItemsInDB={stateRedux.nproduct.count.length}
-                    NumberToShow={numberItemPerPage}
-                    handelClick={getPartProduct}
-                  />
+                  {stateRedux.vendors.count.length > 5 && (
+                    <PaginationReact
+                      NumberOfItemsInDB={stateRedux.nproduct.count.length}
+                      NumberToShow={numberItemPerPage}
+                      handelClick={getPartProduct}
+                    />
+                  )}
                   <hr style={{ border: "1px solid" }} />
                 </div>
               </div>
@@ -786,11 +794,13 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <PaginationReact
-                    NumberOfItemsInDB={stateRedux.contacts.count}
-                    NumberToShow={numberItemPerPage}
-                    handelClick={getPartContant}
-                  />
+                  {stateRedux.contacts.count > 5 && (
+                    <PaginationReact
+                      NumberOfItemsInDB={stateRedux.contacts.count}
+                      NumberToShow={numberItemPerPage}
+                      handelClick={getPartContant}
+                    />
+                  )}
                 </div>
               </div>
             )}
@@ -869,11 +879,13 @@ export default function Admin(props) {
                       </table>
                     </div>
                   </div>
-                  <PaginationReact
-                    NumberOfItemsInDB={stateRedux.ads.count}
-                    NumberToShow={numberItemPerPage}
-                    handelClick={getPartAds}
-                  />
+                  {stateRedux.ads.count > 5 && (
+                    <PaginationReact
+                      NumberOfItemsInDB={stateRedux.ads.count}
+                      NumberToShow={numberItemPerPage}
+                      handelClick={getPartAds}
+                    />
+                  )}
                 </div>
               </div>
             )}
