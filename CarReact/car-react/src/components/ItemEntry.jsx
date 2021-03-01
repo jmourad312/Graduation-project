@@ -176,7 +176,7 @@ export default function ItemEntry(props) {
               {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}
               <small>
-                <i className="badge badge-dark">{props.carBrand}</i>
+                <i className="badge badge-dark mr-1">{props.carBrand}</i>
                 <i className="badge badge-dark">{props.carModel}</i>
               </small>
             </div>
