@@ -1,9 +1,7 @@
 .magdyNav {
   
   @import url("https://fonts.googleapis.com/css?family=Alata&display=swap");
-  * {
-    box-sizing: border-box;
-  }
+
   :root {
     --speed: 0.85;
     --primary: #fff;
@@ -98,7 +96,7 @@
     margin: 0;
     display: block;
     list-style-type: none;
-    z-index: -1;
+    // z-index: -1;
     filter: url("#goo");
     position: absolute;
     top: 0;
