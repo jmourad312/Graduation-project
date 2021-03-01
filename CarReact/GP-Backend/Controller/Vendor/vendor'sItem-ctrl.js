@@ -1,9 +1,8 @@
 const carItem = require("../../models/CarDetails/sparePartCar");
-const vendor = require('../../models/Person/Vendor/vendor')
+const vendor = require("../../models/Person/Vendor/vendor");
 
 //create new Item
 addItem = (req, res) => {
-
   console.log(req.body);
 
   const body = JSON.parse(JSON.stringify(req.body));
@@ -17,7 +16,7 @@ addItem = (req, res) => {
   }
 
   const IdVendor = req.user._id;
-  console.log("adddittem")
+  console.log("adddittem");
   if (!body) {
     return res.json({
       Data: null,
@@ -26,7 +25,7 @@ addItem = (req, res) => {
     });
   }
 
-  const car = new carItem({...body,images});
+  const car = new carItem({ ...body, images });
   car.person = IdVendor;
 
   if (!car) {
@@ -40,11 +39,16 @@ addItem = (req, res) => {
   car
     .save()
     .then((data) => {
+      vendor
+        .updateOne(
+          { person: req.user._id },
+          {
+            $push: { vendorItems: data._id },
+          }
+        )
+        .then("Done")
+        .catch("error");
 
-      vendor.updateOne({person:req.user._id},{
-        $push:{vendorItems:data._id}
-      }).then("Done").catch("error")
-      
       return res.status(200).json({
         Data: car._id,
         Message: "New car item is created",
@@ -66,12 +70,11 @@ getItems = async (req, res) => {
 
   const criteriaSearch = { $regex: req.body.search, $options: "i" };
   const queryCond = {};
- ///////      0
-  if (req.body.priceMoreThan) {
-    console.log(req.body.priceMoreThan);
+
+  if (req.body.price) {
     queryCond.$and = [
-      { price: { $gte: +req.body.priceLessThan } },
-      { price: { $lte: +req.body.priceMoreThan } },
+      { price: { $gte: req.body.price[0] } },
+      { price: { $lte: req.body.price[1] } },
     ];
   }
 
@@ -88,8 +91,10 @@ getItems = async (req, res) => {
 
   console.log(queryCond);
 
-   carItem
-    .find({ person: IdVendor,...queryCond }).sort({ _id: -1 }).exec( async (error, items) => {
+  carItem
+    .find({ person: IdVendor, ...queryCond })
+    .sort({ _id: -1 })
+    .exec(async (error, items) => {
       if (error || items.length == 0) {
         return res.json({
           Data: error,
@@ -97,16 +102,18 @@ getItems = async (req, res) => {
           Success: false,
         });
       }
-      console.log(items)
-      const TotalItem = await carItem.countDocuments({ person: IdVendor,...queryCond }).then("Done").catch("Error")
+      console.log(items);
+      const TotalItem = await carItem
+        .countDocuments({ person: IdVendor, ...queryCond })
+        .then("Done")
+        .catch("Error");
       return res.json({
         Data: items,
-        TotalItem:TotalItem,
-        Message: "number of items:"+items.length,
+        TotalItem: TotalItem,
+        Message: "number of items:" + items.length,
         Success: true,
       });
-    })
-
+    });
 };
 
 //get One Item
@@ -146,12 +153,11 @@ getOneItem = async (req, res) => {
 };
 
 updateItem = (req, res) => {
-
   let IdVendor = req.user._id;
 
-  if(req.params.idperson){
+  if (req.params.idperson) {
     IdVendor = req.params.idperson;
- }
+  }
 
   const body = JSON.parse(JSON.stringify(req.body));
   const images = [];
@@ -165,117 +171,139 @@ updateItem = (req, res) => {
 
   Object.keys(body).forEach((k) => body[k].length == 0 && delete body[k]);
 
-  carItem.updateOne({ _id: req.params.id, person: IdVendor },
-    {...body}, { upsert: true, new: true }, (err, result) => {
+  carItem.updateOne(
+    { _id: req.params.id, person: IdVendor },
+    { ...body },
+    { upsert: true, new: true },
+    (err, result) => {
       if (err) {
         return res.status(400).json({
           Data: null,
           Message: "You can't update an item ",
           Success: false,
         });
-      } return res.status(200).json({
+      }
+      return res.status(200).json({
         Data: result,
         Message: "You can update an item ",
         Success: true,
       });
-    });
+    }
+  );
 };
 
 deleteItem = (req, res) => {
   let IdVendor = req.user._id;
 
-  if(req.params.idperson){
+  if (req.params.idperson) {
     IdVendor = req.params.idperson;
- }
+  }
 
- console.log(req.params)
+  console.log(req.params);
 
-  carItem.deleteOne({ _id: req.params.id, person: IdVendor }, async (err, data) => {
-    if (err) {
-     return res.json({
-        "Data": err,
-        "Message": "Can't delete item from database",
-        "Success": false
-      })
-    }
-       if (data.n == 0) {
+  carItem.deleteOne(
+    { _id: req.params.id, person: IdVendor },
+    async (err, data) => {
+      if (err) {
         return res.json({
-          "Data": {},
-          "Message": "Data with that id: " + req.params.id + " don't exist",
-          "Success": false
-        })
+          Data: err,
+          Message: "Can't delete item from database",
+          Success: false,
+        });
+      }
+      if (data.n == 0) {
+        return res.json({
+          Data: {},
+          Message: "Data with that id: " + req.params.id + " don't exist",
+          Success: false,
+        });
       }
 
-     await vendor.updateOne({person:IdVendor},{
-        $pull:{vendorItems:req.params.id}
-      }).then("Done").catch("error")
+      await vendor
+        .updateOne(
+          { person: IdVendor },
+          {
+            $pull: { vendorItems: req.params.id },
+          }
+        )
+        .then("Done")
+        .catch("error");
 
-       return res.json({
-          "Data": {},
-          "Message": "Done delete",
-          "Success": true
-        })
-  })
-}
+      return res.json({
+        Data: {},
+        Message: "Done delete",
+        Success: true,
+      });
+    }
+  );
+};
 
 //get number of product
 numberOfItem = (req, res) => {
   carItem.estimatedDocumentCount({}, function (err, count) {
     if (err) {
       res.json({
-        "Data": [],
-        "Message": "Can't get number of product from database,  " + err,
-        "Success": false
-      })
-    }
-    else {
+        Data: [],
+        Message: "Can't get number of product from database,  " + err,
+        Success: false,
+      });
+    } else {
       if (count.length == 0) {
         res.json({
-          "Data": {},
-          "Message": "No Data found in DB",
-          "Success": false
-        })
-      }
-      else {
+          Data: {},
+          Message: "No Data found in DB",
+          Success: false,
+        });
+      } else {
         res.json({
-          "Data": count,
-          "Message": "Number of all Product:" + count,
-          "Success": true
-        })
+          Data: count,
+          Message: "Number of all Product:" + count,
+          Success: true,
+        });
       }
     }
   });
-}
-
-// get part of product 
-partOfItem = (req, res) => {
-  const IdVendor = req.user._id;
-  carItem.find({ person: IdVendor }, { __v: 0 }).sort({ _id: -1 }).skip(+req.params.skip).limit(10).exec((err, data) => {
-    if (err) {
-      res.json({
-        "Data": {},
-        "Message": "Can't get product from database,  " + err,
-        "Success": false
-      })
-    }
-    else {
-      if (data.length == 0) {
-        res.json({
-          "Data": {},
-          "Message": "No Data found in DB",
-          "Success": false
-        })
-      }
-      else {
-        res.json({
-          "Data": data,
-          "Message": "Number of all Product:",
-          "Success": true
-        })
-      }
-    }
-  })
 };
 
+// get part of product
+partOfItem = (req, res) => {
+  const IdVendor = req.user._id;
+  carItem
+    .find({ person: IdVendor }, { __v: 0 })
+    .sort({ _id: -1 })
+    .skip(+req.params.skip)
+    .limit(10)
+    .exec((err, data) => {
+      if (err) {
+        res.json({
+          Data: {},
+          Message: "Can't get product from database,  " + err,
+          Success: false,
+        });
+      } else {
+        if (data.length == 0) {
+          res.json({
+            Data: {},
+            Message: "No Data found in DB",
+            Success: false,
+          });
+        } else {
+          res.json({
+            Data: data,
+            Message: "Number of all Product:",
+            Success: true,
+          });
+        }
+      }
+    });
+};
 
-module.exports = { addItem, getItems, getOneItem, updateItem, deleteItem, numberOfItem, partOfItem };
+module.exports = {
+  addItem,
+  getItems,
+  getOneItem,
+  updateItem,
+  deleteItem,
+  numberOfItem,
+  partOfItem,
+};
