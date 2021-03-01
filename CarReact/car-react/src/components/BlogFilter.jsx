@@ -373,8 +373,7 @@ export default function BlogFilter(props) {
             style={{
               fontSize: "1.7rem",
               fontWeight: "700",
-              color: "black",
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
+              backgroundColor: "rgba(128, 128, 128, 0.397)",
               borderRadius: "25px",
               border: "3px solid gray",
               paddingTop: "10px",

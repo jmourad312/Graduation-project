@@ -17,7 +17,7 @@ export default function ContactUsPic({name,prof,bkImage,prImage}) {
               <div className="front__text">
                 <h3 className="front__text-header">{name}</h3>
                 <p className="front__text-para">{prof}</p>
-                <span className="front__text-hover">Hover to Find Me</span>
+                <span className="front__text-hover" style={{fontSize:"15px"}}>Hover to Find Me</span>
               </div>
             </div>
             <div className="back">
