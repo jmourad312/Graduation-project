@@ -186,8 +186,8 @@ export default function MyItems(props) {
                   fontWeight: "700",
                   fontSize: "30px",
                   position: "absolute",
-                  left: "50%",
-                  top: "30%",
+                  left: "35%",
+                  top: "40%",
                   color:"black"
                 }}
               >
