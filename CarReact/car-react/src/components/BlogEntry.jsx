@@ -12,7 +12,9 @@ export default function BlogEntry(props) {
   const handleClick = (params) => {
     dispatch(setBlogId(params));
     history.push(`/BlogDetails/${props.id}`);
-    localStorage.setItem("BlogID",params)
+    localStorage.setItem("BlogID",params);
+    localStorage.setItem("TEST", 0);
+
   }
 
   if (props.date) {
