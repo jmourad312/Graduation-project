@@ -138,8 +138,8 @@ export default function BookmarkedPosts(props) {
                             >
                               {post.title}
                             </h2>
-                            <strong style={{}}>
-                              <i> Posted on </i>
+                            <strong >
+                              <i> {t("repeated.Date")} </i>
                               {time[0]}
                             </strong>
                             <h4
@@ -175,8 +175,8 @@ export default function BookmarkedPosts(props) {
                             </strong>
                             <div
                                 style={{
-                                  top: "20px",
-                                  left: "425px",
+                                  top: "15px",
+                                  left: "370px",
                                   position: "absolute",
                                 }}
                               >
@@ -186,7 +186,7 @@ export default function BookmarkedPosts(props) {
                               </div>
                             <div
                                 style={{
-                                  top: "120px",
+                                  top: "15px",
                                   left: "425px",
                                   position: "absolute",
                                 }}
