@@ -175,7 +175,7 @@ export default function BookmarkedPosts(props) {
                             </strong>
                             <div
                                 style={{
-                                  top: "15px",
+                                  top: "70%",
                                   left: "370px",
                                   position: "absolute",
                                 }}
@@ -186,7 +186,7 @@ export default function BookmarkedPosts(props) {
                               </div>
                             <div
                                 style={{
-                                  top: "15px",
+                                  top: "70%",
                                   left: "425px",
                                   position: "absolute",
                                 }}
