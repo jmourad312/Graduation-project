@@ -74,12 +74,11 @@ showDetailsItem = async (req, res) => {
 };
 
 showRelatedItems = (req, res) => {
-  console.log(req);
+  console.log(req.body);
   const criteriaSearch = { $regex: req.body.name, $options: "i" };
   const queryCond = {};
 
   if (req.body.name || req.body.brand || req.body.model) {
-    queryCond.carBrand = req.body.brand;
     queryCond.$or = [
       { name: criteriaSearch },
       { description: criteriaSearch },
