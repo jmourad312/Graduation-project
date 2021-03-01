@@ -32,6 +32,8 @@ function App() {
             link="http://go.thoughtleaders.io/SenchaCodrops141117"
             imgSrc={image1}
             hoverImgSrc={image2}
+            imgAlt="ads logo"
+            hoverImgAlt="ads description"
           />
         </div>
       </Router>

@@ -998,7 +998,7 @@ export default function BlogDetails(props) {
                           <hr />
                           <p
                             className="truncate"
-                            style={{ fontSize: "1.5rem", maxWidth: "500px" }}
+                            style={{ fontSize: "1.5rem", maxWidth: "600px" }}
                           >
                             {item.content}
                           </p>
