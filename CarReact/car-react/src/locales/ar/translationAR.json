@@ -37,7 +37,9 @@
         "Facebook": "فيسبوك",
         "Youtube": "يوتيوب",
         "CallUs": "إتصل بنا",
-        "OurEmail": "بريدنا الإلكتروني"
+        "OurEmail": "بريدنا الإلكتروني",
+        "ThankForMessage":"شكراً علي رسالتك \n سنتواصل معك في أقرب وقت",
+        "SorryErrorOccured":"عذراً حدث خطأ ما، برجاء المحاولة في وقت لاحق"
     },
     "Navbar": {
         "product list": "المنتجات",

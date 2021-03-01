@@ -217,8 +217,8 @@ export default function ProductDetails(props) {
           <div
             style={{
               position: "absolute",
-              top: "200px",
-              left: "1700px",
+              top: "4.5%",
+              left: "24%",
               width: "300px",
             }}
           >

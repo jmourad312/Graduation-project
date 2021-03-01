@@ -464,8 +464,8 @@ export default function BlogDetails(props) {
       <div
         style={{
           position: "absolute",
-          top: "350px",
-          right: "-500px",
+          top: "18%",
+          left: "75%",
           width: "350px",
         }}
       >

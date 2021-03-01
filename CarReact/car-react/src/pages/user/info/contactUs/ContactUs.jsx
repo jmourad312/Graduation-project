@@ -50,12 +50,12 @@ export default function ContactUs() {
       .then((req) => {
         if (req.data.Success === true) {
           setToastMessage(
-            "Thank you for your message,\nWe will contact you as soon as possible"
+            t("Contact Us.ThankForMessage")
           );
           toggleStatus();
         } else {
           setToastMessage(
-            "Sorry an error occured, please try again later"
+            t("Contact Us.SorryErrorOccured")
           );
           toggleStatus();
         }
@@ -79,8 +79,8 @@ export default function ContactUs() {
       <div
         style={{
           position: "absolute",
-          top: "45%",
-          right: "29%",
+          top: "80%",
+          right: "42.5%",
           height: "100px",
           width: "300px",
         }}

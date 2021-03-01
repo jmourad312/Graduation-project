@@ -34,7 +34,9 @@
         "Facebook": "Facebook",
         "Youtube": "Youtube",
         "CallUs": "Call Us",
-        "OurEmail": "Email"
+        "OurEmail": "Email",
+        "ThankForMessage":"Thank you for your message,\nWe will contact you as soon as possible",
+        "SorryErrorOccured":"Sorry an error occured, please try again later"
     },
     "Navbar": {
         "product list": "Products List",
