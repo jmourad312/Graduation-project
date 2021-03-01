@@ -3,7 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Slider from "react-slick";
-import { setProductId } from '../store/actions';
+import { getRelatedProducts, setProductId } from '../store/actions';
 import { useTranslation } from "react-i18next";
 
 
@@ -35,8 +35,9 @@ export default function SlickSlider(props) {
   const dispatch = useDispatch();
   var history = useHistory();
 
-  const handleClick = (params) => {
+  const handleClick = (params, name, brand, model) => {
     dispatch(setProductId(params));
+    dispatch(getRelatedProducts(params, name, brand, model));
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
     axios
@@ -47,9 +48,7 @@ export default function SlickSlider(props) {
           headers: { Authorization: localStorage.getItem("Authorization") },
         }
       )
-      .then((req) => {
-        
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -75,11 +74,21 @@ export default function SlickSlider(props) {
         {props.items.map((item, index) => {
           return (
             <div className="SliderStyle">
-              <div className="productList" style={{paddingLeft:"50px",paddingTop:"20px"}}>
+              <div
+                className="productList"
+                style={{ paddingLeft: "50px", paddingTop: "20px" }}
+              >
                 <section className="cards">
                   <article
                     className="card card--1"
-                    onClick={() => handleClick(item._id)}
+                    onClick={() =>
+                      handleClick(
+                        item._id,
+                        item.name,
+                        item.carBrand,
+                        item.carMode
+                      )
+                    }
                   >
                     <div
                       className="card__img"
@@ -105,7 +114,8 @@ export default function SlickSlider(props) {
                       </span>{" "}
                       <p className="text-truncate">{item.description}</p>
                       <strong>
-                        <i className="badge badge-dark">{item.carBrand}</i>{"  "}
+                        <i className="badge badge-dark">{item.carBrand}</i>
+                        {"  "}
                         <i className="badge badge-dark">{item.carModel}</i>
                       </strong>
                     </div>

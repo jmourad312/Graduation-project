@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Loading from "../../../../../components/Loading";
 import { PaginationReact } from "../../../../../components/PaginationReact";
-import { getUsersAction, setProductId } from "../../../../../store/actions";
+import { getRelatedProducts, getUsersAction, setProductId } from "../../../../../store/actions";
 // import Review from '../../../../../components/Review';
 import { useTranslation } from "react-i18next";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,8 +27,9 @@ export default function FavouriteItems(props) {
 
   const handleClick = (pageNumber) => setCurrentPage(pageNumber.selected + 1);
 
-  const handleItemClick = (params) => {
+  const handleItemClick = (params, name, brand, model) => {
     dispatch(setProductId(params));
+    dispatch(getRelatedProducts(params, name, brand, model));
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
   };
@@ -120,12 +121,12 @@ export default function FavouriteItems(props) {
                         <article class="card card--1">
                           <div
                             class="card__img"
-                            style={{ background: `url(${item.image})` }}
+                            style={{ background: `url(${item.images[0]})` }}
                           ></div>
                           <p class="card_link">
                             <div
                               class="card__img--hover"
-                              style={{ background: `url(${item.image})` }}
+                              style={{ background: `url(${item.images[0]})` }}
                             ></div>
                           </p>
                           <div class="card__info">
@@ -139,7 +140,8 @@ export default function FavouriteItems(props) {
                               className="card-text"
                               style={{ color: "#e6ac00" }}
                             >
-                              <i class="fas fa-coins"></i> {item.price} {t("repeated.LE")}
+                              <i class="fas fa-coins"></i> {item.price}{" "}
+                              {t("repeated.LE")}
                             </h5>
                             {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}
@@ -155,7 +157,14 @@ export default function FavouriteItems(props) {
                           <button
                             className="btn btn-dark"
                             style={{ fontSize: "1.5rem" }}
-                            onClick={() => handleItemClick(item._id)}
+                            onClick={() =>
+                              handleItemClick(
+                                item._id,
+                                item.name,
+                                item.carBrand,
+                                item.carModel
+                              )
+                            }
                           >
                             {t("repeated.GotoProductDetails")}
                           </button>

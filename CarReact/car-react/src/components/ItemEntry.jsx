@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getProductDetails, setProductId,  filterCarModel,filterCarBrand, getVendorsItemsAction } from "../store/actions";
+import { getProductDetails, setProductId,  filterCarModel,filterCarBrand, getVendorsItemsAction, getRelatedProducts } from "../store/actions";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import cars2 from "../assets/js/cars2";
 import cars3 from "../assets/js/cars3";
@@ -70,10 +70,12 @@ export default function ItemEntry(props) {
 
   const dispatch = useDispatch();
   let history = useHistory();
-  const handleClick = (params) => {
+
+  const handleClick = (params, name, brand, model) => {
     dispatch(setProductId(params));
     localStorage.setItem("ProductID", params);
-    history.push(`/ProductDetails/${props.id}`);
+    dispatch(getRelatedProducts(params, name, brand, model));
+    history.push(`/ProductDetails/${params}`);
   };
 
   const handleDelete = (params) => {
@@ -129,10 +131,8 @@ export default function ItemEntry(props) {
   }, []);
   const {t, i18n} = useTranslation();
   return (
-    <div className="col-4" style={{marginBottom:"60px"}}>
+    <div className="col-4" style={{ marginBottom: "60px" }}>
       <div className="itemEntry">
-
-
         {/* <div className="card" style={{ width: "150px" }}>
         <img className="card-img-top" src={props.image} alt="Card" style={{ height: "100px", width: "146px" }}/>
         <div className="card-body">
@@ -159,19 +159,26 @@ export default function ItemEntry(props) {
           </Button>
           </div> */}
 
-        <section class="cards" >
-          <article class="card card--1" >
-            <div class="card__img" style={{ background: `url(${props.images[0]})` }} ></div>
+        <section class="cards">
+          <article class="card card--1">
+            <div
+              class="card__img"
+              style={{ background: `url(${props.images[0]})` }}
+            ></div>
             <p class="card_link">
-              <div class="card__img--hover" style={{ background: `url(${props.images[0]})` }} onClick={() => handleClick(props.id)} ></div>
+              <div
+                class="card__img--hover"
+                style={{ background: `url(${props.images[0]})` }}
+                onClick={() =>
+                  handleClick(props.id, props.title, props.brand, props.model)
+                }
+              ></div>
             </p>
             <div class="card__info">
               <h4 class="card__title text-truncate">{props.name}</h4>
-              <h6 className="card-text text-truncate">
-              {props.description}
-              </h6>
+              <h6 className="card-text text-truncate">{props.description}</h6>
               <h5 className="card-text" style={{ color: "#e6ac00" }}>
-                <i class="fas fa-coins"></i> {props.price}{" "}{t("repeated.LE")}
+                <i class="fas fa-coins"></i> {props.price} {t("repeated.LE")}
               </h5>
               {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}
@@ -182,139 +189,169 @@ export default function ItemEntry(props) {
             </div>
             <div className="row">
               <div className="col-6">
-          <button className="btn btn-danger" style={{padding:"2px",width:"90%",height:"40px",marginLeft:"5px",marginBottom:"5px"}} onClick={() => handleDelete(props.id)}>
-            <i class="fas fa-trash-alt"></i>
-          </button>
+                <button
+                  className="btn btn-danger"
+                  style={{
+                    padding: "2px",
+                    width: "90%",
+                    height: "40px",
+                    marginLeft: "5px",
+                    marginBottom: "5px",
+                  }}
+                  onClick={() => handleDelete(props.id)}
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
               </div>
               <div className="col-6">
-          <Button 
-          variant="dark" 
-          style={{padding:"2px",width:"90%",height:"40px",marginLeft:"5px"}} onClick={openModal}>
-            <i class="fas fa-pen"></i>
-          </Button>
-
+                <Button
+                  variant="dark"
+                  style={{
+                    padding: "2px",
+                    width: "90%",
+                    height: "40px",
+                    marginLeft: "5px",
+                  }}
+                  onClick={openModal}
+                >
+                  <i class="fas fa-pen"></i>
+                </Button>
               </div>
-          </div>
+            </div>
           </article>
         </section>
-     
 
-
-
-      <Modal show={isOpen} onHide={!isOpen}>
-        <Modal.Header>
-          <Modal.Title style={{fontWeight:"700",fontSize:"25px"}}>{t("EditProductModal.EditTitle")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ProductName")}</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={t("VendorAddItemModal.ProductNameHolder")}
-                name="name"
-                id="name"
-                value={editValue.name}
-                onChange={handleChange}
-                style={{fontWeight:"500"}}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.EnterImage")}</Form.Label>
-              <Form.Control
-                type="file"
-                name="images"
-                id="image"
-                onChange={handleImageChange}
-                multiple
-                style={{fontWeight:"500"}}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ProductDescription")}</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder={t("VendorAddItemModal.DescriptionHolder")}
-                name="description"
-                id="description"
-                value={editValue.description}
-                onChange={handleChange}
-                style={{fontWeight:"500"}}
-              />
-            </Form.Group>
-            <Form.Row>
-              <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("VendorAddItemModal.ItemPrice")}</Form.Label>
+        <Modal show={isOpen} onHide={!isOpen}>
+          <Modal.Header>
+            <Modal.Title style={{ fontWeight: "700", fontSize: "25px" }}>
+              {t("EditProductModal.EditTitle")}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("VendorAddItemModal.ProductName")}
+                </Form.Label>
                 <Form.Control
-                  type="number"
-                  name="price"
-                  id="price"
-                  value={editValue.price}
+                  type="text"
+                  placeholder={t("VendorAddItemModal.ProductNameHolder")}
+                  name="name"
+                  id="name"
+                  value={editValue.name}
                   onChange={handleChange}
-                  style={{fontWeight:"500"}}
+                  style={{ fontWeight: "500" }}
                 />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Brand")}</Form.Label>
+              <Form.Group>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("VendorAddItemModal.EnterImage")}
+                </Form.Label>
                 <Form.Control
-                  defaultValue="Choose..."
-                  as="select"
-                  name="carBrand"
-                  id="carBrand"
-                  value={editValue.carBrand}
-                  onChange={handleChange}
-                  style={{fontWeight:"500"}}
-                >
-                  {stateRedux.brand.map((item, index) => {
-                    return (
-                      <option key={index} value={item.name}>
-                        {item.name}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
+                  type="file"
+                  name="images"
+                  id="image"
+                  onChange={handleImageChange}
+                  multiple
+                  style={{ fontWeight: "500" }}
+                />
               </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label style={{fontWeight:"700",fontSize:"25px"}}>{t("repeated.Model")}</Form.Label>
+              <Form.Group>
+                <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                  {t("VendorAddItemModal.ProductDescription")}
+                </Form.Label>
                 <Form.Control
-                  defaultValue="Choose..."
-                  as="select"
-                  name="carModel"
-                  id="carModel"
-                  value={editValue.carModel}
+                  as="textarea"
+                  rows={3}
+                  placeholder={t("VendorAddItemModal.DescriptionHolder")}
+                  name="description"
+                  id="description"
+                  value={editValue.description}
                   onChange={handleChange}
-                  disabled={!stateDisabled}
-                  style={{fontWeight:"500"}}
-                >
-                  {stateRedux.model.map((item, index) => {
-                    return (
-                      <option key={index} value={item.model}>
-                        {item.model}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
+                  style={{ fontWeight: "500" }}
+                />
               </Form.Group>
-            </Form.Row>
-
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="dark"
-            type="button"
-            onClick={() => handleSubmit(props.id)}
-            style={{fontWeight:"700",fontSize:"20px"}}
-          >
-            {t("repeated.Submit")}
-                </Button>
-          <Button  style={{fontWeight:"700",fontSize:"20px"}} variant="danger" onClick={closeModal}>
-          {t("repeated.Cancel")}
-              </Button>
-        </Modal.Footer>
-      </Modal>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                    {t("VendorAddItemModal.ItemPrice")}
+                  </Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="price"
+                    id="price"
+                    value={editValue.price}
+                    onChange={handleChange}
+                    style={{ fontWeight: "500" }}
+                  />
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                    {t("repeated.Brand")}
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue="Choose..."
+                    as="select"
+                    name="carBrand"
+                    id="carBrand"
+                    value={editValue.carBrand}
+                    onChange={handleChange}
+                    style={{ fontWeight: "500" }}
+                  >
+                    {stateRedux.brand.map((item, index) => {
+                      return (
+                        <option key={index} value={item.name}>
+                          {item.name}
+                        </option>
+                      );
+                    })}
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontWeight: "700", fontSize: "25px" }}>
+                    {t("repeated.Model")}
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue="Choose..."
+                    as="select"
+                    name="carModel"
+                    id="carModel"
+                    value={editValue.carModel}
+                    onChange={handleChange}
+                    disabled={!stateDisabled}
+                    style={{ fontWeight: "500" }}
+                  >
+                    {stateRedux.model.map((item, index) => {
+                      return (
+                        <option key={index} value={item.model}>
+                          {item.model}
+                        </option>
+                      );
+                    })}
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="dark"
+              type="button"
+              onClick={() => handleSubmit(props.id)}
+              style={{ fontWeight: "700", fontSize: "20px" }}
+            >
+              {t("repeated.Submit")}
+            </Button>
+            <Button
+              style={{ fontWeight: "700", fontSize: "20px" }}
+              variant="danger"
+              onClick={closeModal}
+            >
+              {t("repeated.Cancel")}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
-  </div>
   );
 }

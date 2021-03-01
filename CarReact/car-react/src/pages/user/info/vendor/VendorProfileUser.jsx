@@ -4,7 +4,7 @@ import SlickSlider from "../../../../components/SlickSlider";
 import { useTranslation } from "react-i18next";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { setProductId } from "../../../../store/actions";
+import { getRelatedProducts, setProductId } from "../../../../store/actions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function VendorProfileUser(props) {
@@ -67,8 +67,9 @@ export default function VendorProfileUser(props) {
     }
   });
 
-  const handleClick = (params) => {
+  const handleClick = (params, name, brand, model) => {
     dispatch(setProductId(params));
+    dispatch(getRelatedProducts(params, name, brand, model));
     localStorage.setItem("ProductID", params);
     history.push(`/ProductDetails/${params}`);
     axios
@@ -79,8 +80,7 @@ export default function VendorProfileUser(props) {
           headers: { Authorization: localStorage.getItem("Authorization") },
         }
       )
-      .then((req) => {
-      })
+      .then((req) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -192,57 +192,91 @@ export default function VendorProfileUser(props) {
                 return (
                   <Col lg="4" key={index}>
                     <section className="cards">
-                      <article className="card card--1" onClick={() => handleClick(item._id)} style={{
-                        marginRight: "15px",
-                        transition: "all 0.4s cubic-bezier(0.175, 0.885, 0, 1)",
-                        backgroundColor: "#fff",
-                        width: "100%",
-                        position: "relative",
-                        borderRadius: "12px",
-                        overFlow: "hidden",
-                        boxShadow: "0px 13px 10px -7px rgba(0, 0, 0, 0.1)",
-                        height: "370px",
-                        marginBottom: "20px",
-                        cursor: "pointer"
-
-                      }}
-                      // onClick={() => handleClick(item._id)} 
-                      >
-                        <div className="card__img" style={{
-                          background: `url(${item.images[0]})top left 100%`, visibility: "hidden",
-                          backgroundSize: "cover",
-                          backgroundPosition: "top",
-                          backgroundRepeat: "no-repeat",
+                      <article
+                        className="card card--1"
+                        onClick={() =>
+                          handleClick(
+                            item._id,
+                            item.name,
+                            item.carBrand,
+                            item.carMode
+                          )
+                        }
+                        style={{
+                          marginRight: "15px",
+                          transition:
+                            "all 0.4s cubic-bezier(0.175, 0.885, 0, 1)",
+                          backgroundColor: "#fff",
                           width: "100%",
-                          height: "235px", borderTopLeftRadius: "12px", borderTopRightRadius: "12px"
-                        }}></div>
-                        <p className="card_link">
-                          <div className="card__img--hover" style={{
+                          position: "relative",
+                          borderRadius: "12px",
+                          overFlow: "hidden",
+                          boxShadow: "0px 13px 10px -7px rgba(0, 0, 0, 0.1)",
+                          height: "370px",
+                          marginBottom: "20px",
+                          cursor: "pointer",
+                        }}
+                        // onClick={() => handleClick(item._id)}
+                      >
+                        <div
+                          className="card__img"
+                          style={{
                             background: `url(${item.images[0]})top left 100%`,
-                            transition: "0.2s all ease-out",
+                            visibility: "hidden",
                             backgroundSize: "cover",
                             backgroundPosition: "top",
                             backgroundRepeat: "no-repeat",
                             width: "100%",
-                            position: "absolute",
                             height: "235px",
                             borderTopLeftRadius: "12px",
                             borderTopRightRadius: "12px",
-                            top: "0"
-                          }}></div>
+                          }}
+                        ></div>
+                        <p className="card_link">
+                          <div
+                            className="card__img--hover"
+                            style={{
+                              background: `url(${item.images[0]})top left 100%`,
+                              transition: "0.2s all ease-out",
+                              backgroundSize: "cover",
+                              backgroundPosition: "top",
+                              backgroundRepeat: "no-repeat",
+                              width: "100%",
+                              position: "absolute",
+                              height: "235px",
+                              borderTopLeftRadius: "12px",
+                              borderTopRightRadius: "12px",
+                              top: "0",
+                            }}
+                          ></div>
                         </p>
-                        <div className="card__info" style={{
-                          zIndex: "2",
-                          backgroundColor: "#fff",
-                          borderTopLeftRadius: "12px",
-                          borderTopRightRadius: "12px",
-                          padding: "16px 24px 24px 24px"
-                        }}>
-                          <h4 className="card__title text-truncate" style={{
-                            marginTop: "5px",
-                            marginBottom: "10px",
-                          }}>{item.name}</h4>
-                          <span className="price" style={{ fontWeight: "600", color: "goldenrod", fontSize: "25px", }}>
+                        <div
+                          className="card__info"
+                          style={{
+                            zIndex: "2",
+                            backgroundColor: "#fff",
+                            borderTopLeftRadius: "12px",
+                            borderTopRightRadius: "12px",
+                            padding: "16px 24px 24px 24px",
+                          }}
+                        >
+                          <h4
+                            className="card__title text-truncate"
+                            style={{
+                              marginTop: "5px",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            {item.name}
+                          </h4>
+                          <span
+                            className="price"
+                            style={{
+                              fontWeight: "600",
+                              color: "goldenrod",
+                              fontSize: "25px",
+                            }}
+                          >
                             {item.price} {t("repeated.LE")}
                           </span>{" "}
                           <p className="text-truncate">{item.description}</p>

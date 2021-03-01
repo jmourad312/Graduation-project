@@ -1,10 +1,14 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
+// import AddYourAds from "../components/AddYourAds";
 import Loading from "../components/Loading";
 
 const Homepage2 = React.lazy(() => import("../layout/Homepage/Homepage2"));
 
 
+const AddYourAds = React.lazy(() =>
+  import("../components/AddYourAds")
+);
 const BlogDetails = React.lazy(() =>
   import("../pages/user/blog/blogDetails/BlogDetails.jsx")
 );
@@ -52,21 +56,31 @@ export default function Routes() {
   
   return (
     <Suspense fallback={<Loading />}>
-
       <Switch>
-
         <Route path="/" exact component={Homepage2} />
 
-        <Route path="/BlogDetails/:id?" exact component={BlogDetails} />
+        <Route path="/BlogDetails/:id?" exact>
+          <BlogDetails />
+          <AddYourAds />
+        </Route>
 
-        <Route path="/BlogList" exact component={BlogList} />
+        <Route path="/BlogList" exact>
+          <BlogList />
+          <AddYourAds />
+        </Route>
+
         <Route path="/AboutUs" exact component={AboutUs} />
         <Route path="/ContactUs" exact component={ContactUs} />
-        <Route path="/Privacy" exact component={Privacy} />
-        <Route path="/TermsOfService" exact component={TermsOfService} />
-        <Route path="/VendorProfileUser/:id" exact component={VendorProfileUser} />
-        <Route path="/ProductDetails/:id" exact component={ProductDetails} />
-        <Route path="/ProductsList" exact component={ProductsList} />
+        <Route path="/VendorProfileUser/:id" exact>
+          <VendorProfileUser />
+          <AddYourAds />
+        </Route>
+        <Route path="/ProductDetails/:id" exact>
+          <ProductDetails /> <AddYourAds />
+        </Route>
+        <Route path="/ProductsList" exact>
+          <ProductsList /> <AddYourAds />
+        </Route>
 
         <Route path="/MyProfile/(page)?" component={MyProfile} />
 
@@ -77,7 +91,6 @@ export default function Routes() {
           path="/VendorAdministration/(page)?"
           component={VendorAdministration}
         />
-        
       </Switch>
     </Suspense>
   );

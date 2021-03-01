@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Loading from "../../../../../components/Loading";
-import { getUsersAction, setProductId } from "../../../../../store/actions";
+import { getRelatedProducts, getUsersAction, setProductId } from "../../../../../store/actions";
 import { useTranslation } from "react-i18next";
 
 export default function RecentViews(props) {
@@ -15,8 +15,9 @@ export default function RecentViews(props) {
   }, [localStorage.getItem("UserID")]);
   let history = useHistory();
 
-  const handleClick = (params) => {
+  const handleClick = (params, name, brand, model) => {
     dispatch(setProductId(params));
+    dispatch(getRelatedProducts(params, name, brand, model));
     history.push(`/ProductDetails/${params}`);
   };
   const { t, i18n } = useTranslation();
@@ -69,33 +70,54 @@ export default function RecentViews(props) {
                         <article class="card card--1">
                           <div
                             class="card__img"
-                            style={{ background: `url(${item.images[0]})top left 100%` }}
+                            style={{
+                              background: `url(${item.images[0]})top left 100%`,
+                            }}
                           ></div>
                           <p class="card_link">
                             <div
                               class="card__img--hover"
-                              style={{ background: `url(${item.images[0]})top left 100%` }}
+                              style={{
+                                background: `url(${item.images[0]})top left 100%`,
+                              }}
                             ></div>
                           </p>
                           <div class="card__info">
-                            <h4 class="card__title text-truncate">{item.name}</h4>
+                            <h4 class="card__title text-truncate">
+                              {item.name}
+                            </h4>
                             <h6 className="card-text text-truncate">
                               {item.description}
                             </h6>
-                            <h5 className="card-text" style={{ color: "#e6ac00" }}>
-                              <i class="fas fa-coins"></i> {item.price} {t("repeated.LE")}
+                            <h5
+                              className="card-text"
+                              style={{ color: "#e6ac00" }}
+                            >
+                              <i class="fas fa-coins"></i> {item.price}{" "}
+                              {t("repeated.LE")}
                             </h5>
                             {/* <span class="card__by">by <span class="card__author" title="author">{props.userName}</span></span>
                         <br /> */}
                             <small>
-                              <i className="badge badge-dark">{item.carBrand}</i>
-                              <i className="badge badge-dark">{item.carModel}</i>
+                              <i className="badge badge-dark">
+                                {item.carBrand}
+                              </i>
+                              <i className="badge badge-dark">
+                                {item.carModel}
+                              </i>
                             </small>
                           </div>
                           <button
                             className="btn btn-dark"
                             style={{ fontSize: "1.5rem" }}
-                            onClick={() => handleClick(item._id)}
+                            onClick={() =>
+                              handleClick(
+                                item._id,
+                                item.name,
+                                item.carBrand,
+                                item.carModel
+                              )
+                            }
                           >
                             {t("repeated.GotoProductDetails")}
                           </button>

@@ -11,10 +11,10 @@ import ChatBotComp from "./components/ChatBotComp";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 // import 'styled-components';
 
 function App() {
-  let history = useHistory();
   const { t, i18n } = useTranslation();
   return (
     <div className="App">
@@ -38,6 +38,7 @@ function App() {
             hoverImgSrc={image2}
           />
         </div>
+        {/* <>
         <div
           className="text-center"
           style={{
@@ -53,19 +54,16 @@ function App() {
         >
           <Link to="/ContactUs"
             style={{
-              // position: "relative",
-              // top: "20%",
-              // left: "20%",
-              // textAlign: "center",
+
               fontWeight: "700",
               fontSize: "30px",
               cursor: "pointer",
             }}
           >
             {t("repeated.AddAdsHere")}
-            {/* {t("BlogList.NoPosts")} */}
           </Link>
         </div>
+        </> */}
       </Router>
     </div>
   );
