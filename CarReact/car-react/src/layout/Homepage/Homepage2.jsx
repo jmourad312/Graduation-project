@@ -343,9 +343,11 @@ export default function Homepage2() {
 
   return (
     <section className="homepage2">
-    <div style={{position:"absolute",left:"35%",top:"5%",zIndex:"20"}}>
-    <Logo/>
-    </div>
+      <div
+        style={{ position: "absolute", left: "35%", top: "5%", zIndex: "20" }}
+      >
+        <Logo />
+      </div>
       <div
         id="myDiv"
         style={{
@@ -358,14 +360,14 @@ export default function Homepage2() {
           border: "2px solid silver",
           padding: "10px",
           borderRadius: "20px",
-          fontWeight:"700",
-          fontSize:"25px"
+          fontWeight: "700",
+          fontSize: "25px",
         }}
         className="text-center"
       >
-        <i class="fas fa-3x fa-long-arrow-alt-up mr-1"></i><br/>
-        {t('navigation')}
-       
+        <i class="fas fa-3x fa-long-arrow-alt-up mr-1"></i>
+        <br />
+        {t("navigation")}
       </div>
       <div
         className="slider"
@@ -380,25 +382,33 @@ export default function Homepage2() {
             >
               <img
                 src="https://www.kingnice.com.tw/storage/application/mechanical-parts/mechanical-parts.jpg"
-                alt=""
+                alt="homepage1"
+                width="1000px"
+                height="1000px"
               />
             </div>
             <div className="slider__images-item" data-id="2">
               <img
                 src="https://images.unsplash.com/photo-1508780709619-79562169bc64?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-                alt=""
+                alt="homepage2"
+                width="1000px"
+                height="1000px"
               />
             </div>
             <div className="slider__images-item" data-id="3">
               <img
                 src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/cq8l59W/videoblocks-v8-motor-with-working-pistons-and-crankshafts-concept-of-automobile-engine_rdb6fr01sx_thumbnail-1080_01.png"
-                alt=""
+                alt="homepage3"
+                width="1000px"
+                height="1000px"
               />
             </div>
             <div className="slider__images-item" data-id="4">
               <img
                 src="https://images.unsplash.com/photo-1577380777497-55be8529ef15?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80"
-                alt=""
+                alt="homepage4"
+                width="1000px"
+                height="1000px"
               />
             </div>
             {/* <div className="slider__images-item" data-id="5">
@@ -414,35 +424,46 @@ export default function Homepage2() {
               data-id="1"
             >
               <div className="slider__text-item-head">
-                <h3>{t('slider.carparts')}</h3>
-    
+                <h3>{t("slider.carparts")}</h3>
               </div>
-              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>{t('slider.slogen')}</p>
+              <div
+                className="slider__text-item-info"
+                style={{ fontSize: "25px" }}
+              >
+                <p>{t("slider.slogen")}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="2">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Blog')}</h3>
+                <h3>{t("slider.Blog")}</h3>
               </div>
-              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>{t('slider.slogen1')}</p>
+              <div
+                className="slider__text-item-info"
+                style={{ fontSize: "25px" }}
+              >
+                <p>{t("slider.slogen1")}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="3">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Products')}</h3>
+                <h3>{t("slider.Products")}</h3>
               </div>
-              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>{t('slider.slogen2')}</p>
+              <div
+                className="slider__text-item-info"
+                style={{ fontSize: "25px" }}
+              >
+                <p>{t("slider.slogen2")}</p>
               </div>
             </div>
             <div className="slider__text-item" data-id="4">
               <div className="slider__text-item-head">
-                <h3>{t('slider.Design')}</h3>
+                <h3>{t("slider.Design")}</h3>
               </div>
-              <div className="slider__text-item-info" style={{fontSize:"25px"}}>
-                <p>{t('slider.slogen4')}</p>
+              <div
+                className="slider__text-item-info"
+                style={{ fontSize: "25px" }}
+              >
+                <p>{t("slider.slogen4")}</p>
               </div>
             </div>
             {/* <div className="slider__text-item" data-id="5">
@@ -482,7 +503,6 @@ export default function Homepage2() {
           </div>
         </div>
       </div>
-      
     </section>
   );
 }
