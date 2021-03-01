@@ -874,6 +874,7 @@ export default function BlogDetails(props) {
                       <div className="media mb-1 mr-3" key={index}>
                         <div className="mr-2">
                           {!voted ? (
+                            (localStorage.getItem("Authorization")&&
                             <button
                               className="btn"
                               style={{
@@ -885,7 +886,7 @@ export default function BlogDetails(props) {
                               onClick={() => addVote(item._id)}
                             >
                               <ThumbUpIcon />
-                            </button>
+                            </button>)
                           ) : (
                             <Spinner
                               animation="grow"
@@ -897,7 +898,7 @@ export default function BlogDetails(props) {
                             />
                           )}
                           <span
-                            className="btn badge-pill"
+                            className={localStorage.getItem("Authorization")?"btn badge-pill":"btn badge-pill mr-3 ml-3"}
                             style={{
                               position: "relative",
                               left: "10px",
@@ -910,6 +911,7 @@ export default function BlogDetails(props) {
                             {item.vote.resultVoting}
                           </span>
                           {!voted ? (
+                            (localStorage.getItem("Authorization") &&
                             <button
                               className="btn"
                               style={{
@@ -921,7 +923,7 @@ export default function BlogDetails(props) {
                               onClick={() => removeVote(item._id)}
                             >
                               <ThumbDownIcon />
-                            </button>
+                            </button>)
                           ) : (
                             <Spinner
                               // animation="grow"

@@ -60,24 +60,21 @@ export default function MagdyNavbar() {
           </svg>
         </label>
         <ul className="menu__content">
-          {localStorage.getItem("Authorization") && (
-            <>
-              <li className="menu__item" id="item5">
+              <li className="menu__item" id="item5" style={{ visibility: localStorage.getItem("Authorization")?"":"hidden" }}>
                 <Link
                   className="menu__link"
+                  
                   onClick={handleClick}
                   to="/ProductsList"
                 >
                   {t("Navbar.product list")}
                 </Link>
               </li>
-            </>
-          )}
           {localStorage.getItem("Authorization") ? (
             <>
               <li className="menu__item" id="item1">
                 <Link className="menu__link" onClick={logout} to="/">
-                {t("Navbar.Logout")}
+                  {t("Navbar.Logout")}
                 </Link>
               </li>
             </>
@@ -89,34 +86,34 @@ export default function MagdyNavbar() {
                   onClick={handleClick}
                   to="/SignChoice"
                 >
-                      {t("Navbar.sign")}
+                  {t("Navbar.sign")}
                 </Link>
               </li>
             </>
           )}
           <li className="menu__item" id="item4">
             <Link className="menu__link" onClick={handleClick} to="/BlogList">
-            {t("Navbar.Blog List")}
+              {t("Navbar.Blog List")}
             </Link>
           </li>
           <li className="menu__item" id="item8">
             <Link className="menu__link" onClick={handleClick} to="/AboutUs">
-            {t("Navbar.About Us")}
+              {t("Navbar.About Us")}
             </Link>
           </li>
           <li className="menu__item" id="item9">
             <Link className="menu__link" onClick={handleClick} to="/ContactUs">
-            {t("Navbar.Contact Us")}
+              {t("Navbar.Contact Us")}
             </Link>
           </li>
           <li className="menu__item" id="item12">
             <Link className="menu__link" onClick={handleClick} to="/">
-            {t("Navbar.Homepage")}
+              {t("Navbar.Homepage")}
             </Link>
           </li>
 
           {/* /will removed from navbar */}
-          
+
           {/* <li className="menu__item" id="item13">
             <Link className="menu__link" onClick={changeLanguage("en")}>
               LanguageEn
