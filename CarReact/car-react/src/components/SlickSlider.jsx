@@ -60,7 +60,7 @@ export default function SlickSlider(props) {
     pauseOnHover: true,
     slidesToShow: props.items.length === 1 ? 1 : props.items.length === 2 ? 2 : 3,
     slidesToScroll: 1,
-    //   autoplay: true,
+    autoplay: true,
     speed: 1500,
     autoplaySpeed: 1000,
     cssEase: "linear",
@@ -83,12 +83,12 @@ export default function SlickSlider(props) {
                   >
                     <div
                       className="card__img"
-                      style={{ background: `url(${item.image})` }}
+                      style={{ background: `url(${item.images[0]})` }}
                     ></div>
                     <p className="card_link">
                       <div
                         className="card__img--hover"
-                        style={{ background: `url(${item.image})` }}
+                        style={{ background: `url(${item.images[0]})` }}
                       ></div>
                     </p>
                     <div className="card__info">
