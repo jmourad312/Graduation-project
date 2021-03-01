@@ -19,6 +19,21 @@ export default function AddAds(props) {
     ownerEmail: "",
   });
 
+  const ClearValue = () => {
+    setState({
+      title: "",
+      description: "",
+      images: [],
+      createdAT: "",
+      expired: "",
+      duration: 10,
+      price: 0,
+      ownerName: "",
+      ownerPhone: 0,
+      ownerEmail: "",
+    });
+  };
+
   const tiggreValue = (e) => {
     const { value, name } = e.target;
     setState((previous) => {
@@ -32,14 +47,14 @@ export default function AddAds(props) {
   const handleImageChange = (event) => {
     setState({
       ...state,
-      images: event.target.files
+      images: event.target.files,
     });
   };
 
   const sendAds = () => {
     const formData = new FormData();
     for (var x = 0; x < state.images.length; x++) {
-      formData.append('images', state.images[x])
+      formData.append("images", state.images[x]);
     }
     formData.append("title", state.title);
     formData.append("description", state.description);
@@ -65,8 +80,12 @@ export default function AddAds(props) {
         console.log(req);
         if (req.data.Success === true) {
           console.log("Success");
+          alert("Done");
+          ClearValue();
         } else {
           console.log("fail");
+          alert("Try again");
+          ClearValue();
         }
       })
       .catch((error) => {
@@ -80,7 +99,7 @@ export default function AddAds(props) {
         <div className="container-for-admin mb-5">
           <div className="container pt-3 mt-5 w-50">
             <Navbar />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Title</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>Title</label>
             <input
               value={state.title}
               type="text"
@@ -88,7 +107,9 @@ export default function AddAds(props) {
               className="form-control"
               name="title"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Description</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Description
+            </label>
             <input
               value={state.description}
               type="text"
@@ -96,7 +117,7 @@ export default function AddAds(props) {
               className="form-control"
               name="description"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Image</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>Image</label>
             <input
               type="file"
               onChange={(e) => handleImageChange(e)}
@@ -104,7 +125,7 @@ export default function AddAds(props) {
               name="images"
               multiple
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Price</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>Price</label>
             <input
               value={state.price}
               type="text"
@@ -112,7 +133,9 @@ export default function AddAds(props) {
               className="form-control"
               name="price"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Create AT</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Create AT
+            </label>
             <input
               value={state.createdAT}
               type="date"
@@ -120,7 +143,9 @@ export default function AddAds(props) {
               className="form-control"
               name="createdAT"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Expired</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Expired
+            </label>
             <input
               value={state.expired}
               type="date"
@@ -128,7 +153,9 @@ export default function AddAds(props) {
               className="form-control"
               name="expired"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Name</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Owner Name
+            </label>
             <input
               value={state.ownerName}
               type="text"
@@ -136,7 +163,9 @@ export default function AddAds(props) {
               className="form-control"
               name="ownerName"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Phone</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Owner Phone
+            </label>
             <input
               value={state.ownerPhone}
               type="text"
@@ -144,7 +173,9 @@ export default function AddAds(props) {
               className="form-control"
               name="ownerPhone"
             />
-            <label style={{ fontSize: "25px",fontWeight:"500" }}>Owner Email</label>
+            <label style={{ fontSize: "25px", fontWeight: "500" }}>
+              Owner Email
+            </label>
             <input
               value={state.owneEmail}
               type="text"
@@ -156,8 +187,10 @@ export default function AddAds(props) {
               className="btn  btn-success mt-3"
               onClick={sendAds}
               name="Add Ads"
-              style={{fontSize:"25px"}}
-            >Add Ads</Button>
+              style={{ fontSize: "25px" }}
+            >
+              Add Ads
+            </Button>
           </div>
         </div>
       </div>
