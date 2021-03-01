@@ -170,7 +170,7 @@ export default function ChatBotComp() {
             headerTitle={t("ChatBot.DreksyonyChatBot")}
             bubbleStyle={{ fontSize: "20px" }}
             bubbleOptionStyle={{ fontSize: "20px",padding:"15px",margin:"6px" }}
-            // userAvatar={localStorage.getItem("Authorization") && localStorage.getItem("ProfileImage")}
+            // userAvatar={localStorage.getItem("Authorization") ? localStorage.getItem("ProfileImage"):undefined}
             // botAvatar={"../assets/Images/icon.png"}
           />
           ;
