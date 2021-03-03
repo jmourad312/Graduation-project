@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import SlickSlider from "../../../../components/SlickSlider";
 import { useTranslation } from "react-i18next";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getRelatedProducts, setProductId } from "../../../../store/actions";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 export default function VendorProfileUser(props) {
+  const location = useLocation();
   const dispatch = useDispatch();
   var history = useHistory();
   const [vendor, setVendor] = useState({
@@ -19,6 +19,7 @@ export default function VendorProfileUser(props) {
     location: [],
     workshopName: ""
   });
+  // const productDetails = useSelector(state => state.productDetails)
   const [loc, setLoc] = useState("");
   // const [vendorItems, setVendorItems] = useState([])
   const getVendor = async (params) => {
@@ -50,7 +51,8 @@ export default function VendorProfileUser(props) {
   };
 
   useEffect(() => {
-    getVendor(props.match.params.id);
+    getVendor(location.pathname.split("/",15)[2]);
+    // console.log(location.pathname.split("/", 15)[2]);
   }, []);
 
   useEffect(() => {
